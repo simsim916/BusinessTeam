@@ -43,21 +43,24 @@ main {
     height: 175px;
     border-radius: 20px;
 }
-#mainFrameImgTitle{
+
+#mainFrameImgTitle {
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 #mainFrameImgTitle>p {
-    display: inline;
+    display: inline-block;
     font-size: 12px;
-    display: flex;
     margin: 0;
-    width: 100%;
     line-height: 25px;
 }
 
 #mainFrameCalenderBox {
+    border: 2px solid #ca404750;
+    box-sizing: border-box;
+    border-radius: 10px;
     width: calc(100% - 10px);
     height: 100%;
     margin: 5px 5px;
@@ -67,7 +70,7 @@ main {
 }
 
 #mainFrameCalender {
-    height: 205px;
+    height: 200px;
     display: grid;
     grid-template: 40px repeat(5, 1fr) / repeat(7, 1fr);
     background-color: rgba(0, 0, 0, 0.133);
@@ -82,7 +85,7 @@ main {
 #CalenderDetail {
     background-color: rgba(255, 0, 0, 0.262);
     font-size: 16px;
-    margin-top: 7px;
+    margin-top: 2px;
     height: 141px;
 }
 
