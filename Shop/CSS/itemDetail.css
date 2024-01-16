@@ -1,0 +1,25 @@
+
+main{
+    display: flex;
+}
+
+#imgBox{
+    width: 50%;
+}
+
+#imgBox>img{
+    width: 100%;
+    margin: 20px;
+}
+
+#itemDetailSM {
+    width: 50%;
+    display: grid;
+    grid-template: repeat(9, 100px)/repeat(2, 1fr);
+    padding: 20px;
+    margin: 20px;
+    outline-style: auto;
+}
+#itemDetialTitle{
+    grid-column: 1/4;
+}
