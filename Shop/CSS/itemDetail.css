@@ -1,14 +1,18 @@
 * {
     border: 1px solid;
     box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
-body {}
+body {
+    width: 1200px;
+}
 
 main {
     display: flex;
     flex-wrap: wrap;
 }
+
 
 #imgBox {
     width: 50%;
@@ -25,7 +29,7 @@ main {
     width: 50%;
     display: grid;
     outline-style: auto;
-    grid-template: 200px 100px 50px 70px 50px 50px 150px 70px repeat(1, 50px)/1fr 2.5fr;
+    grid-template: 200px 100px 50px 70px 50px 50px 150px 70px 250px/1fr 2.5fr;
 
 }
 
@@ -47,30 +51,39 @@ main {
     padding: 0;
 }
 
-#itemDetailTitle>div {
-    padding-left: 10px;
-}
 
 #title1 {
-    color: gray;
-    height: 30px;
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 55px;
+    line-height: 20px;
+    text-align: center;
+    font-size: 11px;
+    background-color: #CA4046;
+    color: rgb(255, 255, 255);
+    border-radius: 5px;
+    padding: 0;
 }
 
 #title2 {
+    padding-left: 10px;
     font-weight: bold;
     font-size: 20px;
 }
 
 #title3 {
+    padding-left: 10px;
     color: gray;
 }
 
 #title4 {
+    padding-left: 10px;
     font-weight: bolder;
     font-size: 25px;
 }
 
 #title5 {
+    padding-left: 10px;
     color: gray;
     text-decoration: line-through;
 }
@@ -81,6 +94,10 @@ main {
 
 #itmeselect {
     position: relative;
+}
+#itmeselect>select{
+    padding-top: 50px;
+
 }
 
 #get {
@@ -93,10 +110,17 @@ main {
 }
 
 #detailClick {
+    margin-top: 50px;
     border: 1px;
     list-style: none;
     background-color: rgb(212, 207, 207);
     font-weight: bold;
     text-align: center;
-
+    display: flex;
+    width: 100%;
+    padding: 0;
+}
+#detailClick>li{
+    width: 25%;
+    line-height: 50px;
 }
