@@ -1,0 +1,120 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.containerYH {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: auto;
+    padding: 20px;
+}
+
+.headtitle {
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+}
+
+.subtitle {
+    border-left: 10px solid rgba(0, 0, 255, 0.475);
+}
+
+
+/* ============= 최상단 제목 ============== */
+.containerTopYH {
+    display: flex;
+    justify-content: space-between;
+}
+
+.containerTopLeftYH {
+    display: flex;
+}
+
+.saveBtYH {
+    background-color: gray;
+    color: white;
+}
+
+.checkBtYH {
+    background-color: mediumaquamarine;
+    color: white;
+}
+
+.refreshBtYH {
+    background-color: mediumaquamarine;
+    color: white;
+}
+
+/* =============== 상단 검색창 ================= */
+.containerTopSearchYH {
+    padding-left: 30px;
+    width: 100%;
+    line-height: 50px;
+    display: flex;
+    gap: 30px;
+    background-color: #ca404630;
+}
+
+/* =================== 주문현황 ================== */
+.currentOrderYH {
+    display: flex;
+    flex-direction: column;
+}
+
+.currentOrderHeadYH {
+    display: grid;
+    grid-template: repeat(2, 30px) / repeat(8, 1fr);
+    text-align: center;
+}
+
+.tbElement {
+    border: 1px solid gray;
+}
+
+.orderCount {
+    grid-row: span 2;
+    line-height: 60px;
+}
+
+.costAmount {
+    grid-column: span 5;
+}
+
+.loanAmount {
+    grid-row: span 2;
+    line-height: 60px;
+}
+
+.timeLeft {
+    grid-row: span 2;
+    line-height: 60px;
+}
+
+.insertRowCurrentYH {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+}
+
+/* =============== 주문내역 ========= */
+
+.orderedListYH {
+    border: 1px solid;
+    width: 100%;
+    line-height: 50px;
+    /* height: 50px; */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.insertRowYH {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1.5fr 1.5fr 3fr 1.5fr 1fr 1.5fr 1fr 1.3fr 1.3fr 1.4fr 1.3fr 1.4fr 3fr 1.3fr 2fr 1.3fr 2fr 1.3fr 1.3fr;
+    line-height: 30px;
+    width: 100%;
+    line-height: 50px;
+    height: 50px;
+}
