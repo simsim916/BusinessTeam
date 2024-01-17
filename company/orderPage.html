@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="./CSS/orderPage.css">
+
+    <script defer src="./Javascript/orderPage.js"></script>
+</head>
+
+<body>
+    <div class="containerYH">
+
+        <div class="containerTopYH">
+            <!-- 최상단 -->
+            <div class="containerTopLeftYH">
+                <h3>★ 식재주문등록</h3>&nbsp;&nbsp;
+                <div>주문>식재주문등록</div>
+            </div>
+            <div class="containerTopRightYH">
+                <button class="saveBtYH">저장</button>
+                <button class="checkBtYH">조회</button>
+                <button class="refreshBtYH">새로고침</button>
+            </div>
+        </div>
+
+        <div class="containerTopSearchYH">
+            <!-- 상단 검색창 -->
+            <div>
+                <label for="search">
+                    사업장 <input type="text" name="search" id="search">
+                </label>
+            </div>
+
+            <div>
+                <label for="date">
+                    입고일자 <input type="date" name="date" id="date">
+                </label>
+            </div>
+            <div>
+                <input type="checkbox"> 수량 0 제외
+            </div>
+        </div>
+
+
+        <div>
+            <div class="currentOrder headtitle">
+                <div class="currentOrder subtitle"> &nbsp;주문현황</div>
+                <div>
+                    <label for="radioRow">
+                        <input type="radio" id="radioRow">가로형
+                    </label>
+
+
+                    <label for="radioCol">
+                        <input type="radio" id="radioCol">세로형
+                    </label>
+
+
+                    <label for="radioPop">
+                        <input type="radio" id="radioPop">팝업형
+                    </label>
+                </div>
+            </div>
+
+
+            <div class="currentOrderYH">
+                <!-- 주문현황 -->
+                <div class="currentOrderHeadYH">
+                    <div class="tbElement orderCount">주문건수</div>
+                    <div class="tbElement costAmount">주문금액</div>
+                    <div class="tbElement loanAmount">여신금액</div>
+                    <div class="tbElement timeLeft">주문가능잔여시간</div>
+                    <div class="tbElement taxfreeAmount">면세합계</div>
+                    <div class="tbElement taxAmount">과세합계</div>
+                    <div class="tbElement vatAmount">부가세합계</div>
+                    <div class="tbElement totalAmount">총주문금액</div>
+                    <div class="tbElement monthAverage">30일평균(VAT제외)</div>
+                </div>
+                <!-- 
+            테이블로 치면 th만 정의해둔 상황에서
+            td들은 결국 데이터를 가져올텐데, grid로 설정해두면
+            row 는 2로 고정된 상황에서 데이터가 추가되면 어떻게 되는가?
+            -->
+            </div>
+        </div>
+
+        <div>
+            <div class="orderList headtitle">
+                <div class="orderList subtitle">&nbsp;주문내역</div>
+                <div>
+                    <button>단품검색</button>
+                    <button>다운로드</button>
+                    <button>+</button>
+                    <button>-</button>
+                    <button>X</button>
+                </div>
+            </div>
+            <div class="orderedListYH">
+                <!-- 주문내역 -->
+                <div class="insertRowYH">
+                    <div class="tbElement checkYH"><input type="checkbox"></div>
+                    <div class="tbElement sequenceYH">순번</div>
+                    <div class="tbElement conditionYH">상태</div>
+                    <div class="tbElement saveOrNotYH">저장여부</div>
+                    <div class="tbElement productOnlyYH">단품</div>
+                    <div class="tbElement productNameYH">단품명</div>
+                    <div class="tbElement standardYH">규격</div>
+                    <div class="tbElement unitYH">단위</div>
+                    <div class="tbElement leastOrderYH">최소발주일</div>
+                    <div class="tbElement productCount">입수</div>
+                    <div class="tbElement orderAmountYH">주문량</div>
+                    <div class="tbElement uniPriceYH">단가</div>
+                    <div class="tbElement supplyAmountYH">공급액</div>
+                    <div class="tbElement vatYH">부가세</div>
+                    <div class="tbElement totalCostYH">합계</div>
+                    <div class="tbElement noteYH">비고</div>
+                    <div class="tbElement billYH">계산서</div>
+                    <div class="tbElement SpecificationYH">거래명세서구분</div>
+                    <div class="tbElement directDvYH">직송구분</div>
+                    <div class="tbElement calDayYH">정산일자</div>
+                    <div class="tbElement originYH">원산지</div>
+                    <div class="tbElement leastAmount">최소량</div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+</body>
+
+</html>
