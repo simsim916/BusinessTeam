@@ -1,35 +1,7 @@
-function insertOrderedOrder() {
-    const orderedList = document.querySelector(".orderedListYH");
-
-    const makeDiv = document.createElement("div");
-    makeDiv.className = "insertRowYH";
-
-    orderedList.appendChild(makeDiv);
-    for (let i = 0; i < 22; i++) {
-        makeInnerDiv = document.createElement("div");
-        makeDiv.appendChild(makeInnerDiv);
-    }
-}
-
-insertOrderedOrder();
 
 
 
-function insertCurrentList() {
-    const currentOrder = document.querySelector(".currentOrderYH");
 
-    const makeDiv = document.createElement("div");
-    makeDiv.className = "insertRowCurrentYH";
-
-    currentOrder.appendChild(makeDiv);
-    for (let i = 0; i < 8; i++) {
-        makeInnerDiv = document.createElement("div");
-        makeDiv.appendChild(makeInnerDiv);
-    }
-}
-
-
-insertCurrentList();
 
 
 

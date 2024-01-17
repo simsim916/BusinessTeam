@@ -37,7 +37,7 @@
                         사업장 <input type="text" name="search" id="search">
                     </label>
                 </div>
-    
+
                 <div>
                     <label for="date">
                         입고일자 <input type="date" name="date" id="date">
@@ -51,52 +51,49 @@
 
 
 
-        <div>
-            <div class="currentOrder headtitle">
-                <div class="currentOrder subtitle"> &nbsp;주문현황</div>
-                <div>
-                    <label for="radioRow">
-                        <input type="radio" id="radioRow" name="">가로형
-                    </label>
-
-
-                    <label for="radioCol">
-                        <input type="radio" id="radioCol">세로형
-                    </label>
-
-
-                    <label for="radioPop">
-                        <input type="radio" id="radioPop">팝업형
-                    </label>
+        <!-- 주문현황 -->
+        <div id="orderReport">
+            <div class="headtitle">
+                <div class="subtitle"> &nbsp;주문현황</div>
+                <div id="sortBt">
+                    <div>가로</div>
+                    <div>세로</div>
                 </div>
             </div>
 
 
-            <div class="currentOrderYH">
-                <!-- 주문현황 -->
-                <div class="currentOrderHeadYH">
-                    <div>주문건수</div>
-                    <div>주문금액</div>
-                    <div>여신금액</div>
-                    <div>주문가능잔여시간</div>
-                    <div>면세합계</div>
-                    <div>과세합계</div>
-                    <div>부가세합계</div>
-                    <div>총주문금액</div>
-                    <div>30일평균(VAT제외)</div>
-                </div>
-                <!-- 
+
+            <div id="currentOrderHeadYH">
+                <div>주문건수</div>
+                <div>주문금액</div>
+                <div>여신금액</div>
+                <div>주문가능잔여시간</div>
+                <div>면세합계</div>
+                <div>과세합계</div>
+                <div>부가세합계</div>
+                <div>총주문금액</div>
+                <div>30일평균(VAT제외)</div>
+                <div>1</div>
+                <div>1</div>
+                <div>1</div>
+                <div>1</div>
+                <div>1</div>
+                <div>1</div>
+                <div>1</div>
+                <div>1</div>
+            </div>
+            <!-- 
             테이블로 치면 th만 정의해둔 상황에서
             td들은 결국 데이터를 가져올텐데, grid로 설정해두면
             row 는 2로 고정된 상황에서 데이터가 추가되면 어떻게 되는가?
             -->
-            </div>
+
         </div>
 
-        <div>
-            <div class="orderList headtitle">
-                <div class="orderList subtitle">&nbsp;주문내역</div>
-                <div>
+        <div id="orderListBox">
+            <div class="headtitle">
+                <div class="subtitle">&nbsp;주문내역</div>
+                <div id="orderListButtonBox">
                     <button>단품검색</button>
                     <button>다운로드</button>
                     <button>+</button>
@@ -104,31 +101,45 @@
                     <button>X</button>
                 </div>
             </div>
-            <div class="orderedListYH">
+            <div id="orderedListYH">
                 <!-- 주문내역 -->
-                <div class="insertRowYH">
+                <div id="insertRowYH">
                     <div><input type="checkbox"></div>
                     <div>순번</div>
-                    <div>상태</div>
-                    <div>저장여부</div>
-                    <div>단품</div>
-                    <div>단품명</div>
+                    <div>제품코드</div>
+                    <div>제품명</div>
                     <div>규격</div>
                     <div>단위</div>
-                    <div>최소발주일</div>
-                    <div>입수</div>
                     <div>주문량</div>
                     <div>단가</div>
                     <div>공급액</div>
                     <div>부가세</div>
                     <div>합계</div>
-                    <div>비고</div>
-                    <div>계산서</div>
-                    <div>거래명세서구분</div>
-                    <div>직송구분</div>
-                    <div>정산일자</div>
                     <div>원산지</div>
-                    <div>최소량</div>
+                    <div>1</div>
+                    <div>1</div>
+                    <div>1</div>
+                    <div>1</div>
+                    <div>1</div>
+                    <div>1</div>
+                    <div>1</div>
+                    <div>1</div>
+                    <div>1</div>
+                    <div>1</div>
+                    <div>1</div>
+                    <div>1</div>
+                    <div>2</div>
+                    <div>2</div>
+                    <div>2</div>
+                    <div>2</div>
+                    <div>2</div>
+                    <div>2</div>
+                    <div>2</div>
+                    <div>2</div>
+                    <div>2</div>
+                    <div>2</div>
+                    <div>2</div>
+                    <div>2</div>
                 </div>
             </div>
         </div>
