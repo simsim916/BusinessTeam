@@ -1,22 +1,45 @@
 body {
-    display: flex;
+    
     margin: 0;
-    height: 100vh;
     box-sizing: border-box;
+    position: relative;
+}
+main{
+    display: flex;
+}
+.container{
+    margin: 0 auto;
+    width: 1200px;
+    position: relative;
+}
+#containerOptionMJ{
+    height: 30px;
+}
+#totalMJ{
+    position: absolute;
+    left: 10px;
+}
+#listOptionMJ{
+    position: absolute;
+    right: 10px;
+    display: flex;
+}
+#listOptionMJ>div{
+    margin-left: 10px;
+}
+#listfilter{
+    width: 200px;
+    height: 400px;
+    background-color: rgb(196, 196, 255);
 }
 #containerMJ{
-    justify-content: center;
-    /* background-color: rgb(255, 255, 255); */
-    width: 100%;
+    width: 900px;
     height: 100%;
     display: grid;
-    grid-template:repeat(4,1fr)/repeat(3,minmax(200px, 250px));
+    grid-template:repeat(4,1fr)/repeat(3,minmax(200px, calc((1000px - 20px)/3)));
     gap: 10px;
-    padding: 10px;
 }
 .itemBoxMJ{
-    /* display: grid;
-    grid-template: 1/5 ; */
     background-color: rgb(255, 247, 247);
     border: 1px solid #EAA6A2;
     width: 100%;
@@ -33,7 +56,7 @@ body {
 .itemNameMJ{
     margin-top: 10px;
     padding-left: 10px;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 1em;
 }
 .itemInfoMJ{
