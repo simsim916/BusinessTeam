@@ -5,9 +5,6 @@
 }
 
 .containerYH {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
     margin: auto;
     padding: 20px;
 }
@@ -19,37 +16,39 @@
 }
 
 .subtitle {
-    border-left: 10px solid rgba(0, 0, 255, 0.475);
+    padding-left: 10px;
+    border-left: 10px solid #9B1B30;
 }
 
 
 /* ============= 최상단 제목 ============== */
-.containerTopYH {
+#topBoxYH {
+    position: relative;
+    height: 100px;
+}
+
+#topBoxLeftYH {
     display: flex;
-    justify-content: space-between;
+    align-items: end;
 }
 
-.containerTopLeftYH {
-    display: flex;
+#topBoxRightYH {
+    position: absolute;
+    right: 0;
+    top: calc((30px - 25px)/2);
 }
 
-.saveBtYH {
-    background-color: gray;
+#topBoxRightYH>button {
+    height: 25px;
+}
+
+#saveBtYH {
+    background-color: #9B1B30;
     color: white;
 }
 
-.checkBtYH {
-    background-color: mediumaquamarine;
-    color: white;
-}
-
-.refreshBtYH {
-    background-color: mediumaquamarine;
-    color: white;
-}
-
-/* =============== 상단 검색창 ================= */
-.containerTopSearchYH {
+#topSearchBoxYH {
+    margin-top: 20px;
     padding-left: 30px;
     width: 100%;
     line-height: 50px;
@@ -71,7 +70,7 @@
 }
 
 .tbElement {
-    border: 1px solid gray;
+    border: 1px solid #CA4046;
 }
 
 .orderCount {
