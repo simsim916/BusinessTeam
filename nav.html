@@ -10,8 +10,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="./CSS/nav.css">
     <title>Document</title>
 </head>
@@ -20,7 +20,9 @@
     <div id="topBar">
         <div id="loginBar">
             <div class="container">
-
+                <a href="">고객센터</a>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="">로그인</a>
             </div>
         </div>
 
@@ -30,8 +32,24 @@
                     <img src="" alt="">
                     <h1>사이트이름</h1>
                 </div>
-                <div id="searchBox">
-
+                <form id="searchBox">
+                    <input type="text" placeholder="검색어를 입력해주세요.">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </form>
+                <div id="searchRightBox">
+                    <div id="myPage">
+                        <i class="fa-solid fa-user"></i>
+                        <p>마이페이지</p>
+                    </div>
+                    <div id="myCart">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <p>장바구니</p>
+                    </div>
+                    <div id="myItem">
+                        <i class="fa-solid fa-box-archive"></i>
+                        <p>최근 본 상품</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -39,14 +57,30 @@
         <nav>
             <div class="container">
                 <div id="categoryBox">
-                    
+                    <i class="fa-solid fa-bars"></i>&nbsp;&nbsp;&nbsp;카테고리
+                    <ul>
+                        <li>채소
+                            <ul>
+                                <li></li>
+                            </ul>
+                        </li>
+                        <li>과일ㆍ견과ㆍ쌀</li>
+                        <li>수산ㆍ해산ㆍ건어물</li>
+                        <li>정육ㆍ가공육ㆍ계란</li>
+                        <li>국ㆍ반찬ㆍ메인요리</li>
+                        <li>간편식ㆍ밀키트ㆍ샐러드</li>
+                        <li>면ㆍ양념ㆍ오일</li>
+                        <li>생수ㆍ음료ㆍ커피</li>
+                        <li>간식ㆍ과자ㆍ떡</li>
+                        <li>베이커리</li>
+                        <li>유제품</li>
+
+                    </ul>
                 </div>
                 <ul>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
+                    <li>식단 주문</li>
+                    <li>재료 주문</li>
+                    <li>이벤트</li>
                 </ul>
             </div>
         </nav>
