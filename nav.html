@@ -1,21 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 폰트어썸 -->
     <script src="https://kit.fontawesome.com/d68045e863.js" crossorigin="anonymous"></script>
-    <title>Shop!!</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- 구글 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="../CSS/nav.css">
-    <link rel="stylesheet" href="../CSS/itemList.css">
-    <script src='main.js'></script>
+    <link rel="stylesheet" href="./CSS/nav.css">
+    <title>Document</title>
 </head>
 
 <body>
@@ -31,7 +29,7 @@
         <div id="searchBar">
             <div class="container">
                 <div id="logoBox">
-                    <img src="/img/logo.png" alt="">
+                    <img src="./img/logo.png" alt="">
                     <h1>사이트이름</h1>
                 </div>
                 <form id="searchBox">
@@ -59,8 +57,7 @@
         <nav>
             <div class="container">
                 <div id="categoryBox">
-                    <div onmouseover="firstCategoryVisible()" id="categoryTag"><i
-                            class="fa-solid fa-bars"></i>&nbsp;&nbsp;&nbsp;카테고리</div>
+                    <div onmouseover="firstCategoryVisible()" id="categoryTag"><i class="fa-solid fa-bars"></i>&nbsp;&nbsp;&nbsp;카테고리</div>
                     <ul onmouseout="firstCategoryHidden()" onmouseover="firstCategoryVisible()" id="firstCategory">
                         <li></li>
                         <li id="firstCategorySearch">
@@ -69,12 +66,12 @@
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </div>
                         </li>
-                        <li><img src="/img/category_vitamin.png" alt="category_vitamin">건강식품</li>
-                        <li><img src="/img/category_chicken.png" alt="category_chicken">계육</li>
-                        <li><img src="/img/category_etc.png" alt="category_etc">기타</li>
-                        <li><img src="/img/category_wheat.png" alt="category_wheat">농산가공</li>
-                        <li><img src="/img/category_pig.png" alt="category_pig">돈육</li>
-                        <li><img src="/img/category_noodle.png" alt="category_noodle">면류</li>
+                        <li><img src="./img/category_vitamin.png" alt="category_vitamin">건강식품</li>
+                        <li><img src="./img/category_chicken.png" alt="category_chicken">계육</li>
+                        <li><img src="./img/category_etc.png" alt="category_etc">기타</li>
+                        <li><img src="./img/category_wheat.png" alt="category_wheat">농산가공</li>
+                        <li><img src="./img/category_pig.png" alt="category_pig">돈육</li>
+                        <li><img src="./img/category_noodle.png" alt="category_noodle">면류</li>
                         <li>분말류</li>
                         <li>생활용품</li>
                         <li>세제류</li>
@@ -125,74 +122,14 @@
             </div>
         </nav>
     </div>
-
-    <!-- <h2>신상품</h2>
-    <aside>카테고리</aside> -->
-    <main class="container">
-        <div id="listfilter"></div>
-        <div id="containerMJ" class="container">
-            <div id="containerOptionMJ">
-                <div id="totalMJ">총 9 개</div>
-                <div id="listOptionMJ">
-                    <div>최신상품순</div>
-                    <div>인기상품순</div>
-                    <div>인기상품순</div>
-                </div>
-            </div>
-            <div class="itemBoxMJ">
-                <img src="" alt="">
-                <div class="itemNameMJ">쌀밥</div>
-                <div class="itemInfoMJ">맛있는 쌀밥<br><br></div>
-                <p class="itemPriceMJ">900원</p>
-                <div class="itemOptionMJ">무료배송</div>
-            </div>
-            <div class="itemBoxMJ">
-                <img src="" alt="">
-                <div class="itemNameMJ">쌀밥</div>
-                <div class="itemInfoMJ">맛있는 쌀밥</div>
-                <p class="itemPriceMJ">900원</p>
-                <div class="itemOptionMJ">무료배송</div>
-            </div>
-            <div class="itemBoxMJ">
-                <img src="" alt="">
-                <div class="itemNameMJ"></div>
-                <div class="itemInfoMJ"></div>
-                <p class="itemPriceMJ"></p>
-                <div class="itemOptionMJ"></div>
-            </div>
-            <div class="itemBoxMJ">
-                <img src="" alt="">
-                <div class="itemNameMJ"></div>
-                <div class="itemInfoMJ"></div>
-                <p class="itemPriceMJ"></p>
-                <div class="itemOptionMJ"></div>
-            </div>
-            <div class="itemBoxMJ">
-                <img src="" alt="">
-                <div class="itemNameMJ"></div>
-                <div class="itemInfoMJ"></div>
-                <p class="itemPriceMJ"></p>
-                <div class="itemOptionMJ"></div>
-            </div>
-            <div class="itemBoxMJ">
-                <img src="" alt="">
-                <div class="itemNameMJ"></div>
-                <div class="itemInfoMJ"></div>
-                <p class="itemPriceMJ"></p>
-                <div class="itemOptionMJ"></div>
-            </div>
-
-        </div>
-    </main>
 </body>
 <script>
     let firstCategory = document.getElementById("firstCategory");
-    function firstCategoryVisible() {
-        firstCategory.style.visibility = "visible";
+    function firstCategoryVisible(){
+        firstCategory.style.visibility="visible";
     }
-    function firstCategoryHidden() {
-        firstCategory.style.visibility = "hidden";
+    function firstCategoryHidden(){
+        firstCategory.style.visibility="hidden";
     }
 </script>
-
 </html>
