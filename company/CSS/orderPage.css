@@ -157,7 +157,6 @@
     text-align: center;
     display: flex;
     flex-direction: column;
-    border: 1px solid;
     margin-top: 5px;
 }
 
@@ -168,21 +167,30 @@
     line-height: 20px;
     width: 100%;
     height: 50px;
-    border-top: 1px solid;
-}
-
-#insertRowYH:first-child {
-    border-top: none;
 }
 
 #insertRowYH>div {
+    border-top: 1px solid;
     border-right: 1px solid;
 }
 
-#insertRowYH>div:nth-child(n+1):nth-child(12) {
-    /* line-height: 50px; */
+#insertRowYH>div:nth-child(n+13) {
+    /* background-color: #9B1B30; */
+    line-height: 20px;
+    /* line-height 가 적용 된건가 ? */
 }
 
-#insertRowYH>div:last-child {
-    border-right: none;
+#insertRowYH>div:nth-child(n+1):nth-child(-n+12) {
+    /* background-color: #9B1B30; */
+    line-height: 50px;
+}
+
+#insertRowYH>div:nth-last-child(-n+12) {
+    /* background-color: #9B1B30; */
+    border-bottom: 1px solid;
+}
+
+#insertRowYH>div:nth-child(12n+1) {
+    /* background-color: #9B1B30; */
+    border-left: 1px solid;
 }
