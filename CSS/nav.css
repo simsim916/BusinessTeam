@@ -164,6 +164,7 @@ nav {
     visibility: visible;
 }
 #firstCategory {
+    z-index: 3;
     visibility: hidden;
     position: relative;
     padding: 0;
@@ -246,6 +247,7 @@ nav {
     visibility: visible;
 }
 #secondCategory {
+    z-index: 3;
     visibility: hidden;
     position: absolute;
     top: 60px;
