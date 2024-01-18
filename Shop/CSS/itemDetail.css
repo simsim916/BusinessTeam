@@ -1,5 +1,5 @@
 * {
-    border: 1px solid;
+    /* border: 1px solid; */
     box-sizing: border-box;
     font-family: 'Noto Sans KR', sans-serif;
 }
@@ -61,7 +61,7 @@ main {
     font-size: 11px;
     background-color: #CA4046;
     color: rgb(255, 255, 255);
-    border-radius: 5px;
+    /* border-radius: 5px; */
     padding: 0;
 }
 
@@ -80,9 +80,18 @@ main {
     padding-left: 10px;
     font-weight: bolder;
     font-size: 25px;
+    color: orange;
+    display: grid;
+    grid-template: 20px 20px/1fr 1fr;
 }
 
 #title5 {
+    padding-left: 10px;
+    font-weight: bolder;
+    font-size: 25px;
+}
+
+#title6 {
     padding-left: 10px;
     color: gray;
     text-decoration: line-through;
@@ -95,7 +104,8 @@ main {
 #itmeselect {
     position: relative;
 }
-#itmeselect>select{
+
+#itmeselect>select {
     padding-top: 50px;
 
 }
@@ -120,7 +130,8 @@ main {
     width: 100%;
     padding: 0;
 }
-#detailClick>li{
+
+#detailClick>li {
     width: 25%;
     line-height: 50px;
 }
