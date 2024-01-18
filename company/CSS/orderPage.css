@@ -137,16 +137,16 @@
 }
 
 /* =============== 주문내역 ========= */
-#orderListBox{
+#orderListBox {
     margin-top: 20px;
 }
 
-#orderListButtonBox{
+#orderListButtonBox {
     display: flex;
     align-items: center;
 }
 
-#orderListButtonBox>button{
+#orderListButtonBox>button {
     margin-left: 5px;
     height: 25px;
     width: 25px;
@@ -177,6 +177,10 @@
 
 #insertRowYH>div {
     border-right: 1px solid;
+}
+
+#insertRowYH>div:nth-child(n+1):nth-child(12) {
+    /* line-height: 50px; */
 }
 
 #insertRowYH>div:last-child {
