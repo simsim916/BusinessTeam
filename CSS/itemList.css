@@ -51,9 +51,11 @@ main {
 
 .itemBoxMJ {
     background-color: rgb(255, 247, 247);
-    border: 1px solid #EAA6A2;
+    /* border: 1px solid #EAA6A2; */
     width: 100%;
     height: calc(90px * 4.5);
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .itemBoxMJ>img {
