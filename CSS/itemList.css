@@ -12,6 +12,19 @@ main {
     display: flex;
 }
 
+#searchTitleMJ{
+    margin: 35px auto 0 auto;
+    text-align: center;
+    font-size: 30px;
+}
+
+#searchTitleMJ>span{
+    font-size: 20px;
+}
+
+#searchTitleMJ>b{
+    color: #9B1B30;
+}   
 #totalMJ {
     position: absolute;
     left: 10px;
@@ -28,12 +41,14 @@ main {
 }
 
 #listfilter {
+    margin-top: 50px;
     width: 250px;
     height: 400px;
     background-color: rgb(196, 196, 255);
 }
 
 #containerMJ {
+    margin-top: 50px;
     max-width: calc(1200px - 280px);
     min-width: calc(1024px - 280px);
     height: 100%;
@@ -51,9 +66,11 @@ main {
 
 .itemBoxMJ {
     background-color: rgb(255, 247, 247);
-    border: 1px solid #EAA6A2;
+    /* border: 1px solid #EAA6A2; */
     width: 100%;
     height: calc(90px * 4.5);
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .itemBoxMJ>img {
