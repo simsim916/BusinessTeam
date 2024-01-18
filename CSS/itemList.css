@@ -12,12 +12,6 @@ main {
     display: flex;
 }
 
-.container {
-    margin: 0 auto;
-    width: 1200px;
-    position: relative;
-}
-
 #totalMJ {
     position: absolute;
     left: 10px;

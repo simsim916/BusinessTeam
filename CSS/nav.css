@@ -13,7 +13,9 @@ li {
 }
 
 .container {
-    width: 1024px;
+    width: 100vw;
+    min-width: 1024px;
+    max-width: 1200px;
     margin: 0 auto;
     position: relative;
 }
@@ -154,15 +156,19 @@ nav {
     font-weight: 500;
     color: #640000;
 }
-#categoryTag:hover~#firstCategory{
+
+#categoryTag:hover~#firstCategory {
     visibility: visible;
 }
-#firstCategory:hover{
+
+#firstCategory:hover {
     visibility: visible;
 }
-#secondCategory:hover{
+
+#secondCategory:hover {
     visibility: visible;
 }
+
 #firstCategory {
     z-index: 3;
     visibility: hidden;
@@ -243,9 +249,11 @@ nav {
     height: 30px;
     margin-right: 15px;
 }
+
 #firstCategory:hover~#secondCategory {
     visibility: visible;
 }
+
 #secondCategory {
     z-index: 3;
     visibility: hidden;
