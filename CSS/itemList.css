@@ -1,5 +1,7 @@
+*{
+    font-family: 'Noto Sans KR', sans-serif;
+}
 body {
-    
     margin: 0;
     box-sizing: border-box;
     position: relative;
@@ -12,9 +14,7 @@ main{
     width: 1200px;
     position: relative;
 }
-#containerOptionMJ{
-    height: 30px;
-}
+
 #totalMJ{
     position: absolute;
     left: 10px;
@@ -28,16 +28,23 @@ main{
     margin-left: 10px;
 }
 #listfilter{
-    width: 200px;
+    width: 250px;
     height: 400px;
     background-color: rgb(196, 196, 255);
 }
 #containerMJ{
-    width: 900px;
+    max-width: calc(1200px - 280px);
+    min-width: calc(1024px - 280px);
     height: 100%;
     display: grid;
-    grid-template:repeat(4,1fr)/repeat(3,minmax(200px, calc((1000px - 20px)/3)));
+    grid-template:30px repeat(4,1fr)/repeat(4,minmax(200px, calc((1000px - 20px)/3)));
     gap: 10px;
+}
+#containerOptionMJ {
+    height: 30px;
+    grid-column: 1/-1;
+    display: flex;
+    align-items: end;
 }
 .itemBoxMJ{
     background-color: rgb(255, 247, 247);
