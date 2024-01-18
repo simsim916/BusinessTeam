@@ -4,12 +4,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/nav.css">
     <link rel="stylesheet" href="./CSS/itemDetail.css">
+    <!-- 폰트어썸 -->
+    <script src="https://kit.fontawesome.com/d68045e863.js" crossorigin="anonymous"></script>
+    <!-- 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <title>Document</title>
 </head>
 
 <body>
-    <main>
+    <header id="topBar">
+        <div id="loginBar">
+            <div class="container">
+                <a href="">고객센터</a>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="">로그인</a>
+            </div>
+        </div>
+    
+        <div id="searchBar">
+            <div class="container">
+                <div id="logoBox">
+                    <img src="/img/logo.png" alt="">
+                    <h1>사이트이름</h1>
+                </div>
+                <form id="searchBox">
+                    <input type="text" placeholder="검색어를 입력해주세요.">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </form>
+                <div id="searchRightBox">
+                    <div id="myPage">
+                        <i class="fa-solid fa-user"></i>
+                        <p>마이페이지</p>
+                    </div>
+                    <div id="myCart">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <p>장바구니</p>
+                    </div>
+                    <div id="myItem">
+                        <i class="fa-solid fa-box-archive"></i>
+                        <p>최근 본 상품</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <nav>
+            <div class="container">
+                <div id="categoryBox">
+                    <div onmouseover="firstCategoryVisible()" id="categoryTag"><i
+                            class="fa-solid fa-bars"></i>&nbsp;&nbsp;&nbsp;카테고리</div>
+                    <ul onmouseout="firstCategoryHidden()" onmouseover="firstCategoryVisible()" id="firstCategory">
+                        <li></li>
+                        <li id="firstCategorySearch">
+                            <div>
+                                <input type="text"><i class="fa-solid fa-circle-xmark"></i>
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </div>
+                        </li>
+                        <li><img src="/img/category_vitamin.png" alt="category_vitamin">건강식품</li>
+                        <li><img src="/img/category_chicken.png" alt="category_chicken">계육</li>
+                        <li><img src="/img/category_etc.png" alt="category_etc">기타</li>
+                        <li><img src="/img/category_wheat.png" alt="category_wheat">농산가공</li>
+                        <li><img src="/img/category_pig.png" alt="category_pig">돈육</li>
+                        <li><img src="/img/category_noodle.png" alt="category_noodle">면류</li>
+                        <li>분말류</li>
+                        <li>생활용품</li>
+                        <li>세제류</li>
+                        <li>수산가공</li>
+                        <li>야채</li>
+                        <li>양곡</li>
+                        <li>양육</li>
+                        <li>어패류</li>
+                        <li>우육</li>
+                        <li>유제품</li>
+                        <li>유지류</li>
+                        <li>음료ㆍ차</li>
+                        <li>일반가공</li>
+                        <li>제과</li>
+                        <li>조리식품</li>
+                        <li>조미식품</li>
+                        <li>청과</li>
+                        <li>축산가공</li>
+                        <li>해조류</li>
+                    </ul>
+                    <ul onmouseout="firstCategoryHidden()" onmouseover="firstCategoryVisible()" id="secondCategory">
+                        <li></li>
+                        <li id="secondCategorySearch">
+                            <div>
+                                <input type="text"><i class="fa-solid fa-circle-xmark"></i>
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </div>
+                        </li>
+                        <li>채소</li>
+                        <li>과일ㆍ견과ㆍ쌀</li>
+                        <li>수산ㆍ해산ㆍ건어물</li>
+                        <li>정육ㆍ가공육ㆍ계란</li>
+                        <li>국ㆍ반찬ㆍ메인요리</li>
+                        <li>간편식ㆍ밀키트ㆍ샐러드</li>
+                        <li>면ㆍ양념ㆍ오일</li>
+                        <li>생수ㆍ음료ㆍ커피</li>
+                        <li>간식ㆍ과자ㆍ떡</li>
+                        <li>베이커리</li>
+                        <li>유제품</li>
+    
+                    </ul>
+                </div>
+                <ul id="navBar">
+                    <li>식단 주문</li>
+                    <li>재료 주문</li>
+                    <li>이벤트</li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="container">
         <div id="imgBox">
             <img src="	https://product-image.kurly.com/product/image/607d62d6-c6e9-4837-a629-f38f66c17d32.jpg" alt="">
         </div>
@@ -19,16 +134,13 @@
 
         <div id="itemDetailSM">
             <div id="itemDetailTitle">
-                <div>샛별배송</div>
-                <div>[일일특가][압구정] 오징어/낙지 볶음 2종(택1)</div>
-                <div>마늘의 감칠맛이 듬뿍</div>
-
+                <div id="title1">새벽배송</div>
+                <div id="title2">[일일특가][압구정] 오징어/낙지 볶음 2종(택1)</div>
+                <div id="title3">마늘의 감칠맛이 듬뿍</div>
+                <div id="title4">33%</div>
+                <div id="title5">10,500원 ~</div>
+                <div id="title6">15,900원</div>
             </div>
-            <div>33% 10,500원 ~</div>
-            <div>15,900원</div>
-            <div>원산지: 상품설명/상세정보 참조</div>
-            <div>로그인 후, 적립 혜택이 제공됩니다</div>
-            <div>2,000원 적립금-할인 쿠폰 받고 구매하기</div>
             <div>배송</div>
             <div>샛별배송<br>23시 전 주문 시 내일 아침 7시 전 도착<br>(대구·부산·울산 샛별배송 운영시간 별도 확인)</div>
             <div>판매자</div>
@@ -46,11 +158,37 @@
             <div>유통기한(또는 소비기한)정보</div>
             <div>수령일 포함 180일 이상 남은 제품을 보내드립니다.(총 유통기한 365일)</div>
             <div>상품 선택</div>
-            <div></div>
+            <div id="itemSelect">
+                <select name="" id="">
+                    <option value="" checked>상품을 선택해주세요</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+                <div>총 상품금액: </div>
+                <div id="get">장바구니 담기</div>
+            </div>
+
         </div>
 
-
+        <ul id="detailClick">
+            <li>상품설명</li>
+            <li>상세정보</li>
+            <li>후기</li>
+            <li>문의</li>
+        </ul>
     </main>
+
 </body>
+<script>
+    let firstCategory = document.getElementById("firstCategory");
+    function firstCategoryVisible() {
+        firstCategory.style.visibility = "visible";
+    }
+    function firstCategoryHidden() {
+        firstCategory.style.visibility = "hidden";
+    }
+</script>
 
 </html>
