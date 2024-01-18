@@ -1,27 +1,61 @@
-body {
-    display: flex;
-    margin: 0;
-    height: 100vh;
-    box-sizing: border-box;
+* {
+    font-family: 'Noto Sans KR', sans-serif;
 }
-#containerMJ{
-    justify-content: center;
-    /* background-color: rgb(255, 255, 255); */
-    width: 100%;
+
+body {
+    margin: 0;
+    box-sizing: border-box;
+    position: relative;
+}
+
+main {
+    display: flex;
+}
+
+#totalMJ {
+    position: absolute;
+    left: 10px;
+}
+
+#listOptionMJ {
+    position: absolute;
+    right: 10px;
+    display: flex;
+}
+
+#listOptionMJ>div {
+    margin-left: 10px;
+}
+
+#listfilter {
+    width: 250px;
+    height: 400px;
+    background-color: rgb(196, 196, 255);
+}
+
+#containerMJ {
+    max-width: calc(1200px - 280px);
+    min-width: calc(1024px - 280px);
     height: 100%;
     display: grid;
-    grid-template:repeat(4,1fr)/repeat(3,minmax(200px, 250px));
+    grid-template: 30px repeat(4, 1fr)/repeat(4, minmax(200px, calc((1000px - 20px)/3)));
     gap: 10px;
-    padding: 10px;
 }
-.itemBoxMJ{
-    /* display: grid;
-    grid-template: 1/5 ; */
+
+#containerOptionMJ {
+    height: 30px;
+    grid-column: 1/-1;
+    display: flex;
+    align-items: end;
+}
+
+.itemBoxMJ {
     background-color: rgb(255, 247, 247);
     border: 1px solid #EAA6A2;
     width: 100%;
     height: calc(90px * 4.5);
 }
+
 .itemBoxMJ>img {
     display: flex;
     align-items: center;
@@ -30,25 +64,29 @@ body {
     width: 100%;
     height: calc(90px * 3);
 }
-.itemNameMJ{
+
+.itemNameMJ {
     margin-top: 10px;
     padding-left: 10px;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 1em;
 }
-.itemInfoMJ{
+
+.itemInfoMJ {
     padding-left: 10px;
     font-size: 0.75em;
     color: rgba(54, 54, 54, 0.699);
 }
-.itemPriceMJ{
+
+.itemPriceMJ {
     margin: 0;
     margin-top: 7px;
     padding-left: 10px;
     font-size: 1.1em;
     font-weight: 600;
 }
-.itemOptionMJ{
+
+.itemOptionMJ {
     margin-left: 10px;
     margin-top: 10px;
     width: 55px;
