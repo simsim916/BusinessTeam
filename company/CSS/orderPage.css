@@ -7,7 +7,10 @@
 
 .containerYH {
     margin: auto;
-    padding: 20px;
+    /* padding: 20px; */
+    width: 100vmin;
+    height: 100vmin;
+
 }
 
 .headtitle {
@@ -195,9 +198,8 @@
     border-left: 1px solid;
 }
 
-
-@media screen and (min-width: 80rem) {
-    .containerYH {
-        margin: 1em 2em;
+@media all and (min-width:768px) and (max-width:1080px) {
+    .container {
+        background-color: #9B1B30;
     }
 }
