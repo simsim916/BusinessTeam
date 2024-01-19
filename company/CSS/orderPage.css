@@ -194,3 +194,10 @@
     /* background-color: #9B1B30; */
     border-left: 1px solid;
 }
+
+
+@media screen and (min-width: 80rem) {
+    .containerYH {
+        margin: 1em 2em;
+    }
+}
