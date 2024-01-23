@@ -5,10 +5,10 @@
 
 .container {
     margin: 0 auto;
-    border: 1px solid;
     display: flex;
     height: 600px;
     width: 800px;
+    border-top: 2px solid blue;
 }
 
 
@@ -55,9 +55,11 @@
     grid-template-rows: 14fr 14fr 2fr;
 }
 
+
 #rightBoxYH>div:nth-child(n+1):nth-child(-n+2) {
-    border: 1px solid;
     display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid;
 }
 
 
@@ -75,8 +77,15 @@
     background-color: gray;
 }
 
+.itemBoxYH {
+    width: 30%;
+}
+
 .itemBoxYH>p {
     text-wrap: wrap;
+    word-break: keep-all;
+    font-size: 12px;
+    font-weight: bold;
 }
 
 .itemBoxYH>div {
