@@ -12,15 +12,24 @@ main {
     display: flex;
 }
 
-.container {
-    margin: 0 auto;
-    width: 1200px;
-    position: relative;
+#searchTitleMJ {
+    margin: 35px auto 0 auto;
+    text-align: center;
+    font-size: 30px;
+    height: 50px;
+}
+
+#searchTitleMJ>span {
+    font-size: 20px;
+}
+
+#searchTitleMJ>b {
+    color: #9B1B30;
 }
 
 #totalMJ {
     position: absolute;
-    left: 10px;
+    left: 290px;
 }
 
 #listOptionMJ {
@@ -31,21 +40,28 @@ main {
 
 #listOptionMJ>div {
     margin-left: 10px;
+    font-size: 14px;
 }
 
 #listfilter {
+    position: fixed;
     width: 250px;
-    height: 400px;
-    background-color: rgb(196, 196, 255);
+    border: 1px solid #9B1B30;
+    border-radius: 40px;
+    height: calc(100vh - 320px - 30px);
+    top: 325px;
 }
 
 #containerMJ {
-    max-width: calc(1200px - 280px);
-    min-width: calc(1024px - 280px);
-    height: 100%;
+    padding-left: 280px;
+    margin-top: 30px;
     display: grid;
-    grid-template: 30px repeat(4, 1fr)/repeat(4, minmax(200px, calc((1000px - 20px)/3)));
+    grid-template-rows: 30px repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(calc((800px - 280px - 10px - 30px)/4), calc((1200px - 280px - 10px - 30px)/4)));
     gap: 10px;
+    width: calc(100vw - 30px - 10px);
+    height: calc((100vw - 280px - 30px - 10px)/4*2*4);
+    max-height: calc((1200px - 280px - 30px - 10px)*2);
 }
 
 #containerOptionMJ {
@@ -55,24 +71,29 @@ main {
     align-items: end;
 }
 
+#totalMJ>span {
+    color: #9B1B30;
+    font-weight: 600;
+    font-size: 1.2em;
+}
+
 .itemBoxMJ {
     background-color: rgb(255, 247, 247);
-    border: 1px solid #EAA6A2;
     width: 100%;
-    height: calc(90px * 4.5);
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .itemBoxMJ>img {
-    display: flex;
-    align-items: center;
     justify-content: center;
     background-color: rgb(0, 0, 0);
     width: 100%;
-    height: calc(90px * 3);
+    text-align: center;
 }
 
 .itemNameMJ {
-    margin-top: 10px;
+    margin-top: 5px;
     padding-left: 10px;
     font-weight: 500;
     font-size: 1em;
@@ -102,4 +123,16 @@ main {
     background-color: #CA4046;
     color: rgb(255, 255, 255);
     border-radius: 5px;
+}
+
+
+/* 모바일 반응형 */
+
+@media (max-width : 1023px) {
+    #containerMJ {
+        grid-template-rows: 30px repeat(4, 1fr);
+        grid-template-columns: repeat(3, minmax(calc((800px - 280px - 10px - 30px)/4), calc((1200px - 280px - 10px - 30px)/4)));
+        height: calc((100vw - 280px - 30px - 10px)/3*2*4 + 150px);
+        max-height: calc((1200px - 280px - 30px - 10px)*2);
+    }
 }

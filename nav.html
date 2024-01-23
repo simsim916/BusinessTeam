@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <div id="topBar">
+    <header id="topBar">
         <div id="loginBar">
             <div class="container">
                 <a href="">고객센터</a>
@@ -29,7 +29,7 @@
         <div id="searchBar">
             <div class="container">
                 <div id="logoBox">
-                    <img src="./img/logo.png" alt="">
+                    <img src="/img/logo.png" alt="">
                     <h1>사이트이름</h1>
                 </div>
                 <form id="searchBox">
@@ -57,7 +57,8 @@
         <nav>
             <div class="container">
                 <div id="categoryBox">
-                    <div onmouseover="firstCategoryVisible()" id="categoryTag"><i class="fa-solid fa-bars"></i>&nbsp;&nbsp;&nbsp;카테고리</div>
+                    <div onmouseover="firstCategoryVisible()" id="categoryTag"><i
+                            class="fa-solid fa-bars"></i>&nbsp;&nbsp;&nbsp;카테고리</div>
                     <ul onmouseout="firstCategoryHidden()" onmouseover="firstCategoryVisible()" id="firstCategory">
                         <li></li>
                         <li id="firstCategorySearch">
@@ -66,12 +67,12 @@
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </div>
                         </li>
-                        <li><img src="./img/category_vitamin.png" alt="category_vitamin">건강식품</li>
-                        <li><img src="./img/category_chicken.png" alt="category_chicken">계육</li>
-                        <li><img src="./img/category_etc.png" alt="category_etc">기타</li>
-                        <li><img src="./img/category_wheat.png" alt="category_wheat">농산가공</li>
-                        <li><img src="./img/category_pig.png" alt="category_pig">돈육</li>
-                        <li><img src="./img/category_noodle.png" alt="category_noodle">면류</li>
+                        <li><img src="/img/category_vitamin.png" alt="category_vitamin">건강식품</li>
+                        <li><img src="/img/category_chicken.png" alt="category_chicken">계육</li>
+                        <li><img src="/img/category_etc.png" alt="category_etc">기타</li>
+                        <li><img src="/img/category_wheat.png" alt="category_wheat">농산가공</li>
+                        <li><img src="/img/category_pig.png" alt="category_pig">돈육</li>
+                        <li><img src="/img/category_noodle.png" alt="category_noodle">면류</li>
                         <li>분말류</li>
                         <li>생활용품</li>
                         <li>세제류</li>
@@ -121,15 +122,16 @@
                 </ul>
             </div>
         </nav>
-    </div>
+    </header>
 </body>
 <script>
     let firstCategory = document.getElementById("firstCategory");
-    function firstCategoryVisible(){
-        firstCategory.style.visibility="visible";
+    function firstCategoryVisible() {
+        firstCategory.style.visibility = "visible";
     }
-    function firstCategoryHidden(){
-        firstCategory.style.visibility="hidden";
+    function firstCategoryHidden() {
+        firstCategory.style.visibility = "hidden";
     }
 </script>
+
 </html>
