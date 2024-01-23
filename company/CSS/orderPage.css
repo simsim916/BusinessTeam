@@ -7,9 +7,7 @@
 
 .containerYH {
     margin: auto;
-    /* padding: 20px; */
-    width: 100vmin;
-    height: 100vmin;
+    padding: 20px;
 
 }
 
@@ -61,6 +59,7 @@
     display: flex;
     gap: 30px;
     background-color: #ca404630;
+    border: 1px solid;
 }
 
 /* =================== 주문현황 ================== */
@@ -198,8 +197,59 @@
     border-left: 1px solid;
 }
 
-@media all and (min-width:768px) and (max-width:1080px) {
-    .container {
-        background-color: #9B1B30;
+@media all and (max-width:1080px) {
+
+
+    #topSearchBoxYH {
+        display: block;
+        flex-direction: column;
+        padding-left: 0;
+        text-align: center;
+    }
+
+    #topSearchBoxYH>:nth-child(1) {
+        border: 1px solid;
+        background-color: antiquewhite;
+        width: 100%;
+    }
+
+    #topSearchBoxYH>:nth-child(2) {
+        border: 1px solid;
+        background-color: chartreuse;
+    }
+
+    #topSearchBoxYH>:nth-child(3) {
+        display: none;
+    }
+
+    #topBoxYH {
+        position: initial;
+        text-indent: 20px;
+    }
+
+    #topBoxRightYH {
+        position: initial;
+    }
+
+    #topBoxRightYH button {
+        width: 33.333%;
+        height: 30px;
+    }
+
+    #orderReport {
+        margin-top: 100px;
+    }
+
+    #topBoxRightYH form {
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    #orderReport {
+        font-size: 14px;
+    }
+
+    #orderListBox {
+        font-size: 14px;
     }
 }
