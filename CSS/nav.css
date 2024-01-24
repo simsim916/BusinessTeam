@@ -331,3 +331,18 @@ nav {
     top: calc((40px - 20px)/2);
     color: #9b1b20;
 }
+
+#leftBar{
+    list-style: none;
+    position: fixed;
+    left: 0;
+}
+
+#leftBar>li>div{
+    display: none;
+}
+
+#leftBar>li>img{
+    width: 25px;
+    height: 25px;
+}
