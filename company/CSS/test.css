@@ -1,0 +1,73 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 800px;
+    height: 600px;
+    border: 1px solid;
+}
+
+#innerBox {
+    width: calc(800px * 0.8);
+    height: calc(600px * 0.8);
+    margin-top: calc((600px - (600px * 0.8)) / 2);
+    margin-left: calc((600px - (600px * 0.8)) / 2);
+    border: 1px solid;
+
+    display: grid;
+    grid-template: 1fr 2fr / 3fr 2fr;
+
+
+    position: relative;
+}
+
+
+#searchArea {
+    border-right: 1px solid;
+}
+
+#searchArea>select {
+    width: 30%;
+    margin-left: 5px;
+    margin-top: 15px;
+}
+
+#searchBox {}
+
+
+#imageArea {
+    display: flex;
+    justify-content: space-around;
+}
+
+#imageArea>img {
+    border: 1px solid;
+    width: 40%;
+    height: 70%;
+    margin-top: calc((160px - (160px * 0.7)) / 2);
+}
+
+#textArea {
+    padding: 30px;
+    border-top: 1px solid;
+    grid-column: span 2;
+}
+
+#tap {
+    width: calc((800px * 0.8) * 0.6);
+    /* 1.5ft 비율만큼 */
+    height: 30px;
+    position: absolute;
+    bottom: 100%;
+    left: -1px;
+    /* 왼쪽이 살짝 떠있는건 왜지? */
+    display: flex;
+}
+
+#tap>div {
+    width: 25%;
+    height: 100%;
+    border: 1px solid;
+}
