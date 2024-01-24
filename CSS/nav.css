@@ -190,7 +190,7 @@ nav {
     width: 7px;
 }
 
-::-webkit-scrollbar-thumb {
+#firstCategory::-webkit-scrollbar-thumb {
     background-color: #9b1b1f70;
     border-radius: 10px;
 }
@@ -271,6 +271,15 @@ nav {
     overflow-y: auto;
     border-bottom: 2px solid rgba(121, 121, 121, 0.2);
     border-right: 2px solid rgba(121, 121, 121, 0.2);
+}
+
+#secondCategory::-webkit-scrollbar {
+    width: 7px;
+}
+
+#secondCategory::-webkit-scrollbar-thumb {
+    background-color: #9b1b1f70;
+    border-radius: 10px;
 }
 
 #secondCategory>li {
