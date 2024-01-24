@@ -13,7 +13,14 @@ function openSideBar() {
     sideBarStatus = !sideBarStatus;
 }
 
-function openDetailFirst(){
-    sideBarDetailFirst.style.display="block"
+function openDetailFirst() {
+    sideBarDetailFirst.style.display = "block"
+    sideBarDetailSecond.style.display = "block"
+    sideBarDetailFirst.style.transform = "translateX(0)";
+}
+
+function closeDetail() {
+    sideBarDetailFirst.style.display = "none"
+    sideBarDetailSecond.style.display = "none"
     sideBarDetailFirst.style.transform = "translateX(0)";
 }
