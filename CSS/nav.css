@@ -186,7 +186,7 @@ nav {
     border-bottom: 2px solid rgba(121, 121, 121, 0.2);
 }
 
-::-webkit-scrollbar {
+#firstCategory::-webkit-scrollbar {
     width: 7px;
 }
 

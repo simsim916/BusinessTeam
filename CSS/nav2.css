@@ -21,7 +21,7 @@
     width: 80px;
     background-color: #9B1B30;
     transition: 1s;
-    /* transform: translateX(-100%); */
+    z-index: 2;
 }
 
 #sideBarButton {
@@ -112,7 +112,7 @@
     left: 150px;
     width: 200px;
     height: calc(100vh - 40px);
-    background-color: #fff5f480;
+    background-color: #fcf9f8;
     color: black;
     font-size: 14px;
 }

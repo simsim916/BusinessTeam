@@ -4,6 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- nav CSS -->
+    <link rel="stylesheet" href="../css/nav2.css">
+    <!-- nav JS-->
+    <script defer src="../js/nav2.js"></script>
     <!-- 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,32 +24,68 @@
 </head>
 
 <body>
-    <div class="containerYH">
+    <div id="topBar">
+        <i class="fa-solid fa-house"></i>
+    </div>
+    <div id="sideBar">
+        <div>토마토팜</div>
+        <ul>
+            <li onclick="openDetailFirst()">
+                <div><i class="fa-solid fa-bars"></i><br>전체메뉴</div>
+            </li>
+            <li>
+                <div><i class="fa-solid fa-circle-user"></i><br>즐겨찾기</div>
+            </li>
+            <li>
+                <div><i class="fa-solid fa-list-check"></i><br>최근메뉴</div>
+            </li>
+            <li>
+                <div><i class="fa-solid fa-bullhorn"></i><br>공지사항</div>
+            </li>
+            <li>
+                <div><i class="fa-solid fa-bell"></i><br>알림</div>
+            </li>
+            <li>
+                <div><i class="fa-solid fa-comment-dots"></i><br>고객센터</div>
+            </li>
+            <li>
+                <div><i class="fa-solid fa-gear"></i><br>설정</div>
+            </li>
+        </ul>
+        <div onclick="openSideBar()" id="sideBarButton"><i class="fa-solid fa-chevron-right"></i></div>
+        <div id="sideBarDetail">
+            <div id="sideBarDetailFirst">
+                <ul>
+                    <li>상품주문</li>
+                    <li>상품조회/검색</li>
+                    <li>주문조회</li>
+                    <li>클레임 처리현황</li>
+                    <li>출력물</li>
+                </ul>
+            </div>
+            <div id="sideBarDetailSecond">
+                <div id="sideBarDetailSecondExit" onclick="closeDetail()"><i class="fa-solid fa-xmark"></i></div>
+                <div id="sideBarDetailSecondSearch">
+                    <input type="text">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <ul>
+                    <li>식재주문등록</li>
+                    <li>식단주문등록</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
         <div id="topBoxYH">
             <!-- 최상단 -->
             <div id="topBoxLeftYH">
                 <h3>★ 식재주문등록</h3>&nbsp;&nbsp;
                 <h4>주문>식재주문등록</h4>
             </div>
-            
-            
-            <div id="topSearchBoxYH">
-                <!-- 상단 검색창 -->
-                <label for="search">
-                    사업장 <input type="text" name="search" id="search">
-                </label>
 
-                <label for="date">
-                    입고일자 <input type="date" name="date" id="date">
-                </label>
-            </div>
-            <div id="topBoxRightYH">
-                <form action="">
-                    <button id="saveBtYH">저장</button>
-                    <button id="checkBtYH">조회</button>
-                    <button id="refreshBtYH">새로고침</button>
-                </form>
-            </div>
+
             <div id="topSearchBoxYH">
                 <!-- 상단 검색창 -->
                 <label for="search">
@@ -175,5 +215,16 @@
 
     </div>
 </body>
+
+<script>
+    const sideBar = document.getElementById("sideBar");
+    const sideBarButton = document.getElementById("sideBarButton");
+    const topBar = document.getElementById("topBar")
+    const sideBarDetailFirst = document.getElementById("sideBarDetailFirst")
+    const sideBarDetailSecond = document.getElementById("sideBarDetailSecond")
+    let containers = document.getElementsByClassName("container");
+
+    let sideBarStatus = false;
+</script>
 
 </html>
