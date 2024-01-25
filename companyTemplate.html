@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./CSS/nav2.css">
+    <!-- nav CSS -->
+    <link rel="stylesheet" href="./css/nav2.css">
+    <!-- nav JS-->
+    <script defer src="./js/nav2.js"></script>
     <!-- 폰트어썸 -->
     <script src="https://kit.fontawesome.com/d68045e863.js" crossorigin="anonymous"></script>
     <!-- 구글 폰트 -->
@@ -23,7 +26,7 @@
     <div id="sideBar">
         <div>토마토팜</div>
         <ul>
-            <li>
+            <li onclick="openDetailFirst()">
                 <div><i class="fa-solid fa-bars"></i><br>전체메뉴</div>
             </li>
             <li>
@@ -45,7 +48,7 @@
                 <div><i class="fa-solid fa-gear"></i><br>설정</div>
             </li>
         </ul>
-        <div id="sideBarButton"><i class="fa-solid fa-chevron-right"></i></div>
+        <div onclick="openSideBar()" id="sideBarButton"><i class="fa-solid fa-chevron-right"></i></div>
         <div id="sideBarDetail">
             <div id="sideBarDetailFirst">
                 <ul>
@@ -56,9 +59,28 @@
                     <li>출력물</li>
                 </ul>
             </div>
-            <div id="sideBarDetailSecond"></div>
+            <div id="sideBarDetailSecond">
+                <div id="sideBarDetailSecondExit" onclick="closeDetail()"><i class="fa-solid fa-xmark"></i></div>
+                <div id="sideBarDetailSecondSearch">
+                    <input type="text">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <ul>
+                    <li>식재주문등록</li>
+                    <li>식단주문등록</li>
+                </ul>
+            </div>
         </div>
     </div>
 </body>
+<script>
+    const sideBar = document.getElementById("sideBar");
+    const sideBarButton = document.getElementById("sideBarButton");
+    const topBar = document.getElementById("topBar")
+    const sideBarDetailFirst = document.getElementById("sideBarDetailFirst")
+    const sideBarDetailSecond = document.getElementById("sideBarDetailSecond")
+    let sideBarStatus = false;
+</script>
 
 </html>
