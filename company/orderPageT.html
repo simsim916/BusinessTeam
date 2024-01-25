@@ -167,7 +167,7 @@
                         <div>부가세</div>
                         <div>합계</div>
                         <div>원산지</div>
-                        <div><input type="checkbox" name="test1" class="chk"></div>
+                        <div><input onclick="uncheckedAllBox()" type="checkbox" name="test1" class="chk"></div>
                         <div>1</div>
                         <div>1</div>
                         <div>1</div>
@@ -179,7 +179,7 @@
                         <div>1</div>
                         <div>1</div>
                         <div>1</div>
-                        <div><input type="checkbox" name="test1" class="chk"></div>
+                        <div><input onclick="uncheckedAllBox()" type="checkbox" name="test1" class="chk"></div>
                         <div>2</div>
                         <div>2</div>
                         <div>2</div>
@@ -191,7 +191,7 @@
                         <div>2</div>
                         <div>2</div>
                         <div>2</div>
-                        <div><input type="checkbox" name="test1" class="chk"></div>
+                        <div><input onclick="uncheckedAllBox()" type="checkbox" name="test1" class="chk"></div>
                         <div>3</div>
                         <div>3</div>
                         <div>3</div>
@@ -222,6 +222,7 @@
     const topBar = document.getElementById("topBar")
     const sideBarDetailFirst = document.getElementById("sideBarDetailFirst")
     const sideBarDetailSecond = document.getElementById("sideBarDetailSecond")
+    const checkAll = document.querySelector('#checkAll');
     let containers = document.getElementsByClassName("container");
 
     let sideBarStatus = false;
