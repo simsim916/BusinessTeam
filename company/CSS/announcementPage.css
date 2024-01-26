@@ -3,8 +3,10 @@
     box-sizing: border-box;
 }
 
-#containerYH {
-    width: 90%;
+
+
+#container {
+    width: 98%;
     margin: 0 auto;
 }
 
@@ -13,6 +15,8 @@
     border-top: 3px solid;
     border-bottom: 1px solid rgba(128, 128, 128, 0.329);
     display: flex;
+    margin-top: 20px;
+    /* 가려져있어서 몰랐는데,  */
 }
 
 #tagBoxYH {
@@ -21,37 +25,121 @@
     align-items: center;
 }
 
-#tagBoxYH>p{
-    background-color: #EAA6A2;
-    width: 30%;
+#tagBoxYH>p {
+    background-color: #F2EECA;
+    width: 20%;
     text-align: center;
-    line-height: 50px;
+    line-height: 40px;
+    margin-right: 20px;
 }
 
-#tagBoxYH>select{
+#tagBoxYH>select {
     width: 70%;
-    height: 50px;
+    height: 35px;
     text-indent: 10px;
     font-size: 16px;
 }
 
-#searchBoxYH{
+#searchBoxYH {
+    display: flex;
     width: 40%;
+    align-items: center;
+}
+
+#searchBoxYH>p {
+    background-color: #F2EECA;
+    width: 30%;
+    text-align: center;
+    line-height: 40px;
+    margin-right: 20px;
+}
+
+#searchBoxYH>select {
+    width: 15%;
+    margin-right: 5px;
+    height: 35px;
+}
+
+#searchBoxYH>input {
+    width: 45%;
+    padding: 0;
+    height: 35px;
+}
+
+#dateBoxYH {
+    width: 30%;
     display: flex;
     align-items: center;
 }
 
-#searchBoxYH>div{
-    width: 25%;
+#dateBoxYH>p {
+    background-color: #F2EECA;
+    width: 30%;
     text-align: center;
-}
-#searchBoxYH>input{
-    width: 75%;
-    height: 100%;
-    padding: 0;
+    line-height: 40px;
+    margin-right: 20px;
 }
 
-#dateBoxYH{
-    width: 30%;
-    background-color: green;
+#dateBoxYH>input {
+    width: 40%;
+    height: 35px;
+}
+
+#dateBoxYH>button {
+    width: 20%;
+    height: 35px;
+    margin-left: 20px;
+}
+
+/* 
+#noticeboardHead>h1 {
+    position: absolute;
+    left: 0;
+}
+
+#noticeboardHead>select{
+    position: absolute;
+    right: 0;
+    height: 40px;
+} */
+
+#noticeboardHead {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+
+#noticeboardHead>select {
+    width: 150px;
+    height: 43px;
+}
+
+#noticeboard {
+    display: grid;
+    grid-template: repeat(15, 50px) / 0.7fr 3fr 0.7fr 0.6fr;
+    text-align: center;
+}
+
+#noticeboard>div {
+    line-height: 50px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.312);
+}
+
+
+
+#noticeboard>div:nth-child(4n-2) {
+    text-align: start;
+    text-indent: 20px;
+}
+
+#noticeboard>div:nth-child(2) {
+    text-align: center;
+}
+
+#noticeboard>div:nth-child(n+1):nth-child(-n+4) {
+    border-bottom: 1px solid;
+    border-top: 2px solid;
+    font-weight: bold;
+
 }
