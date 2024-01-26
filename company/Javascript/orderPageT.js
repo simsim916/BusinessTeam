@@ -22,7 +22,6 @@ function uncheckedAllBox() {
 }
 
 function insertData() {
-    const orderList = document.querySelector('#insertRowYH');
     const makeDiv = document.createElement("div");
 
     for (let index = 0; index < 12; index++) {
@@ -31,9 +30,10 @@ function insertData() {
             const makeInput = makeDiv.createElement("input");
             makeInput.className = "chk";
         } else {
-            
+            orderList.appendChild(makeDiv);
         }
         orderList.appendChild(makeDiv);
     }
     orderList.appendChild(makeDiv);
 }
+
