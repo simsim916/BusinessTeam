@@ -18,9 +18,9 @@
     <script src="https://kit.fontawesome.com/d68045e863.js" crossorigin="anonymous"></script>
     <title>Document</title>
 
-    <link rel="stylesheet" type="text/css" href="./CSS/orderPage.css" id="changeStyle">
+    <link rel="stylesheet" href="./CSS/orderPageT.css">
 
-    <script defer src="./Javascript/orderPage.js"></script>
+    <script defer src="./Javascript/orderPageT.js"></script>
 </head>
 
 <body>
@@ -155,7 +155,7 @@
                 <div id="orderedListYH">
                     <!-- 주문내역 -->
                     <div id="insertRowYH">
-                        <div><input type="checkbox" name="test1"></div>
+                        <div><input type="checkbox" name="test1" id="checkAll" onclick="selectAll()"></div>
                         <div>순번</div>
                         <div>제품코드</div>
                         <div>제품명</div>
@@ -167,7 +167,7 @@
                         <div>부가세</div>
                         <div>합계</div>
                         <div>원산지</div>
-                        <div><input type="checkbox" name="test1"></div>
+                        <div><input onclick="uncheckedAllBox()" type="checkbox" name="test1" class="chk"></div>
                         <div>1</div>
                         <div>1</div>
                         <div>1</div>
@@ -179,7 +179,7 @@
                         <div>1</div>
                         <div>1</div>
                         <div>1</div>
-                        <div><input type="checkbox" name="test1"></div>
+                        <div><input onclick="uncheckedAllBox()" type="checkbox" name="test1" class="chk"></div>
                         <div>2</div>
                         <div>2</div>
                         <div>2</div>
@@ -191,7 +191,7 @@
                         <div>2</div>
                         <div>2</div>
                         <div>2</div>
-                        <div><input type="checkbox" name="test1"></div>
+                        <div><input onclick="uncheckedAllBox()" type="checkbox" name="test1" class="chk"></div>
                         <div>3</div>
                         <div>3</div>
                         <div>3</div>
@@ -211,17 +211,22 @@
 
 
 
+        <input type="submit" value="${test.jno}">
 
     </div>
 </body>
 
 <script>
+
     const sideBar = document.getElementById("sideBar");
     const sideBarButton = document.getElementById("sideBarButton");
     const topBar = document.getElementById("topBar")
     const sideBarDetailFirst = document.getElementById("sideBarDetailFirst")
     const sideBarDetailSecond = document.getElementById("sideBarDetailSecond")
+    const checkAll = document.querySelector('#checkAll');
     let containers = document.getElementsByClassName("container");
+    const orderList = document.querySelector('#insertRowYH');
+
 
     let sideBarStatus = false;
 </script>
