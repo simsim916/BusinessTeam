@@ -1,5 +1,95 @@
-#adImgBox{
-    width: 100vw;
-    height: 250px;
-    background-color: black;
+* {
+    box-sizing: border-box;
+}
+
+#adImgBox {
+    width: calc(100vw - 17px);
+    height: 300px;
+    background-color: rgb(255, 226, 226);
+}
+
+#adImg {
+    position: relative;
+
+}
+
+#adRightTab {
+    position: absolute;
+    right: 50px;
+    top: calc((300px - 220px)/2);
+    width: 120px;
+    height: 240px;
+}
+
+#adRightTab>div {
+    border: 1px solid black;
+    height: calc(220px/4);
+}
+
+#firstContainer {
+    text-align: center;
+    margin-top: 50px;
+}
+
+#firstContainer>h3 {
+    font-size: 30px;
+    font-weight: 500;
+    color: #4C4556;
+}
+
+#firstContainer>h3>i {
+    color: #F6C026;
+}
+
+#firstContainerButton {
+    gap: 20px;
+    font-size: 15px;
+    margin-top: 30px;
+}
+
+#firstContainerButton>div {
+    display: inline-block;
+    margin: 0 10px;
+    width: 100px;
+    height: 100px;
+}
+
+#firstContainerButton>div>img {
+    border-radius: 50%;
+    background-color: #EAA6A240;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#secondContainer {
+    text-align: center;
+    margin-top: 50px;
+}
+
+#secondContainer>h3 {
+    font-size: 30px;
+    font-weight: 500;
+    color: #4C4556;
+}
+
+#secondContainer>h3>i {
+    color: #F6C026;
+}
+
+
+/* ---------------------------------------------  */
+#secondContainerList {
+    gap: 10px;
+    position: relative;
+    margin-top: 30px;
+}
+
+.itemBox{
+    display: inline-block;
+    width: 200px;
+    height: 500px;
+}
+
+.itemBox>img{
+    width: 100%;
 }
