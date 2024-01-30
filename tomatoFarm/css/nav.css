@@ -160,20 +160,20 @@ nav {
 }
 
 #categoryTag:hover~#firstCategory {
-    visibility: visible;
+    display: block;
 }
 
 #firstCategory:hover {
-    visibility: visible;
+    display: block;
 }
 
 #secondCategory:hover {
-    visibility: visible;
+    display: block;
 }
 
 #firstCategory {
     z-index: 3;
-    visibility: hidden;
+    display: none;
     position: relative;
     padding: 0;
     list-style: none;
@@ -253,12 +253,12 @@ nav {
 }
 
 #firstCategory:hover~#secondCategory {
-    visibility: visible;
+    display: block;
 }
 
 #secondCategory {
     z-index: 3;
-    visibility: hidden;
+    display: none;
     position: absolute;
     top: 60px;
     list-style: none;

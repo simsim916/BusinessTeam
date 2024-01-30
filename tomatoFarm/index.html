@@ -12,8 +12,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="./CSS/nav.css">
-    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/index.css">
     <title>Document</title>
 </head>
 
@@ -123,16 +123,52 @@
     </header>
 
     <div id="adImgBox">
+        <div id="adImg" class="container">
 
+            <div id="adRightTab">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
     </div>
+
+    <div id="firstContainer" class="container">
+        <h3><i class="fa-solid fa-star"></i> 토마토팜 바로가기 <i class="fa-solid fa-star"></i></h3>
+        <div id="firstContainerButton">
+            <div><img src="/img/index_bestSeller.png" alt="" class="categoryImg"><br>베스트 상품</div>
+            <div><img src="/img/index_mealkit.png" alt="" class="categoryImg"><br>밀키트</div>
+            <div><img src="/img/index_food.png" alt="" class="categoryImg"><br>신선 재료</div>
+            <div><img src="/img/index_menu.png" alt="" class="categoryImg"><br>메뉴 주문</div>
+            <div><img src="/img/index_cooking.png" alt="" class="categoryImg"><br>조리 도구</div>
+            <div><img src="/img/index_gift.png" alt="" class="categoryImg"><br>이벤트</div>
+        </div>
+    </div>
+
+    <div id="secondContainer" class="container">
+        <h3><i class="fa-solid fa-gift"></i> 이주의 혜택 <i class="fa-solid fa-gift"></i></h3>
+        <div id="secondContainerList">
+            <div class="itemBox">
+                <img src="../img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
+                <div class="itemNameMJ">신림동 백순대 볶음</div>
+                <div class="itemInfoMJ">프레시지<br></div>
+                <p class="itemPriceMJ">12,300원</p>
+                <div class="itemOptionMJ">무료배송</div>
+            </div>
+            
+            <div class="nationBt"><i class="fa-sharp fa-solid fa-arrow-right"></i></div>
+
+        </div>
+
 </body>
 <script>
     let firstCategory = document.getElementById("firstCategory");
     function firstCategoryVisible() {
-        firstCategory.style.visibility = "visible";
+        firstCategory.style.display = "block";
     }
     function firstCategoryHidden() {
-        firstCategory.style.visibility = "hidden";
+        firstCategory.style.display = "none";
     }
 </script>
 
