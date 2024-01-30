@@ -1,0 +1,33 @@
+package com.ncs.spring02.model;
+
+import java.util.List;
+
+import com.ncs.spring02.domain.BoardDTO;
+
+public class BoardDAO {
+	String sql;
+	
+	// List
+	public List<BoardDTO> selectList() {
+		return null;
+	}
+	// Detail
+	public BoardDTO selectOne(int seq) {
+		return null;
+	}
+	
+	// Insert
+	public int insert(BoardDTO dto) {
+		return 0;
+	}
+	
+	// Update
+	public int update(BoardDTO dto) {
+		return 0;
+	}
+	
+	// Delete
+	public int delete(int seq) {
+		return 0;
+	}
+}

@@ -1,0 +1,5 @@
+package com.ncs.spring02.service;
+
+public class BoardServiceImpl {
+
+}
