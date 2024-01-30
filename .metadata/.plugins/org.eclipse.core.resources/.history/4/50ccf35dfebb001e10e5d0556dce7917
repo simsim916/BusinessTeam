@@ -1,0 +1,29 @@
+package com.ncs.spring02.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.ncs.spring02.service.JoService;
+
+@Controller
+@RequestMapping(value="/jo")
+public class JoController {
+	@Autowired
+	private JoService service;
+	
+	// joList
+	@RequestMapping(value="/jolist")
+	public String jolist(Model model) {
+		model.addAttribute( "list" , service.joList());
+		return "jo/joList";
+	}
+	// joDetail
+		
+	// joInsert
+
+	// joUpdate
+
+	// joDelete
+}

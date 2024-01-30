@@ -1,0 +1,46 @@
+package com.ncs.spring02.controller;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.ncs.spring02.service.BoardService;
+
+
+@Controller
+@RequestMapping("/board")
+public class BoardController {
+	@Autowired
+	BoardService service;
+	
+	//List
+	@GetMapping("/boardList")
+	public void boardList(Model model) {
+		model.addAttribute("list", service.selectList());
+	}
+
+	//Detail
+	@GetMapping("/detail")
+	public String boardDetail(Model model, HttpSession session, @RequestParam("seq") int seq) {
+		String uri = "board/list";
+		
+		if (session.getAttribute("loginId")==null) {
+			model.addAttribute("message", "로그인 후 조회가능합니다.");
+		} else {
+			uri = "board/boardDetail";
+			model.addAttribute("board", service.selectOne(seq));
+		}
+		
+		return uri;
+	}
+	
+	//Insert
+	@GetMapping("/insert")
+	public void boardInsert() {
+	}
+}

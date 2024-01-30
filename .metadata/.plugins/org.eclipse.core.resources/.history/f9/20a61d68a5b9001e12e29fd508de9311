@@ -1,0 +1,27 @@
+package iocDI01_xml;
+
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
+
+public class TVUser02 {
+
+	public static void main(String[] args) {
+		// 1. BeanFactory (스프링 컨테이너)생성
+		AbstractApplicationContext sc = new 
+				GenericXmlApplicationContext("iocDI01_xml/app02.xml");
+		TV tv = (TV)sc.getBean("tv");
+		
+		// 2. 필요한 객체를 전달받고 서비스 진행
+		if (tv != null) {
+			tv.powerOn();
+			tv.volumeUp();
+			tv.volumeDown();
+			tv.powerOff();
+		} else {
+			System.out.println("TV를 선택하지 않았습니다.");
+		}
+		
+		sc.close();
+	}
+
+}

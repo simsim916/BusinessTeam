@@ -1,0 +1,48 @@
+package com.ncs.spring02.model;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.ncs.spring02.domain.JoDTO;
+
+public class JoDAO {
+	private static Connection cn = DBConnection.getConnection();
+	private static PreparedStatement pst;
+	private static ResultSet rs;
+	private static String sql;
+	
+	//joList
+	public List<JoDTO> joList() {
+		sql = "SELECT * FROM jo";
+		List<JoDTO> list = new ArrayList<JoDTO>();
+		
+		try {
+			pst = cn.prepareStatement(sql);
+			rs = pst.executeQuery();
+			
+			if (rs.next()) {
+				JoDTO dto = new JoDTO();
+				dto.setJno(rs.getInt(1));
+				dto.setJname(rs.getString(2));
+				dto.setCaptain(rs.getString(3));
+				dto.setProject(rs.getString(4));
+				dto.setSlogan(rs.getString(5));
+			}
+		} catch (Exception e) {
+			System.out.println("\\ joList 에러발생");
+		}
+		
+		return list;
+	}
+	//joDetail
+	
+	//joInsert
+	
+	//joUpdate
+	
+	//joDelete
+}
