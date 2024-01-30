@@ -1,0 +1,33 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Jo List</title>
+</head>
+<body>
+<h2>Jo List</h2>
+
+	<table><thead><tr>
+			<th>조번호</th><th>조이름</th><th>조장ID</th><th>프로젝트</th><th>슬로건</th>
+			</tr></thead><tbody></tbody>
+	<c:if test="${!empty requestScope.dto}">
+	<c:set value="${requestScope.dto}" var="m" />
+		<tr>
+			<td>${m.jno}<td><td>${m.jname}<td>
+			<td>${m.captain}<td><td>${m.project}<td><td>${m.slogan}<td>
+		</tr>
+	</c:if>
+	<c:if test="${empty requestScope.list}">
+		<tr>
+			<td colspan="6">	<h3>출력할 자료가 없습니다.</h3></td>
+		</tr>
+	</c:if>
+</table>
+<a href="/spring02/home">Home</a>
+<a href="javascript:history.go(-1)">이전으로</a>
+
+</body>
+</body>
+</html>

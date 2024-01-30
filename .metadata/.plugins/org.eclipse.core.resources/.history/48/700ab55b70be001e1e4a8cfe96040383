@@ -1,0 +1,45 @@
+package com.ncs.spring02.model;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import com.ncs.spring02.domain.BoardDTO;
+@Repository
+public class BoardDAO {
+	String sql;
+	private static Connection cn = DBConnection.getConnection();
+	private static PreparedStatement pst;
+	private static ResultSet rs;
+	
+	// List
+	public List<BoardDTO> selectList() {
+		sql = "select * from board";
+		
+		try
+		
+		return null;
+	}
+	// Detail
+	public BoardDTO selectOne(int seq) {
+		return null;
+	}
+	
+	// Insert
+	public int insert(BoardDTO dto) {
+		return 0;
+	}
+	
+	// Update
+	public int update(BoardDTO dto) {
+		return 0;
+	}
+	
+	// Delete
+	public int delete(int seq) {
+		return 0;
+	}
+}

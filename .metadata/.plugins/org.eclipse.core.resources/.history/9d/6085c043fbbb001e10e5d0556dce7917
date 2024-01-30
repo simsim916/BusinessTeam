@@ -1,0 +1,10 @@
+package com.ncs.spring02.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.ncs.spring02.model.JoDAO;
+
+public class JoService {
+	@Autowired
+	private JoDAO dao;
+}

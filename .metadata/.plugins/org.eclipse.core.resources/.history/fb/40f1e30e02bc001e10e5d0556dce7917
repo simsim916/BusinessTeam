@@ -1,0 +1,78 @@
+package com.ncs.spring02.model;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import com.ncs.spring02.domain.JoDTO;
+@Repository
+public class JoDAO {
+	private static Connection cn = DBConnection.getConnection();
+	private static PreparedStatement pst;
+	private static ResultSet rs;
+	private static String sql;
+
+	// joList
+	public List<JoDTO> joList() {
+		sql = "SELECT * FROM jo";
+		List<JoDTO> list = new ArrayList<JoDTO>();
+
+		try {
+			pst = cn.prepareStatement(sql);
+			rs = pst.executeQuery();
+
+			if (rs.next()) {
+				do {
+					JoDTO dto = new JoDTO();
+					dto.setJno(rs.getInt(1));
+					dto.setJname(rs.getString(2));
+					dto.setCaptain(rs.getString(3));
+					dto.setProject(rs.getString(4));
+					dto.setSlogan(rs.getString(5));
+					list.add(dto);
+				} while (rs.next());
+				return list;
+			} else
+				return null;
+		} catch (Exception e) {
+			System.out.println("\\ JoDAO.joList 에러발생");
+			return null;
+		}
+
+	}
+	// joDetail
+	public JoDTO joDetail(int jno) {
+		sql = "SELECT * FROM jo where jno=?";
+		JoDTO dto = new JoDTO();
+
+		try {
+			pst = cn.prepareStatement(sql);
+			pst.setInt(1, jno);
+			rs = pst.executeQuery();
+
+			if (rs.next()) {
+					dto.setJno(rs.getInt(1));
+					dto.setJname(rs.getString(2));
+					dto.setCaptain(rs.getString(3));
+					dto.setProject(rs.getString(4));
+					dto.setSlogan(rs.getString(5));
+				return dto;
+			} else
+				return null;
+		} catch (Exception e) {
+			System.out.println("\\ JoDAO.joDetail 에러발생");
+			return null;
+		}
+
+	}
+	// joInsert
+
+	// joUpdate
+
+	// joDelete
+}

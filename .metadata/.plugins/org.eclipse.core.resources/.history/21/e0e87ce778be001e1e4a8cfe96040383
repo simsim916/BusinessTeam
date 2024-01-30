@@ -1,0 +1,29 @@
+package com.ncs.spring02.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.ncs.spring02.service.BoardService;
+
+import lombok.AllArgsConstructor;
+
+@Controller
+@RequestMapping("/board")
+public class BoardController {
+	@Autowired
+	BoardService service;
+	
+	//List
+	@GetMapping("/list")
+	public void boardList(Model model) {
+		model.addAttribute("list", service.selectList());
+	}
+
+	//Insert
+	@GetMapping("/insert")
+	public void boardInsert() {
+	}
+}

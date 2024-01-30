@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- 1) 고전적 방법 (직접 new : 소스 재컴파일)  -->
+	<bean id="sstv" class="iocDI01_xml.SsTVs" lazy-init="true" />
+	
+	<!-- 2) IOC/DI -> 생성자 주입  -->
+	<bean id="lgtv" class="iocDI01_xml.LgTVs" lazy-init="true">
+		<constructor-arg name="color" value="green"/>
+		<constructor-arg name="price" value="1234500"/>
+		<constructor-arg name="speaker" ref="sp"/>
+	</bean>
+	<bean id="sp" class="iocDI01_xml.Speaker"/>	
+	<!-- 3) IOC/DI -> setter 주입  -->
+	<bean id="aitv" class="iocDI01_xml.AiTVs" lazy-init="true" />
+</beans>
