@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:asdfasdfasdf/src/main/java/com/sadf/asd/HomeController.java
 package com.sadf.asd;
+========
+package com.main.tomatoFarm;
+>>>>>>>> origin/JYH:tomatoFarm/src/main/java/com/main/tomatoFarm/HomeController.java
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -22,7 +26,7 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = {"/","/home"}, method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
@@ -35,5 +39,8 @@ public class HomeController {
 		
 		return "home";
 	}
+	
+	
+	
 	
 }
