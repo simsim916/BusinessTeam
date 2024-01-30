@@ -2,14 +2,26 @@
     box-sizing: border-box;
 }
 
+hr {
+    margin-top: 50px;
+    border: none;
+    border-top: 1px solid #4C455630;
+}
+
 #adImgBox {
+    position: relative;
+    z-index: -1;
     width: calc(100vw - 17px);
     height: 300px;
-    background-color: rgb(255, 226, 226);
+    background-color: #000;
+    background-image: url(/img/adimg/fresheasy.png);
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 #adImg {
     position: relative;
+    background-position: center;
 }
 
 #adRightTab {
@@ -21,8 +33,20 @@
 }
 
 #adRightTab>div {
-    border: 1px solid black;
+    border-bottom: 1px solid #4C455640;
     height: calc(220px/4);
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    text-indent: 12px;
+}
+#adRightTab>div:nth-last-of-type(1) {
+    border: none;
+}
+#adRightTab>div>img {
+    width: 35%;
+    margin-left: 8px;
 }
 
 #firstContainer {
@@ -60,6 +84,8 @@
     margin-bottom: 10px;
 }
 
+/* ---------------------------------------------  */
+
 #secondContainer {
     text-align: center;
     margin-top: 50px;
@@ -76,13 +102,40 @@
 }
 
 
-/* ---------------------------------------------  */
 #secondContainerList {
     gap: 10px;
     position: relative;
     margin-top: 30px;
     display: flex;
     overflow: hidden;
+}
+
+.slideBox {
+    display: flex;
+    gap: 20px
+}
+
+#secondContainerRightBtn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: linear-gradient(to left, #fff 0%, #ffffff 20%, #ffffff00 100%);
+    width: 80px;
+    height: 100%;
+}
+
+#secondContainerRightBtn>i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 10px;
+    top: calc(50% - 15px);
+    background-color: #CA4046;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
 }
 
 .itemBox {
@@ -137,4 +190,148 @@
     background-color: #CA4046;
     color: rgb(255, 255, 255);
     border-radius: 5px;
+}
+
+/* ---------------------------------------------  */
+
+#thirdContainer {
+    text-align: center;
+    margin-top: 50px;
+}
+
+#thirdContainer>h3 {
+    font-size: 30px;
+    font-weight: 500;
+    color: #4C4556;
+}
+
+#thirdContainer>h3>i {
+    color: #F6C026;
+}
+
+/* ---------------------------------------------  */
+
+.typeBox:nth-of-type(1) {
+    border-top: 2.5px solid #62a349;
+    border-bottom: 2.5px solid #62a349;
+    color: #62a349;
+}
+
+.typeBox:nth-of-type(2) {
+    border-top: 2.5px solid #ecb500;
+    border-bottom: 2.5px solid #ecb500;
+    color: #ecb500;
+}
+
+.typeBox:nth-of-type(3) {
+    border-top: 2.5px solid #ef7601;
+    border-bottom: 2.5px solid #ef7601;
+    color: #ef7601;
+}
+
+.typeBox {
+    margin-top: 30px;
+    margin-bottom: 50px;
+    width: 100%;
+    height: 400px;
+    display: flex;
+    position: relative;
+    ;
+}
+
+.typeBoxTag {
+    width: 180px;
+}
+
+.typeBoxTagTitle {
+    display: flex;
+    align-items: end;
+    padding-left: 10px;
+    padding-top: 10px;
+    font-size: 20px;
+}
+
+.typeBoxTagTitle>img {
+    width: 30%;
+    margin-right: 10px;
+}
+
+.typeBoxTagList {
+    list-style: none;
+    padding-left: 0;
+    position: absolute;
+    bottom: 10px;
+    text-align: left;
+}
+
+.typeBoxTagList>li {
+    margin: 10px 0;
+}
+
+.typeBoxTagList>li>span {
+    padding: 2px 7px;
+    border: 1px solid #4C455650;
+}
+
+.typeBoxTagList>li>span::before {
+    content: "# ";
+}
+
+.typeBoxImg {
+    width: 250px;
+    background-image: url(/img/itemImg/5000001_1.jpg);
+    background-position: center;
+    background-size: 130%;
+    position: relative;
+    overflow: hidden;
+}
+
+.typeBoxImgTitle {
+    position: absolute;
+    width: 200px;
+    height: 80px;
+    left: calc((250px - 200px)/2);
+    top: 20px;
+    background-color: #00000080;
+}
+
+.typeBoxImgTitleName {
+    color: white;
+    font-size: 18px;
+    margin-top: 15px;
+    font-weight: 400;
+}
+
+.typeBoxImgTitlePrice {
+    color: rgb(255, 226, 62);
+    margin-top: 6px;
+}
+
+.typeBoxImgTitleBest {
+    position: absolute;
+    width: 150px;
+    line-height: 30px;
+    background-color: #CA4046;
+    color: white;
+    bottom: 20px;
+    right: -38px;
+    transform: rotate(-45deg);
+}
+
+.typeBoxList {
+    width: calc(100% - 180px - 250px);
+    color: initial;
+    padding: 20px 0 20px 20px;
+    overflow: hidden;
+    display: flex;
+}
+
+.typeBoxList .itemBox {
+    height: 356px;
+}
+
+.typeBoxList img {
+    object-fit: cover;
+    object-position: 0 -20px;
+    height: 220px;
 }
