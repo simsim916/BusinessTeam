@@ -1,11 +1,6 @@
-INDEX VERSION 1.4+Z:\JavaWebStudy\MyWork\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-3511036668.index
-2509275387.index
-4059547569.index
-3568555584.index
-4024460164.index
-3994269524.index
-1213168454.index
-1994994238.index
-1135006618.index
-2366099124.index
+INDEX VERSION 1.4+Z:\BusinessTeam\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+3306645026.index
+3502260004.index
+1371891855.index
+2857040039.index
+2164298969.index
