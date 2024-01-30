@@ -11321,3 +11321,129 @@ java.lang.ClassCastException: class org.eclipse.jst.j2ee.webapplication.internal
 
 !ENTRY org.eclipse.m2e.logback.appender 2 0 2024-01-30 11:37:09.590
 !MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-30 12:14:10.259
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-30 12:14:10.261
+!MESSAGE classpath=57 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-30 12:14:10.262
+!MESSAGE buffering callback sts4.classpath.aAENwtMi tomatoFarm false 57
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-30 12:14:10.263
+!MESSAGE executing callback sts4.classpath.aAENwtMi 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-30 12:14:10.305
+!MESSAGE executing callback sts4.classpath.aAENwtMi SUCCESS [done]
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-01-30 12:14:10.810
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-01-30 12:14:10.813
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-01-30 12:14:29.194
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-01-30 12:14:29.199
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-01-30 12:14:29.207
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-30 12:14:29.320
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-30 12:14:29.322
+!MESSAGE classpath=58 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-30 12:14:29.324
+!MESSAGE buffering callback sts4.classpath.aAENwtMi tomatoFarm false 58
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-30 12:14:29.327
+!MESSAGE executing callback sts4.classpath.aAENwtMi 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-30 12:14:29.347
+!MESSAGE executing callback sts4.classpath.aAENwtMi SUCCESS [done]
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-01-30 12:14:30.674
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-01-30 12:14:30.686
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-30 12:31:36.717
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-30 12:31:36.721
+!MESSAGE classpath=58 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-30 12:31:36.723
+!MESSAGE buffering callback sts4.classpath.aAENwtMi tomatoFarm false 58
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-30 12:31:36.723
+!MESSAGE executing callback sts4.classpath.aAENwtMi 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-30 12:31:36.734
+!MESSAGE executing callback sts4.classpath.aAENwtMi SUCCESS [done]
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-01-30 12:31:37.051
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-01-30 12:31:37.056
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.ui 2 2 2024-01-30 12:31:52.245
+!MESSAGE Invalid preference category path: egovframework.dev.imp.confmngt.preferences.emptyconfpreperencepage (bundle: egovframework.rte.rdt, page: egovframework.rte.rdt.plugin.preferences.RdtPreferencePage)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-30 12:33:00.860
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-30 12:33:00.862
+!MESSAGE classpath=58 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-30 12:33:00.863
+!MESSAGE buffering callback sts4.classpath.aAENwtMi tomatoFarm false 58
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-30 12:33:00.863
+!MESSAGE executing callback sts4.classpath.aAENwtMi 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-30 12:33:00.872
+!MESSAGE executing callback sts4.classpath.aAENwtMi SUCCESS [done]
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-01-30 12:33:00.978
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-01-30 12:33:00.981
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.jst.server.tomcat.core 4 0 2024-01-30 12:34:32.882
+!MESSAGE Several ports (8005, 8080) required by Tomcat v9.0 Server at localhost (2) are already in use. The server may already be running in another process, or a system process may be using the port. To start this server you will need to stop the other process or change the port number(s).
+
+!ENTRY org.eclipse.jst.server.tomcat.core 4 0 2024-01-30 12:35:34.537
+!MESSAGE Several ports (8005, 8080) required by Tomcat v9.0 Server at localhost (2) are already in use. The server may already be running in another process, or a system process may be using the port. To start this server you will need to stop the other process or change the port number(s).
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-30 12:36:02.688
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-30 12:36:02.691
+!MESSAGE classpath=26 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-30 12:36:02.693
+!MESSAGE buffering callback sts4.classpath.aAENwtMi tomatoFarm false 26
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-30 12:36:02.694
+!MESSAGE executing callback sts4.classpath.aAENwtMi 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-30 12:36:02.705
+!MESSAGE executing callback sts4.classpath.aAENwtMi SUCCESS [done]
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-01-30 12:36:03.114
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-01-30 12:36:03.118
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.jst.server.tomcat.core 4 0 2024-01-30 12:37:58.282
+!MESSAGE Several ports (8005, 8080) required by Tomcat v9.0 Server at localhost are already in use. The server may already be running in another process, or a system process may be using the port. To start this server you will need to stop the other process or change the port number(s).
