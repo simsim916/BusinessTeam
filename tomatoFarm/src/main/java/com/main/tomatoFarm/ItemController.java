@@ -28,5 +28,6 @@ public class ItemController {
 		model.addAttribute("size", list.size());
 		model.addAttribute("keyword", keyword);
 	}
+	
 }
 

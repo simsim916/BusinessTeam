@@ -370,9 +370,6 @@
                 firstCategory.style.display = "none";
             }
         
-			var a = "[[${requestScope.list}]]";
-			console.log(${requestScope.list});
-		
 		</script>
 		
 
