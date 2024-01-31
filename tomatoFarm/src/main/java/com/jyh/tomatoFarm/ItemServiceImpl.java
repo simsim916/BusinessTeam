@@ -13,18 +13,18 @@ public class ItemServiceImpl implements ItemService{
 	ItemDAO dao;
 	
 	@Override
-	public List<ItemDTO> selectList() {
-		return dao.selectList();
+	public List<ItemDTO> selectItemList() {
+		return dao.selectItemList();
 	}
 
 	@Override
-	public List<ItemDTO> search(String keyWord) {
-		return dao.search(keyWord);
+	public List<ItemDTO> selectItemListWhereKeyword(String keyword) {
+		return dao.selectItemListWhereKeyword(keyword);
 	}
 
 	@Override
-	public ItemDTO selectOne(int code) {
-		return dao.selectOne(code);
+	public ItemDTO selectItem(int code) {
+		return dao.selectItem(code);
 	}
 
 	@Override
@@ -42,14 +42,5 @@ public class ItemServiceImpl implements ItemService{
 		return null;
 	}
 	
-	@Override
-	public List<ItemDTO> brandList2() {
-		return null;
-	}
-	
-	@Override
-	public List<ItemDTO> brandList3() {
-		return null;
-	}
 	
 }
