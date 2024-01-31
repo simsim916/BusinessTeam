@@ -14,7 +14,7 @@ hr {
     width: calc(100vw - 17px);
     height: 300px;
     background-color: #000;
-    background-image: url(/img/adimg/fresheasy.png);
+    background-image: url(/tomatoFarm/resources/img/adimg/fresheasy.png);
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -279,7 +279,7 @@ hr {
 
 .typeBoxImg {
     width: 250px;
-    background-image: url(/img/itemImg/5000001_1.jpg);
+    background-image: url(/tomatoFarm/resources/img/itemImg/5000001_1.jpg);
     background-position: center;
     background-size: 130%;
     position: relative;
