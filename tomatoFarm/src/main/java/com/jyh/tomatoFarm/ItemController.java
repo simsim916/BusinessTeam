@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
-@Controller
-@RequestMapping("/item")
-public class ItemController {
+//@AllArgsConstructor
+//@Controller
+//@RequestMapping("/item")
+//public class ItemController {
 
 //	ItemService service;
 //	
@@ -134,4 +134,4 @@ public class ItemController {
 //	}
 //	
 //	
-}
+//}

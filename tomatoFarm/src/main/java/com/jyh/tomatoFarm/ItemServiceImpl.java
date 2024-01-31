@@ -33,13 +33,13 @@ public class ItemServiceImpl implements ItemService{
 	}
 	
 	@Override
-	public List<ItemDTO> selectSales() {
-		return dao.selectSales();
+	public List<ItemDTO> selectItemListBySales() {
+		return dao.selectItemListBySales();
 	}
 	
 	@Override
-	public List<ItemDTO> brandList1() {
-		return null;
+	public List<ItemDTO> selectItemListWhereBrand(String str) {
+		return dao.selectItemListWhereBrand(str);
 	}
 	
 	

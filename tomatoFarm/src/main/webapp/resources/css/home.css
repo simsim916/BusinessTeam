@@ -1,13 +1,3 @@
-* {
-    box-sizing: border-box;
-}
-
-hr {
-    margin-top: 50px;
-    border: none;
-    border-top: 1px solid #4C455630;
-}
-
 #adImgBox {
     position: relative;
     z-index: -1;
@@ -41,9 +31,11 @@ hr {
     font-size: 13px;
     text-indent: 12px;
 }
+
 #adRightTab>div:nth-last-of-type(1) {
     border: none;
 }
+
 #adRightTab>div>img {
     width: 35%;
     margin-left: 8px;
@@ -70,14 +62,14 @@ hr {
     margin-top: 30px;
 }
 
-#firstContainerButton>div {
+#firstContainerButton div {
     display: inline-block;
     margin: 0 10px;
     width: 100px;
     height: 100px;
 }
 
-#firstContainerButton>div>img {
+#firstContainerButton div>img {
     border-radius: 50%;
     background-color: #EAA6A240;
     width: 100%;
@@ -279,7 +271,6 @@ hr {
 
 .typeBoxImg {
     width: 250px;
-    background-image: url(/tomatoFarm/resources/img/itemImg/5000001_1.jpg);
     background-position: center;
     background-size: 130%;
     position: relative;

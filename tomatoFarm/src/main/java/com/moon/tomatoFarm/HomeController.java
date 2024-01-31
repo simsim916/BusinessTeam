@@ -1,8 +1,5 @@
 package com.moon.tomatoFarm;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,24 +12,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.jyh.tomatoFarm.ItemService;
 
 import lombok.AllArgsConstructor;
-
+@AllArgsConstructor
 @Controller
 public class HomeController {
-	@Autowired
 	ItemService service;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@RequestMapping(value = {"/","/home"}, method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
+	public String home(Model model) {
 
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-
-		String formattedDate = dateFormat.format(date);
-
-		model.addAttribute("serverTime", formattedDate);
+		model.addAttribute("list", service.selectItemListBySales());
+		model.addAttribute("fresheasyList", service.selectItemListWhereBrand("프레시지"));
 
 		return "home";
 	}

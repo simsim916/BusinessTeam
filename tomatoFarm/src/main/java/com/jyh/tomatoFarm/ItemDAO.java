@@ -61,11 +61,11 @@ public class ItemDAO {
 
 	public List<ItemDTO> selectItemListWhereKeyword(String keyword) {
 
-		sql = "select * from mealkit where name =? union all select * from mealkit where brand =?";
+		sql = "select * from mealkit where name like '%"+keyword+"%' "
+				+ "union select * from mealkit where brand like '%"+keyword+"%' "
+				+ "union select * from mealkit where sort4 like '%"+keyword+"%' ";
 		try {
 			pst = cn.prepareStatement(sql);
-			pst.setString(1, keyword);
-			pst.setString(2, keyword);
 			rs = pst.executeQuery();
 
 			List<ItemDTO> list = new ArrayList<ItemDTO>();
@@ -190,7 +190,7 @@ public class ItemDAO {
 	}
 
 	// 판매량 순위
-	public List<ItemDTO> selectSales() {
+	public List<ItemDTO> selectItemListBySales() {
 
 		sql = "select * from mealkit order by sales desc";
 		try {
@@ -235,7 +235,7 @@ public class ItemDAO {
 
 	public List<ItemDTO> selectItemListWhereBrand(String str) {
 
-		sql = "Select * From mealkit Where brand =" + str + "Order By sales desc";
+		sql = "Select * From mealkit Where brand ='" + str + "' Order By sales desc";
 		try {
 			pst = cn.prepareStatement(sql);
 			rs = pst.executeQuery();
@@ -266,11 +266,11 @@ public class ItemDAO {
 
 				return list;
 			} else {
-				System.out.println("selectSales => 출력할 데이터가 없다");
+				System.out.println("selectItemListWhereBrand => 출력할 데이터가 없다");
 				return null;
 			}
 		} catch (Exception e) {
-			System.out.println("selectSales => :" + e.toString());
+			System.out.println("selectItemListWhereBrand => :" + e.toString());
 			return null;
 		}
 
