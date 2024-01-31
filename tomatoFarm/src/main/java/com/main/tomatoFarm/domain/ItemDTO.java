@@ -1,4 +1,4 @@
-package com.jyh.tomatoFarm;
+package com.main.tomatoFarm.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
