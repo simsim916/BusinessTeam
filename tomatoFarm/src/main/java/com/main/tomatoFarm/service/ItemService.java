@@ -1,6 +1,8 @@
-package com.jyh.tomatoFarm;
+package com.main.tomatoFarm.service;
 
 import java.util.List;
+
+import com.main.tomatoFarm.domain.ItemDTO;
 
 
 public interface ItemService {

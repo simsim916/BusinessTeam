@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.jyh.tomatoFarm.ItemService;
+import com.main.tomatoFarm.service.ItemService;
 
 import lombok.AllArgsConstructor;
 @AllArgsConstructor

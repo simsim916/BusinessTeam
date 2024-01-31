@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.jyh.tomatoFarm.ItemDTO;
-import com.jyh.tomatoFarm.ItemService;
+import com.main.tomatoFarm.domain.ItemDTO;
+import com.main.tomatoFarm.service.ItemService;
 
 import lombok.AllArgsConstructor;
 
@@ -28,5 +28,6 @@ public class ItemController {
 		model.addAttribute("size", list.size());
 		model.addAttribute("keyword", keyword);
 	}
+	
 }
 

@@ -1,20 +1,33 @@
-package com.jyh.tomatoFarm;
+package com.main.tomatoFarm.controller;
+
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import com.main.tomatoFarm.domain.ItemDTO;
+import com.main.tomatoFarm.service.ItemService;
 
 import lombok.AllArgsConstructor;
 
-//@AllArgsConstructor
-//@Controller
-//@RequestMapping("/item")
-//public class ItemController {
+@AllArgsConstructor
+@Controller
+@RequestMapping("/item")
+public class ItemController {
 
-//	ItemService service;
+
+	ItemService service;
+	
+	
+	
+	@GetMapping("/keyword")
+	public List<ItemDTO> selectItemListWhereKeyword(ItemDTO dto) {
+		
+		service.selectItemListWhereKeyword(dto.getName());
+		return null;
+		
+	}
 //	
 ////	=======================================================================
 //	// 검색기능
@@ -134,4 +147,4 @@ import lombok.AllArgsConstructor;
 //	}
 //	
 //	
-//}
+}
