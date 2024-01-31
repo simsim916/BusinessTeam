@@ -1,9 +1,12 @@
-package com.jyh.tomatoFarm;
+package com.main.tomatoFarm.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.main.tomatoFarm.domain.ItemDTO;
+import com.main.tomatoFarm.model.ItemDAO;
 
 
 @Service

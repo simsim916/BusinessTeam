@@ -1,4 +1,4 @@
-package com.jyh.tomatoFarm;
+package com.main.tomatoFarm.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
