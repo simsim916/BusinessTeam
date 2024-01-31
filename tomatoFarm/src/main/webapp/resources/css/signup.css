@@ -1,0 +1,70 @@
+#logo {
+    height: 80px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+main {
+    position: relative;
+    border: 1px solid black;
+    width: 500px;
+    height: 800px;
+    margin: auto;
+    display: block;
+}
+
+h3 {
+    margin-top: 120px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 500;
+}
+
+input:focus {
+    outline: none;
+}
+
+#signUpBox {
+    margin: auto;
+    margin-top: 30px;
+    position: relative;
+}
+
+#signUpBox>div {
+    border: 1px solid #4C4556;
+    width: 350px;
+    margin: auto;
+    line-height: 50px;
+    font-size: 18px;
+    border-bottom: 0.5px solid #4C4556;
+    border-top: 0.5px solid #4C4556;
+}
+
+#signUpBox>div>i {
+    width: 50px;
+    text-align: center;
+    font-size: 16px;
+}
+
+#signUpBox>div>input {
+    border: none;
+    width: 280px;
+}
+
+#signUpBox>#idBox {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top: 1px solid #4C4556;
+}
+
+#signUpBox>#phoneNumBox {
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom: 1px solid #4C4556;
+}
+
+#signUpBox>#addressBox {
+    margin-top: 30px;
+    border-top: 1px solid #4C4556;
+}
