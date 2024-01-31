@@ -16,7 +16,7 @@
             <link rel="stylesheet" href="/tomatoFarm/resources/css/00default.css">
             <link rel="stylesheet" href="/tomatoFarm/resources/css/00header.css">
             <link rel="stylesheet" href="/tomatoFarm/resources/css/home.css">
-            <title>토마토팜 || 메인 </title>
+            <title>토마토팜 || 메인 ||</title>
         </head>
 
         <body>
