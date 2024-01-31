@@ -16,7 +16,7 @@
             <link rel="stylesheet" href="/tomatoFarm/resources/css/00default.css">
             <link rel="stylesheet" href="/tomatoFarm/resources/css/00header.css">
             <link rel="stylesheet" href="/tomatoFarm/resources/css/home.css">
-            <title>Document</title>
+            <title>Document ss</title>
         </head>
 
         <body>

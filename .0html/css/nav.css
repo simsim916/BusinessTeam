@@ -1,23 +1,9 @@
-* {
-    margin: 0;
-    font-family: 'Noto Sans KR', sans-serif;
-    box-sizing: border-box;
-}
-
-a {
-    text-decoration: none;
-}
 
 li {
     padding-left: 20px;
 }
 
-.container {
-    width: calc(100vw - 30px);
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
-}
+
 
 #topBar {
     height: 210px;
