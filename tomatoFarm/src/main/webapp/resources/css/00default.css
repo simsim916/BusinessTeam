@@ -23,6 +23,12 @@ hr {
     border-top: 0.5px solid #4C455630;
 }
 
+button {
+	background-color: none;
+	padding: 0;
+	border: none;
+}
+
 .container {
     width: calc(100vw - 30px);
     max-width: 1200px;

@@ -48,4 +48,13 @@ public class ItemController {
 		
 		return uri;
 	}
+	
+	@GetMapping("searchlist")
+	public String search(@RequestParam("keyword")String keyword,Model model) {
+		
+		String uri = "item/list";
+		model.addAttribute("list", itemService.selectItemListWhereKeyword(keyword));
+		
+		return uri;
+	}
 }

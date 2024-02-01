@@ -38,11 +38,11 @@
                             <img src="/tomatoFarm/resources/img/logo.png" alt="">
                             <h1>토마토팜 tomatoFarm</h1>
                         </div>
-							<form id="searchBox" action="item/list">
-							     <input type="text" name="keyword" placeholder="검색어를 입력해주세요.">
-							      <i class="fa-solid fa-circle-xmark"></i>
-							      <i class="fa-solid fa-magnifying-glass"></i>
-							</form>
+							 <form id="searchBox" action="searchlist">
+                            <input type="text" name="keyword" placeholder="검색어를 입력해주세요.">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </form>
                         <div id="searchRightBox">
                             <div id="myPage">
                                 <i class="fa-solid fa-user"></i>
