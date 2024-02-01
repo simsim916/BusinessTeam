@@ -171,23 +171,6 @@
                                 </ul>
                         	</c:forEach>
                     	</c:forEach>
-                        <li><i class="fa-regular fa-circle-check"></i>야채
-                            <ul>
-                                <li><i class="fa-regular fa-circle-check"></i>양배추</li>
-                                <li><i class="fa-regular fa-circle-check"></i>파슬리</li>
-                                <li><i class="fa-regular fa-circle-check"></i>브로콜리</li>
-                                <li><i class="fa-regular fa-circle-check"></i>양배추</ht></li>
-                            </ul>
-                        </li>
-                        <li><i class="fa-regular fa-circle-check"></i>육류
-                            <ul>
-                                <li><i class="fa-regular fa-circle-check"></i>양상추</li>
-                                <li><i class="fa-regular fa-circle-check"></i>양배추</li>
-                                <li><i class="fa-regular fa-circle-check"></i>파슬리</li>
-                                <li><i class="fa-regular fa-circle-check"></i>브로콜리</li>
-                                <li><i class="fa-regular fa-circle-check"></i>양배추</li>
-                            </ul>
-                        </li>
                     </ul>
                 <hr>
                 </li>
