@@ -6,6 +6,11 @@
 
 a {
     text-decoration: none;
+	color:#640000;
+}
+
+a:visited{
+	color:#640000;
 }
 
 body {

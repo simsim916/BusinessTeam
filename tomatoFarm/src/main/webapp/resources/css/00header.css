@@ -76,7 +76,12 @@ li {
     top: calc(25px - 12.5px);
     right: calc(12.5px);
     color: #9b1b20;
+	font-size: 0px;
+}
+
+#searchBox>button>i {
     font-size: 25px;
+	background-color: white;
 }
 
 #searchBox>input {

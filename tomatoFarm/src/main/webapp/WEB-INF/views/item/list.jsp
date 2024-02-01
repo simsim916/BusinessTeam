@@ -37,7 +37,7 @@
                             <img src="/tomatoFarm/resources/img/logo.png" alt="">
                             <h1>토마토팜 tomatoFarm</h1>
                         </div>
-                        <form id="searchBox" action="searchlist">
+                        <form id="searchBox" action="/tomatoFarm/item/list">
                             <input type="text" name="keyword" placeholder="검색어를 입력해주세요.">
                             <i class="fa-solid fa-circle-xmark"></i>
                             <button><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -135,7 +135,7 @@
                             </ul>
                         </div>
                         <ul id="navBar">
-                            <li><a href="item/list">밀키트 주문</a></li>
+                            <li><a href="/tomatoFarm/item/list?keyword=밀키트">밀키트 주문</a></li>
                             <li>식단 주문</li>
                             <li>재료 주문</li>
                             <li>이벤트</li>
