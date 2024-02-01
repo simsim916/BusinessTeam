@@ -13,9 +13,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="nav.css">
-    <link rel="stylesheet" href="itemList.css">
-    <script src='main.js'></script>
+    <link rel="stylesheet" href="./css/nav.css">
+    <link rel="stylesheet" href="./css/itemList.css">
+    <script defer src="./js/itemList.js"></script>
 </head>
 
 <body>
@@ -123,10 +123,64 @@
         </nav>
     </header>
     <div id="searchTitleMJ" class="container">"<b>밀키트</b>"<span>에 대한 검색 결과</span></div>
-    <!-- <h2>신상품</h2>
-    <aside>카테고리</aside> -->
     <main class="container">
-        <div id="listfilter"></div>
+        <div id="listfilter">
+            <ul>
+                <li>
+                    <i class="fa-regular fa-circle-check"></i>밀키트
+                    <ul>
+                        <li><i class="fa-regular fa-circle-check"></i>채선당</li>
+                        <li><i class="fa-regular fa-circle-check"></i>도리깨침</li>
+                        <li><i class="fa-regular fa-circle-check"></i>김구원선생</li>
+                        <li><i class="fa-regular fa-circle-check"></i>김구원선생</li>
+                        <li><i class="fa-regular fa-circle-check"></i>김구원선생</li>
+                        <li><i class="fa-regular fa-circle-check"></i>김구원선생</li>
+                        <li><i class="fa-regular fa-circle-check"></i>김구원선생</li>
+                    </ul>
+                    <hr>
+                </li>
+                <li>
+                    <i class="fa-regular fa-circle-check"></i>식재료
+                    <ul>
+                        <li><i class="fa-regular fa-circle-check"></i>야채
+                            <ul>
+                                <li><i class="fa-regular fa-circle-check"></i>양상추</li>
+                                <li><i class="fa-regular fa-circle-check"></i>양배추</li>
+                                <li><i class="fa-regular fa-circle-check"></i>파슬리</li>
+                                <li><i class="fa-regular fa-circle-check"></i>브로콜리</li>
+                                <li><i class="fa-regular fa-circle-check"></i>양배추</ht></li>
+                            </ul>
+                        </li>
+                        <li><i class="fa-regular fa-circle-check"></i>육류
+                            <ul>
+                                <li><i class="fa-regular fa-circle-check"></i>양상추</li>
+                                <li><i class="fa-regular fa-circle-check"></i>양배추</li>
+                                <li><i class="fa-regular fa-circle-check"></i>파슬리</li>
+                                <li><i class="fa-regular fa-circle-check"></i>브로콜리</li>
+                                <li><i class="fa-regular fa-circle-check"></i>양배추</li>
+                            </ul>
+                        </li>
+                    </ul>
+                <hr>
+                </li>
+                
+                <li>
+                    <i class="fa-regular fa-circle-check"></i>행사
+                    <ul>
+                        <li><i class="fa-regular fa-circle-check"></i>채선당</li>
+                        <li><i class="fa-regular fa-circle-check"></i>도리깨침</li>
+                    </ul>
+                    <hr>
+                </li>
+                <li id="filterPrice"><i class="fa-regular fa-circle-check"></i>가격
+                    <div>
+                        <input type="text" placeholder="0 원">
+                        &nbsp;&nbsp;~&nbsp;&nbsp;
+                        <input type="text" placeholder="1000000 원">
+                    </div>
+                </li>
+            </ul>
+        </div>
         <div id="containerMJ">
             <div id="containerOptionMJ">
                 <div id="totalMJ">총 <span>9</span> 개</div>
@@ -225,13 +279,7 @@
     </main>
 </body>
 <script>
-    let firstCategory = document.getElementById("firstCategory");
-    function firstCategoryVisible() {
-        firstCategory.style.visibility = "visible";
-    }
-    function firstCategoryHidden() {
-        firstCategory.style.visibility = "hidden";
-    }
+
 </script>
 
 </html>

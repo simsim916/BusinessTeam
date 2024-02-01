@@ -17,6 +17,7 @@
             <link rel="stylesheet" href="/tomatoFarm/resources/css/00default.css">
             <link rel="stylesheet" href="/tomatoFarm/resources/css/00header.css">
             <link rel="stylesheet" href="/tomatoFarm/resources/css/itemList.css">
+            <script defer type="text/javascript" src="/tomatoFarm/resources/js/itemList.js"></script>
             <title>토마토팜 || List</title>
         </head>
 
@@ -146,7 +147,68 @@
             <!-- <h2>신상품</h2>
     <aside>카테고리</aside> -->
             <main class="container">
-                <div id="listfilter"></div>
+                <div id="listfilter">
+            <ul>
+                <li>
+                    <i class="fa-regular fa-circle-check"></i>밀키트
+                    <ul>
+                    	<c:forEach var="l" items="${requestScope.brandList}">
+	                        <li><i class="fa-regular fa-circle-check"></i>${l.brand}</li>
+                    	</c:forEach>
+                    </ul>
+                    <hr>
+                </li>
+                <li>
+                    <i class="fa-regular fa-circle-check"></i>식재료
+                    <ul>
+                    	<c:forEach var="l" items="${requestScope.sortbList}">
+                        	<li><i class="fa-regular fa-circle-check"></i>${l.sortb}
+                        	<c:forEach var="m" items="${requestScope.sortList}">
+                                <ul>
+                                <c:if test="${l.sortb==m.sortb}">
+	                                <li><i class="fa-regular fa-circle-check"></i>${m.sortc}</li>
+                                </c:if>
+                                </ul>
+                        	</c:forEach>
+                    	</c:forEach>
+                        <li><i class="fa-regular fa-circle-check"></i>야채
+                            <ul>
+                                <li><i class="fa-regular fa-circle-check"></i>양배추</li>
+                                <li><i class="fa-regular fa-circle-check"></i>파슬리</li>
+                                <li><i class="fa-regular fa-circle-check"></i>브로콜리</li>
+                                <li><i class="fa-regular fa-circle-check"></i>양배추</ht></li>
+                            </ul>
+                        </li>
+                        <li><i class="fa-regular fa-circle-check"></i>육류
+                            <ul>
+                                <li><i class="fa-regular fa-circle-check"></i>양상추</li>
+                                <li><i class="fa-regular fa-circle-check"></i>양배추</li>
+                                <li><i class="fa-regular fa-circle-check"></i>파슬리</li>
+                                <li><i class="fa-regular fa-circle-check"></i>브로콜리</li>
+                                <li><i class="fa-regular fa-circle-check"></i>양배추</li>
+                            </ul>
+                        </li>
+                    </ul>
+                <hr>
+                </li>
+                
+                <li>
+                    <i class="fa-regular fa-circle-check"></i>행사
+                    <ul>
+                        <li><i class="fa-regular fa-circle-check"></i>채선당</li>
+                        <li><i class="fa-regular fa-circle-check"></i>도리깨침</li>
+                    </ul>
+                    <hr>
+                </li>
+                <li id="filterPrice"><i class="fa-regular fa-circle-check"></i>가격
+                    <div>
+                        <input type="text" placeholder="0 원">
+                        &nbsp;&nbsp;~&nbsp;&nbsp;
+                        <input type="text" placeholder="1000000 원">
+                    </div>
+                </li>
+            </ul>
+        </div>
                 <div id="container">
                     <div id="containerOption">
                         <div id="total">총 <span>${requestScope.size}</span> 개</div>

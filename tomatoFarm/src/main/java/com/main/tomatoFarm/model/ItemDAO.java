@@ -17,9 +17,9 @@ public class ItemDAO {
 	private static PreparedStatement pst;
 	private static ResultSet rs;
 	private static String sql;
-
+	
+	//전체 제품 조회
 	public List<ItemDTO> selectItemList() {
-
 		sql = "select * from mealkit";
 		try {
 			pst = cn.prepareStatement(sql);
@@ -60,7 +60,8 @@ public class ItemDAO {
 		}
 
 	}
-
+	
+	// 키워드(브랜드, 제품명, 분류명)으로 검색
 	public List<ItemDTO> selectItemListWhereKeyword(String keyword) {
 
 		sql = "select * from mealkit where name like '%"+keyword+"%' "
@@ -105,7 +106,8 @@ public class ItemDAO {
 		}
 
 	}
-
+	
+	// 제품코드로 상품조회
 	public ItemDTO selectItem(int code) {
 
 		sql = "select * from mealkit where code =" + code;
@@ -145,53 +147,8 @@ public class ItemDAO {
 		}
 
 	}
-
-	// 이벤트진행중인 제품들만 뽑는 리스트
-	public List<ItemDTO> selectEvent() {
-
-		sql = "select * from mealkit where discount > 0 ";
-		// 테이블 생성시 할인율에 Default 0 설정해둔다는 가정 하에 작성한 sql 구문
-		try {
-			pst = cn.prepareStatement(sql);
-			rs = pst.executeQuery();
-
-			List<ItemDTO> list = new ArrayList<ItemDTO>();
-			if (rs.next()) {
-				do {
-					ItemDTO dto = new ItemDTO();
-					dto.setSort1(rs.getString(1));
-					dto.setSort2(rs.getString(2));
-					dto.setSort3(rs.getString(3));
-					dto.setSort4(rs.getString(4));
-					dto.setCode(rs.getInt(5));
-					dto.setBrand(rs.getString(6));
-					dto.setName(rs.getString(7));
-					dto.setWeight(rs.getInt(8));
-					dto.setStorage(rs.getString(9));
-					dto.setPacking(rs.getString(10));
-					dto.setDelivery(rs.getString(11));
-					dto.setPrice(rs.getInt(12));
-					dto.setSales(rs.getInt(13));
-					dto.setStock(rs.getInt(14));
-					dto.setEvent(rs.getString(15));
-					dto.setDiscount(rs.getInt(16));
-					dto.setAdmin(rs.getString(17));
-					list.add(dto);
-				} while (rs.next());
-
-				return list;
-			} else {
-				System.out.println("selectEvent => 출력할 데이터가 없다");
-				return null;
-			}
-		} catch (Exception e) {
-			System.out.println("selectEvent => :" + e.toString());
-			return null;
-		}
-
-	}
-
-	// 판매량 순위
+	
+	// 
 	public List<ItemDTO> selectItemListBySales() {
 
 		sql = "select * from mealkit order by sales desc";
@@ -234,7 +191,8 @@ public class ItemDAO {
 		}
 
 	}
-
+	
+	// 브랜드로 제품 조회
 	public List<ItemDTO> selectItemListWhereBrand(String str) {
 
 		sql = "Select * From mealkit Where brand ='" + str + "' Order By sales desc";
@@ -278,6 +236,7 @@ public class ItemDAO {
 
 	}
 	
+<<<<<<< HEAD
 	
 	
 	
@@ -286,7 +245,12 @@ public class ItemDAO {
 		try {
 			pst = cn.prepareStatement(sql);
 			rs = pst.executeQuery();
+=======
+	// 브랜드만 조회하기
+	public List<ItemDTO> selectBrandList() {
+>>>>>>> refs/remotes/origin/moon
 
+<<<<<<< HEAD
 			List<ItemDTO> list = new ArrayList<ItemDTO>();
 			if (rs.next()) {
 				do {
@@ -328,3 +292,31 @@ public class ItemDAO {
 	
 
 }
+=======
+		sql = "Select brand, count(brand) From mealkit Group By brand";
+		try {
+			pst = cn.prepareStatement(sql);
+			rs = pst.executeQuery();
+
+			List<ItemDTO> list = new ArrayList<ItemDTO>();
+			if (rs.next()) {
+				do {
+					ItemDTO dto = new ItemDTO();
+					dto.setBrand(rs.getString(1));
+					dto.setStock(rs.getInt(2));
+					list.add(dto);
+				} while (rs.next());
+
+				return list;
+			} else {
+				System.out.println("selectBrandList => 출력할 데이터가 없다");
+				return null;
+			}
+		} catch (Exception e) {
+			System.out.println("selectBrandList => :" + e.toString());
+			return null;
+		}
+
+	}
+}
+>>>>>>> refs/remotes/origin/moon
