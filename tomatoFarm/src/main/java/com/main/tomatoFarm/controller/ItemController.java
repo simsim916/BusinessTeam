@@ -19,42 +19,26 @@ import lombok.AllArgsConstructor;
 @Controller
 @RequestMapping("/item")
 public class ItemController {
-	
+
 	ItemService itemService;
 	SortService sortSerivce;
-	
+
 	@GetMapping("/list")
-	public void list(Model model , @RequestParam("keyword") String keyword) {
+	public void list(Model model, @RequestParam("keyword") String keyword) {
 		List<ItemDTO> list = itemService.selectItemListWhereKeyword(keyword);
 		model.addAttribute("list", list);
-		model.addAttribute("size", list.size());
-		model.addAttribute("brandList", itemService.selectBrandList());
 		model.addAttribute("keyword", keyword);
+		if(list == null) {
+//			model.addAttribute("noResult", "검색결과가 없어서 인기상품 보여드릴게");
+//			model.addAttribute("list", itemService.selectItemListBySales());
+			model.addAttribute("size", 0);
+		} else {
+			model.addAttribute("size", list.size());
+		}
 		
+		model.addAttribute("brandList", itemService.selectBrandList());
 		model.addAttribute("sortList", sortSerivce.selectSortList());
 		model.addAttribute("sortbList", sortSerivce.selectSortbList());
 	}
-	
-	@GetMapping("/sortlist")
-	public String ListBy( Model model ) {
-		String uri = "item/list";
-//		String uri = "redirect:item/list";
 
-		
-		model.addAttribute( "list", itemService.selectItemListOrderBy("sales","desc") );
-		model.addAttribute( "list", itemService.selectItemListOrderBy("price","desc") );
-		model.addAttribute( "list", itemService.selectItemListOrderBy("price","asc") );
-		
-		
-		return uri;
-	}
-	
-	@GetMapping("searchlist")
-	public String search(@RequestParam("keyword")String keyword,Model model) {
-		
-		String uri = "item/list";
-		model.addAttribute("list", itemService.selectItemListWhereKeyword(keyword));
-		
-		return uri;
-	}
 }
