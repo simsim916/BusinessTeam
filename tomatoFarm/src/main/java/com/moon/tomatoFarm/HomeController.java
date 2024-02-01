@@ -15,6 +15,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Controller
 public class HomeController {
+	
 	ItemService service;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);

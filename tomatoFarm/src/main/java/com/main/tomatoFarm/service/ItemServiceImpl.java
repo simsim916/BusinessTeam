@@ -44,6 +44,9 @@ public class ItemServiceImpl implements ItemService{
 	public List<ItemDTO> selectItemListWhereBrand(String str) {
 		return dao.selectItemListWhereBrand(str);
 	}
-	
-	
+//	================================================
+	public List<ItemDTO> selectItemListOrderBy(String col, String sort) {
+		return dao.selectItemListOrderBy(col, sort);
+	}
+
 }

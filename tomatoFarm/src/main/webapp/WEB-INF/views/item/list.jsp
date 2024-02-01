@@ -151,7 +151,7 @@
                     <div id="containerOption">
                         <div id="total">총 <span>${requestScope.size}</span> 개</div>
                         <div id="listOption">
-                            <div>최신상품순</div>
+                            <div>최신상품순</div> <!-- item/sortlist 요청 -->
                             <div>인기상품순</div>
                             <div>가격낮은순</div>
                             <div>가격높은순</div>
