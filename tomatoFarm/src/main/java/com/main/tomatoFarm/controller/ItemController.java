@@ -19,20 +19,7 @@ import lombok.AllArgsConstructor;
 @Controller
 @RequestMapping("/item")
 public class ItemController {
-<<<<<<< HEAD
 	
-	ItemService service;
-=======
->>>>>>> refs/remotes/origin/moon
-	
-<<<<<<< HEAD
-	@GetMapping("/list")
-	public void list(Model model , @RequestParam("keyword") String keyword) {
-		List<ItemDTO> list = service.selectItemListWhereKeyword(keyword);
-		model.addAttribute("list", list);
-		model.addAttribute("size", list.size());
-		model.addAttribute("keyword", keyword);
-=======
 	ItemService itemService;
 	SortService sortSerivce;
 	
@@ -46,25 +33,19 @@ public class ItemController {
 		
 		model.addAttribute("sortList", sortSerivce.selectSortList());
 		model.addAttribute("sortbList", sortSerivce.selectSortbList());
->>>>>>> refs/remotes/origin/moon
 	}
 	
-<<<<<<< HEAD
 	@GetMapping("/sortlist")
 	public String ListBy( Model model ) {
 		String uri = "item/list";
 //		String uri = "redirect:item/list";
 
 		
-		model.addAttribute( "list", service.selectItemListOrderBy("sales","desc") );
-		model.addAttribute( "list", service.selectItemListOrderBy("price","desc") );
-		model.addAttribute( "list", service.selectItemListOrderBy("price","asc") );
+		model.addAttribute( "list", itemService.selectItemListOrderBy("sales","desc") );
+		model.addAttribute( "list", itemService.selectItemListOrderBy("price","desc") );
+		model.addAttribute( "list", itemService.selectItemListOrderBy("price","asc") );
 		
 		
 		return uri;
 	}
 }
-=======
-}
-
->>>>>>> refs/remotes/origin/moon

@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.main.tomatoFarm.domain.ItemDTO;
+
 //test
 @Repository
 public class ItemDAO {
@@ -17,8 +18,8 @@ public class ItemDAO {
 	private static PreparedStatement pst;
 	private static ResultSet rs;
 	private static String sql;
-	
-	//전체 제품 조회
+
+	// 전체 제품 조회
 	public List<ItemDTO> selectItemList() {
 		sql = "select * from mealkit";
 		try {
@@ -60,13 +61,13 @@ public class ItemDAO {
 		}
 
 	}
-	
+
 	// 키워드(브랜드, 제품명, 분류명)으로 검색
 	public List<ItemDTO> selectItemListWhereKeyword(String keyword) {
 
-		sql = "select * from mealkit where name like '%"+keyword+"%' "
-				+ "union select * from mealkit where brand like '%"+keyword+"%' "
-				+ "union select * from mealkit where sort4 like '%"+keyword+"%' ";
+		sql = "select * from mealkit where name like '%" + keyword + "%' "
+				+ "union select * from mealkit where brand like '%" + keyword + "%' "
+				+ "union select * from mealkit where sort4 like '%" + keyword + "%' ";
 		try {
 			pst = cn.prepareStatement(sql);
 			rs = pst.executeQuery();
@@ -106,7 +107,7 @@ public class ItemDAO {
 		}
 
 	}
-	
+
 	// 제품코드로 상품조회
 	public ItemDTO selectItem(int code) {
 
@@ -147,8 +148,8 @@ public class ItemDAO {
 		}
 
 	}
-	
-	// 
+
+	//
 	public List<ItemDTO> selectItemListBySales() {
 
 		sql = "select * from mealkit order by sales desc";
@@ -191,7 +192,7 @@ public class ItemDAO {
 		}
 
 	}
-	
+
 	// 브랜드로 제품 조회
 	public List<ItemDTO> selectItemListWhereBrand(String str) {
 
@@ -235,22 +236,13 @@ public class ItemDAO {
 		}
 
 	}
-	
-<<<<<<< HEAD
-	
-	
-	
+
 	public List<ItemDTO> selectItemListOrderBy(String col, String sort) {
-		sql = "select * from mealkit order by "+ col + " " + sort;
+		sql = "select * from mealkit order by " + col + " " + sort;
 		try {
 			pst = cn.prepareStatement(sql);
 			rs = pst.executeQuery();
-=======
-	// 브랜드만 조회하기
-	public List<ItemDTO> selectBrandList() {
->>>>>>> refs/remotes/origin/moon
 
-<<<<<<< HEAD
 			List<ItemDTO> list = new ArrayList<ItemDTO>();
 			if (rs.next()) {
 				do {
@@ -286,13 +278,9 @@ public class ItemDAO {
 		}
 
 	}
-	
-	
-	
-	
 
-}
-=======
+	// 브랜드만 조회하기
+	public List<ItemDTO> selectBrandList() {
 		sql = "Select brand, count(brand) From mealkit Group By brand";
 		try {
 			pst = cn.prepareStatement(sql);
@@ -319,4 +307,3 @@ public class ItemDAO {
 
 	}
 }
->>>>>>> refs/remotes/origin/moon

@@ -40,18 +40,14 @@ public class ItemServiceImpl implements ItemService{
 		return dao.selectItemListWhereBrand(str);
 	}
 	
-<<<<<<< HEAD
-//	================================================
+	@Override
 	public List<ItemDTO> selectItemListOrderBy(String col, String sort) {
 		return dao.selectItemListOrderBy(col, sort);
 	}
 
-}
-=======
 	@Override
 	public List<ItemDTO> selectBrandList() {
 		return dao.selectBrandList();
 	}
 	
 }
->>>>>>> refs/remotes/origin/moon
