@@ -14,6 +14,6 @@ public interface ItemService {
 	public ItemDTO selectItem(int Code); // 디테일 페이지
 	
 //	=================================================================
-	public List<ItemDTO> selectEvent(); // 이벤트 진행중인 상품 리스트 인덱스페이지
 	public List<ItemDTO> selectItemListWhereBrand(String str); // 인덱스페이지
+	public List<ItemDTO> selectBrandList(); //
 }

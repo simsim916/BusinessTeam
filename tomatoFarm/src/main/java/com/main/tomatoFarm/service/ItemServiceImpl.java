@@ -31,11 +31,6 @@ public class ItemServiceImpl implements ItemService{
 	}
 
 	@Override
-	public List<ItemDTO> selectEvent() {
-		return dao.selectEvent();
-	}
-	
-	@Override
 	public List<ItemDTO> selectItemListBySales() {
 		return dao.selectItemListBySales();
 	}
@@ -45,5 +40,9 @@ public class ItemServiceImpl implements ItemService{
 		return dao.selectItemListWhereBrand(str);
 	}
 	
+	@Override
+	public List<ItemDTO> selectBrandList() {
+		return dao.selectBrandList();
+	}
 	
 }
