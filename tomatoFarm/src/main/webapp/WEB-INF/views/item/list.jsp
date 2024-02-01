@@ -37,10 +37,10 @@
                             <img src="/tomatoFarm/resources/img/logo.png" alt="">
                             <h1>토마토팜 tomatoFarm</h1>
                         </div>
-                        <form id="searchBox">
-                            <input type="text" placeholder="검색어를 입력해주세요.">
+                        <form id="searchBox" action="searchlist">
+                            <input type="text" name="keyword" placeholder="검색어를 입력해주세요.">
                             <i class="fa-solid fa-circle-xmark"></i>
-                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <button><i class="fa-solid fa-magnifying-glass"></i></button>
                         </form>
                         <div id="searchRightBox">
                             <div id="myPage">
@@ -196,7 +196,7 @@
                     <div id="containerOption">
                         <div id="total">총 <span>${requestScope.size}</span> 개</div>
                         <div id="listOption">
-                            <div>최신상품순</div>
+                            <div>최신상품순</div> <!-- item/sortlist 요청 -->
                             <div>인기상품순</div>
                             <div>가격낮은순</div>
                             <div>가격높은순</div>

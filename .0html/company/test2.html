@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="./CSS/test2.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+
+        <div id="topTitle">
+            <h1>결제하기 </h1>
+            <a href="">선물하기</a>
+            <!-- 클릭시 메세지와 함께 선물보내는 창으로 이동 -->
+        </div>
+
+        <div id="contentBox">
+            <div id="deliveryBox">
+                <!-- grid span 2 / 1,1 -->
+                <div>배송지 [ 집 ]<br>
+                </div>
+                <div>
+                    <div>이순신</div>
+                    <div>010-1234-1234</div>
+                </div>
+                <div>
+                    [집] 경기도 광주시 ~~~~~
+                    <a href="">배송지 변경</a>
+                    <!-- 이거 a 태그 href에 요청명쓰고 jsp로 구현해보자
+                팝업창을 띄울수 있을까? -->
+                </div>
+            </div>
+
+            <div id="requestBox">
+                <!-- grid span 2 / 1,1 -->
+                <div>요청사항</div>
+                <div>
+                    <select name="requestOption" id="requestOption">
+                        <option value="1">부재 시 문앞에</option>
+                        <option value="2">배송 전 전화</option>
+                        <option value="3">경비실에</option>
+                        <option value="4">직접 입력(클릭 시 아래 div생기면서 입력창)</option>
+                        <!-- 직접입력 클릭시 div 늘어나도록 구현하기 -->
+                    </select>
+                </div>
+
+                <div>
+                    ~~~~~ 부가설명 ~~~~~
+                </div>
+            </div>
+
+
+
+            <div id="orderInfo">
+                <div>주문자명 / 이메일</div>
+                <div>[${client.name}] ${client.email}
+                    <a href="">변경</a>
+                    <!-- 팝업창 -->
+                </div>
+
+                <div>품절시 환불방법</div>
+                <div>
+                    <label for="">
+                        주문시 결제수단으로 환불
+                        <input type="checkbox" value="">
+                    </label>
+                    <label for="">
+                        마일리지로 돌려받기
+                        <input type="checkbox" value="">
+                    </label>
+                </div>
+            </div>
+
+            <h2 class="subHeading">상품목록</h2>
+
+            <div id="OrderDetailList">
+                <div><img src="" alt=""></div>
+                <div>컬럼 분류</div>
+                <div>브랜드</div>
+                <div>상품명</div>
+                <div>선택한 옵션</div>
+                <div>
+                    <div>99,999 원</div>
+                    <div>수량 : 1 개</div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h2 class="subHeading">할인혜택</h2>
+        </div>
+
+        <div id="OrderCost">
+            <div>총 주문금액</div>
+            <div>99,999 원</div>
+            <div>할인 금액</div>
+            <div>999 원 <a href="">쿠폰 변경</a></div>
+            <div>최종 금액</div>
+            <div>99,000 원</div>
+        </div>
+
+        <h3 class="subHeading">마일리지 사용</h3>
+        <div id="useMileage">
+            <div>보유 마일리지</div>
+            <div><input type="text" placeholder="999 원"><button>전부 사용</button></div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

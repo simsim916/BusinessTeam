@@ -71,7 +71,7 @@ li {
     right: calc(55px);
 }
 
-#searchBox>i:nth-of-type(2) {
+#searchBox>button {
     position: absolute;
     top: calc(25px - 12.5px);
     right: calc(12.5px);

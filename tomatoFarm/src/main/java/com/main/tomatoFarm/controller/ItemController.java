@@ -35,5 +35,26 @@ public class ItemController {
 		model.addAttribute("sortbList", sortSerivce.selectSortbList());
 	}
 	
-}
+	@GetMapping("/sortlist")
+	public String ListBy( Model model ) {
+		String uri = "item/list";
+//		String uri = "redirect:item/list";
 
+		
+		model.addAttribute( "list", itemService.selectItemListOrderBy("sales","desc") );
+		model.addAttribute( "list", itemService.selectItemListOrderBy("price","desc") );
+		model.addAttribute( "list", itemService.selectItemListOrderBy("price","asc") );
+		
+		
+		return uri;
+	}
+	
+	@GetMapping("searchlist")
+	public String search(@RequestParam("keyword")String keyword,Model model) {
+		
+		String uri = "item/list";
+		model.addAttribute("list", itemService.selectItemListWhereKeyword(keyword));
+		
+		return uri;
+	}
+}

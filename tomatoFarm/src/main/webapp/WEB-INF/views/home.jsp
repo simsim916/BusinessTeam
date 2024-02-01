@@ -17,7 +17,9 @@
             <link rel="stylesheet" href="/tomatoFarm/resources/css/00default.css">
             <link rel="stylesheet" href="/tomatoFarm/resources/css/00header.css">
             <link rel="stylesheet" href="/tomatoFarm/resources/css/home.css">
-            <title>Document ss</title>
+
+            <title>토마토팜 || 메인 ||</title>
+
         </head>
 
         <body>
@@ -36,11 +38,10 @@
                             <img src="/tomatoFarm/resources/img/logo.png" alt="">
                             <h1>토마토팜 tomatoFarm</h1>
                         </div>
-                        <form id="searchBox" action="keyword">
-                            <input type="text" name="name" placeholder="검색어를 입력해주세요.">
-                            <!-- 검색기능을 위한 name 추가 -->
+							 <form id="searchBox" action="searchlist">
+                            <input type="text" name="keyword" placeholder="검색어를 입력해주세요.">
                             <i class="fa-solid fa-circle-xmark"></i>
-                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <button><i class="fa-solid fa-magnifying-glass"></i></button>
                         </form>
                         <div id="searchRightBox">
                             <div id="myPage">

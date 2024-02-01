@@ -26,6 +26,7 @@ public class HomeController {
 		model.addAttribute("fresheasyList", service.selectItemListWhereBrand("프레시지"));
 
 		return "home";
+		
 	}
 	
 }
