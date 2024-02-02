@@ -17,7 +17,7 @@
             <link rel="stylesheet" href="/tomatoFarm/resources/css/00default.css">
             <link rel="stylesheet" href="/tomatoFarm/resources/css/00header.css">
             <link rel="stylesheet" href="/tomatoFarm/resources/css/itemList.css">
-            <script defer type="text/javascript" src="/tomatoFarm/resources/js/itemList.js"></script>
+            <script defer type="text/javascript" src="/tomatoFarm/resources/js/00header.js"></script>
             <title>토마토팜 || List</title>
         </head>
 
@@ -34,8 +34,10 @@
                 <div id="searchBar">
                     <div class="container">
                         <div id="logoBox">
-                            <img src="/tomatoFarm/resources/img/logo.png" alt="">
-                            <h1>토마토팜 tomatoFarm</h1>
+                            <a href="/tomatoFarm/">
+                            	<img src="/tomatoFarm/resources/img/logo.png" alt="">
+                            	<h1>토마토팜 tomatoFarm</h1>
+                            </a>
                         </div>
                         <form id="searchBox" action="/tomatoFarm/item/list">
                             <input type="text" name="keyword" placeholder="검색어를 입력해주세요.">
@@ -217,14 +219,5 @@
                 </div>
             </main>
         </body>
-        <script>
-            let firstCategory = document.getElementById("firstCategory");
-            function firstCategoryVisible() {
-                firstCategory.style.visibility = "visible";
-            }
-            function firstCategoryHidden() {
-                firstCategory.style.visibility = "hidden";
-            }
-        </script>
 
         </html>
