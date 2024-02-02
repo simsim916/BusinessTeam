@@ -19,7 +19,7 @@ public class KeywordDAO {
 	private static String sql;
 
 	public int updateKeywordCnt(KeywordDTO dto) {
-		sql = "select * from search where keyword =" + dto.getKeyword();
+		sql = "Select * From search Where keyword =" + dto.getKeyword();
 
 		try {
 			pst = cn.prepareStatement(sql);
@@ -30,7 +30,7 @@ public class KeywordDAO {
 				object.setKeyword(rs.getString(1));
 				object.setCnt(rs.getInt(2));
 
-				sql = "update search set cnt =" + object.getCnt() + 1 + "where keyword=" + object.getKeyword();
+				sql = "update search set cnt =" + (object.getCnt()+1) + "where keyword=" + object.getKeyword();
 				pst = cn.prepareStatement(sql);
 
 				return pst.executeUpdate();
