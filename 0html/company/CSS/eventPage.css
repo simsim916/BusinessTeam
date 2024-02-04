@@ -1,78 +1,89 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-}
-
-body {
-    width: 1024px;
-
-}
-
-#container {
-    margin: 0 auto;
-    width: 95%;
-}
-
-#topBoxYH {
-    display: flex;
-    align-items: center;
-}
-
-#topBoxYH>h3 {
-    text-indent: 10px;
-}
-
-#topBoxYH>div {
-    text-indent: 10px;
-}
-
-#containerOuter {
-    margin-top: 20px;
-    border: 1px solid;
-    padding: 4.2px;
-    width: 325px;
-    height: 320px;
-}
-
-#containerInner {
-    justify-content: center;
+#header {
     width: 100%;
-    height: 100%;
-    display: grid;
-    gap: 5px;
-    grid-template: repeat(3, 100px) / repeat(4, 75px);
+    background-color: aquamarine;
+    height: 150px;
 }
 
-#containerInner>div {
-    border: 1px solid;
+.container {
+    width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#topEventBox {
     position: relative;
-    background-color: beige;
+    padding: 2rem;
+    background-color: #000;
 }
 
-#containerInner>div>div {
-    border: 1px solid;
-    width: 30px;
+#lightPlace {
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 3rem;
+}
+
+
+#lightPlace>div:not(.light) {
+    opacity: 0;
+    animation: flashText 0.8s ease-out alternate infinite;
+}
+
+#lightPlace>div.light {
+    /* #lightPlace>span>.light { */
+    position: relative;
+    display: inline-block;
+
+    &:before {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 120%;
+        background: #fff;
+        filter: blur(40px);
+        content: "";
+        opacity: 0;
+        animation: flash 0.8s ease-out alternate infinite;
+    }
+}
+
+@keyframes flash {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes flashText {
+    to {
+        opacity: 0.4;
+    }
+}
+
+/* ============================== */
+
+#timePlace {
+    font-size: 2em;
+    font-weight: 100;
+    color: white;
+    padding: 20px;
     position: absolute;
-    bottom: 5px;
-    left: 5px;
+    right: 0;
+    top: 0;
 }
 
-#containerInner>div>div:hover {
-    width: 60%;
-    background-color: aqua;
+#timePlace div {
+    display: inline-block;
+    min-width: 70px;
 }
 
-#containerInner>div:nth-child(n+1):nth-child(-n+2) {
-    grid-column: span 2;
+#timePlace div span {
+    display: block;
+    margin-top: 15px;
+    font-size: .35em;
+    font-weight: 400;
 }
 
-#containerInner>div:nth-child(7) {
-    grid-column: span 2;
-}
+/* ============================ */
 
-/* 
-#containerInner>div:nth-child(1),
-#containerInner>div::nth-child(2),
-#containerInner>div::nth-child(7) {
-    grid-column: span 2;
-} */
