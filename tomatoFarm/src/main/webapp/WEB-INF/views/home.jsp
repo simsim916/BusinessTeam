@@ -266,7 +266,7 @@
 			<c:forEach var="l" items="${requestScope.fresheasyList}" begin="0"
 				end="0">
 				<div class="typeBoxImg">
-					<img src="/tomatoFarmA/resources/img/itemImg/${l.code}_1.jpg" alt="${l.name}">
+					<img src="/tomatoFarm/resources/img/itemImg/${l.code}_1.jpg" alt="${l.name}">
 					<div class="typeBoxImgTitle">
 						<div class="typeBoxImgTitleName">${l.name}</div>
 						<p class="typeBoxImgTitlePrice">${l.price}원</p>
@@ -295,153 +295,74 @@
 			</div>
 		</div>
 		<div class="typeBox">
-			<div class="typeBoxTag">
-				<div class="typeBoxTagTitle">
-					<img src="/tomatoFarm/resources/img/brand/rlarndnjstjstodenqn.png"
-						alt="category_vitamin">김구원선생
-				</div>
-				<ul class="typeBoxTagList">
-					<li><span>찌개</span></li>
-					<li><span>두부</span></li>
-				</ul>
-			</div>
-			<div class="typeBoxImg">
-				<div class="typeBoxImgTitle">
-					<div class="typeBoxImgTitleName">신림동 백순대 볶음</div>
-					<p class="typeBoxImgTitlePrice">12,300원</p>
-				</div>
-				<div class="typeBoxImgTitleBest">Best 상품</div>
-			</div>
-			<div class="typeBoxList">
-				<div class="slideBox">
-					<div class="itemBox">
-						<img src="/tomatoFarm/resources/img/itemImg/5000035_1.jpg"
-							alt="신림동 백순대 볶음">
-						<div class="itemName">신림동 백순대 볶음</div>
-						<div class="itemInfo">
-							프레시지<br>
-						</div>
-						<p class="itemPrice">12,300원</p>
-						<div class="itemOption">무료배송</div>
-					</div>
-					<div class="itemBox">
-						<img src="/tomatoFarm/resources/img/itemImg/5000035_1.jpg"
-							alt="신림동 백순대 볶음">
-						<div class="itemName">신림동 백순대 볶음</div>
-						<div class="itemInfo">
-							프레시지<br>
-						</div>
-						<p class="itemPrice">12,300원</p>
-						<div class="itemOption">무료배송</div>
-					</div>
-					<div class="itemBox">
-						<img src="/tomatoFarm/resources/img/itemImg/5000035_1.jpg"
-							alt="신림동 백순대 볶음">
-						<div class="itemName">신림동 백순대 볶음</div>
-						<div class="itemInfo">
-							프레시지<br>
-						</div>
-						<p class="itemPrice">12,300원</p>
-						<div class="itemOption">무료배송</div>
-					</div>
-					<div class="itemBox">
-						<img src="/tomatoFarm/resources/img/itemImg/5000035_1.jpg"
-							alt="신림동 백순대 볶음">
-						<div class="itemName">신림동 백순대 볶음</div>
-						<div class="itemInfo">
-							프레시지<br>
-						</div>
-						<p class="itemPrice">12,300원</p>
-						<div class="itemOption">무료배송</div>
-					</div>
-					<div class="itemBox">
-						<img src="/tomatoFarm/resources/img/itemImg/5000035_1.jpg"
-							alt="신림동 백순대 볶음">
-						<div class="itemName">신림동 백순대 볶음</div>
-						<div class="itemInfo">
-							프레시지<br>
-						</div>
-						<p class="itemPrice">12,300원</p>
-						<div class="itemOption">무료배송</div>
-					</div>
-				</div>
+                    <div class="typeBoxTag">
+                        <div class="typeBoxTagTitle"><img src="/tomatoFarm/resources/img/brand/rlarndnjstjstodenqn.png"
+                                alt="category_vitamin">김구원선생</div>
+                        <ul class="typeBoxTagList">
+                            <li><span>찌개</span></li>
+                            <li><span>두부</span></li>
+                        </ul>
+                    </div>
+                       <div class="typeBoxImg">
+                    <c:forEach var="l" items="${requestScope.rlarndnjstjstodList}" begin="0" end="0">
+                    	  <img src="/tomatoFarm/resources/img/itemImg/${l.code}_1.jpg"
+								alt="${l.name}">
+                          <div class="typeBoxImgTitle">
+                             <div class="typeBoxImgTitleName">${l.name}</div>
+                             <p class="typeBoxImgTitlePrice">${l.price}원</p>
+                          </div>
+                    </c:forEach>
+                          <div class="typeBoxImgTitleBest">Best 상품</div>
+                       </div>
+                    <div class="typeBoxList">
+                       <div class="slideBox">
+                          <c:forEach var="l" items="${requestScope.rlarndnjstjstodList}" begin="1" end="6">
+                           <div class="itemBox">
+                              <img alt="${l.name}" src="/tomatoFarm/resources/img/itemImg/${l.code}_1.jpg">
+                              <div class="itemName">${l.name}</div>
+                              <div class="itemInfo">${l.brand}<br></div>
+                              <p class="itemPrice">${l.price}원</p>
+                              <div class="itemOption">${l.delivery==0?"무료배송":l.delivery+=' 원'}</div>
+                           </div>
+                        </c:forEach>
+                     </div>
 				<div id="secondContainerRightBtn">
 					<i class="fa-sharp fa-solid fa-arrow-right"></i>
 				</div>
 			</div>
 		</div>
 		<div class="typeBox">
-			<div class="typeBoxTag">
-				<div class="typeBoxTagTitle">
-					<img src="/tomatoFarm/resources/img/brand/마이셰프.png"
-						alt="category_vitamin">마이셰프
-				</div>
-				<ul class="typeBoxTagList">
-					<li><span>샤브샤브</span></li>
-					<li><span>마라탕</span></li>
-					<li><span>전골</span></li>
-				</ul>
-			</div>
-			<div class="typeBoxImg">
-				<div class="typeBoxImgTitle">
-					<div class="typeBoxImgTitleName">신림동 백순대 볶음</div>
-					<p class="typeBoxImgTitlePrice">12,300원</p>
-				</div>
-				<div class="typeBoxImgTitleBest">Best 상품</div>
-			</div>
-			<div class="typeBoxList">
-				<div class="slideBox">
-					<div class="itemBox">
-						<img src="/tomatoFarm/resources/img/itemImg/5000035_1.jpg"
-							alt="신림동 백순대 볶음">
-						<div class="itemName">신림동 백순대 볶음</div>
-						<div class="itemInfo">
-							프레시지<br>
-						</div>
-						<p class="itemPrice">12,300원</p>
-						<div class="itemOption">무료배송</div>
-					</div>
-					<div class="itemBox">
-						<img src="/tomatoFarm/resources/img/itemImg/5000035_1.jpg"
-							alt="신림동 백순대 볶음">
-						<div class="itemName">신림동 백순대 볶음</div>
-						<div class="itemInfo">
-							프레시지<br>
-						</div>
-						<p class="itemPrice">12,300원</p>
-						<div class="itemOption">무료배송</div>
-					</div>
-					<div class="itemBox">
-						<img src="/tomatoFarm/resources/img/itemImg/5000035_1.jpg"
-							alt="신림동 백순대 볶음">
-						<div class="itemName">신림동 백순대 볶음</div>
-						<div class="itemInfo">
-							프레시지<br>
-						</div>
-						<p class="itemPrice">12,300원</p>
-						<div class="itemOption">무료배송</div>
-					</div>
-					<div class="itemBox">
-						<img src="/tomatoFarm/resources/img/itemImg/5000035_1.jpg"
-							alt="신림동 백순대 볶음">
-						<div class="itemName">신림동 백순대 볶음</div>
-						<div class="itemInfo">
-							프레시지<br>
-						</div>
-						<p class="itemPrice">12,300원</p>
-						<div class="itemOption">무료배송</div>
-					</div>
-					<div class="itemBox">
-						<img src="/tomatoFarm/resources/img/itemImg/5000035_1.jpg"
-							alt="신림동 백순대 볶음">
-						<div class="itemName">신림동 백순대 볶음</div>
-						<div class="itemInfo">
-							프레시지<br>
-						</div>
-						<p class="itemPrice">12,300원</p>
-						<div class="itemOption">무료배송</div>
-					</div>
-				</div>
+               <div class="typeBoxTag">
+                   <div class="typeBoxTagTitle"><img src="/tomatoFarm/resources/img/brand/마이셰프.png"
+                           alt="category_vitamin">마이셰프</div>
+                   <ul class="typeBoxTagList">
+                       <li><span>샤브샤브</span></li>
+                       <li><span>마라탕</span></li>
+                       <li><span>전골</span></li>
+                   </ul>
+               </div>
+               <c:forEach var="l" items="${requestScope.mychefList}" begin="0" end="0">
+                    <div class="typeBoxImg">
+                    <img src="/tomatoFarm/resources/img/itemImg/${l.code}_1.jpg" alt="${l.name}">
+                     <div class="typeBoxImgTitle">
+                         <div class="typeBoxImgTitleName">${l.name}</div>
+                           <p class="typeBoxImgTitlePrice">${l.price}원</p>
+                      </div>
+                      <div class="typeBoxImgTitleBest">Best 상품</div>
+                   </div>
+                </c:forEach>
+                <div class="typeBoxList">
+                   <div class="slideBox">
+                   <c:forEach var="l" items="${requestScope.mychefList}" begin="1" end="6">
+                      <div class="itemBox">
+                         <img alt="${l.name}" src="/tomatoFarm/resources/img/itemImg/${l.code}_1.jpg">
+                        <div class="itemName">${l.name}</div>
+                        <div class="itemInfo">${l.brand}<br></div>
+                        <p class="itemPrice">${l.price}원</p>
+                        <div class="itemOption">${l.delivery==0?"무료배송":l.delivery+=' 원'}</div>
+                      </div>
+                   </c:forEach>
+                     </div>
 				<div id="secondContainerRightBtn">
 					<i class="fa-sharp fa-solid fa-arrow-right"></i>
 				</div>

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
         <!DOCTYPE html>
         <html>
 
@@ -18,7 +18,7 @@
             <link rel="stylesheet" href="/tomatoFarm/resources/css/00header.css">
             <link rel="stylesheet" href="/tomatoFarm/resources/css/itemList.css">
             <script defer type="text/javascript" src="/tomatoFarm/resources/js/00header.js"></script>
-            <title>토마토팜 || List</title>
+            <title>토마토팜 || 상품검색</title>
         </head>
 
         <body>
@@ -206,6 +206,7 @@
                     </div>
 
                     <c:forEach items="${requestScope.list}" var="l" end="11">
+                        <a href="detail?code=${l.code}">
                         <div class="itemBox">
                             <img src="/tomatoFarm/resources/img/itemImg/${l.code}_1.jpg" alt="${l.name}">
                             <div class="itemName">${l.name}</div>
@@ -213,6 +214,7 @@
                             <p class="itemPrice">${l.price}원</p>
                             <div class="itemOption">${l.delivery==0?"무료배송":l.delivery+=' 원'}</div>
                         </div>
+                        </a>
                     </c:forEach>
 
 

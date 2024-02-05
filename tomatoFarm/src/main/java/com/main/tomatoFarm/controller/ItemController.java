@@ -30,7 +30,6 @@ public class ItemController {
 		model.addAttribute("size", list.size());
 		model.addAttribute("brandList", itemService.selectBrandList());
 		model.addAttribute("keyword", keyword);
-		
 		model.addAttribute("sortList", sortSerivce.selectSortList());
 		model.addAttribute("sortbList", sortSerivce.selectSortbList());
 	}
@@ -39,7 +38,6 @@ public class ItemController {
 	public String ListBy( Model model ) {
 		String uri = "item/list";
 //		String uri = "redirect:item/list";
-
 		
 		model.addAttribute( "list", itemService.selectItemListOrderBy("sales","desc") );
 		model.addAttribute( "list", itemService.selectItemListOrderBy("price","desc") );
@@ -47,6 +45,12 @@ public class ItemController {
 		
 		
 		return uri;
+	}
+	
+	@GetMapping("/detail")
+	public void detail(Model model , @RequestParam("code") int code) {
+		ItemDTO dto = itemService.selectItem(code);
+		model.addAttribute("dto", dto);
 	}
 	
 }

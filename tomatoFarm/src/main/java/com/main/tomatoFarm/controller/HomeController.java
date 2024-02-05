@@ -24,7 +24,8 @@ public class HomeController {
 
 		model.addAttribute("list", service.selectItemListBySales());
 		model.addAttribute("fresheasyList", service.selectItemListWhereBrand("프레시지"));
-
+		model.addAttribute("rlarndnjstjstodList", service.selectItemListWhereBrand("김구원선생"));
+        model.addAttribute("mychefList", service.selectItemListWhereBrand("마이셰프"));
 		return "home";
 		
 	}
