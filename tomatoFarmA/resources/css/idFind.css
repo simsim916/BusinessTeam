@@ -37,13 +37,13 @@ input:focus {
     outline: none;
 }
 
-#idFind {
+#idFindBox {
     margin: auto;
     margin-top: 20px;
     position: relative;
 }
 
-#idFind>div {
+#idFindBox>div {
     border: 1px solid #4C4556;
     width: 350px;
     margin: auto;
@@ -51,19 +51,31 @@ input:focus {
     font-size: 18px;
 }
 
-#idFind>#emailBox {
+#idFindBox>#emailBox {
     border-radius: 10px;
+    width: 350px;
+    height: 50px;
 }
 
-#idFind>div>i {
+#idFindBox>div>i {
     width: 50px;
     text-align: center;
     font-size: 16px;
 }
 
-#idFind>div>input {
+#idFindBox>div>input {
     border: none;
     width: 280px;
+}
+
+span{
+    color: gray;
+    border: 500;
+    margin: auto;
+    width: 350px;
+    padding: 5px;
+    display: block;
+    font-size: 10px;
 }
 
 #sendBox {
@@ -72,12 +84,14 @@ input:focus {
     padding: 0;
     margin: auto;
     font-size: 20px;
+    display: block;
+    text-align: center;
 }
 
 #sendBox button {
-    width: 350px;
+    width: 150px;
     height: 40px;
-    font-size: 20px;
+    font-size: 17px;
     background-color: #9B1B30;
     color: white;
     margin-top: 20px;
