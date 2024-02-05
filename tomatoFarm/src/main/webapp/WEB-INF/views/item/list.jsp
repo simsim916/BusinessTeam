@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
         <!DOCTYPE html>
         <html>
 
@@ -17,8 +17,8 @@
             <link rel="stylesheet" href="/tomatoFarm/resources/css/00default.css">
             <link rel="stylesheet" href="/tomatoFarm/resources/css/00header.css">
             <link rel="stylesheet" href="/tomatoFarm/resources/css/itemList.css">
-            <script defer type="text/javascript" src="/tomatoFarm/resources/js/itemList.js"></script>
-            <title>토마토팜 || List</title>
+            <script defer type="text/javascript" src="/tomatoFarm/resources/js/00header.js"></script>
+            <title>토마토팜 || 상품검색</title>
         </head>
 
         <body>
@@ -34,8 +34,10 @@
                 <div id="searchBar">
                     <div class="container">
                         <div id="logoBox">
-                            <img src="/tomatoFarm/resources/img/logo.png" alt="">
-                            <h1>토마토팜 tomatoFarm</h1>
+                            <a href="/tomatoFarm/">
+                            	<img src="/tomatoFarm/resources/img/logo.png" alt="">
+                            	<h1>토마토팜 tomatoFarm</h1>
+                            </a>
                         </div>
                         <form id="searchBox" action="/tomatoFarm/item/list">
                             <input type="text" name="keyword" placeholder="검색어를 입력해주세요.">
@@ -204,6 +206,7 @@
                     </div>
 
                     <c:forEach items="${requestScope.list}" var="l" end="11">
+                        <a href="detail?code=${l.code}">
                         <div class="itemBox">
                             <img src="/tomatoFarm/resources/img/itemImg/${l.code}_1.jpg" alt="${l.name}">
                             <div class="itemName">${l.name}</div>
@@ -211,20 +214,12 @@
                             <p class="itemPrice">${l.price}원</p>
                             <div class="itemOption">${l.delivery==0?"무료배송":l.delivery+=' 원'}</div>
                         </div>
+                        </a>
                     </c:forEach>
 
 
                 </div>
             </main>
         </body>
-        <script>
-            let firstCategory = document.getElementById("firstCategory");
-            function firstCategoryVisible() {
-                firstCategory.style.visibility = "visible";
-            }
-            function firstCategoryHidden() {
-                firstCategory.style.visibility = "hidden";
-            }
-        </script>
 
         </html>

@@ -48,5 +48,24 @@ public class ItemController {
 		model.addAttribute("sortbList", sortSerivce.selectSortbList());
 		
 	}
-
+	
+	@GetMapping("/sortlist")
+	public String ListBy( Model model ) {
+		String uri = "item/list";
+//		String uri = "redirect:item/list";
+		
+		model.addAttribute( "list", itemService.selectItemListOrderBy("sales","desc") );
+		model.addAttribute( "list", itemService.selectItemListOrderBy("price","desc") );
+		model.addAttribute( "list", itemService.selectItemListOrderBy("price","asc") );
+		
+		
+		return uri;
+	}
+	
+	@GetMapping("/detail")
+	public void detail(Model model , @RequestParam("code") int code) {
+		ItemDTO dto = itemService.selectItem(code);
+		model.addAttribute("dto", dto);
+	}
+	
 }
