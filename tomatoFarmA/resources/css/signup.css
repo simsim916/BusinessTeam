@@ -1,8 +1,10 @@
 #logo {
     height: 80px;
-    position: absolute;
-    top: 20px;
-    left: 20px;
+    position: relative;
+    top: 30px;
+    left: 35%;
+    margin: auto;
+    display: inline-block;
 }
 
 main {
@@ -15,10 +17,22 @@ main {
 }
 
 h3 {
-    margin-top: 120px;
     text-align: center;
-    font-size: 28px;
+    font-size: 20px;
     font-weight: 500;
+    background-color: brown;
+    color: white;
+    width: 350px;
+    height: 40px;
+    padding: 0;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    position: relative;
+    margin: auto;
+    margin-top: 50px;
 }
 
 input:focus {
@@ -52,7 +66,7 @@ input:focus {
     width: 280px;
 }
 
-#signUpBox>#idBox {
+#signUpBox>#nameBox {
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
     border-top: 1px solid #4C4556;
@@ -67,7 +81,7 @@ input:focus {
 #signUpBox>#addressBox {
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
-    margin-top: 50px;
+    margin-top: 30px;
     border-top: 1px solid #4C4556;
 }
 
@@ -85,6 +99,7 @@ input:focus {
     width: 130px;
     text-indent: 5px;
 }
+
 
 #signUpBox>#birtgdayBox>input:nth-of-type(1) {
     width: 90px;
@@ -105,4 +120,68 @@ input:focus {
     border-bottom: 1px solid #4C4556;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
+}
+
+#genderBox {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    margin: auto;
+}
+
+#signUpBox>#genderBox>i {
+    text-align: center;
+    width: 50px;
+    font-size: 20px;
+}
+
+#genderBox>span {
+    width: 40px;
+    font-size: 14px;
+    color: gray;
+}
+
+#gender {
+    display: flex;
+    list-style: none;
+    width: 250px;
+    padding: 0;
+    margin-left: 20px;
+}
+
+#gender>li {
+    border: 1px solid grey;
+    border-radius: 10px;
+    width: 110px;
+    height: 40px;
+    margin: 5px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+}
+
+#gender input[type="radio"] {
+    display: none;
+    margin: 10px;
+}
+
+#joinBox {
+    width: 350px;
+    height: 50px;
+    padding: 0;
+    margin: auto;
+    font-size: 20px;
+}
+
+#joinBox button {
+    margin: auto;
+    width: 350px;
+    height: 40px;
+    font-size: 20px;
+    background-color: brown;
+    color: white;
+    margin-top: 20px;
+    border-radius: 10px;
 }
