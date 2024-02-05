@@ -144,7 +144,7 @@
             <div id="itemDetailTitle">
                 <div id="title1">새벽배송</div>
                 <div id="title2">${d.name}</div>
-                <div id="title3">${d.name} 맛나요</div>
+                <div id="title3">${d.name} 신선하고 맛있어요</div>
 <c:if test="${d.discount != 0}">
                 <span id="title4">${d.discount}<span>%</span></span>
                 <div id="title5">${d.price}원</div>
@@ -155,15 +155,25 @@
 </c:if>
             </div>
             <div>배송</div>
+<c:if test="${d.delivery != 0}">
             <div>${d.delivery}원<br>(23시 전 주문 시 내일 아침 7시 전 도착)</div>
+</c:if>
+<c:if test="${d.delivery == 0}">
+            <div>무료배송<br>(23시 전 주문 시 내일 아침 7시 전 도착)</div>
+</c:if>
             <div>제조사</div>
-            <div>김구원선생</div>
+            <div>${d.brand}</div>
             <div>포장타입</div>
-            <div>냉동</div>
+            <div>${d.storage}</div>
             <div>판매단위</div>
+<c:if test="${d.packing =='pk'}">
             <div>1팩</div>
+</c:if>
+<c:if test="${d.packing == 'box'}">
+            <div>1박스</div>
+</c:if>
             <div>중량/용량</div>
-            <div>356g</div>
+            <div>${d.weight}g</div>
             <div>유통기한</div>
             <div>수령일 포함 180일 이상 남은 제품을 보내드립니다.</div>
             <div id="itemSelect">
