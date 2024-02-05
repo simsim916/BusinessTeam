@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- nav CSS -->
+    <link rel="stylesheet" href="../css/nav2.css">
+    <!-- nav JS-->
+    <script defer src="../js/nav2.js"></script>
+    <!-- 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- 폰트어썸 -->
+    <script src="https://kit.fontawesome.com/d68045e863.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+
+    <link rel="stylesheet" type="text/css" href="./CSS/orderPage.css" id="changeStyle">
+
+    <script defer src="./Javascript/orderPage.js"></script>
+</head>
+
+<body>
+    <div id="topBar">
+        <i class="fa-solid fa-house"></i>
+    </div>
+    <div id="sideBar">
+        <div>토마토팜</div>
+        <ul>
+            <li onclick="openDetailFirst()">
+                <div><i class="fa-solid fa-bars"></i><br>전체메뉴</div>
+            </li>
+            <li>
+                <div><i class="fa-solid fa-circle-user"></i><br>즐겨찾기</div>
+            </li>
+            <li>
+                <div><i class="fa-solid fa-list-check"></i><br>최근메뉴</div>
+            </li>
+            <li>
+                <div><i class="fa-solid fa-bullhorn"></i><br>공지사항</div>
+            </li>
+            <li>
+                <div><i class="fa-solid fa-bell"></i><br>알림</div>
+            </li>
+            <li>
+                <div><i class="fa-solid fa-comment-dots"></i><br>고객센터</div>
+            </li>
+            <li>
+                <div><i class="fa-solid fa-gear"></i><br>설정</div>
+            </li>
+        </ul>
+        <div onclick="openSideBar()" id="sideBarButton"><i class="fa-solid fa-chevron-right"></i></div>
+        <div id="sideBarDetail">
+            <div id="sideBarDetailFirst">
+                <ul>
+                    <li>상품주문</li>
+                    <li>상품조회/검색</li>
+                    <li>주문조회</li>
+                    <li>클레임 처리현황</li>
+                    <li>출력물</li>
+                </ul>
+            </div>
+            <div id="sideBarDetailSecond">
+                <div id="sideBarDetailSecondExit" onclick="closeDetail()"><i class="fa-solid fa-xmark"></i></div>
+                <div id="sideBarDetailSecondSearch">
+                    <input type="text">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <ul>
+                    <li>식재주문등록</li>
+                    <li>식단주문등록</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div id="topBoxYH">
+            <!-- 최상단 -->
+            <div id="topBoxLeftYH">
+                <h3>★ 식재주문등록</h3>&nbsp;&nbsp;
+                <h4>주문>식재주문등록</h4>
+            </div>
+
+
+            <div id="topSearchBoxYH">
+                <!-- 상단 검색창 -->
+                <label for="search">
+                    사업장 <input type="text" name="search" id="search">
+                </label>
+
+                <label for="date">
+                    입고일자 <input type="date" name="date" id="date">
+                </label>
+            </div>
+        </div>
+
+
+
+        <!-- 주문현황 -->
+        <div id="orderReport">
+            <div class="headtitle">
+                <div class="subtitle"> &nbsp;주문현황</div>
+                <div id="sortBt">
+                    <div>가로</div>
+                    <div>세로</div>
+                </div>
+            </div>
+
+
+
+            <div id="currentOrderHeadYH">
+                <div>주문건수</div>
+                <div>주문금액</div>
+                <div>여신금액</div>
+                <div>주문가능잔여시간</div>
+                <div>면세합계</div>
+                <div>과세합계</div>
+                <div>부가세합계</div>
+                <div>총주문금액</div>
+                <div>30일평균(VAT제외)</div>
+                <div>1</div>
+                <div>1</div>
+                <div>1</div>
+                <div>1</div>
+                <div>1</div>
+                <div>1</div>
+                <div>1</div>
+                <div>1</div>
+            </div>
+            <!-- 
+            테이블로 치면 th만 정의해둔 상황에서
+            td들은 결국 데이터를 가져올텐데, grid로 설정해두면
+            row 는 2로 고정된 상황에서 데이터가 추가되면 어떻게 되는가?
+            -->
+
+        </div>
+
+        <div id="orderListBox">
+            <div>
+
+
+                <div class="headtitle">
+                    <div class="subtitle">&nbsp;주문내역</div>
+                    <div id="orderListButtonBox">
+                        <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <button><i class="fa-solid fa-file-excel"></i></button>
+                        <button><i class="fa-solid fa-plus"></i></button>
+                        <button><i class="fa-solid fa-minus"></i></button>
+                    </div>
+                </div>
+                <div id="orderedListYH">
+                    <!-- 주문내역 -->
+                    <div id="insertRowYH">
+                        <div><input type="checkbox" name="test1"></div>
+                        <div>순번</div>
+                        <div>제품코드</div>
+                        <div>제품명</div>
+                        <div>규격</div>
+                        <div>단위</div>
+                        <div>주문량</div>
+                        <div>단가</div>
+                        <div>공급액</div>
+                        <div>부가세</div>
+                        <div>합계</div>
+                        <div>원산지</div>
+                        <div><input type="checkbox" name="test1"></div>
+                        <div>1</div>
+                        <div>1</div>
+                        <div>1</div>
+                        <div>1</div>
+                        <div>1</div>
+                        <div>1</div>
+                        <div>1</div>
+                        <div>1</div>
+                        <div>1</div>
+                        <div>1</div>
+                        <div>1</div>
+                        <div><input type="checkbox" name="test1"></div>
+                        <div>2</div>
+                        <div>2</div>
+                        <div>2</div>
+                        <div>2</div>
+                        <div>2</div>
+                        <div>2</div>
+                        <div>2</div>
+                        <div>2</div>
+                        <div>2</div>
+                        <div>2</div>
+                        <div>2</div>
+                        <div><input type="checkbox" name="test1"></div>
+                        <div>3</div>
+                        <div>3</div>
+                        <div>3</div>
+                        <div>3</div>
+                        <div>3</div>
+                        <div>3</div>
+                        <div>3</div>
+                        <div>3</div>
+                        <div>3</div>
+                        <div>3</div>
+                        <div>3</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+</body>
+
+<script>
+    const sideBar = document.getElementById("sideBar");
+    const sideBarButton = document.getElementById("sideBarButton");
+    const topBar = document.getElementById("topBar")
+    const sideBarDetailFirst = document.getElementById("sideBarDetailFirst")
+    const sideBarDetailSecond = document.getElementById("sideBarDetailSecond")
+    let containers = document.getElementsByClassName("container");
+
+    let sideBarStatus = false;
+</script>
+
+</html>
