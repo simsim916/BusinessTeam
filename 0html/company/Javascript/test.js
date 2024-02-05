@@ -16,7 +16,7 @@ function updateTimer() {
     const s = secs - mins * 60;
 
     const test = document.getElementById('timePlace');
-    test.innerHTML = `<div>${d}<span>Days</span></div><div>${h}<span>Hours</span></div><div>${m}<span>Minutes</span></div><div>${s}<span>Seconds</span></div>`
+    test.innerHTML = `<div>${d}<span>일</span></div><div>${h}<span>시간</span></div><div>${m}<span>분</span></div><div>${s}<span>초</span></div>`
     // test.innerHTML =
     //     '<div>' + d + '<span>Days</span></div>' +
     //     '<div>' + h + '<span>Hours</span></div>' +
