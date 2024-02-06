@@ -25,3 +25,11 @@ setInterval(updateTimer2, 1000);
 
 
 
+let check;
+
+window.onload = function () {
+    check = document.getElementById('eventDetail1_3_Tab');
+
+}
+
+console.log(check);
