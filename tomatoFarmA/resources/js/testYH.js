@@ -3,12 +3,12 @@
 function updateTimer1() {
     const targetTime = Date.parse("2024/02/09 23:59:59");
     const now = new Date();
-    const rainTime = targetTime - now;
+    const remainTime = targetTime - now;
 
-    const days = Math.floor(rainTime / (1000 * 60 * 60 * 24));
-    const hours = Math.floor(rainTime / (1000 * 60 * 60));
-    const mins = Math.floor(rainTime / (1000 * 60));
-    const secs = Math.floor(rainTime / 1000);
+    const days = Math.floor(remainTime / (1000 * 60 * 60 * 24));
+    const hours = Math.floor(remainTime / (1000 * 60 * 60));
+    const mins = Math.floor(remainTime / (1000 * 60));
+    const secs = Math.floor(remainTime / 1000);
 
     const d = days;
     const h = hours - days * 24;
@@ -29,12 +29,12 @@ setInterval(updateTimer1, 1000);
 function updateTimer2() {
     const targetTime = Date.parse("2024/02/09 23:59:59");
     const now = new Date();
-    const rainTime = targetTime - now;
+    const remainTime = targetTime - now;
 
-    const days = Math.floor(rainTime / (1000 * 60 * 60 * 24));
-    const hours = Math.floor(rainTime / (1000 * 60 * 60));
-    const mins = Math.floor(rainTime / (1000 * 60));
-    const secs = Math.floor(rainTime / 1000);
+    const days = Math.floor(remainTime / (1000 * 60 * 60 * 24));
+    const hours = Math.floor(remainTime / (1000 * 60 * 60));
+    const mins = Math.floor(remainTime / (1000 * 60));
+    const secs = Math.floor(remainTime / 1000);
 
     const d = days;
     const h = hours - days * 24;
