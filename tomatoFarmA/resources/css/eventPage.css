@@ -1,0 +1,185 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+main{
+    background-color: wheat;
+}
+
+#header {
+    width: 100%;
+    background-color: aquamarine;
+    height: 130px;
+}
+
+.container {
+    width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    background-color: white;
+}
+
+/* ====================================================== */
+
+.eventItem {
+    margin-top: 100px;
+    position: relative;
+    width: 1000px;
+    height: 600px;
+}
+
+
+#event1 {
+    background: url(/tomatoFarmA/resources/img/jyhTest/event1.jpg) no-repeat center;
+    background-size: cover;
+}
+
+#event2 {
+    background: url(/tomatoFarmA/resources/img/jyhTest/event2.jpg) no-repeat center;
+    background-size: cover;
+}
+
+/* ============================== */
+
+.timePlace {
+    font-size: 3em;
+    position: absolute;
+    z-index: 3;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    width: 700px;
+}
+
+.timePlace div span {
+    font-size: .4em;
+    font-weight: bold;
+    margin-left: 3px;
+}
+
+#event1Time {
+    top: 11px;
+    left: calc((1000px - 700px) / 2);
+}
+
+#event2Time {
+    left: 30px;
+    justify-content: left;
+}
+
+/* ============================ */
+@font-face {
+    font-family: 'KBO-Dia-Gothic_bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/KBO-Dia-Gothic_bold.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+}
+
+.brandEvent {
+    font-family: 'KBO-Dia-Gothic_bold', "Noto Sans KR", sans-serif;
+}
+
+/* ====================================== */
+
+#textArea1 {
+    font-size: 30px;
+    width: 700px;
+    position: absolute;
+    left: 120px;
+    top: 100px;
+    text-align: center;
+    font-family: 'East Sea Dokdo', sans-serif;
+}
+
+#textArea1>p:first-of-type {
+    color: green;
+}
+
+#textArea1>div {
+    font-size: 100px;
+}
+
+#textArea2 {
+    font-size: 30px;
+    position: absolute;
+    top: 70px;
+    left: 30px;
+    font-family: 'East Sea Dokdo', sans-serif;
+}
+
+#textArea2>p:first-of-type {
+    color: teal;
+}
+
+
+#textArea2>div {
+    font-size: 100px;
+}
+
+#EventTab1>img {
+    width: 100%;
+    height: 400px;
+}
+
+/* ================================ */
+
+#Event1Tab_itemList {
+    position: relative;
+    margin-top: 130px;
+}
+
+#Event1Tab_itemList>div:first-of-type {
+    width: 600px;
+    position: absolute;
+    bottom: 105%;
+    display: flex;
+    justify-content: space-between;
+    left: calc((1000px - 600px) / 2);
+}
+
+#Event1Tab_itemList>div:first-of-type>div {
+    border: 1px solid;
+    padding: 10px;
+    border-radius: 30%;
+    font-weight: 700;
+}
+
+.selectedItemList {
+    display: grid;
+    grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+    gap: 30px;
+    height: 500px;
+}
+
+.selectedItemList>a {
+    border: 1px solid;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+}
+.selectedItemList>a>img {
+    width: 45%;
+    height: 100%;
+    padding: 20px;
+}
+
+.selectedItemList>a>div {
+    padding: 10px;
+}
+
+.selectedItemList>a>div>span {
+    border: 1px solid;
+    padding: 2px;
+    color: red;
+}
+
+.selectedItemList>a>div>p:first-of-type {
+    font-size: 22px;
+}
+
+.selectedItemList>a>div>p:nth-of-type(2) {
+    font-weight: 700;
+    font-size: 25px;
+}
