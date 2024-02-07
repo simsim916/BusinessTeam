@@ -169,57 +169,99 @@
             <div class="slideBox">
                 <div class="itemBox">
                     <img src="/tomatoFarmA/resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                    <div class="itemName">신림동 백순대 볶음</div>
+                    <div class="itemName">111111111111</div>
                     <div class="itemInfo">프레시지<br></div>
                     <p class="itemPrice">12,300원</p>
                     <div class="itemOption">무료배송</div>
                 </div>
                 <div class="itemBox">
                     <img src="/tomatoFarmA/resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                    <div class="itemName">신림동 백순대 볶음</div>
+                    <div class="itemName">22222222222222</div>
                     <div class="itemInfo">프레시지<br></div>
                     <p class="itemPrice">12,300원</p>
                     <div class="itemOption">무료배송</div>
                 </div>
                 <div class="itemBox">
                     <img src="/tomatoFarmA/resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                    <div class="itemName">신림동 백순대 볶음</div>
+                    <div class="itemName">333333333333333</div>
                     <div class="itemInfo">프레시지<br></div>
                     <p class="itemPrice">12,300원</p>
                     <div class="itemOption">무료배송</div>
                 </div>
                 <div class="itemBox">
                     <img src="/tomatoFarmA/resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                    <div class="itemName">신림동 백순대 볶음</div>
+                    <div class="itemName">44444444444444</div>
                     <div class="itemInfo">프레시지<br></div>
                     <p class="itemPrice">12,300원</p>
                     <div class="itemOption">무료배송</div>
                 </div>
                 <div class="itemBox">
                     <img src="/tomatoFarmA/resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                    <div class="itemName">신림동 백순대 볶음</div>
+                    <div class="itemName">55555555555555</div>
                     <div class="itemInfo">프레시지<br></div>
                     <p class="itemPrice">12,300원</p>
                     <div class="itemOption">무료배송</div>
                 </div>
                 <div class="itemBox">
                     <img src="/tomatoFarmA/resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                    <div class="itemName">신림동 백순대 볶음</div>
+                    <div class="itemName">666666666666</div>
                     <div class="itemInfo">프레시지<br></div>
                     <p class="itemPrice">12,300원</p>
                     <div class="itemOption">무료배송</div>
                 </div>
                 <div class="itemBox">
                     <img src="/tomatoFarmA/resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                    <div class="itemName">신림동 백순대 볶음</div>
+                    <div class="itemName">7777777777777</div>
+                    <div class="itemInfo">프레시지<br></div>
+                    <p class="itemPrice">12,300원</p>
+                    <div class="itemOption">무료배송</div>
+                </div>
+                <div class="itemBox">
+                    <img src="/tomatoFarmA/resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
+                    <div class="itemName">888888888888</div>
+                    <div class="itemInfo">프레시지<br></div>
+                    <p class="itemPrice">12,300원</p>
+                    <div class="itemOption">무료배송</div>
+                </div>
+                <div class="itemBox">
+                    <img src="/tomatoFarmA/resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
+                    <div class="itemName">99999999999</div>
+                    <div class="itemInfo">프레시지<br></div>
+                    <p class="itemPrice">12,300원</p>
+                    <div class="itemOption">무료배송</div>
+                </div>
+                <div class="itemBox">
+                    <img src="/tomatoFarmA/resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
+                    <div class="itemName">101010101010</div>
+                    <div class="itemInfo">프레시지<br></div>
+                    <p class="itemPrice">12,300원</p>
+                    <div class="itemOption">무료배송</div>
+                </div>
+                <div class="itemBox">
+                    <img src="/tomatoFarmA/resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
+                    <div class="itemName">111111111</div>
                     <div class="itemInfo">프레시지<br></div>
                     <p class="itemPrice">12,300원</p>
                     <div class="itemOption">무료배송</div>
                 </div>
             </div>
-
-            <div id="secondContainerLeftBtn"><i class="fa-sharp fa-solid fa-arrow-left"></i></div>
-            <div id="secondContainerRightBtn"><i class="fa-sharp fa-solid fa-arrow-right"></i></div>
+            <div id="secondSlideBtn" onclick="secondContainerSlideBtn(event)">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div id="secondSlideBtnSelected"></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div id="secondContainerLeftBtn" onclick="secondContainerSlideLeftBtn()"><i
+                    class="fa-sharp fa-solid fa-arrow-left"></i></div>
+            <div id="secondContainerRightBtn" onclick="secondContainerSlideRightBtn()"><i
+                    class="fa-sharp fa-solid fa-arrow-right"></i></div>
 
         </div>
     </div>
@@ -231,7 +273,8 @@
                 class="fa-solid fa-bag-shopping"></i></h3>
         <div class="typeBox hide">
             <div class="typeBoxTag">
-                <div class="typeBoxTagTitle"><img src="/img/brand/fresheasy.png" alt="category_vitamin">프레시지</div>
+                <div class="typeBoxTagTitle"><img src="/tomatoFarmA/resources/img/brand/fresheasy.png"
+                        alt="category_vitamin">프레시지</div>
                 <ul class="typeBoxTagList">
                     <li><span>스테이크</span></li>
                     <li><span>파스타</span></li>
@@ -252,46 +295,48 @@
                 <div class="slideBox">
                     <div class="itemBox">
                         <img src="/tomatoFarmA/resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                        <div class="itemName">신림동 백순대 볶음</div>
+                        <div class="itemName">11111111</div>
                         <div class="itemInfo">프레시지<br></div>
                         <p class="itemPrice">12,300원</p>
                         <div class="itemOption">무료배송</div>
                     </div>
                     <div class="itemBox">
                         <img src="/tomatoFarmA/resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                        <div class="itemName">신림동 백순대 볶음</div>
+                        <div class="itemName">22222222</div>
                         <div class="itemInfo">프레시지<br></div>
                         <p class="itemPrice">12,300원</p>
                         <div class="itemOption">무료배송</div>
                     </div>
                     <div class="itemBox">
                         <img src="/tomatoFarmA/resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                        <div class="itemName">신림동 백순대 볶음</div>
+                        <div class="itemName">333333333</div>
                         <div class="itemInfo">프레시지<br></div>
                         <p class="itemPrice">12,300원</p>
                         <div class="itemOption">무료배송</div>
                     </div>
                     <div class="itemBox">
                         <img src="/tomatoFarmA/resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                        <div class="itemName">신림동 백순대 볶음</div>
+                        <div class="itemName">44444</div>
                         <div class="itemInfo">프레시지<br></div>
                         <p class="itemPrice">12,300원</p>
                         <div class="itemOption">무료배송</div>
                     </div>
                     <div class="itemBox">
                         <img src="/tomatoFarmA/resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                        <div class="itemName">신림동 백순대 볶음</div>
+                        <div class="itemName">555555</div>
                         <div class="itemInfo">프레시지<br></div>
                         <p class="itemPrice">12,300원</p>
                         <div class="itemOption">무료배송</div>
                     </div>
                 </div>
-                <div id="secondContainerRightBtn"><i class="fa-sharp fa-solid fa-arrow-right"></i></div>
+                <div onclick="thirdContainerSlideRightBth()" id="secondContainerRightBtn"><i
+                        class="fa-sharp fa-solid fa-arrow-right"></i></div>
             </div>
         </div>
         <div class="typeBox hide">
             <div class="typeBoxTag">
-                <div class="typeBoxTagTitle"><img src="/img/brand/rlarndnjstjstodenqn.png" alt="category_vitamin">김구원선생
+                <div class="typeBoxTagTitle"><img src="/tomatoFarmA/resources/img/brand/rlarndnjstjstodenqn.png"
+                        alt="category_vitamin">김구원선생
                 </div>
                 <ul class="typeBoxTagList">
                     <li><span>영양보충제</span></li>

@@ -76,6 +76,7 @@
     width: 100%;
     margin-bottom: 10px;
 }
+
 #firstContainerButton a>img:hover {
     background-color: #ffabaf;
 }
@@ -99,15 +100,19 @@
 
 
 #secondContainerList {
-    position: relative;
     margin-top: 30px;
+    padding-bottom: 20px;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
 }
 
+
 .slideBox {
-    width: 3140px;
+    width: calc(200px * 11 + 20px * 10);
     display: flex;
-    gap: 20px
+    gap: 20px;
+    transition: 1s;
 }
 
 #secondContainerLeftBtn {
@@ -132,6 +137,7 @@
     height: 30px;
     border-radius: 50%;
 }
+
 #secondContainerRightBtn {
     position: absolute;
     right: 0;
@@ -155,6 +161,25 @@
     border-radius: 50%;
 }
 
+#secondSlideBtn {
+    position: absolute;
+    bottom: -20px;
+    display: flex;
+}
+
+#secondSlideBtn>div {
+    width: 20px;
+    height: 8px;
+    margin-left: 3px;
+    background-color: #ffabaf40;
+    border-radius: 5px;
+}
+
+#secondSlideBtn>#secondSlideBtnSelected {
+    width: 100px;
+    background-color: #CA4046;
+}
+
 .itemBox {
     display: inline-block;
     width: 200px;
@@ -165,7 +190,7 @@
     text-align: initial;
 }
 
-.itemBox:hover{
+.itemBox:hover {
     background-color: #ffdbdd;
 }
 
