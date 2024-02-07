@@ -1,6 +1,8 @@
 let hides = document.getElementsByClassName("hide");
 const slideBox = document.getElementsByClassName("slideBox");
 const secondSlideBtn = document.getElementById("secondSlideBtn");
+
+
 let secondContainerSlideMargin = 0 , 
     thirdContainerSlide0Margin = 0;
 
