@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.moon.tomatoFarm">
+	<logger name="com.sadf.asdf">
 		<level value="info" />
 	</logger>
 	

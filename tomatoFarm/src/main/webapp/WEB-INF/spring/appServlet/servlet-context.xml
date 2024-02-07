@@ -21,7 +21,6 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.moon.tomatoFarm" />
 	<context:component-scan base-package="com.main.tomatoFarm" />
 	
 	
