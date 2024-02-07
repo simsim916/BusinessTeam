@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import com.main.tomatoFarm.domain.KeywordDTO;
 import com.main.tomatoFarm.model.KeywordDAO;
 
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 @Service
 public class KeywordServiceImpl implements KeywordService{
 	
