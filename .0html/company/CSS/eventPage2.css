@@ -1,0 +1,147 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 900px;
+    height: 500px;
+    margin: 0 auto;
+}
+
+.container>div {
+    display: flex;
+    height: 95%;
+    width: 95%;
+    align-items: center;
+    border-top: 2px solid blue;
+}
+
+/* ========= Left =========== */
+#leftBoxYH {
+    border: 1px solid;
+    width: 20%;
+    height: 100%;
+    position: relative;
+}
+
+#leftBoxYH>div:nth-child(1) {
+    width: 70%;
+    position: absolute;
+    top: 8%;
+    left: calc((180px - (180px * 0.7)) / 2);
+}
+
+#leftBoxYH>div:nth-child(1)>h2 {
+    color: blue;
+}
+
+#leftBoxYH>div:nth-child(1)>a {
+    font-size: 13px;
+    color: gray;
+    text-decoration: none;
+}
+
+/* ------------------------- */
+
+#leftBoxYH>div:nth-child(2) {
+    position: absolute;
+    width: 60%;
+    bottom: 5%;
+    left: calc((180px - (180px * 0.7)) / 2);
+    /* 중앙배치시킬거면 * 0.7 */
+}
+
+#leftBoxYH>div:nth-child(2)>div {
+    margin-top: 10px;
+    font-size: 12px;
+    border: 1px solid;
+    padding: 3px;
+    font-style: italic;
+    text-indent: 3px;
+}
+
+#leftBoxYH>div:nth-child(2)>div:hover {
+    background-color: rgba(0, 255, 255, 0.195);
+}
+
+
+/* ========= Mid =========== */
+#midBoxYH {
+    border: 1px solid;
+    width: 30%;
+    height: 100%;
+    position: relative;
+    background: url(/img/jyhTest/col1.png) center/cover;
+}
+
+#midBoxYH>div {
+    border: 2px solid white;
+    text-align: center;
+    background-color: rgba(0, 0, 255, 0.724);
+    font-weight: 500;
+    color: white;
+    width: 90%;
+    padding: 8px;
+    position: absolute;
+    bottom: 5%;
+    left: calc((270px - (270px * 0.9)) / 2);
+}
+
+#midBoxYH>div>p {
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* ========= Right =========== */
+#rightBoxYH {
+    border: 1px solid;
+    width: 50%;
+    height: 100%;
+}
+
+#rightBoxYH {
+    display: grid;
+    grid-template-rows: 14.5fr 14.5fr 1fr;
+}
+
+#rightBoxYH>div:nth-child(n+1):nth-child(-n+2) {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#rightBoxYH>div:nth-child(1) {
+    border-bottom: 1px solid rgba(128, 128, 128, 0.23);
+}
+
+.nation {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.nation>div {
+    width: 10px;
+    height: 10px;
+    border: 1px solid gray;
+    border-radius: 50%;
+}
+
+.nation>div:hover {
+    background-color: gray;
+}
+
+.itemBoxYH {
+    width: 120px;
+    height: 85%;
+}
+
+.itemBoxYH>img {
+    width: 100%;
+}
+
+.itemBoxYH>p {
+    font-size: 12px;
+    font-weight: 500;
+}
