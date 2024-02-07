@@ -35,10 +35,10 @@ public class ItemController {
 		} else {
 			model.addAttribute("size", list.size());
 		}
-		if(keyword != null) {
-			KeywordDTO test = new KeywordDTO();
-			keywordService.updateKeywordCnt(test);
-		}
+//		if(keyword != null) {
+//			KeywordDTO test = new KeywordDTO();
+//			keywordService.updateKeywordCnt(test);
+//		}
 		// ======================검색어 업데이트==================
 //		keywordService.updateKeywordCnt(dto);
 //		if ( keywordService.updateKeywordCnt(dto) > 0 ) {}
