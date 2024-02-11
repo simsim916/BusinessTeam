@@ -387,13 +387,4 @@
     height: 220px;
 }
 
-.hide {
-    opacity: 0;
-    transition: 1s;
-    margin-top: 200px;
-}
 
-.test {
-    height: 300px;
-    background-color: black;
-}

@@ -41,3 +41,9 @@ button {
     margin: 0 auto;
     position: relative;
 }
+
+.hide {
+    visibility: hidden;
+    transition: 1s;
+    margin-top: 200px;
+}
