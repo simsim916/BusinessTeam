@@ -71,7 +71,7 @@ input:focus {
     position: relative;
 }
 
-#signUpBox>p {
+#signUpBox>#writeOption {
     width: 350px;
     margin: auto;
     font-size: 12px;
@@ -80,6 +80,7 @@ input:focus {
     margin-top: 5px;
     margin-bottom: 5px;
 }
+
 
 #signUpBox>div {
     border: 1px solid #4C455650;
@@ -127,10 +128,19 @@ input:focus {
     text-indent: inherit;
 }
 
+#signUpBox>#selectOption {
+    width: 350px;
+    margin: auto;
+    font-size: 12px;
+    text-indent: 5px;
+    color: #4C4556;
+    margin-top: 30px;
+    margin-bottom: 5px;
+}
+
 #signUpBox>#addressBox {
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
-    margin-top: 30px;
     border-top: 1px solid #4C455650;
 }
 
