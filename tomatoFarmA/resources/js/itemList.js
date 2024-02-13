@@ -9,3 +9,9 @@ window.addEventListener('scroll', function () {
     }
     console.log(window.scrollY);
 });
+
+function showList(event) {
+    event.target.children[0].classList.add('selected');
+    event.target.children[1].style.display = "block";
+    console.log(event.target)
+}

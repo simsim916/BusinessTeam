@@ -1,6 +1,12 @@
-hr{
-	margin: 10px auto;
+hr {
+    margin: 10px auto;
 }
+
+.selected {
+    color: #9B1B30;
+    opacity: 1 !important;
+}
+
 #searchTitle {
     margin: 35px auto 0 auto;
     text-align: center;
@@ -43,6 +49,7 @@ hr{
     font-size: 20px;
     overflow: hidden;
 }
+
 #listfilter hr {
     border: 0.2px solid #9B1B3030;
 }
@@ -62,7 +69,7 @@ hr{
 }
 
 #listfilter>ul {
-	margin-top: 20px;	
+    margin-top: 20px;
 }
 
 #listfilter>ul>li {
@@ -74,6 +81,7 @@ hr{
     max-height: 200px;
     width: 95%;
     overflow: auto;
+    display: none;
 }
 
 #listfilter ul>li>ul::-webkit-scrollbar {
@@ -84,6 +92,7 @@ hr{
     background-color: #9b1b1f70;
     border-radius: 10px;
 }
+
 #listfilter ul>li>ul>li>ul::-webkit-scrollbar {
     width: 4px;
 }
@@ -98,6 +107,7 @@ hr{
     font-size: 80%;
     text-indent: 25px;
 }
+
 #listfilter>ul>li>ul>li>ul {
     line-height: 23px;
     font-size: 80%;
@@ -106,13 +116,15 @@ hr{
     max-height: 100px;
     width: 98%;
 }
-#filterPrice>div{
+
+#filterPrice>div {
     display: flex;
     justify-content: center;
     text-indent: 0;
     margin-top: 10px;
 }
-#filterPrice input{
+
+#filterPrice input {
     width: 90px;
     height: 30px;
 }

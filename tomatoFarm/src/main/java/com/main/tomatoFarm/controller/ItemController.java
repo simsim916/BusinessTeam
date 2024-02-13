@@ -28,44 +28,45 @@ public class ItemController {
 	@GetMapping("/list")
 	public void list(Model model, @RequestParam("keyword") String keyword) {
 		List<ItemDTO> list = itemService.selectItemListWhereKeyword(keyword);
-		model.addAttribute("list", list);
-		model.addAttribute("keyword", keyword);
+		
+		// 검색결과 개수
 		if(list == null) {
 			model.addAttribute("size", 0);
 		} else {
 			model.addAttribute("size", list.size());
 		}
-//		if(keyword != null) {
-//			KeywordDTO test = new KeywordDTO();
-//			keywordService.updateKeywordCnt(test);
-//		}
-		// ======================검색어 업데이트==================
-//		keywordService.updateKeywordCnt(dto);
-//		if ( keywordService.updateKeywordCnt(dto) > 0 ) {}
-		//=================================================
+		
+		// 검색키워드 등록
+		if(keyword != null) {
+			KeywordDTO test = new KeywordDTO();
+			test.setKeyword(keyword);
+			keywordService.updateKeywordCnt(test);
+		}
+		
+		// 검색결과
+		model.addAttribute("list", list);
+		model.addAttribute("keyword", keyword);
 		model.addAttribute("brandList", itemService.selectBrandList());
 		model.addAttribute("sortList", sortSerivce.selectSortList());
 		model.addAttribute("sortbList", sortSerivce.selectSortbList());
 		
 	}
 	
-	@GetMapping("/sortlist")
-	public String ListBy( Model model ) {
-		String uri = "item/list";
-//		String uri = "redirect:item/list";
-		
-		model.addAttribute( "list", itemService.selectItemListOrderBy("sales","desc") );
-		model.addAttribute( "list", itemService.selectItemListOrderBy("price","desc") );
-		model.addAttribute( "list", itemService.selectItemListOrderBy("price","asc") );
-		
-		
-		return uri;
-	}
-	
 	@GetMapping("/detail")
 	public void detail(Model model , @RequestParam("code") int code) {
 		ItemDTO dto = itemService.selectItem(code);
 		model.addAttribute("dto", dto);
+	}
+	
+	@GetMapping("/eventPage")
+	public void eventPage(Model model) {
+		  model.addAttribute("abc", keywordService.selectKeywordList());
+		  // 이벤트 진행중인 브랜드 아이템들이 필요한 경우 이런식으로 전해주는게 맞는걸까?
+		  // 테이블의 이벤트컬럼을 이용하려고 했더니 새로운 sql문이 필요하고 ~ 새로운 service,dao 를 만들어야하는데
+		  // 어떤게 맞는 방법일까
+		  //model.addAttribute("kimgoowon",itemService.selectItemListWhereBrand("김구원선생"));
+		  //model.addAttribute("fresheasy",itemService.selectItemListWhereBrand("프레시지"));
+		  //model.addAttribute("mychef",itemService.selectItemListWhereBrand("마이셰프"));
 	}
 	
 }

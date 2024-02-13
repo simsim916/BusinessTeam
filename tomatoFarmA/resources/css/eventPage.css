@@ -3,183 +3,465 @@
     box-sizing: border-box;
 }
 
-main{
-    background-color: wheat;
-}
 
-#header {
-    width: 100%;
-    background-color: aquamarine;
-    height: 130px;
-}
-
-.container {
-    width: 1000px;
-    margin: 0 auto;
-    position: relative;
-    background-color: white;
-}
-
-/* ====================================================== */
-
-.eventItem {
-    margin-top: 100px;
-    position: relative;
-    width: 1000px;
-    height: 600px;
-}
-
-
-#event1 {
-    background: url(/tomatoFarmA/resources/img/jyhTest/event1.jpg) no-repeat center;
-    background-size: cover;
-}
-
-#event2 {
-    background: url(/tomatoFarmA/resources/img/jyhTest/event2.jpg) no-repeat center;
-    background-size: cover;
-}
-
-/* ============================== */
-
-.timePlace {
-    font-size: 3em;
+#keywordListDesign {
+    width: 150px;
+    height: 50px;
+    border-radius: 20px;
+    background-color: rgba(128, 128, 128, 0.188);
     position: absolute;
-    z-index: 3;
-    display: flex;
-    gap: 30px;
-    justify-content: center;
-    width: 700px;
-}
-
-.timePlace div span {
-    font-size: .4em;
+    top: 64px;
+    left: 1200px;
+    /* right: 1530px; */
+    line-height: 50px;
+    overflow: hidden;
     font-weight: bold;
-    margin-left: 3px;
 }
 
-#event1Time {
-    top: 11px;
-    left: calc((1000px - 700px) / 2);
+#keywordListDesign>div {
+    position: relative;
+    height: 100%;
 }
 
-#event2Time {
-    left: 30px;
-    justify-content: left;
+#keywordListDesign a {
+    text-decoration: none;
 }
 
-/* ============================ */
+#keywordListDesign>div>ul {
+    list-style: none;
+}
+
+#keywordListDesign>div>ul>li {
+    position: absolute;
+    top: -50px;
+}
+
+#keywordListDesign>div>ul>.prev {
+    top: 50px;
+    transition: top 0.3s ease;
+}
+
+#keywordListDesign>div>ul>.current {
+    top: 0;
+    transition: top 0.3s ease;
+}
+
+#keywordListDesign>div>ul>.next {
+    top: -50px;
+}
+
+
+
+
+
+/* ============================================== */
+
+#eventPageTop {
+    background: url(/tomatoFarm/resources/img/jyhTest/topTest.png) no-repeat center;
+    background-size: cover;
+    width: 1200px;
+    height: 700px;
+    margin: 20px auto;
+    position: relative;
+}
+
+#eventPageTop>div {
+    position: absolute;
+    left: 100px;
+    top: 100px;
+    font-family: 'East Sea Dokdo', sans-serif;
+    /* 여기 폰트패밀리가 인식 X -> 하위 요소에 모두 줘야하는 문제 */
+}
+
+#eventPageTop>div>p:nth-of-type(1) {
+    font-size: 70px;
+    font-family: 'East Sea Dokdo', sans-serif;
+}
+
+#eventPageTop>div>p:nth-of-type(2) {
+    font-size: 50px;
+    font-family: 'East Sea Dokdo', sans-serif;
+}
+
+#eventPageTop>div>p>span {
+    color: #872642;
+    text-decoration: overline;
+    font-family: 'East Sea Dokdo', sans-serif;
+}
+
+#eventPageTop>div>span {
+    font-size: 30px;
+    font-family: 'East Sea Dokdo', sans-serif;
+}
+
+/* ========================================= */
+/* \======================================== */
+
+#eventDetail1_1 {
+    height: 750px;
+    background: url(/tomatoFarm/resources/img/jyhTest/event1.jpg) no-repeat center;
+    background-size: cover;
+    position: relative;
+    margin-top: 50px;
+}
+
+#eventDetail1_1>div:nth-of-type(1) {
+    width: 600px;
+    text-align: center;
+    font-family: 'East Sea Dokdo', sans-serif;
+    position: absolute;
+    left: calc((1200px - 600px) / 2);
+    top: 130px;
+}
+
+
+#eventDetail1_1>div:nth-of-type(1)>div {
+    font-size: 100px;
+    font-family: 'East Sea Dokdo', sans-serif;
+}
+
+#eventDetail1_1>div:nth-of-type(1)>span {
+    font-family: 'East Sea Dokdo', sans-serif;
+    font-size: 20px;
+}
+
 @font-face {
     font-family: 'KBO-Dia-Gothic_bold';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/KBO-Dia-Gothic_bold.woff') format('woff');
     font-weight: 100;
     font-style: normal;
+    /* 얘 폰트 굵기 조절이 안돼 */
 }
 
-.brandEvent {
-    font-family: 'KBO-Dia-Gothic_bold', "Noto Sans KR", sans-serif;
+#eventDetail1_1>div>p {
+    font-size: 20px;
+    font-family: 'KBO-Dia-Gothic_bold';
+
 }
 
-/* ====================================== */
+/* ========= 애니메이션 ========= */
+@keyframes slidein {
+    0% {
+        margin-left: 100%;
+    }
 
-#textArea1 {
-    font-size: 30px;
-    width: 700px;
+    10% {
+        margin-left: 90%;
+    }
+
+    20% {
+        margin-left: 80%;
+    }
+
+    30% {
+        margin-left: 70%;
+    }
+
+    40% {
+        margin-left: 60%;
+    }
+
+    50% {
+        margin-left: 50%;
+    }
+
+    60% {
+        margin-left: 40%;
+    }
+
+    70% {
+        margin-left: 20%;
+    }
+
+    80% {
+        margin-left: 10%;
+    }
+
+    90% {
+        margin-left: 5%;
+    }
+
+    100% {
+        margin-left: 0%;
+    }
+}
+
+/* ========================== */
+
+.rlarndnjsCoupon {
     position: absolute;
-    left: 120px;
-    top: 100px;
-    text-align: center;
-    font-family: 'East Sea Dokdo', sans-serif;
-}
-
-#textArea1>p:first-of-type {
-    color: green;
-}
-
-#textArea1>div {
-    font-size: 100px;
-}
-
-#textArea2 {
-    font-size: 30px;
-    position: absolute;
-    top: 70px;
-    left: 30px;
-    font-family: 'East Sea Dokdo', sans-serif;
-}
-
-#textArea2>p:first-of-type {
-    color: teal;
-}
-
-
-#textArea2>div {
-    font-size: 100px;
-}
-
-#EventTab1>img {
-    width: 100%;
-    height: 400px;
-}
-
-/* ================================ */
-
-#Event1Tab_itemList {
-    position: relative;
-    margin-top: 130px;
-}
-
-#Event1Tab_itemList>div:first-of-type {
-    width: 600px;
-    position: absolute;
-    bottom: 105%;
-    display: flex;
-    justify-content: space-between;
-    left: calc((1000px - 600px) / 2);
-}
-
-#Event1Tab_itemList>div:first-of-type>div {
-    border: 1px solid;
-    padding: 10px;
-    border-radius: 30%;
-    font-weight: 700;
-}
-
-.selectedItemList {
+    width: 420px;
+    height: 340px;
+    left: 370px;
+    bottom: 90px;
     display: grid;
-    grid-template: repeat(2, 1fr) / repeat(2, 1fr);
-    gap: 30px;
-    height: 500px;
+    grid-template-rows: repeat(2, 170px);
+    gap: 10px;
+
+    animation-name: slidein;
+    animation-duration: 1s;
+    animation-timing-function: ease-in;
 }
 
-.selectedItemList>a {
-    border: 1px solid;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: black;
+
+
+.rlarndnjsCoupon>div {
+    display: grid;
+    grid-template-columns: 5fr 1fr;
 }
-.selectedItemList>a>img {
-    width: 45%;
+
+.rlarndnjsCoupon>div>div {
+    border-radius: 20px;
+    padding: 20px;
+    /* border: 1px solid; */
+    background-color: white;
+}
+
+.rlarndnjsCoupon>div>div>h2 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+
+.rlarndnjsCoupon>div>a {
+    writing-mode: vertical-lr;
+    border-radius: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    line-height: 70px;
+    background-color: #872642;
+}
+
+/* ======================================= */
+@font-face {
+    font-family: 'ChosunCentennial';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/ChosunCentennial.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#timePlace {
+    width: 600px;
+    display: flex;
+    gap: 30px;
+    font-family: 'ChosunCentennial';
+    position: absolute;
+    left: calc((1200px - 600px) / 2);
+    top: 30px;
+
+}
+
+#timePlace>div {
+    font-size: 70px;
+    width: 25%;
+    text-align: center;
+}
+
+#timePlace>div>span {
+    font-size: 25px;
+}
+
+/* ======================================= */
+#eventDetail1_2 {
+    margin-top: 50px;
+    display: grid;
+    grid-template-rows: repeat(4, 200px);
+    gap: 10px;
+}
+
+#eventDetail1_2>div {
+    border: 10px solid;
+    border-radius: 20px;
+    padding: 30px;
+}
+
+#eventDetail1_2>div>h2 {
+    margin-bottom: 20px;
+}
+
+#eventDetail1_2>div ul {
+    list-style-type: disc;
+}
+
+#eventDetail1_2>div:nth-of-type(1) {
+    border-color: #F2CF8A;
+    background-color: #f2cf8a1c;
+}
+
+#eventDetail1_2>div:nth-of-type(2) {
+    border-color: #aec5aacc;
+    background-color: #aec5aa21;
+}
+
+#eventDetail1_2>div:nth-of-type(3) {
+    border-color: #EF7601;
+    background-color: #ef740121;
+}
+
+#eventDetail1_2>div:nth-of-type(4) {
+    border-color: #9B1B20;
+    background-color: #9b1b1f38;
+}
+
+/* 보더만 주면 심심해서 배경색 흐리게 주는건 어떤가 */
+
+/* ================================== */
+/* ================================== */
+
+#eventItemListBox {
+    /* margin: 50px auto; */
+    margin-top: 50px;
+    position: relative;
+}
+
+/* #brandItemTab {
+    display: flex;
+}
+
+#brandItemTab>div {
+    border: 1px solid rgba(128, 128, 128, 0.349);
+    width: 33.333%;
+    text-align: center;
+    font-size: 20px;
+    padding: 10px;
+    border-bottom: none;
+} */
+
+#brandItemTab {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 30px;
+    height: 50px;
+}
+
+#brandItemTab>div {
+    border: 1px solid rgba(128, 128, 128, 0.342);
+    border-radius: 20px;
+    font-size: 20px;
+    padding: 10px;
+}
+
+#brandItemTab>div:hover {
+    background-color: #9B1B20;
+    color: white;
+    font-weight: bold;
+}
+
+#breandItemBox {
+    position: relative;
+    width: 1200px;
+    overflow: hidden;
+    display: flex;
+}
+
+/* 
+
+
+.nextList {
+    top: 0;
+    right: -1220px;
+    transition: left 0.5s ease;
+    position: absolute;
+}
+
+.prevList {
+    top: 0;
+    left: -1220px;
+    transition: left 0.5s ease;
+    position: absolute;
+
+}
+ */
+
+
+
+
+
+#eventItemListBox>span {
+    position: absolute;
+    width: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 25px;
+    top: calc((620px - 50px) / 2 + 80px);
+}
+
+#prevBt {
+    left: -70px;
+}
+
+#nextBt {
+    right: -70px;
+}
+
+#eventItemListBox>span:hover {
+    background-color: rgba(128, 128, 128, 0.384);
+    border: none;
+}
+
+
+
+/* ========================================= */
+
+.brandItemList {
+    display: grid;
+    grid-template: repeat(2, 300px) / repeat(2, 590px);
+    gap: 20px;
+    /* position: absolute; */
+}
+
+
+.brandItemList>a {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    border: 1px solid rgba(128, 128, 128, 0.342);
+}
+
+.brandItemList>a>img {
+    width: 100%;
     height: 100%;
     padding: 20px;
 }
 
-.selectedItemList>a>div {
-    padding: 10px;
+.brandItemList>a>div {
+    padding: 20px;
 }
 
-.selectedItemList>a>div>span {
-    border: 1px solid;
+.brandItemList>a>div>span {
+    border-radius: 10px;
+    background-color: #F2CF8A;
+    padding: 5px;
+    font-weight: bold;
+}
+
+
+.brandItemList>a>div>p:nth-of-type(1) {
     padding: 2px;
-    color: red;
+    font-weight: bold;
+    color: #872642;
+    font-size: 13px;
+    /* margin: 20px 0; */
+    margin-top: 20px;
+    margin-bottom: 5px;
+    text-indent: 5px;
 }
 
-.selectedItemList>a>div>p:first-of-type {
+.brandItemList>a>div>p:nth-of-type(2) {
     font-size: 22px;
+    margin-top: 15px;
 }
 
-.selectedItemList>a>div>p:nth-of-type(2) {
-    font-weight: 700;
-    font-size: 25px;
+.brandItemList>a>div>p:nth-of-type(3) {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.brandItemList>a>div>p:nth-of-type(4) {
+    font-size: 14px;
+    text-decoration: line-through;
+    color: rgba(128, 128, 128, 0.459);
 }

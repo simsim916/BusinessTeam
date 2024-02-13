@@ -1,19 +1,11 @@
-let hides = document.getElementsByClassName("hide");
 const slideBox = document.getElementsByClassName("slideBox");
 const secondSlideBtn = document.getElementById("secondSlideBtn");
 
 
-let secondContainerSlideMargin = 0 , 
+let secondContainerSlideMargin = 0,
     thirdContainerSlide0Margin = 0;
 
-window.addEventListener("scroll", () => {
-    for (e of hides) {
-        if (e.getBoundingClientRect().top < 100 + window.innerHeight) {
-            e.style.opacity = "1";
-            e.style.marginTop = "30px";
-        }
-    }
-});
+
 
 function secondContainerSlideLeftBtn() {
     document.getElementById('secondSlideBtnSelected').removeAttribute("id");
@@ -50,8 +42,8 @@ function secondContainerSlideBtn(event) {
     }
 }
 
-function thirdContainerSlideRightBth(){
-    if (thirdContainerSlide0Margin > -660){
+function thirdContainerSlideRightBth() {
+    if (thirdContainerSlide0Margin > -660) {
         thirdContainerSlide0Margin -= 220;
         a(thirdContainerSlide0Margin)
         slideBox[1].style.marginLeft = `${thirdContainerSlide0Margin}px`;
