@@ -20,12 +20,12 @@ let birthdayCheck = false;
 
 
 
-// function focusInputBox() {
-//     idBox.style.border = "2px solid #9B1B30";
-//    passwordBox.style.border = "2px solid #9B1B30";
+function focusInputBox() {
+    idBox.style.border = "2px solid #9B1B30";
+   passwordBox.style.border = "2px solid #9B1B30";
 //     nameBox.style.border = "2px solid #9B1B30";
 //    phonenumberBox.style.border = "2px solid #9B1B30";
-// }
+}
 
 
 function checkId() {
@@ -60,49 +60,49 @@ function checkPassword() {
     }
 }//checkPassword
 
-function checkName() {
-    document.getElementById('nameBox').focus();
-    nameBox.style.border = "2px solid #9B1B30";
-    if (nameBox.children[1].value.length > 1 && nameBox.children[1].value.length < 5) {
-        nameCheck = true;
-        if (nameCheck) {
-            nameBox.style.border = "2px solid #03C75A";
-        } else {
-            nameBox.style.border = "2px solid red";
-            alert('이름을 다시 입력하세요.');
-        }
-    }
-}//checkName
+// function checkName() {
+//     document.getElementById('nameBox').focus();
+//     nameBox.style.border = "2px solid #9B1B30";
+//     if (nameBox.children[1].value.length > 1 && nameBox.children[1].value.length < 5) {
+//         nameCheck = true;
+//         if (nameCheck) {
+//             nameBox.style.border = "2px solid #03C75A";
+//         } else {
+//             nameBox.style.border = "2px solid red";
+//             alert('이름을 다시 입력하세요.');
+//         }
+//     }
+// }//checkName
 
-function checkPhonenumber() {
-    document.getElementById('phonenumberBox').focus();
-    phonenumberBox.style.border = "2px solid #9B1B30";
-    if (phonenumberBox.children[1].value.length == 10) {
-        phoneCheck = true;
-        if (phoneCheck) {
-            phonenumberBox.style.border = "2px solid #03C75A";
-        } else {
-            phonenumberBox.style.border = "2px solid red";
-            alert('전화번호를 다시 입력하세요.');
-        }
-    }
-}//checkPhonenumber
+// function checkPhonenumber() {
+//     document.getElementById('phonenumberBox').focus();
+//     phonenumberBox.style.border = "2px solid #9B1B30";
+//     if (phonenumberBox.children[1].value.length == 10) {
+//         phoneCheck = true;
+//         if (phoneCheck) {
+//             phonenumberBox.style.border = "2px solid #03C75A";
+//         } else {
+//             phonenumberBox.style.border = "2px solid red";
+//             alert('전화번호를 다시 입력하세요.');
+//         }
+//     }
+// }//checkPhonenumber
 
 
-function changeSelectBox(event) {
-    if (event.target.value == "write") {
-        emailSelectBox.style.display = "none";
-        emailWriteBox.style.display = "inline-block";
-        emailWriteBox.focus();
-    }
-}
+// function changeSelectBox(event) {
+//     if (event.target.value == "write") {
+//         emailSelectBox.style.display = "none";
+//         emailWriteBox.style.display = "inline-block";
+//         emailWriteBox.focus();
+//     }
+// }
 
-function selectGender(event) {
-    if (document.getElementById('genderChecked') != null) {
-        document.getElementById('genderChecked').removeAttribute("id");
-    }
-    event.target.closest('li').setAttribute("id", "genderChecked");
-}
+// function selectGender(event) {
+//     if (document.getElementById('genderChecked') != null) {
+//         document.getElementById('genderChecked').removeAttribute("id");
+//     }
+//     event.target.closest('li').setAttribute("id", "genderChecked");
+// }
 
 
 
