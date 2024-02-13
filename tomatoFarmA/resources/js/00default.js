@@ -1,3 +1,5 @@
+'use strict'
+
 let hides = document.getElementsByClassName("hide");
 let hideFlexs = document.getElementsByClassName("hideFlex");
 

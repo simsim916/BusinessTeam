@@ -1,4 +1,3 @@
-"use strict"
 
 function a(str) {
 	console.log(str);
