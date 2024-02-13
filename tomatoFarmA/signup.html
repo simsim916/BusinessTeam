@@ -30,11 +30,13 @@
         <form id="signUpBox">
             <div id="idBox">
                 <i class="fa-solid fa-user"></i>
-                <input onblur="checkId()" onfocus="checkId()" type="text" name="id" placeholder="아이디">
+                <input onkeydown="changeOpacity(event)" onblur="checkId(event)" onfocus="checkId(event)" type="text" name="id"
+                    placeholder="아이디">
             </div>
             <div id="passwordBox">
                 <i class="fa-solid fa-key"></i>
-                <input onblur="checkPassword()" onfocus="checkPassword()" type="text" name="password" placeholder="비밀번호">
+                <input onblur="checkPassword()" onfocus="checkPassword()" type="text" name="password"
+                    placeholder="비밀번호">
             </div>
             <div id="nameBox">
                 <i class="fa-solid fa-circle-user"></i>
@@ -42,7 +44,8 @@
             </div>
             <div id="phonenumberBox">
                 <i class="fa-solid fa-phone"></i>
-                <input onblur="checkPhonenumber()" onfocus="checkPhonenumber()" type="text" name="phonenumber" placeholder="전화번호">
+                <input onblur="checkPhonenumber()" onfocus="checkPhonenumber()" type="text" name="phonenumber"
+                    placeholder="전화번호">
             </div>
             <div id="addressBox">
                 <i class="fa-solid fa-location-dot"></i>

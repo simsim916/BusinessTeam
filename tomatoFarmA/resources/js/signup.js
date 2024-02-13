@@ -28,9 +28,16 @@ let birthdayCheck = false;
 // }
 
 
-function checkId() {
-    document.getElementById('idBox').focus();
-    idBox.style.border = "2px solid #9B1B30";
+
+
+function checkId(event) {
+    let target = event.target;
+    idBox.style.borderColor = "2px solid #9B1B30";
+    if (target.value != null && target.value.length>0){
+        idBox.children[0].style.opacity="1";
+        idBox.children[0].style.opacity="1";
+        target.style.opacity="1";
+    }
     if (idBox.children[1].value.length > 4 && idBox.children[1].value.length < 10) {
         idCheck = true;
         if (idCheck) {
