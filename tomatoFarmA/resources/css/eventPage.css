@@ -1,6 +1,55 @@
+@charset "UTF-8";
+
 * {
     margin: 0;
     box-sizing: border-box;
+}
+
+
+#keywordListDesign {
+    width: 150px;
+    height: 50px;
+    border-radius: 20px;
+    background-color: rgba(128, 128, 128, 0.188);
+    position: absolute;
+    top: 64px;
+    left: 1200px;
+    /* right: 1530px; */
+    line-height: 50px;
+    overflow: hidden;
+    font-weight: bold;
+}
+
+#keywordListDesign>div {
+    position: relative;
+    height: 100%;
+}
+
+#keywordListDesign a {
+    text-decoration: none;
+}
+
+#keywordListDesign>div>ul {
+    list-style: none;
+}
+
+#keywordListDesign>div>ul>li {
+    position: absolute;
+    top: -50px;
+}
+
+#keywordListDesign>div>ul>.prev {
+    top: 50px;
+    transition: top 0.3s ease;
+}
+
+#keywordListDesign>div>ul>.current {
+    top: 0;
+    transition: top 0.3s ease;
+}
+
+#keywordListDesign>div>ul>.next {
+    top: -50px;
 }
 
 
@@ -89,7 +138,7 @@
 #eventDetail1_1>div>p {
     font-size: 20px;
     font-family: 'KBO-Dia-Gothic_bold';
-    
+
 }
 
 /* ========= 애니메이션 ========= */
@@ -243,120 +292,180 @@
     border-color: #F2CF8A;
     background-color: #f2cf8a1c;
 }
+
 #eventDetail1_2>div:nth-of-type(2) {
     border-color: #aec5aacc;
     background-color: #aec5aa21;
 }
+
 #eventDetail1_2>div:nth-of-type(3) {
     border-color: #EF7601;
     background-color: #ef740121;
 }
+
 #eventDetail1_2>div:nth-of-type(4) {
     border-color: #9B1B20;
     background-color: #9b1b1f38;
 }
+
 /* 보더만 주면 심심해서 배경색 흐리게 주는건 어떤가 */
 
 /* ================================== */
+/* ================================== */
 
-#eventDetail1_3 {
+#eventItemListBox {
+    /* margin: 50px auto; */
+    margin-top: 50px;
     position: relative;
-    margin-top: 150px;
 }
 
-#eventDetail1_3_Tab {
-    position: absolute;
-    bottom: 103%;
-    width: 500px;
+/* #brandItemTab {
     display: flex;
-    left: calc((1200px - 500px) / 2);
-    justify-content: space-around;
 }
 
-#eventDetail1_3_Tab>div {
-    border: 1px solid;
-    border-radius: 20%;
+#brandItemTab>div {
+    border: 1px solid rgba(128, 128, 128, 0.349);
+    width: 33.333%;
+    text-align: center;
+    font-size: 20px;
+    padding: 10px;
+    border-bottom: none;
+} */
+
+#brandItemTab {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 30px;
+    height: 50px;
+}
+
+#brandItemTab>div {
+    border: 1px solid rgba(128, 128, 128, 0.342);
+    border-radius: 20px;
+    font-size: 20px;
     padding: 10px;
 }
 
-#eventDetail1_3_Tab>div:hover {
-    background-color: #872642;
-    font-weight: bold;
+#brandItemTab>div:hover {
+    background-color: #9B1B20;
     color: white;
-}
-
-
-#eventDetail1_3_itemList {
-    display: grid;
-    grid-template: repeat(2, 300px) / repeat(2, 570px);
-    gap: 30px;
-    padding: 20px;
-}
-
-#eventDetail1_3_itemList>a {
-    background-color: white;
-}
-
-.itemListBtYH {
-    width: 50px;
-    height: 50px;
-    position: absolute;
-    top: calc((670px - 43px) / 2);
-    font-size: 30px;
-    text-align: center;
     font-weight: bold;
+}
+
+#breandItemBox {
+    position: relative;
+    width: 1200px;
+    overflow: hidden;
+    display: flex;
+}
+
+/* 
+
+
+.nextList {
+    top: 0;
+    right: -1220px;
+    transition: left 0.5s ease;
+    position: absolute;
+}
+
+.prevList {
+    top: 0;
+    left: -1220px;
+    transition: left 0.5s ease;
+    position: absolute;
+
+}
+ */
+
+
+
+
+
+#eventItemListBox>span {
+    position: absolute;
+    width: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 25px;
+    top: calc((620px - 50px) / 2 + 80px);
 }
 
 #prevBt {
-    left: -50px;
+    left: -70px;
 }
 
 #nextBt {
-    right: -50px;
+    right: -70px;
+}
+
+#eventItemListBox>span:hover {
+    background-color: rgba(128, 128, 128, 0.384);
+    border: none;
 }
 
 
-.itemDetailYH {
-    /* border: 1px solid; */
+
+/* ========================================= */
+
+.brandItemList {
     display: grid;
-    grid-template-columns: 1fr 1.3fr;
-    text-decoration: none;
-    color: black;
-    border: 1px solid rgba(128, 128, 128, 0.324);
+    grid-template: repeat(2, 300px) / repeat(2, 590px);
+    gap: 20px;
+    /* position: absolute; */
 }
 
-.itemDetailYH>img {
+
+.brandItemList>a {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    border: 1px solid rgba(128, 128, 128, 0.342);
+}
+
+.brandItemList>a>img {
     width: 100%;
-    height: 299px;
-    padding: 10px;
+    height: 100%;
+    padding: 20px;
 }
 
-.itemDetailYH>div {
-    padding: 50px;
+.brandItemList>a>div {
+    padding: 20px;
 }
 
-.itemDetailYH>div>span {
-    color: #872642;
-}
-
-.itemDetailYH>div>p {
-    margin-top: 10px;
-}
-
-.itemDetailYH>div>p:nth-of-type(1) {
-    font-size: 22px;
-    font-weight: 400;
-}
-
-.itemDetailYH>div>p:nth-of-type(2) {
-    font-size: 30px;
+.brandItemList>a>div>span {
+    border-radius: 10px;
+    background-color: #F2CF8A;
+    padding: 5px;
     font-weight: bold;
 }
 
-.itemDetailYH>div>p:nth-of-type(3) {
+
+.brandItemList>a>div>p:nth-of-type(1) {
+    padding: 2px;
+    font-weight: bold;
+    color: #872642;
+    font-size: 13px;
+    /* margin: 20px 0; */
+    margin-top: 20px;
+    margin-bottom: 5px;
+    text-indent: 5px;
+}
+
+.brandItemList>a>div>p:nth-of-type(2) {
+    font-size: 22px;
+    margin-top: 15px;
+}
+
+.brandItemList>a>div>p:nth-of-type(3) {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.brandItemList>a>div>p:nth-of-type(4) {
+    font-size: 14px;
     text-decoration: line-through;
-    color: gray;
-    margin-top: 0;
+    color: rgba(128, 128, 128, 0.459);
 }
 
 /* ========================================= */
