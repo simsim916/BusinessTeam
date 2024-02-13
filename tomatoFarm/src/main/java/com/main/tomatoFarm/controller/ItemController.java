@@ -38,9 +38,7 @@ public class ItemController {
 		
 		// 검색키워드 등록
 		if(keyword != null) {
-			KeywordDTO test = new KeywordDTO();
-			test.setKeyword(keyword);
-			keywordService.updateKeywordCnt(test);
+			keywordService.updateKeywordCnt(keyword);
 		}
 		
 		// 검색결과
@@ -58,15 +56,6 @@ public class ItemController {
 		model.addAttribute("dto", dto);
 	}
 	
-	@GetMapping("/eventPage")
-	public void eventPage(Model model) {
-		  model.addAttribute("abc", keywordService.selectKeywordList());
-		  // 이벤트 진행중인 브랜드 아이템들이 필요한 경우 이런식으로 전해주는게 맞는걸까?
-		  // 테이블의 이벤트컬럼을 이용하려고 했더니 새로운 sql문이 필요하고 ~ 새로운 service,dao 를 만들어야하는데
-		  // 어떤게 맞는 방법일까
-		  //model.addAttribute("kimgoowon",itemService.selectItemListWhereBrand("김구원선생"));
-		  //model.addAttribute("fresheasy",itemService.selectItemListWhereBrand("프레시지"));
-		  //model.addAttribute("mychef",itemService.selectItemListWhereBrand("마이셰프"));
-	}
+	
 	
 }
