@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 * {
     margin: 0;
     box-sizing: border-box;
@@ -57,7 +59,7 @@
 /* ============================================== */
 
 #eventPageTop {
-    background: url(/tomatoFarm/resources/img/jyhTest/topTest.png) no-repeat center;
+    background: url(/tomatoFarmA/resources/img/jyhTest/topTest.png) no-repeat center;
     background-size: cover;
     width: 1200px;
     height: 700px;
@@ -99,7 +101,7 @@
 
 #eventDetail1_1 {
     height: 750px;
-    background: url(/tomatoFarm/resources/img/jyhTest/event1.jpg) no-repeat center;
+    background: url(/tomatoFarmA/resources/img/jyhTest/event1.jpg) no-repeat center;
     background-size: cover;
     position: relative;
     margin-top: 50px;
@@ -465,3 +467,5 @@
     text-decoration: line-through;
     color: rgba(128, 128, 128, 0.459);
 }
+
+/* ========================================= */
