@@ -1,10 +1,21 @@
-@charset "UTF-8";
-
 * {
     margin: 0;
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: 'ChosunCentennial';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/ChosunCentennial.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'KBO-Dia-Gothic_bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/KBO-Dia-Gothic_bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
 
 #keywordListDesign {
     width: 150px;
@@ -53,24 +64,20 @@
 }
 
 
-
-
-
-/* ============================================== */
-
 #eventPageTop {
-    background: url(/tomatoFarmA/resources/img/jyhTest/topTest.png) no-repeat center;
-    background-size: cover;
-    width: 1200px;
-    height: 700px;
+    background-image: url(/tomatoFarmA/resources/img/jyhTest/topTest.png);
+    background-repeat: no-repeat;
+    background-position-y: -140px;
+    background-position-x: -50px;
+    background-size: 120%;
+    height: 400px;
     margin: 20px auto;
     position: relative;
 }
 
 #eventPageTop>div {
-    position: absolute;
-    left: 100px;
-    top: 100px;
+    padding-left: 50px;
+    padding-top: 50px;
     font-family: 'East Sea Dokdo', sans-serif;
     /* 여기 폰트패밀리가 인식 X -> 하위 요소에 모두 줘야하는 문제 */
 }
@@ -96,12 +103,24 @@
     font-family: 'East Sea Dokdo', sans-serif;
 }
 
-/* ========================================= */
-/* \======================================== */
+#eventPageTop>a {
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    width: 300px;
+    font-size: 24px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 25px;
+    color: white;
+    background-color: #9B1B20;
+}
 
 #eventDetail1_1 {
     height: 750px;
-    background: url(/tomatoFarmA/resources/img/jyhTest/event1.jpg) no-repeat center;
+    background-image: url(/tomatoFarmA/resources/img/jyhTest/event1.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
     background-size: cover;
     position: relative;
     margin-top: 50px;
@@ -112,8 +131,8 @@
     text-align: center;
     font-family: 'East Sea Dokdo', sans-serif;
     position: absolute;
-    left: calc((1200px - 600px) / 2);
-    top: 130px;
+    left: calc((100% - 600px) / 2);
+    top: 150px;
 }
 
 
@@ -124,85 +143,23 @@
 
 #eventDetail1_1>div:nth-of-type(1)>span {
     font-family: 'East Sea Dokdo', sans-serif;
-    font-size: 20px;
+    font-size: 34px;
 }
 
-@font-face {
-    font-family: 'KBO-Dia-Gothic_bold';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/KBO-Dia-Gothic_bold.woff') format('woff');
-    font-weight: 100;
-    font-style: normal;
-    /* 얘 폰트 굵기 조절이 안돼 */
-}
 
 #eventDetail1_1>div>p {
     font-size: 20px;
     font-family: 'KBO-Dia-Gothic_bold';
-
 }
 
-/* ========= 애니메이션 ========= */
-@keyframes slidein {
-    0% {
-        margin-left: 100%;
-    }
-
-    10% {
-        margin-left: 90%;
-    }
-
-    20% {
-        margin-left: 80%;
-    }
-
-    30% {
-        margin-left: 70%;
-    }
-
-    40% {
-        margin-left: 60%;
-    }
-
-    50% {
-        margin-left: 50%;
-    }
-
-    60% {
-        margin-left: 40%;
-    }
-
-    70% {
-        margin-left: 20%;
-    }
-
-    80% {
-        margin-left: 10%;
-    }
-
-    90% {
-        margin-left: 5%;
-    }
-
-    100% {
-        margin-left: 0%;
-    }
-}
-
-/* ========================== */
 
 .rlarndnjsCoupon {
     position: absolute;
     width: 420px;
-    height: 340px;
-    left: 370px;
+    left: calc((100% - 420px) / 2);
     bottom: 90px;
-    display: grid;
-    grid-template-rows: repeat(2, 170px);
-    gap: 10px;
-
-    animation-name: slidein;
-    animation-duration: 1s;
-    animation-timing-function: ease-in;
+    transition: 1s;
+    bottom: 50px;
 }
 
 
@@ -210,40 +167,43 @@
 .rlarndnjsCoupon>div {
     display: grid;
     grid-template-columns: 5fr 1fr;
+    height: 170px;
+    margin-top: 10px;
 }
 
 .rlarndnjsCoupon>div>div {
-    border-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
     padding: 20px;
-    /* border: 1px solid; */
     background-color: white;
 }
 
-.rlarndnjsCoupon>div>div>h2 {
+.rlarndnjsCoupon>div>div>p {
     text-align: center;
-    margin-bottom: 15px;
+    font-weight: 700;
+    font-size: 35px;
+    margin-bottom: 10px;
 }
 
+.rlarndnjsCoupon>div>div>p>span {
+    font-size: 20px;
+}
 
 .rlarndnjsCoupon>div>a {
     writing-mode: vertical-lr;
-    border-radius: 10px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
     font-size: 24px;
     font-weight: bold;
     text-align: center;
     text-decoration: none;
     color: white;
     line-height: 70px;
-    background-color: #872642;
+    background-color: #9B1B20;
 }
 
 /* ======================================= */
-@font-face {
-    font-family: 'ChosunCentennial';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/ChosunCentennial.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
+
 
 #timePlace {
     width: 600px;
@@ -251,8 +211,8 @@
     gap: 30px;
     font-family: 'ChosunCentennial';
     position: absolute;
-    left: calc((1200px - 600px) / 2);
-    top: 30px;
+    left: calc((100% - 600px) / 2);
+    top: 38px;
 
 }
 
@@ -308,13 +268,7 @@
     background-color: #9b1b1f38;
 }
 
-/* 보더만 주면 심심해서 배경색 흐리게 주는건 어떤가 */
-
-/* ================================== */
-/* ================================== */
-
 #eventItemListBox {
-    /* margin: 50px auto; */
     margin-top: 50px;
     position: relative;
 }

@@ -9,9 +9,13 @@ function updateTimer() {
     let mins = Math.floor(remainTime / (1000 * 60));
     let secs = Math.floor(remainTime / 1000);
 
-    let timePlace = document.getElementById('timePlace');
-    timePlace.innerHTML = `<div>${days}<span>일</span></div><div>${hours}<span>시간</span></div><div>${mins}<span>분</span></div><div>${secs}<span>초</span></div>`
+    let d = days;
+    let h = hours - days * 24;
+    let m = mins - hours * 60;
+    let s = secs - mins * 60;
 
+    let timePlace = document.getElementById('timePlace');
+    timePlace.innerHTML = `<div>${d}<span>일</span></div><div>${h}<span>시간</span></div><div>${m}<span>분</span></div><div>${s}<span>초</span></div>`
 }
 setInterval(updateTimer, 1000);
 
