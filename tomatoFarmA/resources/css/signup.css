@@ -94,13 +94,13 @@ input:focus {
     opacity: 0.5;
 }
 
-#signUpBox>#nameBox {
+#signUpBox>#idBox {
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
     border-top: 1px solid #4C455650;
 }
 
-#signUpBox>#phoneNumBox {
+#signUpBox>#phonenumberBox {
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
     border-bottom: 1px solid #4C455650;
@@ -134,22 +134,22 @@ input:focus {
     display: none;
 }
 
-#signUpBox>#birtgdayBox>input:nth-of-type(1) {
+#signUpBox>#birthdayBox>input:nth-of-type(1) {
     width: 90px;
     text-align: center;
 }
 
-#signUpBox>#birtgdayBox>input:nth-of-type(2) {
+#signUpBox>#birthdayBox>input:nth-of-type(2) {
     text-align: center;
     width: 80px;
 }
 
-#signUpBox>#birtgdayBox>input:nth-of-type(3) {
+#signUpBox>#birthdayBox>input:nth-of-type(3) {
     text-align: center;
     width: 80px;
 }
 
-#signUpBox>#birtgdayBox {
+#signUpBox>#birthdayBox {
     border-bottom: 1px solid #4C455650;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
