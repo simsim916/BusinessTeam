@@ -282,7 +282,6 @@
     height: 400px;
     display: flex;
     position: relative;
-    ;
 }
 
 .typeBoxTag {
@@ -386,5 +385,3 @@
     object-position: 0 -20px;
     height: 220px;
 }
-
-
