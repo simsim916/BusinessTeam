@@ -1,3 +1,4 @@
+let formBox = document.getElementById('loginBox');
 let idInput = document.getElementById("id");
 let pwInput = document.getElementById("password");
 let eMessage = document.getElementById('errorMessage');
@@ -11,6 +12,7 @@ function a(str) {
 // }
 
 function SortLogin(ele) {
+    // formBox.style = "initial";
     idInput.closest('div').style = "initial";
     idInput.value = "";
     pwInput.closest('div').style = "initial";
