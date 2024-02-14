@@ -7,7 +7,7 @@ import com.main.tomatoFarm.domain.KeywordDTO;
 public interface KeywordService{
 
 	
-	public int updateKeywordCnt(KeywordDTO dto);
+	public int updateKeywordCnt(String keyword);
 	public List<KeywordDTO> selectKeywordList();
 	
 }

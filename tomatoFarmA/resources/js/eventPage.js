@@ -1,4 +1,5 @@
-function updateTimer2() {
+
+function updateTimer() {
     let targetTime = Date.parse("2024/03/09 23:59:59");
     let now = new Date();
     let remainTime = targetTime - now;
@@ -15,12 +16,9 @@ function updateTimer2() {
 
     let timePlace = document.getElementById('timePlace');
     timePlace.innerHTML = `<div>${d}<span>일</span></div><div>${h}<span>시간</span></div><div>${m}<span>분</span></div><div>${s}<span>초</span></div>`
-
 }
-setInterval(updateTimer2, 1000);
+setInterval(updateTimer, 1000);
 
-
-// ================================================
 function rolling() {
     document.querySelector('.prev').classList.remove('prev');
     // ==========================================================
@@ -39,7 +37,6 @@ function rolling() {
     }
     next.classList.remove('next');
     next.classList.add('current');
-    // ==========================================================
 }
 setInterval(rolling, 3000);
 

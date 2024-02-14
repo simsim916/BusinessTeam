@@ -259,9 +259,9 @@
                 <div></div>
                 <div></div>
             </div>
-            <div id="secondContainerLeftBtn" onclick="secondContainerSlideLeftBtn()"><i
+            <div id="secondContainerLeftBtn" onclick="secondContainerSlideLeftbth(event)"><i
                     class="fa-sharp fa-solid fa-arrow-left"></i></div>
-            <div id="secondContainerRightBtn" onclick="secondContainerSlideRightBtn()"><i
+            <div id="secondContainerRightBtn" onclick="secondContainerSlideRightbth(event)"><i
                     class="fa-sharp fa-solid fa-arrow-right"></i></div>
 
         </div>
@@ -269,10 +269,10 @@
 
     <hr>
 
-    <div id="thirdContainer" class="container hide">
-        <h3 class="hide"><i class="fa-solid fa-bag-shopping"></i> &nbsp;&nbsp; 상품 보기 &nbsp;&nbsp; <i
+    <div id="thirdContainer" class="container hide transition1">
+        <h3 class="hide transition1"><i class="fa-solid fa-bag-shopping"></i> &nbsp;&nbsp; 상품 보기 &nbsp;&nbsp; <i
                 class="fa-solid fa-bag-shopping"></i></h3>
-        <div class="typeBox hide">
+        <div class="typeBox hide transition1">
             <div class="typeBoxTag">
                 <div class="typeBoxTagTitle"><img src="/tomatoFarmA/resources/img/brand/fresheasy.png"
                         alt="category_vitamin">프레시지</div>
@@ -329,12 +329,20 @@
                         <p class="itemPrice">12,300원</p>
                         <div class="itemOption">무료배송</div>
                     </div>
+                    <a href class="linkBox">
+                        <p>" 프레시지 "</p>
+                        <i class="fa-regular fa-circle-play"></i> 상품 더 보러가기
+                    </a>
                 </div>
-                <div onclick="thirdContainerSlideRightBth()" id="secondContainerRightBtn"><i
-                        class="fa-sharp fa-solid fa-arrow-right"></i></div>
+                <div onclick="thirdContainerSlideLeftBth(event)" class="thirdContainerLeftBtn">
+                    <i class="fa-sharp fa-solid fa-arrow-left"></i>
+                </div>
+                <div onclick="thirdContainerSlideRightBth(event)" class="thirdContainerRightBtn">
+                    <i class="fa-sharp fa-solid fa-arrow-right"></i>
+                </div>
             </div>
         </div>
-        <div class="typeBox hide">
+        <div class="typeBox hide transition1">
             <div class="typeBoxTag">
                 <div class="typeBoxTagTitle"><img src="/tomatoFarmA/resources/img/brand/rlarndnjstjstodenqn.png"
                         alt="category_vitamin">김구원선생
@@ -391,11 +399,20 @@
                         <p class="itemPrice">12,300원</p>
                         <div class="itemOption">무료배송</div>
                     </div>
+                    <a href class="linkBox">
+                        <p>" 김구원선생 "</p>
+                        <i class="fa-regular fa-circle-play"></i> 상품 더 보러가기
+                    </a>
                 </div>
-                <div id="secondContainerRightBtn"><i class="fa-sharp fa-solid fa-arrow-right"></i></div>
+                <div onclick="thirdContainerSlideLeftBth(event)" class="thirdContainerLeftBtn">
+                    <i class="fa-sharp fa-solid fa-arrow-left"></i>
+                </div>
+                <div onclick="thirdContainerSlideRightBth(event)" class="thirdContainerRightBtn">
+                    <i class="fa-sharp fa-solid fa-arrow-right"></i>
+                </div>
             </div>
         </div>
-        <div class="typeBox hide">
+        <div class="typeBox hide transition1">
             <div class="typeBoxTag">
                 <div class="typeBoxTagTitle"><img src="/tomatoFarmA/resources/img/brand/마이셰프.png"
                         alt="category_vitamin">마이셰프</div>
@@ -451,15 +468,21 @@
                         <p class="itemPrice">12,300원</p>
                         <div class="itemOption">무료배송</div>
                     </div>
+                    <a href class="linkBox">
+                        <p>" 마이셰프 "</p>
+                        <i class="fa-regular fa-circle-play"></i> 상품 더 보러가기
+                    </a>
                 </div>
-                <div id="secondContainerRightBtn"><i class="fa-sharp fa-solid fa-arrow-right"></i></div>
+                <div onclick="thirdContainerSlideLeftBth(event)" class="thirdContainerLeftBtn">
+                    <i class="fa-sharp fa-solid fa-arrow-left"></i>
+                </div>
+                <div onclick="thirdContainerSlideRightBth(event)" class="thirdContainerRightBtn">
+                    <i class="fa-sharp fa-solid fa-arrow-right"></i>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="test hide">
-
-    </div>
 </body>
 
 </html>
