@@ -15,8 +15,8 @@ public class KeywordServiceImpl implements KeywordService{
 	
 	KeywordDAO dao;
 	
-	public int updateKeywordCnt(KeywordDTO dto) {
-		return dao.updateKeywordCnt(dto);
+	public int updateKeywordCnt(String keyword) {
+		return dao.updateKeywordCnt(keyword);
 	}
 
 	public List<KeywordDTO> selectKeywordList() {

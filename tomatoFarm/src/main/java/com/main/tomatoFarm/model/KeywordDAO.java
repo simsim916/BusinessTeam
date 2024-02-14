@@ -18,25 +18,17 @@ public class KeywordDAO {
 	private static ResultSet rs;
 	private static String sql;
 
-	public int updateKeywordCnt(KeywordDTO dto) {
-		sql = "Select * From search Where keyword =" + dto.getKeyword();
-
+	public int updateKeywordCnt(String keyword) {
+		sql = "update search set cnt = cnt+1 where keyword ='" + keyword + "'";
+		
+		
 		try {
 			pst = cn.prepareStatement(sql);
-			rs = pst.executeQuery();
 
-			if (rs.next()) {
-				KeywordDTO object = new KeywordDTO();
-				object.setKeyword(rs.getString(1));
-				object.setCnt(rs.getInt(2));
-
-				sql = "update search set cnt =" + (object.getCnt()+1) + "where keyword=" + object.getKeyword();
-				pst = cn.prepareStatement(sql);
-
+			if (pst.executeUpdate() != 0) {
 				return pst.executeUpdate();
-
 			} else {
-				sql = "insert into search(keyword) values(" + dto.getKeyword() + ")";
+				sql = "insert into search(keyword) values('" + keyword + "')";
 				pst = cn.prepareStatement(sql);
 
 				return pst.executeUpdate();
@@ -64,7 +56,12 @@ public class KeywordDAO {
 					dto.setCnt(rs.getInt(2));
 
 					list.add(dto);
+					if(list.size() == 5) break;
+					// 나중에는 검색키워드가 많아질테고
+					// 우리가 보여주고자하는건 인기검색어 5~10개 정도
+					// 그러면 반복문을 깨주는게 좋지 않을까
 				} while (rs.next());
+				
 
 				return list;
 			} else {
