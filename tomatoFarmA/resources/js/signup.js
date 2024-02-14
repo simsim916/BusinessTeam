@@ -3,6 +3,7 @@ const idBox = document.getElementById('idBox');
 const passwordBox = document.getElementById('passwordBox');
 const nameBox = document.getElementById('nameBox');
 const phonenumberBox = document.getElementById('phonenumberBox');
+const errorBox = document.getElementById('errorBox');
 
 const emailSelectBox = document.getElementById("emailSelectBox");
 const emailWriteBox = document.getElementById("emailWriteBox");
@@ -20,35 +21,32 @@ let birthdayCheck = false;
 
 
 
-// function focusInputBox() {
-//     idBox.style.border = "2px solid #9B1B30";
-//    passwordBox.style.border = "2px solid #9B1B30";
-//     nameBox.style.border = "2px solid #9B1B30";
-//    phonenumberBox.style.border = "2px solid #9B1B30";
-// }
+function focusInputBox(event) {
+    let box = event.target.closest('div');
+    box.style.border = "2px solid #9B1B30";
+}
 
-
+function changeOpacity(event){
+    let box = event.target.closest('div');
+    for ( e of box.children){
+        e.style.opacity="1";
+    }
+}
 
 
 function checkId(event) {
     let target = event.target;
-    idBox.style.borderColor = "2px solid #9B1B30";
-    if (target.value != null && target.value.length>0){
-        idBox.children[0].style.opacity="1";
-        idBox.children[0].style.opacity="1";
-        target.style.opacity="1";
-    }
-    if (idBox.children[1].value.length > 4 && idBox.children[1].value.length < 10) {
+    if (target.value.length > 4 && target.value.length < 10) {
         idCheck = true;
-        if (idCheck) {
-            // idBox.style.border = "2px solid #03C75A";
-            idBox.style.border = "2px solid green";
-        } else {
-            // idBox.style.border = "2px solid yellow";
-            alert('아이디를 확인하세요');
-        }
-        return null;
+        idBox.style.border = "2px solid #03C75A";
+        idBox.style.borderBottom = "1px solid #03C75A";
+        idBox.children[0].style.color = "#03C75A";
+        document.getElementById('idError').remove();
+    } else {
+        idBox.style.border = "2px solid #FF3F3F";
+        errorBox.innerHTML += `<span id="idError"><i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;아이디 : 4글자~<br></span>`;
     }
+        return null;
 }//checkId
 
 function checkPassword() {
@@ -58,7 +56,7 @@ function checkPassword() {
         pwCheck = true;
         if (pwCheck) {
             // passwordBox.style.border = "2px solid #03C75A";
-            passwordBox.style.border = "2px solid green";
+            passwordBox.style.border = "2px solid #03C75A";
         } else {
             // passwordBox.style.border = "2px solid yellow";
             alert('비밀번호를 확인하세요');

@@ -44,6 +44,10 @@ button {
 
 .hide {
     visibility: hidden;
+    margin-top: 200px !important;
+    opacity: 0;
+}
+
+.transition1 {
     transition: 1s;
-    margin-top: 200px;
 }
