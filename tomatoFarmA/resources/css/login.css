@@ -7,13 +7,41 @@
     display: inline-block;
 }
 
+#errorMessage {
+    text-align: center;
+}
+
+body {
+    background-image: url(/tomatoFarmA/resources/img/signup/signupBGI.jpg);
+    background-size: 120%;
+    background-position: -350px;
+    background-position-y: -400px;
+    height: 100vh;
+}
+
+/* ======================================== */
+
+#bodyBG {
+    position: absolute;
+    width: 600px;
+    height: 100%;
+    background-color: #67111f;
+    z-index: -1;
+    right: 0;
+}
+
+/* ======================================== */
 main {
-    position: relative;
+    right: calc((600px - 500px) / 2);
+    position: absolute;
     border: 1px solid black;
+    border-radius: 40px;
     width: 500px;
-    height: 800px;
+    height: 430px;
     margin: auto;
     display: block;
+    background-color: white;
+    top: calc((100vh - 500px) / 2);
 }
 
 input:focus {
