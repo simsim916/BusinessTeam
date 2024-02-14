@@ -109,7 +109,6 @@
 
 
 .slideBox {
-    width: calc(200px * 11 + 20px * 10);
     display: flex;
     gap: 20px;
     transition: 1s;
@@ -195,11 +194,6 @@
 }
 
 .itemBox>img {
-    width: 100%;
-}
-
-.itemBox>img {
-    justify-content: center;
     background-color: rgb(0, 0, 0);
     width: 100%;
     text-align: center;
@@ -238,8 +232,6 @@
     border-radius: 5px;
 }
 
-/* ---------------------------------------------  */
-
 #thirdContainer {
     text-align: center;
     margin-top: 50px;
@@ -255,12 +247,14 @@
     color: #F6C026;
 }
 
-/* ---------------------------------------------  */
-
 .typeBox:nth-of-type(1) {
     border-top: 2.5px solid #62a349;
     border-bottom: 2.5px solid #62a349;
     color: #62a349;
+}
+
+.typeBox:nth-of-type(1) .linkBox {
+    background-color: #62a349;
 }
 
 .typeBox:nth-of-type(2) {
@@ -269,10 +263,18 @@
     color: #ecb500;
 }
 
+.typeBox:nth-of-type(2) .linkBox {
+    background-color: #ecb500;
+}
+
 .typeBox:nth-of-type(3) {
     border-top: 2.5px solid #ef7601;
     border-bottom: 2.5px solid #ef7601;
     color: #ef7601;
+}
+
+.typeBox:nth-of-type(3) .linkBox {
+    background-color: #ef7601;
 }
 
 .typeBox {
@@ -384,4 +386,74 @@
     object-fit: cover;
     object-position: 0 -20px;
     height: 220px;
+}
+
+.linkBox {
+    width: 200px;
+    color: white;
+    border-radius: 20px;
+    padding-top: 110px;
+    opacity: 0.7;
+}
+
+.linkBox:hover {
+    opacity: 1;
+    color: white;
+}
+
+.linkBox:link {
+    text-decoration: none;
+}
+
+.linkBox>p {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+.thirdContainerRightBtn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: linear-gradient(to left, #fff 0%, #ffffff 20%, #ffffff00 100%);
+    width: 80px;
+    height: 100%;
+}
+
+.thirdContainerRightBtn>i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 10px;
+    top: calc(50% - 15px);
+    background-color: #CA4046;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.thirdContainerLeftBtn {
+    position: absolute;
+    left: 430px;
+    top: 0;
+    background: linear-gradient(to right, #fff 0%, #ffffff 20%, #ffffff00 100%);
+    width: 80px;
+    height: 100%;
+    display: none;
+}
+
+.thirdContainerLeftBtn>i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 10px;
+    top: calc(50% - 15px);
+    background-color: #CA4046;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
 }
