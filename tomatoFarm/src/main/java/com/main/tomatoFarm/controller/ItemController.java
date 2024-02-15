@@ -47,6 +47,7 @@ public class ItemController {
 		model.addAttribute("brandList", itemService.selectBrandList());
 		model.addAttribute("sortList", sortSerivce.selectSortList());
 		model.addAttribute("sortbList", sortSerivce.selectSortbList());
+
 		
 	}
 	

@@ -50,4 +50,9 @@ public class ItemServiceImpl implements ItemService{
 		return dao.selectBrandList();
 	}
 	
+	@Override
+	public List<ItemDTO> selectEventItemList() {
+		return dao.selectEventItemList();
+	}
+	
 }

@@ -149,9 +149,8 @@ public class ItemDAO {
 
 	}
 
-	//
+	// 판매순 높은 순으로 밀키트 조회
 	public List<ItemDTO> selectItemListBySales() {
-
 		sql = "select * from mealkit order by sales desc";
 		try {
 			pst = cn.prepareStatement(sql);
@@ -302,6 +301,49 @@ public class ItemDAO {
 			}
 		} catch (Exception e) {
 			System.out.println("selectBrandList => :" + e.toString());
+			return null;
+		}
+
+	}
+
+	// 이벤트 중인 상품만 조회하기
+	public List<ItemDTO> selectEventItemList(){
+		sql = "select * from mealkit WHERE event != '' ORDER BY sales DESC";
+		try {
+			pst = cn.prepareStatement(sql);
+			rs = pst.executeQuery();
+
+			List<ItemDTO> list = new ArrayList<ItemDTO>();
+			if (rs.next()) {
+				do {
+					ItemDTO dto = new ItemDTO();
+					dto.setSort1(rs.getString(1));
+					dto.setSort2(rs.getString(2));
+					dto.setSort3(rs.getString(3));
+					dto.setSort4(rs.getString(4));
+					dto.setCode(rs.getInt(5));
+					dto.setBrand(rs.getString(6));
+					dto.setName(rs.getString(7));
+					dto.setWeight(rs.getInt(8));
+					dto.setStorage(rs.getString(9));
+					dto.setPacking(rs.getString(10));
+					dto.setDelivery(rs.getString(11));
+					dto.setPrice(rs.getInt(12));
+					dto.setSales(rs.getInt(13));
+					dto.setStock(rs.getInt(14));
+					dto.setEvent(rs.getString(15));
+					dto.setDiscount(rs.getInt(16));
+					dto.setAdmin(rs.getString(17));
+					list.add(dto);
+				} while (rs.next());
+
+				return list;
+			} else {
+				System.out.println("selectEventItemList => 출력할 데이터가 없다");
+				return null;
+			}
+		} catch (Exception e) {
+			System.out.println("selectEventItemList => :" + e.toString());
 			return null;
 		}
 
