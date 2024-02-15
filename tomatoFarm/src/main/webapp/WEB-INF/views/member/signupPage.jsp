@@ -65,8 +65,8 @@
                 <i class="fa-solid fa-envelope"></i>
                 <input onkeydown="changeOpacityEmail(event)" type="text" name="email" placeholder="이메일"><i
                     class="fa-solid fa-at"></i>
-                <input onkeydown="changeOpacityEmail(event)" type="text" name="emailBack" id="emailWriteBox">
-                <select onchange="changeSelectBox(event)" name="emailBack" id="emailSelectBox">
+                <input onkeydown="changeOpacityEmail(event)" type="text" name="emailback" id="emailWriteBox">
+                <select onchange="changeSelectBox(event)" name="emailback" id="emailSelectBox">
                     <option>이메일 선택</option>
                     <option value="naver.com">naver.com</option>
                     <option value="daum.net">daum.net</option>
@@ -82,13 +82,13 @@
                     <label>
                         <li>
                             <input onkeydown="changeOpacity(event)" onclick="selectGender(event)" type="radio"
-                                name="gender" value="male">남자
+                                name="gender" value="남성">남자
                         </li>
                     </label>
                     <label>
                         <li>
                             <input onkeydown="changeOpacity(event)" onclick="selectGender(event)" type="radio"
-                                name="gender" value="female">여자
+                                name="gender" value="여성">여자
                         </li>
                     </label>
                 </ul>

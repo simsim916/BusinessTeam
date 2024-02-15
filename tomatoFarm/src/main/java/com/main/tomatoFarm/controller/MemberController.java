@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.main.tomatoFarm.domain.MemberDTO;
 import com.main.tomatoFarm.service.MemberService;
@@ -24,23 +25,25 @@ public class MemberController {
 	public void loginPage() {	};
 	
 	// login -> home
-public String login(HttpSession session, Model model, MemberDTO dto) {
+	@PostMapping("login")
+	public String login(HttpSession session, Model model, MemberDTO dto) {
+
+		String uri = "member/loginPage";
 		
-		String uri = "member/login";
-		
+
 		MemberDTO dbDTO = memberservice.selectOne(dto.getId());
-		if(dbDTO!=null) {
-			if(dbDTO.getPassword()==dto.getPassword()) {
+		if (dbDTO != null) {
+			if (dbDTO.getPassword() == dto.getPassword()) {
 				// 로그인 성공
 				session.setAttribute("memberDTO", dbDTO);
-				uri="/home";
+				uri = "/home";
 			} else {
 				// PW 틀림
 			}
-		}else {
-			//ID가 틀림
+		} else {
+			// ID가 틀림
 		}
-		return uri;	
+		return uri;
 	}
 	
 	// signUp page
@@ -50,14 +53,14 @@ public String login(HttpSession session, Model model, MemberDTO dto) {
 	
 	// signUp 
 	@PostMapping("/signup")
-	public String singup(Model model, MemberDTO dto) {
+	public String singup(Model model, MemberDTO dto, @RequestParam("year") String year,@RequestParam("month") String month, @RequestParam("day") String day) {
 		
-		String uri = "member/login";
-		
+		String uri = "member/loginPage";
+		dto.setBirthday(year+"-"+month+"-"+day);
 		if(memberservice.insert(dto)>0) {
 			
 		}else {
-			uri="member/signup";
+			uri="member/signupPage";
 		}
 		return uri;	
 	}

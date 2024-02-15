@@ -18,6 +18,7 @@ public class MemberDTO {
 	private String delivery2;
 	private String delivery3;
 	private String email;
+	private String emailback;
 	private String gender;
 	private String birthday;
 	
