@@ -14,31 +14,37 @@
         rel="stylesheet">
     <link rel="stylesheet" href="/tomatoFarmA/resources/css/00default.css">
     <link rel="stylesheet" href="/tomatoFarmA/resources/css/login.css">
+    <script defer src="/tomatoFarmA/resources/js/login.js"></script>
     <title>토마토팜 || 로그인</title>
 </head>
 
 <body>
+    <div id="bodyBG"></div>
     <main>
-        <img id="logo" src="/tomatoFarmA/resources/img/logo.png"></img>
+        <img id="logo" src="/tomatoFarmA/resources/img/logo.png">
         <form id="loginBox">
             <div id="loginButton">
-                <div>일반 로그인</div>
-                <div>사업자 로그인</div>
+                <div onclick="SortLogin(this)">일반 로그인</div>
+                <div onclick="SortLogin(this)">사업자 로그인</div>
             </div>
 
             <div id="idBox">
                 <i class="fa-solid fa-user"></i>
-                <input type="text" name="id" placeholder="아이디">
+                <input onkeydown="keydownInput(event)" onblur="focusOutInputBox(event)" onfocus="focusInputBox(event)"
+                    id="id" type="text" name="id" placeholder="아이디">
             </div>
             <div id="passwordBox">
                 <i class="fa-solid fa-key"></i>
-                <input type="text" name="password" placeholder="비밀번호">
+                <input onkeydown="keydownInput(event)" onblur="focusOutInputBox(event)" onfocus="focusInputBox(event)"
+                    id="password" type="text" name="password" placeholder="비밀번호">
             </div>
+            <p id="errorMessage">
+            </p>
 
 
         </form>
         <div id="loginInBox">
-            <button>로그인</button>
+            <button onclick="loginCheck()">로그인</button>
         </div>
         <ul id="search">
             <li>아이디 찾기</li>

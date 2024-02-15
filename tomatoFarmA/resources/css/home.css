@@ -112,6 +112,7 @@
     display: flex;
     gap: 20px;
     transition: 1s;
+    padding-top: 5px;
 }
 
 #secondContainerLeftBtn {
@@ -190,7 +191,7 @@
 }
 
 .itemBox:hover {
-    background-color: #ffdbdd;
+    box-shadow: 0px 0px 8px 2px #CA404670
 }
 
 .itemBox>img {
