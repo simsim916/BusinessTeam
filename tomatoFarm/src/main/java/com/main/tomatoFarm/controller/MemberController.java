@@ -1,6 +1,7 @@
 package com.main.tomatoFarm.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,11 +17,31 @@ import com.main.tomatoFarm.service.MemberService;
 @RequestMapping(value = "/member")
 public class MemberController {
 	@Autowired(required = false)
-	MemberService service;
+	MemberService memberservice;
 	
 	// login page
+	@GetMapping("/loginPage")
+	public void loginPage() {	};
 	
 	// login -> home
+public String login(HttpSession session, Model model, MemberDTO dto) {
+		
+		String uri = "member/login";
+		
+		MemberDTO dbDTO = memberservice.selectOne(dto.getId());
+		if(dbDTO!=null) {
+			if(dbDTO.getPassword()==dto.getPassword()) {
+				// 로그인 성공
+				session.setAttribute("memberDTO", dbDTO);
+				uri="/home";
+			} else {
+				// PW 틀림
+			}
+		}else {
+			//ID가 틀림
+		}
+		return uri;	
+	}
 	
 	// signUp page
 	@GetMapping("/signupPage")
@@ -29,16 +50,15 @@ public class MemberController {
 	
 	// signUp 
 	@PostMapping("/signup")
-	public String singup(HttpServletRequest request, Model model, MemberDTO dto) {
+	public String singup(Model model, MemberDTO dto) {
 		
 		String uri = "member/login";
 		
-		if(service.insert(dto)>0) {
-			model.addAttribute("message", "회원가입 성공! 로그인 후 이용하세요");
+		if(memberservice.insert(dto)>0) {
+			
 		}else {
 			uri="member/signup";
-			model.addAttribute("message", "회원가입에 실패했습니다.");
 		}
 		return uri;	
-	}//singup
+	}
 }

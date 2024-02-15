@@ -32,9 +32,9 @@
             <div class="container">
                 <a href="">고객센터</a>
                 &nbsp;&nbsp;|&nbsp;&nbsp;
-                <a href="">로그인</a>
+                <a href="member/loginPage">로그인</a>
                 &nbsp;&nbsp;|&nbsp;&nbsp;
-                <a href="">회원가입</a>
+                <a href="member/signupPage">회원가입</a>
             </div>
         </div>
 
