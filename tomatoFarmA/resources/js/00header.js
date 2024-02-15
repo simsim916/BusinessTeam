@@ -49,7 +49,7 @@ function sperateKorWord(str) {
 		return str;
 	}
 
-	const kor_starts_index
+	// const kor_starts_index
 }
 
 function seachCategory(ele) {

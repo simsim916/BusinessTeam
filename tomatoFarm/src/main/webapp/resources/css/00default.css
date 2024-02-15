@@ -6,12 +6,9 @@
 
 a {
     text-decoration: none;
-	color:#000;
+    color: inherit;
 }
-a:h
-a:visited{
-	color:#640000;
-}
+
 
 body {
     margin: 0;
@@ -29,9 +26,9 @@ hr {
 }
 
 button {
-	background-color: none;
-	padding: 0;
-	border: none;
+    background-color: none;
+    padding: 0;
+    border: none;
 }
 
 .container {
@@ -39,4 +36,14 @@ button {
     max-width: 1200px;
     margin: 0 auto;
     position: relative;
+}
+
+.hide {
+    visibility: hidden !important;
+    margin-top: 200px !important;
+    opacity: 0;
+}
+
+.transition1 {
+    transition: 1s;
 }

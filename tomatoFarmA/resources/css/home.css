@@ -316,12 +316,12 @@
     margin: 10px 0;
 }
 
-.typeBoxTagList>li>span {
+.typeBoxTagList>li>a {
     padding: 2px 7px;
     border: 1px solid #4C455650;
 }
 
-.typeBoxTagList>li>span::before {
+.typeBoxTagList>li>a::before {
     content: "# ";
 }
 

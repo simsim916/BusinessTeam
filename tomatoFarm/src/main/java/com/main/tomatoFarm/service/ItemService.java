@@ -21,6 +21,7 @@ public interface ItemService {
 	public List<ItemDTO> selectItemListWhereBrand(String str); // 인덱스페이지
 	public List<ItemDTO> selectItemListOrderBy(String col,String sort);
 	public List<ItemDTO> selectBrandList(); //
+	public List<ItemDTO> selectEventItemList();
 //	=========================================================================
 	
 

@@ -11,4 +11,5 @@ public class SortDTO {
 	String sorta;
 	String sortb;
 	String sortc;
+	String sortcode;
 }
