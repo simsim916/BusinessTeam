@@ -95,26 +95,52 @@ function keydownInput(event) {
 }
 
 
-function focusOutInputBox(event) {
+// function focusOutInputBox(event) {
+//     if (event.target == idInput) {
+//         if (event.target.value == "") {
+//             box.style.border = "2px solid #ff3f3f";
+//         } else if (event.target.value.length < 4 || event.target.value.length > 10) {
+//             box.style.border = "2px solid #ff3f3f";
+//             errorBox.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;아이디 : 4 ~ 15 글자 이하만 가능합니다.<br>`;
+
+//         } else {
+//             box.style.border = "2px solid #03C75A";
+//             box.style.borderBottom = "1px solid #03C75A";
+//         }
+//     } else {
+//         if (event.target.value == "") {
+//             box.style.border = "2px solid #9B1B30";
+//         } else {
+//             box.style.border = "2px solid #03C75A";
+//             box.style.borderTop = "1px solid #03C75A";
+//         }
+//     }
+// }
+
+function focusOutIdBox(event) {
     let box = event.target.closest('div');
-    if (event.target == idInput) {
-        if (event.target.value == "") {
-            box.style.border = "2px solid #ff3f3f";
-        } else if (event.target.value.length < 4 || event.target.value.length > 10) {
-            box.style.border = "2px solid #ff3f3f";
-            errorBox.innerText = "아이디는 4글자 이상 입니다."
-            
-        } else {
-            box.style.border = "2px solid #03C75A";
-            box.style.borderBottom = "1px solid #03C75A";
-        }
+    if (event.target.value == "") {
+        box.style.border = "2px solid #ff3f3f";
+        box.style.borderBottom = "1px solid #ff3f3f";
+        errorBox.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;아이디 : 입력해주세요.<br>`;
+    } else if (event.target.value.length < 4 || event.target.value.length > 15) {
+        box.style.border = "2px solid #ff3f3f";
+        box.style.borderBottom = "1px solid #ff3f3f";
+        errorBox.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;아이디 : 4 ~ 15 글자 이하만 가능합니다.<br>`;
     } else {
-        if (event.target.value == "") {
-            box.style.border = "2px solid #9B1B30";
-        } else {
-            box.style.border = "2px solid #03C75A";
-            box.style.borderTop = "1px solid #03C75A";
-        }
+        box.style.border = "2px solid #03C75A";
+        box.style.borderBottom = "1px solid #03C75A";
+    }
+}
+
+function focusOutPwBox(event) {
+    let box = event.target.closest('div');
+    if (event.target.value == "") {
+        box.style.border = "2px solid #ff3f3f";
+        box.style.borderTop = "1px solid #ff3f3f";
+    } else {
+        box.style.border = "2px solid #03C75A";
+        box.style.borderTop = "1px solid #03C75A";
     }
 }
 
