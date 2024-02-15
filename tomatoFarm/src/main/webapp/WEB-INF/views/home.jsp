@@ -148,7 +148,7 @@
         <h3><i class="fa-solid fa-gift"></i> &nbsp;&nbsp;특가 상품&nbsp;&nbsp; <i class="fa-solid fa-gift"></i></h3>
         <div id="secondContainerList">
             <div class="slideBox">
-<c:forEach var="l" items="${eventItemList}" begin="9" end="10">
+<c:forEach var="l" items="${eventItemList}" begin="8" end="10">
                 <a href="item/detail?code=${l.code}" class="itemBox">
                     <img src="/tomatoFarm/resources/img/itemImg/${l.code}_1.jpg" alt="${l.name}">
                     <div class="itemName">${l.name}</div>
@@ -166,7 +166,7 @@
                     <div class="itemOption">무료배송</div>
                 </a>
 </c:forEach>
-<c:forEach var="l" items="${eventItemList}" begin="0" end="1">
+<c:forEach var="l" items="${eventItemList}" begin="0" end="2">
                 <a href="item/detail?code=${l.code}" class="itemBox">
                     <img src="/tomatoFarm/resources/img/itemImg/${l.code}_1.jpg" alt="${l.name}">
                     <div class="itemName">${l.name}</div>
