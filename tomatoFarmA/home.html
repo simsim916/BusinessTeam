@@ -31,6 +31,8 @@
                 <a href="">고객센터</a>
                 &nbsp;&nbsp;|&nbsp;&nbsp;
                 <a href="">로그인</a>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="">회원가입</a>
             </div>
         </div>
 
@@ -50,13 +52,13 @@
                 </form>
                 <div id="searchRightBox">
                     <div id="myPage">
-                        <a><i class="fa-solid fa-user"></i></a>
+                        <a href="/tomatoFarmA/"><i class="fa-solid fa-user"></i></a>
                     </div>
                     <div id="myCart">
-                        <a><i class="fa-solid fa-cart-shopping"></i></a>
+                        <a href="/tomatoFarmA/"><i class="fa-solid fa-cart-shopping"></i></a>
                     </div>
                     <div id="myItem">
-                        <a><i class="fa-solid fa-box-archive"></i></a>
+                        <a href="/tomatoFarmA/"><i class="fa-solid fa-box-archive"></i></a>
                     </div>
                 </div>
             </div>
@@ -71,10 +73,13 @@
                         <li></li>
                         <li id="firstCategorySearch">
                             <div>
-                                <input type="text"><i class="fa-solid fa-circle-xmark"></i>
+                                <input onkeyup="seachCategory(this)" oninput="appearinputBoxResetButton2(this)"
+                                    type="text"><i onclick="resetInputBox2(this)" class="fa-solid fa-circle-xmark"></i>
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </div>
                         </li>
+                        <li><a href=""><img src="/tomatoFarmA/resources/img/category_mealkit.png"
+                                    alt="category_mealkit">밀키트</a></li>
                         <li><img src="/tomatoFarmA/resources/img/category_vitamin.png" alt="category_vitamin">건강식품</li>
                         <li><img src="/tomatoFarmA/resources/img/category_chicken.png" alt="category_chicken">계육</li>
                         <li><img src="/tomatoFarmA/resources/img/category_etc.png" alt="category_etc">기타</li>
@@ -109,11 +114,12 @@
                         <li></li>
                         <li id="secondCategorySearch">
                             <div>
-                                <input type="text"><i class="fa-solid fa-circle-xmark"></i>
+                                <input onkeyup="seachCategory(this)" oninput="appearinputBoxResetButton2(this)"
+                                    type="text"><i onclick="resetInputBox2(this)" class="fa-solid fa-circle-xmark"></i>
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </div>
                         </li>
-                        <li>채소</li>
+                        <li><a href="">채소</a></li>
                         <li>과일ㆍ견과ㆍ쌀</li>
                         <li>수산ㆍ해산ㆍ건어물</li>
                         <li>정육ㆍ가공육ㆍ계란</li>
@@ -128,10 +134,10 @@
                     </ul>
                 </div>
                 <ul id="navBar">
-                    <li><a>밀키트 주문</a></li>
-                    <li><a>식단 주문</a></li>
-                    <li><a>재료 주문</a></li>
-                    <li><a>이벤트</a></li>
+                    <li><a href="">밀키트 주문</a></li>
+                    <li><a href="">식단 주문</a></li>
+                    <li><a href="">재료 주문</a></li>
+                    <li><a href="">이벤트</a></li>
                 </ul>
             </div>
         </nav>
@@ -168,13 +174,13 @@
         <h3><i class="fa-solid fa-gift"></i> &nbsp;&nbsp;특가 상품&nbsp;&nbsp; <i class="fa-solid fa-gift"></i></h3>
         <div id="secondContainerList">
             <div class="slideBox">
-                <div class="itemBox">
+                <a href="" class="itemBox">
                     <img src="/tomatoFarmA/resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
                     <div class="itemName">111111111111</div>
                     <div class="itemInfo">프레시지<br></div>
                     <p class="itemPrice">12,300원</p>
                     <div class="itemOption">무료배송</div>
-                </div>
+                </a>
                 <div class="itemBox">
                     <img src="/tomatoFarmA/resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
                     <div class="itemName">22222222222222</div>
@@ -277,12 +283,12 @@
                 <div class="typeBoxTagTitle"><img src="/tomatoFarmA/resources/img/brand/fresheasy.png"
                         alt="category_vitamin">프레시지</div>
                 <ul class="typeBoxTagList">
-                    <li><span>스테이크</span></li>
-                    <li><span>파스타</span></li>
-                    <li><span>감바스</span></li>
+                    <li><a href="">스테이크</a></li>
+                    <li><a href="">파스타</a></li>
+                    <li><a href="">감바스</a></li>
                 </ul>
             </div>
-            <div class="typeBoxImg">
+            <a href="" class="typeBoxImg">
                 <img src="/tomatoFarmA/resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
                 <div class="typeBoxImgTitle">
                     <div class="typeBoxImgTitleName">
@@ -291,45 +297,45 @@
                     <p class="typeBoxImgTitlePrice">12,300원</p>
                 </div>
                 <div class="typeBoxImgTitleBest">Best 상품</div>
-            </div>
+            </a>
             <div class="typeBoxList">
                 <div class="slideBox">
-                    <div class="itemBox">
+                    <a href="" class="itemBox">
                         <img src="/tomatoFarmA/resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
                         <div class="itemName">11111111</div>
                         <div class="itemInfo">프레시지<br></div>
                         <p class="itemPrice">12,300원</p>
                         <div class="itemOption">무료배송</div>
-                    </div>
-                    <div class="itemBox">
+                    </a>
+                    <a href="" class="itemBox">
                         <img src="/tomatoFarmA/resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
                         <div class="itemName">22222222</div>
                         <div class="itemInfo">프레시지<br></div>
                         <p class="itemPrice">12,300원</p>
                         <div class="itemOption">무료배송</div>
-                    </div>
-                    <div class="itemBox">
+                    </a>
+                    <a href="" class="itemBox">
                         <img src="/tomatoFarmA/resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
                         <div class="itemName">333333333</div>
                         <div class="itemInfo">프레시지<br></div>
                         <p class="itemPrice">12,300원</p>
                         <div class="itemOption">무료배송</div>
-                    </div>
-                    <div class="itemBox">
+                    </a>
+                    <a href="" class="itemBox">
                         <img src="/tomatoFarmA/resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
                         <div class="itemName">44444</div>
                         <div class="itemInfo">프레시지<br></div>
                         <p class="itemPrice">12,300원</p>
                         <div class="itemOption">무료배송</div>
-                    </div>
-                    <div class="itemBox">
+                    </a>
+                    <a href="" class="itemBox">
                         <img src="/tomatoFarmA/resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
                         <div class="itemName">555555</div>
                         <div class="itemInfo">프레시지<br></div>
                         <p class="itemPrice">12,300원</p>
                         <div class="itemOption">무료배송</div>
-                    </div>
-                    <a href class="linkBox">
+                    </a>
+                    <a href="" class="linkBox">
                         <p>" 프레시지 "</p>
                         <i class="fa-regular fa-circle-play"></i> 상품 더 보러가기
                     </a>

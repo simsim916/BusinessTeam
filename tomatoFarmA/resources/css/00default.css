@@ -6,13 +6,9 @@
 
 a {
     text-decoration: none;
-    color: #000;
+    color: inherit;
 }
 
-a:hover {
-    color: #640000;
-    text-decoration: underline;
-}
 
 body {
     margin: 0;
@@ -43,7 +39,7 @@ button {
 }
 
 .hide {
-    visibility: hidden;
+    visibility: hidden !important;
     margin-top: 200px !important;
     opacity: 0;
 }

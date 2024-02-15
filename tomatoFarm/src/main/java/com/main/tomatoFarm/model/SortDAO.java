@@ -48,7 +48,7 @@ public class SortDAO {
 	
 	public List<SortDTO> selectSortbList() {
 		try {
-			sql="Select sortb From sorttable Group By sortb";
+			sql="Select sortb, concat(sortacode,sortbcode) From sorttable Group By sortb, sortacode, sortbcode";
 			pst=cn.prepareStatement(sql);
 			rs=pst.executeQuery();
 			List<SortDTO> list = new ArrayList<SortDTO>();
@@ -56,6 +56,7 @@ public class SortDAO {
 				do {
 					SortDTO dto = new SortDTO();
 					dto.setSortb(rs.getString(1));
+					dto.setSortcode(rs.getString(2));
 					list.add(dto);
 				} while (rs.next());
 				
