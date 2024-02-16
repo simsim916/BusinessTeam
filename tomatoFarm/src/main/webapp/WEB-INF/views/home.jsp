@@ -110,7 +110,7 @@
                     </ul>
                 </div>
                 <ul id="navBar">
-                    <li><a href="item/list?keyword=밀키트">밀키트 주문</a></li>
+                    <li><a href="/tomatoFarm/item/list?keyword=밀키트">밀키트 주문</a></li>
                     <li><a href="">식단 주문</a></li>
                     <li><a href="">재료 주문</a></li>
                     <li><a href="">이벤트</a></li>

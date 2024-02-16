@@ -24,7 +24,7 @@
 <body>
     <div id="bodyBG"></div>
     <main>
-        <img id="logo" src="/tomatoFarm/resources/img/logo.png">
+        <a href="/tomatoFarm/"><img id="logo" src="/tomatoFarm/resources/img/logo.png"></a>
         <form id="loginBox">
             <div id="loginButton">
                 <div onclick="selectLoginType(this)">일반 로그인</div>
@@ -33,22 +33,21 @@
 
             <div id="idBox">
                 <i class="fa-solid fa-user"></i>
-                <input onkeydown="changeOpacityId(event)" onblur="focusOutInputBox(event)" onfocus="focusInputBox(event)"
-                    id="id" type="text" name="id" placeholder="아이디">
+                <input onkeydown="changeOpacityId(event)" onblur="checkId(event)" onfocus="focusInputBox(event)" id="id"
+                    type="text" name="id" placeholder="아이디">
             </div>
             <div id="passwordBox">
                 <i class="fa-solid fa-key"></i>
-                <input onkeydown="changeOpacityId(event)" onblur="focusOutInputBox(event)" onfocus="focusInputBox(event)"
-                    id="password" type="text" name="password" placeholder="비밀번호">
+                <input onkeydown="changeOpacityPw(event)" onblur="checkPassword(event)" onfocus="focusInputBox(event)"
+                    id="password" type="password" name="password" placeholder="비밀번호">
             </div>
-            <p id="errorMessage">
+            <p id="errorBox">
+                <span id="idError"></span>
+                <span id="pwError"></span>
             </p>
 
-
+            <button id="loginInBox">로그인</button>
         </form>
-        <div id="loginInBox">
-            <button onclick="loginCheck()">로그인</button>
-        </div>
         <ul id="search">
             <li>아이디 찾기</li>
             <li>비밀번호 찾기</li>
