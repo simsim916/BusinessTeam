@@ -99,8 +99,13 @@ input:focus {
     font-size: 18px;
 }
 
+#loginBox>#loginInBox {
+    border: none;
+    margin-top: 20px;
+}
+
 #loginBox>div:nth-of-type(1) {
-    
+
     border-bottom: 0.5px solid #564f45;
 }
 
@@ -132,6 +137,7 @@ input:focus {
     padding: 0;
     margin: auto;
     font-size: 20px;
+    margin-top: 50px;
 }
 
 #loginInBox button {
@@ -141,7 +147,7 @@ input:focus {
     font-size: 20px;
     background-color: #9B1B30;
     color: white;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     border-radius: 10px;
     cursor: pointer;
 }

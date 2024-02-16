@@ -61,21 +61,3 @@ function focusOutInputBox(event) {
         box.style.border = "2px solid #03C75A";
     }
 }
-
-
-function loginCheck() {
-    if (idInput.value != "dydgusc66" && pwInput.value != "123123!") {
-        idInput.closest('div').style.border = "2px solid #FF3F3F";
-        idInput.closest('div').style.borderBottom = "1px solid #FF3F3F";
-        pwInput.closest('div').style.border = "2px solid #FF3F3F";
-        eMessage.innerText = "다 틀렸어";
-    } else if (idInput.value != "dydgusc66") {
-        idInput.closest('div').style.border = "2px solid #FF3F3F";
-        eMessage.innerText = "아이디 틀렸어";
-    } else if (pwInput.value != "123123!") {
-        pwInput.closest('div').style.border = "2px solid #FF3F3F";
-        eMessage.innerText = "패스워드 틀렸어";
-    } else {
-        eMessage.innerHTML = "성공";
-    }
-}
