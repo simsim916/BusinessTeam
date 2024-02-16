@@ -1,4 +1,3 @@
-// let formBox = document.getElementById('loginBox');
 let idInput = document.getElementById("id");
 let pwInput = document.getElementById("password");
 let errorBox = document.getElementById('errorBox');

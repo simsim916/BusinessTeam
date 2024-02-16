@@ -72,7 +72,7 @@
                     <option value="daum.net">daum.net</option>
                     <option value="google.com">google.com</option>
                     <option value="nate.com">nate.com</option>
-                    <option value="write">직접입력</option>
+                    <option value=",">직접입력</option>
                 </select>
             </div>
             <div id="genderBox">
@@ -95,12 +95,18 @@
             </div>
             <div id="birthdayBox">
                 <i class="fa-solid fa-cake-candles"></i>
-                <input onkeydown="changeOpacity2(event)" type="text" name="year" placeholder="yyyy">
-                <input onkeydown="changeOpacity2(event)" type="text" name="month" placeholder="mm">
-                <input onkeydown="changeOpacity2(event)" type="text" name="day" placeholder="dd">
+                <input onkeydown="changeOpacity2(event)" type="text" name="year" placeholder="yyyy" maxlength="4">
+                <input onkeydown="changeOpacity2(event)" type="text" name="month" placeholder="mm" maxlength="2">
+                <input onkeydown="changeOpacity2(event)" type="text" name="day" placeholder="dd" maxlength="2">
             </div>
             <button id="joinBox">가입하기</button>
         </form>
+        <br>
+        <p id="signUpSuccessOrNot">
+	        <c:if test="${!empty signUpSuccessOrNot}">
+	        	${signUpSuccessOrNot}
+	        </c:if>
+        </p>
     </main>
 </body>
 

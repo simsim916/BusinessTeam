@@ -45,8 +45,8 @@
                         <h1>토마토팜 tomatoFarm</h1>
                     </a>
                 </div>
-                <form id="searchBox">
-                    <input oninput="appearinputBoxResetButton(this)" id="searchBoxInput" type="text"
+                <form id="searchBox" action="/tomatoFarm/item/list">
+                    <input oninput="appearinputBoxResetButton(this)" name="keyword" id="searchBoxInput" type="text"
                         placeholder="검색어를 입력해주세요.">
                     <i onclick="resetInputBox(this)" class="fa-solid fa-circle-xmark"></i>
                     <button><i class="fa-solid fa-magnifying-glass"></i></button>
