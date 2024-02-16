@@ -16,7 +16,7 @@ public class MemberDAO {
 	private static String sql;
 	
 	public MemberDTO selectOne(String id) {
-		sql = "SELECT * FROM member WHERE id=?";
+		sql = "SELECT * FROM user WHERE id=?";
 		try {
 			pst = cn.prepareStatement(sql);
 			pst.setString(1, id);
@@ -32,8 +32,9 @@ public class MemberDAO {
 				dto.setDelivery2(rs.getString(7));
 				dto.setDelivery3(rs.getString(8));
 				dto.setEmail(rs.getString(9));
-				dto.setGender(rs.getString(10));
-				dto.setBirthday(rs.getString(11));
+				dto.setEmailback(rs.getString(10));
+				dto.setGender(rs.getString(11));
+				dto.setBirthday(rs.getString(12));
 				return dto;
 			} else {
 				return null;
@@ -46,7 +47,8 @@ public class MemberDAO {
 	
 	
 	public int insert(MemberDTO dto) {
-		sql = "INSERT INTO member VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+		sql = "INSERT INTO user VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+		System.out.println(dto);
 		try {
 			pst = cn.prepareStatement(sql);
 			pst.setString(1, dto.getId());
@@ -58,8 +60,9 @@ public class MemberDAO {
 			pst.setString(7, dto.getDelivery2());
 			pst.setString(8, dto.getDelivery3());
 			pst.setString(9, dto.getEmail());
-			pst.setString(10, dto.getGender());
-			pst.setString(11, dto.getBirthday());
+			pst.setString(10, dto.getEmailback());
+			pst.setString(11, dto.getGender());
+			pst.setString(12, dto.getBirthday());
 			
 			return pst.executeUpdate();
 		} catch (Exception e) {

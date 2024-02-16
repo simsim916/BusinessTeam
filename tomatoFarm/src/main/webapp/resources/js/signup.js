@@ -1,5 +1,3 @@
-"use strict"
-
 const signUpBox = document.getElementById('signUpBox');
 const idBox = document.getElementById('idBox');
 const passwordBox = document.getElementById('passwordBox');
@@ -129,12 +127,12 @@ function checkPassword(event) {
     let value = event.target.value;
     let key = /[a-z.0-9.!-*.@]/gi;
 
-    if (value.length < 4 || value.length > 10) {
+    if (value.length < 4 || value.length > 15) {
         passwordBox.style.border = "2px solid #FF3F3F";
         passwordBox.style.borderTop = "1px solid #FF3F3F";
         passwordBox.style.borderBottom = "1px solid #FF3F3F";
         passwordBox.children[0].style.color = "#FF3F3F";
-        document.getElementById('pwError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;비밀번호 : 4 ~ 10 글자 이하만 입력해주세요.<br>`;
+        document.getElementById('pwError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;비밀번호 : 4 ~ 15 글자 이하만 입력해주세요.<br>`;
     } else if (value.replace(key, '').length > 0) {
         passwordBox.style.border = "2px solid #FF3F3F";
         passwordBox.style.borderTop = "1px solid #FF3F3F";
