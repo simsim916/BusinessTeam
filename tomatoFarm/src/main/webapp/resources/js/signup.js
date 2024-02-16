@@ -202,7 +202,7 @@ function checkPhonenumber(event) {
 }//checkPhonenumber
 
 function changeSelectBox(event) {
-    if (event.target.value == "write") {
+    if (event.target.value == ",") {
         emailSelectBox.style.display = "none";
         emailWriteBox.style.display = "inline-block";
         emailWriteBox.focus();

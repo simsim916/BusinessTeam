@@ -34,34 +34,21 @@ body {
     margin: auto;
     height: 80px;
     overflow: hidden;
-    position: relative;
+    display: flex;
     text-align: center;
+    justify-content: center;
 }
 
 #imgBoxImgList>div {
-    background-size: cover;
-    background-color: black;
-    background-position: center;
     width: 80px;
-    height: 80px;
-    display: inline-block;
     margin: 10px 5px 5px 0px;
+    opacity: 0.5;
 }
 
-#imgBoxImgList>div:nth-of-type(1) {
-    background-image: url("../../img/itemImg/5000003_1.jpg");
-}
-
-#imgBoxImgList>div:nth-of-type(2) {
-    background-image: url("../../img/itemImg/5000003_2.jpg");
-}
-
-#imgBoxImgList>div:nth-of-type(3) {
-    background-image: url("../../img/itemImg/5000003_3.jpg");
-}
-
-#imgBoxImgList>div:nth-of-type(4) {
-    background-image: url("../../img/itemImg/5000003_4.jpg");
+#imgBoxImgList>div>img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
 
 #itemDetailSM {
@@ -157,6 +144,7 @@ body {
 #itemSelect {
     position: relative;
     grid-column: 1/3;
+    line-height: 40px;
 }
 
 #itemSelect>div:nth-of-type(1) {
@@ -180,15 +168,18 @@ body {
     width: 40px;
     height: 40px;
 }
-#price{
+
+#price {
     position: absolute;
     right: 40px;
     font-size: 16px;
 }
-#price>span{
+
+#price>span {
     font-size: 30px;
     font-weight: 500;
 }
+
 #cart {
     border: 1px solid #CA4046;
     width: 250px;
@@ -214,7 +205,7 @@ body {
 
 #detailClick {
     margin-top: 50px;
-    border: 1px;
+    border: 1px solid #4C455630;
     list-style: none;
     font-weight: bold;
     text-align: center;
@@ -229,14 +220,85 @@ body {
     line-height: 50px;
     border-right: 1px solid #4C455630;
 }
+
 #detailClick>li:nth-last-of-type(1) {
     border-right: none;
 }
 
-#introItem{
-    height: 2500px;
+
+#introItem>img {
+    width: 100%;
 }
 
-#introItem>img{
-    width: 100%;
+.subTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 50px 0;
+}
+
+.subTitle hr {
+    width: 20%;
+    height: 0;
+    margin: 0;
+}
+
+.subTitle img {
+    height: 100px;
+    position: absolute;
+    left: -100px;
+    top: calc((100% - 100px)/2);
+}
+
+.subTitle h4 {
+    font-size: 52px;
+    position: relative;
+}
+
+#askBoardBox{
+    position: relative;
+}
+
+#askBoardBox>h5{
+    margin-top: 30px;
+    font-size: 32px;
+    height: 80px;
+}
+
+#askBoardBox>a {
+    position: absolute;
+    right: 50px;
+    background-color: #CA4046;
+    top: 20px;
+    width: 100px;
+    line-height: 40px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+}
+
+#askBoard{
+    height: 600px;
+    border-top: 3px solid #000;
+    display: grid;
+    grid-template-rows: repeat(5, 65px);
+}
+
+.boardRow{
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.boardRow>div:nth-of-type(1){
+    width: 9%;
+}
+.boardRow>div:nth-of-type(2){
+    width: 60%;
+}
+.boardRow>div:nth-of-type(3){
+    width: 20%;
+}
+.boardRow>div:nth-of-type(4){
+    width: 19%;
 }

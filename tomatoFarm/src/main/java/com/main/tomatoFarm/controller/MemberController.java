@@ -1,6 +1,5 @@
 package com.main.tomatoFarm.controller;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +57,7 @@ public class MemberController {
 		String uri = "member/loginPage";
 		dto.setBirthday(year+"-"+month+"-"+day);
 		if(memberservice.insert(dto)>0) {
+			uri="member/signup_Success";
 			
 		}else {
 			uri="member/signupPage";
