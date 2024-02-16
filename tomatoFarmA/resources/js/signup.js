@@ -102,6 +102,7 @@ function changeOpacity2(event) {
 
 function checkId(event) {
     let value = event.target.value;
+    let idBox = event.target.closest('div');
     let key = /[a-z.0-9.-._]/gi;
 
     if (value.length < 4 || value.length > 15) {
@@ -202,7 +203,7 @@ function checkPhonenumber(event) {
 }//checkPhonenumber
 
 function changeSelectBox(event) {
-    if (event.target.value == "write") {
+    if (event.target.value == ",") {
         emailSelectBox.style.display = "none";
         emailWriteBox.style.display = "inline-block";
         emailWriteBox.focus();
@@ -221,26 +222,3 @@ function selectGender(event) {
     event.target.closest('li').setAttribute("id", "genderChecked");
     birthdayBox.focus();
 }//selectGender
-
-
-
-
-
-// function inCheck() {
-//     if (!idCheck) { document.getElementById('idBox').innerHTML = '필수입력, id를 확인하세요.'; }
-//     if (!pwCheck) { document.getElementById('passwordBox').innerHTML = '필수입력, 비밀번호를 확인하세요.'; }
-//     if (!nameCheck) { document.getElementById('nameBox').innerHTML = '필수입력, 이름을 확인하세요.'; }
-//     if (!phoneCheck) { document.getElementById('phonenumberBox').innerHTML = '필수입력, 전화번호를 확인하세요.'; }
-
-//     if (idCheck && pwCheck && nameCheck && phoneCheck) {
-
-//         if (confirm("가입을 진행하겠습니까?(YES : 확인 / NO : 취소)")) {
-//             return true;
-//         } else {
-//             alert("가입이 취소되었습니다.");
-//             return false;
-//         }
-//     } else {
-//         return false;
-//     }
-// }

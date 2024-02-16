@@ -24,30 +24,44 @@
 <body>
     <div id="bodyBG"></div>
     <main>
+<<<<<<< HEAD
         <img id="logo" src="/tomatoFarm/resources/img/logo.png">
         <form id="loginBox" action="login" method="post">
+=======
+        <a href="/tomatoFarm/"><img id="logo" src="/tomatoFarm/resources/img/logo.png"></a>
+        <form id="loginBox">
+>>>>>>> refs/remotes/origin/moon
             <div id="loginButton">
-                <div onclick="SortLogin(this)">일반 로그인</div>
-                <div onclick="SortLogin(this)">사업자 로그인</div>
+                <div onclick="selectLoginType(this)">일반 로그인</div>
+                <div onclick="selectLoginType(this)">사업자 로그인</div>
             </div>
 
             <div id="idBox">
                 <i class="fa-solid fa-user"></i>
-                <input onkeydown="keydownInput(event)" onblur="focusOutInputBox(event)" onfocus="focusInputBox(event)"
-                    id="id" type="text" name="id" placeholder="아이디">
+                <input onkeydown="changeOpacityId(event)" onblur="checkId(event)" onfocus="focusInputBox(event)" id="id"
+                    type="text" name="id" placeholder="아이디">
             </div>
             <div id="passwordBox">
                 <i class="fa-solid fa-key"></i>
-                <input onkeydown="keydownInput(event)" onblur="focusOutInputBox(event)" onfocus="focusInputBox(event)"
-                    id="password" type="text" name="password" placeholder="비밀번호">
+                <input onkeydown="changeOpacityPw(event)" onblur="checkPassword(event)" onfocus="focusInputBox(event)"
+                    id="password" type="password" name="password" placeholder="비밀번호">
             </div>
-            <p id="errorMessage">
+            <p id="errorBox">
+                <span id="idError"></span>
+                <span id="pwError"></span>
             </p>
 
+<<<<<<< HEAD
+=======
+            <button id="loginInBox">로그인</button>
+>>>>>>> refs/remotes/origin/moon
         </form>
+<<<<<<< HEAD
         <div id="loginInBox">
             <button>로그인</button>
         </div>
+=======
+>>>>>>> refs/remotes/origin/moon
         <ul id="search">
             <li>아이디 찾기</li>
             <li>비밀번호 찾기</li>

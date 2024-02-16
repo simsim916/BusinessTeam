@@ -32,9 +32,9 @@
             <div class="container">
                 <a href="">고객센터</a>
                 &nbsp;&nbsp;|&nbsp;&nbsp;
-                <a href="member/loginPage">로그인</a>
+                <a href="/tomatoFarm/member/loginPage">로그인</a>
                 &nbsp;&nbsp;|&nbsp;&nbsp;
-                <a href="member/signupPage">회원가입</a>
+                <a href="/tomatoFarm/member/signupPage">회원가입</a>
             </div>
         </div>
 
@@ -80,9 +80,9 @@
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </div>
                         </li>
-                        <li><a href="item/list?keyword=밀키트"><img src="/tomatoFarm/resources/img/category_mealkit.png" alt="category_mealkit">밀키트</a></li>
+                        <li><a href="/tomatoFarm/item/list?keyword=밀키트"><img src="/tomatoFarm/resources/img/category_mealkit.png" alt="category_mealkit">밀키트</a></li>
 <c:forEach var="l" items="${sortbList}">
-                        <li><a href="item/list?keyword=${l.sortb}"><img src="/tomatoFarm/resources/img/${l.sortcode}.png" alt="${l.sortb}">${l.sortb}</a></li>
+                        <li><a href="/tomatoFarm/item/list?keyword=${l.sortb}"><img src="/tomatoFarm/resources/img/${l.sortcode}.png" alt="${l.sortb}">${l.sortb}</a></li>
 </c:forEach>
                     </ul>
                     <ul onmouseout="firstCategoryHidden()" onmouseover="firstCategoryVisible()" id="secondCategory">
@@ -110,7 +110,7 @@
                     </ul>
                 </div>
                 <ul id="navBar">
-                    <li><a href="item/list?keyword=밀키트">밀키트 주문</a></li>
+                    <li><a href="/tomatoFarm/item/list?keyword=밀키트">밀키트 주문</a></li>
                     <li><a href="">식단 주문</a></li>
                     <li><a href="">재료 주문</a></li>
                     <li><a href="">이벤트</a></li>

@@ -3,58 +3,68 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- 폰트어썸 -->
-        <script src="https://kit.fontawesome.com/d68045e863.js" crossorigin="anonymous"></script>
-        <!-- 구글 폰트 -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap"
-            rel="stylesheet">
-        <link rel="stylesheet" href="/tomatoFarm/resources/css/00default.css">
-        <link rel="stylesheet" href="/tomatoFarm/resources/css/00header.css">
-        <script defer type="text/javascript" src="/tomatoFarm/resources/js/00header.js"></script>
-        <link rel="stylesheet" href="/tomatoFarm/resources/css/itemDetail.css">
-		<title>토마토팜 || 상품내용</title>
-</head>
 <c:set var="d" value="${requestScope.dto}" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 폰트어썸 -->
+    <script src="https://kit.fontawesome.com/d68045e863.js" crossorigin="anonymous"></script>
+    <!-- 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- 기본 CSS, JS -->
+    <link rel="stylesheet" href="/tomatoFarm/resources/css/00default.css">
+    <script defer src="/tomatoFarm/resources/js/00default.js"></script>
+    <!-- 헤더 CSS, JS -->
+    <link rel="stylesheet" href="/tomatoFarm/resources/css/00header.css">
+    <script defer src="/tomatoFarm/resources/js/00header.js"></script>
+    <!-- 페이지 CSS, JS -->
+    <link rel="stylesheet" href="/tomatoFarm/resources/css/itemDetail.css">
+    <script defer src="/tomatoFarm/resources/js/itemDetail.js"></script>
+    <title>토마토팜 || ${d.name}</title>
+</head>
 <body>
     <header id="topBar">
         <div id="loginBar">
             <div class="container">
                 <a href="">고객센터</a>
                 &nbsp;&nbsp;|&nbsp;&nbsp;
-                <a href="">로그인</a>
+                <a href="/tomatoFarm/member/loginPage">로그인</a>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="/tomatoFarm/member/signupPage">회원가입</a>
             </div>
         </div>
-    
+
         <div id="searchBar">
             <div class="container">
                 <div id="logoBox">
-                    <img src="/img/logo.png" alt="">
-                    <h1>사이트이름</h1>
+                    <a href="/tomatoFarm/">
+                        <img src="/tomatoFarm/resources/img/logo.png" alt="">
+                        <h1>토마토팜 tomatoFarm</h1>
+                    </a>
                 </div>
                 <form id="searchBox">
-                    <input type="text" placeholder="검색어를 입력해주세요.">
-                    <i class="fa-solid fa-circle-xmark"></i>
-                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input oninput="appearinputBoxResetButton(this)" id="searchBoxInput" type="text"
+                        placeholder="검색어를 입력해주세요.">
+                    <i onclick="resetInputBox(this)" class="fa-solid fa-circle-xmark"></i>
+                    <button><i class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
                 <div id="searchRightBox">
                     <div id="myPage">
-                        <i class="fa-solid fa-user"></i>
+                        <a href="/tomatoFarm/"><i class="fa-solid fa-user"></i></a>
                     </div>
                     <div id="myCart">
-                        <i class="fa-solid fa-cart-shopping"></i>
+                        <a href="/tomatoFarm/"><i class="fa-solid fa-cart-shopping"></i></a>
                     </div>
                     <div id="myItem">
-                        <i class="fa-solid fa-box-archive"></i>
+                        <a href="/tomatoFarm/"><i class="fa-solid fa-box-archive"></i></a>
                     </div>
                 </div>
             </div>
         </div>
-    
+
         <nav>
             <div class="container">
                 <div id="categoryBox">
@@ -64,45 +74,27 @@
                         <li></li>
                         <li id="firstCategorySearch">
                             <div>
-                                <input type="text"><i class="fa-solid fa-circle-xmark"></i>
+                                <input onkeyup="seachCategory(this)" oninput="appearinputBoxResetButton2(this)"
+                                    type="text"><i onclick="resetInputBox2(this)" class="fa-solid fa-circle-xmark"></i>
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </div>
                         </li>
-                        <li><img src="/img/category_vitamin.png" alt="category_vitamin">건강식품</li>
-                        <li><img src="/img/category_chicken.png" alt="category_chicken">계육</li>
-                        <li><img src="/img/category_etc.png" alt="category_etc">기타</li>
-                        <li><img src="/img/category_wheat.png" alt="category_wheat">농산가공</li>
-                        <li><img src="/img/category_pig.png" alt="category_pig">돈육</li>
-                        <li><img src="/img/category_noodle.png" alt="category_noodle">면류</li>
-                        <li><img src="/img/category_flour.png" alt="category_flour">분말류</li>
-                        <li><img src="/img/category_blush.png" alt="category_blush">생활용품</li>
-                        <li><img src="/img/category_detergent.png" alt="category_detergent">세제류</li>
-                        <li><img src="/img/category_fish.png" alt="category_fish">수산가공</li>
-                        <li><img src="/img/category_vegetable.png" alt="category_vegetable">야채</li>
-                        <li><img src="/img/category_wheat.png" alt="category_wheat">양곡</li>
-                        <li><img src="/img/category_sheep.png" alt="category_sheep">양육</li>
-                        <li><img src="/img/category_seashel.png" alt="category_seashel">어패류</li>
-                        <li><img src="/img/category_cow.png" alt="category_cow">우육</li>
-                        <li><img src="/img/category_cheese.png" alt="category_cheese">유제품</li>
-                        <li><img src="/img/category_oils.png" alt="category_oils">유지류</li>
-                        <li><img src="/img/category_drink.png" alt="category_drink">음료ㆍ차</li>
-                        <li><img src="/img/category_gimbap.png" alt="category_gimbap">일반가공</li>
-                        <li><img src="/img/category_bread.png" alt="category_bread">제과</li>
-                        <li><img src="/img/category_cookedFood.png" alt="category_cookedFood">조리식품</li>
-                        <li><img src="/img/category_seasoning.png" alt="category_seasoning">조미식품</li>
-                        <li><img src="/img/category_fruit.png" alt="category_fruit">청과</li>
-                        <li><img src="/img/category_meat.png" alt="category_meat">축산가공</li>
-                        <li><img src="/img/category_seaweed.png" alt="category_seaweed">해조류</li>
+                        <li><a href="/tomatoFarm/item/list?keyword=밀키트"><img src="/tomatoFarm/resources/img/category_mealkit.png" alt="category_mealkit">밀키트</a></li>
+<c:forEach var="l" items="${sortbList}">
+                        <li><a href="/tomatoFarm/item/list?keyword=${l.sortb}"><img src="/tomatoFarm/resources/img/${l.sortcode}.png" alt="${l.sortb}">${l.sortb}</a></li>
+</c:forEach>
                     </ul>
                     <ul onmouseout="firstCategoryHidden()" onmouseover="firstCategoryVisible()" id="secondCategory">
                         <li></li>
                         <li id="secondCategorySearch">
                             <div>
-                                <input type="text"><i class="fa-solid fa-circle-xmark"></i>
+                                <input onkeyup="seachCategory(this)" oninput="appearinputBoxResetButton2(this)"
+                                    type="text"><i onclick="resetInputBox2(this)" class="fa-solid fa-circle-xmark"></i>
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </div>
                         </li>
-                        <li>채소</li>
+                        
+                        <li><a href="">채소</a></li>
                         <li>과일ㆍ견과ㆍ쌀</li>
                         <li>수산ㆍ해산ㆍ건어물</li>
                         <li>정육ㆍ가공육ㆍ계란</li>
@@ -113,18 +105,17 @@
                         <li>간식ㆍ과자ㆍ떡</li>
                         <li>베이커리</li>
                         <li>유제품</li>
-    
+
                     </ul>
                 </div>
                 <ul id="navBar">
-                    <li>식단 주문</li>
-                    <li>재료 주문</li>
-                    <li>이벤트</li>
+                    <li><a href="/tomatoFarm/item/list?keyword=밀키트">밀키트 주문</a></li>
+                    <li><a href="">식단 주문</a></li>
+                    <li><a href="">재료 주문</a></li>
+                    <li><a href="">이벤트</a></li>
                 </ul>
             </div>
         </nav>
-    
-    
     </header>
     
     <main id="itemDetailBox" class="container">
@@ -189,7 +180,6 @@
                     <div id="buy">구매하기</div>
                 </div>
             </div>
-
         </div>
 
         
@@ -201,11 +191,29 @@
         <li>문의</li>
     </ul>
     <div id="introItem" class="container">
-        제품 조리 사진
+        <div class="subTitle">
+            <hr>
+            <h4>상품 조리 사진
+                <img src="/tomatoFarm/resources/img/logo3.png" alt="제품 조리 사진">
+            </h4>
+            <hr>
+        </div>
         <img src="/tomatoFarm/resources/img/itemImg/${d.code}_2.jpg" alt="${d.name} 제품">
-        제품 구성 사진
+        <div class="subTitle">
+            <hr>
+            <h4>상품 구성
+                <img src="/tomatoFarm/resources/img/logo4.png" alt="상품 구성">
+            </h4>
+            <hr>
+        </div>
         <img src="/tomatoFarm/resources/img/itemImg/${d.code}_3.jpg" alt="${d.name} 구성품">
-        제품 표시사항 및 크기
+        <div class="subTitle">
+            <hr>
+            <h4>상품 표시사항
+                <img src="/tomatoFarm/resources/img/logo2.png" alt="제품 조리 사진">
+            </h4>
+            <hr>
+        </div>
         <img src="/tomatoFarm/resources/img/itemImg/${d.code}_4.jpg" alt="${d.name} 상세표기">
     </div>
 

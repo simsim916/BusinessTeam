@@ -26,7 +26,7 @@
     <div id="bodyBG"></div>
     <div id="bodyBG2"></div>
     <main>
-        <img id="logo" src="/tomatoFarm/resources/img/logo.png"></img>
+        <a href="/tomatoFarm/"><img id="logo" src="/tomatoFarm/resources/img/logo.png"></img></a>
         <h3>회원가입</h3>
         <form id="signUpBox" action="signup" method="post">
             <p id="writeOption"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;필수 입력 사항</p>

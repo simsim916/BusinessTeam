@@ -8,159 +8,101 @@ let id = "test";
 let pw = "123123!";
 
 
-function a(str) {
-    console.log(str);
-}
 
-// window.onload = function () {
-//     idInput.focus();
-// }
-
-function SortLogin(ele) {
-    // formBox.style = "initial";
-    idInput.closest('div').style = "initial";
+function selectLoginType(ele) {
     idInput.value = "";
-    pwInput.closest('div').style = "initial";
     pwInput.value = "";
-    errorBox.innerText = "";
+    idBox.style.border = "1px solid #564f45";
+    idBox.style.borderBottom = "0.5px solid #564f45";
+    idBox.children[0].style.color = "black";
+    idBox.children[0].style.opacity = "0.3";
+    passwordBox.style.border = "1px solid #564f45";
+    passwordBox.style.borderTop = "0.5px solid #564f45";
+    passwordBox.children[0].style.color = "black";
+    passwordBox.children[0].style.opacity = "0.3";
+    for (let e of errorBox.children) {
+        e.innerText='';
+    }
     if (ele.innerText == "일반 로그인") {
-        ele.style.backgroundColor = "rgb(146, 112, 112)";
+        ele.style.backgroundColor = "#9B1B30 ";
         ele.style.borderBottom = "none";
         ele.style.color = "white";
         ele.nextElementSibling.style.backgroundColor = "white";
         ele.nextElementSibling.style.color = "black";
-        ele.nextElementSibling.style.borderBottom = "1px solid grey";
+        ele.nextElementSibling.style.borderBottom = "1px solid #564f45";
     } else {
-        ele.style.backgroundColor = "rgb(146, 112, 112)";
+        ele.style.backgroundColor = "#9B1B30 ";
         ele.style.borderBottom = "none";
         ele.style.color = "white";
         ele.previousElementSibling.style.backgroundColor = "white";
         ele.previousElementSibling.style.color = "black";
-        ele.previousElementSibling.style.borderBottom = "1px solid grey";
+        ele.previousElementSibling.style.borderBottom = "1px solid #564f45";
     }
 }
 
 function focusInputBox(event) {
     let box = event.target.closest('div');
-
-    if (event.target == idInput) {
-        if (event.target.value == "") {
-            box.style.border = "2px solid #9B1B30";
-        } else if (event.target.value.length < 4 || event.target.value.length > 10) {
-            box.style.border = "2px solid #9B1B30";
-        } else {
-            box.style.border = "2px solid #03C75A";
-            box.style.borderBottom = "1px solid #03C75A";
-        }
-    } else {
-        if (event.target.value == "") {
-            box.style.border = "2px solid #9B1B30";
-        } else {
-            box.style.border = "2px solid #03C75A";
-            box.style.borderTop = "1px solid #03C75A";
-        }
+    for (e of box.children) {
+        e.style.opacity = "1";
     }
+    box.style.border = "2px solid #9B1B30";
 }
 
-function keydownInput(event) {
+function changeOpacityId(event) {
     let box = event.target.closest('div');
-    let keyCode = event.keyCode;
-    if (event.target == idInput) {
-        if (event.target.value == "") {
-            box.style.border = "2px solid #9B1B30";
-        } else if (event.target.value.length < 4 || event.target.value.length > 10) {
-            box.style.border = "2px solid #9B1B30";
-        } else {
-            box.style.border = "2px solid #03C75A";
-            // box.style.borderBottom = "1px solid #03C75A";
-        }
-
-        if (keyCode == 13) {
-            pwInput.focus();
-        }
-    } else {
-        if (event.target.value == "") {
-            box.style.border = "2px solid #9B1B30";
-        } else {
-            box.style.border = "2px solid #03C75A";
-            box.style.borderTop = "1px solid #03C75A";
-        }
-
-        if (keyCode == 13) {
-            loginBt.focus();
-        }
+    for (e of box.children) {
+        e.style.opacity = "1";
     }
-
-
+    if (event.which == 13) {
+        event.preventDefault();
+        pwInput.focus();
+    }
 }
 
-
-// function focusOutInputBox(event) {
-//     if (event.target == idInput) {
-//         if (event.target.value == "") {
-//             box.style.border = "2px solid #ff3f3f";
-//         } else if (event.target.value.length < 4 || event.target.value.length > 10) {
-//             box.style.border = "2px solid #ff3f3f";
-//             errorBox.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;아이디 : 4 ~ 15 글자 이하만 가능합니다.<br>`;
-
-//         } else {
-//             box.style.border = "2px solid #03C75A";
-//             box.style.borderBottom = "1px solid #03C75A";
-//         }
-//     } else {
-//         if (event.target.value == "") {
-//             box.style.border = "2px solid #9B1B30";
-//         } else {
-//             box.style.border = "2px solid #03C75A";
-//             box.style.borderTop = "1px solid #03C75A";
-//         }
-//     }
-// }
-
-function focusOutIdBox(event) {
+function changeOpacityPw(event) {
     let box = event.target.closest('div');
-    if (event.target.value == "") {
-        box.style.border = "2px solid #ff3f3f";
-        box.style.borderBottom = "1px solid #ff3f3f";
-        errorBox.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;아이디 : 입력해주세요.<br>`;
-    } else if (event.target.value.length < 4 || event.target.value.length > 15) {
-        box.style.border = "2px solid #ff3f3f";
-        box.style.borderBottom = "1px solid #ff3f3f";
-        errorBox.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;아이디 : 4 ~ 15 글자 이하만 가능합니다.<br>`;
-    } else {
-        box.style.border = "2px solid #03C75A";
-        box.style.borderBottom = "1px solid #03C75A";
+    for (e of box.children) {
+        e.style.opacity = "1";
     }
-}
-
-function focusOutPwBox(event) {
-    let box = event.target.closest('div');
-    if (event.target.value == "") {
-        box.style.border = "2px solid #ff3f3f";
-        box.style.borderTop = "1px solid #ff3f3f";
-    } else {
-        box.style.border = "2px solid #03C75A";
-        box.style.borderTop = "1px solid #03C75A";
-    }
+    return true;
 }
 
 
-// function loginCheck() {
-//     if (idInput.value == id && pwInput.value == pw) {
-//         errorBox.innerText = "성공";
-//     } else if (idInput.value != id && pwInput.value == pw) {
-//         errorBox.innerText = "아이디가 틀렸습니다."
-//         idInput.closest('div').style.border = "2px solid #9B1B30";
-//         idInput.closest('div').style.borderBottom = "1px solid #9B1B30";
-//     } else if (idInput.value == id && pwInput.value != pw) {
-//         errorBox.innerText = "비밀번호가 틀렸습니다."
-//         pwInput.closest('div').style.border = "2px solid #9B1B30";
-//         pwInput.closest('div').style.borderTop = "1px solid #9B1B30";
-//     } else {
-//         errorBox.innerText = "아이디,비밀번호가 틀렸습니다."
-//         idInput.closest('div').style.border = "2px solid #9B1B30";
-//         idInput.closest('div').style.borderBottom = "1px solid #9B1B30";
-//         pwInput.closest('div').style.border = "2px solid #9B1B30";
-//         pwInput.closest('div').style.borderTop = "1px solid #9B1B30";
-//     }
-// }
+function checkId(event) {
+    let value = event.target.value;
+    let key = /[a-z.0-9.-._]/gi;
+
+    if (value.length < 4 || value.length > 15) {
+        idBox.style.border = "2px solid #FF3F3F";
+        idBox.style.borderBottom = "1px solid #FF3F3F";
+        idBox.children[0].style.color = "#FF3F3F";
+        document.getElementById('idError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;아이디 : 4 ~ 15 글자 이하만 가능합니다.<br>`;
+    } else if (value.replace(key, '').length > 0) {
+        idBox.style.border = "2px solid #FF3F3F";
+        idBox.style.borderBottom = "1px solid #FF3F3F";
+        idBox.children[0].style.color = "#FF3F3F";
+        document.getElementById('idError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;아이디 : 영문, 숫자, 특수문자(-, _)만 가능합니다.<br>`;
+    } else {
+        idBox.style.border = "2px solid #03C75A";
+        idBox.style.borderBottom = "1px solid #03C75A";
+        idBox.children[0].style.color = "#03C75A";
+        document.getElementById('idError').innerHTML = '';
+    }
+}
+
+function checkPassword(event) {
+    let value = event.target.value;
+    let key = /[a-z.0-9.!-*.@]/gi;
+
+    if (value.length < 4 || value.length > 15) {
+        passwordBox.style.border = "2px solid #FF3F3F";
+        passwordBox.style.borderTop = "1px solid #FF3F3F";
+        passwordBox.children[0].style.color = "#FF3F3F";
+        document.getElementById('pwError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;비밀번호 : 4 ~ 15 글자 이하만 입력해주세요.<br>`;
+    } else {
+        passwordBox.style.border = "2px solid #03C75A";
+        passwordBox.style.borderTop = "1px solid #03C75A";
+        passwordBox.children[0].style.color = "#03C75A";
+        document.getElementById('pwError').innerHTML = '';
+    }
+}
