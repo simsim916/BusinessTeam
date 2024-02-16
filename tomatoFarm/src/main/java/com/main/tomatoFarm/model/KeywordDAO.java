@@ -25,8 +25,9 @@ public class KeywordDAO {
 		try {
 			pst = cn.prepareStatement(sql);
 
-			if (pst.executeUpdate() != 0) {
-				return pst.executeUpdate();
+			System.out.println("cc");
+			if (pst.executeUpdate() > 0) {
+				return 1;
 			} else {
 				sql = "insert into search(keyword) values('" + keyword + "')";
 				pst = cn.prepareStatement(sql);

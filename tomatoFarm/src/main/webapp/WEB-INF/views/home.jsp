@@ -46,8 +46,8 @@
                         <h1>토마토팜 tomatoFarm</h1>
                     </a>
                 </div>
-                <form id="searchBox">
-                    <input oninput="appearinputBoxResetButton(this)" id="searchBoxInput" type="text"
+                <form id="searchBox" action="/tomatoFarm/item/list">
+                    <input oninput="appearinputBoxResetButton(this)" name="keyword" id="searchBoxInput" type="text"
                         placeholder="검색어를 입력해주세요.">
                     <i onclick="resetInputBox(this)" class="fa-solid fa-circle-xmark"></i>
                     <button><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -281,7 +281,7 @@
                         <div class="itemOption">무료배송</div>
                     </a>
 </c:forEach>
-                    <a href class="linkBox">
+                    <a href="item/list?keyword=김구원선생" class="linkBox">
                         <p>" 김구원선생 "</p>
                         <i class="fa-regular fa-circle-play"></i> 상품 더 보러가기
                     </a>
@@ -326,7 +326,7 @@
                         <div class="itemOption">무료배송</div>
                     </a>
 </c:forEach>
-                    <a href class="linkBox">
+                    <a href="item/list?keyword=마이셰프" class="linkBox">
                         <p>" 마이셰프 "</p>
                         <i class="fa-regular fa-circle-play"></i> 상품 더 보러가기
                     </a>

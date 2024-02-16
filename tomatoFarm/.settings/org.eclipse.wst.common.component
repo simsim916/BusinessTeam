@@ -2,7 +2,7 @@
             	
     
     
-    <wb-module deploy-name="tomatoFarm">
+    <wb-module deploy-name="tomatoFarm-1.0.0-BUILD-SNAPSHOT">
                                 
         
         
@@ -19,6 +19,7 @@
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+<<<<<<< HEAD
 <<<<<<< HEAD
                 
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/generated-sources/annotations"/>
@@ -39,16 +40,14 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
                 
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
+=======
+>>>>>>> refs/remotes/origin/JYH2
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/generated-sources/annotations"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/generated-test-sources/test-annotations"/>
                         		
         
         
         <property name="java-output-path" value="target/classes"/>
-                                
-        
-        
-        <property name="context-root" value="main"/>
+        <property name="context-root" value="tomatoFarm"/>
                         	
     
 >>>>>>> origin/JYH2

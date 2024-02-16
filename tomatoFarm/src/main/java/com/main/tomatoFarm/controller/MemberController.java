@@ -54,6 +54,7 @@ public class MemberController {
 	@PostMapping("/signup")
 	public String singup(Model model, MemberDTO dto, @RequestParam("year") String year,@RequestParam("month") String month, @RequestParam("day") String day) {
 		
+		
 		String uri = "member/loginPage";
 		dto.setBirthday(year+"-"+month+"-"+day);
 		if(memberservice.insert(dto)>0) {
