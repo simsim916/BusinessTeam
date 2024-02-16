@@ -9,6 +9,11 @@ function secondContainerSlideLeftbth(event) {
     }
     secondSlideBtn.children[`${5 - margin / 440}`].setAttribute("id", "secondSlideBtnSelected")
     slideBox[0].style.marginLeft = `${margin}px`;
+    if (margin == 2200) {
+        slideBox[0].style.transition = '0';
+        slideBox[0].style.marginLeft = '-2200px';
+        slideBox[0].style.transition = '1s';
+    }
 }
 
 function secondContainerSlideRightbth(event) {
