@@ -28,7 +28,6 @@
 <script defer type="text/javascript"
 	src="/tomatoFarm/resources/js/itemList.js"></script>
 <title>토마토팜 || 상품검색</title>
-<title>토마토팜 || 상품검색</title>
 </head>
 
 <body>
