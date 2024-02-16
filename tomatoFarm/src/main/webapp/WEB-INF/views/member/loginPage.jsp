@@ -27,18 +27,18 @@
         <img id="logo" src="/tomatoFarm/resources/img/logo.png">
         <form id="loginBox">
             <div id="loginButton">
-                <div onclick="SortLogin(this)">일반 로그인</div>
-                <div onclick="SortLogin(this)">사업자 로그인</div>
+                <div onclick="selectLoginType(this)">일반 로그인</div>
+                <div onclick="selectLoginType(this)">사업자 로그인</div>
             </div>
 
             <div id="idBox">
                 <i class="fa-solid fa-user"></i>
-                <input onkeydown="keydownInput(event)" onblur="focusOutInputBox(event)" onfocus="focusInputBox(event)"
+                <input onkeydown="changeOpacityId(event)" onblur="focusOutInputBox(event)" onfocus="focusInputBox(event)"
                     id="id" type="text" name="id" placeholder="아이디">
             </div>
             <div id="passwordBox">
                 <i class="fa-solid fa-key"></i>
-                <input onkeydown="keydownInput(event)" onblur="focusOutInputBox(event)" onfocus="focusInputBox(event)"
+                <input onkeydown="changeOpacityId(event)" onblur="focusOutInputBox(event)" onfocus="focusInputBox(event)"
                     id="password" type="text" name="password" placeholder="비밀번호">
             </div>
             <p id="errorMessage">
