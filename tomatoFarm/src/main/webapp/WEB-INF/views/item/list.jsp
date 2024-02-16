@@ -28,110 +28,100 @@
 <script defer type="text/javascript"
 	src="/tomatoFarm/resources/js/itemList.js"></script>
 <title>토마토팜 || 상품검색</title>
-<title>토마토팜 || 상품검색</title>
 </head>
 
 <body>
-	<header id="topBar">
-		<div id="loginBar">
-			<div class="container">
-				<a href="">고객센터</a> &nbsp;&nbsp;|&nbsp;&nbsp; <a
-					href="/tomatoFarm/member/loginPage">로그인</a>
-				&nbsp;&nbsp;|&nbsp;&nbsp; <a href="/tomatoFarm/member/signupPage">회원가입</a>
-			</div>
-		</div>
+    <header id="topBar">
+        <div id="loginBar">
+            <div class="container">
+                <a href="">고객센터</a>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="/tomatoFarm/member/loginPage">로그인</a>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="/tomatoFarm/member/signupPage">회원가입</a>
+            </div>
+        </div>
 
-		<div id="searchBar">
-			<div class="container">
-				<div id="logoBox">
-					<a href="/tomatoFarm/"> <img
-						src="/tomatoFarm/resources/img/logo.png" alt="">
-						<h1>토마토팜 tomatoFarm</h1>
-					</a>
-				</div>
-				<form id="searchBox">
-					<input oninput="appearinputBoxResetButton(this)"
-						id="searchBoxInput" type="text" placeholder="검색어를 입력해주세요.">
-					<i onclick="resetInputBox(this)" class="fa-solid fa-circle-xmark"></i>
-					<button>
-						<i class="fa-solid fa-magnifying-glass"></i>
-					</button>
-				</form>
-				<div id="searchRightBox">
-					<div id="myPage">
-						<a href="/tomatoFarm/"><i class="fa-solid fa-user"></i></a>
-					</div>
-					<div id="myCart">
-						<a href="/tomatoFarm/"><i class="fa-solid fa-cart-shopping"></i></a>
-					</div>
-					<div id="myItem">
-						<a href="/tomatoFarm/"><i class="fa-solid fa-box-archive"></i></a>
-					</div>
-				</div>
-			</div>
-		</div>
+        <div id="searchBar">
+            <div class="container">
+                <div id="logoBox">
+                    <a href="/tomatoFarm/">
+                        <img src="/tomatoFarm/resources/img/logo.png" alt="">
+                        <h1>토마토팜 tomatoFarm</h1>
+                    </a>
+                </div>
+                <form id="searchBox" action="/tomatoFarm/item/list">
+                    <input oninput="appearinputBoxResetButton(this)" name="keyword" id="searchBoxInput" type="text"
+                        placeholder="검색어를 입력해주세요.">
+                    <i onclick="resetInputBox(this)" class="fa-solid fa-circle-xmark"></i>
+                    <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+                <div id="searchRightBox">
+                    <div id="myPage">
+                        <a href="/tomatoFarm/"><i class="fa-solid fa-user"></i></a>
+                    </div>
+                    <div id="myCart">
+                        <a href="/tomatoFarm/"><i class="fa-solid fa-cart-shopping"></i></a>
+                    </div>
+                    <div id="myItem">
+                        <a href="/tomatoFarm/"><i class="fa-solid fa-box-archive"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-		<nav>
-			<div class="container">
-				<div id="categoryBox">
-					<div onmouseover="firstCategoryVisible()" id="categoryTag">
-						<i class="fa-solid fa-bars"></i>&nbsp;&nbsp;&nbsp;카테고리
-					</div>
-					<ul onmouseout="firstCategoryHidden()"
-						onmouseover="firstCategoryVisible()" id="firstCategory">
-						<li></li>
-						<li id="firstCategorySearch">
-							<div>
-								<input onkeyup="seachCategory(this)"
-									oninput="appearinputBoxResetButton2(this)" type="text"><i
-									onclick="resetInputBox2(this)" class="fa-solid fa-circle-xmark"></i>
-								<i class="fa-solid fa-magnifying-glass"></i>
-							</div>
-						</li>
-						<li><a href="/tomatoFarm/item/list?keyword=밀키트"><img
-								src="/tomatoFarm/resources/img/category_mealkit.png"
-								alt="category_mealkit">밀키트</a></li>
-						<c:forEach var="l" items="${sortbList}">
-							<li><a href="/tomatoFarm/item/list?keyword=${l.sortb}"><img
-									src="/tomatoFarm/resources/img/${l.sortcode}.png"
-									alt="${l.sortb}">${l.sortb}</a></li>
-						</c:forEach>
-					</ul>
-					<ul onmouseout="firstCategoryHidden()"
-						onmouseover="firstCategoryVisible()" id="secondCategory">
-						<li></li>
-						<li id="secondCategorySearch">
-							<div>
-								<input onkeyup="seachCategory(this)"
-									oninput="appearinputBoxResetButton2(this)" type="text"><i
-									onclick="resetInputBox2(this)" class="fa-solid fa-circle-xmark"></i>
-								<i class="fa-solid fa-magnifying-glass"></i>
-							</div>
-						</li>
+        <nav>
+            <div class="container">
+                <div id="categoryBox">
+                    <div onmouseover="firstCategoryVisible()" id="categoryTag"><i
+                            class="fa-solid fa-bars"></i>&nbsp;&nbsp;&nbsp;카테고리</div>
+                    <ul onmouseout="firstCategoryHidden()" onmouseover="firstCategoryVisible()" id="firstCategory">
+                        <li></li>
+                        <li id="firstCategorySearch">
+                            <div>
+                                <input onkeyup="seachCategory(this)" oninput="appearinputBoxResetButton2(this)"
+                                    type="text"><i onclick="resetInputBox2(this)" class="fa-solid fa-circle-xmark"></i>
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </div>
+                        </li>
+                        <li><a href="/tomatoFarm/item/list?keyword=밀키트"><img src="/tomatoFarm/resources/img/category_mealkit.png" alt="category_mealkit">밀키트</a></li>
+<c:forEach var="l" items="${sortbList}">
+                        <li><a href="/tomatoFarm/item/list?keyword=${l.sortb}"><img src="/tomatoFarm/resources/img/${l.sortcode}.png" alt="${l.sortb}">${l.sortb}</a></li>
+</c:forEach>
+                    </ul>
+                    <ul onmouseout="firstCategoryHidden()" onmouseover="firstCategoryVisible()" id="secondCategory">
+                        <li></li>
+                        <li id="secondCategorySearch">
+                            <div>
+                                <input onkeyup="seachCategory(this)" oninput="appearinputBoxResetButton2(this)"
+                                    type="text"><i onclick="resetInputBox2(this)" class="fa-solid fa-circle-xmark"></i>
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </div>
+                        </li>
+                        
+                        <li><a href="">채소</a></li>
+                        <li>과일ㆍ견과ㆍ쌀</li>
+                        <li>수산ㆍ해산ㆍ건어물</li>
+                        <li>정육ㆍ가공육ㆍ계란</li>
+                        <li>국ㆍ반찬ㆍ메인요리</li>
+                        <li>간편식ㆍ밀키트ㆍ샐러드</li>
+                        <li>면ㆍ양념ㆍ오일</li>
+                        <li>생수ㆍ음료ㆍ커피</li>
+                        <li>간식ㆍ과자ㆍ떡</li>
+                        <li>베이커리</li>
+                        <li>유제품</li>
 
-						<li><a href="">채소</a></li>
-						<li>과일ㆍ견과ㆍ쌀</li>
-						<li>수산ㆍ해산ㆍ건어물</li>
-						<li>정육ㆍ가공육ㆍ계란</li>
-						<li>국ㆍ반찬ㆍ메인요리</li>
-						<li>간편식ㆍ밀키트ㆍ샐러드</li>
-						<li>면ㆍ양념ㆍ오일</li>
-						<li>생수ㆍ음료ㆍ커피</li>
-						<li>간식ㆍ과자ㆍ떡</li>
-						<li>베이커리</li>
-						<li>유제품</li>
-
-					</ul>
-				</div>
-				<ul id="navBar">
-					<li><a href="/tomatoFarm/item/list?keyword=밀키트">밀키트 주문</a></li>
-					<li><a href="">식단 주문</a></li>
-					<li><a href="">재료 주문</a></li>
-					<li><a href="">이벤트</a></li>
-				</ul>
-			</div>
-		</nav>
-	</header>
+                    </ul>
+                </div>
+                <ul id="navBar">
+                    <li><a href="/tomatoFarm/item/list?keyword=밀키트">밀키트 주문</a></li>
+                    <li><a href="">식단 주문</a></li>
+                    <li><a href="">재료 주문</a></li>
+                    <li><a href="">이벤트</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
 	<div id="searchTitle" class="container">
 		"<b>${requestScope.keyword}</b>"<span>에 대한 검색 결과</span>
 	</div>
