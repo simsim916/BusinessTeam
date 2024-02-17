@@ -1,3 +1,5 @@
+'use strict'
+
 function a(str) {
     console.log(str)
 }
@@ -5,10 +7,25 @@ function a(str) {
 function otherCategory(ele) {
     ele.style.backgroundColor = '#9b1b1f63';
     for (let i = 0; i < ele.parentNode.childElementCount; i++) {
-        if (ele.parentNode.children[i] == ele) continue;
-        ele.parentNode.children[i].style.backgroundColor = 'white';
+        if (ele.parentNode.children[i] != ele) {
+            ele.parentNode.children[i].style.backgroundColor = 'white';
+        }
     }
 }
+
+function showContent(ele) {
+    if (ele.children[5].className == 'contentBox disappear') {
+        ele.children[5].className = 'contentBox appear';
+        for (let i = 1; i < ele.parentNode.childElementCount; i++) {
+            if (ele.parentNode.children[i] != ele) {
+                ele.parentNode.children[i].children[5].className = 'disappear';
+            }
+        }
+    } else {
+        ele.children[5].className = 'contentBox disappear';
+    }
+}
+
 
 // function changePage(ele) {
 //     let chess = document.getElementById('tomatoChess');
@@ -36,15 +53,3 @@ function otherCategory(ele) {
 //         } break;
 //     }
 // }
-
-function showContent(ele) {
-    if (ele.children[5].className == 'contentBox disappear') {
-        ele.children[5].className = 'contentBox appear';
-        for (let i = 1; i < ele.parentNode.childElementCount; i++) {
-            if (ele.parentNode.children[i] == ele) continue;
-            ele.parentNode.children[i].children[5].className = 'disappear';
-        }
-    } else {
-        ele.children[5].className = 'contentBox disappear';
-    }
-}

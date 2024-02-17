@@ -46,6 +46,10 @@ body {
     opacity: 0.5;
 }
 
+#imgBoxImgList>div:hover {
+    opacity: 1;
+}
+
 #imgBoxImgList>div:nth-of-type(1) {
     opacity: 1;
 }
