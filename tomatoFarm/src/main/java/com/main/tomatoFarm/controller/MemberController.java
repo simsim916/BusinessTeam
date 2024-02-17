@@ -1,15 +1,16 @@
 package com.main.tomatoFarm.controller;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.main.tomatoFarm.domain.MemberDTO;
 import com.main.tomatoFarm.service.MemberService;
@@ -26,24 +27,28 @@ public class MemberController {
 	
 	// login -> home
 	@PostMapping("/login")
-	public String login(HttpSession session, Model model, MemberDTO dto) {
+	public String login(HttpSession session, Model model, MemberDTO dto, RedirectAttributes attr) {
 
 		String uri = "member/loginPage";
 		
-
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		MemberDTO dbDTO = memberservice.selectOne(dto.getId());
+		String insertedPw = dto.getPassword();
+		String clientPw = dbDTO.getPassword();
+		
 		if (dbDTO != null) {
-			if (dbDTO.getPassword() == dto.getPassword()) {
+			if (encoder.matches(insertedPw, clientPw)){
 				// 로그인 성공
 				session.setAttribute("memberDTO", dbDTO);
 				uri = "/home";
 			} else {
 				// PW 틀림
+				attr.addFlashAttribute("loginSuccessOrNot", "비밀번호를 확인해주세요");
 			}
 		} else {
-			// ID가 틀림
+			attr.addFlashAttribute("loginSuccessOrNot", "아이디를 확인해주세요");
 		}
-		return uri;
+		return "redirect:/" + uri;
 	}
 	
 	// signUp page
@@ -53,18 +58,27 @@ public class MemberController {
 	
 	// signUp 
 	@PostMapping("/signup")
-	public String singup(Model model, MemberDTO dto, @RequestParam("year") String year, @RequestParam("month") String month, @RequestParam("day") String day) {
+	public String singup(MemberDTO dto, @RequestParam("year") String year, 
+			@RequestParam("month") String month, @RequestParam("day") String day
+			, RedirectAttributes attr ) {
 		
 		
 		String uri = "member/loginPage";
+		//=======================================================
+		String pwd = dto.getPassword();
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String encodedPwd = encoder.encode(pwd);
+		dto.setPassword(encodedPwd);
+		//=======================================================		
 		dto.setBirthday(year+"-"+month+"-"+day);
 		dto.setEmailback(dto.getEmailback().replace(",", ""));
+		//=======================================================		
 		if(memberservice.insert(dto)>0) {
-			model.addAttribute("signUpSuccessOrNot", "회원가입 성공했습니다");
+			attr.addFlashAttribute("signUpSuccessOrNot", "회원가입 성공했습니다");
 		}else {
-			model.addAttribute("signUpSuccessOrNot", "회원가입 실패했습니다");
+			attr.addFlashAttribute("signUpSuccessOrNot", "회원가입 실패했습니다");
 			uri="member/signupPage";
 		}
-		return uri;	
+		return "redirect:/" + uri;	
 	}
 }

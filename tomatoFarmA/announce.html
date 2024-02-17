@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="nav.css">
-    <link rel="stylesheet" href="itemDetail.css">
+    <!-- <link rel="stylesheet" href="nav.css"> -->
     <!-- 폰트어썸 -->
     <script src="https://kit.fontawesome.com/d68045e863.js" crossorigin="anonymous"></script>
     <!-- 폰트 -->
@@ -21,8 +20,8 @@
     <link rel="stylesheet" href="/tomatoFarmA/resources/css/00header.css">
     <script defer src="/tomatoFarmA/resources/js/00header.js"></script>
     <!-- 페이지 CSS, JS -->
-    <link rel="stylesheet" href="/tomatoFarmA/resources/css/itemDetail.css">
-    <script defer src="/tomatoFarmA/resources/js/itemDetail.js"></script>
+    <link rel="stylesheet" href="/tomatoFarmA/resources/css/announce.css">
+    <script defer src="/tomatoFarmA/resources/js/announce.js"></script>
     <title>토마토팜 || 제품</title>
 </head>
 
@@ -166,119 +165,69 @@
         </nav>
     </header>
 
-    <main id="itemDetailBox" class="container">
-        <div id="imgBox">
-            <div id="imgBoxImg">
-                <img src="/tomatoFarmA/resources/img/itemImg/5000100_1.jpg" alt="소고기 찹스테이크 사진">
-            </div>
-            <div id="imgBoxImgList">
-                <div onclick="clickImg(this)"><img src="/tomatoFarmA/resources/img/itemImg/5000100_1.jpg"
-                        alt="소고기 찹스테이크 조리"></div>
-                <div onclick="clickImg(this)"><img src="/tomatoFarmA/resources/img/itemImg/5000100_2.jpg"
-                        alt="소고기 찹스테이크 제품"></div>
-                <div onclick="clickImg(this)"><img src="/tomatoFarmA/resources/img/itemImg/5000100_3.jpg"
-                        alt="소고기 찹스테이크 구성품"></div>
-                <div onclick="clickImg(this)"><img src="/tomatoFarmA/resources/img/itemImg/5000100_4.jpg"
-                        alt="소고기 찹스테이크 상세표기"></div>
-            </div>
-        </div>
-
-        <div id="itemDetailSM">
-            <div id="itemDetailTitle">
-                <div id="title1">새벽배송</div>
-                <div id="title2">소고기 찹스테이크</div>
-                <div id="title3">소고기 찹스테이크 신선하고 맛있어요</div>
-
-                <span id="title4">10<span>%</span></span>
-                <div id="title5">16110원</div>
-                <div id="title6">14499.0원</div>
+    <main class="container">
+        <div id="annContainer" class="container">
 
 
-            </div>
-            <div>배송</div>
 
-            <div>3500원<br>(23시 전 주문 시 내일 아침 7시 전 도착)</div>
-
-
-            <div>제조사</div>
-            <div>프레시지</div>
-            <div>포장타입</div>
-            <div>냉동</div>
-            <div>판매단위</div>
-
-            <div>1팩</div>
-
-
-            <div>중량/용량</div>
-            <div>527g</div>
-            <div>유통기한</div>
-            <div>수령일 포함 180일 이상 남은 제품을 보내드립니다.</div>
-            <div id="itemSelect">
-                <div>수량 선택</div>
-                <div id="countBox">
-                    <button><i class="fa-solid fa-plus"></i></button>
-                    <input type="text" value="1">
-                    <button><i class="fa-solid fa-minus"></i></button>
+            <div id="annTopBox">
+                <div>TomatoFarm 공지사항</div>
+                <div id="annTopSearchBox">
+                    <div>공지사항</div>
+                    <div>
+                        <form action="">
+                            <input type="date">
+                            <input type="date">
+                            <input type="text">
+                            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </form>
+                    </div>
                 </div>
-                <div id="priceBox">
-                    <div id="price">총 상품금액&nbsp; : &nbsp;<span>30000원</span></div>
-                    <a href="" id="cart">장바구니 담기</a>
-                    <a href="" id="buy">구매하기</a>
+            </div>
+
+            <div id="annBoard">
+                <div class="annRow">
+                    <div>번호</div>
+                    <div>제목</div>
+                    <div>작성자</div>
+                    <div>작성일자</div>
+                    <div>조회수</div>
+                </div>
+                <div class="annRow">
+                    <div>1</div>
+                    <div onclick="showContent(this)"><i class="fa-solid fa-chevron-down"></i> 브랜드 김구원선생 판매 중단</div>
+                    <div>홍길동</div>
+                    <div>2024-01-01 11:11</div>
+                    <div>7</div>
+                </div>
+                <div class="annRow">
+                    <div>1</div>
+                    <div onclick="showContent(this)"><i class="fa-solid fa-chevron-down"></i> 마이셰프 특가 할인 공지</div>
+                    <div>이순신</div>
+                    <div>2024-01-01 11:11</div>
+                    <div>77</div>
+                </div>
+                <div class="annRow">
+                    <div>1</div>
+                    <div onclick="showContent(this)"><i class="fa-solid fa-chevron-down"></i> 마이셰프 밀키트 관련 공지사항</div>
+                    <div>홍길동</div>
+                    <div>2024-01-01 11:11</div>
+                    <div>777</div>
+                </div>
+                <div class="annRow">
+                    <div>1</div>
+                    <div onclick="showContent(this)"><i class="fa-solid fa-chevron-down"></i> 마이셰프 밀키트 관련 공지사항</div>
+                    <div>홍길동</div>
+                    <div>2024-01-01 11:11</div>
+                    <div>7777</div>
                 </div>
             </div>
 
         </div>
 
+        <!-- <i class="fa-solid fa-chevron-down"></i> -->
 
     </main>
-    <ul id="detailClick" class="container">
-        <li>상품설명</li>
-        <li>상세정보</li>
-        <li>후기</li>
-        <li>문의</li>
-    </ul>
-    <div id="introItem" class="container">
-
-        <div class="subTitle">
-            <hr>
-            <h4>상품 조리 사진
-                <img src="/tomatoFarmA/resources/img/logo3.png" alt="제품 조리 사진">
-            </h4>
-            <hr>
-        </div>
-        <img src="/tomatoFarmA/resources/img/itemImg/5000100_2.jpg" alt="소고기 찹스테이크 제품">
-        <div class="subTitle">
-            <hr>
-            <h4>상품 구성
-                <img src="/tomatoFarmA/resources/img/logo4.png" alt="상품 구성">
-            </h4>
-            <hr>
-        </div>
-        <img src="/tomatoFarmA/resources/img/itemImg/5000100_3.jpg" alt="소고기 찹스테이크 구성품">
-        <div class="subTitle">
-            <hr>
-            <h4>상품 표시사항
-                <img src="/tomatoFarmA/resources/img/logo2.png" alt="제품 조리 사진">
-            </h4>
-            <hr>
-        </div>
-        <img src="/tomatoFarmA/resources/img/itemImg/5000100_4.jpg" alt="소고기 찹스테이크 상세표기">
-    </div>
-    <hr>
-    <div id="askBoardBox" class="container">
-        <h5>상품문의</h5>
-        <a href=""> 문의하기 </a>
-        <div id="askBoard">
-            <div class="boardRow">
-                <div>공개</div>
-                <div>제목</div>
-                <div>작성자</div>
-                <div>작성일</div>
-            </div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>
 </body>
 
 </html>
