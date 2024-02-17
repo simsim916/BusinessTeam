@@ -34,9 +34,9 @@ public class MemberController {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		MemberDTO dbDTO = memberservice.selectOne(dto.getId());
 		String insertedPw = dto.getPassword();
-		String clientPw = dbDTO.getPassword();
 		
 		if (dbDTO != null) {
+			String clientPw = dbDTO.getPassword();
 			if (encoder.matches(insertedPw, clientPw)){
 				// 로그인 성공
 				session.setAttribute("memberDTO", dbDTO);

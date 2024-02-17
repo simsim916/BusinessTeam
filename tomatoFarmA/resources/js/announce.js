@@ -2,23 +2,49 @@ function a(str) {
     console.log(str)
 }
 
+function otherCategory(ele) {
+    ele.style.backgroundColor = '#9b1b1f63';
+    for (let i = 0; i < ele.parentNode.childElementCount; i++) {
+        if (ele.parentNode.children[i] == ele) continue;
+        ele.parentNode.children[i].style.backgroundColor = 'white';
+    }
+}
+
+// function changePage(ele) {
+//     let chess = document.getElementById('tomatoChess');
+//     a(ele.getAttribute('value'));
+//     switch (ele.getAttribute('value')) {
+//         case '2': {
+//             chess.style.transform = 'translateX(60px)';
+//             chess.style.transitionDuration = '1s';
+//         } break;
+//         case '3': {
+//             chess.style.transform = 'translateX(120px)';
+//             chess.style.transitionDuration = '1s';
+//         } break;
+//         case '4': {
+//             chess.style.transform = 'translateX(180px)';
+//             chess.style.transitionDuration = '1s';
+//         } break;
+//         case '5': {
+//             chess.style.transform = 'translateX(240px)';
+//             chess.style.transitionDuration = '1s';
+//         } break;
+//         case '1': {
+//             chess.style.transform = 'translateX(300px)';
+//             chess.style.transitionDuration = '1s';
+//         } break;
+//     }
+// }
+
 function showContent(ele) {
-
-    // const content = '<div id=annContent>클릭한 공지사항의 내용</div>';
-    // const ContentDiv = document.createElement('div');
-    // ContentDiv.className = 'ContentBox';
-    // ContentDiv.innerText = 'agqilwljklajfklldjklzsjdksd'
-    // ele.parentNode.after(ContentDiv);
-    // 이렇게 하면 된다는데
-    // 태그가 추가되는게 아니라 텍스트가 그대로 추가된다.
-
-    a(ele.parentNode.className);
-    if (ele.parentNode.previousElementSibling.className == 'annRow') {
-        const ContentDiv = document.createElement('div');
-        ContentDiv.className = 'contentBox';
-        ContentDiv.innerText = "브랜드 '김구원선생'은 2024년 01월 01일 이후로 TomatoFarm 에서 판매를 중단하게 되었습니다. 관련 상품들은 24년 2월까지만 게시할 예정입니다";
-        ele.parentNode.after(ContentDiv);
+    if (ele.children[5].className == 'contentBox disappear') {
+        ele.children[5].className = 'contentBox appear';
+        for (let i = 1; i < ele.parentNode.childElementCount; i++) {
+            if (ele.parentNode.children[i] == ele) continue;
+            ele.parentNode.children[i].children[5].className = 'disappear';
+        }
     } else {
-        ele.parentNode.nextElementSibling.remove();
+        ele.children[5].className = 'contentBox disappear';
     }
 }
