@@ -43,10 +43,10 @@ public class MemberController {
 				uri = "/home";
 			} else {
 				// PW 틀림
-				attr.addFlashAttribute("loginSuccessOrNot", "비밀번호를 확인해주세요");
+				attr.addFlashAttribute("successOrNot", "비밀번호를 확인해주세요");
 			}
 		} else {
-			attr.addFlashAttribute("loginSuccessOrNot", "아이디를 확인해주세요");
+			attr.addFlashAttribute("successOrNot", "아이디를 확인해주세요");
 		}
 		return "redirect:/" + uri;
 	}
@@ -62,8 +62,10 @@ public class MemberController {
 			@RequestParam("month") String month, @RequestParam("day") String day
 			, RedirectAttributes attr ) {
 		
-		
 		String uri = "member/loginPage";
+		if(dto.getPassword().length() < 4 || dto.getPassword().length() > 15) {
+			return "redirect:/" + uri;	
+		}
 		//=======================================================
 		String pwd = dto.getPassword();
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -74,9 +76,9 @@ public class MemberController {
 		dto.setEmailback(dto.getEmailback().replace(",", ""));
 		//=======================================================		
 		if(memberservice.insert(dto)>0) {
-			attr.addFlashAttribute("signUpSuccessOrNot", "회원가입 성공했습니다");
+			attr.addFlashAttribute("successOrNot", "회원가입 성공했습니다. 로그인 후 이용하세요");
 		}else {
-			attr.addFlashAttribute("signUpSuccessOrNot", "회원가입 실패했습니다");
+			attr.addFlashAttribute("successOrNot", "회원가입 실패했습니다");
 			uri="member/signupPage";
 		}
 		return "redirect:/" + uri;	

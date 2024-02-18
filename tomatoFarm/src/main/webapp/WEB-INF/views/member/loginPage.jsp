@@ -48,9 +48,9 @@
 
             <button id="loginInBox">로그인</button>
         </form>
-        <p id="signUpSuccessOrNot">
-	        <c:if test="${!empty loginSuccessOrNot}">
-	        	${loginSuccessOrNot}
+        <p id="successOrNot">
+	        <c:if test="${!empty successOrNot}">
+	        	<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;${successOrNot}
 	        </c:if>
         </p>
         <ul id="search">

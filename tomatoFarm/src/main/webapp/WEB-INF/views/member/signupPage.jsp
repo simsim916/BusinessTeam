@@ -102,9 +102,9 @@
             <button id="joinBox">가입하기</button>
         </form>
         <br>
-        <p id="signUpSuccessOrNot">
-	        <c:if test="${!empty signUpSuccessOrNot}">
-	        	${signUpSuccessOrNot}
+        <p id="successOrNot">
+	        <c:if test="${!empty successOrNot}">
+	        	<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;${successOrNot}
 	        </c:if>
         </p>
     </main>
