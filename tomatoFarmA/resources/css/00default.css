@@ -44,6 +44,11 @@ button {
     opacity: 0;
 }
 
-.transition1 {
-    transition: 1s;
+.appear {
+    box-shadow: 0px 0px 10px 4px #00000020;
+}
+
+.appear>div:nth-child(1) {
+    opacity: 1;
+    display: block;
 }

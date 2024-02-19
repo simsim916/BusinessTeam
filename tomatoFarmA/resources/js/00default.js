@@ -2,6 +2,7 @@
 
 let hides = document.getElementsByClassName("hide");
 
+// hide
 window.addEventListener("scroll", () => {
     for (let e of hides) {
         if (e.getBoundingClientRect().top < 100 + window.innerHeight) {
@@ -11,3 +12,15 @@ window.addEventListener("scroll", () => {
         }
     }
 });
+
+// appear
+function showContent(ele) {
+    if (ele.classList.contains('appear')) {
+        ele.classList.remove('appear');
+    } else {
+        if (ele.closest('.appearContainer').getElementsByClassName('appear')[0]) {
+            ele.closest('.appearContainer').getElementsByClassName('appear')[0].classList.remove('appear');
+        }
+        ele.classList.add('appear');
+    }
+}

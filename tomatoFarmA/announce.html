@@ -167,19 +167,14 @@
 
     <main>
         <div class="container">
-            <div id="otherMenu">
-                <a href="#" onclick="otherCategory(this)">공지사항</a>
-                <a href="#" onclick="otherCategory(this)">QnA</a>
-                <a href="#" onclick="otherCategory(this)">브랜드 뉴스</a>
-            </div>
             <div id="annTopBox">
-                <div>공지사항<span>( 우리 팀 > 파이팅 )</span></div>
-                <div>
+                <h3>공지사항</h3>
+            </div>
+            <div id="announceBoard" class="appearContainer">
+                <form>
                     <input type="text">
                     <button><i class="fa-solid fa-magnifying-glass"></i></button>
-                </div>
-            </div>
-            <div id="announceBoard">
+                </form>
                 <div>
                     <div>번호</div>
                     <div>제목</div>
@@ -188,12 +183,7 @@
                     <div>조회수</div>
                 </div>
                 <div onclick="showContent(this)">
-                    <div><img src="/tomatoFarmA/resources/img/logo.png" alt=""></div>
-                    <div>토마토팜 홈페이지 이용시 </div>
-                    <div>홍길동</div>
-                    <div>2024-02-02 11:11</div>
-                    <div>77</div>
-                    <div class="contentBox disappear">
+                    <div class="contentBox ">
                         <i class="fa-solid fa-bullhorn"></i>
                         <div> - 토마토팜 홈페이지 이용시 - </div>
                         <p>2024-02-02일 이후 토마토팜에서는 브랜드 '김구원선생' 제품의 판매를 중단합니다. 이미 주문한 상품은 발송 예정이며, 재고가 남은 상품은 재고소진시까지
@@ -202,14 +192,14 @@
                         <a href="#">수정</a>
                         <a href="#">삭제</a>
                     </div>
-                </div>
-                <div onclick="showContent(this)">
+                    <div>공지</div>
+                    <div>토마토팜 홈페이지 이용시 </div>
                     <div><img src="/tomatoFarmA/resources/img/logo.png" alt=""></div>
-                    <div>명절 배송지연 관련 공지사항</div>
-                    <div>홍길동</div>
                     <div>2024-02-02 11:11</div>
                     <div>77</div>
-                    <div class="contentBox disappear">
+                </div>
+                <div onclick="showContent(this)">
+                    <div class="contentBox ">
                         <i class="fa-solid fa-bullhorn"></i>
                         <div> - 명절 배송지연 관련 공지사항 - </div>
                         <p>2024-02-02일 이후 토마토팜에서는 브랜드 '김구원선생' 제품의 판매를 중단합니다. 이미 주문한 상품은 발송 예정이며, 재고가 남은 상품은 재고소진시까지
@@ -218,31 +208,32 @@
                         <a href="#">수정</a>
                         <a href="#">삭제</a>
                     </div>
+                    <div><img src="/tomatoFarmA/resources/img/logo.png" alt=""></div>
+                    <div>명절 배송지연 관련 공지사항</div>
+                    <div>홍길동</div>
+                    <div>2024-02-02 11:11</div>
+                    <div>77</div>
                 </div>
                 <div onclick="showContent(this)">
+                    <div class="contentBox ">
+                        <div> - '프레시지' 명절 할인 상품 공지 - </div>
+                        <p>2024-02-02일 이후 토마토팜에서는 브랜드 '김구원선생' 제품의 판매를 중단합니다. 이미 주문한 상품은 발송 예정이며, 재고가 남은 상품은 재고소진시까지
+                            홈페이지에 등록 되어있을 예정입니다. 자세한 내용은 1577-1577로 문의 부탁 드립니다.
+                        </p>
+                        <form action="">
+                            <a href="#">수정</a>
+                            <a href="#">삭제</a>
+                        </form>
+                    </div>
                     <div>10</div>
                     <div>'프레시지' 명절 할인 상품 공지<span class="latestAnnounce"><i class="fa-solid fa-n"></i></span>
                     </div>
                     <div>홍길동</div>
                     <div>2024-02-02 11:11</div>
                     <div>77</div>
-                    <div class="contentBox disappear">
-                        <i class="fa-solid fa-bullhorn"></i>
-                        <div> - '프레시지' 명절 할인 상품 공지 - </div>
-                        <p>2024-02-02일 이후 토마토팜에서는 브랜드 '김구원선생' 제품의 판매를 중단합니다. 이미 주문한 상품은 발송 예정이며, 재고가 남은 상품은 재고소진시까지
-                            홈페이지에 등록 되어있을 예정입니다. 자세한 내용은 1577-1577로 문의 부탁 드립니다.
-                        </p>
-                        <a href="#">수정</a>
-                        <a href="#">삭제</a>
-                    </div>
                 </div>
                 <div onclick="showContent(this)">
-                    <div>9</div>
-                    <div>우리 팀 파이팅<span class="latestAnnounce"><i class="fa-solid fa-n"></i></span></div>
-                    <div>홍길동</div>
-                    <div>2024-02-02 11:11</div>
-                    <div>77</div>
-                    <div class="contentBox disappear">
+                    <div class="contentBox ">
                         <i class="fa-solid fa-bullhorn"></i>
                         <div> - 우리 팀 파이팅 - </div>
                         <p>2024-02-02일 이후 토마토팜에서는 브랜드 '김구원선생' 제품의 판매를 중단합니다. 이미 주문한 상품은 발송 예정이며, 재고가 남은 상품은 재고소진시까지
@@ -251,14 +242,14 @@
                         <a href="#">수정</a>
                         <a href="#">삭제</a>
                     </div>
-                </div>
-                <div onclick="showContent(this)">
-                    <div>8</div>
-                    <div>브랜드 '김구원 선생' 판매중단 공지</div>
+                    <div>9</div>
+                    <div>우리 팀 파이팅<span class="latestAnnounce"><i class="fa-solid fa-n"></i></span></div>
                     <div>홍길동</div>
                     <div>2024-02-02 11:11</div>
                     <div>77</div>
-                    <div class="contentBox disappear">
+                </div>
+                <div onclick="showContent(this)">
+                    <div class="contentBox ">
                         <i class="fa-solid fa-bullhorn"></i>
                         <div> - 브랜드 '김구원 선생' 판매중단 공지 - </div>
                         <p>2024-02-02일 이후 토마토팜에서는 브랜드 '김구원선생' 제품의 판매를 중단합니다. 이미 주문한 상품은 발송 예정이며, 재고가 남은 상품은 재고소진시까지
@@ -267,14 +258,14 @@
                         <a href="#">수정</a>
                         <a href="#">삭제</a>
                     </div>
-                </div>
-                <div onclick="showContent(this)">
-                    <div>7</div>
-                    <div>'마이셰프' 명절 할인 시작</div>
+                    <div>8</div>
+                    <div>브랜드 '김구원 선생' 판매중단 공지</div>
                     <div>홍길동</div>
                     <div>2024-02-02 11:11</div>
                     <div>77</div>
-                    <div class="contentBox disappear">
+                </div>
+                <div onclick="showContent(this)">
+                    <div class="contentBox ">
                         <i class="fa-solid fa-bullhorn"></i>
                         <div> - '마이셰프' 명절 할인 시작 - </div>
                         <p>2024-02-02일 이후 토마토팜에서는 브랜드 '김구원선생' 제품의 판매를 중단합니다. 이미 주문한 상품은 발송 예정이며, 재고가 남은 상품은 재고소진시까지
@@ -283,14 +274,14 @@
                         <a href="#">수정</a>
                         <a href="#">삭제</a>
                     </div>
-                </div>
-                <div onclick="showContent(this)">
-                    <div>6</div>
-                    <div>밀키트 구매시 주의사항</div>
+                    <div>7</div>
+                    <div>'마이셰프' 명절 할인 시작</div>
                     <div>홍길동</div>
                     <div>2024-02-02 11:11</div>
                     <div>77</div>
-                    <div class="contentBox disappear">
+                </div>
+                <div onclick="showContent(this)">
+                    <div class="contentBox ">
                         <i class="fa-solid fa-bullhorn"></i>
                         <div> - 밀키트 구매시 주의사항 - </div>
                         <p>2024-02-02일 이후 토마토팜에서는 브랜드 '김구원선생' 제품의 판매를 중단합니다. 이미 주문한 상품은 발송 예정이며, 재고가 남은 상품은 재고소진시까지
@@ -299,14 +290,14 @@
                         <a href="#">수정</a>
                         <a href="#">삭제</a>
                     </div>
-                </div>
-                <div onclick="showContent(this)">
-                    <div>5</div>
-                    <div>토마토팜 X 채선당 기획전</div>
+                    <div>6</div>
+                    <div>밀키트 구매시 주의사항</div>
                     <div>홍길동</div>
                     <div>2024-02-02 11:11</div>
                     <div>77</div>
-                    <div class="contentBox disappear">
+                </div>
+                <div onclick="showContent(this)">
+                    <div class="contentBox ">
                         <i class="fa-solid fa-bullhorn"></i>
                         <div> - 토마토팜 X 채선당 기획전 - </div>
                         <p>2024-02-02일 이후 토마토팜에서는 브랜드 '김구원선생' 제품의 판매를 중단합니다. 이미 주문한 상품은 발송 예정이며, 재고가 남은 상품은 재고소진시까지
@@ -315,14 +306,14 @@
                         <a href="#">수정</a>
                         <a href="#">삭제</a>
                     </div>
-                </div>
-                <div onclick="showContent(this)">
-                    <div>4</div>
-                    <div>신규브랜드 입점 '푸드어셈블' </div>
+                    <div>5</div>
+                    <div>토마토팜 X 채선당 기획전</div>
                     <div>홍길동</div>
                     <div>2024-02-02 11:11</div>
                     <div>77</div>
-                    <div class="contentBox disappear">
+                </div>
+                <div onclick="showContent(this)">
+                    <div class="contentBox ">
                         <i class="fa-solid fa-bullhorn"></i>
                         <div> - 신규브랜드 입점 '푸드어셈블' - </div>
                         <p>2024-02-02일 이후 토마토팜에서는 브랜드 '김구원선생' 제품의 판매를 중단합니다. 이미 주문한 상품은 발송 예정이며, 재고가 남은 상품은 재고소진시까지
@@ -331,14 +322,14 @@
                         <a href="#">수정</a>
                         <a href="#">삭제</a>
                     </div>
-                </div>
-                <div onclick="showContent(this)">
-                    <div>3</div>
-                    <div>2024년 맞이 '하루한킷' 특별 할인행사 </div>
+                    <div>4</div>
+                    <div>신규브랜드 입점 '푸드어셈블' </div>
                     <div>홍길동</div>
                     <div>2024-02-02 11:11</div>
                     <div>77</div>
-                    <div class="contentBox disappear">
+                </div>
+                <div onclick="showContent(this)">
+                    <div class="contentBox ">
                         <i class="fa-solid fa-bullhorn"></i>
                         <div> - 2024년 맞이 '하루한킷' 특별 할인행사 - </div>
                         <p>2024-02-02일 이후 토마토팜에서는 브랜드 '김구원선생' 제품의 판매를 중단합니다. 이미 주문한 상품은 발송 예정이며, 재고가 남은 상품은 재고소진시까지
@@ -347,14 +338,14 @@
                         <a href="#">수정</a>
                         <a href="#">삭제</a>
                     </div>
-                </div>
-                <div onclick="showContent(this)">
-                    <div>2</div>
-                    <div>2025년도 좋은 일 가득 </div>
+                    <div>3</div>
+                    <div>2024년 맞이 '하루한킷' 특별 할인행사 </div>
                     <div>홍길동</div>
                     <div>2024-02-02 11:11</div>
                     <div>77</div>
-                    <div class="contentBox disappear">
+                </div>
+                <div onclick="showContent(this)">
+                    <div class="contentBox ">
                         <i class="fa-solid fa-bullhorn"></i>
                         <div> - 2025년도 좋은 일 가득 - </div>
                         <p>2024-02-02일 이후 토마토팜에서는 브랜드 '김구원선생' 제품의 판매를 중단합니다. 이미 주문한 상품은 발송 예정이며, 재고가 남은 상품은 재고소진시까지
@@ -363,14 +354,14 @@
                         <a href="#">수정</a>
                         <a href="#">삭제</a>
                     </div>
-                </div>
-                <div onclick="showContent(this)">
-                    <div>1</div>
-                    <div>2024년 좋은 일 가득 </div>
+                    <div>2</div>
+                    <div>2025년도 좋은 일 가득 </div>
                     <div>홍길동</div>
                     <div>2024-02-02 11:11</div>
                     <div>77</div>
-                    <div class="contentBox disappear">
+                </div>
+                <div onclick="showContent(this)">
+                    <div class="contentBox ">
                         <i class="fa-solid fa-bullhorn"></i>
                         <div> - 2024년 좋은일 가득 - </div>
                         <p>2024-02-02일 이후 토마토팜에서는 브랜드 '김구원선생' 제품의 판매를 중단합니다. 이미 주문한 상품은 발송 예정이며, 재고가 남은 상품은 재고소진시까지
@@ -379,6 +370,11 @@
                         <a href="#">수정</a>
                         <a href="#">삭제</a>
                     </div>
+                    <div>1</div>
+                    <div>2024년 좋은 일 가득 </div>
+                    <div>홍길동</div>
+                    <div>2024-02-02 11:11</div>
+                    <div>77</div>
                 </div>
             </div>
             <div id="NationContainer">
