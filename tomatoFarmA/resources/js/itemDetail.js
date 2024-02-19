@@ -10,6 +10,6 @@ function clickImg(ele) {
     for (let i = 0; i < ele.parentNode.childElementCount; i++) {
         if (ele.parentNode.children[i] != ele) {
             ele.parentNode.children[i].style.opacity = '0.5';
-        } 
+        }
     }
 }

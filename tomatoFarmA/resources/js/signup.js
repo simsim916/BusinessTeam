@@ -18,11 +18,6 @@ let pwCheck = false;
 let nameCheck = false;
 let phoneCheck = false;
 
-let addressCheck = false;
-let mailCheck = false;
-let genderCheck = false;
-let birthdayCheck = false;
-
 function focusInputBox(event) {
     let box = event.target.closest('div');
     box.style.border = "2px solid #9B1B30";
@@ -109,20 +104,19 @@ function checkId(event) {
         idBox.style.borderBottom = "1px solid #FF3F3F";
         idBox.children[0].style.color = "#FF3F3F";
         document.getElementById('idError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;아이디 : 4 ~ 15 글자 이하만 가능합니다.<br>`;
-        preventBtn();
     } else if (value.replace(key, '').length > 0) {
         idBox.style.border = "2px solid #FF3F3F";
         idBox.style.borderBottom = "1px solid #FF3F3F";
         idBox.children[0].style.color = "#FF3F3F";
         document.getElementById('idError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;아이디 : 영문, 숫자, 특수문자(-, _)만 가능합니다.<br>`;
-        preventBtn();
     } else {
         idCheck = true;
         idBox.style.border = "2px solid #03C75A";
         idBox.style.borderBottom = "1px solid #03C75A";
         idBox.children[0].style.color = "#03C75A";
         document.getElementById('idError').innerHTML = '';
-        permitBtn();
+        idCheck = !idCheck;
+        checkAll();
     }
 }//checkId
 
@@ -136,21 +130,18 @@ function checkPassword(event) {
         passwordBox.style.borderBottom = "1px solid #FF3F3F";
         passwordBox.children[0].style.color = "#FF3F3F";
         document.getElementById('pwError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;비밀번호 : 4 ~ 15 글자 이하만 입력해주세요.<br>`;
-        preventBtn();
     } else if (value.replace(key, '').length > 0) {
         passwordBox.style.border = "2px solid #FF3F3F";
         passwordBox.style.borderTop = "1px solid #FF3F3F";
         passwordBox.style.borderBottom = "1px solid #FF3F3F";
         passwordBox.children[0].style.color = "#FF3F3F";
         document.getElementById('pwError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;비밀번호 : 영문, 숫자, 특수문자(!,@,#,$,%,^,&,*)만 가능합니다.<br>`;
-        preventBtn();
     } else if (value.replace(/[!-*.@]/gi, '').length >= value.length) {
         passwordBox.style.border = "2px solid #FF3F3F";
         passwordBox.style.borderTop = "1px solid #FF3F3F";
         passwordBox.style.borderBottom = "1px solid #FF3F3F";
         passwordBox.children[0].style.color = "#FF3F3F";
         document.getElementById('pwError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;비밀번호 : 특수문자(!,@,#,$,%,^,&,*)를 반드시 포함해주세요.<br>`;
-        preventBtn();
     } else {
         pwCheck = true;
         passwordBox.style.border = "2px solid #03C75A";
@@ -158,7 +149,8 @@ function checkPassword(event) {
         passwordBox.style.borderBottom = "1px solid #03C75A";
         passwordBox.children[0].style.color = "#03C75A";
         document.getElementById('pwError').innerHTML = '';
-        permitBtn();
+        pwCheck = !pwCheck;
+        checkAll();
     }
 }//checkPassword
 
@@ -170,14 +162,12 @@ function checkName(event) {
         nameBox.style.borderBottom = "1px solid #FF3F3F";
         nameBox.children[0].style.color = "#FF3F3F";
         document.getElementById('nameError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;이름 : 2글자 이상 10글자 이하로 입력하세요.<br>`;
-        preventBtn();
     } else if (value.replace(/[a-z.가-힣]/gi, '').length > 0) {
         nameBox.style.border = "2px solid #FF3F3F";
         nameBox.style.borderTop = "1px solid #FF3F3F";
         nameBox.style.borderBottom = "1px solid #FF3F3F";
         nameBox.children[0].style.color = "#FF3F3F";
         document.getElementById('nameError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;이름은 한글, 영문만 입력하세요.<br>`;
-        preventBtn();
     } else {
         nameCheck = true;
         nameBox.style.border = "2px solid #03C75A";
@@ -185,7 +175,8 @@ function checkName(event) {
         nameBox.style.borderTop = "1px solid #03C75A";
         nameBox.children[0].style.color = "#03C75A";
         document.getElementById('nameError').innerHTML = '';
-        permitBtn();
+        nameCheck = !nameCheck;
+        checkAll();
     }
 
 }//checkName
@@ -197,20 +188,19 @@ function checkPhonenumber(event) {
         phonenumberBox.style.borderTop = "1px solid #FF3F3F";
         phonenumberBox.children[0].style.color = "#FF3F3F";
         document.getElementById('pnError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;전화번호는 9자리 ~ 12자리 숫자로 입력해주세요.<br>`;
-        preventBtn();
     } else if (value.replace(/[0-9]/gi, '').length > 0) {
         phonenumberBox.style.border = "2px solid #FF3F3F";
         phonenumberBox.style.borderTop = "1px solid #FF3F3F";
         phonenumberBox.children[0].style.color = "#FF3F3F";
         document.getElementById('pnError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;전화번호는 숫자만 입력하세요.<br>`;
-        preventBtn();
     } else {
         phoneCheck = true;
         phonenumberBox.style.border = "2px solid #03C75A";
         phonenumberBox.style.borderTop = "1px solid #03C75A";
         phonenumberBox.children[0].style.color = "#03C75A";
         document.getElementById('pnError').innerHTML = '';
-        permitBtn();
+        phoneCheck != phoneCheck;
+        checkAll();
     }
 }//checkPhonenumber
 
@@ -235,6 +225,14 @@ function selectGender(event) {
     birthdayBox.focus();
 }//selectGender
 
+function checkAll() {
+    if (idCheck == true && pwCheck == true && nameCheck == true && phoneCheck == true) {
+        document.getElementById('joinBox').style.opacity = 1;
+        document.getElementById('joinBox').disabled = false;
+    }
+}
+
+
 
 
 
@@ -258,21 +256,3 @@ function selectGender(event) {
 //     }
 // }
 
-
-// ==========================================================
-// 1. 아이디 비밀번호가 형식에 맞지 않을 때, 페이지 내에서 경고메세지
-//    하지만 무시하고 버튼 누르면 가입되는 문제
-//    버튼 비활성화 하기위해 모든check 메서드에 버튼메서드 추가하기??
-const joinBtn = document.getElementById('joinBox');
-function preventBtn() {
-    joinBtn.disabled = true;
-    joinBtn.style.backgroundColor = "grey"
-    joinBtn.innerText = "가입불가"
-}
-
-function permitBtn() {
-    joinBtn.disabled = false;
-    joinBtn.style.backgroundColor = "#9B1B30"
-    joinBtn.innerText = "가입하기"
-}
-// =========================================================
