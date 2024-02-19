@@ -25,7 +25,7 @@
     <div id="bodyBG"></div>
     <main>
         <a href="/tomatoFarm/"><img id="logo" src="/tomatoFarm/resources/img/logo.png"></a>
-        <form id="loginBox">
+        <form id="loginBox" action="/tomatoFarm/member/login" method="post">
             <div id="loginButton">
                 <div onclick="selectLoginType(this)">일반 로그인</div>
                 <div onclick="selectLoginType(this)">사업자 로그인</div>
@@ -48,10 +48,15 @@
 
             <button id="loginInBox">로그인</button>
         </form>
+        <p id="successOrNot">
+	        <c:if test="${!empty successOrNot}">
+	        	<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;${successOrNot}
+	        </c:if>
+        </p>
         <ul id="search">
             <li>아이디 찾기</li>
             <li>비밀번호 찾기</li>
-            <li>회원가입</li>
+            <li><a href="/tomatoFarm/member/signupPage">회원가입</a></li>
         </ul>
     </main>
 </body>

@@ -41,7 +41,7 @@ main {
     position: absolute;
     border-radius: 40px;
     width: 500px;
-    height: 430px;
+    height: 470px;
     margin: auto;
     display: block;
     background-color: white;
@@ -57,6 +57,7 @@ input:focus {
     margin-top: 90px;
     position: relative;
     width: 350px;
+
 }
 
 #loginBox>#loginButton {
@@ -67,7 +68,6 @@ input:focus {
     left: 0;
     border: none;
     display: flex;
-    border: none;
 }
 
 #loginButton>div {
@@ -79,15 +79,15 @@ input:focus {
 
 #loginButton>div:nth-of-type(1) {
     border-top-left-radius: 10px;
-    border-left: 1px solid black;
-    border-top: 1px solid black;
-    background-color: rgb(146, 112, 112);
+    border-left: 1px solid #564f45;
+    border-top: 1px solid #564f45;
+    background-color: #9B1B30;
     color: white;
 }
 
 #loginButton>div:nth-of-type(2) {
     border-top-right-radius: 10px;
-    border: 1px solid;
+    border: 1px solid #564f45;
 }
 
 #loginBox>div {
@@ -98,21 +98,14 @@ input:focus {
     font-size: 18px;
 }
 
-#loginBox>#loginInBox {
-    border: none;
-    margin-top: 20px;
-}
-
-#loginBox>div:nth-of-type(1) {
-
-    border-bottom: 0.5px solid #564f45;
-}
 
 #loginBox>#idBox {
+    border-bottom: 0.5px solid #564f45;
     border-top: none;
 }
 
 #loginBox>#passwordBox {
+    border-top: 0.5px solid #564f45;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
 }
@@ -121,6 +114,7 @@ input:focus {
     width: 50px;
     text-align: center;
     font-size: 16px;
+    opacity: 0.3;
 }
 
 #loginBox>div>input {
@@ -129,24 +123,14 @@ input:focus {
 
 }
 
-
 #loginInBox {
-    width: 350px;
-    height: 50px;
-    padding: 0;
-    margin: auto;
-    font-size: 20px;
-    margin-top: 50px;
-}
-
-#loginInBox button {
     margin: auto;
     width: 350px;
     height: 40px;
     font-size: 20px;
     background-color: #9B1B30;
     color: white;
-    /* margin-top: 20px; */
+    margin-top: 20px;
     border-radius: 10px;
     cursor: pointer;
 }
@@ -169,4 +153,16 @@ input:focus {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+
+#successOrNot {
+    width: 350px;
+    margin: auto;
+    font-size: 12px;
+    padding-left: 5px;
+    color: #9B1B30;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-indent: inherit;
 }

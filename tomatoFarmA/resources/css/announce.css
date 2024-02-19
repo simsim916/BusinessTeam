@@ -1,0 +1,215 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+#otherMenu {
+    /* border-radius: 20px; */
+    width: 200px;
+    text-align: center;
+    font-size: 30px;
+    position: fixed;
+    left: 100px;
+    top: 350px;
+    display: flex;
+    flex-direction: column;
+}
+
+#otherMenu>div {
+    font-size: 50px;
+    line-height: 100px;
+}
+
+#otherMenu>a {
+    line-height: 80px;
+    border: 1px solid rgba(128, 128, 128, 0.534);
+}
+
+#otherMenu>a:first-child {
+    box-shadow: 0px 0px 3px 3px #9B1B20;
+    border-radius: 20px 20px 0 0;
+    font-weight: bold;
+}
+
+#otherMenu>a:last-child {
+    border-radius: 0 0 20px 20px;
+}
+
+/* ======================================= */
+
+#annTopBox {
+    display: flex;
+    justify-content: space-between;
+    background-color: #9B1B20;
+    line-height: 80px;
+    font-size: 34px;
+    color: white;
+    border-radius: 20px 20px ;
+    margin-top: 30px;
+}
+
+#annTopBox>div:nth-of-type(1) {
+    text-indent: 50px;
+}
+
+#annTopBox>div:nth-of-type(1)>span {
+    font-size: 13px;
+    margin-left: 10px;
+}
+
+#annTopBox>div:nth-of-type(2) {
+    line-height: 70px;
+    margin-right: 30px;
+}
+
+#annTopBox>div:nth-of-type(2)>input {
+    height: 30px;
+    width: 200px;
+    border-radius: 10px;
+}
+
+#annTopBox>div:nth-of-type(2)>button {
+    color: white;
+    background-color: #9B1B20;
+    margin-left: 10px;
+}
+
+/* ================================================= */
+
+
+#announceBoard {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-family: 'Kangbujang';
+}
+
+#announceBoard>div {
+    display: grid;
+    grid-template-columns: 1fr 6fr 1.5fr 2fr 1fr;
+    line-height: 60px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.316);
+}
+
+#announceBoard>div:nth-of-type(1) {
+    background-color: #9b1b1f96;
+    color: white;
+    font-size: 22px;
+    border-radius: 20px 20px 0 0;
+}
+
+#announceBoard>div:nth-of-type(n+2):nth-of-type(-n+3) {
+    background-color: #9b1b1f0e;
+}
+
+#announceBoard>div:nth-of-type(n+2):nth-of-type(-n+3) div>img {
+    width: 40%;
+    margin-left: 10px;
+    padding-top: 20px;
+}
+
+#announceBoard>div:not(:nth-of-type(1))>div:nth-of-type(2) {
+    text-align: left;
+    text-indent: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: break-all;
+}
+
+@keyframes blink-effect {
+    50% {
+        opacity: 0;
+    }
+}
+
+.latestAnnounce {
+    font-size: 12px;
+    text-indent: 10px;
+    color: chocolate;
+    animation: blink-effect 1s step-end infinite;
+}
+
+/* ================================== */
+.contentBox {
+    grid-column: span 5;
+    background-color: rgba(128, 128, 128, 0.095);
+    position: relative;
+}
+
+.contentBox>i {
+    margin-top: 30px;
+    font-size: 30px;
+}
+
+.contentBox>div {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.contentBox>p {
+    width: 80%;
+    margin: auto;
+    text-align: left;
+    word-break: keep-all;
+}
+
+.contentBox>a {
+    background-color: #9b1b1f96;
+    color: white;
+    border-radius: 7px;
+    padding: 5px;
+    margin: 0 10px;
+}
+
+/* ================================================ */
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.disappear {
+    display: none;
+    opacity: 0;
+}
+
+.appear {
+    animation: fadein 1s;
+}
+
+/* ================================= */
+
+#NationContainer {
+    width: 399px;
+    margin: 0 auto;
+    height: 50px;
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(7, 57px);
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+#NationContainer>div {
+    line-height: 50px;
+}
+
+
+
+/* ====== Test ======== */
+
+#tomatoChess {
+    position: absolute;
+    width: 60px;
+    left: 70px;
+    top: 6px;
+}
