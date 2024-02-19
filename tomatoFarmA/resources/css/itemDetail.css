@@ -255,11 +255,11 @@ body {
     position: relative;
 }
 
-#askBoardBox{
+#askBoardBox {
     position: relative;
 }
 
-#askBoardBox>h5{
+#askBoardBox>h5 {
     margin-top: 30px;
     font-size: 32px;
     height: 80px;
@@ -277,28 +277,56 @@ body {
     color: white;
 }
 
-#askBoard{
+#askBoard {
     height: 600px;
     border-top: 3px solid #000;
-    display: grid;
-    grid-template-rows: repeat(5, 65px);
+    border-bottom: 3px solid #000;
+    display: flex;
+    flex-direction: column;
 }
 
-.boardRow{
+.boardRow {
+    height: 50px;
     display: flex;
     align-items: center;
     text-align: center;
 }
 
-.boardRow>div:nth-of-type(1){
-    width: 9%;
+.boardRow:nth-of-type(1) {
+    height: 60px;
+    border-bottom: 1px solid #000;
 }
-.boardRow>div:nth-of-type(2){
+
+.boardRow>div:nth-of-type(1) {
+    width: 7%;
+}
+
+.boardRow>div:nth-of-type(2) {
     width: 60%;
 }
-.boardRow>div:nth-of-type(3){
+
+.boardRow>div:nth-of-type(3) {
     width: 20%;
 }
-.boardRow>div:nth-of-type(4){
-    width: 19%;
+
+.boardRow>div:nth-of-type(4) {
+    width: 23%;
+}
+
+.askContents {
+    height: 150px;
+    background-color: #00000008;
+    border-bottom: 1px solid #00000015;
+    border-top: 1px solid #00000015;
+}
+
+.askContents a::before {
+    content: " |  ";
+}
+
+.askContents>div:nth-of-type(1) {
+    width: 100%;
+    text-align: left;
+    margin-left: 10%;
+    margin-right: 10%;
 }
