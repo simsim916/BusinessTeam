@@ -58,7 +58,6 @@ public class MemberController {
 		String uri = "member/loginPage";
 		dto.setBirthday(year+"-"+month+"-"+day);
 		if(memberservice.insert(dto)>0) {
-			uri="member/signup_Success";
 			
 		}else {
 			uri="member/signupPage";
