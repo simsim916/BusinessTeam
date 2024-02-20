@@ -2,7 +2,10 @@ hr {
     margin: 10px auto;
 }
 
-.selected {
+.opened>ul {
+    display: block !important;
+}
+.selected>i {
     color: #9B1B30;
     opacity: 1 !important;
 }
@@ -115,6 +118,7 @@ hr {
     overflow: auto;
     max-height: 100px;
     width: 98%;
+    display: none;
 }
 
 #filterPrice>div {
