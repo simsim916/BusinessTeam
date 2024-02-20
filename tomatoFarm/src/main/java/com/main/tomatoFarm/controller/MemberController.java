@@ -26,8 +26,8 @@ public class MemberController {
 	public void loginPage() {	};
 	
 	// login -> home
-	@PostMapping("/login")
-	public String login(HttpSession session, Model model, MemberDTO dto, RedirectAttributes attr) {
+	@PostMapping("login")
+	public String login(HttpSession session, Model model, MemberDTO dto) {
 
 		String uri = "member/loginPage";
 		
@@ -58,9 +58,8 @@ public class MemberController {
 	
 	// signUp 
 	@PostMapping("/signup")
-	public String singup(MemberDTO dto, @RequestParam("year") String year, 
-			@RequestParam("month") String month, @RequestParam("day") String day
-			, RedirectAttributes attr ) {
+	public String singup(Model model, MemberDTO dto, @RequestParam("year") String year,@RequestParam("month") String month, @RequestParam("day") String day) {
+		
 		
 		String uri = "member/loginPage";
 		if(dto.getPassword().length() < 4 || dto.getPassword().length() > 15) {
@@ -73,12 +72,10 @@ public class MemberController {
 		dto.setPassword(encodedPwd);
 		//=======================================================		
 		dto.setBirthday(year+"-"+month+"-"+day);
-		dto.setEmailback(dto.getEmailback().replace(",", ""));
-		//=======================================================		
 		if(memberservice.insert(dto)>0) {
-			attr.addFlashAttribute("successOrNot", "회원가입 성공했습니다. 로그인 후 이용하세요");
+			uri="member/signup_Success";
+			
 		}else {
-			attr.addFlashAttribute("successOrNot", "회원가입 실패했습니다");
 			uri="member/signupPage";
 		}
 		return "redirect:/" + uri;	

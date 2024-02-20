@@ -19,14 +19,18 @@ body {
 }
 
 #imgBoxImg {
-    width: 100%;
-    text-align: center;
+    width: 95%;
+    height: 700px;
+    border-radius: 30px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #imgBoxImg>img {
     object-fit: contain;
-    width: 95%;
-    border-radius: 30px;
+    width: 100%;
     vertical-align: middle;
 }
 
@@ -230,9 +234,35 @@ body {
     border-right: none;
 }
 
+#introItem {
+    height: 500px;
+    overflow: hidden;
+    text-align: center;
+}
 
 #introItem>img {
+    width: 95%;
+}
+
+#introItemBtn {
+    line-height: 60px;
+    font-size: 24px;
+    text-align: center;
+    background-color: #00000005;
+    border: 1px solid #00000020;
+    position: relative;
+}
+
+#introItemBtn div {
+    position: absolute;
+    bottom: 61px;
     width: 100%;
+    height: 80px;
+    background: linear-gradient(to top, #ffffff 5%, #ffffff00 80%);
+}
+
+#introItemBtn i {
+    margin-left: 25px;
 }
 
 .subTitle {
@@ -260,6 +290,113 @@ body {
     position: relative;
 }
 
+#reviewBoardBox {
+    position: relative;
+}
+
+#reviewBoardBox>h5 {
+    margin-top: 30px;
+    font-size: 32px;
+    height: 80px;
+}
+
+#reviewBoard {
+    border-top: 3px solid #000;
+    border-bottom: 3px solid #000;
+}
+
+.reviewBoardRow {
+    line-height: 60px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #000;
+}
+
+.reviewBoardRow>div:nth-of-type(1) {
+    width: 120px;
+}
+
+.reviewBoardRow>div:nth-of-type(2) {
+    line-height: 35px;
+    width: calc((100% - 120px)*0.6);
+}
+
+.reviewBoardRow>div:nth-of-type(3) {
+    width: calc((100% - 120px)*0.2);
+}
+
+.reviewBoardRow>div:nth-of-type(4) {
+    width: calc((100% - 120px)*0.15);
+}
+
+.reviewContent {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.reviewContent>div:nth-of-type(1) {
+    width: 100%;
+    order: 1;
+}
+
+.reviewContent>div:nth-of-type(2) {
+    color: #d1151e;
+    width: 140px;
+    text-align: center;
+}
+
+.reviewContent>div:nth-of-type(3) {
+    line-height: 35px;
+    width: calc((100% - 140px)*0.6);
+}
+
+.reviewContent>div:nth-of-type(4) {
+    width: calc((100% - 140px)*0.2);
+}
+
+.reviewContent>div:nth-of-type(5) {
+    width: calc((100% - 140px)*0.15);
+}
+
+.reviewDetail {
+    text-align: left;
+    padding-left: 140px;
+    padding-right: 50px;
+    display: none;
+}
+
+.reviewDetail img {
+    height: 100px;
+}
+
+.reviewDetail b {
+    display: block;
+    margin-top: 15px;
+    font-size: 110%;
+}
+
+.reviewDetail p {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+#reviewBoardBtn {
+    margin-top: 30px;
+    text-align: center;
+}
+
+#reviewBoardBtn i {
+    margin: 0 10px;
+}
+
+#reviewBoardBtn span {
+    margin: 0 8px;
+}
+
 #askBoardBox {
     position: relative;
 }
@@ -283,30 +420,78 @@ body {
 }
 
 #askBoard {
-    height: 600px;
     border-top: 3px solid #000;
-    display: grid;
-    grid-template-rows: repeat(5, 65px);
+    border-bottom: 3px solid #000;
 }
 
 .boardRow {
     display: flex;
     align-items: center;
     text-align: center;
+    flex-wrap: wrap;
+}
+
+.boardRow:nth-of-type(1) {
+    line-height: 60px;
+    border-bottom: 1px solid #000;
 }
 
 .boardRow>div:nth-of-type(1) {
-    width: 9%;
+    width: 100%;
 }
 
 .boardRow>div:nth-of-type(2) {
-    width: 60%;
+    width: 8%;
+}
+
+.boardRow:nth-of-type(1)>div:nth-of-type(3) {
+    text-align: center;
 }
 
 .boardRow>div:nth-of-type(3) {
-    width: 20%;
+    line-height: 35px;
+    width: 60%;
+    text-align: left;
+    text-indent: 50px;
 }
 
 .boardRow>div:nth-of-type(4) {
-    width: 19%;
+    width: 17%;
+}
+
+.boardRow>div:nth-of-type(5) {
+    width: 15%;
+}
+
+.askContents a::before {
+    content: " | ";
+    margin: 0px 10px;
+}
+
+.askContents a {
+    opacity: 0.5;
+}
+
+.askContents {
+    background-color: #00000008;
+    border-bottom: 1px solid #00000015;
+    border-top: 1px solid #00000015;
+    width: 100%;
+    text-align: left;
+    padding: 15px 10%;
+    order: 1;
+    display: none;
+}
+
+#askBoardBtn {
+    margin-top: 30px;
+    text-align: center;
+}
+
+#askBoardBtn i {
+    margin: 0 10px;
+}
+
+#askBoardBtn span {
+    margin: 0 8px;
 }
