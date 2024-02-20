@@ -74,8 +74,6 @@ public class MemberController {
 		dto.setBirthday(year+"-"+month+"-"+day);
 		dto.setEmailback(dto.getEmailback().replace(",", ""));
 		//=======================================================
-		dto.setPhonenumber(dto.getPassword().replace("-", ""));
-		//=======================================================		
 		if(memberservice.insert(dto)>0) {
 			attr.addFlashAttribute("successOrNot", "회원가입 성공했습니다. 로그인 후 이용하세요");
 		}else {
