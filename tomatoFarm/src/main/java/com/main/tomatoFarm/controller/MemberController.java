@@ -27,7 +27,7 @@ public class MemberController {
 	
 	// login -> home
 	@PostMapping("login")
-	public String login(HttpSession session, Model model, MemberDTO dto) {
+	public String login(HttpSession session, Model model, MemberDTO dto , RedirectAttributes attr) {
 
 		String uri = "member/loginPage";
 		

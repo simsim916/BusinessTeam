@@ -16,3 +16,29 @@ function changeMainImg(event) {
     }
     return false;
 }
+
+function count(event, type) {
+    let target = event.target.closest("#countBox");
+    let value = target.children[1].value
+    if ("-" === type) {
+        if (value > 0)
+            value--;
+    }
+    else
+        value++;
+
+    target.children[1].value = value;
+    sumTotal(value);
+}
+
+function sumTotal(value) {
+    const title6Value = document.getElementById('title6').innerText.replace('원', '');
+    const priceBox = document.getElementById('price');
+    priceBox.children[0].innerText = `${value * title6Value} 원`
+}
+
+function inputCount(event) {
+    const inputBox = document.getElementById('inputCount');
+    const countBox = document.getElementById('price');
+    countBox.children[1].innerText = inputBox;
+}
