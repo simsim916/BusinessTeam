@@ -18,11 +18,6 @@ let pwCheck = false;
 let nameCheck = false;
 let phoneCheck = false;
 
-let addressCheck = false;
-let mailCheck = false;
-let genderCheck = false;
-let birthdayCheck = false;
-
 function focusInputBox(event) {
     let box = event.target.closest('div');
     box.style.border = "2px solid #9B1B30";
@@ -102,7 +97,6 @@ function changeOpacity2(event) {
 
 function checkId(event) {
     let value = event.target.value;
-    let idBox = event.target.closest('div');
     let key = /[a-z.0-9.-._]/gi;
 
     if (value.length < 4 || value.length > 15) {
@@ -121,6 +115,8 @@ function checkId(event) {
         idBox.style.borderBottom = "1px solid #03C75A";
         idBox.children[0].style.color = "#03C75A";
         document.getElementById('idError').innerHTML = '';
+        idCheck = !idCheck;
+        checkAll();
     }
 }//checkId
 
@@ -153,6 +149,8 @@ function checkPassword(event) {
         passwordBox.style.borderBottom = "1px solid #03C75A";
         passwordBox.children[0].style.color = "#03C75A";
         document.getElementById('pwError').innerHTML = '';
+        pwCheck = !pwCheck;
+        checkAll();
     }
 }//checkPassword
 
@@ -177,6 +175,8 @@ function checkName(event) {
         nameBox.style.borderTop = "1px solid #03C75A";
         nameBox.children[0].style.color = "#03C75A";
         document.getElementById('nameError').innerHTML = '';
+        nameCheck = !nameCheck;
+        checkAll();
     }
 
 }//checkName
@@ -199,6 +199,8 @@ function checkPhonenumber(event) {
         phonenumberBox.style.borderTop = "1px solid #03C75A";
         phonenumberBox.children[0].style.color = "#03C75A";
         document.getElementById('pnError').innerHTML = '';
+        phoneCheck != phoneCheck;
+        checkAll();
     }
 }//checkPhonenumber
 
@@ -222,3 +224,35 @@ function selectGender(event) {
     event.target.closest('li').setAttribute("id", "genderChecked");
     birthdayBox.focus();
 }//selectGender
+
+function checkAll() {
+    if (idCheck == true && pwCheck == true && nameCheck == true && phoneCheck == true) {
+        document.getElementById('joinBox').style.opacity = 1;
+        document.getElementById('joinBox').disabled = false;
+    }
+}
+
+
+
+
+
+
+// function inCheck() {
+//     if (!idCheck) { document.getElementById('idBox').innerHTML = '필수입력, id를 확인하세요.'; }
+//     if (!pwCheck) { document.getElementById('passwordBox').innerHTML = '필수입력, 비밀번호를 확인하세요.'; }
+//     if (!nameCheck) { document.getElementById('nameBox').innerHTML = '필수입력, 이름을 확인하세요.'; }
+//     if (!phoneCheck) { document.getElementById('phonenumberBox').innerHTML = '필수입력, 전화번호를 확인하세요.'; }
+
+//     if (idCheck && pwCheck && nameCheck && phoneCheck) {
+
+//         if (confirm("가입을 진행하겠습니까?(YES : 확인 / NO : 취소)")) {
+//             return true;
+//         } else {
+//             alert("가입이 취소되었습니다.");
+//             return false;
+//         }
+//     } else {
+//         return false;
+//     }
+// }
+

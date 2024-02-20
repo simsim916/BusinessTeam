@@ -1,4 +1,3 @@
-// let formBox = document.getElementById('loginBox');
 let idInput = document.getElementById("id");
 let pwInput = document.getElementById("password");
 let errorBox = document.getElementById('errorBox');
@@ -21,7 +20,7 @@ function selectLoginType(ele) {
     passwordBox.children[0].style.color = "black";
     passwordBox.children[0].style.opacity = "0.3";
     for (let e of errorBox.children) {
-        e.innerText='';
+        e.innerText = '';
     }
     if (ele.innerText == "일반 로그인") {
         ele.style.backgroundColor = "#9B1B30 ";

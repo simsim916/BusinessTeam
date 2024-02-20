@@ -25,7 +25,6 @@ public class KeywordDAO {
 		try {
 			pst = cn.prepareStatement(sql);
 
-			System.out.println("cc");
 			if (pst.executeUpdate() > 0) {
 				return 1;
 			} else {

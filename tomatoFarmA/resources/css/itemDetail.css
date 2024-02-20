@@ -24,6 +24,7 @@ body {
 }
 
 #imgBoxImg>img {
+    object-fit: contain;
     width: 95%;
     border-radius: 30px;
     vertical-align: middle;
@@ -43,6 +44,10 @@ body {
     width: 80px;
     margin: 10px 5px 5px 0px;
     opacity: 0.5;
+}
+
+#imgBoxImgList>div:nth-of-type(1) {
+    opacity: 1;
 }
 
 #imgBoxImgList>div>img {
@@ -255,11 +260,11 @@ body {
     position: relative;
 }
 
-#askBoardBox{
+#askBoardBox {
     position: relative;
 }
 
-#askBoardBox>h5{
+#askBoardBox>h5 {
     margin-top: 30px;
     font-size: 32px;
     height: 80px;
@@ -277,28 +282,31 @@ body {
     color: white;
 }
 
-#askBoard{
+#askBoard {
     height: 600px;
     border-top: 3px solid #000;
     display: grid;
     grid-template-rows: repeat(5, 65px);
 }
 
-.boardRow{
+.boardRow {
     display: flex;
     align-items: center;
     text-align: center;
 }
 
-.boardRow>div:nth-of-type(1){
+.boardRow>div:nth-of-type(1) {
     width: 9%;
 }
-.boardRow>div:nth-of-type(2){
+
+.boardRow>div:nth-of-type(2) {
     width: 60%;
 }
-.boardRow>div:nth-of-type(3){
+
+.boardRow>div:nth-of-type(3) {
     width: 20%;
 }
-.boardRow>div:nth-of-type(4){
+
+.boardRow>div:nth-of-type(4) {
     width: 19%;
 }
