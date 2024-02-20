@@ -274,7 +274,7 @@ input:focus {
     font-size: 12px;
     padding-left: 5px;
     color: #9B1B30;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    /* margin-top: 5px; */
+    /* margin-bottom: 5px; */
     text-indent: inherit;
 }

@@ -147,14 +147,13 @@
           <artifactId>mysql-connector-java</artifactId>
           <version>8.0.28</version>
       </dependency>  
-      
-      
-      <dependency>
-      	<groupId>org.springframework.security</groupId>
-      	<artifactId>spring-security-web</artifactId>
-      	<version>4.0.0.RELEASE</version>
-      </dependency>
-      
+      <!--스프링시큐리티 web 라이브러리 (설치된 스프링 버전과 일치해야 함.)-->
+       <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>4.0.0.RELEASE</version>
+        </dependency>
+
 	</dependencies>
     <build>
         <plugins>

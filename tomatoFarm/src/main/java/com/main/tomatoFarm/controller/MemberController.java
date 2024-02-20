@@ -21,6 +21,9 @@ public class MemberController {
 	@Autowired(required = false)
 	MemberService memberservice;
 	
+	@Autowired
+	BCryptPasswordEncoder encoder;
+	
 	// login page
 	@GetMapping("/loginPage")
 	public void loginPage() {	};
@@ -31,7 +34,6 @@ public class MemberController {
 
 		String uri = "member/loginPage";
 		
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		MemberDTO dbDTO = memberservice.selectOne(dto.getId());
 		String insertedPw = dto.getPassword();
 		
@@ -43,11 +45,12 @@ public class MemberController {
 				uri = "/home";
 			} else {
 				// PW 틀림
-				attr.addFlashAttribute("successOrNot", "비밀번호를 확인해주세요");
+				attr.addFlashAttribute("successOrNot", "비밀번호를 확인해주세요.");
 			}
 		} else {
-			attr.addFlashAttribute("successOrNot", "아이디를 확인해주세요");
+			attr.addFlashAttribute("successOrNot", "존재하지 않는 아이디 입니다.");
 		}
+		
 		return "redirect:/" + uri;
 	}
 	
@@ -63,17 +66,15 @@ public class MemberController {
 			, RedirectAttributes attr ) {
 		
 		String uri = "member/loginPage";
-		if(dto.getPassword().length() < 4 || dto.getPassword().length() > 15) {
-			return "redirect:/" + uri;	
-		}
 		//=======================================================
 		String pwd = dto.getPassword();
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		String encodedPwd = encoder.encode(pwd);
 		dto.setPassword(encodedPwd);
 		//=======================================================		
 		dto.setBirthday(year+"-"+month+"-"+day);
 		dto.setEmailback(dto.getEmailback().replace(",", ""));
+		//=======================================================
+		dto.setPhonenumber(dto.getPassword().replace("-", ""));
 		//=======================================================		
 		if(memberservice.insert(dto)>0) {
 			attr.addFlashAttribute("successOrNot", "회원가입 성공했습니다. 로그인 후 이용하세요");

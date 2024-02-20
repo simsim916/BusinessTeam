@@ -41,7 +41,7 @@ main {
     position: absolute;
     border-radius: 40px;
     width: 500px;
-    height: 430px;
+    height: 470px;
     margin: auto;
     display: block;
     background-color: white;
@@ -156,8 +156,8 @@ input:focus {
 }
 
 
-main>#successOrNot {
-	width: 350px;
+#successOrNot {
+    width: 350px;
     margin: auto;
     font-size: 12px;
     padding-left: 5px;

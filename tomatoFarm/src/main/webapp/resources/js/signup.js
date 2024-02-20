@@ -9,10 +9,6 @@ const emailBox = document.getElementById('emailBox');
 const genderBox = document.getElementById('genderBox');
 const birthdayBox = document.getElementById('birthdayBox');
 
-/*=======================================================*/
-const joinBtn = document.getElementById('joinBox');
-/*=======================================================*/
-
 const emailSelectBox = document.getElementById("emailSelectBox");
 const emailWriteBox = document.getElementById("emailWriteBox");
 const genderUl = document.getElementById('genderUl');
@@ -21,11 +17,6 @@ let idCheck = false;
 let pwCheck = false;
 let nameCheck = false;
 let phoneCheck = false;
-
-let addressCheck = false;
-let mailCheck = false;
-let genderCheck = false;
-let birthdayCheck = false;
 
 function focusInputBox(event) {
     let box = event.target.closest('div');
@@ -109,11 +100,13 @@ function checkId(event) {
     let key = /[a-z.0-9.-._]/gi;
 
     if (value.length < 4 || value.length > 15) {
+    	idCheck = false;
         idBox.style.border = "2px solid #FF3F3F";
         idBox.style.borderBottom = "1px solid #FF3F3F";
         idBox.children[0].style.color = "#FF3F3F";
         document.getElementById('idError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;아이디 : 4 ~ 15 글자 이하만 가능합니다.<br>`;
     } else if (value.replace(key, '').length > 0) {
+    	idCheck = false;
         idBox.style.border = "2px solid #FF3F3F";
         idBox.style.borderBottom = "1px solid #FF3F3F";
         idBox.children[0].style.color = "#FF3F3F";
@@ -125,26 +118,29 @@ function checkId(event) {
         idBox.children[0].style.color = "#03C75A";
         document.getElementById('idError').innerHTML = '';
     }
+    checkAll();
 }//checkId
 
 function checkPassword(event) {
     let value = event.target.value;
     let key = /[a-z.0-9.!-*.@]/gi;
 
-    if (value.length < 4 || value.length > 15) {
+    if (value.length < 4 || value.length > 14) {
+    	pwCheck = false;
         passwordBox.style.border = "2px solid #FF3F3F";
         passwordBox.style.borderTop = "1px solid #FF3F3F";
         passwordBox.style.borderBottom = "1px solid #FF3F3F";
         passwordBox.children[0].style.color = "#FF3F3F";
         document.getElementById('pwError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;비밀번호 : 4 ~ 15 글자 이하만 입력해주세요.<br>`;
-        joinBtn.style.pointerEvents = 'none';
     } else if (value.replace(key, '').length > 0) {
+    	pwCheck = false;
         passwordBox.style.border = "2px solid #FF3F3F";
         passwordBox.style.borderTop = "1px solid #FF3F3F";
         passwordBox.style.borderBottom = "1px solid #FF3F3F";
         passwordBox.children[0].style.color = "#FF3F3F";
         document.getElementById('pwError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;비밀번호 : 영문, 숫자, 특수문자(!,@,#,$,%,^,&,*)만 가능합니다.<br>`;
     } else if (value.replace(/[!-*.@]/gi, '').length >= value.length) {
+    	pwCheck = false;
         passwordBox.style.border = "2px solid #FF3F3F";
         passwordBox.style.borderTop = "1px solid #FF3F3F";
         passwordBox.style.borderBottom = "1px solid #FF3F3F";
@@ -157,18 +153,22 @@ function checkPassword(event) {
         passwordBox.style.borderBottom = "1px solid #03C75A";
         passwordBox.children[0].style.color = "#03C75A";
         document.getElementById('pwError').innerHTML = '';
+        
     }
+    checkAll();
 }//checkPassword
 
 function checkName(event) {
     let value = event.target.value;
     if (value.length < 2 || value.length > 10) {
+    	nameCheck = false;
         nameBox.style.border = "2px solid #FF3F3F";
         nameBox.style.borderTop = "1px solid #FF3F3F";
         nameBox.style.borderBottom = "1px solid #FF3F3F";
         nameBox.children[0].style.color = "#FF3F3F";
         document.getElementById('nameError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;이름 : 2글자 이상 10글자 이하로 입력하세요.<br>`;
     } else if (value.replace(/[a-z.가-힣]/gi, '').length > 0) {
+    	nameCheck = false;
         nameBox.style.border = "2px solid #FF3F3F";
         nameBox.style.borderTop = "1px solid #FF3F3F";
         nameBox.style.borderBottom = "1px solid #FF3F3F";
@@ -182,17 +182,19 @@ function checkName(event) {
         nameBox.children[0].style.color = "#03C75A";
         document.getElementById('nameError').innerHTML = '';
     }
-
+	checkAll();
 }//checkName
 
 function checkPhonenumber(event) {
     let value = event.target.value;
-    if (value.length < 10 || value.length > 13) {
+    if (value.length < 10 || value.length > 11) {
+    	phoneCheck = false;
         phonenumberBox.style.border = "2px solid #FF3F3F";
         phonenumberBox.style.borderTop = "1px solid #FF3F3F";
         phonenumberBox.children[0].style.color = "#FF3F3F";
         document.getElementById('pnError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;전화번호는 9자리 ~ 12자리 숫자로 입력해주세요.<br>`;
     } else if (value.replace(/[0-9]/gi, '').length > 0) {
+    	phoneCheck = false;
         phonenumberBox.style.border = "2px solid #FF3F3F";
         phonenumberBox.style.borderTop = "1px solid #FF3F3F";
         phonenumberBox.children[0].style.color = "#FF3F3F";
@@ -204,6 +206,7 @@ function checkPhonenumber(event) {
         phonenumberBox.children[0].style.color = "#03C75A";
         document.getElementById('pnError').innerHTML = '';
     }
+    checkAll();
 }//checkPhonenumber
 
 function changeSelectBox(event) {
@@ -227,6 +230,22 @@ function selectGender(event) {
     birthdayBox.focus();
 }//selectGender
 
+function a(str) {
+    console.log(str);
+}
+
+function checkAll() {
+    if (idCheck == true && pwCheck == true && nameCheck == true && phoneCheck == true) {
+        document.getElementById('joinBox').style.opacity = "1";
+        document.getElementById('joinBox').disabled = false;
+    } else {
+    	document.getElementById('joinBox').style.opacity = "0.5";
+        document.getElementById('joinBox').disabled = true;
+    }
+}
+
+
+
 
 
 
@@ -249,3 +268,4 @@ function selectGender(event) {
 //         return false;
 //     }
 // }
+
