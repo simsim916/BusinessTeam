@@ -44,16 +44,67 @@ function inputCount(event) {
 }
 
 
+// function showItemDetail(ele) {
+//     let itemIntro = ele.previousElementSibling;
+//     if (itemIntro.classList.contains('heightAuto'))
+//         itemIntro.classList.remove('heightAuto');
+//     else {
+//         itemIntro.classList.add('heightAuto');
+//         introItemBtn.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`;
+//     }
+//     return null;
+// }
+
+
+// function showItemDetail(ele) {
+//     const itemIntro = document.getElementById('introItem');
+//     const introItemBtn = document.getElementById('detailButton'); // '상품정보 접기' 버튼
+
+//     itemIntro.classList.add('heightAuto');
+//     introItemBtn.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`; // 버튼의 텍스트 변경
+// }
+
 function showItemDetail(ele) {
-    let itemIntro = ele.previousElementSibling;
-    console.log(ele.children[0])
-    if (itemIntro.classList.contains('heightAuto'))
+    const itemIntro = document.getElementById('introItem');
+    if (e) {
+        itemIntro.classList.add('heightAuto');
         itemIntro.classList.remove('heightAuto');
-    else {
+    } else {
         itemIntro.classList.add('heightAuto');
         introItemBtn.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`;
+        //ele.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`;
     }
+    return null;
 }
+
+
+// function detailClick(event) {
+//     const targetTab = event.target.textContent.trim();
+//     const itemIntroBtn = document.getElementById('detailClick');
+
+//     // 해당 탭에 따라 상품디테일설명 열기
+//     switch (targetTab) {
+//         case '상품설명':
+//             showItemDetail(itemIntroBtn);
+//             break;
+//         case '상세정보':
+//             // 상세정보 탭에 대한 동작 구현
+//             break;
+//         case '후기':
+//             // 후기 탭에 대한 동작 구현
+//             break;
+//         case '문의':
+//             // 문의 탭에 대한 동작 구현
+//             break;
+//         default:
+//             break;
+//     }
+// }
+// document.getElementById('detailClick').addEventListener('click', detailButtonClick);
+
+
+
+
 
 function reivewDetail(event) {
     event.stopPropagation();
@@ -62,3 +113,28 @@ function reivewDetail(event) {
     reviewImg.style.height = 100;
 
 }
+
+
+
+
+
+
+// function detailClick(event) {
+//     const detailClick = document.getElementById('detailClick');
+    
+//     if (detailClick.children[1]) {
+//         detailClick.addEventListener("showItemDetail", function(e) {
+            
+//             window.scrollTo({ top: 900, behavior: 'smooth' })
+//         });
+//     } else if(detailClick.children[2]){
+//         window.scrollTo({ top: 900, behavior: 'smooth' })
+        
+//     }
+// }
+
+// function reivewImgDetail(event) {
+//     const rievewImg = document.getElementById('reviewImg');
+
+// }
+

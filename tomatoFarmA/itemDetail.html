@@ -230,7 +230,7 @@
         </div>
 
     </main>
-    <ul id="detailClick" class="container">
+    <ul onclick="detailClick(event)" id="detailClick" class="container">
         <li>상품설명</li>
         <li>상세정보</li>
         <li>후기</li>
@@ -280,7 +280,7 @@
             </div>
             <div onclick="showContent(this)" class="reviewContent">
                 <div onclick="reivewDetail(event)" class="reviewDetail">
-                    <div>
+                    <div onclick="reivewImgDetail(event)" id="reivewImg">
                         <img  src="/tomatoFarmA/resources/img/itemImg/5000001_2.jpg" alt="">
                         <img  src="/tomatoFarmA/resources/img/itemImg/5000001_1.jpg" alt="">
                     </div>
