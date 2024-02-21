@@ -1,11 +1,5 @@
-* {
-    /* border: 1px solid; */
-    box-sizing: border-box;
-    font-family: 'Noto Sans KR', sans-serif;
-}
-
-body {
-    margin: auto;
+.heightAuto {
+    height: auto !important;
 }
 
 #itemDetailBox {
