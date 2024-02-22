@@ -1,5 +1,20 @@
 const slideBox = document.getElementsByClassName("slideBox");
 const secondSlideBtn = document.getElementById("secondSlideBtn");
+const adImgBox = document.getElementById('adImgBox');
+const canvas = adImgBox.querySelector('canvas');
+
+const adImgList = ['fresheasy.jpg', 'mychef.jpg', 'signup.jpg', 'review.jpg']
+
+function changeAdImgBox(ele, event) {
+    event.stopPropagation();
+    let index = 0;
+    for (let e of ele.closest('#adRightTab').children) {
+        if (e == ele) break;
+        index++;
+    }
+    ele.closest('#adImg').children[0].src = `/tomatoFarmA/resources/img/adimg/${adImgList[index]}`;
+}
+
 
 function secondContainerSlideLeftbth(event) {
     document.getElementById('secondSlideBtnSelected').removeAttribute("id");
