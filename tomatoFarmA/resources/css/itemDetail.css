@@ -222,6 +222,10 @@
     background-color: rgb(243, 243, 243);
     line-height: 50px;
     border-right: 1px solid #4C455630;
+    display: block;
+}
+#detailClick>li > a {
+    display: block;
 }
 
 #detailClick>li:nth-last-of-type(1) {
@@ -488,4 +492,85 @@
 
 #askBoardBtn span {
     margin: 0 8px;
+}
+
+
+#reviewDetailBox{
+    background-color: #00000090;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#reviewDetail{
+    background-color: white;
+    width: 800px;
+    height: 600px;
+    position: relative;
+}
+
+#reviewDetailImg{
+    width: 60%;
+    height: 100%;
+    position: relative;
+}
+
+#reviewDetailImgTop{
+    height: 80%;
+    background-color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#reviewDetailImgTop i{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    position: absolute;
+    background-color: #9B1B30;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#reviewDetailImgTop img{
+    position: absolute;
+    width: calc(100% - 100px);
+}
+#reviewDetailImgTop i:nth-of-type(1) {
+    left: 10px;
+}
+
+#reviewDetailImgTop i:nth-of-type(2) {
+    right: 10px;
+}
+#reviewDetailImgBottom{
+    background-color: red;
+    height: 20%;
+}
+
+#reviewDetailImgBottom>img{
+    
+}
+#reviewDetail_Write{
+    display: block;
+    position: relative;
+    height: 300px;
+    width: 300px;
+
+    border-bottom: 1px solid #141414;
+    justify-content: center;
+    align-items: center;
+    margin-left: 40px;
+    
+}
+
+#reviewDetail_Final{
+    overflow-y: auto;
+    box-sizing: border-box;
+    height: 100%;
 }

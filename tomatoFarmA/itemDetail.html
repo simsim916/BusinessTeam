@@ -4,8 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="nav.css">
-    <link rel="stylesheet" href="itemDetail.css">
     <!-- 폰트어썸 -->
     <script src="https://kit.fontawesome.com/d68045e863.js" crossorigin="anonymous"></script>
     <!-- 폰트 -->
@@ -231,14 +229,14 @@
 
     </main>
     <ul id="detailClick" class="container">
-        <li>상품설명</li>
-        <li>상세정보</li>
-        <li>후기</li>
-        <li>문의</li>
+        <li id="detailButton"><a onclick="showItemDetail(this)" href="#introItem1">상품설명</a></li>
+        <li><a onclick="showItemDetail(this)" href="#introItem2">상세정보</a></li>
+        <li><a href="#reviewBoardBox">상품후기</a></li>
+        <li><a href="#askBoardBox">상품문의</a></li>
     </ul>
     <div id="introItem" class="container">
 
-        <div class="subTitle">
+        <div id="introItem1" class="subTitle">
             <hr>
             <h4>상품 조리 사진
                 <img src="/tomatoFarmA/resources/img/logo3.png" alt="제품 조리 사진">
@@ -246,7 +244,7 @@
             <hr>
         </div>
         <img src="/tomatoFarmA/resources/img/itemImg/5000100_2.jpg" alt="소고기 찹스테이크 제품">
-        <div class="subTitle">
+        <div id="introItem2" class="subTitle">
             <hr>
             <h4>상품 구성
                 <img src="/tomatoFarmA/resources/img/logo4.png" alt="상품 구성">
@@ -280,9 +278,9 @@
             </div>
             <div onclick="showContent(this)" class="reviewContent">
                 <div onclick="reivewDetail(event)" class="reviewDetail">
-                    <div>
-                        <img  src="/tomatoFarmA/resources/img/itemImg/5000001_2.jpg" alt="">
-                        <img  src="/tomatoFarmA/resources/img/itemImg/5000001_1.jpg" alt="">
+                    <div id="reivewImg">
+                        <img src="/tomatoFarmA/resources/img/itemImg/5000001_2.jpg" alt="">
+                        <img src="/tomatoFarmA/resources/img/itemImg/5000001_1.jpg" alt="">
                     </div>
                     <b>가성비 굳</b>
                     <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
@@ -473,6 +471,31 @@
             <span> 3 </span>
             <i class="fa-solid fa-angle-right"></i>
             <i class="fa-solid fa-angles-right"></i>
+        </div>
+    </div>
+    <div id="reviewDetailBox">
+        <div id="reviewDetail">
+            <div id="reviewDetailImg">
+                <div id="reviewDetailImgTop">
+                    <img src="/tomatoFarmA/resources/img/itemImg/5000001_2.jpg" alt="">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+                <div id="reviewDetailImgBottom">
+                    <!-- <img src="/tomatoFarmA/resources/img/itemImg/5000001_1.jpg" alt="">
+                    <img src="/tomatoFarmA/resources/img/itemImg/5000001_2.jpg" alt=""> -->
+                </div>
+            </div>
+            <div id="reviewDetail_Write">
+                <p>작성자 아이디</p>
+                <p>작성 날짜</p>
+                <p>구매상품 이름</p>
+                <p id="reviewDetail_Final">후기다 후기다 후기다
+                    후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다
+                    후기다 후기다
+                    후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다
+                </p>
+            </div>
         </div>
     </div>
 </body>

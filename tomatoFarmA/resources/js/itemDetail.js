@@ -46,19 +46,72 @@ function inputCount(event) {
 
 function showItemDetail(ele) {
     let itemIntro = ele.previousElementSibling;
-    console.log(ele.children[0])
     if (itemIntro.classList.contains('heightAuto'))
         itemIntro.classList.remove('heightAuto');
     else {
         itemIntro.classList.add('heightAuto');
         introItemBtn.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`;
     }
+    return null;
 }
 
-function reivewDetail(event) {
-    event.stopPropagation();
-    const reviewImg = document.getElementsByClassName('reviewDetail').children[2];
-    reviewImg.style.width = 100;
-    reviewImg.style.height = 100;
+function reivewImgDetail(event){
 
 }
+
+
+
+
+
+
+
+// function reivewDetail(event) {
+//     event.stopPropagation();
+//     const reviewImg = document.getElementsByClassName('reviewDetail').children[2];
+//     reviewImg.style.width = 100;
+//     reviewImg.style.height = 100;
+
+// }
+
+// function detailClick(event) {
+//     const detailClick = document.getElementById('detailClick');
+//     let itemIntro = ele.previousElementSibling;
+
+//     if (detailClick.children[1]) {
+//         window.scrollTo({ top: 900, behavior: 'smooth' })
+//         container.classList.add('heightAuto');
+//         introItemBtn.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`;
+//         // return showItemDetail(ele);
+//     } else if (detailClick.children[2]) {
+//         window.scrollTo({ top: 900, behavior: 'smooth' })
+
+//     }
+// }
+
+
+// function showItemDetail(element) {
+//     const itemIntro = document.getElementById('introItem');
+//     itemIntro.classList.add('heightAuto');
+//     element.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`;
+// }
+
+// function detailButtonClick(event) {
+//     const targetTab = event.target.textContent.trim();
+//     const itemIntroBtn = document.getElementById('detailButton');
+
+//     switch (targetTab) {
+//         case '상품설명':
+//             showItemDetail(itemIntroBtn);
+//             break;
+//         case '상세정보':
+//             break;
+//         case '후기':
+//             break;
+//         case '문의':
+//             break;
+//         default:
+//             break;
+//     }
+// }
+
+// document.getElementById('detailClick').addEventListener('click', detailButtonClick);
