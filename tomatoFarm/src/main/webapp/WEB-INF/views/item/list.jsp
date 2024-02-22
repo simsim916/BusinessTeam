@@ -28,6 +28,8 @@
 <script defer type="text/javascript"
 	src="/tomatoFarm/resources/js/itemList.js"></script>
 <title>토마토팜 || 상품검색</title>
+
+
 </head>
 
 <body>
@@ -180,7 +182,7 @@
 				</div>
 			</div>
 
-			<c:forEach items="${requestScope.list}" var="l" end="11">
+			<c:forEach items="${requestScope.list}" var="l">
 				<a href="detail?code=${l.code}">
 					<div class="itemBox">
 						<img src="/tomatoFarm/resources/img/itemImg/${l.code}_1.jpg"
@@ -194,6 +196,52 @@
 				</a>
 			</c:forEach>
 
+
+			<div align="center">
+<!-- ** Paging Block ** 
+	=> ver01: QueryString 수동 입력 -> 자동생성 makeQuery 메서드 적용
+	=> ver02: makeQuery메서드 -> searchQuery메서드 로 변경
+ 	 1) FirstPage, Prev  
+ 	 => 수동입력(Old)
+ 	 	<a href="bPageList?currPage=1&rowsPerPage=5">FP</a>&nbsp;
+		<a href="bPageList?currPage=${pageMaker.spageNo-1}&rowsPerPage=5">&LT;</a>&nbsp;&nbsp;
+	 => 자동생성(makeQuery)
+ 	 -->
+  <c:choose>
+	<c:when test="${(pageMaker.currPage >= pageMaker.spageNo) && pageMaker.spageNo > 1}">
+	<!-- ver01 : 자동생성(makeQuery) 
+		<a href="bPageList${pageMaker.makeQuery(1)}">FP</a>&nbsp;
+		<a href="bPageList${pageMaker.makeQuery(pageMaker.spageNo-1)}">&LT;</a>&nbsp;&nbsp;
+	-->
+	<!-- ver02 : searchQuery 메서드 사용 -->
+		<a href="${pageMaker.searchQuery(1)}">FP</a>&nbsp;
+		<a href="${pageMaker.searchQuery(pageMaker.spageNo-1)}">&LT;</a>&nbsp;&nbsp;
+	</c:when>	
+	<c:otherwise>
+		<font color="Gray">FP&nbsp;&LT;&nbsp;&nbsp;</font>
+	</c:otherwise>
+  </c:choose> 	 
+<!-- 2) Display PageNo 
+	=> currPage 제외한 PageNo 만 a Tag 적용 -->
+  <c:forEach var="i" begin="${pageMaker.spageNo}" end="${pageMaker.epageNo}">
+  	<c:if test="${i==pageMaker.currPage}">
+  		<font color="Orange" size="5"><b>${i}</b></font>&nbsp;
+  	</c:if>
+  	<c:if test="${i!=pageMaker.currPage}">
+  		<a href="mPageList${pageMaker.searchQuery(i)}">${i}</a>&nbsp;
+  	</c:if>
+  </c:forEach>
+<!-- 3) Next, LastPage  -->
+  <c:choose>
+  	<c:when test="${(pageMaker.currPage >= pageMaker.epageNo) && pageMaker.epageNo>0}">
+  		&nbsp;<a href="mPageList${pageMaker.searchQuery(pageMaker.epageNo+1)}">&GT;</a>
+  		&nbsp;<a href="mPageList${pageMaker.searchQuery(pageMaker.lastPageNo)}">LP</a>
+  	</c:when>
+  	<c:otherwise>
+  		<font color="Gray">&nbsp;&GT;&nbsp;LP</font>
+  	</c:otherwise>
+  </c:choose>
+</div>
 
 		</div>
 	</main>
