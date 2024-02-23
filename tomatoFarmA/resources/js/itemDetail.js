@@ -65,14 +65,8 @@ function inputCount(event) {
 // }
 
 function showItemDetail(ele) {
-<<<<<<< HEAD
-    const itemIntro = document.getElementById('introItem');
-    if (e) {
-        itemIntro.classList.add('heightAuto');
-=======
     let itemIntro = ele.previousElementSibling;
     if (itemIntro.classList.contains('heightAuto'))
->>>>>>> 90400316109198a5f49c9a59567209398a6e1ce6
         itemIntro.classList.remove('heightAuto');
     } else {
         itemIntro.classList.add('heightAuto');
