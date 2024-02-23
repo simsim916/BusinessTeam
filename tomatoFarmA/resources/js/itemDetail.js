@@ -66,14 +66,14 @@ function inputCount(event) {
 
 function showItemDetail(ele) {
     let itemIntro = ele.previousElementSibling;
-    if (itemIntro.classList.contains('heightAuto'))
+    if (itemIntro.classList.contains('heightAuto')) {
         itemIntro.classList.remove('heightAuto');
     } else {
         itemIntro.classList.add('heightAuto');
         introItemBtn.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`;
         //ele.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`;
     }
-    return false;
+    return fal123se;
 }
 
 function reviewDetailClose(event) {
