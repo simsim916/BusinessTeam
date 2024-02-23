@@ -19,6 +19,8 @@ public class ItemDAO {
 	private static ResultSet rs;
 	private static String sql;
 
+	
+	
 	// 전체 제품 조회
 	public List<ItemDTO> selectItemList() {
 		sql = "select * from mealkit";
@@ -61,13 +63,38 @@ public class ItemDAO {
 		}
 
 	}
+	
+	
+	public int itemListCount(String keyword) {
+		sql = "Select COUNT(*) FROM "
+				+ "(Select * From mealkit Where name Like '%"+keyword+"%' "
+				+ "OR sort4 Like '%"+keyword+"%' "
+				+ "OR brand Like '%"+keyword+"%')";
+		int count = 0;
+		
+		try {
+			pst = cn.prepareStatement(sql);
+			rs = pst.executeQuery();
+			
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+			
+			return count;
+		} catch (Exception e) {
+			System.out.println("itemListCount 데이터가 없다=> " + e.toString());
+			return count;
+		}
+	}
 
 	// 키워드(브랜드, 제품명, 분류명)으로 검색
 	public List<ItemDTO> selectItemListWhereKeyword(String keyword) {
 
-		sql = "select * from mealkit where name like '%" + keyword + "%' "
-				+ "union select * from mealkit where brand like '%" + keyword + "%' "
-				+ "union select * from mealkit where sort4 like '%" + keyword + "%' ";
+		sql = "select * from mealkit where name like '%" + keyword + "%'"
+				+ "or brand like '%" + keyword + "%'"
+				+ "or sort4 like '%" + keyword + "%'"
+				+ "order by sales"
+				+ "limit 0, 3";
 		try {
 			pst = cn.prepareStatement(sql);
 			rs = pst.executeQuery();

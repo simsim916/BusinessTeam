@@ -31,7 +31,7 @@ public class ItemController {
 		List<ItemDTO> list = itemService.selectItemListWhereKeyword(keyword);
 		
 		pageMaker.setSnoEno();
-//		pageMaker.setTotalRowsCount(itemService.)
+		pageMaker.setTotalRowsCount(itemService.itemListCount(keyword));
 		
 		// 검색결과 개수
 		

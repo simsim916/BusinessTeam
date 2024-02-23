@@ -54,5 +54,10 @@ public class ItemServiceImpl implements ItemService{
 	public List<ItemDTO> selectEventItemList() {
 		return dao.selectEventItemList();
 	}
+
+	@Override
+	public int itemListCount(String keyword) {
+		return dao.itemListCount(keyword);
+	}
 	
 }

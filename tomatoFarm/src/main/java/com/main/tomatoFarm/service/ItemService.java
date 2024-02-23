@@ -7,7 +7,7 @@ import com.main.tomatoFarm.domain.ItemDTO;
 
 public interface ItemService {
 
-	
+	public int itemListCount(String keyword);
 	public List<ItemDTO> selectItemList(); // 전체상품
 	public List<ItemDTO> selectItemListWhereKeyword(String keyWord); // 검색기능(브랜드 or 제품명)
 	public List<ItemDTO> selectItemListBySales(); // 판매량 높은순서로 리스트 출력
