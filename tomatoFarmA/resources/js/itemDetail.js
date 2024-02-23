@@ -43,27 +43,6 @@ function inputCount(event) {
     countBox.children[1].innerText = inputBox;
 }
 
-
-// function showItemDetail(ele) {
-//     let itemIntro = ele.previousElementSibling;
-//     if (itemIntro.classList.contains('heightAuto'))
-//         itemIntro.classList.remove('heightAuto');
-//     else {
-//         itemIntro.classList.add('heightAuto');
-//         introItemBtn.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`;
-//     }
-//     return null;
-// }
-
-
-// function showItemDetail(ele) {
-//     const itemIntro = document.getElementById('introItem');
-//     const introItemBtn = document.getElementById('detailButton'); // '상품정보 접기' 버튼
-
-//     itemIntro.classList.add('heightAuto');
-//     introItemBtn.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`; // 버튼의 텍스트 변경
-// }
-
 function showItemDetail(ele) {
     let itemIntro = ele.previousElementSibling;
     if (itemIntro.classList.contains('heightAuto')) {
@@ -73,35 +52,37 @@ function showItemDetail(ele) {
         introItemBtn.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`;
         //ele.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`;
     }
-    return fal123se;
+    return null;
 }
 
-function reviewDetailClose(event) {
+function reviewDetailClose(ele) {
+    ele.closest('#reviewDetailForm').style.display = 'none';
+}
+
+function reviewDetailClick(event) {
+    event.stopPropagation();
     const reviewDetailForm = document.getElementById('reviewDetailForm');
-    const reviewDetailBoxClose = document.getElementById('reviewDetailBoxClose');
-    if (reviewDetailForm.style.visibility === 'hidden') {
-
-        reviewDetailForm.style.visibility = 'visible';
-    } else {
-
-        reviewDetailForm.style.visibility = 'hidden';
-    }
+    reviewDetailForm.style.display = 'flex';
 }
-// function reviewDetailClick(event) {
-//     const reviewDetailForm = document.getElementById('reviewDetailForm');
-//     if (reviewDetailForm.style.visibility === 'hidden') {
-
-//         reviewDetailForm.style.visibility = 'visible';
-//     } else {
-
-//         reviewDetailForm.style.visibility = 'hidden';
-//     }
-// }
 
 function reivewDetailImgChange(ele) {
     ele.parentNode.previousElementSibling.children[0].setAttribute('src', ele.src);
 }
 
+
+// let imgList = document.getElementById('reviewDetailImgBottom');
+// let imgLength = imgList.length;
+
+// function returnImg(event) {
+//     let returnImg = (imgList + imgLength - 1) % imgLength;
+//     event.
+// }
+
+
+// function nextImg(event) {
+//     let nextImg = (imgList + 1) % imgLength;
+    
+// }
 
 
 

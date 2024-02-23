@@ -279,7 +279,7 @@
             </div>
             <div onclick="showContent(this)" class="reviewContent">
                 <div class="reviewDetail">
-                    <div onclick="reviewDetailClick(this)" id="reivewImg">
+                    <div onclick="reviewDetailClick(event)" id="reivewImg">
                         <img src="/tomatoFarmA/resources/img/itemImg/5000001_2.jpg" alt="">
                         <img src="/tomatoFarmA/resources/img/itemImg/5000001_1.jpg" alt="">
                     </div>
@@ -300,7 +300,7 @@
             </div>
             <div onclick="showContent(this)" class="reviewContent">
                 <div class="reviewDetail">
-                    <div>
+                    <div onclick="reviewDetailClick(event)" id="reivewImg">
                         <img src="/tomatoFarmA/resources/img/itemImg/5000001_2.jpg" alt="">
                         <img src="/tomatoFarmA/resources/img/itemImg/5000001_1.jpg" alt="">
                     </div>
@@ -321,7 +321,7 @@
             </div>
             <div onclick="showContent(this)" class="reviewContent">
                 <div class="reviewDetail">
-                    <div>
+                    <div onclick="reviewDetailClick(event)" id="reivewImg">
                         <img src="/tomatoFarmA/resources/img/itemImg/5000001_2.jpg" alt="">
                         <img src="/tomatoFarmA/resources/img/itemImg/5000001_1.jpg" alt="">
                     </div>
@@ -342,7 +342,7 @@
             </div>
             <div onclick="showContent(this)" class="reviewContent">
                 <div class="reviewDetail">
-                    <div>
+                    <div onclick="reviewDetailClick(event)" id="reivewImg">
                         <img src="/tomatoFarmA/resources/img/itemImg/5000001_2.jpg" alt="">
                         <img src="/tomatoFarmA/resources/img/itemImg/5000001_1.jpg" alt="">
                     </div>
@@ -363,7 +363,7 @@
             </div>
             <div onclick="showContent(this)" class="reviewContent">
                 <div class="reviewDetail">
-                    <div>
+                    <div onclick="reviewDetailClick(event)" id="reivewImg">
                         <img src="/tomatoFarmA/resources/img/itemImg/5000001_2.jpg" alt="">
                         <img src="/tomatoFarmA/resources/img/itemImg/5000001_1.jpg" alt="">
                     </div>
@@ -475,17 +475,19 @@
             <i class="fa-solid fa-angles-right"></i>
         </div>
     </div>
-    <div onclick="reviewDetailClick(event)" id="reviewDetailForm">
+    <div id="reviewDetailForm">
         <div id="reviewDetailBox">
             <div id="reviewDetailImg">
                 <div id="reviewDetailImgTop">
                     <img src="/tomatoFarmA/resources/img/itemImg/5000001_2.jpg" alt="">
-                    <i class="fa-solid fa-arrow-left"></i>
-                    <i class="fa-solid fa-arrow-right"></i>
+                    <i onclick="returnImg(event)" class="fa-solid fa-arrow-left"></i>
+                    <i onclick="nextImg(event)" class="fa-solid fa-arrow-right"></i>
                 </div>
                 <div id="reviewDetailImgBottom">
-                    <img onclick="reivewDetailImgChange(this)" src="/tomatoFarmA/resources/img/itemImg/5000001_1.jpg" alt="">
-                    <img onclick="reivewDetailImgChange(this)" src="/tomatoFarmA/resources/img/itemImg/5000001_2.jpg" alt="">
+                    <img onclick="reivewDetailImgChange(this)" src="/tomatoFarmA/resources/img/itemImg/5000001_1.jpg"
+                        alt="">
+                    <img onclick="reivewDetailImgChange(this)" src="/tomatoFarmA/resources/img/itemImg/5000001_2.jpg"
+                        alt="">
                 </div>
             </div>
             <div id="reviewDetail_Write">
@@ -498,7 +500,7 @@
                     후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다
                 </p>
             </div>
-            <div onclick="reviewDetailClose(event)" id="reviewDetailBoxClose"><i class="fa-solid fa-xmark"></i></div>
+            <div onclick="reviewDetailClose(this)" id="reviewDetailBoxClose"><i class="fa-solid fa-xmark"></i></div>
         </div>
     </div>
 </body>
