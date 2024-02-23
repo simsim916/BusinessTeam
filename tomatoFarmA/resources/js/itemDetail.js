@@ -44,13 +44,40 @@ function inputCount(event) {
 }
 
 
+// function showItemDetail(ele) {
+//     let itemIntro = ele.previousElementSibling;
+//     if (itemIntro.classList.contains('heightAuto'))
+//         itemIntro.classList.remove('heightAuto');
+//     else {
+//         itemIntro.classList.add('heightAuto');
+//         introItemBtn.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`;
+//     }
+//     return null;
+// }
+
+
+// function showItemDetail(ele) {
+//     const itemIntro = document.getElementById('introItem');
+//     const introItemBtn = document.getElementById('detailButton'); // '상품정보 접기' 버튼
+
+//     itemIntro.classList.add('heightAuto');
+//     introItemBtn.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`; // 버튼의 텍스트 변경
+// }
+
 function showItemDetail(ele) {
+<<<<<<< HEAD
+    const itemIntro = document.getElementById('introItem');
+    if (e) {
+        itemIntro.classList.add('heightAuto');
+=======
     let itemIntro = ele.previousElementSibling;
     if (itemIntro.classList.contains('heightAuto'))
+>>>>>>> 90400316109198a5f49c9a59567209398a6e1ce6
         itemIntro.classList.remove('heightAuto');
-    else {
+    } else {
         itemIntro.classList.add('heightAuto');
         introItemBtn.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`;
+        //ele.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`;
     }
     return false;
 }
