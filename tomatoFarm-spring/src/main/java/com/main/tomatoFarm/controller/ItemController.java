@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.main.tomatoFarm.domain.ItemDTO;
-import com.main.tomatoFarm.domain.KeywordDTO;
 import com.main.tomatoFarm.service.ItemService;
 import com.main.tomatoFarm.service.KeywordService;
 import com.main.tomatoFarm.service.SortService;
 
 import lombok.AllArgsConstructor;
+import paging.PageMaker;
 
 @AllArgsConstructor
 @Controller
@@ -24,12 +24,18 @@ public class ItemController {
 	ItemService itemService;
 	SortService sortSerivce;
 	KeywordService keywordService;
+	PageMaker pageMaker;
 
 	@GetMapping("/list")
 	public void list(Model model, @RequestParam("keyword") String keyword) {
 		List<ItemDTO> list = itemService.selectItemListWhereKeyword(keyword);
 		
+		pageMaker.setSnoEno();
+		pageMaker.setTotalRowsCount(itemService.itemListCount(keyword));
+		
 		// 검색결과 개수
+		
+		
 		if(list == null) {
 			model.addAttribute("size", 0);
 		} else {

@@ -1,28 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 폰트어썸 -->
-    <script src="https://kit.fontawesome.com/d68045e863.js" crossorigin="anonymous"></script>
-    <!-- 구글 폰트 -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
-    <!-- 기본 CSS, JS -->
-    <link rel="stylesheet" href="/tomatoFarm/resources/css/00default.css">
-    <script defer src="/tomatoFarm/resources/js/00default.js"></script>
-    <!-- 페이지 CSS, JS -->
-    <link rel="stylesheet" href="/tomatoFarm/resources/css/signup.css">
-    <script defer src="/tomatoFarm/resources/js/signup.js"></script>
-    
-		<title>토마토팜 || 회원가입</title>
-</head>
-<body>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+        <!DOCTYPE html>
+        <html>
+
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <!-- 폰트어썸 -->
+            <script src="https://kit.fontawesome.com/d68045e863.js" crossorigin="anonymous"></script>
+            <!-- 구글 폰트 -->
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link
+                href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap"
+                rel="stylesheet">
+            <!-- 기본 CSS, JS -->
+            <link rel="stylesheet" href="/tomatoFarm/resources/css/00default.css">
+            <script defer src="/tomatoFarm/resources/js/00default.js"></script>
+            <!-- 페이지 CSS, JS -->
+            <link rel="stylesheet" href="/tomatoFarm/resources/css/signup.css">
+            <script defer src="/tomatoFarm/resources/js/signup.js"></script>
+
+            <title>토마토팜 || 회원가입</title>
+        </head>
+
+       <body>
     <div id="bodyBG"></div>
     <div id="bodyBG2"></div>
     <main>
@@ -99,15 +101,17 @@
                 <input onkeydown="changeOpacity2(event)" type="text" name="month" placeholder="mm" maxlength="2">
                 <input onkeydown="changeOpacity2(event)" type="text" name="day" placeholder="dd" maxlength="2">
             </div>
-            <button id="joinBox">가입하기</button>
+            <button id="joinBox" disabled>가입하기</button>
         </form>
         <br>
         <p id="successOrNot">
-	        <c:if test="${!empty successOrNot}">
-	        	<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;${successOrNot}
-	        </c:if>
+            <c:if test="${!empty successOrNot}">
+                  <i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;${successOrNot}
+            </c:if>
         </p>
     </main>
 </body>
 
-</html>
+        </html>
+        
+        

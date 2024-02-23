@@ -13,6 +13,7 @@ function changeMainImg(event) {
         if (ele.parentNode.children[i] != ele) {
             ele.parentNode.children[i].style.opacity = '0.5';
         }
+        }
     }
     return false;
 }

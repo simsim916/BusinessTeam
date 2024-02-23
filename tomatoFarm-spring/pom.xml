@@ -147,14 +147,32 @@
           <artifactId>mysql-connector-java</artifactId>
           <version>8.0.28</version>
       </dependency>  
-      
-      
-      <dependency>
-      	<groupId>org.springframework.security</groupId>
-      	<artifactId>spring-security-web</artifactId>
-      	<version>4.0.0.RELEASE</version>
+      <!--스프링시큐리티 web 라이브러리 (설치된 스프링 버전과 일치해야 함.)-->
+       <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>4.0.0.RELEASE</version>
+        </dependency>
+
+		 <dependency>
+         <groupId>org.mybatis</groupId>
+         <artifactId>mybatis</artifactId>
+         <version>3.3.1</version>
       </dependency>
       
+      <!-- Mybatis-Spring : 마이바티스와 스프링 연동을 위한 라이브러리 -->
+      <dependency>
+         <groupId>org.mybatis</groupId>
+         <artifactId>mybatis-spring</artifactId>
+         <version>1.2.4</version>
+      </dependency>
+		   <!-- Spring JDBC : DriverManagerDataSource 사용을 위해 필요함 -->
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-jdbc</artifactId>
+         <version>${org.springframework-version}</version>
+      </dependency>
+
 	</dependencies>
     <build>
         <plugins>
