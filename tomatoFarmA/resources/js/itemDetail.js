@@ -52,66 +52,36 @@ function showItemDetail(ele) {
         itemIntro.classList.add('heightAuto');
         introItemBtn.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`;
     }
-    return null;
+    return false;
 }
 
-function reivewImgDetail(event){
+function reviewDetailClose(event) {
+    const reviewDetailForm = document.getElementById('reviewDetailForm');
+    const reviewDetailBoxClose = document.getElementById('reviewDetailBoxClose');
+    if (reviewDetailForm.style.visibility === 'hidden') {
 
+        reviewDetailForm.style.visibility = 'visible';
+    } else {
+
+        reviewDetailForm.style.visibility = 'hidden';
+    }
 }
+// function reviewDetailClick(event) {
+//     const reviewDetailForm = document.getElementById('reviewDetailForm');
+//     if (reviewDetailForm.style.visibility === 'hidden') {
 
+//         reviewDetailForm.style.visibility = 'visible';
+//     } else {
 
-
-
-
-
-
-// function reivewDetail(event) {
-//     event.stopPropagation();
-//     const reviewImg = document.getElementsByClassName('reviewDetail').children[2];
-//     reviewImg.style.width = 100;
-//     reviewImg.style.height = 100;
-
-// }
-
-// function detailClick(event) {
-//     const detailClick = document.getElementById('detailClick');
-//     let itemIntro = ele.previousElementSibling;
-
-//     if (detailClick.children[1]) {
-//         window.scrollTo({ top: 900, behavior: 'smooth' })
-//         container.classList.add('heightAuto');
-//         introItemBtn.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`;
-//         // return showItemDetail(ele);
-//     } else if (detailClick.children[2]) {
-//         window.scrollTo({ top: 900, behavior: 'smooth' })
-
+//         reviewDetailForm.style.visibility = 'hidden';
 //     }
 // }
 
+function reivewDetailImgChange(ele) {
+    ele.parentNode.previousElementSibling.children[0].setAttribute('src', ele.src);
+}
 
-// function showItemDetail(element) {
-//     const itemIntro = document.getElementById('introItem');
-//     itemIntro.classList.add('heightAuto');
-//     element.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`;
-// }
 
-// function detailButtonClick(event) {
-//     const targetTab = event.target.textContent.trim();
-//     const itemIntroBtn = document.getElementById('detailButton');
 
-//     switch (targetTab) {
-//         case '상품설명':
-//             showItemDetail(itemIntroBtn);
-//             break;
-//         case '상세정보':
-//             break;
-//         case '후기':
-//             break;
-//         case '문의':
-//             break;
-//         default:
-//             break;
-//     }
-// }
 
-// document.getElementById('detailClick').addEventListener('click', detailButtonClick);
+
