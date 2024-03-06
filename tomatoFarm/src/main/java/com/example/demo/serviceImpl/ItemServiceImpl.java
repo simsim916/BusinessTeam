@@ -1,6 +1,5 @@
 package com.example.demo.serviceImpl;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -34,6 +33,11 @@ public class ItemServiceImpl implements ItemService{
 		
 		List<Item> result = itemRepository.selectItemWherebrand(pageRequest,searchRequest);
 		
+	}
+	
+	@Override
+	public List<Item> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest) {
+		List<Item> result = itemRepository.selectItemWhereSearchType(pageRequest,searchRequest);
 		return result;
 	}
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */

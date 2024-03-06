@@ -30,5 +30,6 @@ public interface ItemService {
 
 	List<Item> selectItemWhereEvent_D(PageRequest pageRequest);
 	List<Item> selectItemWherebrand(PageRequest pageRequest, SearchRequest searchRequest);
+	List<Item> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest);
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 }

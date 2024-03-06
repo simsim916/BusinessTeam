@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,7 +39,6 @@ public class ItemController {
 			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
 			log.info("eventitem check");
 		}
-		
 		return result;
 	}
 	
@@ -57,7 +57,30 @@ public class ItemController {
 			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
 			log.info("branditem check");
 		}
+		return result;
+	}
+
+	@GetMapping("/search")
+	public ResponseEntity<?> selectItemWhereSearchType( @Param("keyword") String keyword) {
+		ResponseEntity<?> result = null;
+		PageRequest pageRequest = new PageRequest(1,24);
 		
+		String[] type = {"sort3", "name", "brand"};
+		SearchRequest searchRequest = new SearchRequest(type,keyword);
+		
+		List<Item> list = itemService.selectItemWhereSearchType(pageRequest, searchRequest);
+		
+		if (list != null && list.size() > 0) {
+			result = ResponseEntity.status(HttpStatus.OK).body(list);
+			log.info("search check");
+		} else {
+			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
+			log.info("search check");
+		}
 		return result;
 	}
 }
+	
+	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
+	
+	

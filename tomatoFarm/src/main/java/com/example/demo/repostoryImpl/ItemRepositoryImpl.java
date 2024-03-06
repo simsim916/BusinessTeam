@@ -14,7 +14,6 @@ import static com.example.demo.entity.QItem.item;
 
 import lombok.AllArgsConstructor;
 
-//asd
 @Repository
 @AllArgsConstructor
 public class ItemRepositoryImpl implements ItemRepository{
@@ -38,4 +37,17 @@ public class ItemRepositoryImpl implements ItemRepository{
 				.offset((pageRequest.getPage()-1)*pageRequest.getSize()+1).limit(pageRequest.getPage()*pageRequest.getSize())
 				.fetch();
 	}
+	
+	@Override
+	public List<Item> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest){
+		return jPAQueryFactory.selectFrom(item)
+				.where(item.sort3.in(searchRequest.getType()))
+				.orderBy(item.sales.desc())
+				.offset((pageRequest.getPage()-1)*pageRequest.getSize()+1).limit(pageRequest.getSize()*pageRequest.getPage())
+				.fetch();
+	}
+	
+	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
+	
+	
 }
