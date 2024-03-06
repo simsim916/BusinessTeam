@@ -168,348 +168,260 @@
         </nav>
     </header>
 
-    <div id="adImgBox">
-        <div id="adImg" class="container">
-            <img src="../resources/img/adimg/fresheasy.jpg" alt="">
-            <div id="adRightTab">
-                <div onmouseover="changeAdImgBox(this,event)">프레시지<img src="../resources/img/brand/fresheasy.png"
-                        alt="프레시지로고"></div>
-                <div onmouseover="changeAdImgBox(this,event)">MyChef<img src="../resources/img/brand/마이셰프.png"
-                        alt="마이셰프로고"></div>
-                <div onmouseover="changeAdImgBox(this,event)">회원가입쿠폰<img src="../resources/img/adimg/coupon.jpg"
-                        alt="마이셰프로고"></div>
-                <div onmouseover="changeAdImgBox(this,event)">후기이벤트<img src="../resources/img/adimg/review.png"
-                        alt="마이셰프로고"></div>
+    <main>
+        <div id="adImgBox">
+            <div id="adImg" class="container">
+                <img src="../resources/img/adimg/fresheasy.jpg" alt="">
+                <div id="adRightTab">
+                    <div onmouseover="changeAdImgBox(this,event)">프레시지<img src="../resources/img/brand/fresheasy.png"
+                            alt="프레시지로고"></div>
+                    <div onmouseover="changeAdImgBox(this,event)">MyChef<img src="../resources/img/brand/마이셰프.png"
+                            alt="마이셰프로고"></div>
+                    <div onmouseover="changeAdImgBox(this,event)">회원가입쿠폰<img src="../resources/img/adimg/coupon.jpg"
+                            alt="마이셰프로고"></div>
+                    <div onmouseover="changeAdImgBox(this,event)">후기이벤트<img src="../resources/img/adimg/review.png"
+                            alt="마이셰프로고"></div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div id="firstContainer" class="container">
-        <h3><i class="fa-solid fa-star"></i>&nbsp;&nbsp; 토마토팜 바로가기 &nbsp;&nbsp;<i class="fa-solid fa-star"></i></h3>
-        <div id="firstContainerButton">
-            <div><a><img src="../resources/img/index_bestSeller.png" alt="" class="categoryImg"><br>베스트 상품</a>
+        <div id="firstContainer" class="container">
+            <h3><i class="fa-solid fa-star"></i>&nbsp;&nbsp; 토마토팜 바로가기 &nbsp;&nbsp;<i class="fa-solid fa-star"></i></h3>
+            <div id="firstContainerButton">
+                <div><a><img src="../resources/img/index_bestSeller.png" alt="베스트 상품" class="categoryImg"><br>베스트 상품</a>
+                </div>
+                <div><a><img src="../resources/img/index_mealkit.png" alt="밀키트" class="categoryImg"><br>밀키트</a></div>
+                <div><a><img src="../resources/img/index_food.png" alt="신선 재료" class="categoryImg"><br>신선 재료</a></div>
+                <div><a><img src="../resources/img/index_menu.png" alt="메뉴 주문" class="categoryImg"><br>메뉴 주문</a></div>
+                <div><a><img src="../resources/img/index_cooking.png" alt="조리 도구" class="categoryImg"><br>조리 도구</a>
+                </div>
+                <div><a><img src="../resources/img/index_gift.png" alt="이벤트" class="categoryImg"><br>이벤트</a></div>
             </div>
-            <div><a><img src="../resources/img/index_mealkit.png" alt="" class="categoryImg"><br>밀키트</a></div>
-            <div><a><img src="../resources/img/index_food.png" alt="" class="categoryImg"><br>신선 재료</a></div>
-            <div><a><img src="../resources/img/index_menu.png" alt="" class="categoryImg"><br>메뉴 주문</a></div>
-            <div><a><img src="../resources/img/index_cooking.png" alt="" class="categoryImg"><br>조리 도구</a>
-            </div>
-            <div><a><img src="../resources/img/index_gift.png" alt="" class="categoryImg"><br>이벤트</a></div>
         </div>
-    </div>
 
-    <hr>
+        <hr>
 
-    <div id="secondContainer" class="container">
-        <!-- <h3><i class="fa-solid fa-gift"></i> &nbsp;&nbsp;특가 상품&nbsp;&nbsp; <i class="fa-solid fa-gift"></i></h3>
-        <div id="secondContainerList">
-            <div class="slideBox">
-                <a href="" class="itemBox">
+        <div id="secondContainer" class="container">
+            <h3><i class="fa-solid fa-gift"></i> &nbsp;&nbsp;특가 상품&nbsp;&nbsp; <i class="fa-solid fa-gift"></i></h3>
+        </div>
+
+        <hr>
+
+        <div id="thirdContainer" class="container hide transition1">
+            <h3 class="hide transition1"><i class="fa-solid fa-bag-shopping"></i> &nbsp;&nbsp; 상품 보기 &nbsp;&nbsp; <i
+                    class="fa-solid fa-bag-shopping"></i></h3>
+            <div class="typeBox hide transition1">
+                <div class="typeBoxTag">
+                    <div class="typeBoxTagTitle"><img src="../resources/img/brand/fresheasy.png"
+                            alt="category_vitamin">프레시지
+                    </div>
+                    <ul class="typeBoxTagList">
+                        <li><a href="">스테이크</a></li>
+                        <li><a href="">파스타</a></li>
+                        <li><a href="">감바스</a></li>
+                    </ul>
+                </div>
+                <a href="" class="typeBoxImg">
                     <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                    <div class="itemName">111111111111</div>
-                    <div class="itemInfo">프레시지<br></div>
-                    <p class="itemPrice">12,300원</p>
-                    <div class="itemOption">무료배송</div>
+                    <div class="typeBoxImgTitle">
+                        <div class="typeBoxImgTitleName">
+                            신림동 백순대 볶음
+                        </div>
+                        <p class="typeBoxImgTitlePrice">12,300원</p>
+                    </div>
+                    <div class="typeBoxImgTitleBest">Best 상품</div>
                 </a>
-                <div class="itemBox">
-                    <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                    <div class="itemName">22222222222222</div>
-                    <div class="itemInfo">프레시지<br></div>
-                    <p class="itemPrice">12,300원</p>
-                    <div class="itemOption">무료배송</div>
-                </div>
-                <div class="itemBox">
-                    <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                    <div class="itemName">333333333333333</div>
-                    <div class="itemInfo">프레시지<br></div>
-                    <p class="itemPrice">12,300원</p>
-                    <div class="itemOption">무료배송</div>
-                </div>
-                <div class="itemBox">
-                    <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                    <div class="itemName">44444444444444</div>
-                    <div class="itemInfo">프레시지<br></div>
-                    <p class="itemPrice">12,300원</p>
-                    <div class="itemOption">무료배송</div>
-                </div>
-                <div class="itemBox">
-                    <div class="itemImg">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                        <div>aasdfasdf</div>
+                <div class="typeBoxList">
+                    <div class="slideBox">
+                        <a href="" class="itemBox">
+                            <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
+                            <div class="itemName">11111111</div>
+                            <div class="itemInfo">프레시지<br></div>
+                            <p class="itemPrice">12,300원</p>
+                            <div class="itemOption">무료배송</div>
+                        </a>
+                        <a href="" class="itemBox">
+                            <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
+                            <div class="itemName">22222222</div>
+                            <div class="itemInfo">프레시지<br></div>
+                            <p class="itemPrice">12,300원</p>
+                            <div class="itemOption">무료배송</div>
+                        </a>
+                        <a href="" class="itemBox">
+                            <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
+                            <div class="itemName">333333333</div>
+                            <div class="itemInfo">프레시지<br></div>
+                            <p class="itemPrice">12,300원</p>
+                            <div class="itemOption">무료배송</div>
+                        </a>
+                        <a href="" class="itemBox">
+                            <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
+                            <div class="itemName">44444</div>
+                            <div class="itemInfo">프레시지<br></div>
+                            <p class="itemPrice">12,300원</p>
+                            <div class="itemOption">무료배송</div>
+                        </a>
+                        <a href="" class="itemBox">
+                            <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
+                            <div class="itemName">555555</div>
+                            <div class="itemInfo">프레시지<br></div>
+                            <p class="itemPrice">12,300원</p>
+                            <div class="itemOption">무료배송</div>
+                        </a>
+                        <a href="" class="linkBox">
+                            <p>" 프레시지 "</p>
+                            <i class="fa-regular fa-circle-play"></i> 상품 더 보러가기
+                        </a>
                     </div>
-                    <div class="itemName">55555555555555</div>
-                    <div class="itemInfo">프레시지<br></div>
-                    <p class="itemPrice">12,300원</p>
-                    <div class="itemOption">무료배송</div>
-                </div>
-                <div class="itemBox">
-                    <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                    <div class="itemName">666666666666</div>
-                    <div class="itemInfo">프레시지<br></div>
-                    <p class="itemPrice">12,300원</p>
-                    <div class="itemOption">무료배송</div>
-                </div>
-                <div class="itemBox">
-                    <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                    <div class="itemName">7777777777</div>
-                    <div class="itemInfo">프레시지<br></div>
-                    <p class="itemPrice">12,300원</p>
-                    <div class="itemOption">무료배송</div>
-                </div>
-                <div class="itemBox">
-                    <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                    <div class="itemName">88888888888</div>
-                    <div class="itemInfo">프레시지<br></div>
-                    <p class="itemPrice">12,300원</p>
-                    <div class="itemOption">무료배송</div>
-                </div>
-                <div class="itemBox">
-                    <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                    <div class="itemName">99999999999</div>
-                    <div class="itemInfo">프레시지<br></div>
-                    <p class="itemPrice">12,300원</p>
-                    <div class="itemOption">무료배송</div>
-                </div>
-            </div>
-            <div id="secondSlideBtn" onclick="secondContainerSlideBtn(event)">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div id="secondSlideBtnSelected"></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-            <div id="secondContainerLeftBtn" onclick="secondContainerSlideLeftbth(event)"><i
-                    class="fa-sharp fa-solid fa-arrow-left"></i></div>
-            <div id="secondContainerRightBtn" onclick="secondContainerSlideRightbth(event)"><i
-                    class="fa-sharp fa-solid fa-arrow-right"></i></div>
-
-        </div> -->
-    </div>
-
-    <hr>
-
-    <div id="thirdContainer" class="container hide transition1">
-        <h3 class="hide transition1"><i class="fa-solid fa-bag-shopping"></i> &nbsp;&nbsp; 상품 보기 &nbsp;&nbsp; <i
-                class="fa-solid fa-bag-shopping"></i></h3>
-        <div class="typeBox hide transition1">
-            <div class="typeBoxTag">
-                <div class="typeBoxTagTitle"><img src="../resources/img/brand/fresheasy.png" alt="category_vitamin">프레시지
-                </div>
-                <ul class="typeBoxTagList">
-                    <li><a href="">스테이크</a></li>
-                    <li><a href="">파스타</a></li>
-                    <li><a href="">감바스</a></li>
-                </ul>
-            </div>
-            <a href="" class="typeBoxImg">
-                <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                <div class="typeBoxImgTitle">
-                    <div class="typeBoxImgTitleName">
-                        신림동 백순대 볶음
+                    <div onclick="thirdContainerSlideLeftBth(event)" class="thirdContainerLeftBtn">
+                        <i class="fa-sharp fa-solid fa-arrow-left"></i>
                     </div>
-                    <p class="typeBoxImgTitlePrice">12,300원</p>
+                    <div onclick="thirdContainerSlideRightBth(event)" class="thirdContainerRightBtn">
+                        <i class="fa-sharp fa-solid fa-arrow-right"></i>
+                    </div>
                 </div>
-                <div class="typeBoxImgTitleBest">Best 상품</div>
-            </a>
-            <div class="typeBoxList">
-                <div class="slideBox">
-                    <a href="" class="itemBox">
-                        <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                        <div class="itemName">11111111</div>
-                        <div class="itemInfo">프레시지<br></div>
-                        <p class="itemPrice">12,300원</p>
-                        <div class="itemOption">무료배송</div>
-                    </a>
-                    <a href="" class="itemBox">
-                        <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                        <div class="itemName">22222222</div>
-                        <div class="itemInfo">프레시지<br></div>
-                        <p class="itemPrice">12,300원</p>
-                        <div class="itemOption">무료배송</div>
-                    </a>
-                    <a href="" class="itemBox">
-                        <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                        <div class="itemName">333333333</div>
-                        <div class="itemInfo">프레시지<br></div>
-                        <p class="itemPrice">12,300원</p>
-                        <div class="itemOption">무료배송</div>
-                    </a>
-                    <a href="" class="itemBox">
-                        <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                        <div class="itemName">44444</div>
-                        <div class="itemInfo">프레시지<br></div>
-                        <p class="itemPrice">12,300원</p>
-                        <div class="itemOption">무료배송</div>
-                    </a>
-                    <a href="" class="itemBox">
-                        <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                        <div class="itemName">555555</div>
-                        <div class="itemInfo">프레시지<br></div>
-                        <p class="itemPrice">12,300원</p>
-                        <div class="itemOption">무료배송</div>
-                    </a>
-                    <a href="" class="linkBox">
-                        <p>" 프레시지 "</p>
-                        <i class="fa-regular fa-circle-play"></i> 상품 더 보러가기
-                    </a>
+            </div>
+            <div class="typeBox hide transition1">
+                <div class="typeBoxTag">
+                    <div class="typeBoxTagTitle"><img src="../resources/img/brand/rlarndnjstjstodenqn.png"
+                            alt="category_vitamin">김구원선생
+                    </div>
+                    <ul class="typeBoxTagList">
+                        <li><span>영양보충제</span></li>
+                        <li><span>특수분유</span></li>
+                    </ul>
                 </div>
-                <div onclick="thirdContainerSlideLeftBth(event)" class="thirdContainerLeftBtn">
-                    <i class="fa-sharp fa-solid fa-arrow-left"></i>
+                <div class="typeBoxImg">
+                    <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
+                    <div class="typeBoxImgTitle">
+                        <div class="typeBoxImgTitleName">
+                            신림동 백순대 볶음
+                        </div>
+                        <p class="typeBoxImgTitlePrice">12,300원</p>
+                    </div>
+                    <div class="typeBoxImgTitleBest">Best 상품</div>
                 </div>
-                <div onclick="thirdContainerSlideRightBth(event)" class="thirdContainerRightBtn">
-                    <i class="fa-sharp fa-solid fa-arrow-right"></i>
+                <div class="typeBoxList">
+                    <div class="slideBox">
+                        <div class="itemBox">
+                            <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
+                            <div class="itemName">신림동 백순대 볶음</div>
+                            <div class="itemInfo">프레시지<br></div>
+                            <p class="itemPrice">12,300원</p>
+                            <div class="itemOption">무료배송</div>
+                        </div>
+                        <div class="itemBox">
+                            <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
+                            <div class="itemName">신림동 백순대 볶음</div>
+                            <div class="itemInfo">프레시지<br></div>
+                            <p class="itemPrice">12,300원</p>
+                            <div class="itemOption">무료배송</div>
+                        </div>
+                        <div class="itemBox">
+                            <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
+                            <div class="itemName">신림동 백순대 볶음</div>
+                            <div class="itemInfo">프레시지<br></div>
+                            <p class="itemPrice">12,300원</p>
+                            <div class="itemOption">무료배송</div>
+                        </div>
+                        <div class="itemBox">
+                            <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
+                            <div class="itemName">신림동 백순대 볶음</div>
+                            <div class="itemInfo">프레시지<br></div>
+                            <p class="itemPrice">12,300원</p>
+                            <div class="itemOption">무료배송</div>
+                        </div>
+                        <div class="itemBox">
+                            <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
+                            <div class="itemName">신림동 백순대 볶음</div>
+                            <div class="itemInfo">프레시지<br></div>
+                            <p class="itemPrice">12,300원</p>
+                            <div class="itemOption">무료배송</div>
+                        </div>
+                        <a href class="linkBox">
+                            <p>" 김구원선생 "</p>
+                            <i class="fa-regular fa-circle-play"></i> 상품 더 보러가기
+                        </a>
+                    </div>
+                    <div onclick="thirdContainerSlideLeftBth(event)" class="thirdContainerLeftBtn">
+                        <i class="fa-sharp fa-solid fa-arrow-left"></i>
+                    </div>
+                    <div onclick="thirdContainerSlideRightBth(event)" class="thirdContainerRightBtn">
+                        <i class="fa-sharp fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="typeBox hide transition1">
+                <div class="typeBoxTag">
+                    <div class="typeBoxTagTitle"><img src="../resources/img/brand/마이셰프.png" alt="category_vitamin">마이셰프
+                    </div>
+                    <ul class="typeBoxTagList">
+                        <li><span>영양보충제</span></li>
+                        <li><span>특수분유</span></li>
+                    </ul>
+                </div>
+                <div class="typeBoxImg">
+                    <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
+                    <div class="typeBoxImgTitle">
+                        <div class="typeBoxImgTitleName">
+                            신림동 백순대 볶음
+                        </div>
+                        <p class="typeBoxImgTitlePrice">12,300원</p>
+                    </div>
+                    <div class="typeBoxImgTitleBest">Best 상품</div>
+                </div>
+                <div class="typeBoxList">
+                    <div class="slideBox">
+                        <div class="itemBox">
+                            <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
+                            <div class="itemName">신림동 백순대 볶음</div>
+                            <div class="itemInfo">프레시지<br></div>
+                            <p class="itemPrice">12,300원</p>
+                            <div class="itemOption">무료배송</div>
+                        </div>
+                        <div class="itemBox">
+                            <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
+                            <div class="itemName">신림동 백순대 볶음</div>
+                            <div class="itemInfo">프레시지<br></div>
+                            <p class="itemPrice">12,300원</p>
+                            <div class="itemOption">무료배송</div>
+                        </div>
+                        <div class="itemBox">
+                            <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
+                            <div class="itemName">신림동 백순대 볶음</div>
+                            <div class="itemInfo">프레시지<br></div>
+                            <p class="itemPrice">12,300원</p>
+                            <div class="itemOption">무료배송</div>
+                        </div>
+                        <div class="itemBox">
+                            <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
+                            <div class="itemName">신림동 백순대 볶음</div>
+                            <div class="itemInfo">프레시지<br></div>
+                            <p class="itemPrice">12,300원</p>
+                            <div class="itemOption">무료배송</div>
+                        </div>
+                        <div class="itemBox">
+                            <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
+                            <div class="itemName">신림동 백순대 볶음</div>
+                            <div class="itemInfo">프레시지<br></div>
+                            <p class="itemPrice">12,300원</p>
+                            <div class="itemOption">무료배송</div>
+                        </div>
+                        <a href class="linkBox">
+                            <p>" 마이셰프 "</p>
+                            <i class="fa-regular fa-circle-play"></i> 상품 더 보러가기
+                        </a>
+                    </div>
+                    <div onclick="thirdContainerSlideLeftBth(event)" class="thirdContainerLeftBtn">
+                        <i class="fa-sharp fa-solid fa-arrow-left"></i>
+                    </div>
+                    <div onclick="thirdContainerSlideRightBth(event)" class="thirdContainerRightBtn">
+                        <i class="fa-sharp fa-solid fa-arrow-right"></i>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="typeBox hide transition1">
-            <div class="typeBoxTag">
-                <div class="typeBoxTagTitle"><img src="../resources/img/brand/rlarndnjstjstodenqn.png"
-                        alt="category_vitamin">김구원선생
-                </div>
-                <ul class="typeBoxTagList">
-                    <li><span>영양보충제</span></li>
-                    <li><span>특수분유</span></li>
-                </ul>
-            </div>
-            <div class="typeBoxImg">
-                <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                <div class="typeBoxImgTitle">
-                    <div class="typeBoxImgTitleName">
-                        신림동 백순대 볶음
-                    </div>
-                    <p class="typeBoxImgTitlePrice">12,300원</p>
-                </div>
-                <div class="typeBoxImgTitleBest">Best 상품</div>
-            </div>
-            <div class="typeBoxList">
-                <div class="slideBox">
-                    <div class="itemBox">
-                        <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                        <div class="itemName">신림동 백순대 볶음</div>
-                        <div class="itemInfo">프레시지<br></div>
-                        <p class="itemPrice">12,300원</p>
-                        <div class="itemOption">무료배송</div>
-                    </div>
-                    <div class="itemBox">
-                        <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                        <div class="itemName">신림동 백순대 볶음</div>
-                        <div class="itemInfo">프레시지<br></div>
-                        <p class="itemPrice">12,300원</p>
-                        <div class="itemOption">무료배송</div>
-                    </div>
-                    <div class="itemBox">
-                        <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                        <div class="itemName">신림동 백순대 볶음</div>
-                        <div class="itemInfo">프레시지<br></div>
-                        <p class="itemPrice">12,300원</p>
-                        <div class="itemOption">무료배송</div>
-                    </div>
-                    <div class="itemBox">
-                        <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                        <div class="itemName">신림동 백순대 볶음</div>
-                        <div class="itemInfo">프레시지<br></div>
-                        <p class="itemPrice">12,300원</p>
-                        <div class="itemOption">무료배송</div>
-                    </div>
-                    <div class="itemBox">
-                        <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                        <div class="itemName">신림동 백순대 볶음</div>
-                        <div class="itemInfo">프레시지<br></div>
-                        <p class="itemPrice">12,300원</p>
-                        <div class="itemOption">무료배송</div>
-                    </div>
-                    <a href class="linkBox">
-                        <p>" 김구원선생 "</p>
-                        <i class="fa-regular fa-circle-play"></i> 상품 더 보러가기
-                    </a>
-                </div>
-                <div onclick="thirdContainerSlideLeftBth(event)" class="thirdContainerLeftBtn">
-                    <i class="fa-sharp fa-solid fa-arrow-left"></i>
-                </div>
-                <div onclick="thirdContainerSlideRightBth(event)" class="thirdContainerRightBtn">
-                    <i class="fa-sharp fa-solid fa-arrow-right"></i>
-                </div>
-            </div>
-        </div>
-        <div class="typeBox hide transition1">
-            <div class="typeBoxTag">
-                <div class="typeBoxTagTitle"><img src="../resources/img/brand/마이셰프.png" alt="category_vitamin">마이셰프
-                </div>
-                <ul class="typeBoxTagList">
-                    <li><span>영양보충제</span></li>
-                    <li><span>특수분유</span></li>
-                </ul>
-            </div>
-            <div class="typeBoxImg">
-                <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                <div class="typeBoxImgTitle">
-                    <div class="typeBoxImgTitleName">
-                        신림동 백순대 볶음
-                    </div>
-                    <p class="typeBoxImgTitlePrice">12,300원</p>
-                </div>
-                <div class="typeBoxImgTitleBest">Best 상품</div>
-            </div>
-            <div class="typeBoxList">
-                <div class="slideBox">
-                    <div class="itemBox">
-                        <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                        <div class="itemName">신림동 백순대 볶음</div>
-                        <div class="itemInfo">프레시지<br></div>
-                        <p class="itemPrice">12,300원</p>
-                        <div class="itemOption">무료배송</div>
-                    </div>
-                    <div class="itemBox">
-                        <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                        <div class="itemName">신림동 백순대 볶음</div>
-                        <div class="itemInfo">프레시지<br></div>
-                        <p class="itemPrice">12,300원</p>
-                        <div class="itemOption">무료배송</div>
-                    </div>
-                    <div class="itemBox">
-                        <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                        <div class="itemName">신림동 백순대 볶음</div>
-                        <div class="itemInfo">프레시지<br></div>
-                        <p class="itemPrice">12,300원</p>
-                        <div class="itemOption">무료배송</div>
-                    </div>
-                    <div class="itemBox">
-                        <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                        <div class="itemName">신림동 백순대 볶음</div>
-                        <div class="itemInfo">프레시지<br></div>
-                        <p class="itemPrice">12,300원</p>
-                        <div class="itemOption">무료배송</div>
-                    </div>
-                    <div class="itemBox">
-                        <img src="../resources/img/itemImg/5000035_1.jpg" alt="신림동 백순대 볶음">
-                        <div class="itemName">신림동 백순대 볶음</div>
-                        <div class="itemInfo">프레시지<br></div>
-                        <p class="itemPrice">12,300원</p>
-                        <div class="itemOption">무료배송</div>
-                    </div>
-                    <a href class="linkBox">
-                        <p>" 마이셰프 "</p>
-                        <i class="fa-regular fa-circle-play"></i> 상품 더 보러가기
-                    </a>
-                </div>
-                <div onclick="thirdContainerSlideLeftBth(event)" class="thirdContainerLeftBtn">
-                    <i class="fa-sharp fa-solid fa-arrow-left"></i>
-                </div>
-                <div onclick="thirdContainerSlideRightBth(event)" class="thirdContainerRightBtn">
-                    <i class="fa-sharp fa-solid fa-arrow-right"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    </main>
 </body>
 
 </html>

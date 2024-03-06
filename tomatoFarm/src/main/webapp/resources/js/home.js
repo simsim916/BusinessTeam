@@ -1,6 +1,8 @@
 
 
 const slideBox = document.getElementsByClassName("slideBox");
+const secondContainer = document.getElementById('secondContainer');
+const thirdContainer = document.getElementById('thirdContainer');
 let secondSlideBtn;
 const adImgBox = document.getElementById('adImgBox');
 const canvas = adImgBox.querySelector('canvas');
@@ -16,7 +18,7 @@ function changeAdImgBox(ele, event) {
         if (e == ele) break;
         index++;
     }
-    ele.closest('#adImg').children[0].src = `/tomatoFarmA/resources/img/adimg/${adImgList[index]}`;
+    ele.closest('#adImg').children[0].src = `../resources/img/adimg/${adImgList[index]}`;
 }
 
 
@@ -90,13 +92,12 @@ function thirdContainerSlideLeftBth(event) {
 
 function writeSlideContainer() {
     let uri = "/item/eventitem";
-    let result;
-
+    let result = '';
     axios.get(uri
-    ).then(response => {
-        const secondContainer = document.getElementById('secondContainer')
-        result = `
-            <h3><i class="fa-solid fa-gift"></i> &nbsp;&nbsp;특가 상품&nbsp;&nbsp; <i class="fa-solid fa-gift"></i></h3>
+        ).then(response => {
+        
+
+        result += `
             <div id="secondContainerList">
             <div class="slideBox">
         `;
@@ -108,7 +109,6 @@ function writeSlideContainer() {
                         <i class="fa-solid fa-cart-shopping"></i>
                         <i class="fa-solid fa-magnifying-glass"></i>
                         <img src="/resources/img/itemImg/${e.code}_1.jpg" alt="${e.name}">
-                    <div>aasdfasdf</div>
                     </div>
                     <div class="itemName">${e.name}</div>
                     <div class="itemInfo">${e.brand}<br></div>
@@ -138,10 +138,47 @@ function writeSlideContainer() {
             <div id="secondContainerRightBtn" onclick="secondContainerSlideRightbth(event)"><i
                     class="fa-sharp fa-solid fa-arrow-right"></i></div>
         ` ;
-        secondContainer.innerHTML = result;
+        secondContainer.innerHTML += result;
         secondSlideBtn = document.getElementById("secondSlideBtn");
     }).catch(err => {
+        console.log("writeSlideContainer 에러 :" + err.massage);
+        alert("writeSlideContainer 에러 :" + err.massage);
+    });
 
+}
+
+function writePresentBox(brand) {
+    let uri = "/item/branditem/" + brand;
+    let result;
+    axios.get(uri
+    ).then(response => {
+        result = `
+            <div class="typeBox hide transition1">
+                <div class="typeBoxTag">
+                    <div class="typeBoxTagTitle"><img src="../resources/img/brand/fresheasy.png"
+                            alt="category_vitamin">${brand}
+                    </div>
+                    <ul class="typeBoxTagList">
+                        <li><a href="">스테이크</a></li>
+                        <li><a href="">파스타</a></li>
+                        <li><a href="">감바스</a></li>
+                    </ul>
+                </div>
+        `;
+        result += `
+            <a href="" class="typeBoxImg">
+                    <img src="../resources/img/itemImg/${response.data[0].code}_1.jpg" alt="${response.data[0].name}">
+                    <div class="typeBoxImgTitle">
+                        <div class="typeBoxImgTitleName">
+                            ${response.data[0].name}
+                        </div>
+                        <p class="typeBoxImgTitlePrice">${response.data[0].price}원</p>
+                    </div>
+                    <div class="typeBoxImgTitleBest">Best 상품</div>
+                </a>
+        `;
+    }).catch(err => {
+        console.log("writePresentBox 에러 :" + err.massage);
+        alert("writePresentBox 에러 :" + err.massage);
     })
-
 }
