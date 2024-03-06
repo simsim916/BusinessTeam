@@ -2,6 +2,8 @@ const listfilter = document.getElementById("listfilter");
 
 let filterCheckedList = [];
 
+
+
 function checkList() {
     console.log("--- checkC ---")
     for (let e of filterCheckedList) {

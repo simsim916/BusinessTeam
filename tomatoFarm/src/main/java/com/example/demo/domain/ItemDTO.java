@@ -1,23 +1,16 @@
-package com.example.demo.entity;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+package com.example.demo.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "item")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Item {
+public class ItemDTO {
 
-	@Id
 	private int code; // 제품코드
 	private String sort1; // 일반 , 사업자
 	private String sort2;

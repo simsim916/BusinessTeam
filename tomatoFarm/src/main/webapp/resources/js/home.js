@@ -7,7 +7,7 @@ const canvas = adImgBox.querySelector('canvas');
 
 const adImgList = ['fresheasy.jpg', 'mychef.jpg', 'signup.jpg', 'review.jpg']
 
-window.onload(writeSlideContainer());
+window.onload = writeSlideContainer();
 
 function changeAdImgBox(ele, event) {
     event.stopPropagation();
