@@ -22,4 +22,7 @@ public class SearchRequest {
 	private String[] type; // 검색 옵션
 	private String keyword; // 검색 키워드
 	
+	public SearchRequest(String keyword) {
+		this.keyword=keyword;
+	}
 }
