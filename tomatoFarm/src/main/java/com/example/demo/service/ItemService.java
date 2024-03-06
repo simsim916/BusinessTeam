@@ -5,6 +5,7 @@ import java.util.List;
 import com.example.demo.domain.ItemDTO;
 import com.example.demo.entity.Item;
 import com.example.demo.module.PageRequest;
+import com.example.demo.module.SearchRequest;
 
 public interface ItemService {
 
@@ -27,7 +28,7 @@ public interface ItemService {
 		return dto;
 	}
 
-	List<Item> selectMealkitWhereEvent_D(PageRequest pageRequest);
-	List<Item> selectItemWhereKeyword(PageRequest pageRequest, String keyword);
+	List<Item> selectItemWhereEvent_D(PageRequest pageRequest);
+	List<Item> selectItemWherebrand(PageRequest pageRequest, SearchRequest searchRequest);
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 }

@@ -13,13 +13,16 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.entity.Item;
 import com.example.demo.entity.Sorttable;
 import com.example.demo.module.PageRequest;
+import com.example.demo.module.SearchRequest;
 
 @Repository
 public interface ItemRepository {
 
-	// ** sortb 조회
-	List<Item> selectMealkitWhereEvent_D(PageRequest pageRequest);
-	List<Item> selectItemWhereKeyword(PageRequest pageRequest, String keyword);
+	// ** 이벤트 상품 조회
+	List<Item> selectItemWhereEvent_D(PageRequest pageRequest);
+	// ** 브랜드 상품 조회 
+	List<Item> selectItemWherebrand(PageRequest pageRequest, SearchRequest searchRequest);
+	
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 
 }

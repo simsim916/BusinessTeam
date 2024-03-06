@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Item;
 import com.example.demo.module.PageRequest;
+import com.example.demo.module.SearchRequest;
 import com.example.demo.repository.ItemRepository;
 import com.example.demo.service.ItemService;
 
@@ -21,17 +22,17 @@ public class ItemServiceImpl implements ItemService{
 	private final ItemRepository itemRepository;
 	
 	@Override
-	public List<Item> selectMealkitWhereEvent_D(PageRequest pageRequest) {
+	public List<Item> selectItemWhereEvent_D(PageRequest pageRequest) {
 		
-		List<Item> result = itemRepository.selectMealkitWhereEvent_D(pageRequest);
+		List<Item> result = itemRepository.selectItemWhereEvent_D(pageRequest);
 		
 		return result;
 	}
 	
 	@Override
-	public List<Item> selectItemWhereKeyword(PageRequest pageRequest, String keyword) {
+	public List<Item> selectItemWherebrand(PageRequest pageRequest, SearchRequest searchRequest) {
 		
-		List<Item> result = itemRepository.selectItemWhereKeyword(pageRequest,keyword);
+		List<Item> result = itemRepository.selectItemWherebrand(pageRequest,searchRequest);
 		
 		return result;
 	}
