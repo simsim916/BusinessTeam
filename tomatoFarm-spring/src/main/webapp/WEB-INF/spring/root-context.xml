@@ -13,6 +13,5 @@
 <!-- 	<bean id="PageMaker" 
 		class="paging.PageMaker">
 	</bean> -->
-	<bean class="paging.PageMaker" lazy-init="true"/>
 	
 </beans>
