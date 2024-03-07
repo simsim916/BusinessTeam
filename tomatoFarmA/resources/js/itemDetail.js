@@ -43,8 +43,6 @@ function inputCount(event) {
     countBox.children[1].innerText = inputBox;
 }
 
-
-
 function showItemDetail(ele) {
     let itemIntro = ele.previousElementSibling;
     if (itemIntro.classList.contains('heightAuto')) {

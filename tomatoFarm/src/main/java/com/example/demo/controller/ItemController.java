@@ -79,8 +79,30 @@ public class ItemController {
 		}
 		return result;
 	}
-}
+
 	
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
+
+
+	@GetMapping("/detail")
+	public ResponseEntity<?> selectItemWhereCode(@Param("code") String keyword){
+		ResponseEntity<?> result = null;
+		
+		SearchRequest searchRequest = new SearchRequest(keyword);
+		
+		Item entity = itemService.selectItemWhereCode(searchRequest);
+		
+		if(entity != null) {
+			result = ResponseEntity.status(HttpStatus.OK).body(entity);
+			log.info("search check");
+		} else {
+			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
+			log.info("search check");
+		}
+		
+		return result;
+		
+	}
+}
 	
 	

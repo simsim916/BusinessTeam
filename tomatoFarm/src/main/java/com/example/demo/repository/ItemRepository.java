@@ -24,6 +24,8 @@ public interface ItemRepository {
 	List<Item> selectItemWherebrand(PageRequest pageRequest, SearchRequest searchRequest);
 	// ** 키워드 상품 조회
 	List<Item> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest);
+	// ** 코드로 상품 조회
+	Item selectItemWhereCode(SearchRequest searchRequest);
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 
 }

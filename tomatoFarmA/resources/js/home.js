@@ -88,3 +88,4 @@ function thirdContainerSlideLeftBth(event) {
         box[2].style.display = "block";
     }
 }
+
