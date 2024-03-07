@@ -60,8 +60,6 @@ function reviewDetailClose(event) {
     const reviewDetailBoxClose = document.getElementById('reviewDetailBoxClose');
     if (reviewDetailForm.style.visibility === 'hidden') {
 
-        reviewDetailForm.style.visibility = 'visible';
-    } else {
 
         reviewDetailForm.style.visibility = 'hidden';
     }
