@@ -42,7 +42,8 @@ public class ItemRepositoryImpl implements ItemRepository{
 	public List<Item> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest){
 	System.out.println(searchRequest.getType());
 		return jPAQueryFactory.selectFrom(item)
-				.where(item.sort3.contains(searchRequest.getKeyword())
+				.where(item.sort2.contains(searchRequest.getKeyword())
+						.or(item.sort3.contains(searchRequest.getKeyword()))
 						.or(item.brand.contains(searchRequest.getKeyword()))
 						.or(item.name.contains(searchRequest.getKeyword())))
 				.orderBy(item.sales.desc())
