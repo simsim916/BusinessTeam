@@ -1582,10 +1582,13 @@ function writeItemList(keyword) {
     }).catch(err => {
 
     });
-
-
 }
 
 function writeListTitle() {
 
 }
+
+
+
+
+
