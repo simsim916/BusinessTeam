@@ -6,6 +6,12 @@ let loginBt = document.getElementById('loginInBox').children[0];
 let id = "test";
 let pw = "123123!";
 
+function changeLoginToSignUp() {
+	let uri = "";
+	let result;
+	
+}
+
 
 
 function selectLoginType(ele) {
