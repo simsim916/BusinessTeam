@@ -212,14 +212,12 @@
     height: 100%;
     width: 100%;
     object-fit: cover;
-    background-blend-mode: color-burn;
 }
 
 .itemImg {
     height: 65%;
     position: relative;
     background-color: #000000;
-    background-blend-mode: darken;
     font-size: 0;
     z-index: 5;
     display: flex;
@@ -344,6 +342,26 @@
     background-color: #ef7601;
 }
 
+.typeBox:nth-of-type(4) {
+    border-top: 2.5px solid #df0017;
+    border-bottom: 2.5px solid #df0017;
+    color: #df0017;
+}
+
+.typeBox:nth-of-type(4) .linkBox {
+    background-color: #df0017;
+}
+
+.typeBox:nth-of-type(5) {
+    border-top: 2.5px solid #000;
+    border-bottom: 2.5px solid #000;
+    color: #000;
+}
+
+.typeBox:nth-of-type(5) .linkBox {
+    background-color: #000;
+}
+
 .typeBox {
     margin-top: 30px;
     margin-bottom: 50px;
@@ -450,9 +468,7 @@
 }
 
 .typeBoxList img {
-    object-fit: cover;
     object-position: 0 -20px;
-    height: 220px;
 }
 
 .linkBox {
@@ -485,6 +501,7 @@
     background: linear-gradient(to left, #fff 0%, #ffffff 20%, #ffffff00 100%);
     width: 80px;
     height: 100%;
+    z-index: 5;
 }
 
 .thirdContainerRightBtn>i {
@@ -499,6 +516,7 @@
     width: 30px;
     height: 30px;
     border-radius: 50%;
+
 }
 
 .thirdContainerLeftBtn {
@@ -509,6 +527,7 @@
     width: 80px;
     height: 100%;
     display: none;
+    z-index: 5;
 }
 
 .thirdContainerLeftBtn>i {

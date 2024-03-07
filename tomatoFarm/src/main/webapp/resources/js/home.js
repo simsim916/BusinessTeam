@@ -6,10 +6,20 @@ const thirdContainer = document.getElementById('thirdContainer');
 let secondSlideBtn;
 const adImgBox = document.getElementById('adImgBox');
 const canvas = adImgBox.querySelector('canvas');
-
+let idx = 0;
+let writeTarget = ['프레시지', '김구원선생', '마이셰프', '하림', '하루한킷'];
 const adImgList = ['fresheasy.jpg', 'mychef.jpg', 'signup.jpg', 'review.jpg']
 
 window.onload = writeSlideContainer();
+
+// write
+window.addEventListener("scroll", () => {
+    if (document.documentElement.scrollHeight - innerHeight - scrollY < 600) {
+        if (writeTarget.length > idx) {
+            writePresentBox(writeTarget[idx++]);
+        }
+    }
+});
 
 function changeAdImgBox(ele, event) {
     event.stopPropagation();
@@ -20,7 +30,6 @@ function changeAdImgBox(ele, event) {
     }
     ele.closest('#adImg').children[0].src = `../resources/img/adimg/${adImgList[index]}`;
 }
-
 
 function secondContainerSlideLeftbth(event) {
     document.getElementById('secondSlideBtnSelected').removeAttribute("id");
@@ -94,8 +103,7 @@ function writeSlideContainer() {
     let uri = "/item/eventitem";
     let result = '';
     axios.get(uri
-        ).then(response => {
-        
+    ).then(response => {
 
         result += `
             <div id="secondContainerList">
@@ -109,6 +117,7 @@ function writeSlideContainer() {
                         <i class="fa-solid fa-cart-shopping"></i>
                         <i class="fa-solid fa-magnifying-glass"></i>
                         <img src="/resources/img/itemImg/${e.code}_1.jpg" alt="${e.name}">
+                        <div></div>
                     </div>
                     <div class="itemName">${e.name}</div>
                     <div class="itemInfo">${e.brand}<br></div>
@@ -152,10 +161,11 @@ function writePresentBox(brand) {
     let result;
     axios.get(uri
     ).then(response => {
+        let data = response.data;
         result = `
-            <div class="typeBox hide transition1">
+            <div class="typeBox hide">
                 <div class="typeBoxTag">
-                    <div class="typeBoxTagTitle"><img src="../resources/img/brand/fresheasy.png"
+                    <div class="typeBoxTagTitle"><img src="../resources/img/brand/${brand}.png"
                             alt="category_vitamin">${brand}
                     </div>
                     <ul class="typeBoxTagList">
@@ -164,19 +174,50 @@ function writePresentBox(brand) {
                         <li><a href="">감바스</a></li>
                     </ul>
                 </div>
-        `;
-        result += `
-            <a href="" class="typeBoxImg">
-                    <img src="../resources/img/itemImg/${response.data[0].code}_1.jpg" alt="${response.data[0].name}">
+                <a href="/item/detail/${data[0].code}" class="typeBoxImg">
+                    <img src="../resources/img/itemImg/${data[0].code}_1.jpg" alt="${data[0].name}">
                     <div class="typeBoxImgTitle">
                         <div class="typeBoxImgTitleName">
-                            ${response.data[0].name}
+                            ${data[0].name}
                         </div>
-                        <p class="typeBoxImgTitlePrice">${response.data[0].price}원</p>
+                        <p class="typeBoxImgTitlePrice">${data[0].price}원</p>
                     </div>
                     <div class="typeBoxImgTitleBest">Best 상품</div>
                 </a>
+            <div class="typeBoxList">
+                <div class="slideBox">
         `;
+        for (let i = 1; i < 6; i++) {
+            result += `
+                <a href="/item/detail/${data[i].code}" class="itemBox">
+                    <div class="itemImg">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <img src="../resources/img/itemImg/${data[i].code}_1.jpg" alt="${data[i].name}">
+                        <div></div>
+                    </div>
+                    <div class="itemName">${data[i].name}</div>
+                    <div class="itemInfo">${data[i].brand}<br></div>
+                    <p class="itemPrice">${data[i].price}원</p>
+                    <div class="itemOption">무료배송</div>
+                </a>
+            `;
+        }
+        result += `
+                    <a href="" class="linkBox">
+                        <p>" ${data[0].brand} "</p>
+                        <i class="fa-regular fa-circle-play"></i> 상품 더 보러가기
+                    </a>
+                </div>
+                <div onclick="thirdContainerSlideLeftBth(event)" class="thirdContainerLeftBtn">
+                    <i class="fa-sharp fa-solid fa-arrow-left"></i>
+                </div>
+                <div onclick="thirdContainerSlideRightBth(event)" class="thirdContainerRightBtn">
+                    <i class="fa-sharp fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+        `;
+        thirdContainer.innerHTML += result;
     }).catch(err => {
         console.log("writePresentBox 에러 :" + err.massage);
         alert("writePresentBox 에러 :" + err.massage);

@@ -33,6 +33,7 @@ public class ItemServiceImpl implements ItemService{
 		
 		List<Item> result = itemRepository.selectItemWherebrand(pageRequest,searchRequest);
 		
+		return result;
 	}
 	
 	@Override
