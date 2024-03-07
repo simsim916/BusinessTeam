@@ -52,24 +52,35 @@ function showItemDetail(ele) {
         introItemBtn.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`;
         //ele.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`;
     }
-    return fal123se;
+    return null;
 }
 
-function reviewDetailClose(event) {
+
+function reviewDetailClick(event) {
+    event.stopPropagation();
     const reviewDetailForm = document.getElementById('reviewDetailForm');
-    const reviewDetailBoxClose = document.getElementById('reviewDetailBoxClose');
-    if (reviewDetailForm.style.visibility === 'hidden') {
-
-
-        reviewDetailForm.style.visibility = 'hidden';
-    }
+    reviewDetailForm.style.display = 'flex';
 }
 
 function reivewDetailImgChange(ele) {
     ele.parentNode.previousElementSibling.children[0].setAttribute('src', ele.src);
 }
 
+// let imgList = document.getElementById('reviewDetailImgBottom');
+// let imgLength = imgList.length;
+
+// function returnImg(event) {
+//     let returnImg = (imgList + imgLength - 1) % imgLength;
+//     event.
+// }
 
 
+// function nextImg(event) {
+//     let nextImg = (imgList + 1) % imgLength;
+    
+// }
 
+function reviewDetailClose(ele) {
+    ele.closest('#reviewDetailForm').style.display = 'none';
+}
 
