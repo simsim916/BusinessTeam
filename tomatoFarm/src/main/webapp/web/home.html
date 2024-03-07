@@ -24,7 +24,10 @@
     <link rel="stylesheet" href="../resources/css/home.css">
     <script defer src="../resources/js/home.js"></script>
     <!-- itemBox CSS, JS -->
-    <script defer src="/resources/js/itemBox.js"></script>
+    <script defer src="../resources/js/itemBox.js"></script>
+    <!-- list CSS -->
+    <link rel="stylesheet" href="../resources/css/itemList.css">
+    <script defer src="../resources/js/itemList.js"></script>
     <title>토마토팜 || 메인</title>
 </head>
 
@@ -168,12 +171,12 @@
         </nav>
     </header>
 
-    <main>
+    <main id="main">
         <div id="adImgBox">
             <div id="adImg" class="container">
                 <img src="../resources/img/adimg/fresheasy.jpg" alt="">
                 <div id="adRightTab">
-                    <div onmouseover="changeAdImgBox(this,event)">프레시지<img src="../resources/img/brand/fresheasy.png"
+                    <div onmouseover="changeAdImgBox(this,event)">프레시지<img src="../resources/img/brand/프레시지.png"
                             alt="프레시지로고"></div>
                     <div onmouseover="changeAdImgBox(this,event)">MyChef<img src="../resources/img/brand/마이셰프.png"
                             alt="마이셰프로고"></div>
@@ -190,7 +193,8 @@
             <div id="firstContainerButton">
                 <div><a><img src="../resources/img/index_bestSeller.png" alt="베스트 상품" class="categoryImg"><br>베스트 상품</a>
                 </div>
-                <div><a><img src="../resources/img/index_mealkit.png" alt="밀키트" class="categoryImg"><br>밀키트</a></div>
+                <div onclick="changePageToList('밀키트')"><a><img src="../resources/img/index_mealkit.png" alt="밀키트"
+                            class="categoryImg"><br>밀키트</a></div>
                 <div><a><img src="../resources/img/index_food.png" alt="신선 재료" class="categoryImg"><br>신선 재료</a></div>
                 <div><a><img src="../resources/img/index_menu.png" alt="메뉴 주문" class="categoryImg"><br>메뉴 주문</a></div>
                 <div><a><img src="../resources/img/index_cooking.png" alt="조리 도구" class="categoryImg"><br>조리 도구</a>
