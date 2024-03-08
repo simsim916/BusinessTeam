@@ -1,6 +1,5 @@
 package com.main.tomatoFarm.controller;
 
-import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.main.tomatoFarm.domain.ItemDTO;
 import com.main.tomatoFarm.service.ItemService;
-import com.main.tomatoFarm.service.KeywordService;
-import com.main.tomatoFarm.service.SortService;
 
 import lombok.AllArgsConstructor;
 
@@ -21,8 +18,6 @@ import lombok.AllArgsConstructor;
 public class ItemController {
 
 	ItemService itemService;
-	SortService sortSerivce;
-	KeywordService keywordService;
 
 	
 	@GetMapping("/detail")
