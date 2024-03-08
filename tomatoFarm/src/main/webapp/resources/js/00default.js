@@ -27,3 +27,8 @@ function showContent(ele) {
         ele.classList.add('appear');
     }
 }
+
+// 쉼표 찍기
+function makeComa() {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}

@@ -51,6 +51,13 @@ public class ItemRepositoryImpl implements ItemRepository{
 				.fetch();
 	}
 	
+	@Override
+	public List<String> selectSortList() {
+		return jPAQueryFactory.select(item.sort2)
+				.from(item)
+				.groupBy(item.sort2)
+				.fetch();
+	}
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 	
 	

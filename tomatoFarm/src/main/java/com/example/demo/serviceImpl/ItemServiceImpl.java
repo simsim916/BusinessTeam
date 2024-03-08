@@ -41,6 +41,11 @@ public class ItemServiceImpl implements ItemService{
 		List<Item> result = itemRepository.selectItemWhereSearchType(pageRequest,searchRequest);
 		return result;
 	}
+	
+	@Override
+	public List<String> selectSortList() {
+		return itemRepository.selectSortList();
+	}
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 	
 }
