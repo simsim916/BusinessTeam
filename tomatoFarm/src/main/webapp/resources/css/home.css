@@ -126,6 +126,10 @@
     padding-top: 5px;
 }
 
+.slideBox .itemBox {
+    width: 200px;
+}
+
 #secondContainerLeftBtn {
     position: absolute;
     left: 0;
@@ -195,7 +199,6 @@
 
 .itemBox {
     display: inline-block;
-    width: 200px;
     height: 400px;
     border-radius: 10px;
     overflow: hidden;

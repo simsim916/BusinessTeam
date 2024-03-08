@@ -1,4 +1,4 @@
-
+'use strict';
 
 const slideBox = document.getElementsByClassName("slideBox");
 const secondContainer = document.getElementById('secondContainer');
@@ -158,7 +158,6 @@ function writeSlideContainer() {
         secondSlideBtn = document.getElementById("secondSlideBtn");
     }).catch(err => {
         console.log("writeSlideContainer 에러 :" + err.massage);
-        alert("writeSlideContainer 에러 :" + err.massage);
     });
 
 }
@@ -233,13 +232,16 @@ function writePresentBox(brand) {
 }
 
 function changePageToList(keyword) {
-    main.innerHTML = '';
+    main.innerHTML = `
+        <div id="searchTitle" class="container">"<b>${keyword}</b>"<span>에 대한 검색 결과</span></div>
+        <div class="container"><div>
+    `;
     writeListFilter();
     writeItemList(keyword);
 }
 
 function writeListFilter() {
-    main.innerHTML = `
+    main.children[1].innerHTML += `
         <div id="listfilter">
             <ul>
                 <li onclick="showList(event)" class="sortB">
@@ -1522,12 +1524,11 @@ function writeListFilter() {
                         <input type="text" placeholder="0">
                         &nbsp;&nbsp;~&nbsp;&nbsp;
                         <input type="text" placeholder="1000000">
-                    </form>
-                </li>
-            </ul>
-        </div>
-    `;
-
+                        </form>
+                        </li>
+                        </ul>
+                        </div>
+                        `;
     window.addEventListener('scroll', function () {
         listfilter = document.getElementById("listfilter");
         listfilter.style.height = `calc(100vh - 320px - 30px + ${window.scrollY}px)`;
@@ -1541,16 +1542,13 @@ function writeListFilter() {
 
 function writeItemList(keyword) {
     let uri = "/item/search?keyword=" + keyword;
-    let result;
-    main.style.display = 'flex';
-
     axios.get(uri
     ).then(response => {
         let data = response.data;
-        result = `
+        let result = `
             <div id="listContainer">
                 <div id="containerOption">
-                    <div id="total">총 <span>106</span> 개</div>
+                    <div id="total">총 <span>${data.length}</span> 개</div>
                     <div id="listOption">
                         <div>최신상품순</div> <!-- item/sortlist 요청 -->
                         <div>인기상품순</div>
@@ -1575,20 +1573,18 @@ function writeItemList(keyword) {
                     </a>
                 `;
         }
+
         result += `
                 </div>
             `;
-        main.innerHTML += result;
+        main.children[1].innerHTML += result;
     }).catch(err => {
-
+        console.log("writeItemList 에러 :" + err.massage);
     });
 }
 
-function writeListTitle() {
-
+function searchBox(event) {
+    event.preventDefault();
+    let keyword = event.target.closest('form').children[0].value;
+    changePageToList(keyword);
 }
-
-
-
-
-
