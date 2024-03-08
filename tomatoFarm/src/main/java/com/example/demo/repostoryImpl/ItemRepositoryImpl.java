@@ -43,8 +43,12 @@ public class ItemRepositoryImpl implements ItemRepository {
 	
 	@Override
 	public List<Item> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest){
+	System.out.println(searchRequest.getType());
 		return jPAQueryFactory.selectFrom(item)
-				.where(item.sort3.in(searchRequest.getType()))
+				.where(item.sort2.contains(searchRequest.getKeyword())
+						.or(item.sort3.contains(searchRequest.getKeyword()))
+						.or(item.brand.contains(searchRequest.getKeyword()))
+						.or(item.name.contains(searchRequest.getKeyword())))
 				.orderBy(item.sales.desc())
 				.offset((pageRequest.getPage()-1)*pageRequest.getSize()+1).limit(pageRequest.getSize()*pageRequest.getPage())
 				.fetch();

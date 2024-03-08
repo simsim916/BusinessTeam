@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.data.repository.query.Param;
@@ -49,7 +50,7 @@ public class ItemController {
 		SearchRequest searchRequest = new SearchRequest(keyword);
 		
 		List<Item> list = itemService.selectItemWherebrand(pageRequest,searchRequest);
-		
+		log.info("\n"+list);
 		if (list != null && list.size() > 0) {
 			result = ResponseEntity.status(HttpStatus.OK).body(list);
 			log.info("branditem check");
@@ -65,11 +66,11 @@ public class ItemController {
 		ResponseEntity<?> result = null;
 		PageRequest pageRequest = new PageRequest(1,24);
 		
-		String[] type = {"sort3", "name", "brand"};
+		List<String> type = Arrays.asList("sort3", "name", "brand");
 		SearchRequest searchRequest = new SearchRequest(type,keyword);
 		
 		List<Item> list = itemService.selectItemWhereSearchType(pageRequest, searchRequest);
-		
+		log.info("\n"+list);
 		if (list != null && list.size() > 0) {
 			result = ResponseEntity.status(HttpStatus.OK).body(list);
 			log.info("search check");
