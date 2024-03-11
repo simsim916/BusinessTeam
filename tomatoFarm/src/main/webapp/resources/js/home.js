@@ -1,12 +1,63 @@
 'use strict';
+/* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 모듈예정 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
+// 쉼표 찍기
+function makeComa(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+// itemBox 작성하기
+function writeItemBox(data) {
+    let result = `
+        <div class="itemBox">
+            <div class="itemImg">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <img src="/resources/img/itemImg/${data.code < 10000 ? 'default' : data.code}_1.jpg" alt="${data.name}">
+            <div></div>
+        </div>
+        <div class="itemName">${data.name}</div>
+        <div class="itemInfo">${data.brand}<br></div>
+        <p class="itemPrice">${makeComa(data.price)}원</p>
+        `;
+    if (data.delivery > 0) {
+        result += `
+            <div class="itemDelivery"><span>배송비&nbsp;&nbsp;</span>${makeComa(data.delivery)}원</div>
+            `;
+    } else {
+        result += `
+            <div class="itemDelivery">무료배송</div>
+        `;
+    }
+    result += `
+        <div class="itemOption">
+        `;
+    if (data.delivery == 0) {
+        result += `
+            <div class="itemOptionFreeDelivery">무료배송</div>
+            `;
+    }
+    if (data.event != null && data.event.length > 0) {
+        result += `
+            <div class="itemOptionEvent">${data.event}</div>
+            `;
+    }
+    result += `
+            </div>
+        </div>
+        `;
+
+    return result;
+}
+
+/* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 모듈예정 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
 
 const slideBox = document.getElementsByClassName("slideBox");
 const secondContainer = document.getElementById('secondContainer');
 const thirdContainer = document.getElementById('thirdContainer');
 let secondSlideBtn;
 const adImgBox = document.getElementById('adImgBox');
-const canvas = adImgBox.querySelector('canvas');
 const main = document.getElementById('main');
+
 /* list */
 let listfilter;;
 
@@ -14,9 +65,6 @@ const adImgList = ['fresheasy.jpg', 'mychef.jpg', 'signup.jpg', 'review.jpg']
 
 let idx = 0;
 let writeTarget = ['프레시지', '김구원선생', '마이셰프', '하림', '하루한킷'];
-
-window.onload = writeSlideContainer();
-
 
 /* home */
 // write
@@ -27,6 +75,10 @@ window.addEventListener("scroll", () => {
         }
     }
 });
+
+writeSlideContainer()
+
+/* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Home View 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
 
 function changeAdImgBox(ele, event) {
     event.stopPropagation();
@@ -106,6 +158,8 @@ function thirdContainerSlideLeftBth(event) {
     }
 }
 
+/* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Home 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
+
 function writeSlideContainer() {
     let uri = "/item/eventitem";
     let result = '';
@@ -118,20 +172,7 @@ function writeSlideContainer() {
         `;
 
         for (const e of response.data) {
-            result += `
-             <div class="itemBox">
-                    <div class="itemImg">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <img src="/resources/img/itemImg/${e.code}_1.jpg" alt="${e.name}">
-                        <div></div>
-                    </div>
-                    <div class="itemName">${e.name}</div>
-                    <div class="itemInfo">${e.brand}<br></div>
-                    <p class="itemPrice">${e.price}원</p>
-                    <div class="itemOption">${e.delivery}원</div>
-                </div>
-            `;
+            result += writeItemBox(e);
         }
 
         result += `
@@ -154,8 +195,8 @@ function writeSlideContainer() {
             <div id="secondContainerRightBtn" onclick="secondContainerSlideRightbth(event)"><i
                     class="fa-sharp fa-solid fa-arrow-right"></i></div>
         ` ;
-        secondContainer.innerHTML += result;
-        secondSlideBtn = document.getElementById("secondSlideBtn");
+        secondContainer.innerHTML = result;
+        secondSlideBtn = document.getElementById('secondSlideBtn');
     }).catch(err => {
         console.log("writeSlideContainer 에러 :" + err.massage);
     });
@@ -187,7 +228,7 @@ function writePresentBox(brand) {
                         <div class="typeBoxImgTitleName">
                             ${data[0].name}
                         </div>
-                        <p class="typeBoxImgTitlePrice">${data[0].price}원</p>
+                        <p class="typeBoxImgTitlePrice">${makeComa(data[0].price)}원</p>
                     </div>
                     <div class="typeBoxImgTitleBest">Best 상품</div>
                 </a>
@@ -195,20 +236,7 @@ function writePresentBox(brand) {
                 <div class="slideBox">
         `;
         for (let i = 1; i < 6; i++) {
-            result += `
-                <a href="/item/detail/${data[i].code}" class="itemBox">
-                    <div class="itemImg">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <img src="../resources/img/itemImg/${data[i].code}_1.jpg" alt="${data[i].name}">
-                        <div></div>
-                    </div>
-                    <div class="itemName">${data[i].name}</div>
-                    <div class="itemInfo">${data[i].brand}<br></div>
-                    <p class="itemPrice">${data[i].price}원</p>
-                    <div class="itemOption">무료배송</div>
-                </a>
-            `;
+            result += writeItemBox(data[i]);
         }
 
         result += `
@@ -230,6 +258,8 @@ function writePresentBox(brand) {
         console.log("writePresentBox 에러 :" + err.massage);
     })
 }
+
+/* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 List 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
 
 function changePageToList(keyword) {
     main.innerHTML = `
@@ -1558,20 +1588,7 @@ function writeItemList(keyword) {
                 </div>
         `;
         for (let e of data) {
-            result += `
-                    <a href="/item/detail/${e.code}" class="itemBox">
-                        <div class="itemImg">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                            <img src="../resources/img/itemImg/${e.code}_1.jpg" alt="${e.name}">
-                            <div></div>
-                        </div>
-                        <div class="itemName">${e.name}</div>
-                        <div class="itemInfo">${e.brand}<br></div>
-                        <p class="itemPrice">${e.price}원</p>
-                        <div class="itemOption">무료배송</div>
-                    </a>
-                `;
+            result += writeItemBox(e);
         }
 
         result += `
@@ -1583,8 +1600,3 @@ function writeItemList(keyword) {
     });
 }
 
-function searchBox(event) {
-    event.preventDefault();
-    let keyword = event.target.closest('form').children[0].value;
-    changePageToList(keyword);
-}

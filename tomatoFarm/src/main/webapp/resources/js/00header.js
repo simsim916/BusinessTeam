@@ -1,20 +1,6 @@
 
-function a(str) {
-	console.log(str);
-}
-
-
-
 const firstCategory = document.getElementById("firstCategory");
 const searchBoxInput = document.getElementById("searchBoxInput");
-
-function firstCategoryVisible() {
-	firstCategory.style.display = "block";
-}
-
-function firstCategoryHidden() {
-	firstCategory.style.display = "none";
-}
 
 function resetInputBox(ele) {
 	searchBoxInput.value = '';
@@ -24,17 +10,6 @@ function resetInputBox(ele) {
 
 function appearinputBoxResetButton(ele) {
 	ele.closest("form").children[1].style.visibility = "visible"
-}
-
-function resetInputBox2(ele) {
-	ele.closest("div").children[0].value = '';
-	ele.closest("div").children[0].focus();
-	ele.closest("div").children[1].style.visibility = "hidden";
-	seachCategory(ele.closest("div").children[0])
-}
-
-function appearinputBoxResetButton2(ele) {
-	ele.closest("div").children[1].style.visibility = "visible"
 }
 
 function sperateKorWord(str) {
@@ -64,4 +39,35 @@ function seachCategory(ele) {
 			liBox[i].style.display = "block";
 		}
 	}
+}
+
+function searchBox(event) {
+	event.preventDefault();
+	let keyword = event.target.closest('form').children[0].value;
+	changePageToList(keyword);
+}
+
+function searchBoxEnterKey(event) {
+	if (event.which == 13) {
+		searchBox(event)
+	}
+}
+
+writeHeader()
+/* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Header 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
+
+async function writeHeader() {
+	let uri = '/item/sort';
+	let result = '';
+	await axios.get(uri).then(response => {
+		for (let e of response.data) {
+			result += `
+                <li><img src="../resources/img/${e}.png" alt="${e} 이미지">${e}</li>
+                `;
+		}
+		firstCategory.innerHTML += result;
+	}).catch(err => {
+		console.log("writeSlideContainer 에러 :" + err.massage);
+	})
+
 }
