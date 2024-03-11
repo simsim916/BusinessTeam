@@ -15,6 +15,7 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
 @Repository
 @AllArgsConstructor
@@ -54,9 +55,9 @@ public class ItemRepositoryImpl implements ItemRepository {
 	
 	@Override
 	public Item selectItemWhereCode(SearchRequest searchRequest) {
-		
+		System.out.println("aa");
 		return jPAQueryFactory.selectFrom(item)
-				.where(item.code.eq(Integer.parseInt(searchRequest.getKeyword())))
+				.where(item.code.stringValue().eq(searchRequest.getKeyword()))
 				.fetchOne();
 	}
 	

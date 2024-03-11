@@ -1600,3 +1600,18 @@ function writeItemList(keyword) {
     });
 }
 
+/* viewModel */
+
+async function writeDetailPage(code) {
+    let itemDetailData = await getPostData(code);
+    console.log(itemDetailData);
+}
+
+/* model */
+
+
+async function getPostData(code) {
+    let uri = 'item/detail?code=' + code;
+    let response = await axios.get(uri);
+    return response.data;
+}

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Item;
@@ -50,7 +51,6 @@ public class ItemController {
 		SearchRequest searchRequest = new SearchRequest(keyword);
 		
 		List<Item> list = itemService.selectItemWherebrand(pageRequest,searchRequest);
-		log.info("\n"+list);
 		if (list != null && list.size() > 0) {
 			result = ResponseEntity.status(HttpStatus.OK).body(list);
 			log.info("branditem check");
@@ -99,11 +99,10 @@ public class ItemController {
 
 
 	@GetMapping("/detail")
-	public ResponseEntity<?> selectItemWhereCode(@Param("code") String keyword){
+	public ResponseEntity<?> selectItemWhereCode(@RequestParam("code") String keyword){
 		ResponseEntity<?> result = null;
 		
 		SearchRequest searchRequest = new SearchRequest(keyword);
-		
 		Item entity = itemService.selectItemWhereCode(searchRequest);
 		
 		if(entity != null) {
