@@ -159,23 +159,19 @@ function thirdContainerSlideLeftBth(event) {
 }
 
 /* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Home 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
-
-function writeSlideContainer() {
-    let uri = "/item/eventitem";
-    let result = '';
-    axios.get(uri
-    ).then(response => {
-
-        result += `
+/* 💻💻💻💻 view model 💻💻💻💻*/
+async function writeSlideContainer() {
+    let data = await getEventItem();
+    let result = `
             <div id="secondContainerList">
             <div class="slideBox">
         `;
 
-        for (const e of response.data) {
-            result += writeItemBox(e);
-        }
+    for (const e of data) {
+        result += writeItemBox(e);
+    }
 
-        result += `
+    result += `
         </div>
             <div id="secondSlideBtn" onclick="secondContainerSlideBtn(event)">
                 <div></div>
@@ -195,12 +191,8 @@ function writeSlideContainer() {
             <div id="secondContainerRightBtn" onclick="secondContainerSlideRightbth(event)"><i
                     class="fa-sharp fa-solid fa-arrow-right"></i></div>
         ` ;
-        secondContainer.innerHTML = result;
-        secondSlideBtn = document.getElementById('secondSlideBtn');
-    }).catch(err => {
-        console.log("writeSlideContainer 에러 :" + err.massage);
-    });
-
+    secondContainer.innerHTML = result;
+    secondSlideBtn = document.getElementById('secondSlideBtn');
 }
 
 function writePresentBox(brand) {
@@ -258,6 +250,15 @@ function writePresentBox(brand) {
         console.log("writePresentBox 에러 :" + err.massage);
     })
 }
+
+/* 📦📦📦📦 model 📦📦📦📦*/
+async function getEventItem() {
+    let uri = "/item/eventitem";
+    const response = await axios.get(uri);
+    return response.data;
+}
+
+
 
 /* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 List 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
 
