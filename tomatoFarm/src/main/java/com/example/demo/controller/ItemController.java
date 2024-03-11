@@ -94,7 +94,6 @@ public class ItemController {
 		}
 		return result;
 	}
-}
 	
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 

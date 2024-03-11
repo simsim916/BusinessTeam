@@ -4,8 +4,6 @@ import static com.example.demo.entity.QItem.item;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.domain.SortDTO;
@@ -17,7 +15,6 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 @Repository
 @AllArgsConstructor
@@ -53,14 +50,6 @@ public class ItemRepositoryImpl implements ItemRepository {
 				.orderBy(item.sales.desc())
 				.offset((pageRequest.getPage()-1)*pageRequest.getSize()+1).limit(pageRequest.getSize()*pageRequest.getPage())
 				.fetch();
-	}
-	
-	@Override
-	public Item selectItemWhereCode(SearchRequest searchRequest) {
-		
-		return jPAQueryFactory.selectFrom(item)
-				.where(item.code.eq(Integer.parseInt(searchRequest.getKeyword())))
-				.fetchOne();
 	}
 	
 	@Override
