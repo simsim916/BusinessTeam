@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.data.repository.query.Param;
@@ -9,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Item;
@@ -62,15 +62,18 @@ public class ItemController {
 	}
 
 	@GetMapping("/search")
-	public ResponseEntity<?> selectItemWhereSearchType( @Param("keyword") String keyword) {
+	public ResponseEntity<?> selectItemWhereSearchType( @RequestParam("keyword") String keyword, @RequestParam("sorttype")String sortType) {
 		ResponseEntity<?> result = null;
 		PageRequest pageRequest = new PageRequest(1,24);
+		// 1. 파라미터로 정렬하고자 하는 방법을 전달받는다.
+		//SearchRequest searchRequest = new SearchRequest();
+		//searchRequest.setSortType("파라미터");
+		// 2. searchRequest 객체를 생성해서 담아주고
 		
-		List<String> type = Arrays.asList("sort3", "name", "brand");
-		SearchRequest searchRequest = new SearchRequest(type,keyword);
+		SearchRequest searchRequest = new SearchRequest(keyword,sortType);
 		
 		List<Item> list = itemService.selectItemWhereSearchType(pageRequest, searchRequest);
-		log.info("\n"+list);
+		log.info("\n"+searchRequest.getSortType());
 		if (list != null && list.size() > 0) {
 			result = ResponseEntity.status(HttpStatus.OK).body(list);
 			log.info("search check");
