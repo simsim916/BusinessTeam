@@ -69,7 +69,6 @@ public class ItemRepositoryImpl implements ItemRepository{
 
 	@Override
     public Item selectItemWhereCode(SearchRequest searchRequest) {
-        System.out.println("aa");
         return jPAQueryFactory.selectFrom(item)
                 .where(item.code.stringValue().eq(searchRequest.getKeyword()))
                 .fetchOne();

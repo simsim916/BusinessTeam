@@ -38,6 +38,10 @@
     font-size: 14px;
 }
 
+#listOption>div:nth-child(1) {
+    font-weight: bold;
+}
+
 #listfilter {
     position: fixed;
     width: 250px;
@@ -166,4 +170,24 @@
         height: calc((100vw - 280px - 30px - 10px)/3*2*4 + 150px);
         max-height: calc((1200px - 280px - 30px - 10px)*2);
     }
+}
+
+/* =========================== */
+
+#sortType {
+    display: flex;
+    gap: 30px;
+    position: absolute;
+    top: -20px;
+    right: 12px;
+    font-size: 14px;
+}
+
+#sortType> button {
+    padding: 5px;
+}
+
+#sortType>button:hover {
+    background-color: #9B1B30;
+    color: white;
 }

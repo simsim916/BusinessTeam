@@ -423,7 +423,23 @@ async function getBrandItem(brand) {
 /* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 List 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
 /* 📖📖📖📖 view 📖📖📖📖*/
 
+function changeSortType(keyword, sortType, event) {
+    let parent = event.target.parentNode.children;
+    let target = event.target;
+    writeItemList(keyword, sortType);
+    changeStyle(parent, target);
+}
 
+
+function changeStyle(parent, target) {
+    for (let i = 0; i < parent.length; i++) {
+        if (parent[i] != target) {
+            parent[i].style.color = 'blue';
+        }
+    }
+    target.style.color = 'red';
+    target.style.fontWeight = 'bold';
+}
 
 async function writeItemList(keyword, sortType) {
     let content = `
@@ -452,20 +468,34 @@ async function writeItemList(keyword, sortType) {
 
 /* 💻💻💻💻 view model 💻💻💻💻*/
 
+function changeListView(keyword, sortType) {
+    writeItemList(keyword, sortType);
+
+    const itemBox = document.getElementById('listContainer');
+    // itemBox.style.gridTemplateRows = '30px repeat(2, 1fr);'
+    itemBox.style.backgroundColor = 'red';
+}
+
+
 async function makeItemList(keyword, sortType) {
     const data = await getItemList(keyword, sortType);
     let result = `
         <div id="listContainer">
             <div id="containerOption">
                 <div id="total">총 <span>${data.length}</span> 개</div>
+                <div id="sortType">
+                    <button onclick="changeListView(${keyword}, ${sortType})">크게보기</button>
+                    <button onclick="changeListView(${keyword}, ${sortType})">무한스크롤</button>
+                    <button onclick="changeListView(${keyword}, ${sortType})">4개씩</button>
+                </div>
                 <div id="listOption">
-                <div onclick="writeItemList('${keyword}','salesD')">인기상품순</div>
-                    <div onclick="writeItemList('${keyword}','')">최신상품순</div>
-                    <div onclick="writeItemList('${keyword}','priceA')">가격낮은순</div>
-                    <div onclick="writeItemList('${keyword}','priceD')">가격높은순</div>
+                    <div onclick="changeSortType('${keyword}','salesD',event)">인기상품순</div>
+                    <div onclick="changeSortType('${keyword}','',event)">최신상품순</div>
+                    <div onclick="changeSortType('${keyword}','priceA',event)">가격낮은순</div>
+                    <div onclick="changeSortType('${keyword}','priceD',event)">가격높은순</div>
                 </div>
             </div>
-            `;
+    `;
 
     for (let e of data) {
         result += writeItemBox(e);
