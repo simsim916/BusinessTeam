@@ -71,13 +71,14 @@ function checkALL(event) {
         for (let e of target.getElementsByTagName('li')) {
             e.classList.add('selected');
             if (!filterCheckedList.includes(e.innerText))
-                filterCheckedList.push(e.innerText);
+               ilterCheckedList.push(e.innerText);
         }
     }
     event.stopPropagation();
     checkList();
 }
 
-function selfCheck() {
+function  fselfCheck() {
 
 }
+
