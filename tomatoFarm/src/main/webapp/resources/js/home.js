@@ -316,7 +316,12 @@ async function getSortList() {
 
 
 /* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Home 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
-let thirdContainer;
+
+/* 📖📖📖📖 view 📖📖📖📖*/
+
+async function writeHome(brand) {
+    main.innerHTML = 
+}
 
 /* 💻💻💻💻 view model 💻💻💻💻*/
 async function writeSlideContainer() {
@@ -354,43 +359,38 @@ async function writeSlideContainer() {
     secondSlideBtn = document.getElementById('secondSlideBtn');
 }
 
-function writePresentBox(brand) {
-    let uri = "/item/branditem/" + brand;
-    let result;
-    axios.get(uri
-    ).then(response => {
-
-        let data = response.data;
-        result = `
-            <div class="typeBox hide">
-                <div class="typeBoxTag">
-                    <div class="typeBoxTagTitle"><img src="../resources/img/brand/${brand}.png"
-                            alt="category_vitamin">${brand}
-                    </div>
-                    <ul class="typeBoxTagList">
-                        <li><a href="">스테이크</a></li>
-                        <li><a href="">파스타</a></li>
-                        <li><a href="">감바스</a></li>
-                    </ul>
+async function makePresentBox(brand) {
+    const data = getBrandItem(brand);
+    let result = `
+        <div class="typeBox hide">
+            <div class="typeBoxTag">
+                <div class="typeBoxTagTitle"><img src="../resources/img/brand/${brand}.png"
+                        alt="category_vitamin">${brand}
                 </div>
-                <a onclick="writeItemDetailBox(${data[0].code})" class="typeBoxImg">
-                    <img src="../resources/img/itemImg/${data[0].code}_1.jpg" alt="${data[0].name}">
-                    <div class="typeBoxImgTitle">
-                        <div class="typeBoxImgTitleName">
-                            ${data[0].name}
-                        </div>
-                        <p class="typeBoxImgTitlePrice">${makeComa(data[0].price)}원</p>
+                <ul class="typeBoxTagList">
+                    <li><a href="">스테이크</a></li>
+                    <li><a href="">파스타</a></li>
+                    <li><a href="">감바스</a></li>
+                </ul>
+            </div>
+            <a onclick="writeItemDetailBox(${data[0].code})" class="typeBoxImg">
+                <img src="../resources/img/itemImg/${data[0].code}_1.jpg" alt="${data[0].name}">
+                <div class="typeBoxImgTitle">
+                    <div class="typeBoxImgTitleName">
+                        ${data[0].name}
                     </div>
-                    <div class="typeBoxImgTitleBest">Best 상품</div>
-                </a>
-            <div class="typeBoxList">
-                <div class="slideBox">
-        `;
-        for (let i = 1; i < 6; i++) {
-            result += writeItemBox(data[i]);
-        }
+                    <p class="typeBoxImgTitlePrice">${makeComa(data[0].price)}원</p>
+                </div>
+                <div class="typeBoxImgTitleBest">Best 상품</div>
+            </a>
+        <div class="typeBoxList">
+            <div class="slideBox">
+    `;
+    for (let i = 1; i < 6; i++) {
+        result += writeItemBox(data[i]);
+    }
 
-        result += `
+    result += `
                     <a href="" class="linkBox">
                         <p>" ${data[0].brand} "</p>
                         <i class="fa-regular fa-circle-play"></i> 상품 더 보러가기
@@ -404,17 +404,19 @@ function writePresentBox(brand) {
                 </div>
             </div>
         `;
-        thirdContainer.innerHTML += result;
-        thirdContainer = document.getElementById('thirdContainer');
-    }).catch(err => {
-        console.log("writePresentBox 에러 :" + err.massage);
-    })
+    return result;
 }
 
 /* 📦📦📦📦 model 📦📦📦📦*/
 async function getEventItem() {
     let uri = "/item/eventitem";
     const response = await axios.get(uri);
+    return response.data;
+}
+
+async function getBrandItem(brand) {
+    let uri = "/item/branditem/" + brand;
+    let response = await axios.get(uri);
     return response.data;
 }
 

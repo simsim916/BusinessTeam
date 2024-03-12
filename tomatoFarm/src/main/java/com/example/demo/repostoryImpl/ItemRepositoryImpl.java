@@ -82,12 +82,29 @@ public class ItemRepositoryImpl implements ItemRepository{
 				.fetch();
 	}
 
+	@Override
+    public Item selectItemWhereCode(SearchRequest searchRequest) {
+        System.out.println("aa");
+        return jPAQueryFactory.selectFrom(item)
+                .where(item.code.stringValue().eq(searchRequest.getKeyword()))
+                .fetchOne();
+    }
+	
+	@Override
+    public List<String> selectSortList() {
+        return jPAQueryFactory.select(item.sort2)
+                .from(item)
+                .groupBy(item.sort2)
+                .fetch();
+    }
+	
+	@Override
+	public List<SortDTO> selectSortWhereSearchType(SearchRequest searchRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 	
-//	List<Item> selectItemOrderByType(PageRequest pageRequest, SearchRequest searchRequest) {
-//		return jPAQueryFactory.selectFrom(item)
-//				.orderBy(searchRequest.setSortType(null))
-//	}
 	
 }
