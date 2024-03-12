@@ -318,6 +318,9 @@ async function getSortList() {
 
 /* 📖📖📖📖 view 📖📖📖📖*/
 
+async function writeHome(brand) {
+    main.innerHTML = 
+}
 
 /* 💻💻💻💻 view model 💻💻💻💻*/
 async function writeSlideContainer() {
