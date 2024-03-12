@@ -53,7 +53,6 @@ function writeItemBox(data) {
 
 const slideBox = document.getElementsByClassName("slideBox");
 const secondContainer = document.getElementById('secondContainer');
-const thirdContainer = document.getElementById('thirdContainer');
 let secondSlideBtn;
 const adImgBox = document.getElementById('adImgBox');
 const main = document.getElementById('main');
@@ -65,19 +64,9 @@ let listfilter;;
 const adImgList = ['fresheasy.jpg', 'mychef.jpg', 'signup.jpg', 'review.jpg']
 
 let idx = 0;
-let writeTarget = ['프레시지', '김구원선생', '마이셰프', '하림', '하루한킷'];
 
-/* home */
-// write
-window.addEventListener("scroll", () => {
-    if (document.documentElement.scrollHeight - innerHeight - scrollY < 600) {
-        if (writeTarget.length > idx) {
-            writePresentBox(writeTarget[idx++]);
-        }
-    }
-});
 
-writeSlideContainer()
+
 
 /* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Home View 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
 
@@ -316,18 +305,88 @@ async function getSortList() {
 
 /* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Home 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
 
+writeHome();
+
 /* 📖📖📖📖 view 📖📖📖📖*/
 
-async function writeHome(brand) {
-    main.innerHTML = 
+async function writeHome() {
+    let content = await makeAdImgBox();
+    content += `
+        <div id="firstContainer" class="container">
+            <h3><i class="fa-solid fa-star"></i>&nbsp;&nbsp; 토마토팜 바로가기 &nbsp;&nbsp;<i class="fa-solid fa-star"></i></h3>
+            <div id="firstContainerButton">
+                <div><a><img src="../resources/img/index_bestSeller.png" alt="베스트 상품" class="categoryImg"><br>베스트 상품</a>
+                </div>
+                <div onclick="changePageToList('밀키트')"><a><img src="../resources/img/index_mealkit.png" alt="밀키트"
+                            class="categoryImg"><br>밀키트</a></div>
+                <div><a><img src="../resources/img/index_food.png" alt="신선 재료" class="categoryImg"><br>신선 재료</a></div>
+                <div><a><img src="../resources/img/index_menu.png" alt="메뉴 주문" class="categoryImg"><br>메뉴 주문</a></div>
+                <div><a><img src="../resources/img/index_cooking.png" alt="조리 도구" class="categoryImg"><br>조리 도구</a>
+                </div>
+                <div><a><img src="../resources/img/index_gift.png" alt="이벤트" class="categoryImg"><br>이벤트</a></div>
+            </div>
+        </div>
+        <hr>
+    `;
+    content += `
+        <div id="secondContainer" class="container">
+            <h3> <i class="fa-solid fa-gift"></i>   특가 상품   <i class="fa-solid fa-gift"></i></h3>
+        `;
+    content += await makeSlideContainer();
+    content += `
+        </div>
+        <hr>
+        `;
+    content += `
+        <div id="thirdContainer" class="container hide">
+            <h3 class="hide"><i class="fa-solid fa-bag-shopping"></i> &nbsp;&nbsp; 상품 보기 &nbsp;&nbsp; <i class="fa-solid fa-bag-shopping"></i></h3>
+        </div>
+    `;
+
+    main.innerHTML = content;
+    secondSlideBtn = document.getElementById('secondSlideBtn');
+
+    let writeTarget = ['프레시지', '김구원선생', '마이셰프', '하림', '하루한킷'];
+    let content2 = [];
+    const thirdContainer = document.getElementById('thirdContainer');
+    for(let i in writeTarget){
+        content2[i] = await makePresentBox(writeTarget[i]);
+    }
+
+    window.addEventListener("scroll", function () {
+        if (document.documentElement.scrollHeight - innerHeight - scrollY < 600) {
+            if (content2.length > idx) {
+                thirdContainer.innerHTML += content2[idx++];
+            }
+        }
+    });
+
+
 }
 
 /* 💻💻💻💻 view model 💻💻💻💻*/
-async function writeSlideContainer() {
+async function makeAdImgBox() {
+    let result = `
+        <div id = "adImgBox">
+            <div id="adImg" class="container">
+                <img src="../resources/img/adimg/fresheasy.jpg" alt="">
+                <div id="adRightTab">
+                    <div onmouseover="changeAdImgBox(this,event)">프레시지<img src="../resources/img/brand/프레시지.png" alt="프레시지로고"></div>
+                    <div onmouseover="changeAdImgBox(this,event)">MyChef<img src="../resources/img/brand/마이셰프.png" alt="마이셰프로고"></div>
+                    <div onmouseover="changeAdImgBox(this,event)">회원가입쿠폰<img src="../resources/img/adimg/coupon.jpg" alt="마이셰프로고"></div>
+                    <div onmouseover="changeAdImgBox(this,event)">후기이벤트<img src="../resources/img/adimg/review.png" alt="마이셰프로고"></div>
+                </div>
+            </div>
+        </div >
+    `;
+    return result;
+}
+
+async function makeSlideContainer() {
     let data = await getEventItem();
     let result = `
             <div id="secondContainerList">
-            <div class="slideBox">
+                <div class="slideBox">
         `;
 
     for (const e of data) {
@@ -335,31 +394,30 @@ async function writeSlideContainer() {
     }
 
     result += `
-        </div>
-            <div id="secondSlideBtn" onclick="secondContainerSlideBtn(event)">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div id="secondSlideBtnSelected"></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+                </div>    
+                <div id="secondSlideBtn" onclick="secondContainerSlideBtn(event)">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div id="secondSlideBtnSelected"></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div id="secondContainerLeftBtn" onclick="secondContainerSlideLeftbth(event)"><i class="fa-sharp fa-solid fa-arrow-left"></i></div>
+                <div id="secondContainerRightBtn" onclick="secondContainerSlideRightbth(event)"><i class="fa-sharp fa-solid fa-arrow-right"></i></div>
             </div>
-            <div id="secondContainerLeftBtn" onclick="secondContainerSlideLeftbth(event)"><i
-                    class="fa-sharp fa-solid fa-arrow-left"></i></div>
-            <div id="secondContainerRightBtn" onclick="secondContainerSlideRightbth(event)"><i
-                    class="fa-sharp fa-solid fa-arrow-right"></i></div>
         ` ;
-    secondContainer.innerHTML = result;
-    secondSlideBtn = document.getElementById('secondSlideBtn');
+    return result;
+
 }
 
 async function makePresentBox(brand) {
-    const data = getBrandItem(brand);
+    const data = await getBrandItem(brand);
     let result = `
         <div class="typeBox hide">
             <div class="typeBoxTag">
