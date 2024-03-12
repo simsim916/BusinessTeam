@@ -33,4 +33,8 @@ public interface ItemService {
 	List<Item> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest);
 	List<String> selectSortList();
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
+	
+	Item selectItemWhereCode(SearchRequest searchRequest);
+	
+	
 }

@@ -46,6 +46,12 @@ public class ItemServiceImpl implements ItemService{
 	public List<String> selectSortList() {
 		return itemRepository.selectSortList();
 	}
-	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 	
+	@Override
+	public Item selectItemWhereCode(SearchRequest searchRequest) {
+		return itemRepository.selectItemWhereCode(searchRequest);
+	}
+	
+	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 }
+	

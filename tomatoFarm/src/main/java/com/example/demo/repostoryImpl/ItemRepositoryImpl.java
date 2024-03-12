@@ -1,5 +1,7 @@
 package com.example.demo.repostoryImpl;
 
+import static com.example.demo.entity.QItem.item;
+
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -12,13 +14,12 @@ import com.example.demo.repository.ItemRepository;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
-import static com.example.demo.entity.QItem.item;
-
 import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
 @Repository
 @AllArgsConstructor
-public class ItemRepositoryImpl implements ItemRepository{
+public class ItemRepositoryImpl implements ItemRepository {
 	
 	private final JPAQueryFactory jPAQueryFactory;
 
@@ -50,6 +51,14 @@ public class ItemRepositoryImpl implements ItemRepository{
 				.orderBy(item.sales.desc())
 				.offset((pageRequest.getPage()-1)*pageRequest.getSize()+1).limit(pageRequest.getSize()*pageRequest.getPage())
 				.fetch();
+	}
+	
+	@Override
+	public Item selectItemWhereCode(SearchRequest searchRequest) {
+		System.out.println("aa");
+		return jPAQueryFactory.selectFrom(item)
+				.where(item.code.stringValue().eq(searchRequest.getKeyword()))
+				.fetchOne();
 	}
 	
 	@Override
