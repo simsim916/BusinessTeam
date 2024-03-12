@@ -42,11 +42,12 @@ function inputCount(event) {
 function showItemDetail(ele) {
     let itemIntro = ele.previousElementSibling;
     if (itemIntro.classList.contains('heightAuto')) {
-        itemIntro.classList.remove('heightAuto');
+        // itemIntro.classList.remove('heightAuto');
+        ele.innerHTML = `상품정보 더보기<i class="fa-solid fa-chevron-down"></i>`;
     } else {
-        itemIntro.classList.add('heightAuto');
+        itemIntro.classList.contains('heightAuto');
         introItemBtn.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`;
-        //ele.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`;
+        ele.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`;
     }
     return null;
 }
@@ -65,19 +66,19 @@ function reviewDetailClose(ele) {
     ele.closest('#reviewDetailForm').style.display = 'none';
 }
 
-// let imgList = document.getElementById('reviewDetailImgBottom');
-// let imgLength = imgList.length;
+let imgList = document.getElementById('reviewDetailImgBottom');
+let imgLength = imgList.length;
 
-// function returnImg(event) {
-//     let returnImg = (imgList + imgLength - 1) % imgLength;
-//     event.
-// }
-
-
-// function nextImg(event) {
-//     let nextImg = (imgList + 1) % imgLength;
+function returnImg(event) {
+    let returnImg = (imgList + imgLength - 1) % imgLength;
     
-// }
+}
+
+
+function nextImg(event) {
+    let nextImg = (imgList + 1) % imgLength;
+    
+}
 
 
 
