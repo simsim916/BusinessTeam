@@ -24,7 +24,6 @@ public class ItemRepositoryImpl implements ItemRepository{
 	
 	private final JPAQueryFactory jPAQueryFactory;
 
-	
 	public OrderSpecifier<?> getSortType(String type) {
 		if(type!=null) {
 			switch (type) {

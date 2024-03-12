@@ -154,6 +154,7 @@ function thirdContainerSlideLeftBth(event) {
 let firstCategory; // 카테고리 리스트
 let searchBoxInput; // 헤더 메인 검색창 input 테그
 
+
 writeHeader()
 
 /* 📖📖📖📖 view 📖📖📖📖*/
@@ -200,7 +201,7 @@ function seachCategory(ele) {
 function searchBox(event) {
     event.preventDefault();
     let keyword = event.target.closest('form').children[0].value;
-    changePageToList(keyword);
+    writeItemList(keyword);
 }
 
 function searchBoxEnterKey(event) {
@@ -478,19 +479,63 @@ async function getBrandItem(brand) {
 }
 
 /* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 List 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
-/* 💻💻💻💻 view model 💻💻💻💻*/
+/* 📖📖📖📖 view 📖📖📖📖*/
 
-function changePageToList(keyword) {
-    main.innerHTML = `
+
+
+async function writeItemList(keyword, sortType) {
+    let content = `
         <div id="searchTitle" class="container">"<b>${keyword}</b>"<span>에 대한 검색 결과</span></div>
-        <div class="container"><div>
+        <div class="container">
     `;
-    writeListFilter();
-    writeItemList(keyword);
+    content += await writeListFilter();
+    content += await makeItemList(keyword, sortType);
+
+    content += `
+        </div>
+    `;
+
+    main.innerHTML = content;
+
+    window.addEventListener('scroll', function () {
+        listfilter = document.getElementById("listfilter");
+        listfilter.style.height = `calc(100vh - 320px - 30px + ${window.scrollY}px)`;
+        if (window.scrollY <= 300) {
+            listfilter.style.top = `calc(325px - ${window.scrollY}px)`;
+        } else {
+            listfilter.style.top = `30px`;
+        }
+    });
 }
 
-function writeListFilter() {
-    main.children[1].innerHTML += `
+/* 💻💻💻💻 view model 💻💻💻💻*/
+
+async function makeItemList(keyword, sortType) {
+    const data = await getItemList(keyword, sortType);
+    let result = `
+        <div id="listContainer">
+            <div id="containerOption">
+                <div id="total">총 <span>${data.length}</span> 개</div>
+                <div id="listOption">
+                <div onclick="writeItemList('${keyword}','salesD')">인기상품순</div>
+                    <div onclick="writeItemList('${keyword}','')">최신상품순</div>
+                    <div onclick="writeItemList('${keyword}','priceA')">가격낮은순</div>
+                    <div onclick="writeItemList('${keyword}','priceD')">가격높은순</div>
+                </div>
+            </div>
+            `;
+
+    for (let e of data) {
+        result += writeItemBox(e);
+    }
+
+    result += `</div>`;
+
+    return result;
+}
+
+async function writeListFilter() {
+    let result = `
         <div id="listfilter">
             <ul>
                 <li onclick="showList(event)" class="sortB">
@@ -1778,52 +1823,15 @@ function writeListFilter() {
                         </ul>
                         </div>
                         `;
-    window.addEventListener('scroll', function () {
-        listfilter = document.getElementById("listfilter");
-        listfilter.style.height = `calc(100vh - 320px - 30px + ${window.scrollY}px)`;
-        if (window.scrollY <= 300) {
-            listfilter.style.top = `calc(325px - ${window.scrollY}px)`;
-        } else {
-            listfilter.style.top = `30px`;
-        }
-    });
-}
-
-function writeItemList(keyword) {
-
-    axios.get(uri
-    ).then(response => {
-        let data = response.data;
-        let result = `
-            <div id="listContainer">
-                <div id="containerOption">
-                    <div id="total">총 <span>${data.length}</span> 개</div>
-                    <div id="listOption">
-                        <div>최신상품순</div> <!-- item/sortlist 요청 -->
-                        <div>인기상품순</div>
-                        <div onclick="">가격낮은순</div>
-                        <div>가격높은순</div>
-                    </div>
-                </div>
-        `;
-        for (let e of data) {
-            result += writeItemBox(e);
-        }
-
-        result += `
-                </div>
-            `;
-        main.children[1].innerHTML += result;
-    }).catch(err => {
-        console.log("writeItemList 에러 :" + err.massage);
-    });
+    return result;
 }
 
 /* 📦📦📦📦 model 📦📦📦📦*/
 
-async function getItemList(keyword) {
-    let uri = "/item/search?keyword=" + keyword;
-    const response = await axios.get
+async function getItemList(keyword, sortType) {
+    let uri = "/item/search?keyword=" + keyword + "&sorttype=" + sortType;
+    const response = await axios.get(uri);
+    return response.data;
 }
 
 /* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Detail 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */

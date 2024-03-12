@@ -72,7 +72,7 @@ public class ItemController {
 		SearchRequest searchRequest = new SearchRequest(keyword,sortType);
 		
 		List<Item> list = itemService.selectItemWhereSearchType(pageRequest, searchRequest);
-		log.info("\n"+searchRequest.getSortType());
+		log.info("\n"+keyword);
 		if (list != null && list.size() > 0) {
 			result = ResponseEntity.status(HttpStatus.OK).body(list);
 			log.info("search check");
@@ -80,6 +80,7 @@ public class ItemController {
 			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
 			log.info("search check");
 		}
+		log.info(result);
 		return result;
 	}
 	
