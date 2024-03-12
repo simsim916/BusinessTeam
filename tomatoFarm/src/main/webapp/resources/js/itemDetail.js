@@ -1,9 +1,5 @@
 'use strict'
 
-function a(str) {
-    console.log(str)
-}
-
 function changeMainImg(event) {
     event.preventDefault();
     let ele = event.target.closest('div');
@@ -55,7 +51,6 @@ function showItemDetail(ele) {
     return null;
 }
 
-
 function reviewDetailClick(event) {
     event.stopPropagation();
     const reviewDetailForm = document.getElementById('reviewDetailForm');
@@ -64,6 +59,10 @@ function reviewDetailClick(event) {
 
 function reivewDetailImgChange(ele) {
     ele.parentNode.previousElementSibling.children[0].setAttribute('src', ele.src);
+}
+
+function reviewDetailClose(ele) {
+    ele.closest('#reviewDetailForm').style.display = 'none';
 }
 
 // let imgList = document.getElementById('reviewDetailImgBottom');
@@ -80,7 +79,5 @@ function reivewDetailImgChange(ele) {
     
 // }
 
-function reviewDetailClose(ele) {
-    ele.closest('#reviewDetailForm').style.display = 'none';
-}
+
 
