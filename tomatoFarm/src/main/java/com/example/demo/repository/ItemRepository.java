@@ -25,5 +25,6 @@ public interface ItemRepository {
 	// ** 분류 검색 조회
 	List<String> selectSortList();
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
+	
 
 }

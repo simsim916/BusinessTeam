@@ -21,10 +21,13 @@ public class PageRequest {
 	
 	private int page; // 출력페이지
 	private int size; // 1page 당 출력 row 갯수
+
 	
 	public PageRequest() {
 		this.page=1;
 		this.size=5;
 	}
+	
+	
 	
 }
