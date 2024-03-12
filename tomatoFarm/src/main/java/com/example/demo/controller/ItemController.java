@@ -80,6 +80,7 @@ public class ItemController {
 			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
 			log.info("search check");
 		}
+		log.info(result);
 		return result;
 	}
 	

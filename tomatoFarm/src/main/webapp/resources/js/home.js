@@ -53,7 +53,7 @@ function writeItemBox(data) {
 
 const slideBox = document.getElementsByClassName("slideBox");
 const secondContainer = document.getElementById('secondContainer');
-const thirdContainer = document.getElementById('thirdContainer');
+
 let secondSlideBtn;
 const adImgBox = document.getElementById('adImgBox');
 const main = document.getElementById('main');
@@ -164,6 +164,7 @@ function thirdContainerSlideLeftBth(event) {
 /* 📗📗📗📗 TAG 📗📗📗📗 */
 let firstCategory; // 카테고리 리스트
 let searchBoxInput; // 헤더 메인 검색창 input 테그
+
 
 writeHeader()
 
@@ -315,6 +316,8 @@ async function getSortList() {
 
 
 /* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Home 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
+let thirdContainer;
+
 /* 💻💻💻💻 view model 💻💻💻💻*/
 async function writeSlideContainer() {
     let data = await getEventItem();
@@ -402,6 +405,7 @@ function writePresentBox(brand) {
             </div>
         `;
         thirdContainer.innerHTML += result;
+        thirdContainer = document.getElementById('thirdContainer');
     }).catch(err => {
         console.log("writePresentBox 에러 :" + err.massage);
     })
@@ -1726,41 +1730,71 @@ function writeListFilter() {
     });
 }
 
-function writeItemList(keyword) {
+// function writeItemList(keyword) {
 
-    axios.get(uri
-    ).then(response => {
-        let data = response.data;
-        let result = `
-            <div id="listContainer">
-                <div id="containerOption">
-                    <div id="total">총 <span>${data.length}</span> 개</div>
-                    <div id="listOption">
-                        <div>최신상품순</div> <!-- item/sortlist 요청 -->
-                        <div>인기상품순</div>
-                        <div onclick="">가격낮은순</div>
-                        <div>가격높은순</div>
-                    </div>
-                </div>
-        `;
-        for (let e of data) {
-            result += writeItemBox(e);
-        }
+//     axios.get(uri
+//     ).then(response => {
+//         let data = response.data;
+//         let result = `
+//             <div id="listContainer">
+//                 <div id="containerOption">
+//                     <div id="total">총 <span>${data.length}</span> 개</div>
+//                     <div id="listOption">
+//                         <div>최신상품순</div> <!-- item/sortlist 요청 -->
+//                         <div>인기상품순</div>
+//                         <div onclick="">가격낮은순</div>
+//                         <div>가격높은순</div>
+//                     </div>
+//                 </div>
+//         `;
+//         for (let e of data) {
+//             result += writeItemBox(e);
+//         }
 
-        result += `
-                </div>
-            `;
-        main.children[1].innerHTML += result;
-    }).catch(err => {
-        console.log("writeItemList 에러 :" + err.massage);
-    });
-}
+//         result += `
+//                 </div>
+//             `;
+//         main.children[1].innerHTML += result;
+//     }).catch(err => {
+//         console.log("writeItemList 에러 :" + err.massage);
+//     });
+// }
 
 /* 📦📦📦📦 model 📦📦📦📦*/
 
 async function getItemList(keyword) {
     let uri = "/item/search?keyword=" + keyword;
-    const response = await axios.get
+    const response = await axios.get(uri);
+    return response.data;
+}
+
+async function makeItemList(keyword) {
+    let result;
+    result += `
+        <div id="listContainer">
+            <div id="containerOption">
+                <div id="total">총 <span>${data.length}</span> 개</div>
+                <div id="listOption">
+                    <div>최신상품순</div> <!-- item/sortlist 요청 -->
+                    <div>인기상품순</div>
+                    <div>가격낮은순</div>
+                    <div>가격높은순</div>
+                </div>
+            </div>
+            `;
+
+    for (let e of data) {
+        result += writeItemBox(e);
+    }
+
+    result += `</div>`;
+    return result;
+
+}
+
+async function writeItemList(keyword) {
+    const result = document.getElementsById('listContainer');
+    console.log(result);
 }
 
 /* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Detail 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */

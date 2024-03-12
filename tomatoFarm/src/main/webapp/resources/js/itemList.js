@@ -78,7 +78,5 @@ function checkALL(event) {
     checkList();
 }
 
-function  fselfCheck() {
-
-}
+function  fselfCheck() {}
 
