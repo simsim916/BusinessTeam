@@ -24,21 +24,6 @@ public class ItemRepositoryImpl implements ItemRepository{
 	
 	private final JPAQueryFactory jPAQueryFactory;
 
-	@Override
-	public Item selectItemWhereCode(SearchRequest searchRequest) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public List<String> selectSortList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public List<SortDTO> selectSortWhereSearchType(SearchRequest searchRequest) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	public OrderSpecifier<?> getSortType(String type) {
 		if(type!=null) {
 			switch (type) {

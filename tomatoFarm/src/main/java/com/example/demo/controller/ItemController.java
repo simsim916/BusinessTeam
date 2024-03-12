@@ -72,7 +72,7 @@ public class ItemController {
 		SearchRequest searchRequest = new SearchRequest(keyword,sortType);
 		
 		List<Item> list = itemService.selectItemWhereSearchType(pageRequest, searchRequest);
-		log.info("\n"+searchRequest.getSortType());
+		log.info("\n"+keyword);
 		if (list != null && list.size() > 0) {
 			result = ResponseEntity.status(HttpStatus.OK).body(list);
 			log.info("search check");
