@@ -1927,6 +1927,10 @@ async function writeItemDetailBox(code) {
     main.innerHTML += await makeAskBoardBox(code);
 }
 
+async function writeReviewDetailForm() {
+    main.innerHTML += await makeReviewDetailForm();
+}
+
 /* 💻💻💻💻 view model 💻💻💻💻*/
 async function makeItemDetailBox(code) {
     const data = await getItem(code);
@@ -2057,7 +2061,7 @@ async function makeItemReviewBoardBox(code) {
                     <i class="fa-solid fa-star-half"></i>
                 </div>
                 <div>가성비 굳</div>
-                <div>작+성자3</div>
+                <div>작성자3</div>
                 <div>작성일4</div>
             </div>
         `;
@@ -2127,6 +2131,40 @@ async function makeAskBoardBox(code) {
      `;
     return result;
 }
+
+async function makeReviewDetailForm() {
+    let result = `
+        <div onclick = "reviewDetailClick(event)" id = "reviewDetailForm">
+        <div id="reviewDetailBox">
+            <div id="reviewDetailImg">
+        <div id="reviewDetailImgTop">
+            <img src="/resources/img/itemImg/5000001_2.jpg" alt="">
+                <i class="fa-solid fa-arrow-left"></i>
+                <i class="fa-solid fa-arrow-right"></i>
+        </div>
+        <div id="reviewDetailImgBottom">
+            <img onclick="reivewDetailImgChange(this)" src="/resources/img/itemImg/5000001_1.jpg" alt="">
+                <img onclick="reivewDetailImgChange(this)" src="/resources/img/itemImg/5000001_2.jpg" alt="">
+                </div>
+        </div>
+        <div id="reviewDetail_Write">
+            <p>구매상품 이름</p>
+            <p>작성자 아이디</p>
+            <p>작성 날짜</p>
+            <p id="reviewDetail_Final">후기다 후기다 후기다
+                후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다
+                후기다 후기다
+                후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다
+            </p>
+        </div>
+        <div onclick="reviewDetailClose(this)" id="reviewDetailBoxClose"><i class="fa-solid fa-xmark"></i></div>
+        </div>
+        </div>
+    `;
+    return result;
+    }
+
+
 
 /* 📦📦📦📦 model 📦📦📦📦*/
 async function getItem(code) {

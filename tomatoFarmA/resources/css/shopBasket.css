@@ -1,0 +1,42 @@
+.heightAuto {
+    height: auto !important;
+}
+
+#shopBasketTitle{
+    background-color: red;
+    width: auto;
+    height: 100px;
+    text-align: center;
+    position: relative;
+    
+
+}
+
+#shopBasketSelect{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    border: 1px solid #4C455630;
+}
+#shopBasketSelect>ul>li{
+    display: block;
+    line-height: 50px;
+    border: 1px solid #4C455630;
+}
+
+#shopBasketPayBox{
+
+}
+
+#shopBasketPrice{
+    display: grid;
+    width: calc(50% - 10px);
+    grid-template: 100px 100px 50px 70px 50px 50px 70px 200px 2fr;
+    border: 2px solid #4C455630;
+    
+}
+
+#shopBasketPrice div{
+    display: flex;
+}
