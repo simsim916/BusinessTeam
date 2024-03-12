@@ -1811,10 +1811,11 @@ function showItemDetail(ele) {
     let itemIntro = ele.previousElementSibling;
     if (itemIntro.classList.contains('heightAuto')) {
         itemIntro.classList.remove('heightAuto');
+        ele.innerHTML = `상품정보 더보기<i class="fa-solid fa-chevron-down"></i>`;
     } else {
         itemIntro.classList.add('heightAuto');
         introItemBtn.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`;
-        //ele.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`;
+        ele.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`;
     }
     return null;
 }
@@ -1832,6 +1833,21 @@ function reivewDetailImgChange(ele) {
 function reviewDetailClose(ele) {
     ele.closest('#reviewDetailForm').style.display = 'none';
 }
+
+// let imgList = document.getElementById('reviewDetailImgBottom');
+// let imgLength = imgList.length;
+
+// function returnImg(event) {
+//     let returnImg = (imgList + imgLength - 1) % imgLength;
+
+// }
+
+
+// function nextImg(event) {
+//     let nextImg = (imgList + 1) % imgLength;
+
+// }
+
 
 async function writeItemDetailBox(code) {
     window.scrollTo(0, 0);
@@ -1857,25 +1873,27 @@ async function makeItemDetailBox(code) {
                 </div>
             </div>
 
-            <div id="itemDetailSM">
+            <div id="itemDetail">
                 <div id="itemDetailTitle">
-                    <div id="title1">새벽배송</div>
-                    <div id="title2">${data.name}</div>
-                    <div id="title3">소고기 찹스테이크 신선하고 맛있어요</div>
-                    <span id="title4">10<span>%</span></span>
-                    <div id="title5">${makeComa(data.price)}원</div>
-                    <div id="title6">14499.0원</div>
+                    <div id="itemDelivery">${data.event}</div>
+                    <div id="itemName">${data.name}</div>
+                    <div id="itemAccount">소고기 찹스테이크 신선하고 맛있어요</div>
+                    <span id="itemSale">10<span>%</span></span>
+                    <div id="itemPrice">${makeComa(data.price)}원</div>
+                    <div id="itemSalePrice">${makeComa(data.price)}원</div>
                 </div>
                 <div>배송</div>
-                <div>3500원<br>(23시 전 주문 시 내일 아침 7시 전 도착)</div>
+                <div>${data.delivery}원<br>(23시 전 주문 시 내일 아침 7시 전 도착)</div>
                 <div>제조사</div>
-                <div>프레시지</div>
+                <div>${data.brand}</div>
                 <div>포장타입</div>
-                <div>냉동</div>
+                <div>${data.storage}</div>
                 <div>판매단위</div>
-                <div>1팩</div>
+                <div>${
+                        data.packing
+                        }</div>
                 <div>중량/용량</div>
-                <div>527g</div>
+                <div>${data.weight}g</div>
                 <div>유통기한</div>
                 <div>수령일 포함 180일 이상 남은 제품을 보내드립니다.</div>
                 <div id="itemSelect">
@@ -1907,7 +1925,7 @@ async function makeItemDetailBox(code) {
                 </h4>
                 <hr>
             </div>
-            <img src="resources/img/itemImg/5000100_2.jpg" alt="소고기 찹스테이크 제품">
+            <img src="resources/img/itemImg/${data.code}_2.jpg" alt="${data.name} 제품">
             <div id="introItem2" class="subTitle">
                 <hr>
                 <h4>상품 구성
@@ -1915,7 +1933,7 @@ async function makeItemDetailBox(code) {
                 </h4>
                 <hr>
             </div>
-            <img src="resources/img/itemImg/5000100_3.jpg" alt="소고기 찹스테이크 구성품">
+            <img src="resources/img/itemImg/${data.code}_3.jpg" alt="${data.name} 구성품">
             <div class="subTitle">
                 <hr>
                 <h4>상품 표시사항
@@ -1923,7 +1941,7 @@ async function makeItemDetailBox(code) {
                 </h4>
                 <hr>
             </div>
-            <img src="resources/img/itemImg/5000100_4.jpg" alt="소고기 찹스테이크 상세표기">
+            <img src="resources/img/itemImg/${data.code}_4.jpg" alt="${data.name} 상세표기">
         </div>
         <div onclick="showItemDetail(this)" id="introItemBtn" class="container">
             상품정보 더보기<i class="fa-solid fa-chevron-down"></i>
@@ -1933,6 +1951,7 @@ async function makeItemDetailBox(code) {
     `;
     return result;
 }
+
 async function makeItemReviewBoardBox(code) {
     let result = `
         <div id="reviewBoardBox" class="container appearContainer">
@@ -1945,111 +1964,35 @@ async function makeItemReviewBoardBox(code) {
                     <div>작성자</div>
                     <div>작성일</div>
                 </div>
-                <div onclick="showContent(this)" class="reviewContent">
-                    <div class="reviewDetail">
-                        <div onclick="reviewDetailClick(this)" id="reivewImg">
-                            <img src="/resources/img/itemImg/5000001_2.jpg" alt="">
-                            <img src="/resources/img/itemImg/5000001_1.jpg" alt="">
-                        </div>
-                        <b>가성비 굳</b>
-                        <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                        </p>
+    `;
+
+    for (let i = 0; i < 5; i++) {
+        result += `
+            <div onclick="showContent(this)" class="reviewContent">
+                <div class="reviewDetail">
+                    <div onclick="reviewDetailClick(this)" id="reivewImg">
+                        <img src="/resources/img/itemImg/5000001_2.jpg" alt="">
+                        <img src="/resources/img/itemImg/5000001_1.jpg" alt="">
                     </div>
-                    <div>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star-half"></i>
-                    </div>
-                    <div>가성비 굳</div>
-                    <div>작성자3</div>
-                    <div>작성일4</div>
+                    <b>가성비 굳</b>
+                    <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                    </p>
                 </div>
-                <div onclick="showContent(this)" class="reviewContent">
-                    <div class="reviewDetail">
-                        <div>
-                            <img src="/resources/img/itemImg/5000001_2.jpg" alt="">
-                            <img src="/resources/img/itemImg/5000001_1.jpg" alt="">
-                        </div>
-                        <b>가성비 굳</b>
-                        <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                        </p>
-                    </div>
-                    <div>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star-half"></i>
-                    </div>
-                    <div>가성비 굳</div>
-                    <div>작성자3</div>
-                    <div>작성일4</div>
+                <div>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half"></i>
                 </div>
-                <div onclick="showContent(this)" class="reviewContent">
-                    <div class="reviewDetail">
-                        <div>
-                            <img src="/resources/img/itemImg/5000001_2.jpg" alt="">
-                            <img src="/resources/img/itemImg/5000001_1.jpg" alt="">
-                        </div>
-                        <b>가성비 굳</b>
-                        <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                        </p>
-                    </div>
-                    <div>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star-half"></i>
-                    </div>
-                    <div>가성비 굳</div>
-                    <div>작성자3</div>
-                    <div>작성일4</div>
-                </div>
-                <div onclick="showContent(this)" class="reviewContent">
-                    <div class="reviewDetail">
-                        <div>
-                            <img src="/resources/img/itemImg/5000001_2.jpg" alt="">
-                            <img src="/resources/img/itemImg/5000001_1.jpg" alt="">
-                        </div>
-                        <b>가성비 굳</b>
-                        <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                        </p>
-                    </div>
-                    <div>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star-half"></i>
-                    </div>
-                    <div>가성비 굳</div>
-                    <div>작성자3</div>
-                    <div>작성일4</div>
-                </div>
-                <div onclick="showContent(this)" class="reviewContent">
-                    <div class="reviewDetail">
-                        <div>
-                            <img src="/resources/img/itemImg/5000001_2.jpg" alt="">
-                            <img src="/resources/img/itemImg/5000001_1.jpg" alt="">
-                        </div>
-                        <b>가성비 굳</b>
-                        <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                        </p>
-                    </div>
-                    <div>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star-half"></i>
-                    </div>
-                    <div>가성비 굳</div>
-                    <div>작성자3</div>
-                    <div>작성일4</div>
-                </div>
+                <div>가성비 굳</div>
+                <div>작+성자3</div>
+                <div>작성일4</div>
+            </div>
+        `;
+    }
+
+    result += `
             </div>
             <div id="reviewBoardBtn">
                 <i class="fa-solid fa-angles-left"></i>
@@ -2063,6 +2006,7 @@ async function makeItemReviewBoardBox(code) {
         </div>
         <hr>
     `;
+
     return result;
 }
 async function makeAskBoardBox(code) {
@@ -2079,7 +2023,11 @@ async function makeAskBoardBox(code) {
                     <div>작성자</div>
                     <div>작성일</div>
                 </div>
-                <div onclick="showContent(this)" class="boardRow">
+        `;
+    
+    for (let i = 0; i < 5; i++){
+       result += `
+            <div onclick="showContent(this)" class="boardRow">
                     <div class="askContents">
                         내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
                         <a>답변</a>
@@ -2090,53 +2038,10 @@ async function makeAskBoardBox(code) {
                     <div>작성자</div>
                     <div>작성일</div>
                 </div>
-                <div onclick="showContent(this)" class="boardRow">
-                    <div class="askContents">
-                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                        <a>답변</a>
-                        <a>삭제</a>
-                    </div>
-                    <div>답변완료</div>
-                    <div>제목2</div>
-                    <div>작성자3</div>
-                    <div>작성일4</div>
-                </div>
-                <div onclick="showContent(this)" class="boardRow">
-                    <div class="askContents">
-                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                        <a>답변</a>
-                        <a>삭제</a>
-                    </div>
-                    <div>답변완료</div>
-                    <div>제목2</div>
-                    <div>작성자3</div>
-                    <div>작성일4</div>
-                </div>
-                <div onclick="showContent(this)" class="boardRow">
-                    <div class="askContents">
-                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                        <a>답변</a>
-                        <a>삭제</a>
-                    </div>
-                    <div><i class="fa-solid fa-lock"></i></div>
-                    <div>
-                        <span>&nbsp;┗&nbsp; Re : </span>
-                        제목2
-                    </div>
-                    <div>작성자3</div>
-                    <div>작성일4</div>
-                </div>
-                <div onclick="showContent(this)" class="boardRow">
-                    <div class="askContents">
-                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                        <a>답변</a>
-                        <a>삭제</a>
-                    </div>
-                    <div><i class="fa-solid fa-lock"></i></div>
-                    <div>제목2</div>
-                    <div>작성자3</div>
-                    <div>작성일4</div>
-                </div>
+            `;
+     }     
+    
+    result += `
             </div>
             <div id="askBoardBtn">
                 <i class="fa-solid fa-angles-left"></i>
@@ -2148,7 +2053,7 @@ async function makeAskBoardBox(code) {
                 <i class="fa-solid fa-angles-right"></i>
             </div>
         </div>
-    `;
+     `;
     return result;
 }
 
