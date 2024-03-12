@@ -16,7 +16,7 @@
         rel="stylesheet">
     <!-- 기본 CSS, JS -->
     <link rel="stylesheet" href="../resources/css/00default.css">
-    <script defer src="../resources/js/00default.js"></script>
+    <script  defer src="../resources/js/00default.js"></script>
     <!-- 헤더 CSS, JS -->
     <link rel="stylesheet" href="../resources/css/00header.css">
     <script defer src="../resources/js/00header.js"></script>
@@ -34,67 +34,7 @@
 
 <body>
     <header id="topBar">
-        <div id="loginBar">
-            <div class="container">
-                <a href="">고객센터</a>
-                &nbsp;&nbsp;|&nbsp;&nbsp;
-                <a href="/member/login">로그인</a>
-                &nbsp;&nbsp;|&nbsp;&nbsp;
-                <a href="">회원가입</a>
-            </div>
-        </div>
-
-        <div id="searchBar">
-            <div class="container">
-                <div id="logoBox">
-                    <a href="/">
-                        <img src="../resources/img/logo.png" alt="로고">
-                        <h1>토마토팜 tomatoFarm</h1>
-                    </a>
-                </div>
-                <form id="searchBox">
-                    <input onkeyup="searchBoxEnterKey(event)" oninput="appearinputBoxResetButton(this)"
-                        id="searchBoxInput" type="text" placeholder="검색어를 입력해주세요.">
-                    <i onclick="resetInputBox(this)" class="fa-solid fa-circle-xmark"></i>
-                    <button onclick="searchBox(event)"><i class="fa-solid fa-magnifying-glass"></i></button>
-                </form>
-                <div id="searchRightBox">
-                    <div id="myPage">
-                        <a href="/"><i class="fa-solid fa-user"></i></a>
-                    </div>
-                    <div id="myCart">
-                        <a href="/"><i class="fa-solid fa-cart-shopping"></i></a>
-                    </div>
-                    <div id="myItem">
-                        <a href="/"><i class="fa-solid fa-box-archive"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <nav>
-            <div class="container">
-                <div id="categoryBox">
-                    <div id="categoryTag"><i class="fa-solid fa-bars"></i>&nbsp;&nbsp;&nbsp;카테고리</div>
-                    <ul id="firstCategory">
-                        <li></li>
-                        <li id="firstCategorySearch">
-                            <div>
-                                <input onkeyup="seachCategory(this)" oninput="appearinputBoxResetButton2(this)"
-                                    type="text"><i onclick="resetInputBox2(this)" class="fa-solid fa-circle-xmark"></i>
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <ul id="navBar">
-                    <li><a href="">밀키트 주문</a></li>
-                    <li><a href="">식단 주문</a></li>
-                    <li><a href="">재료 주문</a></li>
-                    <li><a href="">이벤트</a></li>
-                </ul>
-            </div>
-        </nav>
+        
     </header>
 
     <main id="main">

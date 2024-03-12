@@ -57,6 +57,7 @@ const thirdContainer = document.getElementById('thirdContainer');
 let secondSlideBtn;
 const adImgBox = document.getElementById('adImgBox');
 const main = document.getElementById('main');
+const header = document.getElementsByTagName('header')[0];
 
 /* list */
 let listfilter;;
@@ -158,6 +159,162 @@ function thirdContainerSlideLeftBth(event) {
     }
 }
 
+/* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Header 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
+
+/* 📗📗📗📗 TAG 📗📗📗📗 */
+
+let firstCategory; // 카테고리 리스트
+let searchBoxInput; // 헤더 메인 검색창 input 테그
+
+writeHeader()
+
+/* 📖📖📖📖 view 📖📖📖📖*/
+
+function resetInputBox(ele) {
+    searchBoxInput.value = '';
+    searchBoxInput.focus();
+    ele.closest("form").children[1].style.visibility = "hidden"
+}
+
+function appearinputBoxResetButton(ele) {
+    ele.closest("form").children[1].style.visibility = "visible"
+}
+
+function sperateKorWord(str) {
+    const kor_starts = ["ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
+    const kor_middles = ["ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅘ", "ㅙ", "ㅚ", "ㅛ", "ㅜ", "ㅝ", "ㅞ", "ㅟ", "ㅠ", "ㅡ", "ㅢ", "ㅣ"];
+    const kor_ends = ["", "ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅁ", "ㅂ", "ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
+
+    const unicode_kor_start_num = 44032;
+    const unicode_kor_end_num = 55203;
+
+    const unicodeNum = str.charCodeAt(0);
+
+    if (unicodeNum < unicode_kor_start_num || unicodeNum > unicode_kor_end_num) {
+        return str;
+    }
+
+    // const kor_starts_index
+}
+
+function seachCategory(ele) {
+    let key = ele.value;
+    let liBox = ele.closest('ul').children;
+    for (let i = 2; i < liBox.length; i++) {
+        if (!liBox[i].innerText.includes(key)) {
+            liBox[i].style.display = "none";
+        } else {
+            liBox[i].style.display = "block";
+        }
+    }
+}
+
+function searchBox(event) {
+    event.preventDefault();
+    let keyword = event.target.closest('form').children[0].value;
+    changePageToList(keyword);
+}
+
+function searchBoxEnterKey(event) {
+    if (event.which == 13) {
+        searchBox(event)
+    }
+}
+
+async function writeHeader() {
+    let content = `
+        <div id="loginBar">
+            <div class="container">
+                <a href="">고객센터</a>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="/member/login">로그인</a>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="">회원가입</a>
+            </div>
+        </div>
+
+        <div id="searchBar">
+            <div class="container">
+                <div id="logoBox">
+                    <a href="/">
+                        <img src="../resources/img/logo.png" alt="로고">
+                        <h1>토마토팜 tomatoFarm</h1>
+                    </a>
+                </div>
+                <form id="searchBox">
+                    <input onkeyup="searchBoxEnterKey(event)" oninput="appearinputBoxResetButton(this)"
+                        id="searchBoxInput" type="text" placeholder="검색어를 입력해주세요.">
+                    <i onclick="resetInputBox(this)" class="fa-solid fa-circle-xmark"></i>
+                    <button onclick="searchBox(event)"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+                <div id="searchRightBox">
+                    <div id="myPage">
+                        <a href="/"><i class="fa-solid fa-user"></i></a>
+                    </div>
+                    <div id="myCart">
+                        <a href="/"><i class="fa-solid fa-cart-shopping"></i></a>
+                    </div>
+                    <div id="myItem">
+                        <a href="/"><i class="fa-solid fa-box-archive"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav>
+            <div class="container">
+                <div id="categoryBox">
+                    <div id="categoryTag"><i class="fa-solid fa-bars"></i>&nbsp;&nbsp;&nbsp;카테고리</div>
+                    <ul id="firstCategory">
+                        <li></li>
+                        <li id="firstCategorySearch">
+                            <div>
+                                <input onkeyup="seachCategory(this)" oninput="appearinputBoxResetButton2(this)"
+                                    type="text"><i onclick="resetInputBox2(this)" class="fa-solid fa-circle-xmark"></i>
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <ul id="navBar">
+                    <li><a href="">밀키트 주문</a></li>
+                    <li><a href="">식단 주문</a></li>
+                    <li><a href="">재료 주문</a></li>
+                    <li><a href="">이벤트</a></li>
+                </ul>
+            </div>
+        </nav>
+    `;
+    header.innerHTML = content;
+
+    firstCategory = document.getElementById("firstCategory");
+    searchBoxInput = document.getElementById("searchBoxInput");
+
+    firstCategory.innerHTML += await makeHeader();
+
+}
+
+/* 💻💻💻💻 view model 💻💻💻💻*/
+async function makeHeader() {
+    let result = '';
+    const data = await getSortList();
+    for (let e of data) {
+        result += `
+                <li><img src="../resources/img/${e}.png" alt="${e} 이미지">${e}</li>
+                `;
+    }
+    return result;
+}
+
+/* 📦📦📦📦 model 📦📦📦📦*/
+async function getSortList() {
+    let uri = '/item/sort';
+    let response = await axios.get(uri);
+    // console.log("🚨🚨🚨🚨 getSortList 에러 🚨🚨🚨🚨");
+    return response.data;
+}
+
+
 /* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Home 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
 /* 💻💻💻💻 view model 💻💻💻💻*/
 async function writeSlideContainer() {
@@ -258,9 +415,8 @@ async function getEventItem() {
     return response.data;
 }
 
-
-
 /* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 List 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
+/* 💻💻💻💻 view model 💻💻💻💻*/
 
 function changePageToList(keyword) {
     main.innerHTML = `
@@ -1572,7 +1728,7 @@ function writeListFilter() {
 }
 
 function writeItemList(keyword) {
-    let uri = "/item/search?keyword=" + keyword;
+
     axios.get(uri
     ).then(response => {
         let data = response.data;
@@ -1601,3 +1757,21 @@ function writeItemList(keyword) {
     });
 }
 
+/* 📦📦📦📦 model 📦📦📦📦*/
+
+async function getItemList(keyword) {
+    let uri = "/item/search?keyword=" + keyword;
+    const response = await axios.get
+}
+
+/* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Header 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
+/* 💻💻💻💻 view model 💻💻💻💻*/
+/* 📦📦📦📦 model 📦📦📦📦*/
+
+/* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Header 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
+/* 💻💻💻💻 view model 💻💻💻💻*/
+/* 📦📦📦📦 model 📦📦📦📦*/
+
+/* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Header 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
+/* 💻💻💻💻 view model 💻💻💻💻*/
+/* 📦📦📦📦 model 📦📦📦📦*/
