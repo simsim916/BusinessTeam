@@ -6,9 +6,12 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.entity.Item;
 import com.example.demo.entity.QItem;
+import com.example.demo.entity.QItem;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.repository.ItemRepository;
+import com.querydsl.core.types.Order;
+import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -30,11 +33,8 @@ public class ItemRepositoryImpl implements ItemRepository{
 			case "priceD": return new OrderSpecifier<>(Order.DESC, QItem.item.price);
 			case "priceA": return new OrderSpecifier<>(Order.ASC, QItem.item.price);
 			case "salesA": return new OrderSpecifier<>(Order.ASC, QItem.item.sales);
-			
 			}
 		}
-		
-		
 		return new OrderSpecifier<>(Order.DESC, QItem.item.sales);
 	}
 	

@@ -1,12 +1,64 @@
 'use strict';
+/* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 모듈예정 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
+// 쉼표 찍기
+function makeComa(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+// itemBox 작성하기
+function writeItemBox(data) {
+    let result = `
+        <div class="itemBox" onclick="writeItemDetailBox(${data.code})">
+            <div class="itemImg">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <img src="/resources/img/itemImg/${data.code < 10000 ? 'default' : data.code}_1.jpg" alt="${data.name}">
+            <div></div>
+        </div>
+        <div class="itemName">${data.name}</div>
+        <div class="itemInfo">${data.brand}<br></div>
+        <p class="itemPrice">${makeComa(data.price)}원</p>
+        `;
+    if (data.delivery > 0) {
+        result += `
+            <div class="itemDelivery"><span>배송비&nbsp;&nbsp;</span>${makeComa(data.delivery)}원</div>
+            `;
+    } else {
+        result += `
+            <div class="itemDelivery">무료배송</div>
+        `;
+    }
+    result += `
+        <div class="itemOption">
+        `;
+    if (data.delivery == 0) {
+        result += `
+            <div class="itemOptionFreeDelivery">무료배송</div>
+            `;
+    }
+    if (data.event != null && data.event.length > 0) {
+        result += `
+            <div class="itemOptionEvent">${data.event}</div>
+            `;
+    }
+    result += `
+            </div>
+        </div>
+        `;
+
+    return result;
+}
+
+/* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 모듈예정 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
 
 const slideBox = document.getElementsByClassName("slideBox");
 const secondContainer = document.getElementById('secondContainer');
 const thirdContainer = document.getElementById('thirdContainer');
 let secondSlideBtn;
 const adImgBox = document.getElementById('adImgBox');
-const canvas = adImgBox.querySelector('canvas');
 const main = document.getElementById('main');
+const header = document.getElementsByTagName('header')[0];
+
 /* list */
 let listfilter;;
 
@@ -14,9 +66,6 @@ const adImgList = ['fresheasy.jpg', 'mychef.jpg', 'signup.jpg', 'review.jpg']
 
 let idx = 0;
 let writeTarget = ['프레시지', '김구원선생', '마이셰프', '하림', '하루한킷'];
-
-window.onload = writeSlideContainer();
-
 
 /* home */
 // write
@@ -27,6 +76,10 @@ window.addEventListener("scroll", () => {
         }
     }
 });
+
+writeSlideContainer()
+
+/* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Home View 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
 
 function changeAdImgBox(ele, event) {
     event.stopPropagation();
@@ -106,35 +159,175 @@ function thirdContainerSlideLeftBth(event) {
     }
 }
 
-function writeSlideContainer() {
-    let uri = "/item/eventitem";
-    let result = '';
-    axios.get(uri
-    ).then(response => {
+/* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Header 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
 
+/* 📗📗📗📗 TAG 📗📗📗📗 */
+let firstCategory; // 카테고리 리스트
+let searchBoxInput; // 헤더 메인 검색창 input 테그
+
+writeHeader()
+
+/* 📖📖📖📖 view 📖📖📖📖*/
+
+function resetInputBox(ele) {
+    searchBoxInput.value = '';
+    searchBoxInput.focus();
+    ele.closest("form").children[1].style.visibility = "hidden"
+}
+
+function appearinputBoxResetButton(ele) {
+    ele.closest("form").children[1].style.visibility = "visible"
+}
+
+function sperateKorWord(str) {
+    const kor_starts = ["ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
+    const kor_middles = ["ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅘ", "ㅙ", "ㅚ", "ㅛ", "ㅜ", "ㅝ", "ㅞ", "ㅟ", "ㅠ", "ㅡ", "ㅢ", "ㅣ"];
+    const kor_ends = ["", "ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅁ", "ㅂ", "ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
+
+    const unicode_kor_start_num = 44032;
+    const unicode_kor_end_num = 55203;
+
+    const unicodeNum = str.charCodeAt(0);
+
+    if (unicodeNum < unicode_kor_start_num || unicodeNum > unicode_kor_end_num) {
+        return str;
+    }
+
+    // const kor_starts_index
+}
+
+function seachCategory(ele) {
+    let key = ele.value;
+    let liBox = ele.closest('ul').children;
+    for (let i = 2; i < liBox.length; i++) {
+        if (!liBox[i].innerText.includes(key)) {
+            liBox[i].style.display = "none";
+        } else {
+            liBox[i].style.display = "block";
+        }
+    }
+}
+
+function searchBox(event) {
+    event.preventDefault();
+    let keyword = event.target.closest('form').children[0].value;
+    changePageToList(keyword);
+}
+
+function searchBoxEnterKey(event) {
+    if (event.which == 13) {
+        searchBox(event)
+    }
+}
+
+async function writeHeader() {
+    let content = `
+        <div id="loginBar">
+            <div class="container">
+                <a href="">고객센터</a>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="/member/login">로그인</a>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="">회원가입</a>
+            </div>
+        </div>
+
+        <div id="searchBar">
+            <div class="container">
+                <div id="logoBox">
+                    <a href="/">
+                        <img src="../resources/img/logo.png" alt="로고">
+                        <h1>토마토팜 tomatoFarm</h1>
+                    </a>
+                </div>
+                <form id="searchBox">
+                    <input onkeyup="searchBoxEnterKey(event)" oninput="appearinputBoxResetButton(this)"
+                        id="searchBoxInput" type="text" placeholder="검색어를 입력해주세요.">
+                    <i onclick="resetInputBox(this)" class="fa-solid fa-circle-xmark"></i>
+                    <button onclick="searchBox(event)"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+                <div id="searchRightBox">
+                    <div id="myPage">
+                        <a href="/"><i class="fa-solid fa-user"></i></a>
+                    </div>
+                    <div id="myCart">
+                        <a href="/"><i class="fa-solid fa-cart-shopping"></i></a>
+                    </div>
+                    <div id="myItem">
+                        <a href="/"><i class="fa-solid fa-box-archive"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav>
+            <div class="container">
+                <div id="categoryBox">
+                    <div id="categoryTag"><i class="fa-solid fa-bars"></i>&nbsp;&nbsp;&nbsp;카테고리</div>
+                    <ul id="firstCategory">
+                        <li></li>
+                        <li id="firstCategorySearch">
+                            <div>
+                                <input onkeyup="seachCategory(this)" oninput="appearinputBoxResetButton2(this)"
+                                    type="text"><i onclick="resetInputBox2(this)" class="fa-solid fa-circle-xmark"></i>
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <ul id="navBar">
+                    <li><a href="">밀키트 주문</a></li>
+                    <li><a href="">식단 주문</a></li>
+                    <li><a href="">재료 주문</a></li>
+                    <li><a href="">이벤트</a></li>
+                </ul>
+            </div>
+        </nav>
+    `;
+    header.innerHTML = content;
+
+    firstCategory = document.getElementById("firstCategory");
+    searchBoxInput = document.getElementById("searchBoxInput");
+
+    firstCategory.innerHTML += await makeHeader();
+
+}
+
+/* 💻💻💻💻 view model 💻💻💻💻*/
+async function makeHeader() {
+    let result = '';
+    const data = await getSortList();
+    for (let e of data) {
         result += `
+                <li><img src="../resources/img/${e}.png" alt="${e} 이미지">${e}</li>
+                `;
+    }
+    return result;
+}
+
+/* 📦📦📦📦 model 📦📦📦📦*/
+async function getSortList() {
+    let uri = '/item/sort';
+    let response = await axios.get(uri);
+    // console.log("🚨🚨🚨🚨 getSortList 에러 🚨🚨🚨🚨");
+    return response.data;
+}
+
+
+/* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Home 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
+/* 💻💻💻💻 view model 💻💻💻💻*/
+async function writeSlideContainer() {
+    let data = await getEventItem();
+    let result = `
             <div id="secondContainerList">
             <div class="slideBox">
         `;
 
-        for (const e of response.data) {
-            result += `
-             <div class="itemBox">
-                    <div class="itemImg">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <img src="/resources/img/itemImg/${e.code}_1.jpg" alt="${e.name}">
-                        <div></div>
-                    </div>
-                    <div class="itemName">${e.name}</div>
-                    <div class="itemInfo">${e.brand}<br></div>
-                    <p class="itemPrice">${e.price}원</p>
-                    <div class="itemOption">${e.delivery}원</div>
-                </div>
-            `;
-        }
+    for (const e of data) {
+        result += writeItemBox(e);
+    }
 
-        result += `
+    result += `
         </div>
             <div id="secondSlideBtn" onclick="secondContainerSlideBtn(event)">
                 <div></div>
@@ -154,12 +347,8 @@ function writeSlideContainer() {
             <div id="secondContainerRightBtn" onclick="secondContainerSlideRightbth(event)"><i
                     class="fa-sharp fa-solid fa-arrow-right"></i></div>
         ` ;
-        secondContainer.innerHTML += result;
-        secondSlideBtn = document.getElementById("secondSlideBtn");
-    }).catch(err => {
-        console.log("writeSlideContainer 에러 :" + err.massage);
-    });
-
+    secondContainer.innerHTML = result;
+    secondSlideBtn = document.getElementById('secondSlideBtn');
 }
 
 function writePresentBox(brand) {
@@ -181,13 +370,13 @@ function writePresentBox(brand) {
                         <li><a href="">감바스</a></li>
                     </ul>
                 </div>
-                <a href="/item/detail/${data[0].code}" class="typeBoxImg">
+                <a onclick="writeItemDetailBox(${data[0].code})" class="typeBoxImg">
                     <img src="../resources/img/itemImg/${data[0].code}_1.jpg" alt="${data[0].name}">
                     <div class="typeBoxImgTitle">
                         <div class="typeBoxImgTitleName">
                             ${data[0].name}
                         </div>
-                        <p class="typeBoxImgTitlePrice">${data[0].price}원</p>
+                        <p class="typeBoxImgTitlePrice">${makeComa(data[0].price)}원</p>
                     </div>
                     <div class="typeBoxImgTitleBest">Best 상품</div>
                 </a>
@@ -195,20 +384,7 @@ function writePresentBox(brand) {
                 <div class="slideBox">
         `;
         for (let i = 1; i < 6; i++) {
-            result += `
-                <a href="/item/detail/${data[i].code}" class="itemBox">
-                    <div class="itemImg">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <img src="../resources/img/itemImg/${data[i].code}_1.jpg" alt="${data[i].name}">
-                        <div></div>
-                    </div>
-                    <div class="itemName">${data[i].name}</div>
-                    <div class="itemInfo">${data[i].brand}<br></div>
-                    <p class="itemPrice">${data[i].price}원</p>
-                    <div class="itemOption">무료배송</div>
-                </a>
-            `;
+            result += writeItemBox(data[i]);
         }
 
         result += `
@@ -230,6 +406,16 @@ function writePresentBox(brand) {
         console.log("writePresentBox 에러 :" + err.massage);
     })
 }
+
+/* 📦📦📦📦 model 📦📦📦📦*/
+async function getEventItem() {
+    let uri = "/item/eventitem";
+    const response = await axios.get(uri);
+    return response.data;
+}
+
+/* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 List 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
+/* 💻💻💻💻 view model 💻💻💻💻*/
 
 function changePageToList(keyword) {
     main.innerHTML = `
@@ -1541,7 +1727,7 @@ function writeListFilter() {
 }
 
 function writeItemList(keyword) {
-    let uri = "/item/search?keyword=" + keyword;
+
     axios.get(uri
     ).then(response => {
         let data = response.data;
@@ -1558,20 +1744,7 @@ function writeItemList(keyword) {
                 </div>
         `;
         for (let e of data) {
-            result += `
-                    <a href="/item/detail/${e.code}" class="itemBox">
-                        <div class="itemImg">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                            <img src="../resources/img/itemImg/${e.code}_1.jpg" alt="${e.name}">
-                            <div></div>
-                        </div>
-                        <div class="itemName">${e.name}</div>
-                        <div class="itemInfo">${e.brand}<br></div>
-                        <p class="itemPrice">${e.price}원</p>
-                        <div class="itemOption">무료배송</div>
-                    </a>
-                `;
+            result += writeItemBox(e);
         }
 
         result += `
@@ -1583,8 +1756,413 @@ function writeItemList(keyword) {
     });
 }
 
-function searchBox(event) {
-    event.preventDefault();
-    let keyword = event.target.closest('form').children[0].value;
-    changePageToList(keyword);
+/* 📦📦📦📦 model 📦📦📦📦*/
+
+async function getItemList(keyword) {
+    let uri = "/item/search?keyword=" + keyword;
+    const response = await axios.get
 }
+
+/* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Detail 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
+/* 📗📗📗📗 TAG 📗📗📗📗 */
+
+/* 📖📖📖📖 view 📖📖📖📖*/
+
+function changeMainImg(event) {
+    event.preventDefault();
+    let ele = event.target.closest('div');
+    ele.style.opacity = 1;
+    ele.parentNode.previousElementSibling.children[0].src = ele.children[0].src;
+    for (let i = 0; i < ele.parentNode.childElementCount; i++) {
+        if (ele.parentNode.children[i] != ele) {
+            ele.parentNode.children[i].style.opacity = '0.5';
+        }
+    }
+    return false;
+}
+
+function count(event, type) {
+    let target = event.target.closest("#countBox");
+    let value = target.children[1].value
+    if ("-" === type) {
+        if (value > 0)
+            value--;
+    }
+    else
+        value++;
+
+    target.children[1].value = value;
+    sumTotal(value);
+}
+
+function sumTotal(value) {
+    const title6Value = document.getElementById('title6').innerText.replace('원', '');
+    const priceBox = document.getElementById('price');
+    priceBox.children[0].innerText = `${value * title6Value} 원`;
+}
+
+function inputCount(event) {
+    const inputBox = document.getElementById('inputCount');
+    const countBox = document.getElementById('price');
+    countBox.children[1].innerText = inputBox;
+}
+
+function showItemDetail(ele) {
+    let itemIntro = ele.previousElementSibling;
+    if (itemIntro.classList.contains('heightAuto')) {
+        itemIntro.classList.remove('heightAuto');
+    } else {
+        itemIntro.classList.add('heightAuto');
+        introItemBtn.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`;
+        //ele.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`;
+    }
+    return null;
+}
+
+function reviewDetailClick(event) {
+    event.stopPropagation();
+    const reviewDetailForm = document.getElementById('reviewDetailForm');
+    reviewDetailForm.style.display = 'flex';
+}
+
+function reivewDetailImgChange(ele) {
+    ele.parentNode.previousElementSibling.children[0].setAttribute('src', ele.src);
+}
+
+function reviewDetailClose(ele) {
+    ele.closest('#reviewDetailForm').style.display = 'none';
+}
+
+async function writeItemDetailBox(code) {
+    window.scrollTo(0, 0);
+    main.innerHTML = await makeItemDetailBox(code);
+    main.innerHTML += await makeItemReviewBoardBox(code);
+    main.innerHTML += await makeAskBoardBox(code);
+}
+
+/* 💻💻💻💻 view model 💻💻💻💻*/
+async function makeItemDetailBox(code) {
+    const data = await getItem(code);
+    let result = `
+        <div id="itemDetailBox" class="container">
+            <div id="imgBox">
+                <div id="imgBoxImg">
+                    <img src="resources/img/itemImg/${data.code}_1.jpg" alt="${data.name} 사진">
+                </div>
+                <div id="imgBoxImgList">
+                    <div onclick="changeMainImg(event)"><img src="resources/img/itemImg/${data.code}_1.jpg" alt="${data.name} 조리"></div>
+                    <div onclick="changeMainImg(event)"><img src="resources/img/itemImg/${data.code}_2.jpg" alt="${data.name} 제품"></div>
+                    <div onclick="changeMainImg(event)"><img src="resources/img/itemImg/${data.code}_3.jpg" alt="${data.name} 구성품"></div>
+                    <div onclick="changeMainImg(event)"><img src="resources/img/itemImg/${data.code}_4.jpg" alt="${data.name} 상세표기"></div>
+                </div>
+            </div>
+
+            <div id="itemDetailSM">
+                <div id="itemDetailTitle">
+                    <div id="title1">새벽배송</div>
+                    <div id="title2">${data.name}</div>
+                    <div id="title3">소고기 찹스테이크 신선하고 맛있어요</div>
+                    <span id="title4">10<span>%</span></span>
+                    <div id="title5">${makeComa(data.price)}원</div>
+                    <div id="title6">14499.0원</div>
+                </div>
+                <div>배송</div>
+                <div>3500원<br>(23시 전 주문 시 내일 아침 7시 전 도착)</div>
+                <div>제조사</div>
+                <div>프레시지</div>
+                <div>포장타입</div>
+                <div>냉동</div>
+                <div>판매단위</div>
+                <div>1팩</div>
+                <div>중량/용량</div>
+                <div>527g</div>
+                <div>유통기한</div>
+                <div>수령일 포함 180일 이상 남은 제품을 보내드립니다.</div>
+                <div id="itemSelect">
+                    <div>수량 선택</div>
+                    <div id="countBox">
+                        <button onclick='count(event,"-")'><i class="fa-solid fa-minus"></i></button>
+                        <input onkeydown="inputCount(event)" id="inputCount" type="text" value="1">
+                        <button onclick='count(event,"+")'><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                    <div id="priceBox">
+                        <div id="price">총 상품금액&nbsp; : &nbsp;<span>30000원</span></div>
+                        <a href="" id="cart">장바구니 담기</a>
+                        <a href="" id="buy">구매하기</a>
+                    </div>
+                </div>
+            </div>
+        
+            <ul id="detailClick" class="container">
+                <li id="detailButton"><a onclick="return showItemDetail(this)" href="#introItem1">상품설명</a></li>
+                <li><a onclick="return confirm('aa')" href="#introItem2">상세정보</a></li>
+                <li><a href="#reviewBoardBox">상품후기</a></li>
+                <li><a href="#askBoardBox">상품문의</a></li>
+            </ul>
+            <div id="introItem" class="container">
+            <div id="introItem1" class="subTitle">
+                <hr>
+                <h4>상품 조리 사진
+                    <img src="resources/img/logo3.png" alt="제품 조리 사진">
+                </h4>
+                <hr>
+            </div>
+            <img src="resources/img/itemImg/5000100_2.jpg" alt="소고기 찹스테이크 제품">
+            <div id="introItem2" class="subTitle">
+                <hr>
+                <h4>상품 구성
+                    <img src="resources/img/logo4.png" alt="상품 구성">
+                </h4>
+                <hr>
+            </div>
+            <img src="resources/img/itemImg/5000100_3.jpg" alt="소고기 찹스테이크 구성품">
+            <div class="subTitle">
+                <hr>
+                <h4>상품 표시사항
+                    <img src="resources/img/logo2.png" alt="제품 조리 사진">
+                </h4>
+                <hr>
+            </div>
+            <img src="resources/img/itemImg/5000100_4.jpg" alt="소고기 찹스테이크 상세표기">
+        </div>
+        <div onclick="showItemDetail(this)" id="introItemBtn" class="container">
+            상품정보 더보기<i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </div>
+    <hr>
+    `;
+    return result;
+}
+async function makeItemReviewBoardBox(code) {
+    let result = `
+        <div id="reviewBoardBox" class="container appearContainer">
+            <h5>상품후기</h5>
+            <span>한줄리뷰 - 제목을 클릭하시면 상세내용을 보실 수 있습니다.</span>
+            <div id="reviewBoard">
+                <div class="reviewBoardRow">
+                    <div>별점</div>
+                    <div>제목</div>
+                    <div>작성자</div>
+                    <div>작성일</div>
+                </div>
+                <div onclick="showContent(this)" class="reviewContent">
+                    <div class="reviewDetail">
+                        <div onclick="reviewDetailClick(this)" id="reivewImg">
+                            <img src="/resources/img/itemImg/5000001_2.jpg" alt="">
+                            <img src="/resources/img/itemImg/5000001_1.jpg" alt="">
+                        </div>
+                        <b>가성비 굳</b>
+                        <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                        </p>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half"></i>
+                    </div>
+                    <div>가성비 굳</div>
+                    <div>작성자3</div>
+                    <div>작성일4</div>
+                </div>
+                <div onclick="showContent(this)" class="reviewContent">
+                    <div class="reviewDetail">
+                        <div>
+                            <img src="/resources/img/itemImg/5000001_2.jpg" alt="">
+                            <img src="/resources/img/itemImg/5000001_1.jpg" alt="">
+                        </div>
+                        <b>가성비 굳</b>
+                        <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                        </p>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half"></i>
+                    </div>
+                    <div>가성비 굳</div>
+                    <div>작성자3</div>
+                    <div>작성일4</div>
+                </div>
+                <div onclick="showContent(this)" class="reviewContent">
+                    <div class="reviewDetail">
+                        <div>
+                            <img src="/resources/img/itemImg/5000001_2.jpg" alt="">
+                            <img src="/resources/img/itemImg/5000001_1.jpg" alt="">
+                        </div>
+                        <b>가성비 굳</b>
+                        <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                        </p>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half"></i>
+                    </div>
+                    <div>가성비 굳</div>
+                    <div>작성자3</div>
+                    <div>작성일4</div>
+                </div>
+                <div onclick="showContent(this)" class="reviewContent">
+                    <div class="reviewDetail">
+                        <div>
+                            <img src="/resources/img/itemImg/5000001_2.jpg" alt="">
+                            <img src="/resources/img/itemImg/5000001_1.jpg" alt="">
+                        </div>
+                        <b>가성비 굳</b>
+                        <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                        </p>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half"></i>
+                    </div>
+                    <div>가성비 굳</div>
+                    <div>작성자3</div>
+                    <div>작성일4</div>
+                </div>
+                <div onclick="showContent(this)" class="reviewContent">
+                    <div class="reviewDetail">
+                        <div>
+                            <img src="/resources/img/itemImg/5000001_2.jpg" alt="">
+                            <img src="/resources/img/itemImg/5000001_1.jpg" alt="">
+                        </div>
+                        <b>가성비 굳</b>
+                        <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                        </p>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half"></i>
+                    </div>
+                    <div>가성비 굳</div>
+                    <div>작성자3</div>
+                    <div>작성일4</div>
+                </div>
+            </div>
+            <div id="reviewBoardBtn">
+                <i class="fa-solid fa-angles-left"></i>
+                <i class="fa-solid fa-angle-left"></i>
+                <span> 1 </span>
+                <span> 2 </span>
+                <span> 3 </span>
+                <i class="fa-solid fa-angle-right"></i>
+                <i class="fa-solid fa-angles-right"></i>
+            </div>
+        </div>
+        <hr>
+    `;
+    return result;
+}
+async function makeAskBoardBox(code) {
+    let result = `
+        <div id="askBoardBox" class="container appearContainer">
+            <h5>상품문의</h5>
+            <span>상품문의 - 상품에 궁금하신점을 남겨주세요.</span>
+            <a href=""> 문의하기 </a>
+            <div id="askBoard">
+                <div class="boardRow">
+                    <div></div>
+                    <div>답변</div>
+                    <div>제목</div>
+                    <div>작성자</div>
+                    <div>작성일</div>
+                </div>
+                <div onclick="showContent(this)" class="boardRow">
+                    <div class="askContents">
+                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                        <a>답변</a>
+                        <a>삭제</a>
+                    </div>
+                    <div>미답변</div>
+                    <div>제목</div>
+                    <div>작성자</div>
+                    <div>작성일</div>
+                </div>
+                <div onclick="showContent(this)" class="boardRow">
+                    <div class="askContents">
+                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                        <a>답변</a>
+                        <a>삭제</a>
+                    </div>
+                    <div>답변완료</div>
+                    <div>제목2</div>
+                    <div>작성자3</div>
+                    <div>작성일4</div>
+                </div>
+                <div onclick="showContent(this)" class="boardRow">
+                    <div class="askContents">
+                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                        <a>답변</a>
+                        <a>삭제</a>
+                    </div>
+                    <div>답변완료</div>
+                    <div>제목2</div>
+                    <div>작성자3</div>
+                    <div>작성일4</div>
+                </div>
+                <div onclick="showContent(this)" class="boardRow">
+                    <div class="askContents">
+                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                        <a>답변</a>
+                        <a>삭제</a>
+                    </div>
+                    <div><i class="fa-solid fa-lock"></i></div>
+                    <div>
+                        <span>&nbsp;┗&nbsp; Re : </span>
+                        제목2
+                    </div>
+                    <div>작성자3</div>
+                    <div>작성일4</div>
+                </div>
+                <div onclick="showContent(this)" class="boardRow">
+                    <div class="askContents">
+                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                        <a>답변</a>
+                        <a>삭제</a>
+                    </div>
+                    <div><i class="fa-solid fa-lock"></i></div>
+                    <div>제목2</div>
+                    <div>작성자3</div>
+                    <div>작성일4</div>
+                </div>
+            </div>
+            <div id="askBoardBtn">
+                <i class="fa-solid fa-angles-left"></i>
+                <i class="fa-solid fa-angle-left"></i>
+                <span> 1 </span>
+                <span> 2 </span>
+                <span> 3 </span>
+                <i class="fa-solid fa-angle-right"></i>
+                <i class="fa-solid fa-angles-right"></i>
+            </div>
+        </div>
+    `;
+    return result;
+}
+
+/* 📦📦📦📦 model 📦📦📦📦*/
+async function getItem(code) {
+    const uri = "item/detail?code=" + code;
+    const response = await axios.get(uri);
+    return response.data;
+}
+
+/* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Header 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
+/* 💻💻💻💻 view model 💻💻💻💻*/
+/* 📦📦📦📦 model 📦📦📦📦*/
+
+/* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Header 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
+/* 💻💻💻💻 view model 💻💻💻💻*/
+/* 📦📦📦📦 model 📦📦📦📦*/

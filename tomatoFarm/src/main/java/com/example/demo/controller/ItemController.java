@@ -50,7 +50,6 @@ public class ItemController {
 		SearchRequest searchRequest = new SearchRequest(keyword);
 		
 		List<Item> list = itemService.selectItemWherebrand(pageRequest,searchRequest);
-		log.info("\n"+list);
 		if (list != null && list.size() > 0) {
 			result = ResponseEntity.status(HttpStatus.OK).body(list);
 			log.info("branditem check");
@@ -83,8 +82,42 @@ public class ItemController {
 		}
 		return result;
 	}
-}
+	
+	@GetMapping("/sort")
+	public ResponseEntity<?> selectSortList( ) {
+		ResponseEntity<?> result = null;
+		List<String> list = itemService.selectSortList();
+		if (list != null && list.size() > 0) {
+			result = ResponseEntity.status(HttpStatus.OK).body(list);
+			log.info("sort check");
+		} else {
+			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
+			log.info("sort check");
+		}
+		return result;
+	}
 	
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
+
+
+	@GetMapping("/detail")
+	public ResponseEntity<?> selectItemWhereCode(@RequestParam("code") String keyword){
+		ResponseEntity<?> result = null;
+		
+		SearchRequest searchRequest = new SearchRequest(keyword);
+		Item entity = itemService.selectItemWhereCode(searchRequest);
+		
+		if(entity != null) {
+			result = ResponseEntity.status(HttpStatus.OK).body(entity);
+			log.info("search check");
+		} else {
+			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
+			log.info("search check");
+		}
+		
+		return result;
+		
+	}
+}
 	
 	
