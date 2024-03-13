@@ -163,102 +163,130 @@
             </div>
         </nav>
     </header>
-    
-    <div id="shopBasketTitle">장바구니</div>
-    <div id="shopBasketSelectBox">
-        <ul id="shopBasketSelect">
-            <li type="checkbox"></li>
-            <li>전체선택</li>
-            <li type="checkbox"></li>
-            <li>선택삭제</li>
-        </ul>
-    </div>
-    <div id="shopBasketItemBox">
-        <div>
-            <ul id="shopBasketItemBoxTitle">
-                <li>순번</li>
-                <li>상품명</li>
-                <li>수량</li>
-                <li>상품금액</li>
-                <li>배송비</li>
-            </ul>
-            <div id="shopBasketItem">
-                <div>1</div>
-                <div>밀키트</div>
-                <div id="itemCount">
-                    <button><i class="fa-solid fa-minus"></i></button>
-                    <input id="inputCount" type="text" value="1">
-                    <button><i class="fa-solid fa-plus"></i></button>
-                </div>
-                <div>5000</div>
-                <div>무료배송</div>
+
+    <main>
+        <div class="container">
+            <h3>
+                <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                장바구니
+                <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+            </h3>
+            <div id="shopBasketSelectBox">
+                <ul id="shopBasketSelect">
+                    <li><input type="checkbox"></input></li>
+                    <li>전체선택</li>
+                    <li><input type="checkbox"></input></li>
+                    <li>선택삭제</li>
+                </ul>
             </div>
-            <div id="shopBasketItem">
-                <div>1</div>
-                <div>밀키트</div>
-                <div id="itemCount">
-                    <button><i class="fa-solid fa-minus"></i></button>
-                    <input id="inputCount" type="text" value="1">
-                    <button><i class="fa-solid fa-plus"></i></button>
+            <div id="shopBasketItemBox">
+                <div>
+                    <ul id="shopBasketItemBoxTitle">
+                        <li>순번</li>
+                        <li>상품명</li>
+                        <li>수량</li>
+                        <li>상품금액</li>
+                        <li>배송비</li>
+                    </ul>
+                    <div class="shopBasketItem">
+                        <div><input type="checkbox"></input></div>
+                        <div class="shopBasketItemImg"><img src="/tomatoFarmA/resources/img/itemImg/5000001_2.jpg" alt=""></div>
+                        <div>밀키트</div>
+                        <div id="itemCount">
+                            <button><i class="fa-solid fa-minus"></i></button>
+                            <input id="inputCount" type="text" value="1">
+                            <button><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                        <div>5000</div>
+                        <div>무료배송</div>
+                    </div>
+                    <div class="shopBasketItem">
+                        <div><input type="checkbox"></input></div>
+                        <div class="shopBasketItemImg"><img src="/tomatoFarmA/resources/img/itemImg/5000001_2.jpg" alt=""></div>
+                        <div>밀키트</div>
+                        <div id="itemCount">
+                            <button><i class="fa-solid fa-minus"></i></button>
+                            <input id="inputCount" type="text" value="1">
+                            <button><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                        <div>5000</div>
+                        <div>무료배송</div>
+                    </div>
+                    <div class="shopBasketItem">
+                        <div><input type="checkbox"></input></div>
+                        <div class="shopBasketItemImg"><img src="/tomatoFarmA/resources/img/itemImg/5000001_2.jpg" alt=""></div>
+                        <div>밀키트</div>
+                        <div id="itemCount">
+                            <button><i class="fa-solid fa-minus"></i></button>
+                            <input id="inputCount" type="text" value="1">
+                            <button><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                        <div>5000</div>
+                        <div>무료배송</div>
+                    </div>
+                    <div class="shopBasketItem">
+                        <div><input type="checkbox"></input></div>
+                        <div class="shopBasketItemImg"><img src="/tomatoFarmA/resources/img/itemImg/5000001_2.jpg" alt=""></div>
+                        <div>밀키트</div>
+                        <div id="itemCount">
+                            <button><i class="fa-solid fa-minus"></i></button>
+                            <input id="inputCount" type="text" value="1">
+                            <button><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                        <div>5000</div>
+                        <div>무료배송</div>
+                    </div>
+                    <div class="shopBasketItem">
+                        <div><input type="checkbox"></input></div>
+                        <div class="shopBasketItemImg"><img src="/tomatoFarmA/resources/img/itemImg/5000001_2.jpg" alt=""></div>
+                        <div>밀키트e다다다다다다다다다다다</div>
+                        <div id="itemCount">
+                            <button><i class="fa-solid fa-minus"></i></button>
+                            <input id="inputCount" type="text" value="1">
+                            <button><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                        <div>5000</div>
+                        <div>무료배송</div>
+                    </div>
                 </div>
-                <div>5000</div>
-                <div>무료배송</div>
             </div>
-            <div id="shopBasketItem">
-                <div>1</div>
-                <div>밀키트</div>
-                <div id="itemCount">
-                    <button><i class="fa-solid fa-minus"></i></button>
-                    <input id="inputCount" type="text" value="1">
-                    <button><i class="fa-solid fa-plus"></i></button>
+            <div id="shopBasketPayContainer">
+                <div id="shopBasketPayBox">
+                    <div id="shopBasketPrice">
+                        <div>상품금액
+                            <div>5000원</div>
+                        </div>
+                        <div>상품할인금액
+                            <div>10%할인</div>
+                        </div>
+                        <div>배송비
+                            <div>무료배송</div>
+                        </div>
+                        <div>결제예정금액
+                            <div>4500원</div>
+                        </div>
+                    </div>
                 </div>
-                <div>5000</div>
-                <div>무료배송</div>
+                <div id="loginBox">로그인</div>
+                <div id="shopBasketCancel">
+                    <div>* [주문완료] 상태일 경우에만 주문 취소 가능합니다.</div>
+                    <div>* [마이페이지] -> [주문내역 상세페이지]에서 직접 취소 가능합니다.</div>
+                </div>
             </div>
-            <div id="shopBasketItem">
-                <div>1</div>
-                <div>밀키트</div>
-                <div id="itemCount">
-                    <button><i class="fa-solid fa-minus"></i></button>
-                    <input id="inputCount" type="text" value="1">
-                    <button><i class="fa-solid fa-plus"></i></button>
-                </div>
-                <div>5000</div>
-                <div>무료배송</div>
-            </div>
-            <div id="shopBasketItem">
-                <div>1</div>
-                <div>밀키트</div>
-                <div id="itemCount">
-                    <button><i class="fa-solid fa-minus"></i></button>
-                    <input id="inputCount" type="text" value="1">
-                    <button><i class="fa-solid fa-plus"></i></button>
-                </div>
-                <div>5000</div>
-                <div>무료배송</div>
+
+            <div id="bestItemContainer">
+                <div></div>
+
+
+
             </div>
         </div>
-    </div>
-    <div id="shopBasketPayBox">
-        <div id="shopBasketPrice">
-            <div>상품금액</div>
-            <div>5000원</div>
-            <div>상품할인금액</div>
-            <div>10%할인</div>
-            <div>배송비</div>
-            <div>무료배송</div>
-            <div>결제예정금액</div>
-            <div>4500원</div>
-        </div>
-        <div>로그인</div>
-        <div>[주문완료] 상태일 경우에만 주문 취소 가능합니다.</div>
-        <div>[마이페이지] -> [주문내역 상세페이지]에서 직접 취소 가능합니다.</div>
-    </div>
-    
-    
-    
+    </main>
+
+
 
 
 
 </body>
+
 </html>
