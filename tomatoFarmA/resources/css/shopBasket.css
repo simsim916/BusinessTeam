@@ -206,10 +206,10 @@ h3 i {
 
 .shopBasketItem>div>input {
     border: 2px solid white;
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     list-style: none;
-    margin: 10px;
+    /* margin: 10px; */
     font-size: 20px;
 }
 
@@ -220,10 +220,9 @@ h3 i {
 }
 
 #itemCount>input {
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
     text-align: center;
-    margin: 5px;
 }
 
 #itemCount>button {
@@ -283,3 +282,78 @@ h3 i {
     font-size: 12px;
 }
 
+
+#bestItemTitle{
+    font-size: 30px;
+    font-weight: 500;
+    color: #4c4556;
+    text-align: center;
+    margin-top: 100px;
+
+}
+
+#bestItemContainer {
+    margin-top: 30px;
+    display: grid;
+    grid-template-rows: 30px repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(calc((800px - 280px - 10px - 30px)/4), calc((1200px - 280px - 10px - 30px)/4)));
+    gap: 10px;
+    width: calc(100vw - 30px - 10px);
+    height: calc((100vw - 280px - 30px - 10px)/4*2*4);
+    max-height: calc((1200px - 280px - 30px - 10px)*2);
+}
+
+#containerOption {
+    height: 30px;
+    grid-column: 1/-1;
+    display: flex;
+    align-items: end;
+}
+
+.itemBox {
+    background-color: rgb(255, 247, 247);
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.itemBox>img {
+    justify-content: center;
+    background-color: rgb(0, 0, 0);
+    width: 100%;
+    text-align: center;
+}
+
+.itemName {
+    margin-top: 5px;
+    padding-left: 10px;
+    font-weight: 500;
+    font-size: 1em;
+}
+
+.itemInfo {
+    padding-left: 10px;
+    font-size: 0.75em;
+    color: rgba(54, 54, 54, 0.699);
+}
+
+.itemPrice {
+    margin: 0;
+    margin-top: 7px;
+    padding-left: 10px;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.itemOption {
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 55px;
+    line-height: 20px;
+    text-align: center;
+    font-size: 11px;
+    background-color: #CA4046;
+    color: rgb(255, 255, 255);
+    border-radius: 5px;
+}
