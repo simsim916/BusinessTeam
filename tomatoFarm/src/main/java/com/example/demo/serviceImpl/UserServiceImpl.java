@@ -1,26 +1,35 @@
 package com.example.demo.serviceImpl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.domain.MemberDTO;
-import com.example.demo.entity.Member;
-import com.example.demo.repository.MemberRepository;
-import com.example.demo.service.MemberService;
+import com.example.demo.domain.UserDTO;
+import com.example.demo.repository.UserRepository;
+import com.example.demo.service.UserService;
 
 import lombok.AllArgsConstructor;
 
 
 
+
 @AllArgsConstructor
 @Service
-public class MemberServiceImpl implements MemberService{
+public class UserServiceImpl implements UserService{
+	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 
-	private final MemberRepository memberRepository;
 	
+	
+	/* 🎃🎃🎃🎃🎃🎃 수미 🎃🎃🎃🎃🎃🎃 */
 
-	public Member selectOne(String id) {
-		return memberRepository.findMemberByid(id);
+	private final UserRepository userRepository;
+	
+	@Override
+	public UserDTO selectUser(UserDTO dto) {
+		return userRepository.selectUser(dto);
+	}
+	
+	@Override
+	public int insertUser(UserDTO dto) {
+		return userRepository.insertUser(dto);
 	}
 	
 }

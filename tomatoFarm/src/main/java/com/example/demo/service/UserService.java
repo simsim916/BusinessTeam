@@ -1,12 +1,13 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Member;
 
-public interface MemberService {
+import com.example.demo.domain.UserDTO;
 
+public interface UserService {
+
+	public UserDTO selectUser(UserDTO dto);
 	
-	
-	public Member selectOne(String id);
+	public int insertUser(UserDTO dto);
 	
 //	=================================
 	

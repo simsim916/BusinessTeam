@@ -84,7 +84,6 @@ public class ItemRepositoryImpl implements ItemRepository{
 	
 	@Override
 	public List<SortDTO> selectSortWhereSearchType(SearchRequest searchRequest) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

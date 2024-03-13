@@ -1,67 +1,56 @@
 package com.example.demo.controller;
 
-import javax.servlet.http.HttpSession;
+
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.example.demo.entity.Member;
-import com.example.demo.service.MemberService;
+import com.example.demo.domain.UserDTO;
+import com.example.demo.service.UserService;
 
+import jdk.nashorn.internal.ir.RuntimeNode.Request;
 import lombok.AllArgsConstructor;
 
 
 @Controller
 @AllArgsConstructor
-@RequestMapping(value="/member")
-public class MemberController {
+@RequestMapping(value="/user")
+public class UserController {
 	
-	MemberService memberService;
+	UserService userService;
 	PasswordEncoder passwordEncoder;
 	
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 	
-	@GetMapping("/loginpage")
-	public String loginPage() {
-	return "login/login";
-	}
 	
-	public String login(Member entity,Model model, HttpSession session) {
-		String password = entity.getPassword();
-		String uri = "redirect:/home";
+	@GetMapping("/loginForm")
+	public void loginForm(Model model) {
 		
-		entity = memberService.selectOne(entity.getId());
+	}
+	
+	
+//	@RequestMapping(value = "/joinForm", method = RequestMethod.POST)
+//	public String join(HttpServletRequest request, Model model, UserDTO dto) throws IOException{
+//		
+//		String uri = "user/loginForm";
+//		
+//		String rea
 		
-		if(entity != null && passwordEncoder.matches(password, entity.getPassword())) {
-			session.setAttribute("loginID", entity.getId());
-			session.setAttribute("loginName", entity.getName());
-		} else {
-			uri = "login/login";
-			model.addAttribute("message", "로그인 실패");
-		}
-		return uri;
+		
+		
+		
 	}
 	
-	@GetMapping("/signuppage")
-	public String signUpPage() {
-		return "login/signup";
-	}
 	
-//	@GetMapping("/signup")
-//	public String signUp(RedirectAttributes rttr) {
-//		String uri = "";
-//		
-//		try {
-//			rttr.addFlashAttribute("message", "")
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//		}
-//		
-//		return "";
-//	}
+	
 	
 }

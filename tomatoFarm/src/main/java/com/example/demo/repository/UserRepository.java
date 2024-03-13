@@ -1,8 +1,20 @@
 package com.example.demo.repository;
 
-import com.example.demo.entity.Member;
 
-public interface MemberRepository{
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.domain.UserDTO;
+
+@Repository
+public interface UserRepository{
 	
-	public Member findMemberByid(String id);
+	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
+
+	
+	
+	/* 🎃🎃🎃🎃🎃🎃 수미 🎃🎃🎃🎃🎃🎃 */
+	
+	public UserDTO selectUser(UserDTO dto);
+	
+	public int insertUser(UserDTO dto);
 }
