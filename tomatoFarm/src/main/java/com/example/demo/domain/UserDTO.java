@@ -1,22 +1,26 @@
 package com.example.demo.domain;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.Setter;
 
 @Data
+@Builder
+@Setter
 public class UserDTO {
 
 	private String id;
 	private String password;
-	private String rank;
+	private String level;
 	private String name;
 	private String phonenumber;
-	private int adress_code;
+	private Integer address_code;
 	private String address1;
 	private String address2;
 	private String email;
 	private String email2;
-	private int gender;
+	private Integer gender;
 	private String birthdate;
-	private int point;
+	private Integer point;
 	
 }
