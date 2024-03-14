@@ -32,19 +32,20 @@ public class UserRepositoryImpl implements UserRepository {
 	
 	@Override
 	public int insertUser(UserDTO dto) {
+		// SQL insert 사용시 EntityManager 사용
 		return entityManager
-		.createNativeQuery("INSERT INTO USER(id,password,name,phonenumber"
-								+ ",address2,email,email2,gender,birthdate)")
-			.setParameter(1, dto.getId())
-			.setParameter(2, dto.getPassword())
-			.setParameter(3, dto.getName())
-			.setParameter(4, dto.getPhonenumber())
-			.setParameter(5, dto.getAddress2())
-			.setParameter(6, dto.getEmail())
-			.setParameter(7, dto.getEmail2())
-			.setParameter(8, dto.getGender())
-			.setParameter(9, dto.getBirthdate())
-			.executeUpdate();
+					.createNativeQuery("INSERT INTO USER(id,password,name,phonenumber"
+											+ ",address2,email,email2,gender,birthdate)")
+					.setParameter(1, dto.getId())
+					.setParameter(2, dto.getPassword())
+					.setParameter(3, dto.getName())
+					.setParameter(4, dto.getPhonenumber())
+					.setParameter(5, dto.getAddress2())
+					.setParameter(6, dto.getEmail())
+					.setParameter(7, dto.getEmail2())
+					.setParameter(8, dto.getGender())
+					.setParameter(9, dto.getBirthdate())
+					.executeUpdate();
 	}
 
 	
