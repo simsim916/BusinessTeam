@@ -24,6 +24,8 @@ public class ItemRepositoryImpl implements ItemRepository{
 	
 	private final JPAQueryFactory jPAQueryFactory;
 
+	
+	// queryDSL 동적 정렬을 위해 OrderSpecifier객체를 이용한 동적 정렬
 	public OrderSpecifier<?> getSortType(String type) {
 		if(type!=null) {
 			switch (type) {
