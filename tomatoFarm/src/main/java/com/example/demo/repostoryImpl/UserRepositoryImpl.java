@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 
 import org.springframework.stereotype.Repository;
 import com.example.demo.domain.UserDTO;
+import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
@@ -23,11 +24,10 @@ public class UserRepositoryImpl implements UserRepository {
 	private final EntityManager entityManager;
 
 	@Override
-	public UserDTO selectUser(UserDTO dto) {
-		jpaQueryfactory.selectFrom(user)
+	public User selectUser(UserDTO dto) {
+		return jpaQueryfactory.selectFrom(user)
 		.where(user.id.eq(dto.getId()))
 		.fetchOne();
-		return null;
 	}
 	
 	@Override

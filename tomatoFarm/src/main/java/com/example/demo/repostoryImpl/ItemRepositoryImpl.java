@@ -73,7 +73,9 @@ public class ItemRepositoryImpl implements ItemRepository{
                 .where(item.code.stringValue().eq(searchRequest.getKeyword()))
                 .fetchOne();
     }
-	
+/*
+ *	 
+ */
 	@Override
     public List<String> selectSortList() {
         return jPAQueryFactory.select(item.sort2)

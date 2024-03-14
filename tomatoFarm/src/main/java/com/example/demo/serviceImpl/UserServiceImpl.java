@@ -3,6 +3,7 @@ package com.example.demo.serviceImpl;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.UserDTO;
+import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
 
@@ -23,7 +24,7 @@ public class UserServiceImpl implements UserService{
 	private final UserRepository userRepository;
 	
 	@Override
-	public UserDTO selectUser(UserDTO dto) {
+	public User selectUser(UserDTO dto) {
 		return userRepository.selectUser(dto);
 	}
 	
