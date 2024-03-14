@@ -2141,8 +2141,8 @@ async function makeAskBoardBox(code) {
 /* 📦📦📦📦 model 📦📦📦📦*/
 async function getItem(code) {
     const uri = "item/detail?code=" + code;
-    const response = await axios.get(uri).catch(err=>{
-        
+    const response = await axios.get(uri).catch(err => {
+
     });
     return response.data;
 }
@@ -2274,7 +2274,7 @@ function makeLoginPage() {
                         <span id="pwError"></span>
                     </p>
 
-                    <button id="loginInBox">로그인</button>
+                    <button type="button" onclick="requestLogin()" id="loginInBox">로그인</button>
                 </form>
                 <p id="successOrNot">
                 </p>
@@ -2289,6 +2289,25 @@ function makeLoginPage() {
     `;
     return result;
 }
+
+async function requestLogin() {
+    let id = document.getElementById('id').value;
+    let password = document.getElementById('password').value;
+    let uri = `user/login`;
+    let data = {
+        id: id,
+        password: password
+    }
+    let response = await axios.post(uri, null, {
+        params: {
+            id: id,
+            password: password
+        }
+    });
+
+}
+
+
 // 사용X (makeLoginPage 에 더해서 작성 중)
 function makeSign() {
     let result = `
