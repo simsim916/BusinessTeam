@@ -51,6 +51,7 @@ function writeItemBox(data) {
 
 /* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 모듈예정 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
 
+const body = document.getElementsByTagName("body")[0];
 const slideBox = document.getElementsByClassName("slideBox");
 const secondContainer = document.getElementById('secondContainer');
 let secondSlideBtn;
@@ -69,6 +70,8 @@ let idx = 0;
 
 
 /* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Home View 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
+
+
 
 function changeAdImgBox(ele, event) {
     event.stopPropagation();
@@ -216,7 +219,7 @@ async function writeHeader() {
             <div class="container">
                 <a href="">고객센터</a>
                 &nbsp;&nbsp;|&nbsp;&nbsp;
-                <a href="/member/login">로그인</a>
+                <a onclick='writeLoginPage()'>로그인</a>
                 &nbsp;&nbsp;|&nbsp;&nbsp;
                 <a href="">회원가입</a>
             </div>
@@ -308,6 +311,12 @@ async function getSortList() {
 
 writeHome();
 
+// 로그인페이지 -> 홈
+async function pageToHome() {
+    await writeHeader();
+    await writeHome();
+}
+
 /* 📖📖📖📖 view 📖📖📖📖*/
 
 async function writeHome() {
@@ -350,7 +359,7 @@ async function writeHome() {
     let writeTarget = ['프레시지', '김구원선생', '마이셰프', '하림', '하루한킷'];
     let content2 = [];
     const thirdContainer = document.getElementById('thirdContainer');
-    for(let i in writeTarget){
+    for (let i in writeTarget) {
         content2[i] = await makePresentBox(writeTarget[i]);
     }
 
@@ -482,7 +491,7 @@ async function getBrandItem(brand) {
 /* 📖📖📖📖 view 📖📖📖📖*/
 
 
-
+// 아이템리스트 작성 (keyword=검색어 , sortType=정렬기준)
 async function writeItemList(keyword, sortType) {
     let content = `
         <div id="searchTitle" class="container">"<b>${keyword}</b>"<span>에 대한 검색 결과</span></div>
@@ -510,6 +519,7 @@ async function writeItemList(keyword, sortType) {
 
 /* 💻💻💻💻 view model 💻💻💻💻*/
 
+// 아이템리스트 HTML코드 작성 (keyword=검색어 , sortType=정렬기준)
 async function makeItemList(keyword, sortType) {
     const data = await getItemList(keyword, sortType);
     let result = `
@@ -1828,6 +1838,7 @@ async function writeListFilter() {
 
 /* 📦📦📦📦 model 📦📦📦📦*/
 
+// 아이템리스트 데이터 (keyword=검색어 , sortType=정렬기준)
 async function getItemList(keyword, sortType) {
     let uri = "/item/search?keyword=" + keyword + "&sorttype=" + sortType;
     const response = await axios.get(uri);
@@ -1960,9 +1971,8 @@ async function makeItemDetailBox(code) {
                 <div>포장타입</div>
                 <div>${data.storage}</div>
                 <div>판매단위</div>
-                <div>${
-                        data.packing
-                        }</div>
+                <div>${data.packing
+        }</div>
                 <div>중량/용량</div>
                 <div>${data.weight}g</div>
                 <div>유통기한</div>
@@ -2095,9 +2105,9 @@ async function makeAskBoardBox(code) {
                     <div>작성일</div>
                 </div>
         `;
-    
-    for (let i = 0; i < 5; i++){
-       result += `
+
+    for (let i = 0; i < 5; i++) {
+        result += `
             <div onclick="showContent(this)" class="boardRow">
                     <div class="askContents">
                         내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
@@ -2110,8 +2120,8 @@ async function makeAskBoardBox(code) {
                     <div>작성일</div>
                 </div>
             `;
-     }     
-    
+    }
+
     result += `
             </div>
             <div id="askBoardBtn">
@@ -2131,14 +2141,245 @@ async function makeAskBoardBox(code) {
 /* 📦📦📦📦 model 📦📦📦📦*/
 async function getItem(code) {
     const uri = "item/detail?code=" + code;
-    const response = await axios.get(uri);
+    const response = await axios.get(uri).catch(err=>{
+        
+    });
     return response.data;
 }
 
-/* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Header 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
+/* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Login 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
+/* 📗📗📗📗 TAG 📗📗📗📗 */
+
+/* 📖📖📖📖 view 📖📖📖📖*/
+// 로그인 페이지 작성
+function writeLoginPage() {
+    body.innerHTML = makeLoginPage();
+}
+// 로그인 -> 회원가입 애니메이션
+function writeSign() {
+    document.getElementById('loginBG').style.transform = "translate(-100%,0)";
+    // body.innerHTML += makeSign();
+    document.getElementById('signBG').style.transform = "translate(-100%,0)";
+    document.getElementById('signBG').style.zIndex = '2';
+}
 /* 💻💻💻💻 view model 💻💻💻💻*/
+// 로그인 HTML코드 작성
+function makeLoginPage() {
+    let result = `
+    <div id="bodyBG"></div>
+    <div id="contentBox">
+        <div id="signBG">
+            <div>
+                <a href="/tomatoFarm/"><img id="logo" src="/resources/img/logo.png"></img></a>
+                <h3>회원가입</h3>
+                <form id="signUpBox" action="signup" method="post">
+                    <p id="writeOption"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;필수 입력 사항</p>
+                    <div id="idBox">
+                        <i class="fa-solid fa-user"></i>
+                        <input onkeydown="changeOpacityId(event)" onblur="checkId(event)" onfocus="focusInputBox(event)"
+                            type="text" name="id" placeholder="아이디">
+                    </div>
+                    <div id="passwordBox">
+                        <i class="fa-solid fa-key"></i>
+                        <input onkeydown="changeOpacityPw(event)" onblur="checkPassword(event)" onfocus="focusInputBox(event)"
+                            autocomplete="off" type="password" name="password" placeholder="비밀번호">
+                    </div>
+                    <div id="nameBox">
+                        <i class="fa-solid fa-circle-user"></i>
+                        <input onkeydown="changeOpacityName(event)" onblur="checkName(event)" onfocus="focusInputBox(event)"
+                            type="text" name="name" placeholder="이름">
+                    </div>
+                    <div id="phonenumberBox">
+                        <i class="fa-solid fa-phone"></i>
+                        <input onkeydown="changeOpacityPn(event)" onblur="checkPhonenumber(event)"
+                            onfocus="focusInputBox(event)" type="text" name="phonenumber" placeholder="전화번호">
+                    </div>
+                    <p id="errorBox">
+                        <span id="idError"></span>
+                        <span id="pwError"></span>
+                        <span id="nameError"></span>
+                        <span id="pnError"></span>
+                    </p>
+                    <p id="selectOption"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;선택 입력 사항</p>
+                    <div id="addressBox">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <input onkeydown="changeOpacityAddress(event)" type="text" name="address" placeholder="주소">
+                    </div>
+                    <div id="emailBox">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input onkeydown="changeOpacityEmail(event)" type="text" name="email" placeholder="이메일"><i
+                            class="fa-solid fa-at"></i>
+                        <input onkeydown="changeOpacityEmail(event)" type="text" name="emailback" id="emailWriteBox">
+                        <select onchange="changeSelectBox(event)" name="emailback" id="emailSelectBox">
+                            <option>이메일 선택</option>
+                            <option value="naver.com">naver.com</option>
+                            <option value="daum.net">daum.net</option>
+                            <option value="google.com">google.com</option>
+                            <option value="nate.com">nate.com</option>
+                            <option value=",">직접입력</option>
+                        </select>
+                    </div>
+                    <div id="genderBox">
+                        <i class="fa-solid fa-person-half-dress"></i>
+                        <span>성별</span>
+                        <ul id="genderUl">
+                            <label>
+                                <li>
+                                    <input onkeydown="changeOpacity(event)" onclick="selectGender(event)" type="radio"
+                                        name="gender" value="남성">남자
+                                </li>
+                            </label>
+                            <label>
+                                <li>
+                                    <input onkeydown="changeOpacity(event)" onclick="selectGender(event)" type="radio"
+                                        name="gender" value="여성">여자
+                                </li>
+                            </label>
+                        </ul>
+                    </div>
+                    <div id="birthdayBox">
+                        <i class="fa-solid fa-cake-candles"></i>
+                        <input onkeydown="changeOpacity2(event)" type="text" name="year" placeholder="yyyy" maxlength="4">
+                        <input onkeydown="changeOpacity2(event)" type="text" name="month" placeholder="mm" maxlength="2">
+                        <input onkeydown="changeOpacity2(event)" type="text" name="day" placeholder="dd" maxlength="2">
+                    </div>
+                    <button id="joinBox" disabled>가입하기</button>
+                </form>
+                <br>
+                <p id="successOrNot">
+                </p>
+            </div>
+        </div>
+        <div id="loginBG">
+            <div>
+                <a href="/tomatoFarm/"><img id="logo" src="/resources/img/logo.png"></a>
+                <form id="loginBox" action="/tomatoFarm/member/login" method="post">
+                    <div id="loginButton">
+                        <div onclick="selectLoginType(this)">일반 로그인</div>
+                        <div onclick="selectLoginType(this)">사업자 로그인</div>
+                    </div>
+
+                    <div id="idBox">
+                        <i class="fa-solid fa-user"></i>
+                        <input onkeydown="changeOpacityId(event)" onblur="checkId(event)" onfocus="focusInputBox(event)" id="id"
+                            type="text" name="id" placeholder="아이디">
+                    </div>
+                    <div id="passwordBox">
+                        <i class="fa-solid fa-key"></i>
+                        <input onkeydown="changeOpacityPw(event)" onblur="checkPassword(event)" onfocus="focusInputBox(event)"
+                            autocomplete="off" id="password" type="password" name="password" placeholder="비밀번호">
+                    </div>
+                    <p id="errorBox">
+                        <span id="idError"></span>
+                        <span id="pwError"></span>
+                    </p>
+
+                    <button id="loginInBox">로그인</button>
+                </form>
+                <p id="successOrNot">
+                </p>
+                <ul id="search">
+                    <li>아이디 찾기</li>
+                    <li>비밀번호 찾기</li>
+                    <li><a onclick="writeSign()">회원가입</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    `;
+    return result;
+}
+// 사용X (makeLoginPage 에 더해서 작성 중)
+function makeSign() {
+    let result = `
+    <div id=signForm>
+        <a href="/tomatoFarm/"><img id="logo" src="/tomatoFarm/resources/img/logo.png"></img></a>
+        <h3>회원가입</h3>
+        <form id="signUpBox" action="signup" method="post">
+            <p id="writeOption"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;필수 입력 사항</p>
+            <div id="idBox">
+                <i class="fa-solid fa-user"></i>
+                <input onkeydown="changeOpacityId(event)" onblur="checkId(event)" onfocus="focusInputBox(event)"
+                    type="text" name="id" placeholder="아이디">
+            </div>
+            <div id="passwordBox">
+                <i class="fa-solid fa-key"></i>
+                <input autocomplete="off" onkeydown="changeOpacityPw(event)" onblur="checkPassword(event)" onfocus="focusInputBox(event)"
+                    type="password" name="password" placeholder="비밀번호">
+            </div>
+            <div id="nameBox">
+                <i class="fa-solid fa-circle-user"></i>
+                <input onkeydown="changeOpacityName(event)" onblur="checkName(event)" onfocus="focusInputBox(event)"
+                    type="text" name="name" placeholder="이름">
+            </div>
+            <div id="phonenumberBox">
+                <i class="fa-solid fa-phone"></i>
+                <input onkeydown="changeOpacityPn(event)" onblur="checkPhonenumber(event)"
+                    onfocus="focusInputBox(event)" type="text" name="phonenumber" placeholder="전화번호">
+            </div>
+            <p id="errorBox">
+                <span id="idError"></span>
+                <span id="pwError"></span>
+                <span id="nameError"></span>
+                <span id="pnError"></span>
+            </p>
+            <p id="selectOption"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;선택 입력 사항</p>
+            <div id="addressBox">
+                <i class="fa-solid fa-location-dot"></i>
+                <input onkeydown="changeOpacityAddress(event)" type="text" name="address" placeholder="주소">
+            </div>
+            <div id="emailBox">
+                <i class="fa-solid fa-envelope"></i>
+                <input onkeydown="changeOpacityEmail(event)" type="text" name="email" placeholder="이메일"><i
+                    class="fa-solid fa-at"></i>
+                <input onkeydown="changeOpacityEmail(event)" type="text" name="emailback" id="emailWriteBox">
+                <select onchange="changeSelectBox(event)" name="emailback" id="emailSelectBox">
+                    <option>이메일 선택</option>
+                    <option value="naver.com">naver.com</option>
+                    <option value="daum.net">daum.net</option>
+                    <option value="google.com">google.com</option>
+                    <option value="nate.com">nate.com</option>
+                    <option value=",">직접입력</option>
+                </select>
+            </div>
+            <div id="genderBox">
+                <i class="fa-solid fa-person-half-dress"></i>
+                <span>성별</span>
+                <ul id="genderUl">
+                    <label>
+                        <li>
+                            <input onkeydown="changeOpacity(event)" onclick="selectGender(event)" type="radio"
+                                name="gender" value="남성">남자
+                        </li>
+                    </label>
+                    <label>
+                        <li>
+                            <input onkeydown="changeOpacity(event)" onclick="selectGender(event)" type="radio"
+                                name="gender" value="여성">여자
+                        </li>
+                    </label>
+                </ul>
+            </div>
+            <div id="birthdayBox">
+                <i class="fa-solid fa-cake-candles"></i>
+                <input onkeydown="changeOpacity2(event)" type="text" name="year" placeholder="yyyy" maxlength="4">
+                <input onkeydown="changeOpacity2(event)" type="text" name="month" placeholder="mm" maxlength="2">
+                <input onkeydown="changeOpacity2(event)" type="text" name="day" placeholder="dd" maxlength="2">
+            </div>
+            <button id="joinBox" disabled>가입하기</button>
+        </form>
+        <br>
+        <p id="successOrNot">
+        </p>
+    </div>
+    `;
+    return result;
+}
+
 /* 📦📦📦📦 model 📦📦📦📦*/
 
 /* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Header 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
+/* 📗📗📗📗 TAG 📗📗📗📗 */
+/* 📖📖📖📖 view 📖📖📖📖*/
 /* 💻💻💻💻 view model 💻💻💻💻*/
 /* 📦📦📦📦 model 📦📦📦📦*/

@@ -1,30 +1,28 @@
 package com.example.demo.controller;
 
-import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.example.demo.entity.Member;
-import com.example.demo.service.MemberService;
-
-import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 @Controller
 @Log4j2
 public class HomeController {
-	
-
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	
 	@GetMapping("/home")
 	public void home() {
 		
 	}
 
-	
+	@GetMapping("/test")
+	public void test() {
+		System.out.println(passwordEncoder.encode("1234"));
+	}
 	
 	
 }
