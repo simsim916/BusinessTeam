@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.domain.SortDTO;
 import com.example.demo.entity.Item;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
@@ -43,7 +44,19 @@ public class ItemServiceImpl implements ItemService{
 	}
 	
 	@Override
-	public List<String> selectSortList() {
+	public List<Item> selectItemWhereKeyword(SearchRequest searchRequest) {
+		List<Item> result = itemRepository.selectItemWhereKeyword(searchRequest);
+		return result;
+	}
+	
+	@Override
+	public List<SortDTO> selectSortWhereKeyword(SearchRequest searchRequest) {
+		List<SortDTO> result = itemRepository.selectSortWhereKeyword(searchRequest);
+		return result;
+	}
+	
+	@Override
+	public List<SortDTO> selectSortList() {
 		return itemRepository.selectSortList();
 	}
 	

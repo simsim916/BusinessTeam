@@ -12,6 +12,7 @@ import com.example.demo.module.SearchRequest;
 import com.example.demo.repository.ItemRepository;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import static com.example.demo.entity.QItem.item;
@@ -36,6 +37,7 @@ public class ItemRepositoryImpl implements ItemRepository{
 	}
 	
 	@Override
+	// ** 이벤트 상품 조회
 	public List<Item> selectItemWhereEvent_D(PageRequest pageRequest) {
 		return jPAQueryFactory.selectFrom(item)
 				.where(item.event.isNotNull().and(item.event.ne("")))
@@ -45,6 +47,7 @@ public class ItemRepositoryImpl implements ItemRepository{
 	}
 	
 	@Override
+	// ** 브랜드 상품 조회 
 	public List<Item> selectItemWherebrand(PageRequest pageRequest, SearchRequest searchRequest){
 		return jPAQueryFactory.selectFrom(item)
 				.where(item.brand.eq(searchRequest.getKeyword()))
@@ -54,6 +57,7 @@ public class ItemRepositoryImpl implements ItemRepository{
 	}
 	
 	@Override
+	// ** 키워드 상품 페이징 조회
 	public List<Item> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest){
 	System.out.println(searchRequest.getType());
 		return jPAQueryFactory.selectFrom(item)
@@ -62,12 +66,39 @@ public class ItemRepositoryImpl implements ItemRepository{
 						.or(item.brand.contains(searchRequest.getKeyword()))
 						.or(item.name.contains(searchRequest.getKeyword())))
 				.orderBy(getSortType(searchRequest.getSortType()))
-				
 				.offset((pageRequest.getPage()-1)*pageRequest.getSize()+1).limit(pageRequest.getSize()*pageRequest.getPage())
+				.fetch();
+	}
+	
+	@Override
+	// ** 키워드 상품 단순 조회
+	public List<Item> selectItemWhereKeyword(SearchRequest searchRequest) {
+		return jPAQueryFactory.selectFrom(item)
+				.where(item.sort2.contains(searchRequest.getKeyword())
+						.or(item.sort3.contains(searchRequest.getKeyword()))
+						.or(item.brand.contains(searchRequest.getKeyword()))
+						.or(item.name.contains(searchRequest.getKeyword())))
 				.fetch();
 	}
 
 	@Override
+	// ** 키워드 상품 단순 조회 -> 필터
+	public List<SortDTO> selectSortWhereKeyword(SearchRequest searchRequest) {
+		return jPAQueryFactory.select(
+				Projections.bean(SortDTO.class, 
+									item.sort2,
+									item.sort2.count())
+				).from(item)
+				.where(item.sort2.contains(searchRequest.getKeyword())
+						.or(item.sort3.contains(searchRequest.getKeyword()))
+						.or(item.brand.contains(searchRequest.getKeyword()))
+						.or(item.name.contains(searchRequest.getKeyword())))
+				.groupBy(item.sort2)
+				.fetch();
+	}
+	
+	@Override
+	// ** 코드로 상품 조회
     public Item selectItemWhereCode(SearchRequest searchRequest) {
         return jPAQueryFactory.selectFrom(item)
                 .where(item.code.stringValue().eq(searchRequest.getKeyword()))
@@ -77,17 +108,17 @@ public class ItemRepositoryImpl implements ItemRepository{
  *	 
  */
 	@Override
-    public List<String> selectSortList() {
-        return jPAQueryFactory.select(item.sort2)
+	// ** 키워드 상품 분류 조회
+    public List<SortDTO> selectSortList() {
+        return jPAQueryFactory.select(
+        					Projections.bean(SortDTO.class, 
+        								item.sort1,
+        								item.sort2))
                 .from(item)
-                .groupBy(item.sort2)
+                .groupBy(item.sort1,item.sort2)
                 .fetch();
     }
 	
-	@Override
-	public List<SortDTO> selectSortWhereSearchType(SearchRequest searchRequest) {
-		return null;
-	}
 	
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 	
