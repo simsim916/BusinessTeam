@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.domain.SortDTO;
 import com.example.demo.entity.Item;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
@@ -58,7 +59,7 @@ public class ItemController {
 		}
 		return result;
 	}
-
+/* 페이징 + 정렬 기능 되는 search
 	@GetMapping("/search")
 	public ResponseEntity<?> selectItemWhereSearchType( @RequestParam("keyword") String keyword, @RequestParam("sorttype")String sortType) {
 		ResponseEntity<?> result = null;
@@ -82,11 +83,44 @@ public class ItemController {
 		log.info(result);
 		return result;
 	}
+*/
+	
+	@GetMapping("/search")
+	public ResponseEntity<?> selectItemWhereKeyword(@RequestParam("keyword") String keyword) {
+		ResponseEntity<?> result = null;
+		SearchRequest searchRequest = new SearchRequest(keyword);
+		
+		List<Item> list = itemService.selectItemWhereKeyword(searchRequest);
+		if (list != null && list.size() > 0) {
+			result = ResponseEntity.status(HttpStatus.OK).body(list);
+			log.info("search check");
+		} else {
+			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
+			log.info("search check");
+		}
+		return result;
+	}
+	@GetMapping("/searchsort")
+	public ResponseEntity<?> selectSortWhereKeyword(@RequestParam("keyword") String keyword) {
+		ResponseEntity<?> result = null;
+		SearchRequest searchRequest = new SearchRequest(keyword);
+		
+		List<SortDTO> list = itemService.selectSortWhereKeyword(searchRequest);
+		log.info(list);
+		if (list != null && list.size() > 0) {
+			result = ResponseEntity.status(HttpStatus.OK).body(list);
+			log.info("searchsort check");
+		} else {
+			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
+			log.info("searchsort check");
+		}
+		return result;
+	}
 	
 	@GetMapping("/sort")
 	public ResponseEntity<?> selectSortList( ) {
 		ResponseEntity<?> result = null;
-		List<String> list = itemService.selectSortList();
+		List<SortDTO> list = itemService.selectSortList();
 		if (list != null && list.size() > 0) {
 			result = ResponseEntity.status(HttpStatus.OK).body(list);
 			log.info("sort check");

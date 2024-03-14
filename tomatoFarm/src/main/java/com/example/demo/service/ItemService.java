@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.List;
 
 import com.example.demo.domain.ItemDTO;
+import com.example.demo.domain.SortDTO;
 import com.example.demo.entity.Item;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
@@ -31,7 +32,9 @@ public interface ItemService {
 	List<Item> selectItemWhereEvent_D(PageRequest pageRequest);
 	List<Item> selectItemWherebrand(PageRequest pageRequest, SearchRequest searchRequest);
 	List<Item> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest);
-	List<String> selectSortList();
+	List<Item> selectItemWhereKeyword(SearchRequest searchRequest);
+	List<SortDTO> selectSortWhereKeyword(SearchRequest searchRequest);
+	List<SortDTO> selectSortList();
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 	
 	Item selectItemWhereCode(SearchRequest searchRequest);

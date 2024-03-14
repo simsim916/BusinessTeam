@@ -16,14 +16,16 @@ public interface ItemRepository {
 	List<Item> selectItemWhereEvent_D(PageRequest pageRequest);
 	// ** 브랜드 상품 조회 
 	List<Item> selectItemWherebrand(PageRequest pageRequest, SearchRequest searchRequest);
-	// ** 키워드 상품 조회
+	// ** 키워드 상품 페이징 조회
 	List<Item> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest);
+	// ** 키워드 상품 단순 조회
+	List<Item> selectItemWhereKeyword(SearchRequest searchRequest);
+	// ** 키워드 상품 단순 조회 -> 필터
+	List<SortDTO> selectSortWhereKeyword(SearchRequest searchRequest);
 	// ** 코드로 상품 조회
 	Item selectItemWhereCode(SearchRequest searchRequest);
-	// ** 키워드 상품 분류 조회
-	List<SortDTO> selectSortWhereSearchType(SearchRequest searchRequest);
 	// ** 분류 검색 조회
-	List<String> selectSortList();
+	List<SortDTO> selectSortList();
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 	
 
