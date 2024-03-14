@@ -136,6 +136,7 @@ h3 i {
 
 #shopBasketItemBoxTitle>li:nth-child(3) {
     width: 100px;
+    
 }
 
 #shopBasketItemBoxTitle>li:nth-child(4) {
@@ -169,8 +170,8 @@ h3 i {
 
 .shopBasketItemImg img {
     width: 100%;
-    height: 100%;
-    object-fit: contain;
+    height: 95%;
+    object-fit: cover;
 }
 
 .shopBasketItem>div:nth-child(1) {
@@ -183,6 +184,13 @@ h3 i {
 
 .shopBasketItem>div:nth-child(3) {
     width: 200px;
+    
+}
+.shopBasketItemIfo{
+    flex-direction: column;
+}
+.shopBasketItemIfo>div{
+    font-size: 15px;
 }
 
 .shopBasketItem>div:nth-child(4) {

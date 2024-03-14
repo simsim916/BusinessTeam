@@ -20,7 +20,7 @@
     <script defer src="/tomatoFarmA/resources/js/00header.js"></script>
     <!-- 페이지 CSS, JS -->
     <link rel="stylesheet" href="/tomatoFarmA/resources/css/shopBasket.css">
-    <!-- <script defer src="/tomatoFarmA/resources/js/itemDetail.js"></script> -->
+    <script defer src="/tomatoFarmA/resources/js/shopBasket.js"></script>
     <title>토마토팜 || 제품</title>
 </head>
 
@@ -176,76 +176,86 @@
                     <li><input type="checkbox"></input></li>
                     <li>전체선택</li>
                     <li><input type="checkbox"></input></li>
-                    <li>선택삭제</li>
+                    <li>전체삭제</li>
                 </ul>
             </div>
             <div id="shopBasketItemBox">
                 <div>
                     <ul id="shopBasketItemBoxTitle">
-                        <li>순번</li>
-                        <li>상품명</li>
+                        <li >선택</li>
+                        <li>상품정보</li>
                         <li>수량</li>
-                        <li>상품금액</li>
+                        <li>총 상품금액</li>
                         <li>배송비</li>
                     </ul>
                     <div class="shopBasketItem">
-                        <div><input type="checkbox"></input></div>
+                        <div><input class="check" type="checkbox" onclick="calc()" name="buy"></input></div>
                         <div class="shopBasketItemImg"><img src="/tomatoFarmA/resources/img/itemImg/5000001_2.jpg" alt=""></div>
-                        <div>밀키트</div>
-                        <div id="itemCount">
-                            <button><i class="fa-solid fa-minus"></i></button>
-                            <input id="inputCount" type="text" value="1">
-                            <button><i class="fa-solid fa-plus"></i></button>
+                        <div class="shopBasketItemIfo">상품이름 - 샤브샤브
+                            <div class="price">상품가격:5000</div>
                         </div>
-                        <div>5000</div>
+                        <div id="itemCount">
+                            <button onclick='count(event,"-")'><i class="fa-solid fa-minus"></i></button>
+                            <input onkeydown="inputCount(event)" id="inputCount" type="text" value="1">
+                            <button onclick='count(event,"+")'><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                        <div class="sumPrice">5000</div>
                         <div>무료배송</div>
                     </div>
                     <div class="shopBasketItem">
                         <div><input type="checkbox"></input></div>
                         <div class="shopBasketItemImg"><img src="/tomatoFarmA/resources/img/itemImg/5000001_2.jpg" alt=""></div>
-                        <div>밀키트</div>
-                        <div id="itemCount">
-                            <button><i class="fa-solid fa-minus"></i></button>
-                            <input id="inputCount" type="text" value="1">
-                            <button><i class="fa-solid fa-plus"></i></button>
+                        <div class="shopBasketItemIfo">상품이름 - 샤브샤브
+                            <div class="price">상품가격:5000</div>
                         </div>
-                        <div>5000</div>
+                        <div id="itemCount">
+                            <button onclick='count(event,"-")'><i class="fa-solid fa-minus"></i></button>
+                            <input onkeydown="inputCount(event)" id="inputCount" type="text" value="1">
+                            <button onclick='count(event,"+")'><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                        <div class="sumPrice">5000</div>
                         <div>무료배송</div>
                     </div>
                     <div class="shopBasketItem">
                         <div><input type="checkbox"></input></div>
                         <div class="shopBasketItemImg"><img src="/tomatoFarmA/resources/img/itemImg/5000001_2.jpg" alt=""></div>
-                        <div>밀키트</div>
-                        <div id="itemCount">
-                            <button><i class="fa-solid fa-minus"></i></button>
-                            <input id="inputCount" type="text" value="1">
-                            <button><i class="fa-solid fa-plus"></i></button>
+                        <div class="shopBasketItemIfo">상품이름 - 샤브샤브
+                            <div class="price">상품가격:5000</div>
                         </div>
-                        <div>5000</div>
+                        <div id="itemCount">
+                            <button onclick='count(event,"-")'><i class="fa-solid fa-minus"></i></button>
+                            <input onkeydown="inputCount(event)" id="inputCount" type="text" value="1">
+                            <button onclick='count(event,"+")'><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                        <div class="sumPrice">5000</div>
                         <div>무료배송</div>
                     </div>
                     <div class="shopBasketItem">
                         <div><input type="checkbox"></input></div>
                         <div class="shopBasketItemImg"><img src="/tomatoFarmA/resources/img/itemImg/5000001_2.jpg" alt=""></div>
-                        <div>밀키트</div>
-                        <div id="itemCount">
-                            <button><i class="fa-solid fa-minus"></i></button>
-                            <input id="inputCount" type="text" value="1">
-                            <button><i class="fa-solid fa-plus"></i></button>
+                        <div class="shopBasketItemIfo">상품이름 - 샤브샤브
+                            <div class="price">상품가격:5000</div>
                         </div>
-                        <div>5000</div>
+                        <div id="itemCount">
+                            <button onclick='count(event,"-")'><i class="fa-solid fa-minus"></i></button>
+                            <input onkeydown="inputCount(event)" id="inputCount" type="text" value="1">
+                            <button onclick='count(event,"+")'><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                        <div class="sumPrice">5000</div>
                         <div>무료배송</div>
                     </div>
                     <div class="shopBasketItem">
                         <div><input type="checkbox"></input></div>
                         <div class="shopBasketItemImg"><img src="/tomatoFarmA/resources/img/itemImg/5000001_2.jpg" alt=""></div>
-                        <div>밀키트e다다다다다다다다다다다</div>
-                        <div id="itemCount">
-                            <button><i class="fa-solid fa-minus"></i></button>
-                            <input id="inputCount" type="text" value="1">
-                            <button><i class="fa-solid fa-plus"></i></button>
+                        <div class="shopBasketItemIfo">상품이름 - 샤브샤브
+                            <div class="price">상품가격:5000</div>
                         </div>
-                        <div>5000</div>
+                        <div id="itemCount">
+                            <button onclick='count(event,"-")'><i class="fa-solid fa-minus"></i></button>
+                            <input onkeydown="inputCount(event)" id="inputCount" type="text" value="1">
+                            <button onclick='count(event,"+")'><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                        <div class="sumPrice">5000</div>
                         <div>무료배송</div>
                     </div>
                 </div>
