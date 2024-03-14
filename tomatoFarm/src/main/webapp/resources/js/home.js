@@ -217,7 +217,7 @@ async function writeHeader() {
     let content = `
         <div id="loginBar">
             <div class="container">
-                <a href="">고객센터</a>
+                <a onclick="emailTest()">고객센터</a>
                 &nbsp;&nbsp;|&nbsp;&nbsp;
                 <a onclick='writeLoginPage()'>로그인</a>
                 &nbsp;&nbsp;|&nbsp;&nbsp;
@@ -2402,3 +2402,12 @@ function makeSign() {
 /* 📖📖📖📖 view 📖📖📖📖*/
 /* 💻💻💻💻 view model 💻💻💻💻*/
 /* 📦📦📦📦 model 📦📦📦📦*/
+
+
+
+// ================================
+function emailTest() {
+    // let uri = "user/emailtest";
+    let uri = "sendmail/password";
+    axios.post(uri);
+}
