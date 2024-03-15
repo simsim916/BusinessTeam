@@ -12,32 +12,62 @@ public interface ItemService {
 
 	// default method
 	default Item dtotoEntity(ItemDTO dto) {
-		Item entity = Item.builder().code(dto.getCode()).sort1(dto.getSort1()).sort2(dto.getSort2())
-				.sort3(dto.getSort3()).brand(dto.getBrand()).name(dto.getName()).weight(dto.getWeight())
-				.storage(dto.getStorage()).packing(dto.getPacking()).delivery(dto.getDelivery()).price(dto.getPrice())
-				.vat(dto.getVat()).origin(dto.getOrigin()).sales(dto.getSales()).stock(dto.getStock())
-				.event(dto.getEvent()).admin(dto.getAdmin()).build();
+		Item entity = Item.builder()
+				.code(dto.getCode())
+				.sort1(dto.getSort1())
+				.sort2(dto.getSort2())
+				.sort3(dto.getSort3())
+				.brand(dto.getBrand())
+				.name(dto.getName())
+				.weight(dto.getWeight())
+				.storage(dto.getStorage())
+				.packing(dto.getPacking())
+				.delivery(dto.getDelivery())
+				.price(dto.getPrice())
+				.vat(dto.getVat())
+				.origin(dto.getOrigin())
+				.sales(dto.getSales())
+				.stock(dto.getStock())
+				.views(dto.getViews())
+				.like(dto.getLike())
+				.event_code(dto.getEvent_code())
+				.admin(dto.getAdmin()).build();
 		return entity;
 	}
 
 	default ItemDTO entityToDTO(Item entity) {
-		ItemDTO dto = ItemDTO.builder().code(entity.getCode()).sort1(entity.getSort1()).sort2(entity.getSort2())
-				.sort3(entity.getSort3()).brand(entity.getBrand()).name(entity.getName()).weight(entity.getWeight())
-				.storage(entity.getStorage()).packing(entity.getPacking()).delivery(entity.getDelivery())
-				.price(entity.getPrice()).vat(entity.getVat()).origin(entity.getOrigin()).sales(entity.getSales())
-				.stock(entity.getStock()).event(entity.getEvent()).admin(entity.getAdmin()).build();
+		ItemDTO dto = ItemDTO.builder()
+				.code(entity.getCode())
+				.sort1(entity.getSort1())
+				.sort2(entity.getSort2())
+				.sort3(entity.getSort3())
+				.brand(entity.getBrand())
+				.name(entity.getName())
+				.weight(entity.getWeight())
+				.storage(entity.getStorage())
+				.packing(entity.getPacking())
+				.delivery(entity.getDelivery())
+				.price(entity.getPrice())
+				.vat(entity.getVat())
+				.origin(entity.getOrigin())
+				.sales(entity.getSales())
+				.stock(entity.getStock())
+				.views(entity.getViews())
+				.like(entity.getLike())
+				.event_code(entity.getEvent_code())
+				.admin(entity.getAdmin()).build();
 		return dto;
 	}
 
-	List<Item> selectItemWhereEvent_D(PageRequest pageRequest);
-	List<Item> selectItemWherebrand(PageRequest pageRequest, SearchRequest searchRequest);
-	List<Item> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest);
-	List<Item> selectItemWhereKeyword(SearchRequest searchRequest);
+	List<ItemDTO> selectItemWhereEvent(PageRequest pageRequest);
+	List<ItemDTO> selectItemWherebrand(PageRequest pageRequest, SearchRequest searchRequest);
+	List<ItemDTO> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest);
+	List<ItemDTO> selectItemWhereKeyword(SearchRequest searchRequest);
 	List<SortDTO> selectSortWhereKeyword(SearchRequest searchRequest);
 	List<SortDTO> selectSortList();
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 	
-	Item selectItemWhereCode(SearchRequest searchRequest);
+	ItemDTO selectItemWhereCode(SearchRequest searchRequest);
 	
 	
 }

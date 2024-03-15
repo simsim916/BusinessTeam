@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.domain.ItemDTO;
 import com.example.demo.domain.SortDTO;
 import com.example.demo.entity.Item;
 import com.example.demo.module.PageRequest;
@@ -31,7 +32,7 @@ public class ItemController {
 		ResponseEntity<?> result = null;
 		PageRequest pageRequest = new PageRequest(1,11);
 		
-		List<Item> list = itemService.selectItemWhereEvent_D(pageRequest);
+		List<ItemDTO> list = itemService.selectItemWhereEvent(pageRequest);
 		
 		if (list != null && list.size() > 0) {
 			result = ResponseEntity.status(HttpStatus.OK).body(list);
@@ -49,7 +50,8 @@ public class ItemController {
 		PageRequest pageRequest = new PageRequest(1,6);
 		SearchRequest searchRequest = new SearchRequest(keyword);
 		
-		List<Item> list = itemService.selectItemWherebrand(pageRequest,searchRequest);
+		List<ItemDTO> list = itemService.selectItemWherebrand(pageRequest,searchRequest);
+		System.out.println("\n\n"+keyword+list);
 		if (list != null && list.size() > 0) {
 			result = ResponseEntity.status(HttpStatus.OK).body(list);
 			log.info("branditem check");
@@ -90,7 +92,7 @@ public class ItemController {
 		ResponseEntity<?> result = null;
 		SearchRequest searchRequest = new SearchRequest(keyword);
 		
-		List<Item> list = itemService.selectItemWhereKeyword(searchRequest);
+		List<ItemDTO> list = itemService.selectItemWhereKeyword(searchRequest);
 		if (list != null && list.size() > 0) {
 			result = ResponseEntity.status(HttpStatus.OK).body(list);
 			log.info("search check");
@@ -121,6 +123,7 @@ public class ItemController {
 	public ResponseEntity<?> selectSortList( ) {
 		ResponseEntity<?> result = null;
 		List<SortDTO> list = itemService.selectSortList();
+		System.out.println(list);
 		if (list != null && list.size() > 0) {
 			result = ResponseEntity.status(HttpStatus.OK).body(list);
 			log.info("sort check");
@@ -139,10 +142,10 @@ public class ItemController {
 		ResponseEntity<?> result = null;
 		
 		SearchRequest searchRequest = new SearchRequest(keyword);
-		Item entity = itemService.selectItemWhereCode(searchRequest);
+		ItemDTO dto = itemService.selectItemWhereCode(searchRequest);
 		
-		if(entity != null) {
-			result = ResponseEntity.status(HttpStatus.OK).body(entity);
+		if(dto != null) {
+			result = ResponseEntity.status(HttpStatus.OK).body(dto);
 			log.info("search check");
 		} else {
 			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
