@@ -565,14 +565,16 @@ async function makeListFilter() {
                 </li>
                 <li onclick="showList(event)" class="sortB">
                     <i onclick="checkALL(event)" class="fa-regular fa-circle-check"></i>식재료
+                    <ul>
         `;
     for (let e of data) {
         if (e.sort1 == '식재료')
             result += `
-                    <p><i onclick="checkALL(event)" class="fa-regular fa-circle-check"></i><span>${e.sort2}</span></p>
+                        <li><i onclick="checkALL(event)" class="fa-regular fa-circle-check"></i><span>${e.sort2}</span></li>
             `;
     }
     result += `
+                    </ul>
                 </li>
                 <li>
                     <i class="fa-regular fa-circle-check"></i>행사

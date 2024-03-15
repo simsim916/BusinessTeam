@@ -143,7 +143,7 @@ public class ItemController {
 		
 		SearchRequest searchRequest = new SearchRequest(keyword);
 		ItemDTO dto = itemService.selectItemWhereCode(searchRequest);
-		
+		System.out.println(dto);
 		if(dto != null) {
 			result = ResponseEntity.status(HttpStatus.OK).body(dto);
 			log.info("search check");
