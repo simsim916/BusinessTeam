@@ -304,6 +304,17 @@
     color: #00000080;
     margin-left: 20px;
 }
+#reviewBoardBox>a {
+    position: absolute;
+    right: 50px;
+    background-color: #CA4046;
+    top: 20px;
+    width: 100px;
+    line-height: 40px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+}
 
 #reviewBoard {
     margin-top: 30px;
@@ -510,7 +521,7 @@
 }
 
 
-#reviewDetailForm {
+/* #reviewDetailForm {
     background-color: #00000090;
     position: fixed;
     top: 0;
@@ -638,4 +649,4 @@
     overflow-y: auto;
     box-sizing: border-box;
     height: calc(800px-);
-}
+} */
