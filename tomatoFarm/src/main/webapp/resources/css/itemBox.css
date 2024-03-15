@@ -6,6 +6,7 @@
     background-color: rgb(255, 247, 247);
     text-align: initial;
     position: relative;
+    cursor: pointer;
 }
 
 .itemBox:hover {
@@ -82,9 +83,16 @@
     color: rgba(54, 54, 54, 0.699);
 }
 
+.itemPriceB {
+    margin-top: 7px;
+    padding-left: 10px;
+    font-size: 0.8em;
+    color: #00000080;
+    text-decoration: line-through;
+}
+
 .itemPrice {
     margin: 0;
-    margin-top: 7px;
     padding-left: 10px;
     font-size: 1.1em;
     font-weight: 600;
