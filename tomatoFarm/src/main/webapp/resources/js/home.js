@@ -226,7 +226,7 @@ async function writeHeader() {
     let content = `
         <div id="loginBar">
             <div class="container">
-                <a href="">고객센터</a>
+                <a>고객센터</a>
                 &nbsp;&nbsp;|&nbsp;&nbsp;
                 <a onclick='writeLoginPage()'>로그인</a>
                 &nbsp;&nbsp;|&nbsp;&nbsp;
@@ -957,11 +957,56 @@ async function getItem(code) {
 
 /* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Login 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
 /* 📗📗📗📗 TAG 📗📗📗📗 */
+let errorBox;
+let signUpBox;
+let idBox;
+let passwordBox;
+let nameBox;
+let phonenumberBox;
+let addressBox;
+let emailBox;
+let genderBox;
+let birthdayBox;
+let emailSelectBox;
+let emailWriteBox;
+let genderUl;
+let genderName;
+let emailback;
+
+
+let idCheck = false;
+let pwCheck = false;
+let nameCheck = false;
+let phoneCheck = false;
+
+
+
+
 
 /* 📖📖📖📖 view 📖📖📖📖*/
 // 로그인 페이지 작성
 function writeLoginPage() {
     body.innerHTML = makeLoginPage();
+    idBox = document.getElementById('idBox');
+    errorBox = document.getElementById('errorBox');
+    signUpBox = document.getElementById('signUpBox');
+    passwordBox = document.getElementById('passwordBox');
+    nameBox = document.getElementById('nameBox');
+    phonenumberBox = document.getElementById('phonenumberBox');
+    addressBox = document.getElementById('addressBox');
+    emailBox = document.getElementById('emailBox');
+    genderBox = document.getElementById('genderBox');
+    birthdayBox = document.getElementById('birthdayBox');
+    emailSelectBox = document.getElementById("emailSelectBox");
+    emailWriteBox = document.getElementById("emailWriteBox");
+    genderUl = document.getElementById('genderUl');
+    genderName = document.getElementsByName('gender');
+    emailback = document.getElementsByName('emailback');
+
+    idCheck = false;
+    pwCheck = false;
+    nameCheck = false;
+    phoneCheck = false;
 }
 // 로그인 -> 회원가입 애니메이션
 function writeSign() {
@@ -1018,7 +1063,7 @@ function makeLoginPage() {
                         <input onkeydown="changeOpacityEmail(event)" type="text" name="email" placeholder="이메일"><i
                             class="fa-solid fa-at"></i>
                         <input onkeydown="changeOpacityEmail(event)" type="text" name="emailback" id="emailWriteBox">
-                        <select onchange="changeSelectBox(event)" name="emailback" id="emailSelectBox">
+                        <select onchange="changeSelectBox(event)" id="emailSelectBox">
                             <option>이메일 선택</option>
                             <option value="naver.com">naver.com</option>
                             <option value="daum.net">daum.net</option>
@@ -1034,13 +1079,13 @@ function makeLoginPage() {
                             <label>
                                 <li>
                                     <input onkeydown="changeOpacity(event)" onclick="selectGender(event)" type="radio"
-                                        name="gender" value="남성">남자
+                                        name="gender" value="0">남자
                                 </li>
                             </label>
                             <label>
                                 <li>
                                     <input onkeydown="changeOpacity(event)" onclick="selectGender(event)" type="radio"
-                                        name="gender" value="여성">여자
+                                        name="gender" value="1">여자
                                 </li>
                             </label>
                         </ul>
@@ -1051,7 +1096,7 @@ function makeLoginPage() {
                         <input onkeydown="changeOpacity2(event)" type="text" name="month" placeholder="mm" maxlength="2">
                         <input onkeydown="changeOpacity2(event)" type="text" name="day" placeholder="dd" maxlength="2">
                     </div>
-                    <button id="joinBox" disabled>가입하기</button>
+                    <button type="button" onclick="requestSign()" id="joinBox" disabled>가입하기</button>
                 </form>
                 <br>
                 <p id="successOrNot">
@@ -1096,23 +1141,6 @@ function makeLoginPage() {
     </div>
     `;
     return result;
-}
-
-async function requestLogin() {
-    let id = document.getElementById('id').value;
-    let password = document.getElementById('password').value;
-    let uri = `user/login`;
-    let data = {
-        id: id,
-        password: password
-    }
-    let response = await axios.post(uri, null, {
-        params: {
-            id: id,
-            password: password
-        }
-    });
-
 }
 
 
@@ -1210,3 +1238,296 @@ function makeSign() {
 /* 📖📖📖📖 view 📖📖📖📖*/
 /* 💻💻💻💻 view model 💻💻💻💻*/
 /* 📦📦📦📦 model 📦📦📦📦*/
+
+
+
+async function requestLogin() {
+    let id = document.getElementById('id').value;
+    let password = document.getElementById('password').value;
+    let uri = `user/login`;
+    let data = {
+        id: id,
+        password: password
+    }
+    let response = await axios.post(uri, null, {
+        params: {
+            id: id,
+            password: password
+        }
+    });
+}
+
+function requestSign() {
+    let id = idBox.children[1].value;
+    let pwd = passwordBox.children[1].value;
+    let name = nameBox.children[1].value;
+    let phonenumber = phonenumberBox.children[1].value;
+    let address = addressBox.children[1].value;
+    let emailFront = emailBox.children[1].value;
+    let emailBackValue = emailback[0];
+    let gender;
+    for (let t of genderName) {
+        if (t.checked == true) {
+            gender = t.value;
+        }
+    }
+
+    // input value 0 <-> 1 로 바꿔주기
+    let birthdate
+        = birthdayBox.children[1].value
+        + birthdayBox.children[2].value
+        + birthdayBox.children[3].value;
+
+    // console.log(id);
+    // console.log(pwd);
+    // console.log(name);
+    // console.log(phonenumber);
+    // console.log(address);
+    // console.log(emailFront);
+    console.log(emailback);
+    console.log(emailBackValue);
+    // console.log(gender);
+    // console.log(birthdate);
+
+    //getElementByName => 셀렉트박스랑 인풋박스 두개가 잡히고
+    // 두개 다 체크해야 하는 상황이 온다.
+
+
+}
+
+
+// ===============================================
+// ===============================================
+
+function focusInputBox(event) {
+    let box = event.target.closest('div');
+    box.style.border = "2px solid #9B1B30";
+}
+
+function changeOpacity(event) {
+    let box = event.target.closest('div');
+    for (let e of box.children) {
+        e.style.opacity = "1";
+    }
+}
+function changeOpacityId(event) {
+    let box = event.target.closest('div');
+    for (let e of box.children) {
+        e.style.opacity = "1";
+    }
+    if (event.which == 13) {
+        event.preventDefault();
+        passwordBox.children[1].focus();
+    }
+}
+function changeOpacityPw(event) {
+    let box = event.target.closest('div');
+    for (let e of box.children) {
+        e.style.opacity = "1";
+    }
+    if (event.which == 13) {
+        event.preventDefault();
+        nameBox.children[1].focus();
+    }
+}
+function changeOpacityName(event) {
+    let box = event.target.closest('div');
+    for (let e of box.children) {
+        e.style.opacity = "1";
+    }
+    if (event.which == 13) {
+        event.preventDefault();
+        phonenumberBox.children[1].focus();
+    }
+}
+function changeOpacityPn(event) {
+    let box = event.target.closest('div');
+    for (let e of box.children) {
+        e.style.opacity = "1";
+    }
+    if (event.which == 13) {
+        event.preventDefault();
+        addressBox.children[1].focus();
+    }
+}
+function changeOpacityAddress(event) {
+    let box = event.target.closest('div');
+    for (let e of box.children) {
+        e.style.opacity = "1";
+    }
+    if (event.which == 13) {
+        event.preventDefault();
+        emailBox.children[1].focus();
+    }
+}
+function changeOpacityEmail(event) {
+    let box = event.target.closest('div');
+    for (let e of box.children) {
+        e.style.opacity = "1";
+    }
+    if (event.which == 13) {
+        event.preventDefault();
+        emailSelectBox.focus();
+    }
+}
+
+function changeOpacity2(event) {
+    event.target.closest('div').children[0].style.opacity = "1";
+    event.target.style.opacity = "1";
+}
+
+function checkId(event) {
+    // let test = document.getElementById('idBox');
+    // console.log(test);
+    console.log(idBox);
+    let value = event.target.value;
+    let key = /[a-z.0-9.-._]/gi;
+
+    if (value.length < 4 || value.length > 15) {
+        idCheck = false;
+        idBox.style.border = "2px solid #FF3F3F";
+        idBox.style.borderBottom = "1px solid #FF3F3F";
+        idBox.children[0].style.color = "#FF3F3F";
+        document.getElementById('idError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;아이디 : 4 ~ 15 글자 이하만 가능합니다.<br>`;
+    } else if (value.replace(key, '').length > 0) {
+        idCheck = false;
+        idBox.style.border = "2px solid #FF3F3F";
+        idBox.style.borderBottom = "1px solid #FF3F3F";
+        idBox.children[0].style.color = "#FF3F3F";
+        document.getElementById('idError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;아이디 : 영문, 숫자, 특수문자(-, _)만 가능합니다.<br>`;
+    } else {
+        idCheck = true;
+        idBox.style.border = "2px solid #03C75A";
+        idBox.style.borderBottom = "1px solid #03C75A";
+        idBox.children[0].style.color = "#03C75A";
+        document.getElementById('idError').innerHTML = '';
+    }
+    checkAll();
+}//checkId
+
+function checkPassword(event) {
+    let value = event.target.value;
+    let key = /[a-z.0-9.!-*.@]/gi;
+
+    if (value.length < 4 || value.length > 14) {
+        pwCheck = false;
+        passwordBox.style.border = "2px solid #FF3F3F";
+        passwordBox.style.borderTop = "1px solid #FF3F3F";
+        passwordBox.style.borderBottom = "1px solid #FF3F3F";
+        passwordBox.children[0].style.color = "#FF3F3F";
+        document.getElementById('pwError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;비밀번호 : 4 ~ 15 글자 이하만 입력해주세요.<br>`;
+    } else if (value.replace(key, '').length > 0) {
+        pwCheck = false;
+        passwordBox.style.border = "2px solid #FF3F3F";
+        passwordBox.style.borderTop = "1px solid #FF3F3F";
+        passwordBox.style.borderBottom = "1px solid #FF3F3F";
+        passwordBox.children[0].style.color = "#FF3F3F";
+        document.getElementById('pwError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;비밀번호 : 영문, 숫자, 특수문자(!,@,#,$,%,^,&,*)만 가능합니다.<br>`;
+    } else if (value.replace(/[!-*.@]/gi, '').length >= value.length) {
+        pwCheck = false;
+        passwordBox.style.border = "2px solid #FF3F3F";
+        passwordBox.style.borderTop = "1px solid #FF3F3F";
+        passwordBox.style.borderBottom = "1px solid #FF3F3F";
+        passwordBox.children[0].style.color = "#FF3F3F";
+        document.getElementById('pwError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;비밀번호 : 특수문자(!,@,#,$,%,^,&,*)를 반드시 포함해주세요.<br>`;
+    } else {
+        pwCheck = true;
+        passwordBox.style.border = "2px solid #03C75A";
+        passwordBox.style.borderTop = "1px solid #03C75A";
+        passwordBox.style.borderBottom = "1px solid #03C75A";
+        passwordBox.children[0].style.color = "#03C75A";
+        document.getElementById('pwError').innerHTML = '';
+
+    }
+    checkAll();
+}//checkPassword
+
+function checkName(event) {
+    let value = event.target.value;
+    if (value.length < 2 || value.length > 10) {
+        nameCheck = false;
+        nameBox.style.border = "2px solid #FF3F3F";
+        nameBox.style.borderTop = "1px solid #FF3F3F";
+        nameBox.style.borderBottom = "1px solid #FF3F3F";
+        nameBox.children[0].style.color = "#FF3F3F";
+        document.getElementById('nameError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;이름 : 2글자 이상 10글자 이하로 입력하세요.<br>`;
+    } else if (value.replace(/[a-z.가-힣]/gi, '').length > 0) {
+        nameCheck = false;
+        nameBox.style.border = "2px solid #FF3F3F";
+        nameBox.style.borderTop = "1px solid #FF3F3F";
+        nameBox.style.borderBottom = "1px solid #FF3F3F";
+        nameBox.children[0].style.color = "#FF3F3F";
+        document.getElementById('nameError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;이름은 한글, 영문만 입력하세요.<br>`;
+    } else {
+        nameCheck = true;
+        nameBox.style.border = "2px solid #03C75A";
+        nameBox.style.borderBottom = "1px solid #03C75A";
+        nameBox.style.borderTop = "1px solid #03C75A";
+        nameBox.children[0].style.color = "#03C75A";
+        document.getElementById('nameError').innerHTML = '';
+    }
+    checkAll();
+}//checkName
+
+function checkPhonenumber(event) {
+    let value = event.target.value;
+    if (value.length < 10 || value.length > 11) {
+        phoneCheck = false;
+        phonenumberBox.style.border = "2px solid #FF3F3F";
+        phonenumberBox.style.borderTop = "1px solid #FF3F3F";
+        phonenumberBox.children[0].style.color = "#FF3F3F";
+        document.getElementById('pnError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;전화번호는 9자리 ~ 12자리 숫자로 입력해주세요.<br>`;
+    } else if (value.replace(/[0-9]/gi, '').length > 0) {
+        phoneCheck = false;
+        phonenumberBox.style.border = "2px solid #FF3F3F";
+        phonenumberBox.style.borderTop = "1px solid #FF3F3F";
+        phonenumberBox.children[0].style.color = "#FF3F3F";
+        document.getElementById('pnError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;전화번호는 숫자만 입력하세요.<br>`;
+    } else {
+        phoneCheck = true;
+        phonenumberBox.style.border = "2px solid #03C75A";
+        phonenumberBox.style.borderTop = "1px solid #03C75A";
+        phonenumberBox.children[0].style.color = "#03C75A";
+        document.getElementById('pnError').innerHTML = '';
+    }
+    checkAll();
+}//checkPhonenumber
+
+function changeSelectBox(event) {
+    if (event.target.value == "write") {
+        emailSelectBox.style.display = "none";
+        emailWriteBox.style.display = "inline-block";
+        emailWriteBox.focus();
+        return;
+    }
+    emailback[0].value = event.target.value;
+}//changeSelectBox
+
+function selectGender(event) {
+    let value = event.target.value;
+    for (let e of event.target.closest('div').children) {
+        e.style.opacity = "1";
+        e.style.color = "black";
+    }
+    if (document.getElementById('genderChecked') != null) {
+        document.getElementById('genderChecked').removeAttribute("id");
+    }
+    event.target.closest('li').setAttribute("id", "genderChecked");
+    birthdayBox.focus();
+}//selectGender
+
+function a(str) {
+    console.log(str);
+}
+
+function checkAll() {
+    if (idCheck == true && pwCheck == true && nameCheck == true && phoneCheck == true) {
+        document.getElementById('joinBox').style.opacity = "1";
+        document.getElementById('joinBox').disabled = false;
+    } else {
+        document.getElementById('joinBox').style.opacity = "0.5";
+        document.getElementById('joinBox').disabled = true;
+    }
+}
+// ============================================
+// ============================================
