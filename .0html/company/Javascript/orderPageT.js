@@ -37,3 +37,54 @@ function insertData() {
     orderList.appendChild(makeDiv);
 }
 
+
+// =============================================
+// =============================================
+let row = document.getElementsByClassName('excelColumn');
+let excelBox = document.getElementById('excelBox');
+
+
+function plusColumn() {
+    excelBox.innerHTML += `
+        <div class="excelColumn">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+        </div>
+    `
+}
+
+
+function getExcelData() {
+    let test;
+    let sum = "";
+    for (let i = 0; i < row.length; i++) {
+        for (let j = 0; j < row[i].childElementCount; j++) {
+            sum += row[i].children[j].value + ",";
+        }
+        test = `
+        INSERT INTO ITEM(code,sort1,sort2,sort3,brand,name,weight,storage,packing,delivery,price,vat,origin,sales,stock,admin)
+        VALUES(${sum});
+         `;
+    }
+
+    let result = `
+    INSERT INTO ITEM(code,sort1,sort2,sort3,brand,name,weight,storage,packing,delivery,price,vat,origin,sales,stock,admin)
+    VALUES(${sum});
+    `;
+
+    return result;
+}

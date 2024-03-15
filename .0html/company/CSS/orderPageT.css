@@ -29,12 +29,13 @@
 /* ============= 최상단 제목 ============== */
 #topBoxYH {
     position: relative;
-    height: 80px;
+    height: auto;
 }
 
 #topBoxLeftYH {
     display: flex;
     align-items: end;
+    justify-content: space-between;
     height: 30px;
     margin-top: 20px;
 }
@@ -194,4 +195,34 @@
 
 #insertRowYH>div:nth-child(12n+1) {
     border-left: 1px solid #4C4556;
+}
+
+
+/* ===================================== */
+
+
+#excelHead {
+    display: flex;
+}
+
+
+#excelHead>input {
+    word-break: keep-all;
+    text-align: center;
+    width: calc((100% / 15));
+    /* background-color: #c0c0c0; */
+    font-weight: 700;
+}
+
+.excelColumn {
+    display: flex;
+}
+
+.excelColumn>input {
+    width: calc((100% / 15));
+}
+
+
+#excelBox {
+    margin-top: 10px;
 }
