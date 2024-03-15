@@ -44,7 +44,7 @@ public class UserController {
 		User user = userService.selectUser(dto); // user가 입력한 id로 userData를 조회 하여 dto를 채운다.
 		if(dto.getName() != null) { // 조회성공
 			if(passwordEncoder.matches(password, user.getPassword())) {
-				result = ResponseEntity.status(HttpStatus.OK).body();
+				result = ResponseEntity.status(HttpStatus.OK).body(dto);
 			}else {
 				result = ResponseEntity.status(HttpStatus.OK).body("Password_uncorrected");
 			}
