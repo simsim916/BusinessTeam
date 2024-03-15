@@ -34,7 +34,7 @@ public class UserRepositoryImpl implements UserRepository {
 	public int insertUser(UserDTO dto) {
 		// SQL insert 사용시 EntityManager 사용
 		return entityManager
-					.createNativeQuery("INSERT INTO USER(id,password,name,phonenumber"
+					.createNativeQuery("INSERT INTO user(id,password,name,phonenumber"
 											+ ",address2,email,email2,gender,birthdate)")
 					.setParameter(1, dto.getId())
 					.setParameter(2, dto.getPassword())
