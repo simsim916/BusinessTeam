@@ -2,17 +2,6 @@ let errorBox = document.getElementById('errorBox');
 let idInput = document.getElementById("id");
 let pwInput = document.getElementById("password");
 
-let id = "test";
-let pw = "123123!";
-
-function changeLoginToSignUp() {
-    let uri = "";
-    let result;
-
-}
-
-
-
 function selectLoginType(ele) {
     idInput.value = "";
     pwInput.value = "";

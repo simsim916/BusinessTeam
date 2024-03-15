@@ -27,6 +27,19 @@ body {
     cursor: pointer;
 }
 
+#historyback {
+    max-width: 30px;
+    max-height: 30px;
+    position: absolute;
+    left: -320px;
+    top: 20px;
+    /* left: -370px;
+    top: calc((820px - 30px) / 2); */
+    z-index: 10;
+    font-size: 30px;
+    color: #9B1B30;
+}
+
 /* ======================================== */
 #bodyBG {
     height: 100%;
