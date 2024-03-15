@@ -2304,7 +2304,7 @@ async function requestLogin() {
             password: password
         }
     });
-
+    return response.data;
 }
 
 
