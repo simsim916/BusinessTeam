@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.domain.ItemDTO;
 import com.example.demo.domain.SortDTO;
 import com.example.demo.entity.Item;
 import com.example.demo.module.PageRequest;
@@ -22,30 +23,30 @@ public class ItemServiceImpl implements ItemService{
 	private final ItemRepository itemRepository;
 	
 	@Override
-	public List<Item> selectItemWhereEvent_D(PageRequest pageRequest) {
+	public List<ItemDTO> selectItemWhereEvent(PageRequest pageRequest) {
 		
-		List<Item> result = itemRepository.selectItemWhereEvent_D(pageRequest);
-		
-		return result;
-	}
-	
-	@Override
-	public List<Item> selectItemWherebrand(PageRequest pageRequest, SearchRequest searchRequest) {
-		
-		List<Item> result = itemRepository.selectItemWherebrand(pageRequest,searchRequest);
+		List<ItemDTO> result = itemRepository.selectItemWhereEvent(pageRequest);
 		
 		return result;
 	}
 	
 	@Override
-	public List<Item> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest) {
-		List<Item> result = itemRepository.selectItemWhereSearchType(pageRequest,searchRequest);
+	public List<ItemDTO> selectItemWherebrand(PageRequest pageRequest, SearchRequest searchRequest) {
+		
+		List<ItemDTO> result = itemRepository.selectItemWherebrand(pageRequest,searchRequest);
+		
 		return result;
 	}
 	
 	@Override
-	public List<Item> selectItemWhereKeyword(SearchRequest searchRequest) {
-		List<Item> result = itemRepository.selectItemWhereKeyword(searchRequest);
+	public List<ItemDTO> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest) {
+		List<ItemDTO> result = itemRepository.selectItemWhereSearchType(pageRequest,searchRequest);
+		return result;
+	}
+	
+	@Override
+	public List<ItemDTO> selectItemWhereKeyword(SearchRequest searchRequest) {
+		List<ItemDTO> result = itemRepository.selectItemWhereKeyword(searchRequest);
 		return result;
 	}
 	
@@ -61,7 +62,7 @@ public class ItemServiceImpl implements ItemService{
 	}
 	
 	@Override
-	public Item selectItemWhereCode(SearchRequest searchRequest) {
+	public ItemDTO selectItemWhereCode(SearchRequest searchRequest) {
 		return itemRepository.selectItemWhereCode(searchRequest);
 	}
 	

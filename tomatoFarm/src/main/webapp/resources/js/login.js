@@ -1,7 +1,6 @@
 let errorBox = document.getElementById('errorBox');
 let idInput = document.getElementById("id");
 let pwInput = document.getElementById("password");
-let loginBt = document.getElementById('loginInBox').children[0];
 
 let id = "test";
 let pw = "123123!";
