@@ -504,7 +504,7 @@ async function writeItemList(keyword, sortType) {
         <div id="searchTitle" class="container">"<b>${keyword}</b>"<span>에 대한 검색 결과</span></div>
         <div class="container">
     `;
-    content += await writeListFilter();
+    content += await makeListFilter();
     content += await makeItemList(keyword, sortType);
 
     content += `
@@ -551,77 +551,28 @@ async function makeItemList(keyword, sortType) {
     return result;
 }
 
-async function writeListFilter() {
+async function makeListFilter() {
+    let data = await getSortList();
+    console.log(data);
     let result = `
         <div id="listfilter">
             <ul>
                 <li onclick="showList(event)" class="sortB">
                     <i onclick="checkALL(event)" class="fa-regular fa-circle-check"></i>
                     <span>밀키트</span>
-                    <ul>
-                        <li onclick="checkSort(event)"><i class="fa-regular fa-circle-check"></i>채선당</li>
-                        <li onclick="checkSort(event)"><i class="fa-regular fa-circle-check"></i>도리깨침</li>
-                        <li onclick="checkSort(event)"><i class="fa-regular fa-circle-check"></i>김구원선생</li>
-                        <li onclick="checkSort(event)"><i class="fa-regular fa-circle-check"></i>바른식</li>
-                        <li onclick="checkSort(event)"><i class="fa-regular fa-circle-check"></i>푸드어셈블</li>
-                        <li onclick="checkSort(event)"><i class="fa-regular fa-circle-check"></i>프레시지</li>
-                        <li onclick="checkSort(event)"><i class="fa-regular fa-circle-check"></i>마이셰프</li>
-                        <li onclick="checkSort(event)"><i class="fa-regular fa-circle-check"></i>LITTLENECK</li>
-                        <li onclick="checkSort(event)"><i class="fa-regular fa-circle-check"></i>하림</li>
-                        <li onclick="checkSort(event)"><i class="fa-regular fa-circle-check"></i>최현석의 쵸이닷</li>
-                        <li onclick="checkSort(event)"><i class="fa-regular fa-circle-check"></i>하루한킷</li>
-                    </ul>
-
-                    <hr>
+    `;
+    result += `
                 </li>
                 <li onclick="showList(event)" class="sortB">
                     <i onclick="checkALL(event)" class="fa-regular fa-circle-check"></i>식재료
-                    <ul>
-                        <li><i onclick="checkALL(event)" class="fa-regular fa-circle-check"></i><span>건강식품</span>
-                            <ul>
-                                <li onclick="checkSort(event)"><i class="fa-regular fa-circle-check"></i>영양보충제</li>
-                                <li onclick="checkSort(event)"><i class="fa-regular fa-circle-check"></i>특수분유</li>
-                                <li onclick="checkSort(event)"><i class="fa-regular fa-circle-check"></i>영장제</li>
-                                <li onclick="checkSort(event)"><i class="fa-regular fa-circle-check"></i>기타</li>
-                            </ul>
-                        <li><i class="fa-regular fa-circle-check"></i>계육
-                            <ul>
-                                <li><i class="fa-regular fa-circle-check"></i>닭</li>
-                                <li><i class="fa-regular fa-circle-check"></i>닭가슴살</li>
-                                <li><i class="fa-regular fa-circle-check"></i>닭근위</li>
-                                <li><i class="fa-regular fa-circle-check"></i>닭날개</li>
-                                <li><i class="fa-regular fa-circle-check"></i>닭다리</li>
-                                <li><i class="fa-regular fa-circle-check"></i>닭발</li>
-                                <li><i class="fa-regular fa-circle-check"></i>닭뼈</li>
-                                <li><i class="fa-regular fa-circle-check"></i>닭토막</li>
-                                <li><i class="fa-regular fa-circle-check"></i>오리</li>
-                            </ul>
-                        <li><i class="fa-regular fa-circle-check"></i>농산가공
-                            <ul>
-                                <li><i class="fa-regular fa-circle-check"></i>감자</li>
-                                <li><i class="fa-regular fa-circle-check"></i>강낭콩</li>
-                                <li><i class="fa-regular fa-circle-check"></i>건포도</li>
-                                <li><i class="fa-regular fa-circle-check"></i>구아카몰</li>
-                                <li><i class="fa-regular fa-circle-check"></i>기타</li>
-                                <li><i class="fa-regular fa-circle-check"></i>기타쨈</li>
-                                <li><i class="fa-regular fa-circle-check"></i>드라이토마토</li>
-                                <li><i class="fa-regular fa-circle-check"></i>딸기</li>
-                                <li><i class="fa-regular fa-circle-check"></i>딸기쨈</li>
-                                <li><i class="fa-regular fa-circle-check"></i>땅콩버터</li>
-                                <li><i class="fa-regular fa-circle-check"></i>라즈베리쨈</li>
-                                <li><i class="fa-regular fa-circle-check"></i>리치</li>
-                                <li><i class="fa-regular fa-circle-check"></i>마늘</li>
-                                <li><i class="fa-regular fa-circle-check"></i>마카다미아</li>
-                                <li><i class="fa-regular fa-circle-check"></i>망고</li>
-                                <li><i class="fa-regular fa-circle-check"></i>망고쨈</li>
-                                <li><i class="fa-regular fa-circle-check"></i>매실</li>
-                                <li><i class="fa-regular fa-circle-check"></i>무피클</li>
-                                <li><i class="fa-regular fa-circle-check"></i>무화과</li>
-                                <li><i class="fa-regular fa-circle-check"></i>믹스넛</li>
-                                <li><i class="fa-regular fa-circle-check"></i>콩고기</li>
-                            </ul>
-                    </ul>
-                    <hr>
+        `;
+    for (let e of data) {
+        if (e.sort1 == '식재료')
+            result += `
+                    <p><i onclick="checkALL(event)" class="fa-regular fa-circle-check"></i><span>${e.sort2}</span></p>
+            `;
+    }
+    result += `
                 </li>
                 <li>
                     <i class="fa-regular fa-circle-check"></i>행사
@@ -629,17 +580,16 @@ async function writeListFilter() {
                         <li><i class="fa-regular fa-circle-check"></i>채선당</li>
                         <li><i class="fa-regular fa-circle-check"></i>도리깨침</li>
                     </ul>
-                    <hr>
                 </li>
                 <li id="filterPrice"><i class="fa-regular fa-circle-check"></i>가격
                     <form>
                         <input type="text" placeholder="0">
                         &nbsp;&nbsp;~&nbsp;&nbsp;
                         <input type="text" placeholder="1000000">
-                        </form>
-                        </li>
-                        </ul>
-                        </div>
+                    </form>
+                </li>
+            </ul>
+        </div>
                         `;
     return result;
 }

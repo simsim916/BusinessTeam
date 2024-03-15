@@ -143,17 +143,34 @@ public class ItemRepositoryImpl implements ItemRepository{
 	@Override
 	// ** 키워드 상품 단순 조회 -> 필터
 	public List<SortDTO> selectSortWhereKeyword(SearchRequest searchRequest) {
-		return jPAQueryFactory.select(
+		List<SortDTO> result = jPAQueryFactory.select(
 				Projections.bean(SortDTO.class, 
+									item.sort1,
 									item.sort2,
-									item.sort2.count())
+									item.sort2.count().as("acount"))
 				).from(item)
 				.where(item.sort2.contains(searchRequest.getKeyword())
-						.or(item.sort3.contains(searchRequest.getKeyword()))
-						.or(item.brand.contains(searchRequest.getKeyword()))
-						.or(item.name.contains(searchRequest.getKeyword())))
-				.groupBy(item.sort2)
+								.or(item.sort3.contains(searchRequest.getKeyword()))
+								.or(item.brand.contains(searchRequest.getKeyword()))
+								.or(item.name.contains(searchRequest.getKeyword())).and(item.sort1.ne("밀키트")))
+				.groupBy(item.sort1,item.sort2)
 				.fetch();
+		
+//		result.addAll(jPAQueryFactory.select(
+//				Projections.bean(SortDTO.class, 
+//						item.sort1.as("sort1"),
+//						item.brand.as("sort2"),
+//						item.brand.count().as("acount"))
+//				).from(item)
+//				.where(item.sort1.eq("밀키트")
+//						.and(item.sort2.contains(searchRequest.getKeyword())
+//								.or(item.sort3.contains(searchRequest.getKeyword()))
+//								.or(item.brand.contains(searchRequest.getKeyword()))
+//								.or(item.name.contains(searchRequest.getKeyword()))))
+//				.groupBy(item.brand)
+//				.fetch());
+		
+		return result;
 	}
 	
 	@Override
