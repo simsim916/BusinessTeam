@@ -108,7 +108,7 @@ public class ItemController {
 		SearchRequest searchRequest = new SearchRequest(keyword);
 		
 		List<SortDTO> list = itemService.selectSortWhereKeyword(searchRequest);
-		log.info(list);
+		log.info("\naaaaaaaaa\n"+list+"\n\n");
 		if (list != null && list.size() > 0) {
 			result = ResponseEntity.status(HttpStatus.OK).body(list);
 			log.info("searchsort check");
