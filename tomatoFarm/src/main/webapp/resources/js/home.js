@@ -979,10 +979,6 @@ let pwCheck = false;
 let nameCheck = false;
 let phoneCheck = false;
 
-
-
-
-
 /* 📖📖📖📖 view 📖📖📖📖*/
 // 로그인 페이지 작성
 function writeLoginPage() {
@@ -1001,7 +997,7 @@ function writeLoginPage() {
     emailWriteBox = document.getElementById("emailWriteBox");
     genderUl = document.getElementById('genderUl');
     genderName = document.getElementsByName('gender');
-    emailback = document.getElementsByName('emailback');
+    emailback = document.getElementById('emailWriteBox');
 
     idCheck = false;
     pwCheck = false;
@@ -1143,7 +1139,6 @@ function makeLoginPage() {
     return result;
 }
 
-
 // 사용X (makeLoginPage 에 더해서 작성 중)
 function makeSign() {
     let result = `
@@ -1233,7 +1228,7 @@ function makeSign() {
 
 /* 📦📦📦📦 model 📦📦📦📦*/
 
-/* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Header 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
+/* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Login 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
 /* 📗📗📗📗 TAG 📗📗📗📗 */
 /* 📖📖📖📖 view 📖📖📖📖*/
 /* 💻💻💻💻 view model 💻💻💻💻*/
@@ -1258,39 +1253,40 @@ async function requestLogin() {
 }
 
 function requestSign() {
-    let id = idBox.children[1].value;
-    let pwd = passwordBox.children[1].value;
-    let name = nameBox.children[1].value;
-    let phonenumber = phonenumberBox.children[1].value;
-    let address = addressBox.children[1].value;
-    let emailFront = emailBox.children[1].value;
-    let emailBackValue = emailback[0];
-    let gender;
+    let idValue = idBox.children[1].value;
+    let pwdValue = passwordBox.children[1].value;
+    let nameValue = nameBox.children[1].value;
+    let phonenumberValue = phonenumberBox.children[1].value;
+    let addressValue = addressBox.children[1].value;
+    let emailFrontValue = emailBox.children[1].value;
+    let emailBackValue = emailback.value;
+    let genderValue;
     for (let t of genderName) {
         if (t.checked == true) {
-            gender = t.value;
+            genderValue = t.value;
         }
     }
-
-    // input value 0 <-> 1 로 바꿔주기
-    let birthdate
+    let birthdateValue
         = birthdayBox.children[1].value
         + birthdayBox.children[2].value
         + birthdayBox.children[3].value;
 
-    // console.log(id);
-    // console.log(pwd);
-    // console.log(name);
-    // console.log(phonenumber);
-    // console.log(address);
-    // console.log(emailFront);
-    console.log(emailback);
-    console.log(emailBackValue);
-    // console.log(gender);
-    // console.log(birthdate);
 
-    //getElementByName => 셀렉트박스랑 인풋박스 두개가 잡히고
-    // 두개 다 체크해야 하는 상황이 온다.
+    let data = {
+        idValue: idValue,
+        pwdValue: pwdValue,
+        nameValue: nameValue,
+        phonenumberValue: phonenumberValue,
+        addressValue: addressValue,
+        emailFrontValue: emailFrontValue,
+        emailBackValue: emailBackValue,
+        genderValue: genderValue,
+        birthdateValue: birthdateValue
+    }
+
+    console.log(data);
+
+
 
 
 }
@@ -1500,7 +1496,9 @@ function changeSelectBox(event) {
         emailWriteBox.focus();
         return;
     }
-    emailback[0].value = event.target.value;
+    console.log(emailback.value)
+    emailback.value = event.target.value;
+    console.log(emailback.value)
 }//changeSelectBox
 
 function selectGender(event) {
