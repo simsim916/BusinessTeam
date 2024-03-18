@@ -66,21 +66,27 @@ function reivewDetailImgChange(ele) {
     ele.parentNode.previousElementSibling.children[0].setAttribute('src', ele.src);
 }
 
-// let imgList = document.getElementById('reviewDetailImgBottom');
-// let imgLength = imgList.length;
+let imgList = document.getElementById('reviewDetailImgBottom');
+let imgLength = imgList.length;
 
 // function returnImg(event) {
-//     let returnImg = (imgList + imgLength - 1) % imgLength;
-//     event.
-// }
-
-
-// function nextImg(event) {
-//     let nextImg = (imgList + 1) % imgLength;
+    //     let returnImg = (imgList + imgLength - 1) % imgLength;
+    //     event.
+    // }
     
+    
+    // function nextImg(event) {
+        //     let nextImg = (imgList + 1) % imgLength;
+        
 // }
 
 function reviewDetailClose(ele) {
     ele.closest('#reviewDetailForm').style.display = 'none';
 }
 
+
+function itemAskClick(event) {
+    event.stopPropagation();
+    const reviewDetailForm = document.getElementById('itemAskForm');
+    reviewDetailForm.style.display = 'flex';
+}

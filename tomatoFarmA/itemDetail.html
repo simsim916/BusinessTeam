@@ -269,10 +269,10 @@
     <hr>
 
 
-    <div id="reviewBoardBox" class="container appearContainer">
+    <div id="reviewBoardBox" class="container">
         <h5>상품후기</h5>
         <span>한줄리뷰 - 제목을 클릭하시면 상세내용을 보실 수 있습니다.</span>
-        <a href=""> 후기작성 </a>
+        <div id="reviewWrite"> 후기작성 </div>
         <div id="reviewBoard">
             <div class="reviewBoardRow">
                 <div>별점</div>
@@ -280,7 +280,7 @@
                 <div>작성자</div>
                 <div>작성일</div>
             </div>
-            <div onclick="showContent(this)" class="reviewContent">
+            <div onclick="reviewDetailClick(event)" class="reviewContent">
                 <div class="reviewDetail">
                     <div onclick="reviewDetailClick(this)" id="reivewImg">
                         <img src="/tomatoFarmA/resources/img/itemImg/5000001_2.jpg" alt="">
@@ -401,7 +401,7 @@
     <div id="askBoardBox" class="container appearContainer">
         <h5>상품문의</h5>
         <span>상품문의 - 상품에 궁금하신점을 남겨주세요.</span>
-        <a href=""> 문의하기 </a>
+        <div onclick="itemAskClick(event)" id="itemAskWrite">문의하기</div>
         <div id="askBoard">
             <div class="boardRow">
                 <div></div>
@@ -484,13 +484,13 @@
         <div id="reviewDetailBox">
             <div id="reviewDetailImg">
                 <div id="reviewDetailImgTop">
-                    <img src="/resources/img/itemImg/5000001_2.jpg" alt="">
+                    <img src="/tomatoFarmA/resources/img/itemImg/5000001_2.jpg" alt="">
                     <i class="fa-solid fa-arrow-left"></i>
                     <i class="fa-solid fa-arrow-right"></i>
                 </div>
                 <div id="reviewDetailImgBottom">
-                    <img onclick="reivewDetailImgChange(this)" src="/resources/img/itemImg/5000001_1.jpg" alt="">
-                    <img onclick="reivewDetailImgChange(this)" src="/resources/img/itemImg/5000001_2.jpg" alt="">
+                    <img onclick="reivewDetailImgChange(this)" src="/tomatoFarmA/resources/img/itemImg/5000001_1.jpg" alt="">
+                    <img onclick="reivewDetailImgChange(this)" src="/tomatoFarmA/resources/img/itemImg/5000001_2.jpg" alt="">
                 </div>
             </div>
             <div id="reviewDetail_Write">
@@ -506,6 +506,37 @@
             <div onclick="reviewDetailClose(this)" id="reviewDetailBoxClose"><i class="fa-solid fa-xmark"></i></div>
         </div>
     </div>
+
+
+
+    <div id="itemAskForm">
+        <div id="itemAskBox">
+                <div id="itemAskTop">
+                    <div >상품 문의하기</div>
+                    <img src="/tomatoFarmA/resources/img/itemImg/5000100_1.jpg" alt="">
+                    <div>[밀키트] 밀키트다 밀키트다</div>
+                </div>
+                <div id="itemAskBottom">
+                    <div>제목 <input type="text" placeholder="제목을 입력해주세요"></input></div>
+                    <div>내용 
+                        <input type="text" placeholder="상품 문의 작성 전 확인해주세요.
+                            1. 답변은 영업일 기준 2~3일 소요됩니다.
+                            2. 해당 게시판은 성격과 다른 글은 사전 동의 없이 담당 게시판으로 이동될 수 있습니다.
+                            3. 배송관련, 주문(취소/교환/반품)관련 문의 요청사항은 마켓컬리 1:1 문의에 남겨주세요">
+                        </input>
+                    </div>
+                </div>
+                <div id="itemAskPrivacy">
+                    <input type="checkbox" name="privacyBox">
+                    <div>비밀글로 문의하기</div>
+                </div>
+                <div id="itemAskButton">
+                    <button id="itemAskBoxCancle">취소</button>
+                    <button id="itemAskBoxEnter">등록</button>
+                </div>
+            </div>
+    </div>
+
 </body>
 
 </html>
