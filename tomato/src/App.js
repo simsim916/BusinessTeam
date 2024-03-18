@@ -1,10 +1,18 @@
-import Header from "./pages/0home/Header";
 import "./default.css";
+import { Routes, Route, Link } from "react-router-dom";
+import Home from "./pages/0home/Home";
+import ItemList from "./pages/1list/ItemList";
 
 function App() {
     return (
         <div className="App">
-            <Header />
+
+
+            <Routes>
+                <Route path='/list' element={<ItemList />} />
+                <Route path='/' element={<Home />} />
+                <Route path='/*' element={"잘못된 접근"} />
+            </Routes>
         </div>
     );
 }

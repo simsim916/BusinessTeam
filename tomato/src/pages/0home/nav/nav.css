@@ -84,7 +84,7 @@ nav {
     background-color: white;
 }
 
-#firstCategorySearch>div {
+#firstCategorySearch>form {
     position: relative;
     font-size: 20px;
     height: 40px;
@@ -92,7 +92,7 @@ nav {
     align-items: center;
 }
 
-#firstCategorySearch>div>input {
+#firstCategorySearch>form>input {
     height: 30px;
     width: 210px;
     padding: 0;
@@ -100,12 +100,12 @@ nav {
     text-indent: 10px;
 }
 
-#firstCategorySearch>div>input:focus {
+#firstCategorySearch>form>input:focus {
     border: none;
     outline: 2px solid #EAA6A2;
 }
 
-#firstCategorySearch>div>i:nth-of-type(1) {
+#firstCategorySearch>form>i:nth-of-type(1) {
     position: absolute;
     right: 40px;
     font-size: 12px;
@@ -113,7 +113,7 @@ nav {
     visibility: hidden;
 }
 
-#firstCategorySearch>div>i:nth-of-type(2) {
+#firstCategorySearch>form>i:nth-of-type(2) {
     position: absolute;
     right: 15px;
     top: calc((40px - 20px)/2);
