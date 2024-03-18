@@ -54,7 +54,7 @@
     object-fit: cover;
 }
 
-#itemDetailSM {
+#itemDetail {
     width: calc(50% - 10px);
     display: grid;
     border: 2px solid #4C455630;
@@ -70,43 +70,47 @@
     position: relative;
 }
 
-#title1 {
-    margin: 10px 0 0 10px;
-    width: 55px;
-    line-height: 20px;
+#itemDelivery{
+   
+    display: inline-block;
     text-align: center;
-    font-size: 11px;
-    background-color: #CA4046;
+    font-size: 13px;
     color: rgb(255, 255, 255);
+    line-height: 20px;
     border-radius: 5px;
-    text-indent: 0px;
+    align-items: center;
+    background-color: #9B1B30;
+    padding: 3px;
+    top: 5px;
+    width: auto;
+    
 }
 
-#title2 {
+#itemName {
     font-weight: bold;
     font-size: 22px;
 }
 
-#title3 {
+#itemAccount {
     color: gray;
     line-height: 25px;
 }
 
-#title4 {
+#itemSale {
     font-weight: bolder;
     font-size: 30px;
-    color: #d1151e;
+    color: #9B1B30;
     text-decoration: none;
     position: absolute;
     right: 20px;
     bottom: 75px;
 }
 
-#title4>span {
+#itemSale>span {
     font-size: 50%;
 }
 
-#title5 {
+#itemPrice {
     color: gray;
     text-decoration: line-through;
     position: absolute;
@@ -115,7 +119,7 @@
     font-size: 20px;
 }
 
-#title6 {
+#itemSalePrice {
     padding-left: 10px;
     font-weight: bolder;
     font-size: 35px;
@@ -124,22 +128,22 @@
     bottom: 20px;
 }
 
-#itemDetailSM>div {
+#itemDelivery>div {
     border-bottom: 1px solid #4C455630;
 }
 
-#itemDetailSM>div:nth-last-of-type(1) {
+#itemDetail>div:nth-last-of-type(1) {
     border-bottom: none;
 }
 
-#itemDetailSM>div:nth-of-type(n+2) {
+#itemDetail>div:nth-of-type(n+2) {
     font-size: 16px;
     display: flex;
     align-items: center;
     padding-left: 15px;
 }
 
-#itemDetailSM>div:nth-of-type(2n+3) {
+#itemDetail>div:nth-of-type(2n+3) {
     border-left: 1px solid #4C455630;
     padding-left: 30px;
 }
@@ -304,17 +308,6 @@
     color: #00000080;
     margin-left: 20px;
 }
-#reviewWrite {
-    position: absolute;
-    right: 50px;
-    background-color: #CA4046;
-    top: 20px;
-    width: 100px;
-    line-height: 40px;
-    border-radius: 10px;
-    text-align: center;
-    color: white;
-}
 
 #reviewBoard {
     margin-top: 30px;
@@ -353,7 +346,6 @@
     align-items: center;
     text-align: center;
     flex-wrap: wrap;
-    border-bottom: black dotted 0.3px;
 }
 
 .reviewContent>div:nth-of-type(1) {
@@ -384,6 +376,7 @@
     text-align: left;
     padding-left: 140px;
     padding-right: 50px;
+    display: none;
 }
 
 .reviewDetail img {
@@ -429,7 +422,7 @@
     margin-left: 20px;
 }
 
-#itemAskWrite {
+#askBoardBox>a {
     position: absolute;
     right: 50px;
     background-color: #CA4046;
@@ -519,7 +512,8 @@
     margin: 0 8px;
 }
 
- #reviewDetailForm {
+
+#reviewDetailForm {
     background-color: #00000090;
     position: fixed;
     top: 0;
@@ -528,7 +522,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    display: none;
+    /* display: none; */
 }
 
 #reviewDetailBox {
@@ -643,113 +637,8 @@
     border-top: none;
 }
 
-#itemAskForm {
-    background-color: #9999;
-    position: fixed;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    display: none;
+#reviewDetail_Final {
+    overflow-y: auto;
+    box-sizing: border-box;
+    height: calc(800px-);
 }
-
- #itemAskBox {
-     background-color: white;
-     position: fixed;
-     width: 1200px;
-     height: 800px;
-     justify-content: center;
-     align-items: center;
-    padding: 50px;
- }
-
- #itemAskTop {
-     height: 30%;
-     background-color: white;
-     position: relative;
-    }
-    
-#itemAskTop div:nth-child(1){
-    font-size: 30px;
-    display: block;
-    position: relative;
-    border-bottom: #000 solid 1px;
-}
-
-#itemAskTop div:nth-child(3){
-    font-size: 20px;
-    display: flex;
-    margin-top: 30px;
-}
-#itemAskTop img {
-     margin-top: 30px;
-     position: absolute;
-     width: 150px;
-     height: 150px;
- }
-
- #itemAskBottom {
-    background-color: white;
-    height: 400px;
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    font-size: 15px;
-}
-#itemAskBottom div {
-    gap: 20px;
-    display: flex;
-    height: 400px;
-    margin: 10px 0;
-    justify-content: center;
-}
-#itemAskBottom div:nth-child(1) {
-    height: 15%;
-}
-#itemAskBottom div:nth-child(2) {
-    height: 75%;
-}
-#itemAskPrivacy{
-    position: relative;
-    display: flex;
-    align-content: center;
-    gap: 10px;
-    padding-top: 20px;
-    font-size: 20px;
-}
-#itemAskPrivacy input{
-    width: 25px;
-    height: 25px;
-}
-
-#itemAskButton{
-    position: relative;
-    display: flex;
-    justify-content: center;
-    gap: 0 50px;
-    text-align: center;
-    padding-top: 20px;
-}
-
-#itemAskBoxCancle{
-    background-color: rgb(255, 255, 255);
-    border: 1px solid rgb(221, 221, 221);
-    padding: 0 15px;
-    display: block;
-    text-align: center;
-    width: 200px;
-    height: 50px;
-    font-size: 20px;
-}
-#itemAskBoxEnter{
-    background-color: rgb(221, 221, 221);
-    border: 0px none;
-    padding: 0 15px;
-    display: block;
-    text-align: center;
-    width: 200px;
-    height: 50px;
-    font-size: 20px;
- }
