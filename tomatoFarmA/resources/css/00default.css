@@ -16,10 +16,6 @@ body {
     position: relative;
 }
 
-main {
-    display: flex;
-}
-
 hr {
     margin-top: 50px;
     border-top: 0.5px solid #4C455630;
