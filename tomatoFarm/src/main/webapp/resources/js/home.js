@@ -1,4 +1,5 @@
 'use strict';
+
 /* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 모듈예정 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
 // 쉼표 찍기
 function makeComa(number) {
@@ -605,7 +606,8 @@ async function getItemList(keyword, sortType) {
 
 /* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Detail 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
 /* 📗📗📗📗 TAG 📗📗📗📗 */
-
+let itemAskForm;
+let reviewDetailForm;
 /* 📖📖📖📖 view 📖📖📖📖*/
 
 function changeMainImg(event) {
@@ -660,10 +662,8 @@ function showItemDetail(ele) {
     return null;
 }
 
-function reviewDetailClick(event) {
-    event.stopPropagation();
-    const reviewDetailForm = document.getElementById('reviewDetailForm');
-    reviewDetailForm.style.display = 'flex';
+function reviewDetailClick(code) {
+    writeReviewDetailForm(code);
 }
 
 function reivewDetailImgChange(ele) {
@@ -674,20 +674,22 @@ function reviewDetailClose(ele) {
     ele.closest('#reviewDetailForm').style.display = 'none';
 }
 
-// let imgList = document.getElementById('reviewDetailImgBottom');
-// let imgLength = imgList.length;
+let imgList = document.getElementById('reviewDetailImgBottom');
+let imgLength = imgList.length;
 
-// function returnImg(event) {
-//     let returnImg = (imgList + imgLength - 1) % imgLength;
+function returnImg(event) {
+    let returnImg = (imgList + imgLength - 1) % imgLength;
 
-// }
+}
 
+function nextImg(event) {
+    let nextImg = (imgList + 1) % imgLength;
 
-// function nextImg(event) {
-//     let nextImg = (imgList + 1) % imgLength;
+}
 
-// }
-
+async function itemAskClick() {
+    writeItemAskForm();
+}
 
 async function writeItemDetailBox(code) {
     window.scrollTo(0, 0);
@@ -698,6 +700,12 @@ async function writeItemDetailBox(code) {
 
 async function writeReviewDetailForm() {
     main.innerHTML += await makeReviewDetailForm();
+    reviewDetailForm = document.getElementById('reviewDetailForm');
+
+}
+async function writeItemAskForm() {
+    main.innerHTML += await makeItemAskForm();
+    itemAskForm = document.getElementById('itemAskForm');
 }
 
 /* 💻💻💻💻 view model 💻💻💻💻*/
@@ -794,7 +802,8 @@ async function makeItemDetailBox(code) {
     return result;
 }
 
-async function makeItemReviewBoardBox(code) {
+async function makeItemReviewBoardBox(itemcode) {
+    let data = await getReview(itemcode);
     let result = `
         <div id="reviewBoardBox" class="container appearContainer">
             <h5>상품후기</h5>
@@ -808,29 +817,34 @@ async function makeItemReviewBoardBox(code) {
                     <div>작성일</div>
                 </div>
     `;
-
-    for (let i = 0; i < 5; i++) {
+    for (let e of data) {
         result += `
-            <div onclick="showContent(this)" class="reviewContent">
+            <div onclick="reviewDetailClick(${e.seq})" class="reviewContent">
                 <div class="reviewDetail">
-                    <div onclick="reviewDetailClick(this)" id="reivewImg">
-                        <img src="/resources/img/itemImg/5000001_2.jpg" alt="">
-                        <img src="/resources/img/itemImg/5000001_1.jpg" alt="">
+                    <div id="reivewImg">
+                        <img src="/resources/img/itemImg/${e.image1}.jpg" alt="">
+                        <img src="/resources/img/itemImg/${e.image2}.jpg" alt="">
                     </div>
-                    <b>가성비 굳</b>
-                    <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                    </p>
+                    <b>${e.title}</b>
+                    <p>${e.contents}</p>
                 </div>
                 <div>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star-half"></i>
+        `;
+        for (let i = 1; i <= e.score / 2; i++){
+            result += `
+            <i class="fa-solid fa-star"></i>
+            `;
+        }
+        if (e.score % 2) 
+            result += `
+            <i class="fa-solid fa-star-half"></i>
+            `;
+        
+        result +=`
                 </div>
-                <div>가성비 굳</div>
-                <div>작성자3</div>
-                <div>작성일4</div>
+                <div>${e.title}</div>
+                <div>${e.writer}</div>
+                <div>${e.regdate}</div>
             </div>
         `;
     }
@@ -901,8 +915,9 @@ async function makeAskBoardBox(code) {
 }
 
 async function makeReviewDetailForm() {
+    
     let result = `
-        <div onclick="reviewDetailClick(event)" id="reviewDetailForm">
+        <div onclick="reviewDetailClick(code)" id="reviewDetailForm">
         <div id="reviewDetailBox">
             <div id="reviewDetailImg">
                 <div id="reviewDetailImgTop">
@@ -930,13 +945,54 @@ async function makeReviewDetailForm() {
     </div>
     `;
     return result;
-    }
+}
+
+async function makeItemAskForm() {
+    let result = `
+    <div id="itemAskForm">
+        <div id="itemAskBox">
+            <div id="itemAskTop">
+                <div >상품 문의하기</div>
+                <img src="../resources/img/itemImg/5000100_1.jpg" alt="">
+                <div>[밀키트] 밀키트다 밀키트다</div>
+            </div>
+            <div id="itemAskBottom">
+                <div>제목 <input type="text" placeholder="제목을 입력해주세요"></input></div>
+                <div>내용
+                    <input type="text" placeholder="상품 문의 작성 전 확인해주세요.
+                        1. 답변은 영업일 기준 2~3일 소요됩니다.
+                        2. 해당 게시판은 성격과 다른 글은 사전 동의 없이 담당 게시판으로 이동될 수 있습니다.
+                        3. 배송관련, 주문(취소/교환/반품)관련 문의 요청사항은 마켓컬리 1:1 문의에 남겨주세요">
+                    </input>
+                </div>
+            </div>
+            <div id="itemAskPrivacy">
+                <input type="checkbox" name="privacyBox">
+                <div>비밀글로 문의하기</div>
+            </div>
+            <div id="itemAskButton">
+                <button id="itemAskBoxCancle">취소</button>
+                <button id="itemAskBoxEnter">등록</button>
+            </div>
+        </div>
+    </div>
+    `;
+    return result;
+}
 
 
 
 /* 📦📦📦📦 model 📦📦📦📦*/
 async function getItem(code) {
     const uri = "item/detail?code=" + code;
+    const response = await axios.get(uri).catch(err => {
+
+    });
+    return response.data;
+}
+
+async function getReview(itemcode) {
+    const uri = `itemreview/select/${itemcode}`;
     const response = await axios.get(uri).catch(err => {
 
     });

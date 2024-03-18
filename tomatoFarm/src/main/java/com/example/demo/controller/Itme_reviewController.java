@@ -22,14 +22,14 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @AllArgsConstructor
 @RestController
-@RequestMapping(value="/item")
+@RequestMapping(value="/itemreview")
 public class Itme_reviewController {
 	private final Item_reviewService item_reviewService;
 	
-	@GetMapping("/itemreview/{keyword}")
-	public ResponseEntity<?> selectItem_reviewList(@PathVariable("keyword") String keyword){
+	@GetMapping("/select/{itemcode}")
+	public ResponseEntity<?> selectItem_reviewList(@PathVariable("itemcode") String keyword){
 		ResponseEntity<?> result = null;
-		PageRequest pageRequest = new PageRequest(1,11);
+		PageRequest pageRequest = new PageRequest(1,4);
 		SearchRequest searchRequest = new SearchRequest(keyword);
 		
 		List<Item_review> list = item_reviewService.selectItemReviewList(pageRequest, searchRequest);

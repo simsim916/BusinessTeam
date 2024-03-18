@@ -30,7 +30,7 @@ public class Item_reviewRepositoryImpl implements Item_reviewRepository{
 	public List<Item_review> selectItemReviewList(PageRequest pageRequest, SearchRequest searchRequest) {
 		return jPAQueryFactory.selectFrom(item_review)
 				.where(item_review.item_code.eq(Integer.parseInt(searchRequest.getKeyword())))
-				.orderBy(item_review.regdate.desc())
+				.orderBy(item_review.seq.desc())
 				.offset(pageRequest.getStartData()).limit(pageRequest.getEndData())
 				.fetch();
 	}	
