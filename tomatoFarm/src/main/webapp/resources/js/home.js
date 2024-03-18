@@ -733,8 +733,7 @@ async function makeItemDetailBox(code) {
                 <div>포장타입</div>
                 <div>${data.storage}</div>
                 <div>판매단위</div>
-                <div>${data.packing
-        }</div>
+                <div>${data.packing}</div>
                 <div>중량/용량</div>
                 <div>${data.weight}g</div>
                 <div>유통기한</div>
@@ -800,6 +799,7 @@ async function makeItemReviewBoardBox(code) {
         <div id="reviewBoardBox" class="container appearContainer">
             <h5>상품후기</h5>
             <span>한줄리뷰 - 제목을 클릭하시면 상세내용을 보실 수 있습니다.</span>
+            <div id="reviewWrite"> 후기작성 </div>
             <div id="reviewBoard">
                 <div class="reviewBoardRow">
                     <div>별점</div>
@@ -857,7 +857,7 @@ async function makeAskBoardBox(code) {
         <div id="askBoardBox" class="container appearContainer">
             <h5>상품문의</h5>
             <span>상품문의 - 상품에 궁금하신점을 남겨주세요.</span>
-            <a href=""> 문의하기 </a>
+            <div onclick="itemAskClick(event)" id="itemAskWrite">문의하기</div>
             <div id="askBoard">
                 <div class="boardRow">
                     <div></div>
@@ -902,32 +902,32 @@ async function makeAskBoardBox(code) {
 
 async function makeReviewDetailForm() {
     let result = `
-        <div onclick = "reviewDetailClick(event)" id = "reviewDetailForm">
+        <div onclick="reviewDetailClick(event)" id="reviewDetailForm">
         <div id="reviewDetailBox">
             <div id="reviewDetailImg">
-        <div id="reviewDetailImgTop">
-            <img src="/resources/img/itemImg/5000001_2.jpg" alt="">
-                <i class="fa-solid fa-arrow-left"></i>
-                <i class="fa-solid fa-arrow-right"></i>
-        </div>
-        <div id="reviewDetailImgBottom">
-            <img onclick="reivewDetailImgChange(this)" src="/resources/img/itemImg/5000001_1.jpg" alt="">
-                <img onclick="reivewDetailImgChange(this)" src="/resources/img/itemImg/5000001_2.jpg" alt="">
+                <div id="reviewDetailImgTop">
+                    <img src="../resources/img/itemImg/5000001_2.jpg" alt="">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <i class="fa-solid fa-arrow-right"></i>
                 </div>
+                <div id="reviewDetailImgBottom">
+                    <img onclick="reivewDetailImgChange(this)" src="../resources/img/itemImg/5000001_1.jpg" alt="">
+                    <img onclick="reivewDetailImgChange(this)" src="../resources/img/itemImg/5000001_2.jpg" alt="">
+                </div>
+            </div>
+            <div id="reviewDetail_Write">
+                <p>구매상품 이름</p>
+                <p>작성자 아이디</p>
+                <p>작성 날짜</p>
+                <p id="reviewDetail_Final">후기다 후기다 후기다
+                    후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다
+                    후기다 후기다
+                    후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다
+                </p>
+            </div>
+            <div onclick="reviewDetailClose(this)" id="reviewDetailBoxClose"><i class="fa-solid fa-xmark"></i></div>
         </div>
-        <div id="reviewDetail_Write">
-            <p>구매상품 이름</p>
-            <p>작성자 아이디</p>
-            <p>작성 날짜</p>
-            <p id="reviewDetail_Final">후기다 후기다 후기다
-                후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다
-                후기다 후기다
-                후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다
-            </p>
-        </div>
-        <div onclick="reviewDetailClose(this)" id="reviewDetailBoxClose"><i class="fa-solid fa-xmark"></i></div>
-        </div>
-        </div>
+    </div>
     `;
     return result;
     }
