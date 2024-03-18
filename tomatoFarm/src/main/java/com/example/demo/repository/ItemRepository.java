@@ -29,5 +29,6 @@ public interface ItemRepository {
 	List<SortDTO> selectSortList();
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 	
-
+	int batchInsert(List<Item> entity);
+	List<ItemDTO> selectAll();
 }

@@ -49,6 +49,7 @@ public class UserController {
 		return result;
 	}
 	
+	
 	@PostMapping("/signup")
 	public ResponseEntity<?> singup(UserDTO dto) {
 		ResponseEntity<?> result = null;

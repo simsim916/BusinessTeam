@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -155,6 +157,25 @@ public class ItemController {
 		return result;
 		
 	}
+	
+	@GetMapping("/allitem")
+	public ResponseEntity<?> selectAll() {
+		ResponseEntity<?> result = null;
+		List<ItemDTO> itemList = itemService.selectAll();
+		
+		if(itemList != null && itemList.size() > 0) {
+			result = ResponseEntity.status(HttpStatus.OK).body(itemList);
+			log.info("출력한다");
+		} else {
+			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
+			log.info("데이터 못찾겠다");
+		}
+		
+		return result;
+	}
+	
+	
+
 }
 	
 	

@@ -62,29 +62,38 @@ function plusColumn() {
             <input type="text">
             <input type="text">
             <input type="text">
-            <input type="text">
         </div>
     `
 }
 
 
-function getExcelData() {
-    let test;
-    let sum = "";
+async function getExcelData() {
+    let uri = 'http://localhost:8090/item/batchinsert';
+    let row = document.getElementsByClassName('excelColumn');
+    let itemdata = {};
+
+    let data = new Array(row.length);
     for (let i = 0; i < row.length; i++) {
-        for (let j = 0; j < row[i].childElementCount; j++) {
-            sum += row[i].children[j].value + ",";
-        }
-        test = `
-        INSERT INTO ITEM(code,sort1,sort2,sort3,brand,name,weight,storage,packing,delivery,price,vat,origin,sales,stock,admin)
-        VALUES(${sum});
-         `;
+        itemdata.code = row[i].children[0].value;
+        itemdata.sort1 = row[i].children[1].value;
+        itemdata.sort2 = row[i].children[2].value;
+        itemdata.sort3 = row[i].children[3].value;
+        itemdata.brand = row[i].children[4].value;
+        itemdata.name = row[i].children[5].value;
+        itemdata.weight = row[i].children[6].value;
+        itemdata.storage = row[i].children[7].value;
+        itemdata.packing = row[i].children[8].value;
+        itemdata.delivery = row[i].children[9].value;
+        itemdata.price = row[i].children[10].value;
+        itemdata.vat = row[i].children[11].value;
+        itemdata.origin = row[i].children[12].value;
+        itemdata.stock = row[i].children[13].value;
+        itemdata.admin = row[i].children[14].value;
+        data[i] = itemdata;
     }
 
-    let result = `
-    INSERT INTO ITEM(code,sort1,sort2,sort3,brand,name,weight,storage,packing,delivery,price,vat,origin,sales,stock,admin)
-    VALUES(${sum});
-    `;
 
-    return result;
+    let response = await axios.post(uri, null, data);
 }
+
+

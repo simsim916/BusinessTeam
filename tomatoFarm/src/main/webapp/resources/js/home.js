@@ -1663,3 +1663,300 @@ function checkAll() {
 }
 // ============================================
 // ============================================
+
+
+
+
+
+function selectAll() {
+    const checkboxes = document.getElementsByClassName(".chk");
+    // console.log(checkAll);
+    if (checkAll.checked) {
+        const checkboxes = document.querySelectorAll('.chk');
+
+        for (const a of checkboxes) {
+            a.checked = true;
+        }
+    } else {
+        const checkboxes = document.querySelectorAll('.chk');
+
+        for (const a of checkboxes) {
+            a.checked = false;
+        }
+    }
+}
+
+function uncheckedAllBox() {
+    checkAll.checked = false;
+}
+
+function insertData() {
+    const makeDiv = document.createElement("div");
+
+    for (let index = 0; index < 12; index++) {
+        if (index == 0) {
+            orderList.appendChild(makeDiv);
+            const makeInput = makeDiv.createElement("input");
+            makeInput.className = "chk";
+        } else {
+            orderList.appendChild(makeDiv);
+        }
+        orderList.appendChild(makeDiv);
+    }
+    orderList.appendChild(makeDiv);
+}
+
+
+// =============================================
+// =============================================
+async function writeCommand() {
+    body.innerHTML = await makeCommand();
+}
+
+async function makeCommand() {
+    let data = await getAllItem();
+    console.log(data);
+    let result = `
+        <div id="topBar">
+        <i class="fa-solid fa-house"></i>
+    </div>
+    <div id="sideBar">
+        <div>토마토팜</div>
+        <ul>
+            <li onclick="openDetailFirst()">
+                <div><i class="fa-solid fa-bars"></i><br>전체메뉴</div>
+            </li>
+            <li>
+                <div><i class="fa-solid fa-circle-user"></i><br>즐겨찾기</div>
+            </li>
+            <li>
+                <div><i class="fa-solid fa-list-check"></i><br>최근메뉴</div>
+            </li>
+            <li>
+                <div><i class="fa-solid fa-bullhorn"></i><br>공지사항</div>
+            </li>
+            <li>
+                <div><i class="fa-solid fa-bell"></i><br>알림</div>
+            </li>
+            <li>
+                <div><i class="fa-solid fa-comment-dots"></i><br>고객센터</div>
+            </li>
+            <li>
+                <div><i class="fa-solid fa-gear"></i><br>설정</div>
+            </li>
+        </ul>
+        <div onclick="openSideBar()" id="sideBarButton"><i class="fa-solid fa-chevron-right"></i></div>
+        <div id="sideBarDetail">
+            <div id="sideBarDetailFirst">
+                <ul>
+                    <li>상품주문</li>
+                    <li>상품조회/검색</li>
+                    <li>주문조회</li>
+                    <li>클레임 처리현황</li>
+                    <li>출력물</li>
+                </ul>
+            </div>
+            <div id="sideBarDetailSecond">
+                <div id="sideBarDetailSecondExit" onclick="closeDetail()"><i class="fa-solid fa-xmark"></i></div>
+                <div id="sideBarDetailSecondSearch">
+                    <input type="text">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <ul>
+                    <li>식재주문등록</li>
+                    <li>식단주문등록</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div id="topBoxYH">
+            <!-- 최상단 -->
+            <div id="topBoxLeftYH">
+                <h3>★ 식재주문등록</h3>&nbsp;&nbsp;
+                <div>
+                    <button onclick="plusColumn()">행추가<i class="fa-duotone fa-square-plus"></i></button>
+                    <button onclick="getExcelData()">추가완료<i class="fa-duotone fa-square-plus"></i></button>
+                </div>
+            </div>
+
+
+            <div id=excelBox>
+                <div id="excelHead">
+                    <input type="text" value="상품코드" readonly>
+                    <input type="text" value="대분류" readonly>
+                    <input type="text" value="중분류" readonly>
+                    <input type="text" value="소분류" readonly>
+                    <input type="text" value="브랜드" readonly>
+                    <input type="text" value="제품명" readonly>
+                    <input type="text" value="중량" readonly>
+                    <input type="text" value="보관방식" readonly>
+                    <input type="text" value="포장단위" readonly>
+                    <input type="text" value="배송비" readonly>
+                    <input type="text" value="제품가격" readonly>
+                    <input type="text" value="VAT" readonly>
+                    <input type="text" value="원산지" readonly>
+                    <input type="text" value="재고량" readonly>
+                    <input type="text" value="제품등록자" readonly>
+                </div>
+                <div class="excelColumn">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                </div>
+            </div>
+        </div>
+    `;
+
+    result += `
+        <!-- 주문현황 -->
+        <div id="orderReport">
+            <div class="headtitle">
+                <div class="subtitle"> &nbsp;주문현황</div>
+                <div id="sortBt">
+                    <div>가로</div>
+                    <div>세로</div>
+                </div>
+            </div>
+
+
+
+            <div id=excelBox>
+                <div id="excelHead">
+                    <input type="text" value="상품코드" readonly>
+                    <input type="text" value="대분류" readonly>
+                    <input type="text" value="중분류" readonly>
+                    <input type="text" value="소분류" readonly>
+                    <input type="text" value="브랜드" readonly>
+                    <input type="text" value="제품명" readonly>
+                    <input type="text" value="중량" readonly>
+                    <input type="text" value="보관방식" readonly>
+                    <input type="text" value="포장단위" readonly>
+                    <input type="text" value="배송비" readonly>
+                    <input type="text" value="제품가격" readonly>
+                    <input type="text" value="VAT" readonly>
+                    <input type="text" value="원산지" readonly>
+                    <input type="text" value="재고량" readonly>
+                    <input type="text" value="제품등록자" readonly>
+                </div>
+                `;
+
+    for (let d of data) {
+        result += `
+            <div class="dataColumn">
+                <input type="text" value=${d.code}>
+                <input type="text" value=${d.sort1}>
+                <input type="text" value=${d.sort2}>
+                <input type="text" value=${d.sort3}>
+                <input type="text" value=${d.brand}>
+                <input type="text" value=${d.name}>
+                <input type="text" value=${d.weight}>
+                <input type="text" value=${d.storage}>
+                <input type="text" value=${d.packing}>
+                <input type="text" value=${d.delivery}>
+                <input type="text" value=${d.price}>
+                <input type="text" value=${d.vat}>
+                <input type="text" value=${d.origin}>
+                <input type="text" value=${d.stock}>
+                <input type="text" value=${d.admin}>
+            </div>
+            `;
+    }
+
+    result += `
+            </div>
+        </div>
+
+        <div id="orderListBox">
+            <div>
+
+
+                <div class="headtitle">
+                    <div class="subtitle">&nbsp;주문내역</div>
+                    <div id="orderListButtonBox">
+                        <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <button><i class="fa-solid fa-file-excel"></i></button>
+                        <button><i class="fa-solid fa-plus"></i></button>
+                        <button><i class="fa-solid fa-minus"></i></button>
+                    </div>
+                </div>
+                <div id="orderedListYH">
+                    <!-- 주문내역 -->
+                    <div id="insertRowYH">
+                        <div><input type="checkbox" name="test1" id="checkAll" onclick="selectAll()"></div>
+                        <div>순번</div>
+                        <div>제품코드</div>
+                        <div>제품명</div>
+                        <div>규격</div>
+                        <div>단위</div>
+                        <div>주문량</div>
+                        <div>단가</div>
+                        <div>공급액</div>
+                        <div>부가세</div>
+                        <div>합계</div>
+                        <div>원산지</div>
+                        <div><input onclick="uncheckedAllBox()" type="checkbox" name="test1" class="chk"></div>
+                        <div>1</div>
+                        <div>1</div>
+                        <div>1</div>
+                        <div>1</div>
+                        <div>1</div>
+                        <div>1</div>
+                        <div>1</div>
+                        <div>1</div>
+                        <div>1</div>
+                        <div>1</div>
+                        <div>1</div>
+                        <div><input onclick="uncheckedAllBox()" type="checkbox" name="test1" class="chk"></div>
+                        <div>2</div>
+                        <div>2</div>
+                        <div>2</div>
+                        <div>2</div>
+                        <div>2</div>
+                        <div>2</div>
+                        <div>2</div>
+                        <div>2</div>
+                        <div>2</div>
+                        <div>2</div>
+                        <div>2</div>
+                        <div><input onclick="uncheckedAllBox()" type="checkbox" name="test1" class="chk"></div>
+                        <div>3</div>
+                        <div>3</div>
+                        <div>3</div>
+                        <div>3</div>
+                        <div>3</div>
+                        <div>3</div>
+                        <div>3</div>
+                        <div>3</div>
+                        <div>3</div>
+                        <div>3</div>
+                        <div>3</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  `;
+
+    return result;
+}
+
+async function getAllItem() {
+    let uri = 'item/allitem';
+    let response = await axios.get(uri);
+    return response.data;
+}
