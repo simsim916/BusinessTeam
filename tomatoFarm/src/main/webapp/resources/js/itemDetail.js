@@ -90,3 +90,16 @@ function itemAskClick(event) {
     const reviewDetailForm = document.getElementById('itemAskForm');
     reviewDetailForm.style.display = 'flex';
 }
+
+function itemAskBoxClose(ele) {
+    ele.closest('#itemAskForm').style.display = 'none';
+}
+
+function reviewWriteClick(event) {
+    const reviewDetailForm = document.getElementById('reviewWriteForm');
+    reviewDetailForm.style.display = 'flex';
+}
+
+function reviewWriteBoxClose(ele) {
+    ele.closest('#reviewWriteForm').style.display = 'none';
+}

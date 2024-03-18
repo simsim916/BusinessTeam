@@ -304,6 +304,7 @@
     color: #00000080;
     margin-left: 20px;
 }
+
 #reviewWrite {
     position: absolute;
     right: 50px;
@@ -519,7 +520,7 @@
     margin: 0 8px;
 }
 
- #reviewDetailForm {
+#reviewDetailForm {
     background-color: #00000090;
     position: fixed;
     top: 0;
@@ -655,85 +656,135 @@
     display: none;
 }
 
- #itemAskBox {
-     background-color: white;
-     position: fixed;
-     width: 1200px;
-     height: 800px;
-     justify-content: center;
-     align-items: center;
-    padding: 50px;
- }
-
- #itemAskTop {
-     height: 30%;
-     background-color: white;
-     position: relative;
-    }
-    
-#itemAskTop div:nth-child(1){
-    font-size: 30px;
-    display: block;
-    position: relative;
-    border-bottom: #000 solid 1px;
-}
-
-#itemAskTop div:nth-child(3){
-    font-size: 20px;
-    display: flex;
-    margin-top: 30px;
-}
-#itemAskTop img {
-     margin-top: 30px;
-     position: absolute;
-     width: 150px;
-     height: 150px;
- }
-
- #itemAskBottom {
+#itemAskBox {
     background-color: white;
-    height: 400px;
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    font-size: 15px;
-}
-#itemAskBottom div {
-    gap: 20px;
-    display: flex;
-    height: 400px;
-    margin: 10px 0;
+    position: fixed;
+    width: 1200px;
+    height: 1000px;
     justify-content: center;
-}
-#itemAskBottom div:nth-child(1) {
-    height: 15%;
-}
-#itemAskBottom div:nth-child(2) {
-    height: 75%;
-}
-#itemAskPrivacy{
-    position: relative;
-    display: flex;
-    align-content: center;
-    gap: 10px;
-    padding-top: 20px;
-    font-size: 20px;
-}
-#itemAskPrivacy input{
-    width: 25px;
-    height: 25px;
+    align-items: center;
+    padding: 50px;
 }
 
-#itemAskButton{
+#itemAskTop {
+    height: 30%;
+    background-color: white;
+    position: relative;
+    border-bottom: 1px solid rgb(221, 221, 221);
+}
+
+#itemAskTop div:nth-of-type(1) {
+    font-size: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgb(221, 221, 221);
+}
+
+#itemAskTop img {
+    margin-top: 20px;
+    position: absolute;
+    width: 200px;
+    height: 200ox;
+}
+
+#itemTitle {
+    margin-top: 20px;
+    font-size: 20px;
+    display: flex;
+    position: absolute;
+    width: 500px;
+    left: 230px;
+}
+
+#itemAskBottom {
+    height: 380px;
+    width: 100%;
+    display: flex;
+    position: relative;
+    padding-top: 15px;
+    flex-direction: column;
+}
+
+#itemAskTitle {
+    gap: 0px 50px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+#itemAskTitle div {
+    display: flex;
+    position: block;
+    font-size: 20px;
+    width: 200px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+}
+
+#itemAskTitle input {
+    padding: 0 20px;
+    font-size: 20px;
+    width: 90%;
+    display: block;
+    border-radius: 10px;
+}
+
+#itemAskContent {
+    margin-top: 20px;
+    gap: 0px 50px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+#itemAskContent div {
+    display: flex;
+    position: block;
+    font-size: 20px;
+    width: 200px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+}
+
+#itemAskContent input {
+    padding: 0 20px;
+    font-size: 20px;
+    width: 90%;
+    height: 400px;
+    display: block;
+    border-radius: 10px;
+}
+
+#itemAskPrivacy {
+    position: relative;
+    display: flex;
+    height: 30px;
+    gap: 10px;
+    left: 210px;
+    margin: 10px 20px;
+}
+
+#itemAskPrivacy input {
+    width: 20px;
+    height: 20px;
+}
+
+#itemAskButton {
     position: relative;
     display: flex;
     justify-content: center;
     gap: 0 50px;
     text-align: center;
-    padding-top: 20px;
+    padding-top: 200px;
+
 }
 
-#itemAskBoxCancle{
+#itemAskBoxCancle {
     background-color: rgb(255, 255, 255);
     border: 1px solid rgb(221, 221, 221);
     padding: 0 15px;
@@ -742,8 +793,10 @@
     width: 200px;
     height: 50px;
     font-size: 20px;
+    border-radius: 10px;
 }
-#itemAskBoxEnter{
+
+#itemAskBoxEnter {
     background-color: rgb(221, 221, 221);
     border: 0px none;
     padding: 0 15px;
@@ -752,4 +805,236 @@
     width: 200px;
     height: 50px;
     font-size: 20px;
- }
+    border-radius: 10px;
+}
+
+#itemAskBoxClose {
+    position: absolute;
+    top: 0px;
+    right: -50px;
+    background-color: #9B1B30;
+    color: #fff;
+    font-size: 35px;
+    width: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+
+
+
+#reviewWriteForm {
+    background-color: #9999;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+#reviewWriteBox {
+    background-color: white;
+    position: fixed;
+    width: 1200px;
+    height: 1000px;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+}
+
+#reviewWriteTop {
+    height: 240px;
+    background-color: white;
+    position: relative;
+    border-bottom: 1px solid rgb(221, 221, 221);
+}
+
+#reviewWriteTop div:nth-of-type(1) {
+    font-size: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgb(221, 221, 221);
+}
+
+#reviewWriteTop div:nth-of-type(3) {
+    font-size: 20px;
+    width: 300px;
+    color: #9B1B30;
+    left: 230px;
+    top: 60px;
+    position: relative;
+}
+
+#reviewWriteTop img {
+    margin-top: 10px;
+    position: absolute;
+    width: 150px;
+    height: 150px;
+}
+
+#itemTitle {
+    margin-top: 10px;
+    font-size: 20px;
+    display: flex;
+    position: absolute;
+    width: 500px;
+    left: 230px;
+}
+
+#reviewWriteBottom {
+    border-bottom: 1px solid rgb(221, 221, 221);
+    height: 600px;
+    width: 100%;
+    display: flex;
+    position: relative;
+    padding-top: 20px;
+    flex-direction: column;
+}
+
+#reviewWriteTitle {
+    position: relative;
+    display: flex;
+    text-align: center;
+    border-bottom: 1px solid rgb(221, 221, 221);
+    gap: 30px;
+    text-align: center;
+    align-items: center;
+}
+
+#reviewWriteTitle div {
+    font-size: 20px;
+    width: 200px;
+    height: 50px;
+    font-weight: 500;
+}
+
+#reviewWriteTitle input {
+    font-size: 10px;
+    display: block;
+    position: relative;
+    width: 20px;
+
+}
+
+#reviewWriteContent {
+    margin-top: 20px;
+    height: 220px;
+    gap: 0px 50px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+#reviewWriteContent div {
+    display: flex;
+    position: block;
+    font-size: 20px;
+    width: 200px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+}
+
+#reviewWriteContent input {
+    padding: 0 20px;
+    font-size: 20px;
+    width: 90%;
+    height: 200px;
+    display: block;
+    border-radius: 10px;
+}
+
+#reviewWriteContentBottom {
+    position: relative;
+    height: 40px;
+    gap: 10px;
+    left: 210px;
+    margin: 10px 20px;
+}
+
+#reviewWritePhoto {
+    margin-top: 20px;
+    gap: 0px 30px;
+    position: relative;
+    display: flex;
+}
+
+#reviewPhoto {
+    display: flex;
+    position: block;
+    font-size: 20px;
+    width: 200px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+#reviewWritePhoto label {
+    font-size: 20px;
+    width: 180px;
+    height: 50px;
+    display: flex;
+    position: block;
+    border: #9B1B30 1px solid;
+    color: #9B1B30;
+    font-weight: 500;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#reviewWriteButton {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    gap: 0 50px;
+    text-align: center;
+    padding-top: 20px;
+
+}
+
+#reviewWriteCancle {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(221, 221, 221);
+    padding: 0 15px;
+    display: block;
+    text-align: center;
+    width: 200px;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+#reviewWriteEnter {
+    background-color: rgb(221, 221, 221);
+    border: 0px none;
+    padding: 0 15px;
+    display: block;
+    text-align: center;
+    width: 200px;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+#reviewWriteBoxClose {
+    position: absolute;
+    top: 0px;
+    right: -50px;
+    background-color: #9B1B30;
+    color: #fff;
+    font-size: 35px;
+    width: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 10px;
+}
