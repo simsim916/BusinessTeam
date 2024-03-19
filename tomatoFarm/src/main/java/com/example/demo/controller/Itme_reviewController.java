@@ -29,7 +29,6 @@ public class Itme_reviewController {
 	@GetMapping("/select/{itemcode}")
 	public ResponseEntity<?> selectItem_reviewList(@PathVariable("itemcode") String keyword){
 		ResponseEntity<?> result = null;
-		System.out.println(keyword);
 		PageRequest pageRequest = new PageRequest(1,4);
 		SearchRequest searchRequest = new SearchRequest(keyword);
 		
