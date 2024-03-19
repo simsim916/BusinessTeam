@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.domain.ItemDTO;
 import com.example.demo.domain.SortDTO;
-import com.example.demo.entity.Item;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.service.ItemService;
@@ -21,7 +20,7 @@ import com.example.demo.service.ItemService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
-@CrossOrigin(origins = "http://localhost:3001")
+@CrossOrigin(origins = "http://localhost:3000")
 @Log4j2
 @AllArgsConstructor
 @RestController

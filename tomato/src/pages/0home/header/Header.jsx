@@ -1,13 +1,19 @@
 import "./header.css";
-import Nav from './nav/Nav';
+import Nav from './Nav';
+import { useNavigate } from 'react-router-dom';
 
-function searchBox(event) {
-    event.preventDefault();
-    let keyword = event.target.closest('form').children[0].value;
-    // writeItemList(keyword);
-}
 
-function Header() {
+
+const Header = () => {
+
+    const navigate = useNavigate();
+
+    function searchBox(event) {
+        event.preventDefault();
+        let keyword = event.target.closest('form').children[0].value;
+        navigate('/list?keyword=프레시지');
+    }
+
     function searchBoxEnterKey(event) {
         if (event.which == 13) {
             searchBox(event)
@@ -26,7 +32,7 @@ function Header() {
     }
 
     return (
-        <div>
+        <header>
             <div id="loginBar">
                 <div className="container">
                     <a>고객센터</a>
@@ -45,10 +51,10 @@ function Header() {
                         </a>
                     </div>
                     <form id="searchBox">
-                        <input onKeyUp={(event) => searchBoxEnterKey(event)} onInput={(event) => appearinputBoxResetButton(event)}
+                        <input onKeyUp={searchBoxEnterKey} onInput={appearinputBoxResetButton}
                             id="searchBoxInput" type="text" placeholder="검색어를 입력해주세요." />
-                        <i onClick={(event) => resetInputBox(event)} className="fa-solid fa-circle-xmark"></i>
-                        <button onClick={(event) => searchBox(event)}><i className="fa-solid fa-magnifying-glass"></i></button>
+                        <i onClick={resetInputBox} className="fa-solid fa-circle-xmark"></i>
+                        <button onClick={searchBox}><i className="fa-solid fa-magnifying-glass"></i></button>
                     </form>
                     <div id="searchRightBox">
                         <div id="myPage">
@@ -64,7 +70,7 @@ function Header() {
                 </div>
             </div>
             <Nav appearinputBoxResetButton={appearinputBoxResetButton} resetInputBox={resetInputBox} />
-        </div>
+        </header>
     );
 }
 

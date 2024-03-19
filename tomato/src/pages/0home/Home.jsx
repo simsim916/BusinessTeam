@@ -1,13 +1,12 @@
-import { Route, Routes, Link } from "react-router-dom";
-import Header from "./Header"
-import List from "../1list/ItemListFilter";
+import AdImgBox from "./adImgBox/AdImgBox";
+import Header from "./header/Header"
 
 const Home = () => {
     return (
         <div>
             <Header />
-
-
+            <AdImgBox />
+            <FirstContainer />
         </div>
     )
 }

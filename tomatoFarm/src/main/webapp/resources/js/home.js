@@ -601,6 +601,7 @@ async function makeListFilter() {
 // 아이템리스트 데이터 (keyword=검색어 , sortType=정렬기준)
 async function getItemList(keyword, sortType) {
     let uri = "/item/search?keyword=" + keyword + "&sorttype=" + sortType;
+    console.log(uri);
     const response = await axios.get(uri);
     return response.data;
 }
