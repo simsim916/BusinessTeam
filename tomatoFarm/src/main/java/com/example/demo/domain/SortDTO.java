@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SortDTO {
 
+	private String sort1;
 	private String sort2;
-	private String sort3;
-	private int acount;
+	private Long acount;
 	
 }

@@ -110,24 +110,58 @@ public class ItemRepositoryImpl implements ItemRepository {
 	@Override
 	// ** 키워드 상품 단순 조회 -> 필터
 	public List<SortDTO> selectSortWhereKeyword(SearchRequest searchRequest) {
-		return jPAQueryFactory.select(Projections.bean(SortDTO.class, item.sort2, item.sort2.count())).from(item)
+		List<SortDTO> result = jPAQueryFactory.select(
+				Projections.bean(SortDTO.class, 
+									item.sort1,
+									item.sort2,
+									item.sort2.count().as("acount"))
+				).from(item)
 				.where(item.sort2.contains(searchRequest.getKeyword())
-						.or(item.sort3.contains(searchRequest.getKeyword()))
-						.or(item.brand.contains(searchRequest.getKeyword()))
-						.or(item.name.contains(searchRequest.getKeyword())))
-				.groupBy(item.sort2).fetch();
+								.or(item.sort3.contains(searchRequest.getKeyword()))
+								.or(item.brand.contains(searchRequest.getKeyword()))
+								.or(item.name.contains(searchRequest.getKeyword())).and(item.sort1.ne("밀키트")))
+				.groupBy(item.sort1,item.sort2)
+				.fetch();
+		
+//		result.addAll(jPAQueryFactory.select(
+//				Projections.bean(SortDTO.class, 
+//						item.sort1.as("sort1"),
+//						item.brand.as("sort2"),
+//						item.brand.count().as("acount"))
+//				).from(item)
+//				.where(item.sort1.eq("밀키트")
+//						.and(item.sort2.contains(searchRequest.getKeyword())
+//								.or(item.sort3.contains(searchRequest.getKeyword()))
+//								.or(item.brand.contains(searchRequest.getKeyword()))
+//								.or(item.name.contains(searchRequest.getKeyword()))))
+//				.groupBy(item.brand)
+//				.fetch());
+		
+		return result;
 	}
 
 	@Override
 	// ** 코드로 상품 조회
-	public ItemDTO selectItemWhereCode(SearchRequest searchRequest) {
-		return jPAQueryFactory
-				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price,
-						item.sales, item.stock, item.views, item.like, item.event_code, item_event.discount,
-						item_event.name.as("event_name")))
-				.where(item.code.stringValue().eq(searchRequest.getKeyword())).fetchOne();
-	}
-
+    public ItemDTO selectItemWhereCode(SearchRequest searchRequest) {
+        return jPAQueryFactory.select(Projections.bean(ItemDTO.class, 
+				item.code,
+				item.brand,
+				item.name,
+				item.delivery,
+				item.price,
+				item.sales,
+				item.stock,
+				item.views,
+				item.like,
+				item.event_code,
+				item_event.discount,
+				item_event.name.as("event_name")
+				))
+    			.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
+                .where(item.code.stringValue().eq(searchRequest.getKeyword()))
+                .fetchOne();
+    }
+	
 	@Override
 	// ** 키워드 상품 분류 조회
 	public List<SortDTO> selectSortList() {
