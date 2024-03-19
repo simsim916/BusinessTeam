@@ -22,12 +22,20 @@ public class PageRequest {
 	private int page; // 출력페이지
 	private int size; // 1page 당 출력 row 갯수
 
+	private int startData; // 출력할 데이터 시작
+	private int endData; // 출력할 데이터 끝
 	
 	public PageRequest() {
 		this.page=1;
 		this.size=5;
 	}
 	
-	
+	public PageRequest(int page, int size){
+		this.page = page;
+		this.size = size;
+		
+		this.startData = (page-1)*size+1;
+		this.endData = (page)*size;
+	}
 	
 }

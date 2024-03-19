@@ -1,9 +1,5 @@
 'use strict'
 
-function a(str) {
-    console.log(str)
-}
-
 function changeMainImg(event) {
     event.preventDefault();
     let ele = event.target.closest('div');
@@ -47,14 +43,14 @@ function showItemDetail(ele) {
     let itemIntro = ele.previousElementSibling;
     if (itemIntro.classList.contains('heightAuto')) {
         itemIntro.classList.remove('heightAuto');
+        ele.innerHTML = `상품정보 더보기<i class="fa-solid fa-chevron-down"></i>`;
     } else {
-        itemIntro.classList.add('heightAuto');
+        // itemIntro.classList.contains('heightAuto');
         introItemBtn.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`;
-        //ele.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`;
+        ele.innerHTML = `상품정보 접기<i class="fa-solid fa-chevron-up"></i>`;
     }
     return null;
 }
-
 
 function reviewDetailClick(event) {
     event.stopPropagation();
@@ -66,40 +62,23 @@ function reivewDetailImgChange(ele) {
     ele.parentNode.previousElementSibling.children[0].setAttribute('src', ele.src);
 }
 
-let imgList = document.getElementById('reviewDetailImgBottom');
-let imgLength = imgList.length;
-
-// function returnImg(event) {
-    //     let returnImg = (imgList + imgLength - 1) % imgLength;
-    //     event.
-    // }
-    
-    
-    // function nextImg(event) {
-        //     let nextImg = (imgList + 1) % imgLength;
-        
-// }
-
 function reviewDetailClose(ele) {
     ele.closest('#reviewDetailForm').style.display = 'none';
 }
 
+let imgList = document.getElementById('reviewDetailImgBottom');
+let imgLength = imgList.length;
 
-function itemAskClick(event) {
-    event.stopPropagation();
-    const reviewDetailForm = document.getElementById('itemAskForm');
-    reviewDetailForm.style.display = 'flex';
+function returnImg(event) {
+    let returnImg = (imgList + imgLength - 1) % imgLength;
+    
 }
 
-function itemAskBoxClose(ele) {
-    ele.closest('#itemAskForm').style.display = 'none';
+
+function nextImg(event) {
+    let nextImg = (imgList + 1) % imgLength;
+    
 }
 
-function reviewWriteClick(event) {
-    const reviewDetailForm = document.getElementById('reviewWriteForm');
-    reviewDetailForm.style.display = 'flex';
-}
 
-function reviewWriteBoxClose(ele) {
-    ele.closest('#reviewWriteForm').style.display = 'none';
-}
+

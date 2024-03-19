@@ -1,4 +1,5 @@
 'use strict';
+
 /* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 모듈예정 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
 // 쉼표 찍기
 function makeComa(number) {
@@ -608,7 +609,9 @@ async function getItemList(keyword, sortType) {
 
 /* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Detail 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
 /* 📗📗📗📗 TAG 📗📗📗📗 */
-
+let itemAskForm;
+let reviewWriteForm;
+let reviewDetailForm;
 /* 📖📖📖📖 view 📖📖📖📖*/
 
 function changeMainImg(event) {
@@ -663,10 +666,8 @@ function showItemDetail(ele) {
     return null;
 }
 
-function reviewDetailClick(event) {
-    event.stopPropagation();
-    const reviewDetailForm = document.getElementById('reviewDetailForm');
-    reviewDetailForm.style.display = 'flex';
+function reviewDetailClick(code) {
+    writeReviewDetailForm(code);
 }
 
 function reivewDetailImgChange(ele) {
@@ -677,26 +678,46 @@ function reviewDetailClose(ele) {
     ele.closest('#reviewDetailForm').style.display = 'none';
 }
 
-// let imgList = document.getElementById('reviewDetailImgBottom');
-// let imgLength = imgList.length;
+let imgList = document.getElementById('reviewDetailImgBottom');
+let imgLength = imgList.length;
 
-// function returnImg(event) {
-//     let returnImg = (imgList + imgLength - 1) % imgLength;
+function returnImg(event) {
+    let returnImg = (imgList + imgLength - 1) % imgLength;
 
-// }
+}
 
+function nextImg(event) {
+    let nextImg = (imgList + 1) % imgLength;
 
-// function nextImg(event) {
-//     let nextImg = (imgList + 1) % imgLength;
+}
 
-// }
+async function itemAskClick() {
+    writeItemAskForm();
+}
 
+async function itemReviewClick() {
+    writeItemReviewForm();
+}
 
 async function writeItemDetailBox(code) {
     window.scrollTo(0, 0);
     main.innerHTML = await makeItemDetailBox(code);
     main.innerHTML += await makeItemReviewBoardBox(code);
     main.innerHTML += await makeAskBoardBox(code);
+}
+
+async function writeReviewDetailForm() {
+    main.innerHTML += await makeReviewDetailForm();
+    reviewDetailForm = document.getElementById('reviewDetailForm');
+
+}
+async function writeItemAskForm() {
+    main.innerHTML += await makeItemAskForm();
+    itemAskForm = document.getElementById('itemAskForm');
+}
+async function writeItemReviewForm() {
+    main.innerHTML += await makeItemReviewForm();
+    reviewWriteForm = document.getElementById('reviewWriteForm');
 }
 
 /* 💻💻💻💻 view model 💻💻💻💻*/
@@ -732,8 +753,7 @@ async function makeItemDetailBox(code) {
                 <div>포장타입</div>
                 <div>${data.storage}</div>
                 <div>판매단위</div>
-                <div>${data.packing
-        }</div>
+                <div>${data.packing}</div>
                 <div>중량/용량</div>
                 <div>${data.weight}g</div>
                 <div>유통기한</div>
@@ -794,42 +814,49 @@ async function makeItemDetailBox(code) {
     return result;
 }
 
-async function makeItemReviewBoardBox(code) {
+async function makeItemReviewBoardBox(itemcode) {
+    let data = await getReview(itemcode);
     let result = `
         <div id="reviewBoardBox" class="container appearContainer">
             <h5>상품후기</h5>
             <span>한줄리뷰 - 제목을 클릭하시면 상세내용을 보실 수 있습니다.</span>
+            <div onclick="reviewWriteClick(this)" id="reviewWrite"> 후기작성 </div>
             <div id="reviewBoard">
                 <div class="reviewBoardRow">
                     <div>별점</div>
                     <div>제목</div>
                     <div>작성자</div>
-                    <div>작성일</div>
+                    <div>등록일</div>
                 </div>
     `;
-
-    for (let i = 0; i < 5; i++) {
+    for (let e of data) {
         result += `
-            <div onclick="showContent(this)" class="reviewContent">
+            <div onclick="reviewDetailClick(${e.seq})" class="reviewContent">
                 <div class="reviewDetail">
-                    <div onclick="reviewDetailClick(this)" id="reivewImg">
-                        <img src="/resources/img/itemImg/5000001_2.jpg" alt="">
-                        <img src="/resources/img/itemImg/5000001_1.jpg" alt="">
+                    <div id="reivewImg">
+                        <img src="/resources/img/itemImg/${e.image1}.jpg" alt="">
+                        <img src="/resources/img/itemImg/${e.image2}.jpg" alt="">
                     </div>
-                    <b>가성비 굳</b>
-                    <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                    </p>
+                    <b>${e.title}</b>
+                    <p>${e.contents}</p>
                 </div>
                 <div>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star-half"></i>
+        `;
+        for (let i = 1; i <= e.score / 2; i++){
+            result += `
+            <i class="fa-solid fa-star"></i>
+            `;
+        }
+        if (e.score % 2) 
+            result += `
+            <i class="fa-solid fa-star-half"></i>
+            `;
+        
+        result +=`
                 </div>
-                <div>가성비 굳</div>
-                <div>작+성자3</div>
-                <div>작성일4</div>
+                <div>${e.title}</div>
+                <div>${e.writer}</div>
+                <div>${e.regdate}</div>
             </div>
         `;
     }
@@ -852,33 +879,34 @@ async function makeItemReviewBoardBox(code) {
     return result;
 }
 async function makeAskBoardBox(code) {
+	let data = await getReview(itemcode);
     let result = `
         <div id="askBoardBox" class="container appearContainer">
             <h5>상품문의</h5>
             <span>상품문의 - 상품에 궁금하신점을 남겨주세요.</span>
-            <a href=""> 문의하기 </a>
+            <div onclick="itemAskClick(event)" id="itemAskWrite">문의하기</div>
             <div id="askBoard">
                 <div class="boardRow">
                     <div></div>
                     <div>답변</div>
                     <div>제목</div>
                     <div>작성자</div>
-                    <div>작성일</div>
+                    <div>작성일자</div>
                 </div>
         `;
 
-    for (let i = 0; i < 5; i++) {
+    for (let e of data) {
         result += `
             <div onclick="showContent(this)" class="boardRow">
                     <div class="askContents">
-                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                        ${e.contents}
                         <a>답변</a>
                         <a>삭제</a>
                     </div>
                     <div>미답변</div>
-                    <div>제목</div>
-                    <div>작성자</div>
-                    <div>작성일</div>
+                    <div>${e.title}</div>
+                    <div>${e.writer}</div>
+                    <div>${e.regdate}</div>
                 </div>
             `;
     }
@@ -899,6 +927,123 @@ async function makeAskBoardBox(code) {
     return result;
 }
 
+async function makeReviewDetailForm() {
+    let data = await getReview(itemcode);
+    let result = `
+        <div onclick="reviewDetailClick(code)" id="reviewDetailForm">
+        <div id="reviewDetailBox">
+            <div id="reviewDetailImg">
+                <div id="reviewDetailImgTop">
+                    <img src="../resources/img/itemImg/${e.image2}" alt="">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+                <div id="reviewDetailImgBottom">
+                    <img onclick="reivewDetailImgChange(this)" src="../resources/img/${e.image1}" alt="">
+                    <img onclick="reivewDetailImgChange(this)" src="../resources/img/${e.image2}" alt="">
+                </div>
+            </div>
+            <div id="reviewDetail_Write">
+                <p>구매상품 이름</p>
+                <p>${e.writer}</p>
+                <p>${e.regdate}</p>
+                <p id="reviewDetail_Final">${e.contents}</p>
+            </div>
+            <div onclick="reviewDetailClose(this)" id="reviewDetailBoxClose"><i class="fa-solid fa-xmark"></i></div>
+        </div>
+    </div>
+    `;
+    return result;
+}
+
+async function makeItemAskForm() {
+    let result = `
+    <div id="itemAskForm">
+        <div id="itemAskBox">
+            <div id="itemAskTop">
+                <div>상품 문의하기</div>
+                <img src="../resources/img/itemImg/5000100_1.jpg" alt="">
+                <div>[밀키트] 밀키트다 밀키트다</div>
+            </div>
+            <div id="itemAskBottom">
+                <div>제목 <input type="text" placeholder="제목을 입력해주세요"></input></div>
+                <div>내용 
+                    <input type="text" placeholder="상품 문의 작성 전 확인해주세요.
+                        1. 답변은 영업일 기준 2~3일 소요됩니다.
+                        2. 해당 게시판은 성격과 다른 글은 사전 동의 없이 담당 게시판으로 이동될 수 있습니다.
+                        3. 배송관련, 주문(취소/교환/반품)관련 문의 요청사항은 마켓컬리 1:1 문의에 남겨주세요">
+                    </input>
+                </div>
+            </div>
+            <div id="itemAskPrivacy">
+                <input type="checkbox" name="privacyBox">
+                <div>비밀글로 문의하기</div>
+            </div>
+            <div id="itemAskButton">
+                <button id="itemAskBoxCancle">취소</button>
+                <button id="itemAskBoxEnter">등록</button>
+            </div>
+            <div onclick="itemAskBoxClose(this)" id="itemAskBoxClose"><i class="fa-solid fa-xmark"></i></div>
+        </div>
+    </div>
+    `;
+    return result;
+}
+
+async function makeItemReviewForm(){
+	let result=`
+	<div id="reviewWriteForm">
+        <div id="reviewWriteBox">
+            <div id="reviewWriteTop">
+                <div>상품 후기 작성하기</div>
+                <img src="../resources/img/itemImg/5000100_1.jpg" alt="">
+                <div id="itemTitle">작성할 상품의 제목 넣으셈</div>
+                <div>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half"></i>
+                </div>
+            </div>
+            <div id="reviewWriteBottom">
+                <div id="reviewWriteTitle">
+                    <div>리뷰</div>
+                    <input type="radio">맛있어요</input>
+                    <input type="radio">보통이에요</input>
+                    <input type="radio">생각보다 별로에요</input>
+                </div>
+                <div id="reviewWriteContent">
+                    <div>상세리뷰</div>
+                    <input type="text" placeholder="
+                        다른 고객님에게 도움이 되도록 상품에 대한 솔직한 평가를 300자 이내로 남겨주세요.
+                        (상품 품질과 관계 없는 배송, 포장, 질문 응대, 상품 가격 등은 판매자 서비스 평가에 남겨주세요.)">
+                    </input>
+                </div>
+                <div id="reviewWriteContentBottom">
+                    <div>* 상품 품질과 관계 없는 내용은 비공개 처리 될 수 있습니다</div>
+                    <div>* 작성된 리뷰는 '마이페이지> 상품 후기 관리' 에서 수정 및 삭제 가능합니다</div>
+                </div>
+                <div id="reviewWritePhoto">
+                    <div id="reviewPhoto">사진첨부</div>
+                    <div>
+                        <label>사진 첨부하기</label>
+                    </div>
+                </div>
+            </div>
+            <div id="reviewWriteButton">
+                <button id="reviewWriteCancle">취소</button>
+                <button id="reviewWriteEnter">등록</button>
+            </div>
+            <div onclick="reviewWriteBoxClose(this)" id="reviewWriteBoxClose"><i class="fa-solid fa-xmark"></i></div>
+        </div>
+    </div>
+	`;
+	return result;
+}
+
+
+
 /* 📦📦📦📦 model 📦📦📦📦*/
 async function getItem(code) {
     const uri = "item/detail?code=" + code;
@@ -907,6 +1052,23 @@ async function getItem(code) {
     });
     return response.data;
 }
+
+async function getReview(itemcode) {
+    const uri = `itemreview/select/${itemcode}`;
+    const response = await axios.get(uri).catch(err => {
+
+    });
+    return response.data;
+}
+
+async function getAsk(itemcode) {
+    const uri = `itemask/select/${itemcode}`;
+    const response = await axios.get(uri).catch(err => {
+
+    });
+    return response.data;
+}
+
 
 /* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Login 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
 /* 📗📗📗📗 TAG 📗📗📗📗 */
@@ -1091,6 +1253,24 @@ function makeLoginPage() {
     `;
     return result;
 }
+
+async function requestLogin() {
+    let id = document.getElementById('id').value;
+    let password = document.getElementById('password').value;
+    let uri = `user/login`;
+    let data = {
+        id: id,
+        password: password
+    }
+    let response = await axios.post(uri, null, {
+        params: {
+            id: id,
+            password: password
+        }
+    });
+    return response.data;
+}
+
 
 // 사용X (makeLoginPage 에 더해서 작성 중)
 function makeSign() {

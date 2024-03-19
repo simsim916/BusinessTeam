@@ -89,3 +89,8 @@ function thirdContainerSlideLeftBth(event) {
     }
 }
 
+function itemAskClick(event) {
+    event.stopPropagation();
+    const reviewDetailForm = document.getElementById('itemAskForm');
+    reviewDetailForm.style.display = 'flex';
+}
