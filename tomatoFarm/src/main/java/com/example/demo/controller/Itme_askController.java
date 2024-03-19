@@ -21,12 +21,12 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @AllArgsConstructor
 @RestController
-@RequestMapping(value="/item")
+@RequestMapping(value="/itemask")
 public class Itme_askController {
 	private final Item_askService item_askService;
 	
-	@GetMapping("/itemask/{keyword}")
-	public ResponseEntity<?> selectItem_askList(@PathVariable("keyword") String keyword){
+	@GetMapping("/select/{itemcode}")
+	public ResponseEntity<?> selectItem_askList(@PathVariable("itemcode") String keyword){
 		ResponseEntity<?> result = null;
 		PageRequest pageRequest = new PageRequest(1,11);
 		SearchRequest searchRequest = new SearchRequest(keyword);
