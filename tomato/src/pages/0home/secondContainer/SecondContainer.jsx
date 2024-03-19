@@ -12,12 +12,12 @@ const SecondContainer = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     let secondSlideBtnRef = useRef(null);
+    let slideBox = useRef(null);
+    let selectedBox = useRef(null);
 
-    console.log('aa')
     useEffect(() => {
         axios.get('http://localhost:8090/item/eventitem'
         ).then(res => {
-            console.log('bb')
             setEventItemList(res.data);
             setLoading(false);
         }).catch(err => {
@@ -31,27 +31,57 @@ const SecondContainer = () => {
     if (error) return <Error />
 
     function secondContainerSlideLeftbth(event) {
-        document.getElementById('secondSlideBtnSelected').removeAttribute("id");
-        let margin = event.target.closest('#secondContainerList').children[0].style.marginLeft.replace('px', '');
+        let margin = slideBox.current.style.marginLeft.replace('px', '');
+        secondSlideBtnRef.current.children[`${5 - margin / 440}`].removeAttribute("id");
+        if (slideBox.current.style.marginLeft == '') {
+            slideBox.current.style.marginLeft = "440px";
+            secondSlideBtnRef.current.children[`${5 - 440 / 440}`].setAttribute("id", "secondSlideBtnSelected")
+            return;
+        }
         if (margin < 2200) {
             margin = +margin + 440;
         }
-        console.log(secondSlideBtnRef.current)
-        // secondSlideBtn.children[`${5 - margin / 440}`].setAttribute("id", "secondSlideBtnSelected")
-        // slideBox[0].style.marginLeft = `${margin}px`;
+        secondSlideBtnRef.current.children[`${5 - margin / 440}`].setAttribute("id", "secondSlideBtnSelected")
+        slideBox.current.style.marginLeft = `${margin}px`;
     }
 
     function secondContainerSlideRightbth(event) {
+        let margin = slideBox.current.style.marginLeft.replace('px', '');
+        secondSlideBtnRef.current.children[`${5 - margin / 440}`].removeAttribute("id");
+        if (slideBox.current.style.marginLeft == '') {
+            slideBox.current.style.marginLeft = "-440px";
+            secondSlideBtnRef.current.children[`${5 + 440 / 440}`].setAttribute("id", "secondSlideBtnSelected")
+            return;
+        }
+        if (margin > -2200) {
+            margin -= 440;
+        }
+        secondSlideBtnRef.current.children[`${5 - margin / 440}`].setAttribute("id", "secondSlideBtnSelected")
+        slideBox.current.style.marginLeft = `${margin}px`;
     }
 
     function secondContainerSlideBtn(event) {
+        let target = event.target;
+        if (event.target.id != 'secondSlideBtn') {
+            selectedBox.current.removeAttribute("id");
+            selectedBox.current =event.target;
+            event.target.setAttribute("id", "secondSlideBtnSelected");
+            let index = 0;
+            for (let a of secondSlideBtnRef.current.children) {
+                if (target == a) {
+                    break;
+                }
+                ++index;
+            }
+            slideBox.current.style.marginLeft = `${2200 - (440 * index)}px`;
+        }
     }
 
     return (
         <div id="secondContainer" className="container">
             <h3> <i className="fa-solid fa-gift"></i> 특가 상품 <i className="fa-solid fa-gift"></i></h3>
             <div id="secondContainerList">
-                <div className="slideBox">
+                <div ref={slideBox} className="slideBox">
                     {eventItemList.map((e, i) => <ItemBox data={e} key={i} />)}
                 </div>
 
@@ -61,7 +91,7 @@ const SecondContainer = () => {
                     <div></div>
                     <div></div>
                     <div></div>
-                    <div id="secondSlideBtnSelected"></div>
+                    <div id="secondSlideBtnSelected" ref={selectedBox}></div>
                     <div></div>
                     <div></div>
                     <div></div>

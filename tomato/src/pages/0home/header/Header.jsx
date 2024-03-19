@@ -8,7 +8,8 @@ const Header = () => {
 
     const navigate = useNavigate();
 
-    function searchBox(event) {
+    
+    const searchBox = (event) => {
         event.preventDefault();
         let keyword = event.target.closest('form').children[0].value;
         navigate('/list?keyword=프레시지');
