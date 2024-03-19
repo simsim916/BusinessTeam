@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 //** JPA Paging & Sort
 		// => https://bnzn2426.tistory.com/135
@@ -15,19 +17,27 @@ import lombok.Setter;
 
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class PageRequest {
 	
 	private int page; // 출력페이지
 	private int size; // 1page 당 출력 row 갯수
-
-	private int startData; // 출력할 데이터 시작
-	private int endData; // 출력할 데이터 끝
+	private int startNum; // 페이지의 나타날 데이터 중 시작데이터 순서
+	private int currPage;
 	
-	public PageRequest() {
-		this.page=1;
-		this.size=5;
+	public PageRequest(int currPage, int size) {
+		this.currPage=currPage;
+		this.size=size;
+	}
+	
+	public void setStartEndNum(int currPage) {
+		if(this.startNum < 1) {
+			this.startNum = 1;
+		}
+		this.startNum = (this.currPage-1)*(this.size);
 	}
 	
 	public PageRequest(int page, int size){

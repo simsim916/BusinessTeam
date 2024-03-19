@@ -1,0 +1,19 @@
+#bodyBG {
+    height: 100vh;
+    background-position: center;
+    background-position-x: -200px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#contentBox {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: flex;
+    height: 100%;
+    overflow: hidden;
+    background-color: #9B1B30;
+    width: 30%;
+    min-width: 550px;
+}

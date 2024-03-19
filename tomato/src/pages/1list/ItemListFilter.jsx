@@ -1,9 +1,10 @@
 import { useSearchParams } from "react-router-dom";
 import './itemList.css'
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 
 const ItemListFilter = ({ filterCheckedList, keyword }) => {
     const [searchParams, setSearchParams] = useSearchParams();
+    const listfilter = useRef(null);
 
     function checkAll(event) {
         let target = event.target.closest('li');
@@ -46,21 +47,24 @@ const ItemListFilter = ({ filterCheckedList, keyword }) => {
         }
     }
 
-    useMemo(() => {
-        window.addEventListener('scroll', function () {
-            let listfilter = document.getElementById("listfilter");
+    useEffect(() => {
+        const listScroll = () => {
             listfilter.style.height = `calc(100vh - 320px - 30px + ${window.scrollY}px)`;
             if (window.scrollY <= 300) {
                 listfilter.style.top = `calc(325px - ${window.scrollY}px)`;
             } else {
                 listfilter.style.top = `30px`;
             }
-        });
+        }
+
+
+        window.addEventListener('scroll', listScroll);
+        return window.removeEventListener('scroll', listScroll)
     }, [])
 
     return (
         <>
-            <div id="listfilter">
+            <div id="listfilter" ref={listfilter}>
                 <ul>
                     <li onClick={showList} className="sortB">
                         <i onClick={checkAll} className="fa-regular fa-circle-check"></i>

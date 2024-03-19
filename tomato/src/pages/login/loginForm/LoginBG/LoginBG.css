@@ -1,0 +1,158 @@
+#loginBG {
+    transition: 3s;
+    width: 100%;
+    position: absolute;
+    left: 0;
+}
+
+#loginBG>div {
+    right: calc((600px - 500px) / 2);
+    border-radius: 40px;
+    width: 500px;
+    height: 470px;
+    display: block;
+    background-color: white;
+    margin: calc((923px - 470px) / 2) auto;
+}
+
+#loginBox {
+    margin: auto;
+    margin-top: 90px;
+    position: relative;
+    width: 350px;
+
+}
+
+#loginBox>#loginButton {
+    text-align: center;
+    font-weight: 500;
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    border: none;
+    display: flex;
+}
+
+#loginButton>div {
+    width: 50%;
+    line-height: 40px;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+#loginButton>div:nth-of-type(1) {
+    border-top-left-radius: 10px;
+    border-left: 1px solid #564f45;
+    border-top: 1px solid #564f45;
+    background-color: #9B1B30;
+    color: white;
+}
+
+#loginButton>div:nth-of-type(2) {
+    border-top-right-radius: 10px;
+    border: 1px solid #564f45;
+}
+
+#loginBox>div {
+    border: 1px solid #564f45;
+    width: 350px;
+    margin: auto;
+    line-height: 50px;
+    font-size: 18px;
+}
+
+
+#loginBox>#idBox {
+    border-bottom: 0.5px solid #564f45;
+    border-top: none;
+}
+
+#loginBox>#passwordBox {
+    border-top: 0.5px solid #564f45;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+#loginBox>div>i {
+    width: 50px;
+    text-align: center;
+    font-size: 16px;
+    opacity: 0.3;
+}
+
+#loginBox>div>input {
+    border: none;
+    width: 280px;
+
+}
+
+#loginInBox {
+    margin: auto;
+    width: 350px;
+    height: 40px;
+    font-size: 20px;
+    background-color: #9B1B30;
+    color: white;
+    margin-top: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#loginBox>#idBox {
+    border-bottom: 0.5px solid #564f45;
+    border-top: none;
+}
+
+/* ========================== */
+#logo {
+    height: 80px;
+    position: relative;
+    top: 30px;
+    left: 35%;
+    margin: auto;
+    display: inline-block;
+}
+
+#errorBox {
+    width: 350px;
+    font-size: 12px;
+    padding-left: 5px;
+    color: #9B1B30;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#search {
+    list-style: none;
+    display: flex;
+    margin: auto;
+    width: 300px;
+    padding: 10px;
+    font-size: 12px;
+    margin-top: 20px;
+}
+
+#search>li {
+    width: 100px;
+    margin: auto;
+    text-align: center;
+}
+
+#search span:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    color: blue;
+}
+
+#successOrNot {
+    width: 350px;
+    margin: auto;
+    font-size: 12px;
+    padding-left: 5px;
+    color: #9B1B30;
+    /* margin-top: 5px; */
+    /* margin-bottom: 5px; */
+    text-indent: inherit;
+}
+
+/* ========================== */

@@ -49,9 +49,22 @@ public class UserController {
 		return result;
 	}
 	
+	
 	@PostMapping("/signup")
 	public ResponseEntity<?> singup(UserDTO dto) {
 		ResponseEntity<?> result = null;
+		
+		System.out.println("\n***************\n");
+//		System.out.println("getId => " + dto.getId());
+//		System.out.println("password => " + dto.getPassword());
+//		System.out.println("getName => " + dto.getName());
+//		System.out.println("getPhonenumber => " + dto.getPhonenumber());
+//		System.out.println("getAddress2 => " + dto.getAddress2());
+//		System.out.println("password => " + dto.getGender());
+//		System.out.println("password => " + dto.getBirthdate());
+		System.out.println("password => " + dto.getEmail());
+		System.out.println("password => " + dto.getEmail2());
+		
 		
 		String password = dto.getPassword();
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();

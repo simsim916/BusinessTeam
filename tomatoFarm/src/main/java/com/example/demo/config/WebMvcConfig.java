@@ -12,6 +12,10 @@ public class WebMvcConfig implements WebMvcConfigurer{
 		registry.addViewController("/").setViewName("redirect:/home");
 	}
 	
+	public void addViewControllers2(ViewControllerRegistry registry) {
+		registry.addViewController("/orderpage").setViewName("redirect:/orderpage");
+	}
+	
 	
 	
 }

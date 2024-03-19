@@ -10,6 +10,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 //** JPA Paging & Sort
 		// => https://bnzn2426.tistory.com/135
@@ -23,6 +24,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class SearchRequest {
 	
 	private List<String> type; // 검색 옵션
