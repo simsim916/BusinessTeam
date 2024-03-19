@@ -4,26 +4,70 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.domain.ItemDTO;
+import com.example.demo.domain.SortDTO;
 import com.example.demo.entity.Item;
-import com.example.demo.entity.Sorttable;
+import com.example.demo.module.PageRequest;
+import com.example.demo.module.SearchRequest;
 import com.example.demo.repository.ItemRepository;
-import com.example.demo.repository.SortRepository;
 import com.example.demo.service.ItemService;
-import com.example.demo.service.SortService;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @AllArgsConstructor
 @Service
 public class ItemServiceImpl implements ItemService{
 
-	private final ItemRepository mealkitRepository;
+	private final ItemRepository itemRepository;
 	
 	@Override
-	public List<Item> selectMealkitWhereEvent_D() {
-		return mealkitRepository.selectMealkitWhereEvent_D();
+	public List<ItemDTO> selectItemWhereEvent(PageRequest pageRequest) {
+		
+		List<ItemDTO> result = itemRepository.selectItemWhereEvent(pageRequest);
+		
+		return result;
+	}
+	
+	@Override
+	public List<ItemDTO> selectItemWherebrand(PageRequest pageRequest, SearchRequest searchRequest) {
+		
+		List<ItemDTO> result = itemRepository.selectItemWherebrand(pageRequest,searchRequest);
+		
+		return result;
+	}
+	
+	@Override
+	public List<ItemDTO> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest) {
+		List<ItemDTO> result = itemRepository.selectItemWhereSearchType(pageRequest,searchRequest);
+		return result;
+	}
+	
+	@Override
+	public List<ItemDTO> selectItemWhereKeyword(SearchRequest searchRequest) {
+		List<ItemDTO> result = itemRepository.selectItemWhereKeyword(searchRequest);
+		return result;
+	}
+	
+	@Override
+	public List<SortDTO> selectSortWhereKeyword(SearchRequest searchRequest) {
+		List<SortDTO> result = itemRepository.selectSortWhereKeyword(searchRequest);
+		return result;
+	}
+	
+	@Override
+	public List<SortDTO> selectSortList() {
+		return itemRepository.selectSortList();
+	}
+	
+	@Override
+	public ItemDTO selectItemWhereCode(SearchRequest searchRequest) {
+		return itemRepository.selectItemWhereCode(searchRequest);
 	}
 	
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 	
+	
 }
+	

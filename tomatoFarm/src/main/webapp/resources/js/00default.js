@@ -1,11 +1,14 @@
 'use strict'
 
-let hides = document.getElementsByClassName("hide");
+const hides = document.getElementsByClassName("hide");
+
+
 
 // hide
 window.addEventListener("scroll", () => {
     for (let e of hides) {
-        if (e.getBoundingClientRect().top < 100 + window.innerHeight) {
+        if (e.getBoundingClientRect().top < 0 + window.innerHeight) {
+            e.style.transition = "0.8s";
             e.classList.remove('hide');
             e.style.visibility = "visible";
             e.style.marginTop = "30px";
@@ -23,4 +26,9 @@ function showContent(ele) {
         }
         ele.classList.add('appear');
     }
+}
+
+// 쉼표 찍기
+function makeComa() {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }

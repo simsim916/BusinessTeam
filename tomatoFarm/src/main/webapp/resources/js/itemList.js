@@ -1,6 +1,8 @@
-const listfilter = document.getElementById("listfilter");
+
 
 let filterCheckedList = [];
+
+
 
 function checkList() {
     console.log("--- checkC ---")
@@ -9,15 +11,7 @@ function checkList() {
     }
 }
 
-window.addEventListener('scroll', function () {
-    listfilter.style.height = `calc(100vh - 320px - 30px + ${window.scrollY}px)`;
-    if (window.scrollY <= 300) {
-        listfilter.style.top = `calc(325px - ${window.scrollY}px)`;
-    } else {
-        listfilter.style.top = `30px`;
-    }
-    console.log(window.scrollY);
-});
+
 
 function showList(event) {
     let target = event.target.closest('li');
@@ -77,13 +71,12 @@ function checkALL(event) {
         for (let e of target.getElementsByTagName('li')) {
             e.classList.add('selected');
             if (!filterCheckedList.includes(e.innerText))
-                filterCheckedList.push(e.innerText);
+               ilterCheckedList.push(e.innerText);
         }
     }
     event.stopPropagation();
     checkList();
 }
 
-function selfCheck() {
+function  fselfCheck() {}
 
-}

@@ -5,6 +5,7 @@ hr {
 .opened>ul {
     display: block !important;
 }
+
 .selected>i {
     color: #9B1B30;
     opacity: 1 !important;
@@ -133,7 +134,7 @@ hr {
     height: 30px;
 }
 
-#container {
+#listContainer {
     padding-left: 280px;
     margin-top: 30px;
     display: grid;
@@ -210,7 +211,7 @@ hr {
 /* 모바일 반응형 */
 
 @media (max-width : 1023px) {
-    #container {
+    #listContainer {
         grid-template-rows: 30px repeat(4, 1fr);
         grid-template-columns: repeat(3, minmax(calc((800px - 280px - 10px - 30px)/4), calc((1200px - 280px - 10px - 30px)/4)));
         height: calc((100vw - 280px - 30px - 10px)/3*2*4 + 150px);
