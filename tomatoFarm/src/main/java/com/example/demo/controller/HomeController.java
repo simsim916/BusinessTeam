@@ -24,5 +24,7 @@ public class HomeController {
 		System.out.println(passwordEncoder.encode("1234"));
 	}
 	
-	
+	@GetMapping("/orderpage")
+	public void orderpage() {
+	}
 }

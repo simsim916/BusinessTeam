@@ -238,3 +238,10 @@
 .dataColumn>input {
     width: calc((100% / 15));
 }
+
+
+#pageNation {
+    display: flex;
+    gap: 30px;
+    margin: 0 auto;
+}

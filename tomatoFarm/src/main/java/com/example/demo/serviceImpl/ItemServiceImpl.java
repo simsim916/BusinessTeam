@@ -68,6 +68,12 @@ public class ItemServiceImpl implements ItemService{
 	
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 	
+	public int batchInsert(List<Item> entity) {
+		return (int)itemRepository.batchInsert(entity);
+	}
 	
+	public List<ItemDTO> selectAll() {
+		return itemRepository.selectAll();
+	}
 }
 	

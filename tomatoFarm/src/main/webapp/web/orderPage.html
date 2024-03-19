@@ -18,9 +18,9 @@
     <script src="https://kit.fontawesome.com/d68045e863.js" crossorigin="anonymous"></script>
     <title>Document</title>
 
-    <link rel="stylesheet" href="./CSS/orderPageT.css">
+    <link rel="stylesheet" href="../resources/css/orderPage.css">
+    <script defer src="../resources/js/orderPage.js"></script>
 
-    <script defer src="./Javascript/orderPageT.js"></script>
 </head>
 
 <body>
@@ -245,15 +245,16 @@
                     <input type="text">
                 </div>
             </div>
-
-
-            <!-- 
-            테이블로 치면 th만 정의해둔 상황에서
-            td들은 결국 데이터를 가져올텐데, grid로 설정해두면
-            row 는 2로 고정된 상황에서 데이터가 추가되면 어떻게 되는가?
-            -->
-
         </div>
+<!-- ================================================ -->
+<div id="pageNation">
+    <div onclick="movePage(event)">1</div>
+    <div onclick="movePage(event)">2</div>
+    <div onclick="movePage(event)">3</div>
+    <div onclick="movePage(event)">4</div>
+    <div onclick="movePage(event)">5</div>
+</div>
+<!-- ================================================ -->
 
         <div id="orderListBox">
             <div>

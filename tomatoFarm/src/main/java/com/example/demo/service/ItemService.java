@@ -69,5 +69,7 @@ public interface ItemService {
 	
 	ItemDTO selectItemWhereCode(SearchRequest searchRequest);
 	
+	int batchInsert(List<Item> entity);
+	List<ItemDTO> selectAll();
 	
 }

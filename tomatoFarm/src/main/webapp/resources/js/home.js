@@ -1093,6 +1093,9 @@ let idCheck = false;
 let pwCheck = false;
 let nameCheck = false;
 let phoneCheck = false;
+// ===============================
+let idInput;
+let pwInput;
 
 /* 📖📖📖📖 view 📖📖📖📖*/
 // 로그인 페이지 작성
@@ -1120,12 +1123,13 @@ function writeLoginPage() {
     phoneCheck = false;
 }
 // 로그인 -> 회원가입 애니메이션
-function writeSign() {
-    document.getElementById('loginBG').style.transform = "translate(-100%,0)";
-    // body.innerHTML += makeSign();
-    document.getElementById('signBG').style.transform = "translate(-100%,0)";
-    document.getElementById('signBG').style.zIndex = '2';
+
+
+function clickLogin() {
+    document.getElementById('loginBG').style.transform = "translate(0,0)";
+    document.getElementById('signBG').style.transform = "translate(0,0)";
 }
+
 /* 💻💻💻💻 view model 💻💻💻💻*/
 // 로그인 HTML코드 작성
 function makeLoginPage() {
@@ -1133,6 +1137,7 @@ function makeLoginPage() {
     <div id="bodyBG"></div>
     <div id="contentBox">
         <div id="signBG">
+        <div onclick="clickLogin()" id="historyback"><i class="fa-solid fa-arrow-left"></i></div>
             <div>
                 <a href="/tomatoFarm/"><img id="logo" src="/resources/img/logo.png"></img></a>
                 <h3>회원가입</h3>
@@ -1349,7 +1354,7 @@ function makeSign() {
                 <input onkeydown="changeOpacity2(event)" type="text" name="month" placeholder="mm" maxlength="2">
                 <input onkeydown="changeOpacity2(event)" type="text" name="day" placeholder="dd" maxlength="2">
             </div>
-            <button id="joinBox" disabled>가입하기</button>
+            <button type="button" onclick="requestSign()" id="joinBox" disabled>가입하기</button>
         </form>
         <br>
         <p id="successOrNot">
@@ -1359,17 +1364,22 @@ function makeSign() {
     return result;
 }
 
-/* 📦📦📦📦 model 📦📦📦📦*/
+/* 💻💻💻💻 view 💻💻💻💻*/
+function writeSign() {
+    document.getElementById('loginBG').style.transform = "translate(-100%,0)";
+    document.getElementById('signBG').style.transform = "translate(-100%,0)";
+    document.getElementById('signBG').style.zIndex = '2';
+}
 
-/* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Login 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
-/* 📗📗📗📗 TAG 📗📗📗📗 */
-/* 📖📖📖📖 view 📖📖📖📖*/
-/* 💻💻💻💻 view model 💻💻💻💻*/
+
 /* 📦📦📦📦 model 📦📦📦📦*/
 
 
 
 async function requestLogin() {
+    idInput = document.getElementById("id");
+    pwInput = document.getElementById("password");
+    errorBox = document.getElementById('errorBox');
     let id = document.getElementById('id').value;
     let password = document.getElementById('password').value;
     let uri = `user/login`;
@@ -1385,7 +1395,7 @@ async function requestLogin() {
     });
 }
 
-function requestSign() {
+async function requestSign() {
     let idValue = idBox.children[1].value;
     let pwdValue = passwordBox.children[1].value;
     let nameValue = nameBox.children[1].value;
@@ -1405,28 +1415,124 @@ function requestSign() {
         + birthdayBox.children[3].value;
 
 
-    let data = {
-        idValue: idValue,
-        pwdValue: pwdValue,
-        nameValue: nameValue,
-        phonenumberValue: phonenumberValue,
-        addressValue: addressValue,
-        emailFrontValue: emailFrontValue,
-        emailBackValue: emailBackValue,
-        genderValue: genderValue,
-        birthdateValue: birthdateValue
-    }
 
-    console.log(data);
+    let uri = "user/signup";
 
-
-
+    let response = await axios.post(uri, null, {
+        params: {
+            id: idValue,
+            password: pwdValue,
+            name: nameValue,
+            phonenumber: phonenumberValue,
+            address2: addressValue,
+            email: emailFrontValue,
+            email2: emailBackValue,
+            gender: genderValue,
+            birthdate: birthdateValue
+        }
+    });
 
 }
 
+// ===============================================
 
-// ===============================================
-// ===============================================
+function selectLoginType(ele) {
+    idInput.value = "";
+    pwInput.value = "";
+    idBox.style.border = "1px solid #564f45";
+    idBox.style.borderBottom = "0.5px solid #564f45";
+    idBox.children[0].style.color = "black";
+    idBox.children[0].style.opacity = "0.3";
+    passwordBox.style.border = "1px solid #564f45";
+    passwordBox.style.borderTop = "0.5px solid #564f45";
+    passwordBox.children[0].style.color = "black";
+    passwordBox.children[0].style.opacity = "0.3";
+    for (let e of errorBox.children) {
+        e.innerText = '';
+    }
+    if (ele.innerText == "일반 로그인") {
+        ele.style.backgroundColor = "#9B1B30 ";
+        ele.style.borderBottom = "none";
+        ele.style.color = "white";
+        ele.nextElementSibling.style.backgroundColor = "white";
+        ele.nextElementSibling.style.color = "black";
+        ele.nextElementSibling.style.borderBottom = "1px solid #564f45";
+    } else {
+        ele.style.backgroundColor = "#9B1B30 ";
+        ele.style.borderBottom = "none";
+        ele.style.color = "white";
+        ele.previousElementSibling.style.backgroundColor = "white";
+        ele.previousElementSibling.style.color = "black";
+        ele.previousElementSibling.style.borderBottom = "1px solid #564f45";
+    }
+}
+
+function focusInputBox(event) {
+    let box = event.target.closest('div');
+    for (e of box.children) {
+        e.style.opacity = "1";
+    }
+    box.style.border = "2px solid #9B1B30";
+}
+
+function changeOpacityId(event) {
+    let box = event.target.closest('div');
+    for (e of box.children) {
+        e.style.opacity = "1";
+    }
+    if (event.which == 13) {
+        event.preventDefault();
+        pwInput.focus();
+    }
+}
+
+function changeOpacityPw(event) {
+    let box = event.target.closest('div');
+    for (e of box.children) {
+        e.style.opacity = "1";
+    }
+    return true;
+}
+
+function checkId(event) {
+    let value = event.target.value;
+    let key = /[a-z.0-9.-._]/gi;
+
+    if (value.length < 4 || value.length > 15) {
+        idBox.style.border = "2px solid #FF3F3F";
+        idBox.style.borderBottom = "1px solid #FF3F3F";
+        idBox.children[0].style.color = "#FF3F3F";
+        document.getElementById('idError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;아이디 : 4 ~ 15 글자 이하만 가능합니다.<br>`;
+    } else if (value.replace(key, '').length > 0) {
+        idBox.style.border = "2px solid #FF3F3F";
+        idBox.style.borderBottom = "1px solid #FF3F3F";
+        idBox.children[0].style.color = "#FF3F3F";
+        document.getElementById('idError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;아이디 : 영문, 숫자, 특수문자(-, _)만 가능합니다.<br>`;
+    } else {
+        idBox.style.border = "2px solid #03C75A";
+        idBox.style.borderBottom = "1px solid #03C75A";
+        idBox.children[0].style.color = "#03C75A";
+        document.getElementById('idError').innerHTML = '';
+    }
+}
+
+function checkPassword(event) {
+    let value = event.target.value;
+    let key = /[a-z.0-9.!-*.@]/gi;
+
+    if (value.length < 4 || value.length > 15) {
+        passwordBox.style.border = "2px solid #FF3F3F";
+        passwordBox.style.borderTop = "1px solid #FF3F3F";
+        passwordBox.children[0].style.color = "#FF3F3F";
+        document.getElementById('pwError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;비밀번호 : 4 ~ 15 글자 이하만 입력해주세요.<br>`;
+    } else {
+        passwordBox.style.border = "2px solid #03C75A";
+        passwordBox.style.borderTop = "1px solid #03C75A";
+        passwordBox.children[0].style.color = "#03C75A";
+        document.getElementById('pwError').innerHTML = '';
+    }
+}
+
 
 function focusInputBox(event) {
     let box = event.target.closest('div');
@@ -1458,6 +1564,7 @@ function changeOpacityPw(event) {
         event.preventDefault();
         nameBox.children[1].focus();
     }
+    console.log(`리턴없는놈이다`);
 }
 function changeOpacityName(event) {
     let box = event.target.closest('div');
@@ -1506,8 +1613,6 @@ function changeOpacity2(event) {
 }
 
 function checkId(event) {
-    // let test = document.getElementById('idBox');
-    // console.log(test);
     console.log(idBox);
     let value = event.target.value;
     let key = /[a-z.0-9.-._]/gi;
@@ -1661,4 +1766,431 @@ function checkAll() {
     }
 }
 // ============================================
-// ============================================
+
+function selectAll() {
+    const checkboxes = document.getElementsByClassName(".chk");
+    // console.log(checkAll);
+    if (checkAll.checked) {
+        const checkboxes = document.querySelectorAll('.chk');
+
+        for (const a of checkboxes) {
+            a.checked = true;
+        }
+    } else {
+        const checkboxes = document.querySelectorAll('.chk');
+
+        for (const a of checkboxes) {
+            a.checked = false;
+        }
+    }
+}
+
+function uncheckedAllBox() {
+    checkAll.checked = false;
+}
+
+function insertData() {
+    const makeDiv = document.createElement("div");
+
+    for (let index = 0; index < 12; index++) {
+        if (index == 0) {
+            orderList.appendChild(makeDiv);
+            const makeInput = makeDiv.createElement("input");
+            makeInput.className = "chk";
+        } else {
+            orderList.appendChild(makeDiv);
+        }
+        orderList.appendChild(makeDiv);
+    }
+    orderList.appendChild(makeDiv);
+}
+
+// ======================================================================
+/* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 CommandPage 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
+/* 📗📗📗📗 TAG 📗📗📗📗 */
+let row;
+let excelBox;
+
+
+
+/* 📖📖📖📖 view 📖📖📖📖*/
+async function writeCommand() {
+    body.innerHTML = await makeCommand();
+    row = document.getElementsByClassName('excelColumn');
+    excelBox = document.getElementById('excelBox');
+}
+
+/* 📖📖📖📖 view model 📖📖📖📖*/
+async function makeCommand() {
+    let data = await getAllItem();
+    console.log(data);
+    let result = `
+        <div id="topBar">
+        <i class="fa-solid fa-house"></i>
+    </div>
+    <div id="sideBar">
+        <div>토마토팜</div>
+        <ul>
+            <li onclick="openDetailFirst()">
+                <div><i class="fa-solid fa-bars"></i><br>전체메뉴</div>
+            </li>
+            <li>
+                <div><i class="fa-solid fa-circle-user"></i><br>즐겨찾기</div>
+            </li>
+            <li>
+                <div><i class="fa-solid fa-list-check"></i><br>최근메뉴</div>
+            </li>
+            <li>
+                <div><i class="fa-solid fa-bullhorn"></i><br>공지사항</div>
+            </li>
+            <li>
+                <div><i class="fa-solid fa-bell"></i><br>알림</div>
+            </li>
+            <li>
+                <div><i class="fa-solid fa-comment-dots"></i><br>고객센터</div>
+            </li>
+            <li>
+                <div><i class="fa-solid fa-gear"></i><br>설정</div>
+            </li>
+        </ul>
+        <div onclick="openSideBar()" id="sideBarButton"><i class="fa-solid fa-chevron-right"></i></div>
+        <div id="sideBarDetail">
+            <div id="sideBarDetailFirst">
+                <ul>
+                    <li>상품주문</li>
+                    <li>상품조회/검색</li>
+                    <li>주문조회</li>
+                    <li>클레임 처리현황</li>
+                    <li>출력물</li>
+                </ul>
+            </div>
+            <div id="sideBarDetailSecond">
+                <div id="sideBarDetailSecondExit" onclick="closeDetail()"><i class="fa-solid fa-xmark"></i></div>
+                <div id="sideBarDetailSecondSearch">
+                    <input type="text">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <ul>
+                    <li>식재주문등록</li>
+                    <li>식단주문등록</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div id="topBoxYH">
+            <!-- 최상단 -->
+            <div id="topBoxLeftYH">
+                <h3>★ 식재주문등록</h3>&nbsp;&nbsp;
+                <div>
+                    <button onclick="plusColumn()">행추가<i class="fa-duotone fa-square-plus"></i></button>
+                    <button onclick="sendExcelData()">추가완료<i class="fa-duotone fa-square-plus"></i></button>
+                </div>
+            </div>
+
+
+            <div id=excelBox>
+                <div id="excelHead">
+                    <input type="text" value="상품코드" readonly>
+                    <input type="text" value="대분류" readonly>
+                    <input type="text" value="중분류" readonly>
+                    <input type="text" value="소분류" readonly>
+                    <input type="text" value="브랜드" readonly>
+                    <input type="text" value="제품명" readonly>
+                    <input type="text" value="중량" readonly>
+                    <input type="text" value="보관방식" readonly>
+                    <input type="text" value="포장단위" readonly>
+                    <input type="text" value="배송비" readonly>
+                    <input type="text" value="제품가격" readonly>
+                    <input type="text" value="VAT" readonly>
+                    <input type="text" value="원산지" readonly>
+                    <input type="text" value="재고량" readonly>
+                    <input type="text" value="제품등록자" readonly>
+                </div>
+                <div class="excelColumn">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                </div>
+            </div>
+        </div>
+    `;
+
+    result += `
+        <!-- 주문현황 -->
+        <div id="orderReport">
+            <div class="headtitle">
+                <div class="subtitle"> &nbsp;주문현황</div>
+                <div id="sortBt">
+                    <div>가로</div>
+                    <div>세로</div>
+                </div>
+            </div>
+
+
+
+            <div id=excelBox>
+                <div id="excelHead">
+                    <input type="text" value="상품코드" readonly>
+                    <input type="text" value="대분류" readonly>
+                    <input type="text" value="중분류" readonly>
+                    <input type="text" value="소분류" readonly>
+                    <input type="text" value="브랜드" readonly>
+                    <input type="text" value="제품명" readonly>
+                    <input type="text" value="중량" readonly>
+                    <input type="text" value="보관방식" readonly>
+                    <input type="text" value="포장단위" readonly>
+                    <input type="text" value="배송비" readonly>
+                    <input type="text" value="제품가격" readonly>
+                    <input type="text" value="VAT" readonly>
+                    <input type="text" value="원산지" readonly>
+                    <input type="text" value="재고량" readonly>
+                    <input type="text" value="제품등록자" readonly>
+                </div>
+                `;
+
+    for (let d of data) {
+        result += `
+            <div class="dataColumn">
+                <input type="text" value=${d.code}>
+                <input type="text" value=${d.sort1}>
+                <input type="text" value=${d.sort2}>
+                <input type="text" value=${d.sort3}>
+                <input type="text" value=${d.brand}>
+                <input type="text" value=${d.name}>
+                <input type="text" value=${d.weight}>
+                <input type="text" value=${d.storage}>
+                <input type="text" value=${d.packing}>
+                <input type="text" value=${d.delivery}>
+                <input type="text" value=${d.price}>
+                <input type="text" value=${d.vat}>
+                <input type="text" value=${d.origin}>
+                <input type="text" value=${d.stock}>
+                <input type="text" value=${d.admin}>
+            </div>
+            `;
+    }
+
+    result += `
+            <div id="pageNation">
+                <div onclick="movePage(event)">1</div>
+                <div onclick="movePage(event)">2</div>
+                <div onclick="movePage(event)">3</div>
+                <div onclick="movePage(event)">4</div>
+                <div onclick="movePage(event)">5</div>
+            </div>
+            `;
+    result += `
+            </div>
+        </div>
+
+        <div id="orderListBox">
+            <div>
+
+
+                <div class="headtitle">
+                    <div class="subtitle">&nbsp;주문내역</div>
+                    <div id="orderListButtonBox">
+                        <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <button><i class="fa-solid fa-file-excel"></i></button>
+                        <button><i class="fa-solid fa-plus"></i></button>
+                        <button><i class="fa-solid fa-minus"></i></button>
+                    </div>
+                </div>
+                <div id="orderedListYH">
+                    <!-- 주문내역 -->
+                    <div id="insertRowYH">
+                        <div><input type="checkbox" name="test1" id="checkAll" onclick="selectAll()"></div>
+                        <div>순번</div>
+                        <div>제품코드</div>
+                        <div>제품명</div>
+                        <div>규격</div>
+                        <div>단위</div>
+                        <div>주문량</div>
+                        <div>단가</div>
+                        <div>공급액</div>
+                        <div>부가세</div>
+                        <div>합계</div>
+                        <div>원산지</div>
+                        <div><input onclick="uncheckedAllBox()" type="checkbox" name="test1" class="chk"></div>
+                        <div>1</div>
+                        <div>1</div>
+                        <div>1</div>
+                        <div>1</div>
+                        <div>1</div>
+                        <div>1</div>
+                        <div>1</div>
+                        <div>1</div>
+                        <div>1</div>
+                        <div>1</div>
+                        <div>1</div>
+                        <div><input onclick="uncheckedAllBox()" type="checkbox" name="test1" class="chk"></div>
+                        <div>2</div>
+                        <div>2</div>
+                        <div>2</div>
+                        <div>2</div>
+                        <div>2</div>
+                        <div>2</div>
+                        <div>2</div>
+                        <div>2</div>
+                        <div>2</div>
+                        <div>2</div>
+                        <div>2</div>
+                        <div><input onclick="uncheckedAllBox()" type="checkbox" name="test1" class="chk"></div>
+                        <div>3</div>
+                        <div>3</div>
+                        <div>3</div>
+                        <div>3</div>
+                        <div>3</div>
+                        <div>3</div>
+                        <div>3</div>
+                        <div>3</div>
+                        <div>3</div>
+                        <div>3</div>
+                        <div>3</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  `;
+
+    return result;
+}
+
+/* 📦📦📦📦 model 📦📦📦📦*/
+async function getAllItem() {
+    let uri = 'item/allitem';
+    let response = await axios.get(uri);
+    return response.data;
+}
+
+function selectAll() {
+    const checkboxes = document.getElementsByClassName(".chk");
+    // console.log(checkAll);
+    if (checkAll.checked) {
+        const checkboxes = document.querySelectorAll('.chk');
+
+        for (const a of checkboxes) {
+            a.checked = true;
+        }
+    } else {
+        const checkboxes = document.querySelectorAll('.chk');
+
+        for (const a of checkboxes) {
+            a.checked = false;
+        }
+    }
+}
+
+function uncheckedAllBox() {
+    checkAll.checked = false;
+}
+
+function insertData() {
+    const makeDiv = document.createElement("div");
+
+    for (let index = 0; index < 12; index++) {
+        if (index == 0) {
+            orderList.appendChild(makeDiv);
+            const makeInput = makeDiv.createElement("input");
+            makeInput.className = "chk";
+        } else {
+            orderList.appendChild(makeDiv);
+        }
+        orderList.appendChild(makeDiv);
+    }
+    orderList.appendChild(makeDiv);
+}
+
+
+// =============================================
+// =============================================
+
+
+function plusColumn() {
+    excelBox.innerHTML += `
+        <div class="excelColumn">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+        </div>
+    `
+}
+
+
+async function sendExcelData() {
+    let uri = 'http://localhost:8090/item/batchinsert';
+    // row = document.getElementsByClassName('excelColumn');
+    let itemdata = {};
+
+    let data = new Array(row.length);
+    for (let i = 0; i < row.length; i++) {
+        itemdata.code = row[i].children[0].value;
+        itemdata.sort1 = row[i].children[1].value;
+        itemdata.sort2 = row[i].children[2].value;
+        itemdata.sort3 = row[i].children[3].value;
+        itemdata.brand = row[i].children[4].value;
+        itemdata.name = row[i].children[5].value;
+        itemdata.weight = row[i].children[6].value;
+        itemdata.storage = row[i].children[7].value;
+        itemdata.packing = row[i].children[8].value;
+        itemdata.delivery = row[i].children[9].value;
+        itemdata.price = row[i].children[10].value;
+        itemdata.vat = row[i].children[11].value;
+        itemdata.origin = row[i].children[12].value;
+        itemdata.stock = row[i].children[13].value;
+        itemdata.admin = row[i].children[14].value;
+        data[i] = itemdata;
+    }
+
+    let response = await axios.post(uri, null, data);
+}
+
+
+
+
+async function movePage(event) {
+    let keyword = "";
+    let sorttype = "salesD";
+    let currPage = event.target.value;
+    let uri = `item/search?keyword=${keyword}&sorttype=${sorttype}&currPage=${currPage}`;
+
+    let data = await axios.get(uri);
+
+}
+async function movePage2() {
+    let keyword = "프레시지";
+    let sorttype = "salesD";
+    let currPage = 1;
+    let uri = `item/search?keyword=${keyword}&sortType=${sorttype}&currPage=${currPage}`;
+    console.log(uri);
+    let data = await axios.get(uri);
+
+}
