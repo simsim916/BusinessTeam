@@ -1,6 +1,7 @@
 import { useSearchParams } from 'react-router-dom';
-import Header from './../0home/header/Header';
+import Header from '../0home/header/Header';
 import ItemDetailBox from './ItemDetailBox';
+import ReviewBoardBox from './ReviewBoardBox';
 
 
 const ItemDetail = () => {
@@ -10,6 +11,7 @@ const ItemDetail = () => {
         <>
             <Header />
             <ItemDetailBox itemCode={itemCode} />
+            <ReviewBoardBox itemCode={itemCode} />
         </>
     );
 }

@@ -77,14 +77,14 @@ const PresentBox = ({ brand }) => {
                     <li><a href="">감바스</a></li>
                 </ul>
             </div>
-            <a className="typeBoxImg">
+            <Link to={`/detail?code=${brandItem[0].code}`} className="typeBoxImg">
                 <img src={process.env.PUBLIC_URL + `/img/itemImg/${brandItem[0].code}_1.jpg`} alt={brandItem[0].name} />
                 <div className="typeBoxImgTitle">
                     <div className="typeBoxImgTitleName"> {brandItem[0].name} </div>
                     <p className="typeBoxImgTitlePrice">{makeComa(brandItem[0].price)}원</p>
                 </div>
                 <div className="typeBoxImgTitleBest">Best 상품</div>
-            </a>
+            </Link>
             <div className="typeBoxList">
                 <div className="slideBox" ref={slideBox} style={{ marginLeft: '0px' }}>
                     {brandItem.slice(1, 5).map((e, i) => <ItemBox data={e} key={i} />)}
