@@ -31,7 +31,7 @@ public class Item_reviewRepositoryImpl implements Item_reviewRepository{
 		return jPAQueryFactory.selectFrom(item_review)
 				.where(item_review.item_code.eq(Integer.parseInt(searchRequest.getKeyword())))
 				.orderBy(item_review.seq.desc())
-				.offset(pageRequest.getStartData()).limit(pageRequest.getEndData())
+				.offset(pageRequest.getStartNum()).limit(pageRequest.getEndNum())
 				.fetch();
 	}	
 	

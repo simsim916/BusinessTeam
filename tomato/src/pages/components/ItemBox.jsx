@@ -1,8 +1,9 @@
+import { Link } from 'react-router-dom';
 import './itemBox.css';
 
 const ItemBox = ({data})=>{
     return (
-        <div className="itemBox">
+        <Link to={"/detail?code="+data.code} className="itemBox">
             <div className="itemImg">
                 <i className="fa-solid fa-cart-shopping"></i>
                 <i className="fa-solid fa-magnifying-glass"></i>
@@ -39,7 +40,7 @@ const ItemBox = ({data})=>{
                     )
                 }
             </div>
-        </div>
+        </Link>
     );
 }
 
