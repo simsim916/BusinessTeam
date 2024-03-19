@@ -33,11 +33,6 @@ const SecondContainer = () => {
     function secondContainerSlideLeftbth(event) {
         let margin = slideBox.current.style.marginLeft.replace('px', '');
         secondSlideBtnRef.current.children[`${5 - margin / 440}`].removeAttribute("id");
-        if (slideBox.current.style.marginLeft == '') {
-            slideBox.current.style.marginLeft = "440px";
-            secondSlideBtnRef.current.children[`${5 - 440 / 440}`].setAttribute("id", "secondSlideBtnSelected")
-            return;
-        }
         if (margin < 2200) {
             margin = +margin + 440;
         }
@@ -48,11 +43,6 @@ const SecondContainer = () => {
     function secondContainerSlideRightbth(event) {
         let margin = slideBox.current.style.marginLeft.replace('px', '');
         secondSlideBtnRef.current.children[`${5 - margin / 440}`].removeAttribute("id");
-        if (slideBox.current.style.marginLeft == '') {
-            slideBox.current.style.marginLeft = "-440px";
-            secondSlideBtnRef.current.children[`${5 + 440 / 440}`].setAttribute("id", "secondSlideBtnSelected")
-            return;
-        }
         if (margin > -2200) {
             margin -= 440;
         }
@@ -81,7 +71,7 @@ const SecondContainer = () => {
         <div id="secondContainer" className="container">
             <h3> <i className="fa-solid fa-gift"></i> 특가 상품 <i className="fa-solid fa-gift"></i></h3>
             <div id="secondContainerList">
-                <div ref={slideBox} className="slideBox">
+                <div ref={slideBox} className="slideBox" style={{marginLeft:'0px'}}>
                     {eventItemList.map((e, i) => <ItemBox data={e} key={i} />)}
                 </div>
 

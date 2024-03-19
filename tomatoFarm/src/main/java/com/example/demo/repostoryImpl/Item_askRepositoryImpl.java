@@ -27,7 +27,7 @@ public class Item_askRepositoryImpl implements Item_askRepository{
 		return jPAQueryFactory.selectFrom(item_ask)
 				.where(item_ask.item_code.eq(Integer.parseInt(searchRequest.getKeyword())))
 				.orderBy(item_ask.regdate.desc())
-				.offset(pageRequest.getStartData()).limit(pageRequest.getEndData())
+				.offset(pageRequest.getStartNum()).limit(pageRequest.getEndNum())
 				.fetch();
 	}
 	
