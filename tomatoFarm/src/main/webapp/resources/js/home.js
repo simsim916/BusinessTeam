@@ -566,14 +566,16 @@ async function makeListFilter() {
                 </li>
                 <li onclick="showList(event)" class="sortB">
                     <i onclick="checkALL(event)" class="fa-regular fa-circle-check"></i>식재료
+                    <ul>
         `;
     for (let e of data) {
         if (e.sort1 == '식재료')
             result += `
-                    <p><i onclick="checkALL(event)" class="fa-regular fa-circle-check"></i><span>${e.sort2}</span></p>
+                        <li><i onclick="checkALL(event)" class="fa-regular fa-circle-check"></i><span>${e.sort2}</span></li>
             `;
     }
     result += `
+                    </ul>
                 </li>
                 <li>
                     <i class="fa-regular fa-circle-check"></i>행사
@@ -600,6 +602,7 @@ async function makeListFilter() {
 // 아이템리스트 데이터 (keyword=검색어 , sortType=정렬기준)
 async function getItemList(keyword, sortType) {
     let uri = "/item/search?keyword=" + keyword + "&sorttype=" + sortType;
+    console.log(uri);
     const response = await axios.get(uri);
     return response.data;
 }

@@ -190,8 +190,7 @@ public class ItemRepositoryImpl implements ItemRepository{
 				item_event.discount,
 				item_event.name.as("event_name")
 				))
-        		.from(item)
-				.join(item_event).on(item.event_code.eq(item_event.code))
+    			.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
                 .where(item.code.stringValue().eq(searchRequest.getKeyword()))
                 .fetchOne();
     }
