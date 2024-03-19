@@ -40,6 +40,8 @@ public class ItemRepositoryImpl implements ItemRepository {
 				return new OrderSpecifier<>(Order.ASC, QItem.item.price);
 			case "salesA":
 				return new OrderSpecifier<>(Order.ASC, QItem.item.sales);
+			case "codeD":
+				return new OrderSpecifier<>(Order.DESC, QItem.item.code);
 			}
 		}
 		return new OrderSpecifier<>(Order.DESC, QItem.item.sales);
@@ -78,13 +80,16 @@ public class ItemRepositoryImpl implements ItemRepository {
 				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price,
 						item.sales, item.stock, item.views, item.like, item.event_code, item_event.discount,
 						item_event.name.as("event_name")))
+				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
 				.where(item.sort2.contains(searchRequest.getKeyword())
 						.or(item.sort3.contains(searchRequest.getKeyword()))
 						.or(item.brand.contains(searchRequest.getKeyword()))
 						.or(item.name.contains(searchRequest.getKeyword())))
 				.orderBy(getSortType(searchRequest.getSortType()))
-				.offset((pageRequest.getPage() - 1) * pageRequest.getSize() + 1)
-				.limit(pageRequest.getSize() * pageRequest.getPage()).fetch();
+//				.offset((pageRequest.getPage() - 1) * pageRequest.getSize() + 1)
+				.offset(((pageRequest.getCurrPage() - 1) ) * ( pageRequest.getSize()+1 ))
+				.limit(pageRequest.getSize() * pageRequest.getCurrPage())
+				.fetch();
 	}
 
 	@Override
@@ -144,6 +149,6 @@ public class ItemRepositoryImpl implements ItemRepository {
     public List<ItemDTO> selectAll() {
     	return jPAQueryFactory.select(Projections.bean(ItemDTO.class, item.code,item.sort1,item.sort2,item.sort3,
     			item.brand,item.name,item.weight,item.storage,item.packing,item.delivery,item.price,item.vat,
-    			item.origin,item.stock,item.admin)).from(item).offset(0).limit(5).fetch();
+    			item.origin,item.stock,item.admin)).from(item).offset(0	).limit(5).fetch();
     }
 }

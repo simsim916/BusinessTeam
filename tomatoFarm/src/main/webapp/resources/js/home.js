@@ -1008,11 +1008,7 @@ function writeLoginPage() {
     phoneCheck = false;
 }
 // 로그인 -> 회원가입 애니메이션
-function writeSign() {
-    document.getElementById('loginBG').style.transform = "translate(-100%,0)";
-    document.getElementById('signBG').style.transform = "translate(-100%,0)";
-    document.getElementById('signBG').style.zIndex = '2';
-}
+
 
 function clickLogin() {
     document.getElementById('loginBG').style.transform = "translate(0,0)";
@@ -1235,12 +1231,14 @@ function makeSign() {
     return result;
 }
 
-/* 📦📦📦📦 model 📦📦📦📦*/
+/* 💻💻💻💻 view 💻💻💻💻*/
+function writeSign() {
+    document.getElementById('loginBG').style.transform = "translate(-100%,0)";
+    document.getElementById('signBG').style.transform = "translate(-100%,0)";
+    document.getElementById('signBG').style.zIndex = '2';
+}
 
-/* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 Login 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
-/* 📗📗📗📗 TAG 📗📗📗📗 */
-/* 📖📖📖📖 view 📖📖📖📖*/
-/* 💻💻💻💻 view model 💻💻💻💻*/
+
 /* 📦📦📦📦 model 📦📦📦📦*/
 
 
@@ -1284,31 +1282,8 @@ async function requestSign() {
         + birthdayBox.children[3].value;
 
 
-    // let data = {
-    //     idValue: idValue,
-    //     pwdValue: pwdValue,
-    //     nameValue: nameValue,
-    //     phonenumberValue: phonenumberValue,
-    //     addressValue: addressValue,
-    //     emailFrontValue: emailFrontValue,
-    //     emailBackValue: emailBackValue,
-    //     genderValue: genderValue,
-    //     birthdateValue: birthdateValue
-    // };
-    // let data = {
-    //     id: idValue,
-    //     password: pwdValue,
-    //     name: nameValue,
-    //     phonenumber: phonenumberValue,
-    //     address2: addressValue,
-    //     email: emailFrontValue,
-    //     email2: emailBackValue,
-    //     gender: genderValue,
-    //     birthdate: birthdateValue
-    // };
 
     let uri = "user/signup";
-    // let response = await axios.post(uri, null, data);
 
     let response = await axios.post(uri, null, {
         params: {
@@ -1326,8 +1301,6 @@ async function requestSign() {
 
 }
 
-
-// ===============================================
 // ===============================================
 
 function selectLoginType(ele) {
@@ -1387,7 +1360,6 @@ function changeOpacityPw(event) {
     }
     return true;
 }
-
 
 function checkId(event) {
     let value = event.target.value;
@@ -1507,8 +1479,6 @@ function changeOpacity2(event) {
 }
 
 function checkId(event) {
-    // let test = document.getElementById('idBox');
-    // console.log(test);
     console.log(idBox);
     let value = event.target.value;
     let key = /[a-z.0-9.-._]/gi;
@@ -1662,11 +1632,6 @@ function checkAll() {
     }
 }
 // ============================================
-// ============================================
-
-
-
-
 
 function selectAll() {
     const checkboxes = document.getElementsByClassName(".chk");
@@ -1706,13 +1671,22 @@ function insertData() {
     orderList.appendChild(makeDiv);
 }
 
+// ======================================================================
+/* 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 CommandPage 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅 */
+/* 📗📗📗📗 TAG 📗📗📗📗 */
+let row;
+let excelBox;
 
-// =============================================
-// =============================================
+
+
+/* 📖📖📖📖 view 📖📖📖📖*/
 async function writeCommand() {
     body.innerHTML = await makeCommand();
+    row = document.getElementsByClassName('excelColumn');
+    excelBox = document.getElementById('excelBox');
 }
 
+/* 📖📖📖📖 view model 📖📖📖📖*/
 async function makeCommand() {
     let data = await getAllItem();
     console.log(data);
@@ -1777,7 +1751,7 @@ async function makeCommand() {
                 <h3>★ 식재주문등록</h3>&nbsp;&nbsp;
                 <div>
                     <button onclick="plusColumn()">행추가<i class="fa-duotone fa-square-plus"></i></button>
-                    <button onclick="getExcelData()">추가완료<i class="fa-duotone fa-square-plus"></i></button>
+                    <button onclick="sendExcelData()">추가완료<i class="fa-duotone fa-square-plus"></i></button>
                 </div>
             </div>
 
@@ -1877,6 +1851,15 @@ async function makeCommand() {
     }
 
     result += `
+            <div id="pageNation">
+                <div onclick="movePage(event)">1</div>
+                <div onclick="movePage(event)">2</div>
+                <div onclick="movePage(event)">3</div>
+                <div onclick="movePage(event)">4</div>
+                <div onclick="movePage(event)">5</div>
+            </div>
+            `;
+    result += `
             </div>
         </div>
 
@@ -1955,8 +1938,125 @@ async function makeCommand() {
     return result;
 }
 
+/* 📦📦📦📦 model 📦📦📦📦*/
 async function getAllItem() {
     let uri = 'item/allitem';
     let response = await axios.get(uri);
     return response.data;
+}
+
+function selectAll() {
+    const checkboxes = document.getElementsByClassName(".chk");
+    // console.log(checkAll);
+    if (checkAll.checked) {
+        const checkboxes = document.querySelectorAll('.chk');
+
+        for (const a of checkboxes) {
+            a.checked = true;
+        }
+    } else {
+        const checkboxes = document.querySelectorAll('.chk');
+
+        for (const a of checkboxes) {
+            a.checked = false;
+        }
+    }
+}
+
+function uncheckedAllBox() {
+    checkAll.checked = false;
+}
+
+function insertData() {
+    const makeDiv = document.createElement("div");
+
+    for (let index = 0; index < 12; index++) {
+        if (index == 0) {
+            orderList.appendChild(makeDiv);
+            const makeInput = makeDiv.createElement("input");
+            makeInput.className = "chk";
+        } else {
+            orderList.appendChild(makeDiv);
+        }
+        orderList.appendChild(makeDiv);
+    }
+    orderList.appendChild(makeDiv);
+}
+
+
+// =============================================
+// =============================================
+
+
+function plusColumn() {
+    excelBox.innerHTML += `
+        <div class="excelColumn">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+        </div>
+    `
+}
+
+
+async function sendExcelData() {
+    let uri = 'http://localhost:8090/item/batchinsert';
+    // row = document.getElementsByClassName('excelColumn');
+    let itemdata = {};
+
+    let data = new Array(row.length);
+    for (let i = 0; i < row.length; i++) {
+        itemdata.code = row[i].children[0].value;
+        itemdata.sort1 = row[i].children[1].value;
+        itemdata.sort2 = row[i].children[2].value;
+        itemdata.sort3 = row[i].children[3].value;
+        itemdata.brand = row[i].children[4].value;
+        itemdata.name = row[i].children[5].value;
+        itemdata.weight = row[i].children[6].value;
+        itemdata.storage = row[i].children[7].value;
+        itemdata.packing = row[i].children[8].value;
+        itemdata.delivery = row[i].children[9].value;
+        itemdata.price = row[i].children[10].value;
+        itemdata.vat = row[i].children[11].value;
+        itemdata.origin = row[i].children[12].value;
+        itemdata.stock = row[i].children[13].value;
+        itemdata.admin = row[i].children[14].value;
+        data[i] = itemdata;
+    }
+
+    let response = await axios.post(uri, null, data);
+}
+
+
+
+
+async function movePage(event) {
+    let keyword = "";
+    let sorttype = "salesD";
+    let currPage = event.target.value;
+    let uri = `item/search?keyword=${keyword}&sorttype=${sorttype}&currPage=${currPage}`;
+
+    let data = await axios.get(uri);
+
+}
+async function movePage2() {
+    let keyword = "프레시지";
+    let sorttype = "salesD";
+    let currPage = 1;
+    let uri = `item/search?keyword=${keyword}&sortType=${sorttype}&currPage=${currPage}`;
+    console.log(uri);
+    let data = await axios.get(uri);
+
 }

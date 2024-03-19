@@ -63,20 +63,20 @@ public class ItemController {
 		}
 		return result;
 	}
-/* 페이징 + 정렬 기능 되는 search
+//페이징 + 정렬 기능 되는 search
 	@GetMapping("/search")
-	public ResponseEntity<?> selectItemWhereSearchType( @RequestParam("keyword") String keyword, @RequestParam("sorttype")String sortType) {
+	public ResponseEntity<?> selectItemWhereSearchType( PageRequest pageRequest, SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
-		PageRequest pageRequest = new PageRequest(1,24);
+		pageRequest.setSize(10);
+		pageRequest.setStartEndNum(pageRequest.getCurrPage());
 		// 1. 파라미터로 정렬하고자 하는 방법을 전달받는다.
 		//SearchRequest searchRequest = new SearchRequest();
 		//searchRequest.setSortType("파라미터");
 		// 2. searchRequest 객체를 생성해서 담아주고
 		
-		SearchRequest searchRequest = new SearchRequest(keyword,sortType);
+		log.info("\n"+pageRequest+"\n"+searchRequest);
 		
-		List<Item> list = itemService.selectItemWhereSearchType(pageRequest, searchRequest);
-		log.info("\n"+keyword);
+		List<ItemDTO> list = itemService.selectItemWhereSearchType(pageRequest, searchRequest);
 		if (list != null && list.size() > 0) {
 			result = ResponseEntity.status(HttpStatus.OK).body(list);
 			log.info("search check");
@@ -87,23 +87,24 @@ public class ItemController {
 		log.info(result);
 		return result;
 	}
-*/
+
 	
-	@GetMapping("/search")
-	public ResponseEntity<?> selectItemWhereKeyword(@RequestParam("keyword") String keyword) {
-		ResponseEntity<?> result = null;
-		SearchRequest searchRequest = new SearchRequest(keyword);
-		
-		List<ItemDTO> list = itemService.selectItemWhereKeyword(searchRequest);
-		if (list != null && list.size() > 0) {
-			result = ResponseEntity.status(HttpStatus.OK).body(list);
-			log.info("search check");
-		} else {
-			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
-			log.info("search check");
-		}
-		return result;
-	}
+//	@GetMapping("/search")
+//	public ResponseEntity<?> selectItemWhereKeyword(@RequestParam("keyword") String keyword) {
+//		ResponseEntity<?> result = null;
+//		SearchRequest searchRequest = new SearchRequest(keyword);
+//		
+//		List<ItemDTO> list = itemService.selectItemWhereKeyword(searchRequest);
+//		if (list != null && list.size() > 0) {
+//			result = ResponseEntity.status(HttpStatus.OK).body(list);
+//			log.info("search check");
+//		} else {
+//			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
+//			log.info("search check");
+//		}
+//		return result;
+//	}
+	
 	@GetMapping("/searchsort")
 	public ResponseEntity<?> selectSortWhereKeyword(@RequestParam("keyword") String keyword) {
 		ResponseEntity<?> result = null;
@@ -174,7 +175,7 @@ public class ItemController {
 		return result;
 	}
 	
-	
+
 
 }
 	
