@@ -1384,6 +1384,7 @@ function changeOpacityPw(event) {
         event.preventDefault();
         nameBox.children[1].focus();
     }
+    console.log(`리턴없는놈이다`);
 }
 function changeOpacityName(event) {
     let box = event.target.closest('div');

@@ -1,6 +1,6 @@
 import "./header.css";
 import Nav from './Nav';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 
@@ -37,7 +37,7 @@ const Header = () => {
                 <div className="container">
                     <a>고객센터</a>
                     &nbsp;&nbsp;|&nbsp;&nbsp;
-                    <a>로그인</a>
+                    <Link to="/login">로그인</Link>
                     &nbsp;&nbsp;|&nbsp;&nbsp;
                     <a>회원가입</a>
                 </div>
