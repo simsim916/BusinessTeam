@@ -13,7 +13,6 @@ const SecondContainer = () => {
     const [error, setError] = useState(false);
     let secondSlideBtnRef = useRef(null);
 
-    console.log('aa')
     useEffect(() => {
         axios.get('http://localhost:8090/item/eventitem'
         ).then(res => {
