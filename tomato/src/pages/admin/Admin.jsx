@@ -1,5 +1,6 @@
 import "./Admin.css";
-import AddDataHead from "./AddDataBox";
+import InsertDataBox from "./InsertDataBox";
+import SelectDataBox from "./SelectDataBox";
 import SideMenu from "./SideMenu";
 
 
@@ -10,7 +11,8 @@ const Admin = () => {
         <>
             <SideMenu />
             <div id="containerYH">
-                <AddDataHead />
+                <InsertDataBox />
+                {/* <SelectDataBox /> */}
             </div>
         </>
     );

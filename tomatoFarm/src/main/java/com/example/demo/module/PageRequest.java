@@ -2,7 +2,6 @@ package com.example.demo.module;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,15 +32,18 @@ public class PageRequest {
 		if(this.startNum < 1) {
 			this.startNum = 1;
 		}
-		this.startNum = (this.currPage-1)*(this.size);
+		this.startNum = (this.currPage-1) * (this.size);
+		this.endNum = startNum * this.size;
 	}
 	
 	public PageRequest(int page, int size){
-		this.page = page;
+		this.page = 1;
 		this.size = size;
 		
 		this.startNum = (page-1)*size+1;
 		this.endNum = page*size;
 	}
 	
+	
+
 }

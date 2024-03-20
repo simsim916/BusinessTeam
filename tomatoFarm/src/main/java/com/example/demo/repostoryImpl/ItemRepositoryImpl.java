@@ -86,9 +86,9 @@ public class ItemRepositoryImpl implements ItemRepository {
 						.or(item.brand.contains(searchRequest.getKeyword()))
 						.or(item.name.contains(searchRequest.getKeyword())))
 				.orderBy(getSortType(searchRequest.getSortType()))
+				.offset(pageRequest.getStartNum()).limit(pageRequest.getEndNum())
 //				.offset((pageRequest.getPage() - 1) * pageRequest.getSize() + 1)
-				.offset(((pageRequest.getCurrPage() - 1) ) * ( pageRequest.getSize()+1 ))
-				.limit(pageRequest.getSize() * pageRequest.getCurrPage())
+//				.offset(pageRequest.getStartNum()).limit(pageRequest.getEndNum())
 				.fetch();
 	}
 
@@ -186,6 +186,6 @@ public class ItemRepositoryImpl implements ItemRepository {
     public List<ItemDTO> selectAll() {
     	return jPAQueryFactory.select(Projections.bean(ItemDTO.class, item.code,item.sort1,item.sort2,item.sort3,
     			item.brand,item.name,item.weight,item.storage,item.packing,item.delivery,item.price,item.vat,
-    			item.origin,item.stock,item.admin)).from(item).offset(0	).limit(5).fetch();
+    			item.origin,item.stock,item.admin)).from(item).offset(0).limit(100).orderBy(item.sales.desc()).fetch();
     }
 }

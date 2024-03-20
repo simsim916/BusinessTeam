@@ -69,21 +69,21 @@ public class ItemController {
 		ResponseEntity<?> result = null;
 		pageRequest.setSize(10);
 		pageRequest.setStartEndNum(pageRequest.getCurrPage());
+		System.out.println("*****startNum********"+pageRequest.getStartNum());
+		System.out.println("******EndNum*******"+pageRequest.getEndNum());
+		System.out.println("*******getCurrPage******"+pageRequest.getCurrPage());
+		System.out.println("********getSortType*****"+searchRequest.getSortType());
 		// 1. 파라미터로 정렬하고자 하는 방법을 전달받는다.
 		//SearchRequest searchRequest = new SearchRequest();
 		//searchRequest.setSortType("파라미터");
 		// 2. searchRequest 객체를 생성해서 담아주고
 		
-		log.info("\n"+pageRequest+"\n"+searchRequest);
+//		log.info("\n"+pageRequest+"\n"+searchRequest);
 		
 		List<ItemDTO> list = itemService.selectItemWhereSearchType(pageRequest, searchRequest);
-		if (list != null && list.size() > 0) {
+//		System.out.println("\n**************"+list.size()+"**************\n");
 			result = ResponseEntity.status(HttpStatus.OK).body(list);
 			log.info("search check");
-		} else {
-			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
-			log.info("search check");
-		}
 		log.info(result);
 		return result;
 	}
@@ -104,7 +104,7 @@ public class ItemController {
 //		}
 //		return result;
 //	}
-	
+//	
 	@GetMapping("/searchsort")
 	public ResponseEntity<?> selectSortWhereKeyword(@RequestParam("keyword") String keyword) {
 		ResponseEntity<?> result = null;
