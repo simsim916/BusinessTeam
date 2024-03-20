@@ -2,6 +2,7 @@ import "./DataColumn.css";
 
 
 
+
 const DataColumn = () => {
 
     return (

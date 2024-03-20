@@ -36,6 +36,7 @@ const AddDataHead = () => {
             <DataColumn />
             <DataColumn />
             {/* 특정 메서드를 클릭하면 컴포넌트가 추가 생성되도록? */}
+            {/* 마지막 컴포넌트에 border-bottom : 1px 줘야한다*/}
         </div>
     );
 }
