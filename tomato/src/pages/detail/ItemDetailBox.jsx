@@ -12,7 +12,7 @@ const ItemDetailBox = ({ itemCode }) => {
     let priceRef = useRef(null)
 
     useEffect(() => {
-        axios.get(`http://localhost:8090/item/detail?code=${itemCode}`
+        axios.get(`http://localhost:8090/item/test?searchType=item.code&keyword=${itemCode}`
         ).then(res => {
             setItem(res.data);
             setLoading(false);
@@ -67,7 +67,7 @@ const ItemDetailBox = ({ itemCode }) => {
         <div id="itemDetailBox" className="container">
             <div id="imgBox">
                 <div id="imgBoxImg">
-                    <img src={ process.env.PUBLIC_URL + `/img/itemImg/${item.code}_1.jpg`} alt={`${item.name} 사진`} />
+                    <img src={process.env.PUBLIC_URL + `/img/itemImg/${item.code}_1.jpg`} alt={`${item.name} 사진`} />
                 </div>
                 <div id="imgBoxImgList">
                     <div onClick={changeMainImg}><img src={process.env.PUBLIC_URL + `/img/itemImg/${item.code}_1.jpg`} alt={`${item.name} 조리`} /></div>

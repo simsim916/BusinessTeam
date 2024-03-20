@@ -16,7 +16,7 @@ const SecondContainer = () => {
     let selectedBox = useRef(null);
 
     useEffect(() => {
-        axios.get('http://localhost:8090/item/eventitem'
+        axios.get('http://localhost:8090/item/selectnotnull?StringType=item.event_code'
         ).then(res => {
             setEventItemList(res.data);
             setLoading(false);
@@ -54,7 +54,7 @@ const SecondContainer = () => {
         let target = event.target;
         if (event.target.id != 'secondSlideBtn') {
             selectedBox.current.removeAttribute("id");
-            selectedBox.current =event.target;
+            selectedBox.current = event.target;
             event.target.setAttribute("id", "secondSlideBtnSelected");
             let index = 0;
             for (let a of secondSlideBtnRef.current.children) {
@@ -71,7 +71,7 @@ const SecondContainer = () => {
         <div id="secondContainer" className="container">
             <h3> <i className="fa-solid fa-gift"></i> 특가 상품 <i className="fa-solid fa-gift"></i></h3>
             <div id="secondContainerList">
-                <div ref={slideBox} className="slideBox" style={{marginLeft:'0px'}}>
+                <div ref={slideBox} className="slideBox" style={{ marginLeft: '0px' }}>
                     {eventItemList.map((e, i) => <ItemBox data={e} key={i} />)}
                 </div>
 

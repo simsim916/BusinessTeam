@@ -10,8 +10,12 @@
     color: #9B1B30;
     margin-top: 5px;
     margin-bottom: 5px;
+    border: none !important;
 }
 
+#errorBox p{
+    line-height: 1.5em;
+}
 #historyback {
     max-width: 30px;
     max-height: 30px;
@@ -232,6 +236,7 @@
     width: 250px;
     padding: 0;
     margin-left: 20px;
+    opacity: 0.5;
 }
 
 #genderUl li {
@@ -245,7 +250,6 @@
     align-items: center;
     justify-content: center;
     font-size: 15px;
-    opacity: 0.5;
 }
 
 #genderUl input[type="radio"] {
@@ -269,7 +273,7 @@
     opacity: 0.5;
 }
 
-#genderBox #genderChecked {
+#genderBox #checked {
     color: white;
     background-color: #9B1B30;
     opacity: 1;

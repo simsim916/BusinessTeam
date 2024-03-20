@@ -59,7 +59,14 @@ public interface ItemService {
 		return dto;
 	}
 
-	List<ItemDTO> selectItemWhereEvent(PageRequest pageRequest);
+	List<ItemDTO> selectItemStringWhereTypeNotNull(PageRequest pageRequest,SearchRequest searchRequest);
+	List<ItemDTO> selectItemStringWhereTypeNotNull(SearchRequest searchRequest);
+	List<ItemDTO> selectItemStringWhereType(SearchRequest searchRequest);
+	List<ItemDTO> selectItemIntegerWhereType(SearchRequest searchRequest);
+	List<ItemDTO> selectItemStringWhereType(PageRequest pageRequest,SearchRequest searchRequest);
+	List<ItemDTO> selectItemIntegerWhereType(PageRequest pageRequest,SearchRequest searchRequest);
+	
+	
 	List<ItemDTO> selectItemWherebrand(PageRequest pageRequest, SearchRequest searchRequest);
 	List<ItemDTO> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest);
 	List<ItemDTO> selectItemWhereKeyword(SearchRequest searchRequest);

@@ -12,9 +12,15 @@ import com.example.demo.module.SearchRequest;
 
 @Repository
 public interface ItemRepository {
-
-	// ** 이벤트 상품 조회
-	List<ItemDTO> selectItemWhereEvent(PageRequest pageRequest);
+	// ** 동적 한 컬럼 검색
+	List<ItemDTO> selectItemStringWhereType(SearchRequest searchRequest);
+	List<ItemDTO> selectItemIntegerWhereType(SearchRequest searchRequest);
+	List<ItemDTO> selectItemStringWhereType(PageRequest pageRequest,SearchRequest searchRequest);
+	List<ItemDTO> selectItemIntegerWhereType(PageRequest pageRequest,SearchRequest searchRequest);
+	List<ItemDTO> selectItemStringWhereTypeNotNull(SearchRequest searchRequest);
+	List<ItemDTO> selectItemStringWhereTypeNotNull(PageRequest pageRequest,SearchRequest searchRequest);
+	
+	
 	// ** 브랜드 상품 조회 
 	List<ItemDTO> selectItemWherebrand(PageRequest pageRequest, SearchRequest searchRequest);
 	// ** 키워드 상품 페이징 조회
@@ -31,4 +37,6 @@ public interface ItemRepository {
 	
 	int batchInsert(List<Item> entity);
 	List<ItemDTO> selectAll();
+	
+	
 }

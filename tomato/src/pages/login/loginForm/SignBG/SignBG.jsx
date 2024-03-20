@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./SignBG.css"
-import { useState, useRef } from "react";
+import { useState, useRef, useMemo } from "react";
 import axios from 'axios';
 import Loading from './../../../components/Loading';
 import Error from './../../../components/Error';
@@ -53,19 +53,16 @@ const SignBG = ({ changeSignBox, style }) => {
         box.style.border = "2px solid #9B1B30";
     }
 
-    const handleInputChange = (event, signValue) => {
+    const handleInputChange = (event , handle) => {
         let result = {
             message: '',
             check: false
         }
-        switch (event.target.name) {
-            case "id":
-                result = checkId(event);
-                break;
-        }
+        if (handle) result=handle(event);
         valueChange(event, result.message, result.check);
+        toggleJoinButton();
     }
-
+    
     const checkId = (event) => {
         const value = event.target.value;
         const idBox = event.target.closest('div');
@@ -75,19 +72,116 @@ const SignBG = ({ changeSignBox, style }) => {
 
         if (value.length < 4 || value.length > 15) {
             idBox.style.border = "2px solid #FF3F3F";
-            idBox.style.borderBottom = "1px solid #FF3F3F";
+            // idBox.style.borderBottom = "1px solid #FF3F3F";
             idBox.children[0].style.color = "#FF3F3F";
             message = `아이디 : 4 ~ 15 글자 이하만 가능합니다.`;
         } else if (value.replace(key, '').length > 0) {
             idBox.style.border = "2px solid #FF3F3F";
-            idBox.style.borderBottom = "1px solid #FF3F3F";
+            // idBox.style.borderBottom = "1px solid #FF3F3F";
             idBox.children[0].style.color = "#FF3F3F";
             message = `아이디 : 영문, 숫자, 특수문자(-, _)만 가능합니다.`;
         } else {
             idBox.style.border = "2px solid #03C75A";
-            idBox.style.borderBottom = "1px solid #03C75A";
+            // idBox.style.borderBottom = "1px solid #03C75A";
             idBox.children[0].style.color = "#03C75A";
             check = true;
+        }
+        return {
+            message: message,
+            check: check
+        }
+    }
+
+    const checkPassword = (event) => {
+        let value = event.target.value;
+        const passwordBox = event.target.closest('div');
+        let message = '';
+        let check = false;
+        let key = /[a-z.0-9.!-*.@]/gi;
+
+        if (value.length < 4 || value.length > 14) {
+            passwordBox.style.border = "2px solid #FF3F3F";
+            // passwordBox.style.borderTop = "1px solid #FF3F3F";
+            // passwordBox.style.borderBottom = "1px solid #FF3F3F";
+            passwordBox.children[0].style.color = "#FF3F3F";
+            message = `비밀번호 : 4 ~ 15 글자 이하만 입력해주세요.`;
+        } else if (value.replace(key, '').length > 0) {
+            passwordBox.style.border = "2px solid #FF3F3F";
+            // passwordBox.style.borderTop = "1px solid #FF3F3F";
+            // passwordBox.style.borderBottom = "1px solid #FF3F3F";
+            passwordBox.children[0].style.color = "#FF3F3F";
+            message = `비밀번호 : 영문, 숫자, 특수문자(!,@,#,$,%,^,&,*)만 가능합니다.`;
+        } else if (value.replace(/[!-*.@]/gi, '').length >= value.length) {
+            passwordBox.style.border = "2px solid #FF3F3F";
+            // passwordBox.style.borderTop = "1px solid #FF3F3F";
+            // passwordBox.style.borderBottom = "1px solid #FF3F3F";
+            passwordBox.children[0].style.color = "#FF3F3F";
+            message = `비밀번호 : 특수문자(!,@,#,$,%,^,&,*)를 반드시 포함해주세요.`;
+        } else {
+            passwordBox.style.border = "2px solid #03C75A";
+            // passwordBox.style.borderTop = "1px solid #03C75A";
+            // passwordBox.style.borderBottom = "1px solid #03C75A";
+            passwordBox.children[0].style.color = "#03C75A";
+            check = true;
+        }
+
+        return {
+            message: message,
+            check: check
+        }
+    }
+
+    const checkName = (event) => {
+        let value = event.target.value;
+        const nameBox = event.target.closest('div');
+        let message = '';
+        let check = false;
+        if (value.length < 2 || value.length > 10) {
+            nameBox.style.border = "2px solid #FF3F3F";
+            // nameBox.style.borderTop = "1px solid #FF3F3F";
+            // nameBox.style.borderBottom = "1px solid #FF3F3F";
+            nameBox.children[0].style.color = "#FF3F3F";
+            message = `이름 : 2글자 이상 10글자 이하로 입력하세요.`;
+        } else if (value.replace(/[a-z.가-힣]/gi, '').length > 0) {
+            nameBox.style.border = "2px solid #FF3F3F";
+            // nameBox.style.borderTop = "1px solid #FF3F3F";
+            // nameBox.style.borderBottom = "1px solid #FF3F3F";
+            nameBox.children[0].style.color = "#FF3F3F";
+            message = `이름은 한글, 영문만 입력하세요.`;
+        } else {
+            nameBox.style.border = "2px solid #03C75A";
+            // nameBox.style.borderBottom = "1px solid #03C75A";
+            // nameBox.style.borderTop = "1px solid #03C75A";
+            nameBox.children[0].style.color = "#03C75A";
+            check = true;
+        }
+        return {
+            message: message,
+            check: check
+        }
+    }
+
+    const checkPhonenumber = (event) => {
+        let value = event.target.value;
+        const phonenumberBox = event.target.closest('div');
+        let message = '';
+        let check = false;
+
+        if (value.length < 10 || value.length > 11) {
+            phonenumberBox.style.border = "2px solid #FF3F3F";
+            // phonenumberBox.style.borderTop = "1px solid #FF3F3F";
+            phonenumberBox.children[0].style.color = "#FF3F3F";
+            message = `전화번호는 9자리 ~ 12자리 숫자로 입력해주세요.`;
+        } else if (value.replace(/[0-9]/gi, '').length > 0) {
+            phonenumberBox.style.border = "2px solid #FF3F3F";
+            // phonenumberBox.style.borderTop = "1px solid #FF3F3F";
+            phonenumberBox.children[0].style.color = "#FF3F3F";
+            message = `전화번호는 숫자만 입력하세요.`;
+        } else {
+            check = true;
+            phonenumberBox.style.border = "2px solid #03C75A";
+            // phonenumberBox.style.borderTop = "1px solid #03C75A";
+            phonenumberBox.children[0].style.color = "#03C75A";
         }
         return {
             message: message,
@@ -115,7 +209,15 @@ const SignBG = ({ changeSignBox, style }) => {
 
     const toggleJoinButton = () => {
         signValue.check.id && signValue.check.password && signValue.check.userName && signValue.check.phonenumber ?
-            setSignValue({ ...signValue, isJoinable: true }) : setSignValue({ ...signValue, isJoinable: false });
+            setSignValue(signValue => ({ ...signValue, isJoinable: true })) : setSignValue(signValue => ({ ...signValue, isJoinable: false }));
+    }
+
+    const selectGender = (event) => {
+        for (let e of event.target.closest('div').children) {
+            e.style.opacity = "1";
+        }
+        if (document.getElementById('checked')) document.getElementById('checked').removeAttribute('id');
+        event.target.closest('li').setAttribute('id','checked');
     }
 
     const requestSign = () => {
@@ -155,77 +257,56 @@ const SignBG = ({ changeSignBox, style }) => {
                     <div id="idBox">
                         <i className="fa-solid fa-user"></i>
                         <input type="text" name="id" placeholder="아이디" value={signValue.value.id}
-                            onChange={(event) => handleInputChange(event, signValue)}
-                            onFocus={changeOpacity}
-                        />
+                            onChange={(event) => handleInputChange(event, checkId)}
+                            onBlur={(event) => handleInputChange(event, checkId)}
+                            onFocus={changeOpacity}/>
                     </div>
                     <div id="passwordBox">
                         <i className="fa-solid fa-key"></i>
                         <input type="password" name="password" placeholder="비밀번호" value={signValue.value.password}
-                            onChange={(event) => handleInputChange(event)}
-                            onBlur={toggleJoinButton}
-                        />
+                            onChange={(event) => handleInputChange(event, checkPassword)}
+                            onBlur={(event) => handleInputChange(event, checkPassword)}
+                            onFocus={changeOpacity}/>
                     </div>
-                    {/* <div id="nameBox">
+                    <div id="nameBox">
                         <i className="fa-solid fa-circle-user"></i>
-                        <input
-                            type="text"
-                            name="name"
-                            placeholder="이름"
-                            value={name}
-                            onChange={(e) => handleInputChange(e, setName)}
-                            onBlur={toggleJoinButton}
-                        />
+                        <input type="text" name="userName" placeholder="이름" value={signValue.value.userName}
+                            onChange={(event) => handleInputChange(event, checkName)}
+                            onBlur={(event) => handleInputChange(event, checkName)}
+                            onFocus={changeOpacity}/>
                     </div>
                     <div id="phonenumberBox">
                         <i className="fa-solid fa-phone"></i>
-                        <input
-                            type="text"
-                            name="phonenumber"
-                            placeholder="전화번호"
-                            value={phonenumber}
-                            onChange={(e) => handleInputChange(e, setPhonenumber)}
-                            onBlur={toggleJoinButton}
-                        />
+                        <input type="text" name="phonenumber" placeholder="전화번호" value={signValue.value.phonenumber}
+                            onChange={(event) => handleInputChange(event, checkPhonenumber)}
+                            onBlur={(event) => handleInputChange(event, checkPhonenumber)}
+                            onFocus={changeOpacity}/>
                     </div>
-                    <p id="errorBox">
-                        <span id="idError"></span>
-                        <span id="pwError"></span>
-                        <span id="nameError"></span>
-                        <span id="pnError"></span>
-                    </p>
+                    <div id="errorBox">
+                        {signValue.error.id ? <p><i className="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;{signValue.error.id}</p> : <></>}
+                        {signValue.error.password ? <p><i className="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;{signValue.error.password}</p> : <></>}
+                        {signValue.error.userName ? <p><i className="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;{signValue.error.userName}</p> : <></>}
+                        {signValue.error.phonenumber ? <p><i className="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;{signValue.error.phonenumber}</p> : <></>}
+                    </div>
                     <p id="selectOption"><i className="fa-solid fa-check"></i>&nbsp;&nbsp;선택 입력 사항</p>
                     <div id="addressBox">
                         <i className="fa-solid fa-location-dot"></i>
-                        <input
-                            type="text"
-                            name="address"
-                            placeholder="주소"
-                            value={address}
-                            onChange={(e) => handleInputChange(e, setAddress)}
-                        />
+                        <input type="text" name="address" placeholder="주소" value={signValue.value.address}
+                            onChange={handleInputChange}
+                            onFocus={changeOpacity}/>
                     </div>
                     <div id="emailBox">
                         <i className="fa-solid fa-envelope"></i>
-                        <input
-                            type="text"
-                            name="email"
-                            placeholder="이메일"
-                            value={email}
-                            onChange={(e) => handleInputChange(e, setEmail)}
-                        />
+                        <input type="text" name="email" placeholder="이메일" value={signValue.value.email}
+                            onFocus={changeOpacity}
+                            onChange={handleInputChange}/>
                         <i className="fa-solid fa-at"></i>
-                        <input
-                            type="text"
-                            name="emailback"
-                            id="emailWriteBox"
-                            value={emailBack}
-                            onChange={(e) => handleInputChange(e, setEmailBack)}
-                        />
-                        <select
-                            id="emailSelectBox"
-                            onChange={(e) => handleInputChange(e, setEmail)}
-                        >
+                        <input type="text" name="emailback" id="emailWriteBox" value={signValue.value.emailBack}
+                            onFocus={changeOpacity}
+                            onChange={handleInputChange} />
+                        <select id="emailSelectBox"
+                            onFocus={changeOpacity}
+                            onChange={handleInputChange} >
                             <option>이메일 선택</option>
                             <option value="naver.com">naver.com</option>
                             <option value="daum.net">daum.net</option>
@@ -239,25 +320,16 @@ const SignBG = ({ changeSignBox, style }) => {
                         <span>성별</span>
                         <ul id="genderUl">
                             <label>
-                                <li>
-                                    <input
-                                        type="radio"
-                                        name="gender"
-                                        value="0"
-                                        checked={gender === "0"}
-                                        onChange={handleGenderChange}
-                                    />
+                                <li onClick={selectGender}>
+                                    <input type="radio" name="gender" value="0" checked={signValue.value.gender === "0"}
+                                        onChange={handleInputChange} />
                                     남자
                                 </li>
                             </label>
                             <label>
-                                <li>
-                                    <input
-                                        type="radio"
-                                        name="gender"
-                                        value="1"
-                                        checked={gender === "1"}
-                                        onChange={handleGenderChange}
+                                <li onClick={selectGender}>
+                                    <input type="radio" name="gender" value="1" checked={signValue.value.gender === "1"}
+                                        onChange={handleInputChange}
                                     />
                                     여자
                                 </li>
@@ -266,32 +338,20 @@ const SignBG = ({ changeSignBox, style }) => {
                     </div>
                     <div id="birthdayBox">
                         <i className="fa-solid fa-cake-candles"></i>
-                        <input
-                            type="text"
-                            name="year"
-                            placeholder="yyyy"
-                            maxLength="4"
-                            value={year}
-                            onChange={(e) => handleInputChange(e, setYear)}
+                        <input type="text" name="year" placeholder="yyyy" maxLength="4" value={signValue.value.year}
+                            onFocus={changeOpacity}
+                            onChange={handleInputChange}
                         />
-                        <input
-                            type="text"
-                            name="month"
-                            placeholder="mm"
-                            maxLength="2"
-                            value={month}
-                            onChange={(e) => handleInputChange(e, setMonth)}
+                        <input type="text" name="month" placeholder="mm" maxLength="2" value={signValue.value.month}
+                            onFocus={changeOpacity}
+                            onChange={handleInputChange}
                         />
-                        <input
-                            type="text"
-                            name="day"
-                            placeholder="dd"
-                            maxLength="2"
-                            value={day}
-                            onChange={(e) => handleInputChange(e, setDay)}
+                        <input type="text" name="day" placeholder="dd" maxLength="2" value={signValue.value.day}
+                            onFocus={changeOpacity}
+                            onChange={handleInputChange}
                         />
-                    </div> */}
-                    <button type="button" onClick={requestSign} id="joinBox" disabled={!signValue.isJoinable}>가입하기</button>
+                    </div>
+                    <button type="button" onClick={requestSign} id="joinBox" style={{ opacity: signValue.isJoinable? '1':'0.3' }} disabled={!signValue.isJoinable}>가입하기</button>
                 </form>
                 <br />
                 <p id="successOrNot"></p>
