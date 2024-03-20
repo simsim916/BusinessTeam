@@ -1,0 +1,8 @@
+.excelColumn {
+    display: flex;
+}
+
+.excelColumn>input {
+    height: 30px;
+    width: calc(100% / 15);
+}

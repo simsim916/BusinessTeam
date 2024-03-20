@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import './LoginBG.css';
 import { Link } from 'react-router-dom';
 
-const LoginBG = ({ changeSignBox, style, test }) => {
+const LoginBG = () => {
 
     // let idCheck = false;
     // let pwCheck = false;
@@ -157,47 +157,7 @@ const LoginBG = ({ changeSignBox, style, test }) => {
 
     return (
         <>
-            <div id="loginBG" style={style}>
-                <div>
-                    <Link to="/"><img id="logo" src={process.env.PUBLIC_URL + "/img/logo.png"} /></Link>
-                    <form id="loginBox" action="/tomatoFarm/member/login" method="post">
-                        <div id="loginButton">
-                            {/* <div onclick={selectLoginType}>일반 로그인</div>
-                            <div onclick={selectLoginType}>사업자 로그인</div> */}
-                            <div onclick={empty}>일반 로그인</div>
-                            <div onclick={empty}>사업자 로그인</div>
-                        </div>
-
-                        <div id="idBox">
-                            <i class="fa-solid fa-user"></i>
-                            {/* <input onkeydown={changeOpacityId} onblur={checkId} onfocus={focusInputBox} id="id" */}
-                            <input onkeydown={empty} onblur={empty} onfocus={empty} id="id"
-                                type="text" name="id" placeholder="아이디" />
-                        </div>
-                        <div id="passwordBox">
-                            <i class="fa-solid fa-key"></i>
-                            {/* <input ref={pwInput} onkeydown={changeOpacityPw} onblur={checkPassword} onfocus={focusInputBox} */}
-                            <input onkeydown={empty} onblur={empty} onfocus={empty}
-                                autocomplete="off" id="password" type="password" name="password" placeholder="비밀번호" />
-                        </div>
-                        <p id="errorBox">
-                            <span id="idError"></span>
-                            <span id="pwError"></span>
-                        </p>
-
-                        {/* <button type="button" onclick={requestLogin} id="loginInBox">로그인</button> */}
-                        <button type="button" onclick={empty} id="loginInBox">로그인</button>
-                    </form>
-                    <p id="successOrNot">
-                    </p>
-                    <ul id="search">
-                        <li>아이디 찾기</li>
-                        <li>비밀번호 찾기</li>
-                        {/* <li><a onclick={writeSign}>회원가입</a></li> */}
-                        <li onClick={changeSignBox}>회원가입</li>
-                    </ul>
-                </div>
-            </div>
+          
         </>
     );
 }

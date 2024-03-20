@@ -1,7 +1,6 @@
 import "./Admin.css";
-import NavBar from "./NavBar";
-import AddDataHead from "./AddDataHead";
-import AddDataColumn from './AddDataColumn';
+import AddDataHead from "./AddDataBox";
+import SideMenu from "./SideMenu";
 
 
 
@@ -9,10 +8,9 @@ import AddDataColumn from './AddDataColumn';
 const Admin = () => {
     return (
         <>
-            <NavBar />
+            <SideMenu />
             <div id="containerYH">
                 <AddDataHead />
-                <AddDataColumn />
             </div>
         </>
     );

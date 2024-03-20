@@ -1,0 +1,46 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    padding: 0;
+}
+
+#topBox {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+
+#topButtonBox {
+    display: flex;
+    gap: 20px;
+}
+
+#topButtonBox>div {
+    background-color: #9B1B30;
+    padding: 3px;
+    color: white;
+}
+
+
+#excelBox {
+    width: 100%;
+    height: auto;
+    margin-top: 50px;
+}
+
+
+#excelHead {
+    width: 100%;
+    display: flex;
+}
+
+#excelHead>input {
+    background-color: rgba(128, 128, 128, 0.26);
+    height: 40px;
+    text-align: center;
+    width: calc(100% / 15);
+    font-weight: 700;
+    border: none;
+}

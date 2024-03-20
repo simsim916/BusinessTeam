@@ -1,12 +1,20 @@
-import "./AddDataHead.css";
+import "./AddDataBox.css";
+import DataColumn from "./DataColumn";
 
 
 const AddDataHead = () => {
 
     return (
         <div id="excelBox">
-            <div className="excelColumn">
-                <input type="text" value="상품코드" readOnly/>
+            <div id="topBox">
+                <div><i class="fa-solid fa-list"></i>식자재 등록</div>
+                <div id="topButtonBox">
+                    <div>추가</div>
+                    <div>등록</div>
+                </div>
+            </div>
+            <div id="excelHead">
+                <input type="text" value="상품코드" readOnly />
                 <input type="text" value="대분류" readOnly />
                 <input type="text" value="증분류" readOnly />
                 <input type="text" value="소분류" readOnly />
@@ -22,6 +30,12 @@ const AddDataHead = () => {
                 <input type="text" value="재고량" readOnly />
                 <input type="text" value="등록자" readOnly />
             </div>
+            <DataColumn />
+            <DataColumn />
+            <DataColumn />
+            <DataColumn />
+            <DataColumn />
+            {/* 특정 메서드를 클릭하면 컴포넌트가 추가 생성되도록? */}
         </div>
     );
 }

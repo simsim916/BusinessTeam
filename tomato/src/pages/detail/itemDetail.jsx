@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router-dom';
-import Header from './../0home/header/Header';
+import Header from '../0home/header/Header';
 import ItemDetailBox from './ItemDetailBox';
 
 
