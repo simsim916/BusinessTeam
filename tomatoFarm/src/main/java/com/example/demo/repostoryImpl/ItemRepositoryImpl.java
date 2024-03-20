@@ -13,9 +13,16 @@ import com.example.demo.entity.QItem;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.repository.ItemRepository;
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.Expressions;
+import com.querydsl.core.types.dsl.NumberPath;
+import com.querydsl.core.types.dsl.PathBuilder;
+import com.querydsl.core.types.dsl.PathBuilderFactory;
+import com.querydsl.core.types.dsl.StringPath;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import static com.example.demo.entity.QItem.item;
@@ -29,7 +36,8 @@ public class ItemRepositoryImpl implements ItemRepository {
 
 	private final JPAQueryFactory jPAQueryFactory;
 	private final EntityManager entityManager;
-
+	
+	
 	// queryDSL 동적 정렬을 위해 OrderSpecifier객체를 이용한 동적 정렬
 	public OrderSpecifier<?> getSortType(String type) {
 		if (type != null) {
@@ -47,18 +55,78 @@ public class ItemRepositoryImpl implements ItemRepository {
 		return new OrderSpecifier<>(Order.DESC, QItem.item.sales);
 	}
 
+	// 동적 column 검색
 	@Override
-	// ** 이벤트 상품 조회
-	public List<ItemDTO> selectItemWhereEvent(PageRequest pageRequest) {
+	public List<ItemDTO> selectItemStringWhereType(SearchRequest searchRequest) {
 		return jPAQueryFactory
 				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price,
 						item.sales, item.stock, item.views, item.like, item.event_code, item_event.discount,
 						item_event.name.as("event_name")))
 				.from(item).join(item_event).on(item.event_code.eq(item_event.code)).orderBy(item.sales.desc())
-				.offset((pageRequest.getPage() - 1) * pageRequest.getSize() + 1)
-				.limit(pageRequest.getPage() * pageRequest.getSize()).fetch();
+				.where(Expressions.stringPath(searchRequest.getStringType()).contains(searchRequest.getKeyword()))
+				.fetch();
+	}
+	
+	@Override
+	public List<ItemDTO> selectItemIntegerWhereType(SearchRequest searchRequest) {
+		return jPAQueryFactory
+				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price,
+						item.sales, item.stock, item.views, item.like, item.event_code, item_event.discount,
+						item_event.name.as("event_name")))
+				.from(item).join(item_event).on(item.event_code.eq(item_event.code)).orderBy(item.sales.desc())
+				.where(Expressions.numberPath(Integer.class, searchRequest.getIntegerType()).eq(Integer.parseInt(searchRequest.getKeyword())))
+				.fetch();
+	}
+	@Override
+	public List<ItemDTO> selectItemStringWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
+		return jPAQueryFactory
+				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price,
+						item.sales, item.stock, item.views, item.like, item.event_code, item_event.discount,
+						item_event.name.as("event_name")))
+				.from(item).join(item_event).on(item.event_code.eq(item_event.code)).orderBy(item.sales.desc())
+				.where(Expressions.stringPath(searchRequest.getStringType()).contains(searchRequest.getKeyword()))
+				.offset(((pageRequest.getCurrPage() - 1) ) * ( pageRequest.getSize()+1 ))
+				.limit(pageRequest.getSize() * pageRequest.getCurrPage())
+				.fetch();
+	}
+	
+	@Override
+	public List<ItemDTO> selectItemIntegerWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
+		return jPAQueryFactory
+				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price,
+						item.sales, item.stock, item.views, item.like, item.event_code, item_event.discount,
+						item_event.name.as("event_name")))
+				.from(item).join(item_event).on(item.event_code.eq(item_event.code)).orderBy(item.sales.desc())
+				.where(Expressions.numberPath(Integer.class, searchRequest.getIntegerType()).eq(Integer.parseInt(searchRequest.getKeyword())))
+				.offset(((pageRequest.getCurrPage() - 1) ) * ( pageRequest.getSize()+1 ))
+				.limit(pageRequest.getSize() * pageRequest.getCurrPage())
+				.fetch();
 	}
 
+	@Override
+	public List<ItemDTO> selectItemStringWhereTypeNotNull(SearchRequest searchRequest) {
+		return jPAQueryFactory
+				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price,
+						item.sales, item.stock, item.views, item.like, item.event_code, item_event.discount,
+						item_event.name.as("event_name")))
+				.from(item).join(item_event).on(item.event_code.eq(item_event.code)).orderBy(item.sales.desc())
+				.where(Expressions.stringPath(searchRequest.getStringType()).isNotNull())
+				.fetch();
+	}
+	@Override
+	public List<ItemDTO> selectItemStringWhereTypeNotNull(PageRequest pageRequest,SearchRequest searchRequest) {
+		return jPAQueryFactory
+				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price,
+						item.sales, item.stock, item.views, item.like, item.event_code, item_event.discount,
+						item_event.name.as("event_name")))
+				.from(item).join(item_event).on(item.event_code.eq(item_event.code)).orderBy(item.sales.desc())
+				.where(Expressions.stringPath(searchRequest.getStringType()).isNotNull())
+				.offset(((pageRequest.getCurrPage() - 1) ) * ( pageRequest.getSize()+1 ))
+				.limit(pageRequest.getSize() * pageRequest.getCurrPage())
+				.fetch();
+	}
+	
+	
 	@Override
 	// ** 브랜드 상품 조회
 	public List<ItemDTO> selectItemWherebrand(PageRequest pageRequest, SearchRequest searchRequest) {
@@ -75,7 +143,6 @@ public class ItemRepositoryImpl implements ItemRepository {
 	@Override
 	// ** 키워드 상품 페이징 조회
 	public List<ItemDTO> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest) {
-		System.out.println(searchRequest.getType());
 		return jPAQueryFactory
 				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price,
 						item.sales, item.stock, item.views, item.like, item.event_code, item_event.discount,

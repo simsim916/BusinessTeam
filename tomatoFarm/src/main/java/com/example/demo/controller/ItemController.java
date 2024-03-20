@@ -25,35 +25,40 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @AllArgsConstructor
 @RestController
-@RequestMapping(value="/item")
+@RequestMapping(value = "/item")
 public class ItemController {
 	private final ItemService itemService;
-	
-	@GetMapping("/eventitem")
-	public ResponseEntity<?> selectItemWhereEvent_D() {
+
+	@GetMapping("/selectnotnull")
+	public ResponseEntity<?> selectItemWhereEvent(SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
-		PageRequest pageRequest = new PageRequest(1,11);
-		
-		List<ItemDTO> list = itemService.selectItemWhereEvent(pageRequest);
-		
-		if (list != null && list.size() > 0) {
-			result = ResponseEntity.status(HttpStatus.OK).body(list);
-			log.info("eventitem check");
-		} else {
-			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
-			log.info("eventitem check");
-		}
+		PageRequest pageRequest = new PageRequest(1, 11);
+
+		List<ItemDTO> list = itemService.selectItemStringWhereTypeNotNull(pageRequest, searchRequest);
+
+		result = ResponseEntity.status(HttpStatus.OK).body(list);
+		log.info("eventitem check");
 		return result;
 	}
-	
+
+	@GetMapping("/test")
+	public ResponseEntity<?> selectItemWhereType(SearchRequest searchRequest) {
+		ResponseEntity<?> result = null;
+
+		List<ItemDTO> list = itemService.selectItemStringWhereType(searchRequest);
+
+		result = ResponseEntity.status(HttpStatus.OK).body(list);
+		return result;
+	}
+
 	@GetMapping("/branditem/{keyword}")
 	public ResponseEntity<?> selectItemWherebrand(@PathVariable("keyword") String keyword) {
 		ResponseEntity<?> result = null;
-		PageRequest pageRequest = new PageRequest(1,6);
+		PageRequest pageRequest = new PageRequest(1, 6);
 		SearchRequest searchRequest = new SearchRequest(keyword);
-		
-		List<ItemDTO> list = itemService.selectItemWherebrand(pageRequest,searchRequest);
-		System.out.println("\n\n"+keyword+list);
+
+		List<ItemDTO> list = itemService.selectItemWherebrand(pageRequest, searchRequest);
+		System.out.println("\n\n" + keyword + list);
 		if (list != null && list.size() > 0) {
 			result = ResponseEntity.status(HttpStatus.OK).body(list);
 			log.info("branditem check");
@@ -63,9 +68,10 @@ public class ItemController {
 		}
 		return result;
 	}
+
 //페이징 + 정렬 기능 되는 search
 	@GetMapping("/search")
-	public ResponseEntity<?> selectItemWhereSearchType( PageRequest pageRequest, SearchRequest searchRequest) {
+	public ResponseEntity<?> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
 		pageRequest.setSize(10);
 		pageRequest.setStartEndNum(pageRequest.getCurrPage());
@@ -74,12 +80,12 @@ public class ItemController {
 		System.out.println("*******getCurrPage******"+pageRequest.getCurrPage());
 		System.out.println("********getSortType*****"+searchRequest.getSortType());
 		// 1. 파라미터로 정렬하고자 하는 방법을 전달받는다.
-		//SearchRequest searchRequest = new SearchRequest();
-		//searchRequest.setSortType("파라미터");
+		// SearchRequest searchRequest = new SearchRequest();
+		// searchRequest.setSortType("파라미터");
 		// 2. searchRequest 객체를 생성해서 담아주고
-		
-//		log.info("\n"+pageRequest+"\n"+searchRequest);
-		
+
+		log.info("\n" + pageRequest + "\n" + searchRequest);
+
 		List<ItemDTO> list = itemService.selectItemWhereSearchType(pageRequest, searchRequest);
 //		System.out.println("\n**************"+list.size()+"**************\n");
 			result = ResponseEntity.status(HttpStatus.OK).body(list);
@@ -88,7 +94,6 @@ public class ItemController {
 		return result;
 	}
 
-	
 //	@GetMapping("/search")
 //	public ResponseEntity<?> selectItemWhereKeyword(@RequestParam("keyword") String keyword) {
 //		ResponseEntity<?> result = null;
@@ -104,14 +109,14 @@ public class ItemController {
 //		}
 //		return result;
 //	}
-//	
+
 	@GetMapping("/searchsort")
 	public ResponseEntity<?> selectSortWhereKeyword(@RequestParam("keyword") String keyword) {
 		ResponseEntity<?> result = null;
 		SearchRequest searchRequest = new SearchRequest(keyword);
-		
+
 		List<SortDTO> list = itemService.selectSortWhereKeyword(searchRequest);
-		log.info("\naaaaaaaaa\n"+list+"\n\n");
+		log.info("\naaaaaaaaa\n" + list + "\n\n");
 		if (list != null && list.size() > 0) {
 			result = ResponseEntity.status(HttpStatus.OK).body(list);
 			log.info("searchsort check");
@@ -121,9 +126,9 @@ public class ItemController {
 		}
 		return result;
 	}
-	
+
 	@GetMapping("/sort")
-	public ResponseEntity<?> selectSortList( ) {
+	public ResponseEntity<?> selectSortList() {
 		ResponseEntity<?> result = null;
 		List<SortDTO> list = itemService.selectSortList();
 		System.out.println(list);
@@ -136,47 +141,42 @@ public class ItemController {
 		}
 		return result;
 	}
-	
+
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 
-
 	@GetMapping("/detail")
-	public ResponseEntity<?> selectItemWhereCode(@RequestParam("code") String keyword){
+	public ResponseEntity<?> selectItemWhereCode(@RequestParam("code") String keyword) {
 		ResponseEntity<?> result = null;
-		
+
 		SearchRequest searchRequest = new SearchRequest(keyword);
 		ItemDTO dto = itemService.selectItemWhereCode(searchRequest);
 		System.out.println(dto);
-		if(dto != null) {
+		if (dto != null) {
 			result = ResponseEntity.status(HttpStatus.OK).body(dto);
 			log.info("search check");
 		} else {
 			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
 			log.info("search check");
 		}
-		
+
 		return result;
-		
+
 	}
-	
+
 	@GetMapping("/allitem")
 	public ResponseEntity<?> selectAll() {
 		ResponseEntity<?> result = null;
 		List<ItemDTO> itemList = itemService.selectAll();
-		
-		if(itemList != null && itemList.size() > 0) {
+
+		if (itemList != null && itemList.size() > 0) {
 			result = ResponseEntity.status(HttpStatus.OK).body(itemList);
 			log.info("출력한다");
 		} else {
 			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
 			log.info("데이터 못찾겠다");
 		}
-		
+
 		return result;
 	}
-	
-
 
 }
-	
-	
