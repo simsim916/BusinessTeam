@@ -35,7 +35,6 @@ public class Itme_reviewController {
 		SearchRequest searchRequest = new SearchRequest(keyword);
 		
 		List<Item_review> list = item_reviewService.selectItemReviewList(pageRequest, searchRequest);
-		System.out.println("*******"+list);
 		if(list != null && list.size() > 0) {
 			result = ResponseEntity.status(HttpStatus.OK).body(list);
 		}else {
