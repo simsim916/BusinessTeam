@@ -1,0 +1,13 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    padding: 0;
+}
+
+#containerYH {
+    margin: auto;
+    margin-left: 100px;
+    width: calc(100vw - 100px - 20px);
+    transition: 1s;
+}

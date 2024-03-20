@@ -1,0 +1,21 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    padding: 0;
+}
+
+#excelBox {
+    width: 100%;
+    height: auto;
+}
+
+
+.excelColumn {
+    width: 100%;
+    display: flex;
+}
+
+.excelColumn>input {
+    width: calc(100% / 15);
+}
