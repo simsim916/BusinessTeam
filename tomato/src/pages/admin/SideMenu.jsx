@@ -21,7 +21,7 @@ const SideMenu = () => {
             <div id="sideBar" style={{ transform: sideBarOpen ? 'translateX(0%)' : 'translateX(-100%)' }}>
                 <div>토마토팜</div>
                 <ul>
-                    <li onClick={openDetailFirst}>
+                    <li>
                         <div><i className="fa-solid fa-bars"></i><br />전체메뉴</div>
                     </li>
                     <li>

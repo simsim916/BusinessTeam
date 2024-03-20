@@ -13,7 +13,7 @@ function reducer(signValue, action) {
         case "UpdatePassword": {
             return {
                 ...signValue,
-                id: "UpdatePassword",
+                password: "UpdatePassword",
             };
         }
         case "UpdateId": {
@@ -34,7 +34,8 @@ function reducer(signValue, action) {
 } 
 
 function App() {
-
+    //1)const [상태값(변수,state), dispatch(함수의 기능을 나눈다)] = useReducer(reducer (작동시킬 함수), 초기값)
+    
     const [signValue, dispatch] = useReducer(reducer, {
         id:"initId",
         password:"initPassword"

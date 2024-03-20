@@ -36,7 +36,7 @@ const SignBG = ({ changeSignBox, style }) => {
             month: null,
             day: null
         },
-        check:{
+        check: {
             id: false,
             password: false,
             userName: false,
@@ -53,49 +53,50 @@ const SignBG = ({ changeSignBox, style }) => {
         box.style.border = "2px solid #9B1B30";
     }
 
-    const handleInputChange = (event) => {
-        let value = event.target.value;
-        let box = event.target.closest('div');
-        let message = '';
-        setSignValue({
-            ...signValue,
-            value: {
-                ...signValue.value,
-                [event.target.name]: event.target.value,
-            }
-        })
-
-
-
-        valueChange(event, message)
-        toggleJoinButton();
+    const handleInputChange = (event, signValue) => {
+        let result = {
+            message: '',
+            check: false
+        }
+        switch (event.target.name) {
+            case "id":
+                result = checkId(event);
+                break;
+        }
+        valueChange(event, result.message, result.check);
     }
 
-    // const checkId = (box, value)=>{
-    //     setId(value)
-    //     let key = /[a-z.0-9.-._]/gi;
+    const checkId = (event) => {
+        const value = event.target.value;
+        const idBox = event.target.closest('div');
+        let message = '';
+        let check = false;
+        let key = /[a-z.0-9.-._]/gi;
 
-    //     if (id.length < 4 || id.length > 15) {
-    //         box.style.border = "2px solid #FF3F3F";
-    //         box.style.borderBottom = "1px solid #FF3F3F";
-    //         box.style.color = "#FF3F3F";
-    //     }
-    //     //     // document.getElementById('idError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;아이디 : 4 ~ 15 글자 이하만 가능합니다.<br>`;
-    //     // } else if (id.replace(key, '').length > 0) {
-    //     //     idBox.current.style.border = "2px solid #FF3F3F";
-    //     //     idBox.current.style.borderBottom = "1px solid #FF3F3F";
-    //     //     idBox.current.children[0].style.color = "#FF3F3F";
-    //     //     // document.getElementById('idError').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;아이디 : 영문, 숫자, 특수문자(-, _)만 가능합니다.<br>`;
-    //     // } else {
-    //     //     idBox.current.style.border = "2px solid #03C75A";
-    //     //     idBox.current.style.borderBottom = "1px solid #03C75A";
-    //     //     idBox.current.children[0].style.color = "#03C75A";
-    //     //     // document.getElementById('idError').innerHTML = '';
-    //     // }
-    // }
+        if (value.length < 4 || value.length > 15) {
+            idBox.style.border = "2px solid #FF3F3F";
+            idBox.style.borderBottom = "1px solid #FF3F3F";
+            idBox.children[0].style.color = "#FF3F3F";
+            message = `아이디 : 4 ~ 15 글자 이하만 가능합니다.`;
+        } else if (value.replace(key, '').length > 0) {
+            idBox.style.border = "2px solid #FF3F3F";
+            idBox.style.borderBottom = "1px solid #FF3F3F";
+            idBox.children[0].style.color = "#FF3F3F";
+            message = `아이디 : 영문, 숫자, 특수문자(-, _)만 가능합니다.`;
+        } else {
+            idBox.style.border = "2px solid #03C75A";
+            idBox.style.borderBottom = "1px solid #03C75A";
+            idBox.children[0].style.color = "#03C75A";
+            check = true;
+        }
+        return {
+            message: message,
+            check: check
+        }
+    }
 
-    const valueChange = (event, message) => {
-        setSignValue({
+    const valueChange = (event, message, check) => {
+        setSignValue(signValue => ({
             ...signValue,
             value: {
                 ...signValue.value,
@@ -104,28 +105,31 @@ const SignBG = ({ changeSignBox, style }) => {
             error: {
                 ...signValue.error,
                 [event.target.name]: message
+            },
+            check: {
+                ...signValue.check,
+                [event.target.name]: check
             }
-        })
+        }))
     }
 
     const toggleJoinButton = () => {
-        idCheck && passwordCheck && nameCheck && phonenumberCheck && addressCheck &&
-            emailCheck && emailBackCheck && genderCheck && yearCheck && monthCheck && dayCheck ?
-            setIsJoinable(true) : setIsJoinable(false);
+        signValue.check.id && signValue.check.password && signValue.check.userName && signValue.check.phonenumber ?
+            setSignValue({ ...signValue, isJoinable: true }) : setSignValue({ ...signValue, isJoinable: false });
     }
 
     const requestSign = () => {
         axios.post('http://localhost:8090/user/signup/', null, {
             params: {
-                id: id,
-                // password: pwdValue,
-                // name: nameValue,
-                // phonenumber: phonenumberValue,
-                // address2: addressValue,
-                // email: emailFrontValue,
-                // email2: emailBackValue,
-                // gender: genderValue,
-                // birthdate: birthdateValue
+                id: signValue.value.id,
+                password: signValue.value.password,
+                name: signValue.value.userName,
+                phonenumber: signValue.value.phonenumber,
+                address2: signValue.value.address,
+                email: signValue.value.email,
+                email2: signValue.value.emailBack,
+                gender: signValue.value.gender,
+                birthdate: signValue.value.year + signValue.value.month + signValue.value.day
             }
         }).then(res => {
             setLoading(false);
@@ -150,15 +154,15 @@ const SignBG = ({ changeSignBox, style }) => {
                     <p id="writeOption"><i className="fa-solid fa-check"></i>&nbsp;&nbsp;필수 입력 사항</p>
                     <div id="idBox">
                         <i className="fa-solid fa-user"></i>
-                        <input ref={idBox} type="text" name="id" placeholder="아이디" value={signValue.value.id}
-                            onChange={(event) => handleInputChange(event, setId)}
+                        <input type="text" name="id" placeholder="아이디" value={signValue.value.id}
+                            onChange={(event) => handleInputChange(event, signValue)}
                             onFocus={changeOpacity}
                         />
                     </div>
                     <div id="passwordBox">
                         <i className="fa-solid fa-key"></i>
-                        <input ref={passwordBox} type="password" name="password" placeholder="비밀번호" value={signValue.value.password}
-                            onChange={(e) => handleInputChange(e, setPassword)}
+                        <input type="password" name="password" placeholder="비밀번호" value={signValue.value.password}
+                            onChange={(event) => handleInputChange(event)}
                             onBlur={toggleJoinButton}
                         />
                     </div>
@@ -287,7 +291,7 @@ const SignBG = ({ changeSignBox, style }) => {
                             onChange={(e) => handleInputChange(e, setDay)}
                         />
                     </div> */}
-                    <button type="button" onClick={requestSign} id="joinBox" disabled={!isJoinable}>가입하기</button>
+                    <button type="button" onClick={requestSign} id="joinBox" disabled={!signValue.isJoinable}>가입하기</button>
                 </form>
                 <br />
                 <p id="successOrNot"></p>
