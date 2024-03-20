@@ -8,12 +8,14 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.domain.ItemDTO;
 import com.example.demo.domain.SortDTO;
+import com.example.demo.entity.Item;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.service.ItemService;
@@ -179,4 +181,17 @@ public class ItemController {
 		return result;
 	}
 
+    @PostMapping("/insert")
+//    @GetMapping("/insert")
+    public ResponseEntity<?> insertItem(Item entity) {
+    	System.out.println("getCode => " + entity.getCode());
+    	System.out.println("getAdmin => " + entity.getAdmin());
+    	System.out.println("getSort1 => " + entity.getSort1());
+    	System.out.println("getLikes => " + entity.getLikes());
+    	ResponseEntity<?> result = null;
+//        itemService.insertItem(entity);
+        result = ResponseEntity.status(HttpStatus.OK).body("insert성공");
+        return result;
+    }
+	
 }

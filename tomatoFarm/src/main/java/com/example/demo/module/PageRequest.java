@@ -32,8 +32,8 @@ public class PageRequest {
 		if(this.startNum < 1) {
 			this.startNum = 1;
 		}
-		this.startNum = (this.currPage-1) * (this.size);
-		this.endNum = startNum * this.size;
+		this.startNum = ((this.currPage-1) * (this.size));
+		this.endNum = (startNum+1) * this.size;
 	}
 	
 	public PageRequest(int page, int size){

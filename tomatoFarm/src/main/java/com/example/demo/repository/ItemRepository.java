@@ -37,6 +37,7 @@ public interface ItemRepository {
 	
 	int batchInsert(List<Item> entity);
 	List<ItemDTO> selectAll();
+	void insertItem(Item entity);
 	
 	
 }

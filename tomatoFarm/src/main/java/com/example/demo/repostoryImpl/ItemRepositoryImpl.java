@@ -3,6 +3,7 @@ package com.example.demo.repostoryImpl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
@@ -60,7 +61,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 	public List<ItemDTO> selectItemStringWhereType(SearchRequest searchRequest) {
 		return jPAQueryFactory
 				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price,
-						item.sales, item.stock, item.views, item.like, item.event_code, item_event.discount,
+						item.sales, item.stock, item.views, item.likes, item.event_code, item_event.discount,
 						item_event.name.as("event_name")))
 				.from(item).join(item_event).on(item.event_code.eq(item_event.code)).orderBy(item.sales.desc())
 				.where(Expressions.stringPath(searchRequest.getStringType()).contains(searchRequest.getKeyword()))
@@ -71,7 +72,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 	public List<ItemDTO> selectItemIntegerWhereType(SearchRequest searchRequest) {
 		return jPAQueryFactory
 				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price,
-						item.sales, item.stock, item.views, item.like, item.event_code, item_event.discount,
+						item.sales, item.stock, item.views, item.likes, item.event_code, item_event.discount,
 						item_event.name.as("event_name")))
 				.from(item).join(item_event).on(item.event_code.eq(item_event.code)).orderBy(item.sales.desc())
 				.where(Expressions.numberPath(Integer.class, searchRequest.getIntegerType()).eq(Integer.parseInt(searchRequest.getKeyword())))
@@ -81,7 +82,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 	public List<ItemDTO> selectItemStringWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
 		return jPAQueryFactory
 				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price,
-						item.sales, item.stock, item.views, item.like, item.event_code, item_event.discount,
+						item.sales, item.stock, item.views, item.likes, item.event_code, item_event.discount,
 						item_event.name.as("event_name")))
 				.from(item).join(item_event).on(item.event_code.eq(item_event.code)).orderBy(item.sales.desc())
 				.where(Expressions.stringPath(searchRequest.getStringType()).contains(searchRequest.getKeyword()))
@@ -94,7 +95,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 	public List<ItemDTO> selectItemIntegerWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
 		return jPAQueryFactory
 				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price,
-						item.sales, item.stock, item.views, item.like, item.event_code, item_event.discount,
+						item.sales, item.stock, item.views, item.likes, item.event_code, item_event.discount,
 						item_event.name.as("event_name")))
 				.from(item).join(item_event).on(item.event_code.eq(item_event.code)).orderBy(item.sales.desc())
 				.where(Expressions.numberPath(Integer.class, searchRequest.getIntegerType()).eq(Integer.parseInt(searchRequest.getKeyword())))
@@ -107,7 +108,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 	public List<ItemDTO> selectItemStringWhereTypeNotNull(SearchRequest searchRequest) {
 		return jPAQueryFactory
 				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price,
-						item.sales, item.stock, item.views, item.like, item.event_code, item_event.discount,
+						item.sales, item.stock, item.views, item.likes, item.event_code, item_event.discount,
 						item_event.name.as("event_name")))
 				.from(item).join(item_event).on(item.event_code.eq(item_event.code)).orderBy(item.sales.desc())
 				.where(Expressions.stringPath(searchRequest.getStringType()).isNotNull())
@@ -117,7 +118,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 	public List<ItemDTO> selectItemStringWhereTypeNotNull(PageRequest pageRequest,SearchRequest searchRequest) {
 		return jPAQueryFactory
 				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price,
-						item.sales, item.stock, item.views, item.like, item.event_code, item_event.discount,
+						item.sales, item.stock, item.views, item.likes, item.event_code, item_event.discount,
 						item_event.name.as("event_name")))
 				.from(item).join(item_event).on(item.event_code.eq(item_event.code)).orderBy(item.sales.desc())
 				.where(Expressions.stringPath(searchRequest.getStringType()).isNotNull())
@@ -132,7 +133,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 	public List<ItemDTO> selectItemWherebrand(PageRequest pageRequest, SearchRequest searchRequest) {
 		return jPAQueryFactory
 				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price,
-						item.sales, item.stock, item.views, item.like, item.event_code, item_event.discount,
+						item.sales, item.stock, item.views, item.likes, item.event_code, item_event.discount,
 						item_event.name.as("event_name")))
 				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
 				.where(item.brand.eq(searchRequest.getKeyword())).orderBy(item.sales.desc())
@@ -145,7 +146,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 	public List<ItemDTO> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest) {
 		return jPAQueryFactory
 				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price,
-						item.sales, item.stock, item.views, item.like, item.event_code, item_event.discount,
+						item.sales, item.stock, item.views, item.likes, item.event_code, item_event.discount,
 						item_event.name.as("event_name")))
 				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
 				.where(item.sort2.contains(searchRequest.getKeyword())
@@ -164,7 +165,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 	public List<ItemDTO> selectItemWhereKeyword(SearchRequest searchRequest) {
 		return jPAQueryFactory
 				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price,
-						item.sales, item.stock, item.views, item.like, item.event_code, item_event.discount,
+						item.sales, item.stock, item.views, item.likes, item.event_code, item_event.discount,
 						item_event.name.as("event_name")))
 				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
 				.where(item.sort2.contains(searchRequest.getKeyword())
@@ -222,7 +223,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 				item.sales,
 				item.stock,
 				item.views,
-				item.like,
+				item.likes,
 				item.event_code,
 				item_event.discount,
 				item_event.name.as("event_name")
@@ -255,4 +256,12 @@ public class ItemRepositoryImpl implements ItemRepository {
     			item.brand,item.name,item.weight,item.storage,item.packing,item.delivery,item.price,item.vat,
     			item.origin,item.stock,item.admin)).from(item).offset(0).limit(100).orderBy(item.sales.desc()).fetch();
     }
+
+	@Override
+	@Transactional
+	public void insertItem(Item entity) {
+		entityManager.persist(entity);
+	}
+	
+    
 }

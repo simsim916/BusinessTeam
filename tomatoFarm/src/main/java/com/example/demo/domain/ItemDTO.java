@@ -27,7 +27,7 @@ public class ItemDTO {
 	private Integer sales; // 판매 수량
 	private Integer stock; // 재고 수량
 	private Integer views; // 조회수
-	private Integer like; // 좋아요수
+	private Integer likes; // 좋아요수
 	private Integer event_code; // 이벤트명
 	private String admin; // 등록자
 	

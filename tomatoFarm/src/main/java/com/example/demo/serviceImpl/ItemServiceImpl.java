@@ -2,6 +2,8 @@ package com.example.demo.serviceImpl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.ItemDTO;
@@ -16,6 +18,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
+@Transactional
 @AllArgsConstructor
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -115,5 +118,10 @@ public class ItemServiceImpl implements ItemService {
 
 	public List<ItemDTO> selectAll() {
 		return itemRepository.selectAll();
+	}
+	
+	@Override
+	public void insertItem(Item entity) {
+		itemRepository.insertItem(entity);
 	}
 }
