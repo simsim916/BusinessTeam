@@ -4,7 +4,7 @@ import ItemDetailBox from './ItemDetailBox';
 import ReviewBoardBox from './ReviewBoardBox';
 import AskBoardBox from './AskBoardBox';
 import Error from '../components/Error';
-import Loading from './../components/Loading';
+import Loading from '../components/Loading';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 

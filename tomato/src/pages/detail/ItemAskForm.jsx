@@ -18,11 +18,11 @@ const ItemAskForm = ({item}) => {
             <div id="itemAskBox">
                 <div id="itemAskTop">
                     <div >상품 문의하기</div>
-                        <img src={process.env.PUBLIC_URL + '/img/itemImg/5000100_1.jpg'} alt="" />
+                        <img src={process.env.PUBLIC_URL + '/img/itemImg/5000100_2.jpg'} alt="" />
                     <div>[밀키트] 밀키트다 밀키트다</div>
                 </div>
                 <div id="itemAskBottom">
-                        <div>제목 <textarea type="text" placeholder="제목을 입력해주세요"></textarea></div>
+                    <div>제목 <textarea type="text" placeholder="제목을 입력해주세요"></textarea></div>
                     <div>내용
                         <textarea type="text" placeholder="상품 문의 작성 전 확인해주세요.
                         1. 답변은 영업일 기준 2~3일 소요됩니다.
