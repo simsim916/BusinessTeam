@@ -4,15 +4,19 @@ import axios from 'axios';
 import ReviewContent from './ReviewContent';
 import Loading from './../components/Loading';
 import Error from './../components/Error';
+import ReviewWriteForm from './ReviewWriteForm';
+import ReviewDetailForm from './ReviewDetailForm';
 
 
-const ReviewBoardBox = ({ itemCode }) => {
+const ReviewBoardBox = ({ item }) => {
     const [itemReviewList, setItemReviewList] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
+    const [reviewWrite, setReviewWrite] = useState(false);
+
     useEffect(() => {
-        axios.get(`http://localhost:8090/itemreview/select/${itemCode}`
+        axios.get(`http://localhost:8090/itemreview/select/${item.code}`
         ).then(res => {
             setItemReviewList(res.data);
             console.log(itemReviewList)
@@ -22,18 +26,21 @@ const ReviewBoardBox = ({ itemCode }) => {
             setLoading(false);
             setError(true);
         })
-    }, [])
+    },[])
 
-    function reviewWriteClick() {
-
+    const reviewWriteClick = () => {
+        setReviewWrite(!reviewWrite);
     }
+
+    console.log(reviewWrite);
+
 
     if (loading) return <Loading />
     if (error) return <Error />
 
     return (
         <>
-            <div id="ReviewBoardBox" className="container appearContainer">
+            <div id="reviewBoardBox" className="container appearContainer">
                 <h5>상품후기</h5>
                 <span>한줄리뷰 - 제목을 클릭하시면 상세내용을 보실 수 있습니다.</span>
                 <div onClick={reviewWriteClick} id="reviewWrite"> 후기작성 </div>
@@ -45,7 +52,9 @@ const ReviewBoardBox = ({ itemCode }) => {
                         <div>등록일</div>
                     </div>
                 </div>
+
                 {itemReviewList ? (itemReviewList.map((e, i) => <ReviewContent itemReview={e} key={i} />)) : ('')}
+
 
                 <div id="reviewBoardBtn">
                     <i className="fa-solid fa-angles-left"></i>
@@ -56,6 +65,8 @@ const ReviewBoardBox = ({ itemCode }) => {
                     <i className="fa-solid fa-angle-right"></i>
                     <i className="fa-solid fa-angles-right"></i>
                 </div>
+                {reviewWrite ? <ReviewWriteForm item={item} /> : null}
+
             </div>
         </>
     );
