@@ -25,13 +25,9 @@ public class PageRequest {
 	
 	private int page; // 출력페이지
 	private int size; // 1page 당 출력 row 갯수
-	private int startNum; // 페이지의 나타날 데이터 중 시작데이터 순서
+	private int startNum; // 페이지의 나타날 데이터 중 시작데이터 번호
+	private int endNum; // 페이지의 나타날 데이터 중 끝데이터 번호
 	private int currPage;
-	
-	public PageRequest(int currPage, int size) {
-		this.currPage=currPage;
-		this.size=size;
-	}
 	
 	public void setStartEndNum(int currPage) {
 		if(this.startNum < 1) {
@@ -40,6 +36,12 @@ public class PageRequest {
 		this.startNum = (this.currPage-1)*(this.size);
 	}
 	
-	
+	public PageRequest(int page, int size){
+		this.page = page;
+		this.size = size;
+		
+		this.startNum = (page-1)*size+1;
+		this.endNum = page*size;
+	}
 	
 }

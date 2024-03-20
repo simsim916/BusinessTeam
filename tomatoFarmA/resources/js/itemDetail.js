@@ -66,21 +66,39 @@ function reivewDetailImgChange(ele) {
     ele.parentNode.previousElementSibling.children[0].setAttribute('src', ele.src);
 }
 
-// let imgList = document.getElementById('reviewDetailImgBottom');
-// let imgLength = imgList.length;
+let imgList = document.getElementById('reviewDetailImgBottom');
+let imgLength = imgList.length;
 
 // function returnImg(event) {
-//     let returnImg = (imgList + imgLength - 1) % imgLength;
-//     event.
-// }
-
-
-// function nextImg(event) {
-//     let nextImg = (imgList + 1) % imgLength;
+    //     let returnImg = (imgList + imgLength - 1) % imgLength;
+    //     event.
+    // }
     
+    
+    // function nextImg(event) {
+        //     let nextImg = (imgList + 1) % imgLength;
+        
 // }
 
-function reviewDetailClose(ele) {
+function reviewDetailClick(ele) {
     ele.closest('#reviewDetailForm').style.display = 'none';
 }
 
+
+function itemAskClick(event) {
+    const reviewDetailForm = document.getElementById('itemAskForm');
+    reviewDetailForm.style.display = 'flex';
+}
+
+function itemAskBoxClose(ele) {
+    ele.closest('#itemAskForm').style.display = 'none';
+}
+
+function reviewWriteClick(event) {
+    const reviewDetailForm = document.getElementById('reviewWriteForm');
+    reviewDetailForm.style.display = 'flex';
+}
+
+function reviewWriteBoxClose(ele) {
+    ele.closest('#reviewWriteForm').style.display = 'none';
+}

@@ -15,13 +15,8 @@ import { useState } from 'react';
 
 
 
-// let functions = {
+// // let functions = {
 
-
-//   clickLogin: () => {
-//     document.getElementById('loginBG').style.transform = "translate(0,0)";
-//     document.getElementById('signBG').style.transform = "translate(0,0)";
-//   },
 
 //   changeOpacityId: (event) => {
 //     let box = event.target.closest('div');
@@ -152,10 +147,9 @@ const LoginForm = () => {
   // }
   // const [signBox, setSignBox] = useState(false);
 
-  // const changeSignBox = () => {
-  //   setSignBox(!signBox);
-  // }
-
+  const changeSignBox = () => {
+    setSignBox(!signBox);
+  }
   return (
 
 
@@ -163,8 +157,8 @@ const LoginForm = () => {
       <div id="bodyBG" style={{ backgroundImage: `url("${process.env.PUBLIC_URL + "/img/img/signup/signupBGI.jpg"}")` }}></div>
       {/* <div id="bodyBG" style={BGstyle}></div> */}
       <div id="contentBox">
-        {/* <LoginBG changeSignBox={changeSignBox} style={signBox ? { transform: 'translate(-100%, 0)' } : {}} />
-        <SignBG changeSignBox={changeSignBox} style={signBox ? { transform: 'translate(-100%, 0)' } : {}} /> */}
+        {/* <LoginBG changeSignBox={changeSignBox} style={signBox ? { transform: 'translate(-100%, 0)' } : {}} /> */}
+              {!signBox && <SignBG changeSignBox={changeSignBox}/>}
       </div>
     </>
   );
