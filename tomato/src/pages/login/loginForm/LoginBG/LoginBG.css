@@ -106,11 +106,6 @@
 /* ========================== */
 #logo {
     height: 80px;
-    position: relative;
-    top: 30px;
-    left: 35%;
-    margin: auto;
-    display: inline-block;
 }
 
 #errorBox {

@@ -14,7 +14,7 @@ function App() {
             <Routes>
                 <Route path='/list' element={<ItemList />} />
                 <Route path='/detail' element={<ItemDetail />} />
-                {/* <Route path='/login' element={<LoginForm />} /> */}
+                <Route path='/login' element={<LoginForm />} />
                 <Route path='/' element={<Home />} />
                 <Route path='/*' element={"잘못된 접근"} />
             </Routes>

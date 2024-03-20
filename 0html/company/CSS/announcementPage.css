@@ -3,8 +3,6 @@
     box-sizing: border-box;
 }
 
-
-
 #container {
     width: 98%;
     margin: 0 auto;
@@ -16,7 +14,6 @@
     border-bottom: 1px solid rgba(128, 128, 128, 0.329);
     display: flex;
     margin-top: 20px;
-    /* 가려져있어서 몰랐는데,  */
 }
 
 #tagBoxYH {
