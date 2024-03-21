@@ -5,17 +5,19 @@
     left: 0;
     width: 100vw;
     height: 100vh;
+    display: flex;
     justify-content: center;
     align-items: center;
     z-index: 10;
-    display: flex;
 }
 
 #itemAskBox {
     background-color: white;
     position: fixed;
-    width: 1000px;
     height: 900px;
+    max-height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
     justify-content: center;
     align-items: center;
     padding: 50px;
@@ -24,89 +26,122 @@
 }
 
 #itemAskTop {
-    height: 30%;
-    background-color: white;
-    position: relative;
     border-bottom: 1px solid rgb(221, 221, 221);
+    position: relative;
+    display: flex;
+    
 }
-
-#itemAskTop div:nth-of-type(1) {
+#itemAskBox h4 {
     font-size: 30px;
     padding-bottom: 20px;
     border-bottom: 1px solid rgb(221, 221, 221);
+    font-weight: inherit;
 }
-
-#itemAskTop img {
-    margin-top: 20px;
-    position: absolute;
-    width: 200px;
-    height: 300ox;
+#itemAskImg {
+    overflow: hidden;
+    width: 25%;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#itemAskImg img{
+    width: 100%;
+}
+#itemAskImg~div {
+    width: 75%;
+    padding-left: 30px;
 }
 
 #itemTitle {
     margin-top: 20px;
     font-size: 20px;
-    display: flex;
-    position: absolute;
-    width: 500px;
-    left: 230px;
+    color: gray;
+    display: block;
+    width: 200px;
 }
 
 #itemAskBottom {
-    height: 320px;
-    width: 100%;
     display: flex;
+    width: 100%;
     position: relative;
-    padding-top: 30px;
+    padding: 20px;
     flex-direction: column;
 }
 
-#itemAskBottom div {
-    display: flex;
+#itemAskTitle{
     position: relative;
+    display: flex;
+    text-align: center;
+    border-bottom: 1px solid rgb(221, 221, 221);
+    gap: 20px;
+    text-align: center;
+    align-items: center;
+}
+
+#itemAskTitle div{
+    display: flex;
+    position: block;
     font-size: 20px;
-    width: 100%;
+    width: 200px;
     height: 50px;
     justify-content: center;
     align-items: center;
     font-weight: 500;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
-#askTitle textarea {
-    margin: 10px 0px 0px 20px;
+#itemAskTitle textarea {
     padding: 10px 20px;
     font-size: 18px;
-    width: 90%;
+    width: 70%;
     height: 50px;
     display: block;
-    position: relative;
-    border-radius: 10px;
     border-radius: 10px;
     white-space: wrap;
     resize: none;
+    margin-bottom: 20px;
+}
+#itemAskContent{
+    margin-top: 20px;
+    position: relative;
+    display: flex;
+    text-align: center;
+    border-bottom: 1px solid rgb(221, 221, 221);
+    gap: 20px;
+    text-align: center;
+    align-items: center;
 }
 
-#askContent textarea {
-    margin: 170px 0px 0px 20px;
+#itemAskContent div {
+    display: flex;
+    position: block;
+    font-size: 20px;
+    width: 200px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+#itemAskContent textarea {
     padding: 10px 20px;
     font-size: 18px;
-    width: 90%;
-    height: 200px;
+    width: 70%;
+    height: 300px;
     display: block;
-    position: relative;
     border-radius: 10px;
     white-space: wrap;
     resize: none;
+    margin-bottom: 20px;
 }
 
 #itemAskPrivacy {
     position: relative;
     display: flex;
-    height: 30px;
     gap: 10px;
-    left: 55px;
-    margin: 20px 20px;
+    left: 30px;
 }
 
 #itemAskPrivacy input {
@@ -120,7 +155,7 @@
     justify-content: center;
     gap: 0 50px;
     text-align: center;
-    padding-top: 100px;
+    padding-top: 50px;
 
 }
 
@@ -150,8 +185,8 @@
 
 #itemAskBoxClose {
     position: absolute;
-    bottom: calc(100% + 10px);
-    right: 0;
+    top: 20px;
+    right: 20px;
     background-color: #9B1B30;
     color: #fff;
     font-size: 35px;

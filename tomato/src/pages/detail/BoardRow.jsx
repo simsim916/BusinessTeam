@@ -10,12 +10,13 @@ const BaordRow = ({ itemAsk }) => {
         <>
             {itemAsk ?
                 <div onClick={showContent} className="boardRow">
+                    <div>{itemAsk.seq}</div>
                     <div class="askContents">{itemAsk.content}
                         <a>답변</a>
                         <a>삭제</a>
                     </div>
-                    <div>미답변</div>
                     <div>{itemAsk.title}</div>
+                    <div>미답변</div>
                     <div>{itemAsk.writer}</div>
                     <div>{itemAsk.regdate}</div>
                 </div>

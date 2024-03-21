@@ -29,9 +29,9 @@ public class Item_reviewRepositoryImpl implements Item_reviewRepository{
 	//** 상품리뷰 조회
 	public List<Item_review> selectItemReviewList(PageRequest pageRequest, SearchRequest searchRequest) {
 		return jPAQueryFactory.selectFrom(item_review)
-				.where(item_review.item_code.eq(Integer.parseInt(searchRequest.getKeyword())))
+				.where(item_review.item_code.stringValue().eq(searchRequest.getKeyword()))
 				.orderBy(item_review.seq.desc())
-				.offset(pageRequest.getStartNum()).limit(pageRequest.getEndNum())
+				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum())
 				.fetch();
 	}	
 	

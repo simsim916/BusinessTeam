@@ -15,10 +15,9 @@ const AskBoardBox = ({ item }) => {
     const [askWrite, setAskWrite] = useState(false);
 
     useEffect(() => {
-        axios.get(`http://localhost:8090/itemask/select/${item.code}`
+        axios.get(`http://localhost:8090/itemask/select?keyword=${item.code}`
         ).then(res => {
             setItemAskList(res.data);
-            console.log(itemAskList)
             setLoading(false);
         }).catch(err => {
             console.log(err.message)
@@ -27,7 +26,7 @@ const AskBoardBox = ({ item }) => {
         })
     }, [])
 
-    function itemAskClick() {
+    const itemAskClick = () => {
         setAskWrite(!askWrite);
 
     }
@@ -51,7 +50,7 @@ const AskBoardBox = ({ item }) => {
                     </div>
 
                     {
-                        !itemAskList ?
+                        itemAskList ?
                         itemAskList.map((e, i) => <BoardRow itemAsk={e} key={i} />)
                             : <BoardRow />
                     }
@@ -66,7 +65,7 @@ const AskBoardBox = ({ item }) => {
                     <i className="fa-solid fa-angle-right"></i>
                     <i className="fa-solid fa-angles-right"></i>
                 </div>
-                {askWrite ? <ItemAskForm item={item} /> : null}
+                {askWrite ? <ItemAskForm item={item} /> : <></>}
             </div>
 
         </>
