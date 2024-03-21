@@ -144,25 +144,6 @@ public class ItemController {
 
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 
-	@GetMapping("/detail")
-	public ResponseEntity<?> selectItemWhereCode(@RequestParam("code") String keyword) {
-		ResponseEntity<?> result = null;
-
-		SearchRequest searchRequest = new SearchRequest(keyword);
-		ItemDTO dto = itemService.selectItemWhereCode(searchRequest);
-		System.out.println(dto);
-		if (dto != null) {
-			result = ResponseEntity.status(HttpStatus.OK).body(dto);
-			log.info("search check");
-		} else {
-			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
-			log.info("search check");
-		}
-
-		return result;
-
-	}
-
 	@GetMapping("/allitem")
 	public ResponseEntity<?> selectAll() {
 		ResponseEntity<?> result = null;

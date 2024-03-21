@@ -29,8 +29,6 @@ public interface ItemRepository {
 	List<ItemDTO> selectItemWhereKeyword(SearchRequest searchRequest);
 	// ** 키워드 상품 단순 조회 -> 필터
 	List<SortDTO> selectSortWhereKeyword(SearchRequest searchRequest);
-	// ** 코드로 상품 조회
-	ItemDTO selectItemWhereCode(SearchRequest searchRequest);
 	// ** 분류 검색 조회
 	List<SortDTO> selectSortList();
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */

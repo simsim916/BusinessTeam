@@ -153,7 +153,6 @@ public class ItemRepositoryImpl implements ItemRepository {
 						.or(item.brand.contains(searchRequest.getKeyword()))
 						.or(item.name.contains(searchRequest.getKeyword())))
 				.orderBy(getSortType(searchRequest.getSortType()))
-//				.offset((pageRequest.getPage() - 1) * pageRequest.getSize() + 1)
 				.offset(((pageRequest.getCurrPage() - 1) ) * ( pageRequest.getSize()+1 ))
 				.limit(pageRequest.getSize() * pageRequest.getCurrPage())
 				.fetch();
@@ -207,31 +206,6 @@ public class ItemRepositoryImpl implements ItemRepository {
 		return result;
 	}
 
-	@Override
-	// ** 코드로 상품 조회
-    public ItemDTO selectItemWhereCode(SearchRequest searchRequest) {
-        return jPAQueryFactory.select(Projections.bean(ItemDTO.class, 
-				item.code,
-				item.brand,
-				item.name,
-				item.delivery,
-				item.storage,
-				item.packing,
-				item.weight,
-				item.price,
-				item.sales,
-				item.stock,
-				item.views,
-				item.like,
-				item.event_code,
-				item_event.discount,
-				item_event.name.as("event_name")
-				))
-    			.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
-                .where(item.code.stringValue().eq(searchRequest.getKeyword()))
-                .fetchOne();
-    }
-	
 	@Override
 	// ** 키워드 상품 분류 조회
 	public List<SortDTO> selectSortList() {
