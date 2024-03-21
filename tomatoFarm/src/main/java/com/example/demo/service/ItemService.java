@@ -29,7 +29,7 @@ public interface ItemService {
 				.sales(dto.getSales())
 				.stock(dto.getStock())
 				.views(dto.getViews())
-				.like(dto.getLike())
+				.likes(dto.getLikes())
 				.event_code(dto.getEvent_code())
 				.admin(dto.getAdmin()).build();
 		return entity;
@@ -53,7 +53,7 @@ public interface ItemService {
 				.sales(entity.getSales())
 				.stock(entity.getStock())
 				.views(entity.getViews())
-				.like(entity.getLike())
+				.likes(entity.getLikes())
 				.event_code(entity.getEvent_code())
 				.admin(entity.getAdmin()).build();
 		return dto;
@@ -73,5 +73,7 @@ public interface ItemService {
 	
 	int batchInsert(List<Item> entity);
 	List<ItemDTO> selectAll();
+	void insertItem(Item entity);
+	
 	
 }

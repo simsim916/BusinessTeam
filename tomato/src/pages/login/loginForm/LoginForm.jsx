@@ -79,18 +79,15 @@ import { useState } from 'react';
 
 const LoginForm = () => {
 
-    const [signBox, setSignBox] = useState(false);
 
-  const changeSignBox = () => {
-    setSignBox(!signBox);
-  }
+  // const changeSignBox = () => {
+  //   setSignBox(!signBox);
+  // }
+
   return (
+
+
     <>
-      <div id="bodyBG" style={{ backgroundImage: `url("${process.env.PUBLIC_URL + "/img/img/signup/signupBGI.jpg"}")` }}></div>
-      <div id="contentBox">
-        {/* <LoginBG changeSignBox={changeSignBox} style={signBox ? { transform: 'translate(-100%, 0)' } : {}} /> */}
-              {!signBox && <SignBG changeSignBox={changeSignBox}/>}
-      </div>
     </>
   );
 }

@@ -3,17 +3,20 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.domain.ItemDTO;
 import com.example.demo.domain.SortDTO;
+import com.example.demo.entity.Item;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.service.ItemService;
@@ -75,6 +78,10 @@ System.out.println("\n\n\n" + list);
 		ResponseEntity<?> result = null;
 		pageRequest.setSize(10);
 		pageRequest.setStartEndNum(pageRequest.getCurrPage());
+		System.out.println("*****startNum********"+pageRequest.getStartNum());
+		System.out.println("******EndNum*******"+pageRequest.getEndNum());
+		System.out.println("*******getCurrPage******"+pageRequest.getCurrPage());
+		System.out.println("********getSortType*****"+searchRequest.getSortType());
 		// 1. 파라미터로 정렬하고자 하는 방법을 전달받는다.
 		// SearchRequest searchRequest = new SearchRequest();
 		// searchRequest.setSortType("파라미터");
@@ -83,13 +90,9 @@ System.out.println("\n\n\n" + list);
 		log.info("\n" + pageRequest + "\n" + searchRequest);
 
 		List<ItemDTO> list = itemService.selectItemWhereSearchType(pageRequest, searchRequest);
-		if (list != null && list.size() > 0) {
+//		System.out.println("\n**************"+list.size()+"**************\n");
 			result = ResponseEntity.status(HttpStatus.OK).body(list);
 			log.info("search check");
-		} else {
-			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
-			log.info("search check");
-		}
 		log.info(result);
 		return result;
 	}
@@ -160,4 +163,17 @@ System.out.println("\n\n\n" + list);
 		return result;
 	}
 
+    @PostMapping(value="/insert" , consumes = MediaType.APPLICATION_JSON_VALUE)
+//    @GetMapping("/insert")
+    public ResponseEntity<?> insertItem(ItemDTO dto) {
+    	System.out.println("getCode => " + dto.getCode());
+    	System.out.println("getAdmin => " + dto.getAdmin());
+    	System.out.println("getSort1 => " + dto.getSort1());
+    	System.out.println("getLikes => " + dto.getLikes());
+    	ResponseEntity<?> result = null;
+//        itemService.insertItem(entity);
+        result = ResponseEntity.status(HttpStatus.OK).body("insert성공");
+        return result;
+    }
+	
 }
