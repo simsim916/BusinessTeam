@@ -59,12 +59,9 @@ public interface ItemService {
 		return dto;
 	}
 
-	List<ItemDTO> selectItemStringWhereTypeNotNull(PageRequest pageRequest,SearchRequest searchRequest);
-	List<ItemDTO> selectItemStringWhereTypeNotNull(SearchRequest searchRequest);
-	List<ItemDTO> selectItemStringWhereType(SearchRequest searchRequest);
-	List<ItemDTO> selectItemIntegerWhereType(SearchRequest searchRequest);
 	List<ItemDTO> selectItemStringWhereType(PageRequest pageRequest,SearchRequest searchRequest);
 	List<ItemDTO> selectItemIntegerWhereType(PageRequest pageRequest,SearchRequest searchRequest);
+	List<ItemDTO> selectItemStringWhereTypeNotNull(PageRequest pageRequest,SearchRequest searchRequest);
 	
 	
 	List<ItemDTO> selectItemWherebrand(PageRequest pageRequest, SearchRequest searchRequest);
@@ -73,8 +70,6 @@ public interface ItemService {
 	List<SortDTO> selectSortWhereKeyword(SearchRequest searchRequest);
 	List<SortDTO> selectSortList();
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
-	
-	ItemDTO selectItemWhereCode(SearchRequest searchRequest);
 	
 	int batchInsert(List<Item> entity);
 	List<ItemDTO> selectAll();

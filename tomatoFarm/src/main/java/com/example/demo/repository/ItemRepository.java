@@ -13,11 +13,8 @@ import com.example.demo.module.SearchRequest;
 @Repository
 public interface ItemRepository {
 	// ** 동적 한 컬럼 검색
-	List<ItemDTO> selectItemStringWhereType(SearchRequest searchRequest);
-	List<ItemDTO> selectItemIntegerWhereType(SearchRequest searchRequest);
 	List<ItemDTO> selectItemStringWhereType(PageRequest pageRequest,SearchRequest searchRequest);
 	List<ItemDTO> selectItemIntegerWhereType(PageRequest pageRequest,SearchRequest searchRequest);
-	List<ItemDTO> selectItemStringWhereTypeNotNull(SearchRequest searchRequest);
 	List<ItemDTO> selectItemStringWhereTypeNotNull(PageRequest pageRequest,SearchRequest searchRequest);
 	
 	

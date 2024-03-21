@@ -17,7 +17,6 @@ import lombok.ToString;
 
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 @ToString
@@ -44,4 +43,8 @@ public class PageRequest {
 		this.endNum = page*size;
 	}
 	
+	public PageRequest() {
+		this.page = 1;
+		this.size = 500;
+	}
 }

@@ -55,28 +55,6 @@ public class ItemRepositoryImpl implements ItemRepository {
 		return new OrderSpecifier<>(Order.DESC, QItem.item.sales);
 	}
 
-	// 동적 column 검색
-	@Override
-	public List<ItemDTO> selectItemStringWhereType(SearchRequest searchRequest) {
-		return jPAQueryFactory
-				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price,
-						item.sales, item.stock, item.views, item.like, item.event_code, item_event.discount,
-						item_event.name.as("event_name")))
-				.from(item).join(item_event).on(item.event_code.eq(item_event.code)).orderBy(item.sales.desc())
-				.where(Expressions.stringPath(searchRequest.getStringType()).contains(searchRequest.getKeyword()))
-				.fetch();
-	}
-	
-	@Override
-	public List<ItemDTO> selectItemIntegerWhereType(SearchRequest searchRequest) {
-		return jPAQueryFactory
-				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price,
-						item.sales, item.stock, item.views, item.like, item.event_code, item_event.discount,
-						item_event.name.as("event_name")))
-				.from(item).join(item_event).on(item.event_code.eq(item_event.code)).orderBy(item.sales.desc())
-				.where(Expressions.numberPath(Integer.class, searchRequest.getIntegerType()).eq(Integer.parseInt(searchRequest.getKeyword())))
-				.fetch();
-	}
 	@Override
 	public List<ItemDTO> selectItemStringWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
 		return jPAQueryFactory
@@ -103,16 +81,6 @@ public class ItemRepositoryImpl implements ItemRepository {
 				.fetch();
 	}
 
-	@Override
-	public List<ItemDTO> selectItemStringWhereTypeNotNull(SearchRequest searchRequest) {
-		return jPAQueryFactory
-				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price,
-						item.sales, item.stock, item.views, item.like, item.event_code, item_event.discount,
-						item_event.name.as("event_name")))
-				.from(item).join(item_event).on(item.event_code.eq(item_event.code)).orderBy(item.sales.desc())
-				.where(Expressions.stringPath(searchRequest.getStringType()).isNotNull())
-				.fetch();
-	}
 	@Override
 	public List<ItemDTO> selectItemStringWhereTypeNotNull(PageRequest pageRequest,SearchRequest searchRequest) {
 		return jPAQueryFactory

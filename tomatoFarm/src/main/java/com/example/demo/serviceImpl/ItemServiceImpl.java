@@ -23,59 +23,28 @@ public class ItemServiceImpl implements ItemService {
 	private final ItemRepository itemRepository;
 
 	@Override
-	public List<ItemDTO> selectItemStringWhereType(SearchRequest searchRequest) {
-
-		List<ItemDTO> result = itemRepository.selectItemStringWhereType(searchRequest);
-
-		return result;
-	}
-
-	@Override
-	public List<ItemDTO> selectItemIntegerWhereType(SearchRequest searchRequest) {
-
-		List<ItemDTO> result = itemRepository.selectItemIntegerWhereType(searchRequest);
-
-		return result;
-	}
-
-	@Override
 	public List<ItemDTO> selectItemStringWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
-
-		List<ItemDTO> result = itemRepository.selectItemStringWhereType(searchRequest);
-
+		List<ItemDTO> result = itemRepository.selectItemStringWhereType(pageRequest,searchRequest);
 		return result;
 	}
 
 	@Override
 	public List<ItemDTO> selectItemIntegerWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
-
-		List<ItemDTO> result = itemRepository.selectItemIntegerWhereType(searchRequest);
-
+		List<ItemDTO> result = itemRepository.selectItemIntegerWhereType(pageRequest,searchRequest);
 		return result;
 	}
 	
 	
-	@Override
-	public List<ItemDTO> selectItemStringWhereTypeNotNull(SearchRequest searchRequest) {
-		
-		List<ItemDTO> result = itemRepository.selectItemStringWhereTypeNotNull(searchRequest);
-		
-		return result;
-	}
 	@Override
 	public List<ItemDTO> selectItemStringWhereTypeNotNull(PageRequest pageRequest,SearchRequest searchRequest) {
-		
-		List<ItemDTO> result = itemRepository.selectItemStringWhereTypeNotNull(searchRequest);
-		
+		List<ItemDTO> result = itemRepository.selectItemStringWhereTypeNotNull(pageRequest,searchRequest);
 		return result;
 	}
 	
 
 	@Override
 	public List<ItemDTO> selectItemWherebrand(PageRequest pageRequest, SearchRequest searchRequest) {
-
 		List<ItemDTO> result = itemRepository.selectItemWherebrand(pageRequest, searchRequest);
-
 		return result;
 	}
 
@@ -100,11 +69,6 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public List<SortDTO> selectSortList() {
 		return itemRepository.selectSortList();
-	}
-
-	@Override
-	public ItemDTO selectItemWhereCode(SearchRequest searchRequest) {
-		return itemRepository.selectItemWhereCode(searchRequest);
 	}
 
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
