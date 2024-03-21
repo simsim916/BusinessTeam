@@ -19,74 +19,56 @@ const AddDataHead = () => {
         })
     }, [])
 
-
     const numbers = Array.from({ length: length2 }, (_, index) => index);
-    // length 만 변화시켜서 10개씩 등록하기 / 20개 등록하기 이런식으로?
 
-    // const insertAll = () => {
-    //     console.log('동작')
-    //     console.log(formData)
-    //     console.log('동작')
-    //     axios.post(`http://localhost:8090/item/insert`, formData);
-    // }
 
-    // 1. 일반적인 post 방식 => post의 두번째 인자에 데이터 보내면 가지 않던게 생각나서 2번 방법
-    //    => https://live-everyday.tistory.com/219 << 두번째 인자로 보내면 data를 못받는 문제 발생
-    // const insertAll = () => {
-    //     axios.post(`http://localhost:8090/item/insert`, formData)
-    //         .then(res => {
-    //             console.log("inserted successfully:", res.data);
-    //         })
-    //         .catch(err => {
-    //             console.error("Error :", err.message);
-    //         });
-    // };
 
-    // 1번 블로그에서 제시한 방식
-    const insertAll = () => {
-        const api = axios.create({
-            baseURL: `http://localhost:8090/item`
-        })
-        api.post(`/insert`, {
-            code: 'asd',
-            sort1: 'soasd'
-        })
+
+
+    // ** axios.post(url , [,data(폼데이터 or JSON데이터)], [,config])
+
+    // 1. json 데이터라서 JSON.stringify(formData) 를 통해 두번째 인자로 전달해줬지만,
+    //    컨트롤러에서 받지 못하는 문제
+    const insertAll2 = () => {
+        console.log(JSON.stringify(formData))
+        axios.post(`http://localhost:8090/item/insert`, JSON.stringify(formData, replacer), {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        ).then(res => {
+            console.log(res.data)
+        }
+        ).catch(err => console.log(err.message));
     }
 
-    // 2. 세번째 인자로 data 를 전달해도 문제가 생긴다.
-    // const insertAll = () => {
-    //     console.log('동작')
-    //     // console.log(formData)
+    // 2. 세번째 인자로 params 라는걸 강제로 인식시켜줘야 한다.
+    //   => Controller 에서 정상적으로 받게 된다.
+    const insertAll = () => {
+        console.log('동작')
+        axios.post(`http://localhost:8090/item/insert`, null, {
+            params: {
+                code: '482211',
+                sort1: '대분류',
+            }
+        });
+    }
+
+    // 3. params 라고 강제로 인식 시켜준 후, 작성된 formData를 이용
+    // => 인식하지 못한 문제 발생
+    // const insertAll3 = (formData) => {
     //     console.log('동작')
     //     axios.post(`http://localhost:8090/item/insert`, null, {
-    //         code: 'asd',
-    //         sort1: 'sort1'
+    //         params: {
+    //             code: formData.code,
+    //             sort1: formData.sort1,
+    //         }
     //     });
     // }
 
-    // 3. get방식
-    // const insertAll = () => {
-    //     axios.get(`http://localhost:8090/item/insert`, formData)
-    //         .then(res => {
-    //             console.log("inserted successfully:", res.data);
-    //         })
-    //         .catch(err => {
-    //             console.error("Error :", err.message);
-    //         });
-    // };
-
-
-    // 문제점 1. 서버와의 연결은 확실히 확인했다. 하지만 이클립스에서 data가 매개변수로 들어가지 않음.
-    //           => 관리자도구 NetWork 카테고리에서 데이터(formData)까지 날라가는거 확인
-    // 문제점 2. 매개변수로 entity를 넣어도, DTO를 넣어도 계속 null 이 나오는 문제
-    // 문제점 3. table 의 컬럼명 'like' 는 예약어라서 insert 불가
-    //           => ALTER TABLE item CHANGE `like` likes INT;
-
-
-
     const checkInputChange = (event, col) => {
-        setFormData(prevState => ({
-            ...prevState,
+        setFormData(formData => ({
+            ...formData,
             [col]: event.target.value
         }));
         console.log(formData);

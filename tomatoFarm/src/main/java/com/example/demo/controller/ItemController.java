@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -181,13 +182,13 @@ public class ItemController {
 		return result;
 	}
 
-    @PostMapping("/insert")
+    @PostMapping(value="/insert" , consumes = MediaType.APPLICATION_JSON_VALUE)
 //    @GetMapping("/insert")
-    public ResponseEntity<?> insertItem(Item entity) {
-    	System.out.println("getCode => " + entity.getCode());
-    	System.out.println("getAdmin => " + entity.getAdmin());
-    	System.out.println("getSort1 => " + entity.getSort1());
-    	System.out.println("getLikes => " + entity.getLikes());
+    public ResponseEntity<?> insertItem(ItemDTO dto) {
+    	System.out.println("getCode => " + dto.getCode());
+    	System.out.println("getAdmin => " + dto.getAdmin());
+    	System.out.println("getSort1 => " + dto.getSort1());
+    	System.out.println("getLikes => " + dto.getLikes());
     	ResponseEntity<?> result = null;
 //        itemService.insertItem(entity);
         result = ResponseEntity.status(HttpStatus.OK).body("insert성공");
