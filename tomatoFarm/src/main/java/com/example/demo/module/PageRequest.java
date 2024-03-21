@@ -35,7 +35,7 @@ public class PageRequest {
 	}
 	
 	public PageRequest(int page, int size){
-		this.page = 1;
+		this.page = page;
 		this.size = size;
 		
 		this.startNum = (page-1)*size;
@@ -45,5 +45,7 @@ public class PageRequest {
 	public PageRequest() {
 		this.page = 1;
 		this.size = 500;
+		this.startNum = (page-1)*size;
+		this.endNum = page*size;
 	}
 }

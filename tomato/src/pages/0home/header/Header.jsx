@@ -1,6 +1,7 @@
 import "./header.css";
 import Nav from './Nav';
 import { Link, useNavigate } from 'react-router-dom';
+import { SortContext } from './../../../App';
 
 
 
@@ -8,7 +9,7 @@ const Header = () => {
 
     const navigate = useNavigate();
 
-    
+
     const searchBox = (event) => {
         event.preventDefault();
         let keyword = event.target.closest('form').children[0].value;
@@ -70,7 +71,8 @@ const Header = () => {
                     </div>
                 </div>
             </div>
-            <Nav appearinputBoxResetButton={appearinputBoxResetButton} resetInputBox={resetInputBox} />
+
+                <Nav appearinputBoxResetButton={appearinputBoxResetButton} resetInputBox={resetInputBox} />
         </header>
     );
 }

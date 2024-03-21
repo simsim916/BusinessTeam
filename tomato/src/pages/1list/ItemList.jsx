@@ -9,8 +9,30 @@ import ItemListContainer from "./ItemListContainer";
 const ItemList = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const keyword = searchParams.get("keyword");
-    console.log(keyword);
-    const filterCheckedList = [];
+
+    const [itemList, setItemList] = useState(null);
+    const [sortList, setSortList] = useState(null);
+    const [filterCheckedList, setFilterCheckedList] = useState(null);
+
+    useEffect(() => {
+        const url = `http://localhost:8090/item/searchsort?keyword=${keyword}`;
+        axios.get(url
+        ).then(res => {
+            setSortList(res.data)
+        }).catch(err => {
+            console.log(`${err.message}`)
+        })
+    }, [])
+
+    useEffect(() => {
+        const url = `http://localhost:8090/item/search?keyword=${keyword}`;
+        axios.get(url
+        ).then(res => {
+            setItemList(res.data)
+        }).catch(err => {
+            console.log(`${err.message}`)
+        })
+    }, [])
 
     return (
         <>
@@ -19,8 +41,8 @@ const ItemList = () => {
                 " <b>{keyword}</b> " <span>에 대한 검색 결과</span>
             </div>
             <div className="container">
-                <ItemListFilter keyword={keyword} filterCheckedList={filterCheckedList} />
-                <ItemListContainer keyword={keyword} filterCheckedList={filterCheckedList} />
+                <ItemListFilter sortList={sortList} keyword={keyword} />
+                <ItemListContainer itemList={itemList} keyword={keyword} />
             </div>
         </>
     );

@@ -48,7 +48,6 @@ const PresentBox = ({ brand }) => {
         let margin = slideBox.current.style.marginLeft.replace('px', '');
         let maxMargin = -220 * (slideBox.current.children.length - 3);
         if (margin >= maxMargin) {
-            console.log(margin)
             margin = +margin + 220;
             slideBox.current.style.marginLeft = `${margin}px`;
         }
@@ -87,7 +86,7 @@ const PresentBox = ({ brand }) => {
             </Link>
             <div className="typeBoxList">
                 <div className="slideBox" ref={slideBox} style={{ marginLeft: '0px' }}>
-                    {brandItem.slice(1, 5).map((e, i) => <ItemBox data={e} key={i} />)}
+                    {brandItem.slice(1, 5).map((e, i) => <ItemBox item={e} key={i} />)}
                     <Link to={'/list?keyword=' + brand} className="linkBox">
                         <p>{brandItem[0].brand}</p>
                         <i className="fa-regular fa-circle-play"></i> 상품 더 보러가기

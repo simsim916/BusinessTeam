@@ -12,7 +12,7 @@ public class UserDTO {
 	private String id;
 	private String password;
 	private String level;
-	private String name;
+	private String username;
 	private String phonenumber;
 	private Integer address_code;
 	private String address1;

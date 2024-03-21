@@ -36,7 +36,6 @@ public class ItemController {
 		PageRequest pageRequest = new PageRequest(1, 11);
 		List<ItemDTO> list = itemService.selectItemListStringWhereTypeNotNull(pageRequest, searchRequest);
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
-		log.info("eventitem check");
 		return result;
 	}
 
@@ -55,13 +54,7 @@ public class ItemController {
 		SearchRequest searchRequest = new SearchRequest(keyword);
 
 		List<ItemDTO> list = itemService.selectItemWherebrand(pageRequest, searchRequest);
-		if (list != null && list.size() > 0) {
-			result = ResponseEntity.status(HttpStatus.OK).body(list);
-			log.info("branditem check");
-		} else {
-			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
-			log.info("branditem check");
-		}
+		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}
 
@@ -69,57 +62,19 @@ public class ItemController {
 	@GetMapping("/search")
 	public ResponseEntity<?> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
-		pageRequest.setSize(10);
-		pageRequest.setStartEndNum(pageRequest.getCurrPage());
-		System.out.println("*****startNum********"+pageRequest.getStartNum());
-		System.out.println("******EndNum*******"+pageRequest.getEndNum());
-		System.out.println("*******getCurrPage******"+pageRequest.getCurrPage());
-		System.out.println("********getSortType*****"+searchRequest.getSortType());
-		// 1. 파라미터로 정렬하고자 하는 방법을 전달받는다.
-		// SearchRequest searchRequest = new SearchRequest();
-		// searchRequest.setSortType("파라미터");
-		// 2. searchRequest 객체를 생성해서 담아주고
-
-		log.info("\n" + pageRequest + "\n" + searchRequest);
-
+		System.out.println(pageRequest);
 		List<ItemDTO> list = itemService.selectItemWhereSearchType(pageRequest, searchRequest);
-//		System.out.println("\n**************"+list.size()+"**************\n");
-			result = ResponseEntity.status(HttpStatus.OK).body(list);
-			log.info("search check");
-		log.info(result);
+		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}
 
-//	@GetMapping("/search")
-//	public ResponseEntity<?> selectItemWhereKeyword(@RequestParam("keyword") String keyword) {
-//		ResponseEntity<?> result = null;
-//		SearchRequest searchRequest = new SearchRequest(keyword);
-//		
-//		List<ItemDTO> list = itemService.selectItemWhereKeyword(searchRequest);
-//		if (list != null && list.size() > 0) {
-//			result = ResponseEntity.status(HttpStatus.OK).body(list);
-//			log.info("search check");
-//		} else {
-//			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
-//			log.info("search check");
-//		}
-//		return result;
-//	}
-
 	@GetMapping("/searchsort")
-	public ResponseEntity<?> selectSortWhereKeyword(@RequestParam("keyword") String keyword) {
+	public ResponseEntity<?> selectSortWhereKeyword(SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
-		SearchRequest searchRequest = new SearchRequest(keyword);
-
 		List<SortDTO> list = itemService.selectSortWhereKeyword(searchRequest);
-		log.info("\naaaaaaaaa\n" + list + "\n\n");
-		if (list != null && list.size() > 0) {
-			result = ResponseEntity.status(HttpStatus.OK).body(list);
-			log.info("searchsort check");
-		} else {
-			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
-			log.info("searchsort check");
-		}
+		System.out.println(searchRequest);
+		result = ResponseEntity.status(HttpStatus.OK).body(list);
+		System.out.println(list);
 		return result;
 	}
 
@@ -156,30 +111,29 @@ public class ItemController {
 		return result;
 	}
 
-    @PostMapping(value="/insert")
+	@PostMapping(value = "/insert")
 //    @GetMapping("/insert")
-    public ResponseEntity<?> insertItem(ItemDTO entity) {
-    	System.out.println("getCode => " + entity.getCode());
-    	System.out.println("getAdmin => " + entity.getAdmin());
-    	System.out.println("getSort1 => " + entity.getSort1());
-    	System.out.println("getLikes => " + entity.getLikes());
-    	ResponseEntity<?> result = null;
+	public ResponseEntity<?> insertItem(ItemDTO entity) {
+		System.out.println("getCode => " + entity.getCode());
+		System.out.println("getAdmin => " + entity.getAdmin());
+		System.out.println("getSort1 => " + entity.getSort1());
+		System.out.println("getLikes => " + entity.getLikes());
+		ResponseEntity<?> result = null;
 //        itemService.insertItem(entity);
-        result = ResponseEntity.status(HttpStatus.OK).body("insert성공");
-        return result;
-    }
-    
-    
-    // 테스트 메서드야 지워도 돼
-    @PostMapping("/test")
-    public void test(ItemDTO entity) {
-    	System.out.println("*************************************");
-    	System.out.println("getCode =>" + entity.getCode());
-    	System.out.println("getSort1 =>" + entity.getSort1());
-    	System.out.println("getSort1 =>" + entity.getSort1());
-    	System.out.println("getSort3 =>" + entity.getSort3());
-    	System.out.println("getName =>" + entity.getName());
-    	System.out.println("*************************************");
-    }
-	
+		result = ResponseEntity.status(HttpStatus.OK).body("insert성공");
+		return result;
+	}
+
+	// 테스트 메서드야 지워도 돼
+	@PostMapping("/test")
+	public void test(ItemDTO entity) {
+		System.out.println("*************************************");
+		System.out.println("getCode =>" + entity.getCode());
+		System.out.println("getSort1 =>" + entity.getSort1());
+		System.out.println("getSort1 =>" + entity.getSort1());
+		System.out.println("getSort3 =>" + entity.getSort3());
+		System.out.println("getName =>" + entity.getName());
+		System.out.println("*************************************");
+	}
+
 }

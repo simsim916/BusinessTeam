@@ -62,11 +62,6 @@ public class ItemServiceImpl implements ItemService {
 		return result;
 	}
 
-	@Override
-	public List<ItemDTO> selectItemWhereKeyword(SearchRequest searchRequest) {
-		List<ItemDTO> result = itemRepository.selectItemWhereKeyword(searchRequest);
-		return result;
-	}
 
 	@Override
 	public List<SortDTO> selectSortWhereKeyword(SearchRequest searchRequest) {
