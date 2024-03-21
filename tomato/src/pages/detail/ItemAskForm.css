@@ -14,12 +14,12 @@
 #itemAskBox {
     background-color: white;
     position: fixed;
-    width: 1200px;
-    height: 1000px;
+    width: 1000px;
+    height: 900px;
     justify-content: center;
     align-items: center;
     padding: 50px;
-    max-width: 1200px;
+    max-width: 1000px;
     width: calc(90vw - 30px);
 }
 
@@ -40,7 +40,7 @@
     margin-top: 20px;
     position: absolute;
     width: 200px;
-    height: 200ox;
+    height: 300ox;
 }
 
 #itemTitle {
@@ -53,33 +53,48 @@
 }
 
 #itemAskBottom {
-    height: 380px;
+    height: 320px;
     width: 100%;
     display: flex;
     position: relative;
-    padding-top: 15px;
+    padding-top: 30px;
     flex-direction: column;
-    background-color: rebeccapurple;
 }
 
 #itemAskBottom div {
     display: flex;
-    position: block;
+    position: relative;
     font-size: 20px;
-    width: 90%;
+    width: 100%;
     height: 50px;
     justify-content: center;
     align-items: center;
     font-weight: 500;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
-#itemAskBottom textarea {
+#askTitle textarea {
+    margin: 10px 0px 0px 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    width: 90%;
+    height: 50px;
+    display: block;
+    position: relative;
+    border-radius: 10px;
+    border-radius: 10px;
+    white-space: wrap;
+    resize: none;
+}
+
+#askContent textarea {
+    margin: 170px 0px 0px 20px;
     padding: 10px 20px;
     font-size: 18px;
     width: 90%;
     height: 200px;
     display: block;
+    position: relative;
     border-radius: 10px;
     white-space: wrap;
     resize: none;
@@ -90,8 +105,8 @@
     display: flex;
     height: 30px;
     gap: 10px;
-    left: 210px;
-    margin: 10px 20px;
+    left: 55px;
+    margin: 20px 20px;
 }
 
 #itemAskPrivacy input {
@@ -105,7 +120,7 @@
     justify-content: center;
     gap: 0 50px;
     text-align: center;
-    padding-top: 200px;
+    padding-top: 100px;
 
 }
 
