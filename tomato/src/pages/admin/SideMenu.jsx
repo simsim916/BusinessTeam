@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import './SideMenu.css'
 
-const SideMenu = () => {
+const SideMenu = ({ setWhichBox, whichBox }) => {
 
     const [sideBarOpen, setSideBarOpen] = useState(true);
 
@@ -12,6 +12,10 @@ const SideMenu = () => {
         setSideBarOpen(!sideBarOpen);
         console.log(sideBarOpen)
     };
+
+    const changeAdminBox = () => {
+        setWhichBox(!whichBox);
+    }
 
     return (
         <>
@@ -41,6 +45,9 @@ const SideMenu = () => {
                     </li>
                     <li>
                         <div><i className="fa-solid fa-gear"></i><br />설정</div>
+                    </li>
+                    <li>
+                        <div onClick={changeAdminBox}><i className="fa-solid fa-gear"></i><br />데이터 입력</div>
                     </li>
                 </ul>
                 <div id="sideBarButton" onClick={openSideBar}>

@@ -8,7 +8,7 @@ const Header = () => {
 
     const navigate = useNavigate();
 
-    
+
     const searchBox = (event) => {
         event.preventDefault();
         let keyword = event.target.closest('form').children[0].value;
@@ -36,7 +36,7 @@ const Header = () => {
         <header>
             <div id="loginBar">
                 <div className="container">
-                    <a>고객센터</a>
+                    <Link to="/admin">고객센터</Link>
                     &nbsp;&nbsp;|&nbsp;&nbsp;
                     <Link to="/login">로그인</Link>
                     &nbsp;&nbsp;|&nbsp;&nbsp;

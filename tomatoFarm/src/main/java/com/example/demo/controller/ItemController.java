@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.domain.ItemDTO;
 import com.example.demo.domain.SortDTO;
+import com.example.demo.entity.Item;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.service.ItemService;
@@ -157,29 +159,15 @@ public class ItemController {
 	}
 
     @PostMapping(value="/insert")
-//    @GetMapping("/insert")
-    public ResponseEntity<?> insertItem(ItemDTO entity) {
-    	System.out.println("getCode => " + entity.getCode());
-    	System.out.println("getAdmin => " + entity.getAdmin());
-    	System.out.println("getSort1 => " + entity.getSort1());
-    	System.out.println("getLikes => " + entity.getLikes());
+    public ResponseEntity<?> insertItem(@RequestBody Item entity) {
     	ResponseEntity<?> result = null;
-//        itemService.insertItem(entity);
+    	System.out.println("****" + entity.getCode());
+      itemService.insertItem(entity);
         result = ResponseEntity.status(HttpStatus.OK).body("insert성공");
         return result;
     }
     
     
-    // 테스트 메서드야 지워도 돼
-    @PostMapping("/test")
-    public void test(ItemDTO entity) {
-    	System.out.println("*************************************");
-    	System.out.println("getCode =>" + entity.getCode());
-    	System.out.println("getSort1 =>" + entity.getSort1());
-    	System.out.println("getSort1 =>" + entity.getSort1());
-    	System.out.println("getSort3 =>" + entity.getSort3());
-    	System.out.println("getName =>" + entity.getName());
-    	System.out.println("*************************************");
-    }
+
 	
 }

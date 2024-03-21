@@ -6,6 +6,8 @@ import LoginForm from "./pages/login/loginForm/LoginForm";
 import ItemDetail from './pages/detail/ItemDetail';
 import EventPage from "./pages/event/EventPage";
 import Admin from "./pages/admin/Admin";
+import SelectDataBox from './pages/admin/SelectDataBox';
+import InsertDataBox from "./pages/admin/InsertDataBox";
 
 function App() {
 
@@ -21,6 +23,8 @@ function App() {
                 <Route path='/admin' element={<Admin />} />
                 <Route path='/' element={<Home />} />
                 <Route path='/*' element={"잘못된 접근"} />
+                <Route path='/admin/insertPage' element={<SelectDataBox />} />
+                <Route path='/admin/insertPage' element={<InsertDataBox />} />
             </Routes>
         </div>
     );

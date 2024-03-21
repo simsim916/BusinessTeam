@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./Admin.css";
 import InsertDataBox from "./InsertDataBox";
 import SelectDataBox from "./SelectDataBox";
@@ -7,12 +8,13 @@ import SideMenu from "./SideMenu";
 
 
 const Admin = () => {
+    const [whichBox, setWhichBox] = useState(false);
+
     return (
         <>
-            <SideMenu />
+            <SideMenu whichBox={whichBox} setWhichBox={setWhichBox} />
             <div id="containerYH">
-                {/* <InsertDataBox /> */}
-                <SelectDataBox />
+                {whichBox ? <InsertDataBox /> : <SelectDataBox />}
             </div>
         </>
     );

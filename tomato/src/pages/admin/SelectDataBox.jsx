@@ -13,9 +13,9 @@ const SelectDataBox = () => {
     const [column, setColumn] = useState(null);
     const [lastSort, setLastSort] = useState(null);
 
-    const keyword = '프레시지';
-    const sorttype = 'priceD';
-    const currpage = '2';
+    // const keyword = '프레시지';
+    // const sorttype = 'priceD';
+    // const currpage = '2';
     useEffect(() => {
         axios.get(`http://localhost:8090/item/allitem`
         ).then(res => {
@@ -29,46 +29,25 @@ const SelectDataBox = () => {
         })
     }, [])
 
-    const saveItem = (newFormData) => {
-        console.log(newFormData)
-        axios.post(`http://localhost:8090/item/test`, null, {
-            params: {
-                code: newFormData.code,
-                sort1: newFormData.sort1
-            }
-        });
-    };
-
 
     const insertAll = () => {
-        axios.post(`http://localhost:8090/item/test`, null, {
-            params: {
-                code: '482211',
-                sort1: '대분류',
+        console.log(formData)
+        axios.post(`http://localhost:8090/item/insert`, JSON.stringify(formData), {
+            headers: {
+                'Content-Type': 'application/json'
             }
-        });
+        }).then(res => console.log(res.data)
+        ).catch(err => console.log(err.message));
     }
 
-
-
-    const checkInputChange = (event, col) => {
+    const checkInputChange = (event, col, rowIndex) => {
         const value = event.target.value;
-        // const targetId = event.target.id; // 입력 요소의 id 속성을 가져옴
-        const newFormData = {
+        setFormData((formData) => ({
             ...formData,
             [col]: value,
-            code: document.getElementById('codeInput').value // event.target.id 가 옳지 않은 방법이라는 gpt
-        };
-        console.log(newFormData);
-        console.log('=================================');
-        setFormData(newFormData);
-
-        // saveItem 함수 호출하여 params 채우기
-        saveItem(newFormData);
+            code: itemList[rowIndex].code
+        }));
     };
-
-
-
 
     const sortByColumn = (event) => {
         const columnName = event.target.closest('div').id;
@@ -104,8 +83,6 @@ const SelectDataBox = () => {
         setItemList(sortedList);
     };
 
-
-
     return (
         <>
             <div id="excelBox">
@@ -119,15 +96,14 @@ const SelectDataBox = () => {
                         </select>
                         &nbsp;&nbsp;
                         <select name="" id="">
-                            <option value="">밀키트</option>
-                            <option value="">식재료</option>
+                            <option value="">--------</option>
+                            <option value="">--------</option>
                         </select>
                         &nbsp;&nbsp;
                         &nbsp;<input type="text" />
                         &nbsp;&nbsp;<button>검색</button>
                     </div>
                     <div id="topButtonBox">
-                        <div onClick={saveItem}>saveItem</div>
                         <div onClick={insertAll}>insertAll</div>
                     </div>
                 </div>
@@ -135,24 +111,27 @@ const SelectDataBox = () => {
                     {column ? column.map((col, i) => <div style={{ width: `calc(100% / ${column.length})` }} id={col} key={i} onClick={sortByColumn}>{col}<i style={{ display: 'inline-block' }} className="fa-solid fa-caret-up"></i></div>) : ""}
                 </div>
                 <div id="dataListBox">
-                    <div>
-                        {itemList ?
-                            itemList.map((item, i) => (
-                                <div className="excelColumn" key={i}>
-                                    <input id="codeInput" style={{ width: `calc((100% - 15px) / ${column.length})` }} type="text" value={item.code} readOnly />
-                                    {Object.keys(item).slice(1).map((e, j) => (
-                                        <input
-                                            onChange={(event) => checkInputChange(event, e, i)}
-                                            style={{ width: `calc((100% - 15px) / ${column.length})` }}
-                                            type="text"
-                                            placeholder={item[e]}
-                                            key={j}
-                                        />
-                                    ))}
-                                </div>
-                            ))
-                            : <div>자료가 없습니다.</div>
-                        }
+                    <div id="dataListBox">
+                        <div>
+                            {itemList ?
+                                itemList.map((item, rowIndex) => (
+                                    <div className="excelColumn" key={rowIndex}>
+                                        <input id='codeInput' style={{ width: `calc((100% - 15px) / ${column.length})` }} type="text" value={item.code} readOnly />
+                                        {Object.keys(item).slice(1).map((e, j) => (
+                                            <input
+                                                name=""
+                                                onChange={(event) => checkInputChange(event, e, rowIndex)}
+                                                style={{ width: `calc((100% - 15px) / ${column.length})` }}
+                                                type="text"
+                                                placeholder={item[e]}
+                                                key={j}
+                                            />
+                                        ))}
+                                    </div>
+                                ))
+                                : <Loading />
+                            }
+                        </div>
                     </div>
                 </div>
             </div>

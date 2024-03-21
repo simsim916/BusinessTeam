@@ -7,80 +7,59 @@ import axios from 'axios';
 const AddDataHead = () => {
     const [column, setColumn] = useState(null);
     const [length2, setLength] = useState(null);
-    const [formData, setFormData] = useState({})
-
-    useEffect(() => {
-        axios.get(`http://localhost:8090/item/allitem`
-        ).then(res => {
-            setColumn(Object.keys(res.data[0]));
-            setLength(1);
-        }).catch(err => {
-            console.log(err.message)
-        })
-    }, [])
+    const [formData, setFormData] = useState([])
+    const [formDataArray, setFormDataArray] = useState([]);
 
     const numbers = Array.from({ length: length2 }, (_, index) => index);
+    useEffect(() => {
+        axios.get(`http://localhost:8090/item/allitem`)
+            .then(res => {
+                setColumn(Object.keys(res.data[0]));
+                setLength(10);
+            })
+            .catch(err => {
+                console.log(err.message);
+            });
+    }, []);
 
 
 
 
-
-    // ** axios.post(url , [,data(폼데이터 or JSON데이터)], [,config])
-
-    // 1. json 데이터라서 JSON.stringify(formData) 를 통해 두번째 인자로 전달해줬지만,
-    //    컨트롤러에서 받지 못하는 문제
-    // const insertAll2 = () => {
-    //     console.log(JSON.stringify(formData))
-    //     axios.post(`http://localhost:8090/item/insert`, JSON.stringify(formData), {
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         }
-    //     }
-    //     ).then(res => {
-    //         console.log(res.data)
-    //     }
-    //     ).catch(err => console.log(err.message));
-    // }
-
-    // 2. 세번째 인자로 params 라는걸 강제로 인식시켜줘야 한다.
-    //   => Controller 에서 정상적으로 받게 된다.
     const insertAll = () => {
-        console.log('동작')
-        axios.post(`http://localhost:8090/item/insert`, null, {
-            params: {
-                code: '482211',
-                sort1: '대분류',
+        console.log(formData);
+        axios.post(`http://localhost:8090/item/insert`, JSON.stringify(formData), {
+            headers: {
+                'Content-Type': 'application/json'
             }
-        });
+        }).then(res => console.log(res.data))
+            .catch(err => console.log(err.message));
     }
 
-    // 3. params 라고 강제로 인식 시켜준 후, 작성된 formData를 이용
-    // => 인식하지 못한 문제 발생
-    const insertAll2 = (e, formData) => {
-        console.log(formData)
-        axios.post(`http://localhost:8090/item/insert`, null, {
-            params: {
-                code: formData.code,
-                sort1: formData.sort1,
-            }
-        });
-    }
+
+
 
     const checkInputChange = (event, col) => {
-        setFormData(formData => ({
-            ...formData,
-            [col]: event.target.value
+        const value = event.target.value;
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            [col]: value
         }));
-        console.log(formData);
     };
+
+    const changeRowCount = (num) => {
+        const count = length2 + 1 * num;
+        setLength(count);
+    }
+
 
 
     return (
         <div id="excelBox">
             <div id="topBox">
-                <div style={{ fontWeight: 'bold' }}><i class="fa-solid fa-list"></i>&nbsp;&nbsp;식자재 등록</div>
+                <div style={{ fontWeight: 'bold' }}><i className="fa-solid fa-list"></i>&nbsp;&nbsp;식자재 등록</div>
                 <div id="topButtonBox">
-                    <div>추가</div>
+                    <div onClick={() => changeRowCount(1)}>+</div>
+                    <div onClick={() => changeRowCount(-1)}>-</div>
                     <div onClick={insertAll}>등록</div>
                 </div>
             </div>
@@ -89,7 +68,7 @@ const AddDataHead = () => {
             </div>
 
             {numbers.map((e, i) =>
-                <div className="excelData" >
+                <div className="excelData" key={i} >
                     {column ? column.map((col, i) => (
                         <input
                             onChange={(event) => checkInputChange(event, col)}
