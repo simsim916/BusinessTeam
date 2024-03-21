@@ -17,7 +17,7 @@ const ItemDetail = () => {
 
     console.log(item)
     useEffect(() => {
-        axios.get(`http://localhost:8090/item/detail?code=${itemCode}`
+        axios.get(`http://localhost:8090/item/detail?stringType='item.code'&keyword=${itemCode}`
         ).then(res => {
             setItem(res.data);
             setLoading(false);

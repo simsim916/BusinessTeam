@@ -63,8 +63,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 						item_event.name.as("event_name")))
 				.from(item).join(item_event).on(item.event_code.eq(item_event.code)).orderBy(item.sales.desc())
 				.where(Expressions.stringPath(searchRequest.getStringType()).contains(searchRequest.getKeyword()))
-				.offset(((pageRequest.getCurrPage() - 1) ) * ( pageRequest.getSize()+1 ))
-				.limit(pageRequest.getSize() * pageRequest.getCurrPage())
+				.offset(pageRequest.getStartNum()).limit(pageRequest.getEndNum())
 				.fetch();
 	}
 	
@@ -76,8 +75,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 						item_event.name.as("event_name")))
 				.from(item).join(item_event).on(item.event_code.eq(item_event.code)).orderBy(item.sales.desc())
 				.where(Expressions.numberPath(Integer.class, searchRequest.getIntegerType()).eq(Integer.parseInt(searchRequest.getKeyword())))
-				.offset(((pageRequest.getCurrPage() - 1) ) * ( pageRequest.getSize()+1 ))
-				.limit(pageRequest.getSize() * pageRequest.getCurrPage())
+				.offset(pageRequest.getStartNum()).limit(pageRequest.getEndNum())
 				.fetch();
 	}
 
@@ -89,8 +87,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 						item_event.name.as("event_name")))
 				.from(item).join(item_event).on(item.event_code.eq(item_event.code)).orderBy(item.sales.desc())
 				.where(Expressions.stringPath(searchRequest.getStringType()).isNotNull())
-				.offset(((pageRequest.getCurrPage() - 1) ) * ( pageRequest.getSize()+1 ))
-				.limit(pageRequest.getSize() * pageRequest.getCurrPage())
+				.offset(pageRequest.getStartNum()).limit(pageRequest.getEndNum())
 				.fetch();
 	}
 	
@@ -104,8 +101,8 @@ public class ItemRepositoryImpl implements ItemRepository {
 						item_event.name.as("event_name")))
 				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
 				.where(item.brand.eq(searchRequest.getKeyword())).orderBy(item.sales.desc())
-				.offset((pageRequest.getPage() - 1) * pageRequest.getSize() + 1)
-				.limit(pageRequest.getPage() * pageRequest.getSize()).fetch();
+				.offset(pageRequest.getStartNum()).limit(pageRequest.getEndNum())
+				.fetch();
 	}
 
 	@Override

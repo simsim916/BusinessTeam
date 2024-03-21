@@ -41,13 +41,14 @@ public class ItemController {
 		return result;
 	}
 
-	@GetMapping("/test")
+	@GetMapping("/detail")
 	public ResponseEntity<?> selectItemWhereType(SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
+		PageRequest pageRequest = new PageRequest(1,1);
 
-		List<ItemDTO> list = itemService.selectItemStringWhereType(searchRequest);
-
-		result = ResponseEntity.status(HttpStatus.OK).body(list);
+		List<ItemDTO> list = itemService.selectItemStringWhereType(pageRequest, searchRequest);
+System.out.println("\n\n\n" + list);
+		result = ResponseEntity.status(HttpStatus.OK).body(list.size() > 0 ? list.get(0) : null);
 		return result;
 	}
 
@@ -58,7 +59,6 @@ public class ItemController {
 		SearchRequest searchRequest = new SearchRequest(keyword);
 
 		List<ItemDTO> list = itemService.selectItemWherebrand(pageRequest, searchRequest);
-		System.out.println("\n\n" + keyword + list);
 		if (list != null && list.size() > 0) {
 			result = ResponseEntity.status(HttpStatus.OK).body(list);
 			log.info("branditem check");

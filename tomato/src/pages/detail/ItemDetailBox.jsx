@@ -3,25 +3,10 @@ import './ItemDetailBox.css';
 import { useRef, useState } from 'react';
 
 const ItemDetailBox = ({ item }) => {
-    
-    
+
+
     let inputCountRef = useRef(null)
     let priceRef = useRef(null)
-
-    useEffect(() => {
-        axios.get(`http://localhost:8090/item/detail?code=${itemCode}`
-        ).then(res => {
-            setItem(res.data);
-            setLoading(false);
-        }).catch(err => {
-            console.log(err.message)
-            setLoading(false);
-            setError(true);
-        })
-    }, [])
-
-    if (loading) return <Loading />
-    if (error) return <Error />
 
     function changeMainImg(event) {
         let ele = event.target.closest('div');
@@ -147,7 +132,7 @@ const ItemDetailBox = ({ item }) => {
                     </div>
                     <img src={process.env.PUBLIC_URL + `/img/itemImg/${item.code}_4.jpg`} alt={`${item.name} 상세표기`} />
                 </div>
-            }   
+            }
             <div onClick={showItemDetail} id="introItemBtn">
                 상품정보 더보기<i className="fa-solid fa-chevron-down"></i>
             </div>
