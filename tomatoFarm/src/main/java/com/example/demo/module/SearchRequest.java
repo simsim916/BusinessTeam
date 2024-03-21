@@ -27,8 +27,7 @@ import lombok.ToString;
 @ToString
 public class SearchRequest {
 	
-	private String stringType; // 문자 검색 타입
-	private String integerType;// 숫자 검색 타입
+	private String column; // 검색 컬럼
 	private String keyword; // 검색 키워드
 	private String sortType;// 정렬 타입
 	private String access;// 접근권한

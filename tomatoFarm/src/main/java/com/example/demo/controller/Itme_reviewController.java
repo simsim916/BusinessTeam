@@ -35,11 +35,7 @@ public class Itme_reviewController {
 		SearchRequest searchRequest = new SearchRequest(keyword);
 		
 		List<Item_review> list = item_reviewService.selectItemReviewList(pageRequest, searchRequest);
-		if(list != null && list.size() > 0) {
 			result = ResponseEntity.status(HttpStatus.OK).body(list);
-		}else {
-			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력할 자료가 없습니다");
-		}
 		return result;
 	}
 	

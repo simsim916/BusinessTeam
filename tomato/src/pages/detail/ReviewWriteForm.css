@@ -16,6 +16,9 @@
     background-color: white;
     position: fixed;
     height: 1000px;
+    max-height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
     justify-content: center;
     align-items: center;
     padding: 50px;
@@ -24,18 +27,17 @@
 }
 
 #reviewWriteTop {
-    height: 240px;
-    background-color: white;
     position: relative;
     border-bottom: 1px solid rgb(221, 221, 221);
+    display: flex;
 }
 
-#reviewWriteTop div:nth-of-type(1) {
+#reviewWriteBox h4 {
     font-size: 30px;
     padding-bottom: 20px;
     border-bottom: 1px solid rgb(221, 221, 221);
+    font-weight: inherit;
 }
-
 
 #reviewWriteTop div:nth-of-type(4) {
     font-size: 20px;
@@ -45,32 +47,41 @@
     position: relative;
 }
 
-#reviewWriteTop img {
-    margin-top: 10px;
-    position: absolute;
-    width: 180px;
-    height: 150px;
+#reviewWriteImg{
+    overflow: hidden;
+    width: 25%;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#itemTitle {
-    margin-top: 20px;
+#reviewWriteImg~div{
+    width: 75%;
+    padding-left: 30px;
+}
+#reviewWriteImg img {
+    width: 120%;
+
+}
+
+#itemTitle2 {
     font-size: 20px;
-    display: block;
-    position: relative;
-    width: 70%;
-    height: 40px;
-    left: 230px;
+    margin-top: 10px;
 }
 
 #BasketContent{
     font-size: 20px;
     display: block;
-    position: relative;
-    width: 70%;
-    height: 50px;
-    left: 230px;
     color: gray;
-    margin-top: 70px;
+    margin-top: 10px;
+}
+
+#reviewStarBox{
+    position: absolute;
+    bottom: 10px;
+    color: #9B1B30;
+    font-size: 25px;
 }
 
 #reviewWriteBottom {

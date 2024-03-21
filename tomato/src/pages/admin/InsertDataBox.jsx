@@ -31,7 +31,7 @@ const AddDataHead = () => {
     //    컨트롤러에서 받지 못하는 문제
     const insertAll2 = () => {
         console.log(JSON.stringify(formData))
-        axios.post(`http://localhost:8090/item/insert`, JSON.stringify(formData, replacer), {
+        axios.post(`http://localhost:8090/item/insert`, JSON.stringify(formData), {
             headers: {
                 'Content-Type': 'application/json'
             }

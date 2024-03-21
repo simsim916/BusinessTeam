@@ -9,7 +9,6 @@ const Home = () => {
         <div>
             <Header />
             <AdImgBox />
-            <hr />
             <FirstContainer />
             <hr />
             <SecondContainer />

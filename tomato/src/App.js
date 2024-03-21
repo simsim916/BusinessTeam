@@ -2,7 +2,7 @@ import "./default.css";
 import { Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/0home/Home";
 import ItemList from "./pages/1list/ItemList";
-// import LoginForm from "./pages/login/loginForm/LoginForm";
+import LoginForm from "./pages/login/loginForm/LoginForm";
 import ItemDetail from './pages/detail/ItemDetail';
 import EventPage from "./pages/event/EventPage";
 import Admin from "./pages/admin/Admin";
@@ -16,7 +16,7 @@ function App() {
             <Routes>
                 <Route path='/list' element={<ItemList />} />
                 <Route path='/detail' element={<ItemDetail />} />
-                {/* <Route path='/login' element={<LoginForm />} /> */}
+                <Route path='/login' element={<LoginForm />} />
                 <Route path='/event' element={<EventPage />} />
                 <Route path='/admin' element={<Admin />} />
                 <Route path='/' element={<Home />} />

@@ -13,17 +13,21 @@ const ReviewWriteForm = ({ item }) => {
             {writeBoxClose &&
                 <div id="reviewWriteForm" >
                     <div id="reviewWriteBox">
+                        <h4>상품 후기 작성하기</h4>
                         <div id="reviewWriteTop">
-                            <div>상품 후기 작성하기</div>
-                            <img src={process.env.PUBLIC_URL + '/img/itemImg/5000100_1.jpg'} alt="" />
-                            <div id="itemTitle">{item.name}</div>
-                            <div id="BasketContent">내가 주문한 내역 불러오기</div>
+                            <div id='reviewWriteImg'>
+                                <img src={process.env.PUBLIC_URL + '/img/itemImg/5000100_1.jpg'} alt="" />
+                            </div>
                             <div>
-                                <i className="fa-solid fa-star"></i>
-                                <i className="fa-solid fa-star"></i>
-                                <i className="fa-solid fa-star"></i>
-                                <i className="fa-solid fa-star"></i>
-                                <i className="fa-solid fa-star-half"></i>
+                                <div id="itemTitle2">{item.name}</div>
+                                <div id="BasketContent">내가 주문한 내역 불러오기</div>
+                                <div id='reviewStarBox'>
+                                    <i className="fa-solid fa-star"></i>
+                                    <i className="fa-solid fa-star"></i>
+                                    <i className="fa-solid fa-star"></i>
+                                    <i className="fa-solid fa-star"></i>
+                                    <i className="fa-solid fa-star-half"></i>
+                                </div>
                             </div>
 
                         </div>

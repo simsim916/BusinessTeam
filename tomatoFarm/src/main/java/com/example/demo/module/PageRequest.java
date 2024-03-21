@@ -3,7 +3,6 @@ package com.example.demo.module;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -39,7 +38,7 @@ public class PageRequest {
 		this.page = 1;
 		this.size = size;
 		
-		this.startNum = (page-1)*size+1;
+		this.startNum = (page-1)*size;
 		this.endNum = page*size;
 	}
 	

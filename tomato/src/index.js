@@ -10,9 +10,7 @@ import Admin from './pages/admin/Admin';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    {/* {/* <App /> */}
-    {/* <SideMenu /> */} 
-    <Admin />
+    <App />
   </BrowserRouter>
 );
 

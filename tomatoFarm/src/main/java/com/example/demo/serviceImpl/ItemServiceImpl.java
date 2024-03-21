@@ -26,25 +26,30 @@ public class ItemServiceImpl implements ItemService {
 	private final ItemRepository itemRepository;
 
 	@Override
-	public List<ItemDTO> selectItemStringWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
-		List<ItemDTO> result = itemRepository.selectItemStringWhereType(pageRequest,searchRequest);
+	public List<ItemDTO> selectItemListStringWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
+		List<ItemDTO> result = itemRepository.selectItemListStringWhereType(pageRequest,searchRequest);
 		return result;
 	}
 
 	@Override
-	public List<ItemDTO> selectItemIntegerWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
-		List<ItemDTO> result = itemRepository.selectItemIntegerWhereType(pageRequest,searchRequest);
+	public List<ItemDTO> selectItemListIntegerWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
+		List<ItemDTO> result = itemRepository.selectItemListIntegerWhereType(pageRequest,searchRequest);
 		return result;
 	}
 	
 	
 	@Override
-	public List<ItemDTO> selectItemStringWhereTypeNotNull(PageRequest pageRequest,SearchRequest searchRequest) {
-		List<ItemDTO> result = itemRepository.selectItemStringWhereTypeNotNull(pageRequest,searchRequest);
+	public List<ItemDTO> selectItemListStringWhereTypeNotNull(PageRequest pageRequest,SearchRequest searchRequest) {
+		List<ItemDTO> result = itemRepository.selectItemListStringWhereTypeNotNull(pageRequest,searchRequest);
 		return result;
 	}
 	
-
+	@Override
+	public ItemDTO selectItemIntegerWhereType(SearchRequest searchRequest) {
+		ItemDTO result = itemRepository.selectItemIntegerWhereType(searchRequest);
+		return result;
+	}
+	
 	@Override
 	public List<ItemDTO> selectItemWherebrand(PageRequest pageRequest, SearchRequest searchRequest) {
 		List<ItemDTO> result = itemRepository.selectItemWherebrand(pageRequest, searchRequest);
