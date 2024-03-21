@@ -18,11 +18,10 @@
 // 문제점 3. table 의 컬럼명 'like' 는 예약어라서 insert 불가
 //           => ALTER TABLE item CHANGE `like` likes INT;
 
-
 // ** axios.post(url , [,data(폼데이터 or JSON데이터)], [,config])
 
-// 1 ) json 데이터라서 JSON.stringify(formData) 를 통해 두번째 인자로 전달해줬지만,
-//    컨트롤러에서 받지 못하는 문제
+// 1 ) JSON.stringify(formData) 를 통해 두번째 인자로 전달해줬지만,
+//     컨트롤러에서 받지 못하는 문제
 const insertAll1 = () => {
     console.log('동작')
     axios.post(`http://localhost:8090/item/insert`, JSON.stringify(formData)

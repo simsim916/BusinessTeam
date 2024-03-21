@@ -29,18 +29,18 @@ const AddDataHead = () => {
 
     // 1. json 데이터라서 JSON.stringify(formData) 를 통해 두번째 인자로 전달해줬지만,
     //    컨트롤러에서 받지 못하는 문제
-    const insertAll2 = () => {
-        console.log(JSON.stringify(formData))
-        axios.post(`http://localhost:8090/item/insert`, JSON.stringify(formData, replacer), {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-        ).then(res => {
-            console.log(res.data)
-        }
-        ).catch(err => console.log(err.message));
-    }
+    // const insertAll2 = () => {
+    //     console.log(JSON.stringify(formData))
+    //     axios.post(`http://localhost:8090/item/insert`, JSON.stringify(formData), {
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         }
+    //     }
+    //     ).then(res => {
+    //         console.log(res.data)
+    //     }
+    //     ).catch(err => console.log(err.message));
+    // }
 
     // 2. 세번째 인자로 params 라는걸 강제로 인식시켜줘야 한다.
     //   => Controller 에서 정상적으로 받게 된다.
@@ -56,15 +56,15 @@ const AddDataHead = () => {
 
     // 3. params 라고 강제로 인식 시켜준 후, 작성된 formData를 이용
     // => 인식하지 못한 문제 발생
-    // const insertAll3 = (formData) => {
-    //     console.log('동작')
-    //     axios.post(`http://localhost:8090/item/insert`, null, {
-    //         params: {
-    //             code: formData.code,
-    //             sort1: formData.sort1,
-    //         }
-    //     });
-    // }
+    const insertAll2 = (e, formData) => {
+        console.log(formData)
+        axios.post(`http://localhost:8090/item/insert`, null, {
+            params: {
+                code: formData.code,
+                sort1: formData.sort1,
+            }
+        });
+    }
 
     const checkInputChange = (event, col) => {
         setFormData(formData => ({

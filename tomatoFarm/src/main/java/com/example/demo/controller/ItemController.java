@@ -182,17 +182,30 @@ public class ItemController {
 		return result;
 	}
 
-    @PostMapping(value="/insert" , consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value="/insert")
 //    @GetMapping("/insert")
-    public ResponseEntity<?> insertItem(ItemDTO dto) {
-    	System.out.println("getCode => " + dto.getCode());
-    	System.out.println("getAdmin => " + dto.getAdmin());
-    	System.out.println("getSort1 => " + dto.getSort1());
-    	System.out.println("getLikes => " + dto.getLikes());
+    public ResponseEntity<?> insertItem(ItemDTO entity) {
+    	System.out.println("getCode => " + entity.getCode());
+    	System.out.println("getAdmin => " + entity.getAdmin());
+    	System.out.println("getSort1 => " + entity.getSort1());
+    	System.out.println("getLikes => " + entity.getLikes());
     	ResponseEntity<?> result = null;
 //        itemService.insertItem(entity);
         result = ResponseEntity.status(HttpStatus.OK).body("insert성공");
         return result;
+    }
+    
+    
+    // 테스트 메서드야 지워도 돼
+    @PostMapping("/test")
+    public void test(ItemDTO entity) {
+    	System.out.println("*************************************");
+    	System.out.println("getCode =>" + entity.getCode());
+    	System.out.println("getSort1 =>" + entity.getSort1());
+    	System.out.println("getSort1 =>" + entity.getSort1());
+    	System.out.println("getSort3 =>" + entity.getSort3());
+    	System.out.println("getName =>" + entity.getName());
+    	System.out.println("*************************************");
     }
 	
 }
