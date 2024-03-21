@@ -57,4 +57,6 @@ public class Item_reviewRepositoryImpl implements Item_reviewRepository{
 				.executeUpdate();
 	}
 	
+	
+	
 }
