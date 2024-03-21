@@ -11,8 +11,8 @@ const Admin = () => {
         <>
             <SideMenu />
             <div id="containerYH">
-                <InsertDataBox />
-                {/* <SelectDataBox /> */}
+                {/* <InsertDataBox /> */}
+                <SelectDataBox />
             </div>
         </>
     );
