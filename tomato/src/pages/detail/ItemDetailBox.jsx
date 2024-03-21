@@ -1,18 +1,15 @@
 import './ItemDetailBox.css';
-import Error from '../components/Error';
-import Loading from './../components/Loading';
-import { useRef, useState, useEffect } from 'react';
-import axios from 'axios';
 
-const ItemDetailBox = ({ itemCode }) => {
-    const [item, setItem] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
+import { useRef, useState } from 'react';
+
+const ItemDetailBox = ({ item }) => {
+    
+    
     let inputCountRef = useRef(null)
     let priceRef = useRef(null)
 
     useEffect(() => {
-        axios.get(`http://localhost:8090/item/test?searchType=item.code&keyword=${itemCode}`
+        axios.get(`http://localhost:8090/item/detail?code=${itemCode}`
         ).then(res => {
             setItem(res.data);
             setLoading(false);
@@ -59,7 +56,11 @@ const ItemDetailBox = ({ itemCode }) => {
     function inputCount() {
 
     }
+
+    const [showItem, setShowItem] = useState(false);
     function showItemDetail() {
+        setShowItem(true);
+
 
     }
 
@@ -119,33 +120,35 @@ const ItemDetailBox = ({ itemCode }) => {
                 <li><a href="#reviewBoardBox">상품후기</a></li>
                 <li><a href="#askBoardBox">상품문의</a></li>
             </ul>
-            <div id="introItem" className="container">
-                <div id="introItem1" className="subTitle">
-                    <hr />
-                    <h4>상품 조리 사진
-                        <img src={process.env.PUBLIC_URL + `/img/logo3.png`} alt="제품 조리 사진" />
-                    </h4>
-                    <hr />
+            {showItem &&
+                <div id="introItem" className="container">
+                    <div id="introItem1" className="subTitle">
+                        <hr />
+                        <h4>상품 조리 사진
+                            <img src={process.env.PUBLIC_URL + `/img/logo3.png`} alt="제품 조리 사진" />
+                        </h4>
+                        <hr />
+                    </div>
+                    <img src={process.env.PUBLIC_URL + `/img/itemImg/${item.code}_2.jpg`} alt={`${item.name} 제품`} />
+                    <div id="introItem2" className="subTitle">
+                        <hr />
+                        <h4>상품 구성
+                            <img src={process.env.PUBLIC_URL + `/img/logo4.png`} alt="상품 구성" />
+                        </h4>
+                        <hr />
+                    </div>
+                    <img src={process.env.PUBLIC_URL + `/img/itemImg/${item.code}_3.jpg`} alt={`${item.name} 구성품`} />
+                    <div className="subTitle">
+                        <hr />
+                        <h4>상품 표시사항
+                            <img src={process.env.PUBLIC_URL + `/img/logo2.png" alt="제품 조리 사진`} />
+                        </h4>
+                        <hr />
+                    </div>
+                    <img src={process.env.PUBLIC_URL + `/img/itemImg/${item.code}_4.jpg`} alt={`${item.name} 상세표기`} />
                 </div>
-                <img src={process.env.PUBLIC_URL + `/img/itemImg/${item.code}_2.jpg`} alt={`${item.name} 제품`} />
-                <div id="introItem2" className="subTitle">
-                    <hr />
-                    <h4>상품 구성
-                        <img src={process.env.PUBLIC_URL + `/img/logo4.png`} alt="상품 구성" />
-                    </h4>
-                    <hr />
-                </div>
-                <img src={process.env.PUBLIC_URL + `/img/itemImg/${item.code}_3.jpg`} alt={`${item.name} 구성품`} />
-                <div className="subTitle">
-                    <hr />
-                    <h4>상품 표시사항
-                        <img src={process.env.PUBLIC_URL + `/img/logo2.png" alt="제품 조리 사진`} />
-                    </h4>
-                    <hr />
-                </div>
-                <img src={process.env.PUBLIC_URL + `/img/itemImg/${item.code}_4.jpg`} alt={`${item.name} 상세표기`} />
-            </div>
-            <div onClick={showItemDetail} id="introItemBtn" className="container">
+            }   
+            <div onClick={showItemDetail} id="introItemBtn">
                 상품정보 더보기<i className="fa-solid fa-chevron-down"></i>
             </div>
         </div>

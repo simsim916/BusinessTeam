@@ -178,6 +178,8 @@
     font-size: 16px;
 }
 
+
+
 #price>span {
     font-size: 30px;
     font-weight: 500;
@@ -460,11 +462,11 @@
 }
 
 .boardRow>div:nth-of-type(1) {
-    width: 100%;
+    width: 8%;
 }
 
 .boardRow>div:nth-of-type(2) {
-    width: 8%;
+    width: 60%;
 }
 
 .boardRow:nth-of-type(1)>div:nth-of-type(3) {
@@ -473,17 +475,17 @@
 
 .boardRow>div:nth-of-type(3) {
     line-height: 35px;
-    width: 60%;
+    width: 17%;
     text-align: left;
     text-indent: 50px;
 }
 
 .boardRow>div:nth-of-type(4) {
-    width: 17%;
+    width: 15%;
 }
 
 .boardRow>div:nth-of-type(5) {
-    width: 15%;
+    width: 100%;
 }
 
 .askContents a::before {
@@ -502,7 +504,6 @@
     width: 100%;
     text-align: left;
     padding: 15px 10%;
-    order: 1;
     display: none;
 }
 

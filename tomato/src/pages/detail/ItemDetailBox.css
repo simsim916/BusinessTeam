@@ -244,6 +244,7 @@
 }
 
 #introItemBtn {
+    width: 100%;
     line-height: 60px;
     font-size: 24px;
     text-align: center;
@@ -288,3 +289,5 @@
     font-size: 52px;
     position: relative;
 }
+
+
