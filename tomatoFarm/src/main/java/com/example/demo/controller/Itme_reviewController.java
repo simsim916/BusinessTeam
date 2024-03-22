@@ -24,37 +24,31 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @AllArgsConstructor
 @RestController
-@RequestMapping(value="/itemreview")
+@RequestMapping(value = "/itemreview")
 public class Itme_reviewController {
 	private final Item_reviewService item_reviewService;
-	
-	@GetMapping("/select/{itemcode}")
-	public ResponseEntity<?> selectItem_reviewList(@PathVariable("itemcode") String keyword){
+
+	@GetMapping("/select")
+	public ResponseEntity<?> selectItem_reviewList(PageRequest pageRequest, SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
-		PageRequest pageRequest = new PageRequest(1,4);
-		SearchRequest searchRequest = new SearchRequest(keyword);
-		
-		List<Item_review> list = item_reviewService.selectItemReviewList(pageRequest, searchRequest);
-			result = ResponseEntity.status(HttpStatus.OK).body(list);
+
+		List<Item_review> list = item_reviewService.selectItemRevieListIntegerWhereType(pageRequest, searchRequest);
+		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}
-	
-	
+
 	@PostMapping("/iteminsert")
-	public ResponseEntity<?> iteminsert(Item_reviewDTO dto){
+	public ResponseEntity<?> iteminsert(Item_reviewDTO dto) {
 		ResponseEntity<?> result = null;
-		
+
 		String writer = dto.getWriter();
-		
-		if(item_reviewService.insertItemReview(dto)>0) {
+
+		if (item_reviewService.insertItemReview(dto) > 0) {
 			result = ResponseEntity.status(HttpStatus.OK).body("review_insert_success");
-		}else {
+		} else {
 			result = ResponseEntity.status(HttpStatus.OK).body("review_insert_failed");
 		}
-		return result;	
+		return result;
 	}
-	
-	
+
 }
-	
-	

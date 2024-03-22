@@ -8,8 +8,11 @@ import com.example.demo.module.SearchRequest;
 
 public interface Item_askService {
 
-	
-	List<Item_ask> selectItemAskList(PageRequest pageRequest, SearchRequest searchRequest);
+	//** 상품문의 조회
+		//* 글자 조회
+	List<Item_ask> selectItemAskListStringWhereType(PageRequest pageRequest, SearchRequest searchRequest);
+		//* 숫자 조회
+	List<Item_ask> selectItemAskListIntegerWhereType(PageRequest pageRequest, SearchRequest searchRequest);
 	
 //	=================================
 	

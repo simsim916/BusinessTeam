@@ -79,15 +79,23 @@
 
 #reviewDetailImgBottom {
     background-color: #000;
+    overflow: hidden;
     height: 15%;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
 }
+#reviewDetailImgBottom div{
+    width: 20%;
+    height: 100%;
+    opacity: 0.5;
+}
 
-#reviewDetailImgBottom>img {
-    height: 90%;
+#reviewDetailImgBottom img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
 
 #reviewDetail_Write {

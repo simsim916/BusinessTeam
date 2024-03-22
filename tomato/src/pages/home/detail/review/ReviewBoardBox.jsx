@@ -15,7 +15,7 @@ const ReviewBoardBox = ({ item }) => {
     const [reviewWrite, setReviewWrite] = useState(false);
 
     useEffect(() => {
-        axios.get(`http://localhost:8090/itemreview/select/${item.code}`
+        axios.get(`http://localhost:8090/itemreview/select?column=item_code&keyword=${item.code}`
         ).then(res => {
             setItemReviewList(res.data);
             console.log(itemReviewList)
