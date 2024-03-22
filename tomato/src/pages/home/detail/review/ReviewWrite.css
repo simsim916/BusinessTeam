@@ -9,7 +9,6 @@
     justify-content: center;
     align-items: center;
     z-index: 10;
-
 }
 
 #reviewWriteBox {
@@ -26,12 +25,6 @@
     width: calc(90vw - 30px);
 }
 
-#reviewWriteTop {
-    position: relative;
-    border-bottom: 1px solid rgb(221, 221, 221);
-    display: flex;
-}
-
 #reviewWriteBox h4 {
     font-size: 30px;
     padding-bottom: 20px;
@@ -46,7 +39,6 @@
 
 #reviewWriteImg img {
     width: 120%;
-
 }
 
 #itemTitle2 {
@@ -104,7 +96,7 @@
     color: #9B1B30;
 }
 
-#reviewWriteTag_detail{
+#reviewWriteTag_detail {
     height: 250px;
     margin: 15px 0;
 }

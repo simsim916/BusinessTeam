@@ -7,6 +7,7 @@ import static com.example.demo.entity.Qitem_event.item_event;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
@@ -47,25 +48,23 @@ public class Item_reviewRepositoryImpl implements Item_reviewRepository{
 				.fetch();
 	}
 	
-	
+	@Transactional
 	@Override
 	//** 상품리뷰 등록
 	public int insertItemReview(Item_reviewDTO dto) {
 		return entityManager
-				.createNativeQuery("INSERT INTO item_review(seq, item_code, writer, title"
-									+ ", contents, score, regdate, likes, image1, image2, image3 "
-									+ "VALUES(?,?,?,?,?,?,?,?,?,?,?)")
-				.setParameter(1, dto.getSeq())
-				.setParameter(2, dto.getItem_code())
-				.setParameter(3, dto.getWriter())
-				.setParameter(4, dto.getTitle())
-				.setParameter(5, dto.getContents())
-				.setParameter(6, dto.getScore())
-				.setParameter(7, dto.getRegdate())
-				.setParameter(8, dto.getLikes())
-				.setParameter(9, dto.getImage1())
-				.setParameter(10, dto.getImage2())
-				.setParameter(11, dto.getImage3())
+				.createNativeQuery("INSERT INTO item_review(item_code, writer, title"
+									+ ", contents, score, regdate, image1, image2, image3) "
+									+ "VALUES(?,?,?,?,?,?,?,?,?)")
+				.setParameter(1, dto.getItem_code())
+				.setParameter(2, dto.getWriter())
+				.setParameter(3, dto.getTitle())
+				.setParameter(4, dto.getContents())
+				.setParameter(5, dto.getScore())
+				.setParameter(6, dto.getRegdate())
+				.setParameter(7, dto.getImage1())
+				.setParameter(8, dto.getImage2())
+				.setParameter(9, dto.getImage3())
 				.executeUpdate();
 	}
 	

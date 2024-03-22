@@ -1,6 +1,6 @@
 package com.example.demo.domain;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 import lombok.Builder;
 import lombok.Data;
@@ -16,8 +16,8 @@ public class Item_reviewDTO {
 	private String writer;	//글쓴이
 	private String title;	//제목
 	private String contents;	//내용
-	private String score; 	//조회수
-	private Date regdate;	//날짜
+	private int score; 	
+	private LocalDateTime regdate;	//날짜
 	private int likes;	//공감수
 	private String image1; 
 	private String image2; 

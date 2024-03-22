@@ -1,6 +1,7 @@
 package com.example.demo.serviceImpl;
 
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -36,6 +37,10 @@ public class Item_reviewServiceImpl implements Item_reviewService{
 	@Override
 	//** 상품리뷰 등록
 	public int insertItemReview(Item_reviewDTO dto) {
+		
+		LocalDateTime currentDateTime = LocalDateTime.now();
+		
+		dto.setRegdate(currentDateTime);
 		
 		return item_reviewRepository.insertItemReview(dto);
 	}

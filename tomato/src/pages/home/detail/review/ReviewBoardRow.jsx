@@ -20,21 +20,46 @@ const ReviewBoardRow = ({ itemReview }) => {
                 <div className='ReviewBoardRow_text'>
                     <div className='ReviewBoardRow_rightTop'>
                         <div className='ReviewBoardRow_score'>
-                            <i className="fa-solid fa-star"></i>
-                            <i className="fa-solid fa-star"></i>
-                            <i className="fa-solid fa-star"></i>
-                            <i className="fa-solid fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
+                            {
+                                itemReview.score >= 1 ?
+                                    <i id='1' className="fa-solid fa-star"></i>
+                                    :
+                                    <i id='1' className="fa-regular fa-star"></i>
+                            }
+                            {
+                                itemReview.score >= 2 ?
+                                    <i id='2' className="fa-solid fa-star"></i>
+                                    :
+                                    <i id='2' className="fa-regular fa-star"></i>
+                            }
+                            {
+                                itemReview.score >= 3 ?
+                                    <i id='3' className="fa-solid fa-star"></i>
+                                    :
+                                    <i id='3' className="fa-regular fa-star"></i>
+                            }
+                            {
+                                itemReview.score >= 4 ?
+                                    <i id='4' className="fa-solid fa-star"></i>
+                                    :
+                                    <i id='4' className="fa-regular fa-star"></i>
+                            }
+                            {
+                                itemReview.score >= 5 ?
+                                    <i id='5' className="fa-solid fa-star"></i>
+                                    :
+                                    <i id='5' className="fa-regular fa-star"></i>
+                            }
                         </div>
-                        <p className='ReviewBoardRow_date'>작성일4</p>
+                        <p className='ReviewBoardRow_date'>{itemReview.regdate}</p>
                     </div>
                     <div className='ReviewBoardRow_toptag'>
-                        <p>가성비 굳</p>
+                        <p>가성비 좋아요</p>
                     </div>
-                    <span className='ReviewBoardRow_title'>가격이 저렴하고 맛있네요</span>
-                    <span className='ReviewBoardRow_wirter'>작성자3</span>
+                    <span className='ReviewBoardRow_title'>{itemReview.title}</span>
+                    <span className='ReviewBoardRow_wirter'>{itemReview.writer}</span>
                     <div className="reviewDetail">
-                        <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
+                        <p>{itemReview.contents}</p>
                     </div>
                 </div>
             </div>
