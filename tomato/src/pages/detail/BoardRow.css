@@ -1,46 +1,35 @@
-.boardRow {
+.boardAnswer {
     display: flex;
     align-items: center;
     text-align: center;
     flex-wrap: wrap;
+    height: 50px;
+    font-size: 18px;
 }
 
-.boardRow:nth-of-type(1) {
+.boardAnswer:nth-of-type(1) {
     line-height: 60px;
     border-bottom: 1px solid #000;
 }
 
-.boardRow>div:nth-of-type(1) {
-    /* width: %; */
-    background-color: rebeccapurple;
-}
-
-.boardRow>div:nth-of-type(2) {
-    width: 20%;
-    background-color: yellow;
-}
-
-.boardRow:nth-of-type(1)>div:nth-of-type(3) {
-    text-align: center;
-    background-color: green;
-    width: 30%;
-}
-
-.boardRow>div:nth-of-type(3) {
-    background-color: pink;
-    line-height: 35px;
-    width: 20%;
-    text-align: center;
-}
-
-.boardRow>div:nth-of-type(4) {
-    background-color: blue;
-    text-align: center;
-    width: 20%;
-}
-
-.boardRow>div:nth-of-type(5) {
+.boardAnswer>div:nth-of-type(1) {
     width: 10%;
+}
+
+.boardAnswer>div:nth-of-type(2) {
+    width: 10%;
+}
+
+.boardAnswer>div:nth-of-type(3) {
+    width: 40%;
+}
+
+.boardAnswer>div:nth-of-type(4) {
+    width: 20%;
+}
+
+.boardAnswer>div:nth-of-type(5) {
+    width: 20%;
 }
 
 .askContents a::before {
@@ -61,7 +50,6 @@
     padding: 15px 10%;
     display: none;
 }
-
 
 #askNone{
     height: 200px;

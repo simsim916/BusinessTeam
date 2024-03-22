@@ -42,9 +42,9 @@ const AskBoardBox = ({ item }) => {
                 <div onClick={()=> itemAskClick()} id="itemAskWrite">문의하기</div>
                 <div id="askBoard">
                     <div className="boardRow">
-                        <div></div>
-                        <div>제목</div>
+                        <div>비밀글</div>
                         <div>답변</div>
+                        <div>제목</div>
                         <div>작성자</div>
                         <div>작성일자</div>
                     </div>
