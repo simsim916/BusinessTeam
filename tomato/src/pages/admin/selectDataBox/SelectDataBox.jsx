@@ -1,8 +1,9 @@
 import "./SelectDataBox.css";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Error from './../components/Error';
-import Loading from './../components/Loading';
+import Error from '../../components/Error';
+import Loading from '../../components/Loading';
+import PagingBox from "../PagingBox";
 
 const SelectDataBox = () => {
 

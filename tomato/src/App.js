@@ -8,8 +8,8 @@ import EventPage from "./pages/event/EventPage";
 import Admin from "./pages/admin/Admin";
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import SelectDataBox from './pages/admin/SelectDataBox';
-import InsertDataBox from "./pages/admin/InsertDataBox";
+import InsertDataBox from "./pages/admin/insertDataBox/InsertDataBox";
+import SelectDataBox from './pages/admin/selectDataBox/SelectDataBox';
 
 function App() {
 

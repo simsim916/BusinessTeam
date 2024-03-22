@@ -1,8 +1,8 @@
 import { useState } from "react";
 import "./Admin.css";
-import InsertDataBox from "./InsertDataBox";
-import SelectDataBox from "./SelectDataBox";
-import SideMenu from "./SideMenu";
+import InsertDataBox from "./insertDataBox/InsertDataBox";
+import SelectDataBox from "./selectDataBox/SelectDataBox";
+import SideMenu from './sideMenu/SideMenu';
 
 
 
