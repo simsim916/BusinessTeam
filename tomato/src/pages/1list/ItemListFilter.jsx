@@ -1,10 +1,13 @@
 import { useSearchParams } from "react-router-dom";
 import './itemList.css'
 import { useEffect, useMemo, useRef } from "react";
+import SortList from './SortList';
 
-const ItemListFilter = ({ filterCheckedList, keyword }) => {
+const ItemListFilter = ({ filterCheckedList, sortList }) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const listfilter = useRef(null);
+
+    console.log(sortList)
 
     function checkAll(event) {
         let target = event.target.closest('li');
@@ -73,7 +76,7 @@ const ItemListFilter = ({ filterCheckedList, keyword }) => {
                     <li onClick={showList} className="sortB">
                         <i onClick={checkAll} className="fa-regular fa-circle-check"></i>식재료
                         <ul>
-                            {/* <Sortli /> */}
+                            {/* {sortList.map((e,i)=><SortList sort2={e} />)} */}
                         </ul>
                     </li>
                     <li>

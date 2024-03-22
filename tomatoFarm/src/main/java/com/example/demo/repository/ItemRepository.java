@@ -23,8 +23,6 @@ public interface ItemRepository {
 	List<ItemDTO> selectItemWherebrand(PageRequest pageRequest, SearchRequest searchRequest);
 	// ** 키워드 상품 페이징 조회
 	List<ItemDTO> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest);
-	// ** 키워드 상품 단순 조회
-	List<ItemDTO> selectItemWhereKeyword(SearchRequest searchRequest);
 	// ** 키워드 상품 단순 조회 -> 필터
 	List<SortDTO> selectSortWhereKeyword(SearchRequest searchRequest);
 	// ** 분류 검색 조회

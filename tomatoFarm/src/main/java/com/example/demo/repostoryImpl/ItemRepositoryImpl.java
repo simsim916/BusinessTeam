@@ -127,50 +127,34 @@ public class ItemRepositoryImpl implements ItemRepository {
 						.or(item.sort3.contains(searchRequest.getKeyword()))
 						.or(item.brand.contains(searchRequest.getKeyword()))
 						.or(item.name.contains(searchRequest.getKeyword())))
-				.orderBy(getSortType(searchRequest)).offset(pageRequest.getStartNum()).limit(pageRequest.getEndNum())
+				.orderBy(getSortType(searchRequest))
+				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum())
 				.fetch();
 	}
 
 	@Override
-	// ** 키워드 상품 단순 조회
-	public List<ItemDTO> selectItemWhereKeyword(SearchRequest searchRequest) {
-		return jPAQueryFactory
-				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price,
-						item.sales, item.stock, item.views, item.likes, item.event_code, item_event.discount,
-						item_event.name.as("event_name")))
-				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
-				.where(item.sort2.contains(searchRequest.getKeyword())
-						.or(item.sort3.contains(searchRequest.getKeyword()))
-						.or(item.brand.contains(searchRequest.getKeyword()))
-						.or(item.name.contains(searchRequest.getKeyword())))
-				.fetch();
-	}
-
-	@Override
-	// ** 키워드 상품 단순 조회 -> 필터
 	public List<SortDTO> selectSortWhereKeyword(SearchRequest searchRequest) {
 		List<SortDTO> result = jPAQueryFactory
-				.select(Projections.bean(SortDTO.class, item.sort1, item.sort2, item.sort2.count().as("acount")))
+				.select(Projections.bean(SortDTO.class, item.sort1, item.sort2,item.sort2.count().as("count")))
 				.from(item)
 				.where(item.sort2.contains(searchRequest.getKeyword())
 						.or(item.sort3.contains(searchRequest.getKeyword()))
 						.or(item.brand.contains(searchRequest.getKeyword()))
-						.or(item.name.contains(searchRequest.getKeyword())).and(item.sort1.ne("밀키트")))
-				.groupBy(item.sort1, item.sort2).fetch();
+						.or(item.name.contains(searchRequest.getKeyword()))
+						.and(item.sort1.ne("밀키트")))
+				.groupBy(item.sort1, item.sort2)
+				.fetch();
 
-//		result.addAll(jPAQueryFactory.select(
-//				Projections.bean(SortDTO.class, 
-//						item.sort1.as("sort1"),
-//						item.brand.as("sort2"),
-//						item.brand.count().as("acount"))
-//				).from(item)
-//				.where(item.sort1.eq("밀키트")
-//						.and(item.sort2.contains(searchRequest.getKeyword())
-//								.or(item.sort3.contains(searchRequest.getKeyword()))
-//								.or(item.brand.contains(searchRequest.getKeyword()))
-//								.or(item.name.contains(searchRequest.getKeyword()))))
-//				.groupBy(item.brand)
-//				.fetch());
+		result.addAll(jPAQueryFactory
+				.select(Projections.bean(SortDTO.class, item.sort1, item.brand.as("sort2"), item.sort2.count().as("count")))
+		        .from(item)
+		        .where(item.sort1.eq("밀키트")
+		                .and(item.sort2.contains(searchRequest.getKeyword())
+		                        .or(item.sort3.contains(searchRequest.getKeyword()))
+		                        .or(item.brand.contains(searchRequest.getKeyword()))
+		                        .or(item.name.contains(searchRequest.getKeyword()))))
+		        .groupBy(item.brand)
+		        .fetch());
 
 		return result;
 	}
@@ -178,8 +162,21 @@ public class ItemRepositoryImpl implements ItemRepository {
 	@Override
 	// ** 키워드 상품 분류 조회
 	public List<SortDTO> selectSortList() {
-		return jPAQueryFactory.select(Projections.bean(SortDTO.class, item.sort1, item.sort2)).from(item)
-				.groupBy(item.sort1, item.sort2).orderBy(item.sort2.when("밀키트").then("a").otherwise("b").asc()).fetch();
+		List<SortDTO> result = jPAQueryFactory
+				.select(Projections.bean(SortDTO.class, item.sort1, item.brand.as("sort2")))
+					.where(item.sort1.eq("밀키트"))
+					.from(item)
+					.groupBy(item.sort1, item.brand)
+					.orderBy(item.brand.asc())
+					.fetch();
+		result.addAll(jPAQueryFactory
+				.select(Projections.bean(SortDTO.class, item.sort1, item.sort2))
+					.from(item)
+					.where(item.sort1.ne("밀키트"))
+					.groupBy(item.sort1, item.sort2)
+					.orderBy(item.sort2.asc())
+					.fetch());
+		return result;
 	}
 
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */

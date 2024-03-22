@@ -3,10 +3,21 @@ import './nav.css'
 import CategoryList from './CategoryList';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { SortContext } from './../../../App';
+import { useContext } from 'react';
 
 function Nav({ appearinputBoxResetButton, resetInputBox }) {
 
-    const [data, setData] = useState(null);
+    const [sortList, setsSortList] = useState(null);
+
+    useEffect(() => {
+        axios.get("http://localhost:8090/item/sort"
+        ).then(res => {
+            setsSortList(res.data);
+        }).catch(err => {
+            console.log(`${err.message}`)
+        })
+    }, [])
 
     function seachCategory(event) {
         let key = event.target.value;
@@ -19,16 +30,6 @@ function Nav({ appearinputBoxResetButton, resetInputBox }) {
             }
         }
     }
-
-    useEffect(() => {
-        axios.get("http://localhost:8090/item/sort"
-        ).then(res => {
-            setData(res.data);
-        }).catch(err => {
-            console.log(`Nav axios : ${err.message}`)
-        })
-    }, [])
-
 
     return (
         <nav>
@@ -44,7 +45,8 @@ function Nav({ appearinputBoxResetButton, resetInputBox }) {
                                 <i className="fa-solid fa-magnifying-glass"></i>
                             </form>
                         </li>
-                        {data ? (data.map((e, i) => <CategoryList key={i} data={e} />)) : ('')}
+                        <CategoryList key={0} data={{sort1:"밀키트", sort2:"밀키트"}} />
+                        {sortList ? (sortList.filter((e)=>e.sort1 != "밀키트").map((e, i) => <CategoryList key={i+1} data={e} />)) : ('')}
                     </ul>
                 </div>
                 <ul id="navBar">

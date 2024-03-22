@@ -6,14 +6,14 @@ import Loading from './../../../components/Loading';
 import Error from './../../../components/Error';
 
 
-const SignBG = ({ changeSignBox, style }) => {
+const SignBG = ({ signBox, changeSignBox }) => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false);
     const [signValue, setSignValue] = useState({
         value: {
             id: '',
             password: '',
-            userName: '',
+            username: '',
             phonenumber: '',
             address: '',
             email: '',
@@ -26,7 +26,7 @@ const SignBG = ({ changeSignBox, style }) => {
         error: {
             id: null,
             password: null,
-            userName: null,
+            username: null,
             phonenumber: null,
             address: null,
             email: null,
@@ -39,7 +39,7 @@ const SignBG = ({ changeSignBox, style }) => {
         check: {
             id: false,
             password: false,
-            userName: false,
+            username: false,
             phonenumber: false,
         },
         isJoinable: false
@@ -53,16 +53,16 @@ const SignBG = ({ changeSignBox, style }) => {
         box.style.border = "2px solid #9B1B30";
     }
 
-    const handleInputChange = (event , handle) => {
+    const handleInputChange = (event, handle) => {
         let result = {
             message: '',
             check: false
         }
-        if (handle) result=handle(event);
+        if (handle) result = handle(event);
         valueChange(event, result.message, result.check);
         toggleJoinButton();
     }
-    
+
     const checkId = (event) => {
         const value = event.target.value;
         const idBox = event.target.closest('div');
@@ -208,7 +208,7 @@ const SignBG = ({ changeSignBox, style }) => {
     }
 
     const toggleJoinButton = () => {
-        signValue.check.id && signValue.check.password && signValue.check.userName && signValue.check.phonenumber ?
+        signValue.check.id && signValue.check.password && signValue.check.username && signValue.check.phonenumber ?
             setSignValue(signValue => ({ ...signValue, isJoinable: true })) : setSignValue(signValue => ({ ...signValue, isJoinable: false }));
     }
 
@@ -217,21 +217,13 @@ const SignBG = ({ changeSignBox, style }) => {
             e.style.opacity = "1";
         }
         if (document.getElementById('checked')) document.getElementById('checked').removeAttribute('id');
-        event.target.closest('li').setAttribute('id','checked');
+        event.target.closest('li').setAttribute('id', 'checked');
     }
 
     const requestSign = () => {
-        axios.post('http://localhost:8090/user/signup/', null, {
-            params: {
-                id: signValue.value.id,
-                password: signValue.value.password,
-                name: signValue.value.userName,
-                phonenumber: signValue.value.phonenumber,
-                address2: signValue.value.address,
-                email: signValue.value.email,
-                email2: signValue.value.emailBack,
-                gender: signValue.value.gender,
-                birthdate: signValue.value.year + signValue.value.month + signValue.value.day
+        axios.post(`http://localhost:8090/user/signup`, signValue.value, {
+            headers: {
+                'Content-Type': 'application/json'
             }
         }).then(res => {
             setLoading(false);
@@ -247,8 +239,8 @@ const SignBG = ({ changeSignBox, style }) => {
     if (error) return <Error />
 
     return (
-        <div id="signBG" style={{ transform: 'translate(-100%, 0)' }} >
-            <div id="historyback" onClick={() => changeSignBox()}><i className="fa-solid fa-arrow-left"></i></div>
+        <div id="signBG" style={{ transform: signBox ? 'translate(-100%, 0)' : 'translate(0, 0)' }} >
+            <div id="historyback" onClick={changeSignBox}><i className="fa-solid fa-arrow-left"></i></div>
             <div>
                 <Link to="/"><img id="logo" src={process.env.PUBLIC_URL + `/img/logo.png`} alt="logo" /></Link>
                 <h3>회원가입</h3>
@@ -259,33 +251,33 @@ const SignBG = ({ changeSignBox, style }) => {
                         <input type="text" name="id" placeholder="아이디" value={signValue.value.id}
                             onChange={(event) => handleInputChange(event, checkId)}
                             onBlur={(event) => handleInputChange(event, checkId)}
-                            onFocus={changeOpacity}/>
+                            onFocus={changeOpacity} />
                     </div>
                     <div id="passwordBox">
                         <i className="fa-solid fa-key"></i>
                         <input type="password" name="password" placeholder="비밀번호" value={signValue.value.password}
                             onChange={(event) => handleInputChange(event, checkPassword)}
                             onBlur={(event) => handleInputChange(event, checkPassword)}
-                            onFocus={changeOpacity}/>
+                            onFocus={changeOpacity} />
                     </div>
                     <div id="nameBox">
                         <i className="fa-solid fa-circle-user"></i>
-                        <input type="text" name="userName" placeholder="이름" value={signValue.value.userName}
+                        <input type="text" name="username" placeholder="이름" value={signValue.value.username}
                             onChange={(event) => handleInputChange(event, checkName)}
                             onBlur={(event) => handleInputChange(event, checkName)}
-                            onFocus={changeOpacity}/>
+                            onFocus={changeOpacity} />
                     </div>
                     <div id="phonenumberBox">
                         <i className="fa-solid fa-phone"></i>
                         <input type="text" name="phonenumber" placeholder="전화번호" value={signValue.value.phonenumber}
                             onChange={(event) => handleInputChange(event, checkPhonenumber)}
                             onBlur={(event) => handleInputChange(event, checkPhonenumber)}
-                            onFocus={changeOpacity}/>
+                            onFocus={changeOpacity} />
                     </div>
                     <div id="errorBox">
                         {signValue.error.id ? <p><i className="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;{signValue.error.id}</p> : <></>}
                         {signValue.error.password ? <p><i className="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;{signValue.error.password}</p> : <></>}
-                        {signValue.error.userName ? <p><i className="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;{signValue.error.userName}</p> : <></>}
+                        {signValue.error.username ? <p><i className="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;{signValue.error.username}</p> : <></>}
                         {signValue.error.phonenumber ? <p><i className="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;{signValue.error.phonenumber}</p> : <></>}
                     </div>
                     <p id="selectOption"><i className="fa-solid fa-check"></i>&nbsp;&nbsp;선택 입력 사항</p>
@@ -293,13 +285,13 @@ const SignBG = ({ changeSignBox, style }) => {
                         <i className="fa-solid fa-location-dot"></i>
                         <input type="text" name="address" placeholder="주소" value={signValue.value.address}
                             onChange={handleInputChange}
-                            onFocus={changeOpacity}/>
+                            onFocus={changeOpacity} />
                     </div>
                     <div id="emailBox">
                         <i className="fa-solid fa-envelope"></i>
                         <input type="text" name="email" placeholder="이메일" value={signValue.value.email}
                             onFocus={changeOpacity}
-                            onChange={handleInputChange}/>
+                            onChange={handleInputChange} />
                         <i className="fa-solid fa-at"></i>
                         <input type="text" name="emailback" id="emailWriteBox" value={signValue.value.emailBack}
                             onFocus={changeOpacity}
@@ -351,7 +343,7 @@ const SignBG = ({ changeSignBox, style }) => {
                             onChange={handleInputChange}
                         />
                     </div>
-                    <button type="button" onClick={requestSign} id="joinBox" style={{ opacity: signValue.isJoinable? '1':'0.3' }} disabled={!signValue.isJoinable}>가입하기</button>
+                    <button type="button" onClick={requestSign} id="joinBox" style={{ opacity: signValue.isJoinable ? '1' : '0.3' }} disabled={!signValue.isJoinable}>가입하기</button>
                 </form>
                 <br />
                 <p id="successOrNot"></p>

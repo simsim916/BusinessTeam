@@ -66,7 +66,6 @@ public interface ItemService {
 	
 	List<ItemDTO> selectItemWherebrand(PageRequest pageRequest, SearchRequest searchRequest);
 	List<ItemDTO> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest);
-	List<ItemDTO> selectItemWhereKeyword(SearchRequest searchRequest);
 	List<SortDTO> selectSortWhereKeyword(SearchRequest searchRequest);
 	List<SortDTO> selectSortList();
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */

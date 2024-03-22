@@ -8,7 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,7 +20,7 @@ import com.example.demo.service.UserService;
 
 import lombok.AllArgsConstructor;
 
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @AllArgsConstructor
 @RequestMapping(value="/user")
@@ -31,12 +33,12 @@ public class UserController {
 	
 
 	@PostMapping("/login") 
-	public ResponseEntity<?> login(HttpServletRequest request,UserDTO dto) {
+	public ResponseEntity<?> login(@RequestBody UserDTO dto) {
 		ResponseEntity<?> result = null;
+		System.out.println(dto);
 		String password = dto.getPassword(); // user가 입력한 password를 변수에 저장
-		System.out.println(passwordEncoder.encode(dto.getPassword()));
 		User user = userService.selectUser(dto); // user가 입력한 id로 userData를 조회 하여 dto를 채운다.
-		if(dto.getName() != null) { // 조회성공
+		if(dto.getUsername() != null) { // 조회성공
 			if(passwordEncoder.matches(password, user.getPassword())) {
 				result = ResponseEntity.status(HttpStatus.OK).body(dto);
 			}else {
@@ -51,19 +53,15 @@ public class UserController {
 	
 	
 	@PostMapping("/signup")
-	public ResponseEntity<?> singup(UserDTO dto) {
+	public ResponseEntity<?> singup(@RequestBody UserDTO dto) {
 		ResponseEntity<?> result = null;
 		
 		System.out.println("\n***************\n");
-//		System.out.println("getId => " + dto.getId());
-//		System.out.println("password => " + dto.getPassword());
-//		System.out.println("getName => " + dto.getName());
-//		System.out.println("getPhonenumber => " + dto.getPhonenumber());
-//		System.out.println("getAddress2 => " + dto.getAddress2());
-//		System.out.println("password => " + dto.getGender());
-//		System.out.println("password => " + dto.getBirthdate());
-		System.out.println("password => " + dto.getEmail());
-		System.out.println("password => " + dto.getEmail2());
+		System.out.println("getId => " + dto.getId());
+		System.out.println("password => " + dto.getPassword());
+		System.out.println("getName => " + dto.getUsername());
+		System.out.println("getPhonenumber => " + dto.getPhonenumber());
+		System.out.println("getAddress2 => " + dto.getAddress2());
 		
 		
 		String password = dto.getPassword();

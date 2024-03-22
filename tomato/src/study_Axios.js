@@ -24,8 +24,11 @@
 //     컨트롤러에서 받지 못하는 문제
 const insertAll1 = () => {
     console.log('동작')
-    axios.post(`http://localhost:8090/item/insert`, JSON.stringify(formData)
-    ).then(res => console.log(res.data)
+    axios.post(`http://localhost:8090/item/insert`, formData, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(res => console.log(res.data)
     ).catch(err => console.log(err.message));
 }
 

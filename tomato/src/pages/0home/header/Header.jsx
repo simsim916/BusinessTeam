@@ -1,6 +1,7 @@
 import "./header.css";
 import Nav from './Nav';
 import { Link, useNavigate } from 'react-router-dom';
+import { SortContext } from './../../../App';
 
 
 
@@ -70,7 +71,8 @@ const Header = () => {
                     </div>
                 </div>
             </div>
-            <Nav appearinputBoxResetButton={appearinputBoxResetButton} resetInputBox={resetInputBox} />
+
+                <Nav appearinputBoxResetButton={appearinputBoxResetButton} resetInputBox={resetInputBox} />
         </header>
     );
 }
