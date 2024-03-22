@@ -6,16 +6,63 @@ import axios from 'axios';
 const SelectAskBox = () => {
 
     const [askList, setAskList] = useState([]);
+    const [currPage, setCurrPage] = useState(1);
 
     useEffect(() => {
         axios.get(`http://localhost:8090/itemask/select`
         ).then(res => {
-            console.log(res.data);
+            // console.log(res.data);
             setAskList(res.data);
         }).catch(err => {
             console.log(err.message);
         })
     }, [])
+
+    const paging = () => (pageNum, size) => {
+        // slice 한 List 를 반환시키는 메서드
+        const start = size * (pageNum - 1);
+        const end = pageNum * size;
+        return askList.slice(start, end);
+    }
+
+
+    // const sortItemList = (event, list, setFunc) => {
+    //     // 1. 정렬하고자 하는 Column 의 이름을 onClick 주는 요소의 id로 지정
+    //     // 2. list = 정렬하고자 하는 List
+    //     // 3. setFunc() = 원본ItemList를 정렬된itemList로 덮어씌운다.
+    //     let sortType = event.target.id;
+    //     let sortedList;
+    //     if (sortType.includes("D")) {
+    //         sortType = sortType.replace("D", "")
+    //         sortedList = list.sort((a, b) => {
+    //             setCurrPage(1)
+    //             setSort(sortType + "D");
+    //             return b[sortType] - a[sortType];
+    //         })
+    //     } else {
+    //         setSort(sortType);
+    //         setCurrPage(1)
+    //         sortedList = list.sort((a, b) => {
+    //             return a[sortType] - b[sortType];
+    //         })
+    //     }
+    //     setFunc(sortedList)
+    // }
+
+    // const getPageNum = (size) => {
+    //     // 페이징 할 <div> 태그 만들때 쓰는 함수
+    //     let needPageCount = 1;
+    //     let arr = [];
+    //     if (itemList) {
+    //         needPageCount = Math.ceil(itemList.length / size);
+    //         for (let i = 0; i < needPageCount; i++) {
+    //             arr.push(i + 1);
+    //         }
+    //     }
+    //     return arr;
+    //     // 우리가 보고자 하는 데이터의 개수를 가지고 필요한 페이지 수를 계산  
+    //     // ex) 필요한 페이지 수 7 => [1,2,3,4,5,6,7] 배열 return
+    // }
 
     return (
         <div class="container">
@@ -82,24 +129,15 @@ const SelectAskBox = () => {
                 </div>
 
                 {/* ===================================== */}
-                {askList.map((askRow, i) => {
-                    <div onclick="showContent(this)">
+                {askList.map((askRow, i) => (
+                    <div key={i}>
                         <div>{askRow.seq}</div>
-                        <div>'프레시지' 명절 할인 상품 공지<span class="latestAnnounce"><i class="fa-solid fa-n"></i></span>
-                        </div>
-                        <div>홍길동</div>
-                        <div>2024-02-02 11:11</div>
-                        <div>77</div>
+                        <div>{askRow.title}<span className="latestAnnounce"><i className="fa-solid fa-n"></i></span></div>
+                        <div>{askRow.writer}</div>
+                        <div>{askRow.regdate}</div>
+                        <div>{askRow.privacy === 0 ? '미답변' : '답변'}</div>
                     </div>
-                })}
-                {/* <div onclick="showContent(this)">
-                    <div>9</div>
-                    <div>우리 팀 파이팅<span class="latestAnnounce"><i class="fa-solid fa-n"></i></span></div>
-                    <div>홍길동</div>
-                    <div>2024-02-02 11:11</div>
-                    <div>77</div>
-                </div> */}
-
+                ))}
             </div>
             <div id="NationContainer">
                 <img src="/tomatoFarmA/resources/img/logo.png" alt="" id="tomatoChess" />
