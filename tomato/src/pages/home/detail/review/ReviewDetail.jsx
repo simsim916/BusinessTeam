@@ -6,17 +6,24 @@ const ReviewDetailForm = ({ itemReview }) => {
 
     const [detailBoxClose, setDetailBoxClose] = useState(true);
 
-    const reivewDetailImgChange = () => {
-
+    const reivewDetailImgChange = (event) => {
+        let ele = event.target.closest('div');
+        ele.style.opacity = 1;
+        ele.parentNode.previousElementSibling.children[0].src = ele.children[0].src;
+        for (let i = 0; i < ele.parentNode.childElementCount; i++) {
+            if (ele.parentNode.children[i] != ele) {
+                ele.parentNode.children[i].style.opacity = '0.5';
+            }
+        }
     }
 
     const reviewDetailClose = () => {
         setDetailBoxClose(false);
-
     }
 
     return (
         <>
+            {detailBoxClose &&
             <div id="reviewDetailForm">
                 <div id="reviewDetailBox">
                     <div id="reviewDetailImg">
@@ -26,8 +33,8 @@ const ReviewDetailForm = ({ itemReview }) => {
                             <i className="fa-solid fa-arrow-right"></i>
                         </div>
                         <div id="reviewDetailImgBottom">
-                            <img onClick={reivewDetailImgChange} src={process.env.PUBLIC_URL + '/img/itemImg/5000001_1.jpg'} alt="" />
-                            <img onClick={reivewDetailImgChange} src={process.env.PUBLIC_URL + '/img/itemImg/5000001_2.jpg'} alt="" />
+                            <div onClick={reivewDetailImgChange}><img src={process.env.PUBLIC_URL + `/img/itemImg/5000001_1.jpg`} alt={""} /></div>
+                            <div onClick={reivewDetailImgChange}><img src={process.env.PUBLIC_URL + `/img/itemImg/5000001_2.jpg`} alt={""} /></div>
                         </div>
                     </div>
                     <div id="reviewDetail_Write">
@@ -43,6 +50,7 @@ const ReviewDetailForm = ({ itemReview }) => {
                     <div onClick={reviewDetailClose} id="reviewDetailBoxClose"><i className="fa-solid fa-xmark"></i></div>
                 </div>
             </div>
+            }
         </>
 
 

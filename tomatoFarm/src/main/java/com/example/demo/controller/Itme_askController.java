@@ -27,14 +27,13 @@ import lombok.extern.log4j.Log4j2;
 public class Itme_askController {
 	private final Item_askService item_askService;
 	
-	@GetMapping("/select/{itemcode}")
-	public ResponseEntity<?> selectItem_askList(@PathVariable("itemcode") String keyword){
+	@GetMapping("/select")
+	public ResponseEntity<?> selectItem_askList(SearchRequest searchRequest){
 		ResponseEntity<?> result = null;
 		PageRequest pageRequest = new PageRequest(1,11);
-		SearchRequest searchRequest = new SearchRequest(keyword);
 		
 		List<Item_ask> list = item_askService.selectItemAskList(pageRequest, searchRequest);
-		
+		System.out.println(list);
 			result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}

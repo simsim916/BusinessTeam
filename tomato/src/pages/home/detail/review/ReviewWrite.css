@@ -39,13 +39,6 @@
     font-weight: inherit;
 }
 
-#reviewWriteTop div:nth-of-type(4) {
-    font-size: 20px;
-    height: 30px;
-    color: #9B1B30;
-    left: 230px;
-    position: relative;
-}
 
 #reviewWriteImg{
     overflow: hidden;
@@ -86,11 +79,10 @@
 
 #reviewWriteBottom {
     border-bottom: 1px solid rgb(221, 221, 221);
-    height: 600px;
     width: 100%;
     display: flex;
     position: relative;
-    padding-top: 20px;
+    padding: 20px;
     flex-direction: column;
 }
 
@@ -125,17 +117,17 @@
     border-radius: 10px;
     white-space: wrap;
     resize: none;
+    margin-bottom: 20px;
 }
 
 #reviewWriteContent {
     margin-top: 20px;
-    height: 200px;
     gap: 0px 30px;
     position: relative;
     display: flex;
     justify-content: center;
     text-align: center;
-
+    
 }
 
 #reviewWriteContent div {
@@ -161,11 +153,10 @@
 }
 
 #reviewWriteContentBottom {
+    margin-top: 20px;
     position: relative;
-    height: 40px;
-    gap: 10px;
     left: 200px;
-    margin: 10px;
+    width: 70%;
 }
 
 #reviewWritePhoto {
@@ -209,7 +200,7 @@
     justify-content: center;
     gap: 0 50px;
     text-align: center;
-    padding-top: 20px;
+    padding-top: 40px;
 
 }
 
@@ -239,8 +230,8 @@
 
 #reviewWriteBoxClose {
     position: absolute;
-    bottom: calc(100% + 10px);
-    right: 0px;
+    top: 20px;
+    right: 20px;
     background-color: #9B1B30;
     color: #fff;
     font-size: 35px;
