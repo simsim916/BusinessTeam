@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import ItemBox from './../../components/ItemBox';
 import ItemBox_vertical from './../../components/itemBox_vertical/ItemBox_vertical';
+import PagingBox from "../../admin/PagingBox";
 
 
 
@@ -35,6 +36,7 @@ const ItemListContainer = ({ keyword, itemList, setItemList }) => {
     const [sort, setSort] = useState('sales');
     const [view, setView] = useState(false);
     const [currPage, setCurrPage] = useState(1);
+    const [limit, setLimit] = useState(16);
 
     const paging = () => (pageNum, size) => {
         // slice 한 List 를 반환시키는 메서드
@@ -67,12 +69,12 @@ const ItemListContainer = ({ keyword, itemList, setItemList }) => {
         setFunc(sortedList)
     }
 
-    const getPageNum = (size) => {
+    const getPageNum = (size, list) => {
         // 페이징 할 <div> 태그 만들때 쓰는 함수
         let needPageCount = 1;
         let arr = [];
-        if (itemList) {
-            needPageCount = Math.ceil(itemList.length / size);
+        if (list) {
+            needPageCount = Math.ceil(list.length / size);
             for (let i = 0; i < needPageCount; i++) {
                 arr.push(i + 1);
             }
@@ -80,10 +82,6 @@ const ItemListContainer = ({ keyword, itemList, setItemList }) => {
         return arr;
         // 우리가 보고자 하는 데이터의 개수를 가지고 필요한 페이지 수를 계산  
         // ex) 필요한 페이지 수 7 => [1,2,3,4,5,6,7] 배열 return
-    }
-    const test = () => {
-        setCurrPage(1);
-        setView(!view);
     }
 
 
@@ -99,39 +97,26 @@ const ItemListContainer = ({ keyword, itemList, setItemList }) => {
                     </div>
                 </div>
                 {
-                    view ?
-                        // itemList.slice(0, 6).map((e, i) => <ItemBox_vertical key={i} item={e} />)
-                        (paging()(currPage, 6).map((e, i) => <ItemBox_vertical key={i} item={e} />))
+                    // view ?
+                    //     (paging()(currPage, 6).map((e, i) => <ItemBox_vertical key={i} item={e} />))
+                    //     :
+                    //     (paging()(currPage, 16).map((e, i) => <ItemBox key={i} item={e} />))
+
+                    // 페이징컴포넌트 사용할때 limit 변수가 있으면 편해서 지정해준 상태
+                    // limit를 이용하면 view 변수가 필요없음
+                    limit == 16 ?
+                        (paging()(currPage, limit).map((e, i) => <ItemBox key={i} item={e} />))
                         :
-                        (paging()(currPage, 16).map((e, i) => <ItemBox key={i} item={e} />))
-                    //이거 뭔 코드가 이래? 클로저 라는걸 써서 그렇다는데 이해가 안돼
+                        (paging()(currPage, limit).map((e, i) => <ItemBox_vertical key={i} item={e} />))
+
                 }
             </div>
-            <div id="pagingBox">
-                <div onClick={() => setCurrPage(1)}><i className="fa-solid fa-angles-left"></i></div>
-                {/* {getPageNum(16).map((pageNum, i) => {
-                    (
-                    <div onClick={() => setCurrPage(pageNum)} id={pageNum} key={i}>{pageNum}</div>
-                    )
-                })} */}
-                {/* 
-                위 코드는 모든 페이지를 노출시키고, 
-                아래 코드는 페이지 숫자를 5개만 노출시키고, 현재 페이지는 항상 가운데 오도록
-                */}
-                {getPageNum(16).map((pageNum, i) => {
-                    const startPage = Math.max(currPage - 2, 1);
-                    const endPage = Math.min(startPage + 4, getPageNum(16).length);
-
-                    if (pageNum >= startPage && pageNum <= endPage) {
-                        return (
-                            <div style={{ fontWeight: pageNum === currPage ? 'bold' : '' }}
-                                onClick={() => setCurrPage(pageNum)} id={pageNum} key={i}>{pageNum}</div>);
-                    } else {
-                        return null;
-                    }
-                })}
-                <div onClick={() => setCurrPage(getPageNum(16).length)}><i className="fa-solid fa-angles-right"></i></div>
-            </div >
+            <PagingBox
+                limit={limit}
+                setLimit={setLimit}
+                list={itemList}
+                currPage={currPage}
+                setCurrPage={setCurrPage} />
         </>
     );
 }

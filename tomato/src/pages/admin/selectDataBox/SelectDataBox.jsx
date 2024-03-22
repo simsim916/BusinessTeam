@@ -13,10 +13,9 @@ const SelectDataBox = () => {
     const [error, setError] = useState(false);
     const [column, setColumn] = useState(null);
     const [lastSort, setLastSort] = useState(null);
+    const [currPage, setCurrPage] = useState(1);
+    const [limit, setLimit] = useState(30);
 
-    // const keyword = '프레시지';
-    // const sorttype = 'priceD';
-    // const currpage = '2';
     useEffect(() => {
         axios.get(`http://localhost:8090/item/allitem`
         ).then(res => {
@@ -29,6 +28,17 @@ const SelectDataBox = () => {
             setError(true);
         })
     }, [])
+
+
+    const paging = () => (pageNum, size) => {
+        console.log('````````````````````````````````')
+        console.log('currPage =>' + currPage)
+        console.log('````````````````````````````````')
+        // slice 한 List 를 반환시키는 메서드
+        const start = size * (pageNum - 1);
+        const end = pageNum * size;
+        return itemList.slice(start, end);
+    }
 
 
     const insertAll = () => {
@@ -48,6 +58,7 @@ const SelectDataBox = () => {
             [col]: value,
             code: itemList[rowIndex].code
         }));
+
     };
 
     const sortByColumn = (event) => {
@@ -113,7 +124,7 @@ const SelectDataBox = () => {
                     <div id="dataListBox">
                         <div>
                             {itemList ?
-                                itemList.map((item, rowIndex) => (
+                                paging()(currPage, limit).map((item, rowIndex) => (
                                     <div className="excelColumn" key={rowIndex}>
                                         <input id='codeInput' style={{ width: `calc((100% - 15px) / ${column.length})` }} type="text" value={item.code} readOnly />
                                         {Object.keys(item).slice(1).map((e, j) => (
@@ -131,6 +142,11 @@ const SelectDataBox = () => {
                                 : <Loading />
                             }
                         </div>
+                        <PagingBox
+                            limit={limit}
+                            list={itemList}
+                            currPage={currPage}
+                            setCurrPage={setCurrPage} />
                     </div>
                 </div>
             </div>

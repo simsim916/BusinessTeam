@@ -192,7 +192,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 				.select(Projections.bean(ItemDTO.class, item.code, item.sort1, item.sort2, item.sort3, item.brand,
 						item.name, item.weight, item.storage, item.packing, item.delivery, item.price, item.vat,
 						item.origin, item.stock, item.admin))
-				.from(item).offset(0).limit(100).orderBy(item.sales.desc()).fetch();
+				.from(item).offset(0).limit(200).orderBy(item.sales.desc()).fetch();
 	}
 
 	@Override
