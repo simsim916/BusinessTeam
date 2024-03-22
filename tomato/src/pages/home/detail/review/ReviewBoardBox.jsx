@@ -26,7 +26,7 @@ const ReviewBoardBox = ({ item }) => {
             setLoading(false);
             setError(true);
         })
-    },[])
+    }, [])
 
     const reviewWriteClick = () => {
         setReviewWrite(!reviewWrite);

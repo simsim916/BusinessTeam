@@ -3,7 +3,7 @@ import Header from "../0home/header/Header";
 import './itemList.css'
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import ItemBox from '../components/ItemBox'
+import ItemBox from '../../components/ItemBox'
 
 const ItemListContainer = ({ keyword, itemList }) => {
     return (

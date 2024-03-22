@@ -1,13 +1,13 @@
 import "./default.css";
 import { Routes, Route, Link } from "react-router-dom";
-import Home from "./pages/0home/Home";
-import ItemList from "./pages/1list/ItemList";
+import Home from "./pages/home/Home";
+import ItemList from "./pages/home/list/ItemList";
 import LoginForm from "./pages/login/loginForm/LoginForm";
-import ItemDetail from './pages/detail/ItemDetail';
 import EventPage from "./pages/event/EventPage";
 import Admin from "./pages/admin/Admin";
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import ItemDetail from './pages/home/detail/ItemDetail';
 
 function App() {
 

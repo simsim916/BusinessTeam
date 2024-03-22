@@ -1,12 +1,11 @@
 import { useSearchParams } from 'react-router-dom';
-import Header from '../0home/header/Header';
-import ItemDetailBox from './ItemDetailBox';
-import ReviewBoardBox from './ReviewBoardBox';
-import AskBoardBox from './AskBoardBox';
-import Error from '../components/Error';
-import Loading from '../components/Loading';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import Loading from './../../components/Loading';
+import Error from './../../components/Error';
+import Header from './../index/header/Header';
+import ItemDetailBox from './descript/ItemDetailBox';
+import ReviewBoardBox from './review/ReviewBoardBox';
+import AskBoardBox from './ask/AskBoardBox';
 
 const ItemDetail = () => {
     const [searchParams, setSearchParams] = useSearchParams();

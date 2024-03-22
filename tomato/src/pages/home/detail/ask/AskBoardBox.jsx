@@ -1,10 +1,10 @@
 import './AskBoardBox.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import Loading from './../components/Loading';
-import Error from './../components/Error';
-import BoardRow from './BoardRow';
+import BoardRow from '../BoardRow';
 import ItemAskForm from './ItemAskForm';
+import Loading from '../../../components/Loading';
+import Error from '../../../components/Error';
 
 
 const AskBoardBox = ({ item }) => {
@@ -40,7 +40,7 @@ const AskBoardBox = ({ item }) => {
             <div id="askBoardBox" className="container appearContainer">
                 <h5>상품문의</h5>
                 <span>상품문의 - 상품에 궁금하신점을 남겨주세요.</span>
-                <div onClick={()=> itemAskClick()} id="itemAskWrite">문의하기</div>
+                <div onClick={() => itemAskClick()} id="itemAskWrite">문의하기</div>
                 <div id="askBoard">
                     <div className="boardRow">
                         <div></div>
@@ -52,7 +52,7 @@ const AskBoardBox = ({ item }) => {
 
                     {
                         !itemAskList ?
-                        itemAskList.map((e, i) => <BoardRow itemAsk={e} key={i} />)
+                            itemAskList.map((e, i) => <BoardRow itemAsk={e} key={i} />)
                             : <BoardRow />
                     }
 
