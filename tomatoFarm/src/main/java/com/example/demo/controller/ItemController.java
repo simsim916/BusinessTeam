@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +19,7 @@ import com.example.demo.entity.Item;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.service.ItemService;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -159,10 +159,14 @@ public class ItemController {
 	}
 
     @PostMapping(value="/insert")
-    public ResponseEntity<?> insertItem(@RequestBody Item entity) {
+//    @JsonProperty(value="insert")
+    public ResponseEntity<?> insertItem(@RequestBody List<Item> entity) {
     	ResponseEntity<?> result = null;
-    	System.out.println("****" + entity.getCode());
-      itemService.insertItem(entity);
+    	for(Item e : entity) {
+    		System.out.println(e.getCode());
+    	}
+//    	System.out.println("****" + entity.getCode());
+//      itemService.insertItem(entity);
         result = ResponseEntity.status(HttpStatus.OK).body("insert성공");
         return result;
     }

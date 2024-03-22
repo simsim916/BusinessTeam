@@ -27,12 +27,21 @@ const AddDataHead = () => {
 
     const insertAll = () => {
         console.log(formData);
-        axios.post(`http://localhost:8090/item/insert`, JSON.stringify(formData), {
+        axios.post(`http://localhost:8090/item/insert`, [{
+            code : "1",
+            sort1 : "a"
+        },
+        {
+            code: "2",
+            sort1: "b"
+        }
+    ]
+        , {
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then(res => console.log(res.data))
-            .catch(err => console.log(err.message));
+        }).then(res => console.log(res.data)
+        ).catch(err => console.log(err.message));
     }
 
 
