@@ -1,5 +1,5 @@
 import './ThirdContainer.css';
-import PresentBox from './../../components/PresentBox';
+import PresentBox from './../../../components/PresentBox';
 
 
 const ThirdContainer = () => {
@@ -45,7 +45,7 @@ const ThirdContainer = () => {
         <h3 className="hide2"><i className="fa-solid fa-bag-shopping"></i> &nbsp;&nbsp; 상품 보기 &nbsp;&nbsp; <i
           className="fa-solid fa-bag-shopping"></i>
         </h3>
-        {writeTarget.map((e,i)=><PresentBox brand={e} key={i} />)}
+        {writeTarget.map((e, i) => <PresentBox brand={e} key={i} />)}
       </div>
     </>
 

@@ -1,11 +1,10 @@
 import './ReviewBoardBox.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import ReviewContent from './ReviewContent';
-import Loading from './../components/Loading';
-import Error from './../components/Error';
-import ReviewWriteForm from './ReviewWriteForm';
-import ReviewDetailForm from './ReviewDetailForm';
+import Loading from './../../../components/Loading';
+import Error from './../../../components/Error';
+import ReviewContent from './ReviewBoardRow';
+import ReviewWriteForm from './ReviewWrite';
 
 
 const ReviewBoardBox = ({ item }) => {
@@ -26,7 +25,7 @@ const ReviewBoardBox = ({ item }) => {
             setLoading(false);
             setError(true);
         })
-    },[])
+    }, [])
 
     const reviewWriteClick = () => {
         setReviewWrite(!reviewWrite);
