@@ -15,7 +15,7 @@ const ReviewBoardBox = ({ item }) => {
     const [reviewWrite, setReviewWrite] = useState(false);
 
     useEffect(() => {
-        axios.get(`http://localhost:8090/itemreview/select/${item.code}`
+        axios.get(`http://localhost:8090/itemreview/select?column=item_code&keyword=${item.code}`
         ).then(res => {
             setItemReviewList(res.data);
             console.log(itemReviewList)
@@ -52,7 +52,7 @@ const ReviewBoardBox = ({ item }) => {
                     </div>
                 </div>
 
-                {itemReviewList ? (itemReviewList.map((e, i) => <ReviewContent itemReview={e} key={i} />)) : ('')}
+                {itemReviewList ? (itemReviewList.slice(0,5).map((e, i) => <ReviewContent itemReview={e} key={i} />)) : ('')}
 
 
                 <div id="reviewBoardBtn">

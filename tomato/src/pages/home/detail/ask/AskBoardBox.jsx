@@ -15,7 +15,7 @@ const AskBoardBox = ({ item }) => {
     const [askWrite, setAskWrite] = useState(false);
 
     useEffect(() => {
-        axios.get(`http://localhost:8090/itemask/select/${item.code}`
+        axios.get(`http://localhost:8090/itemask/select?column=item_ask&keyword=${item.code}`
         ).then(res => {
             setItemAskList(res.data);
             console.log(itemAskList)
@@ -36,40 +36,40 @@ const AskBoardBox = ({ item }) => {
     if (error) return <Error />
 
     return (
-        <>
-            <div id="askBoardBox" className="container appearContainer">
-                <h5>상품문의</h5>
-                <span>상품문의 - 상품에 궁금하신점을 남겨주세요.</span>
-                <div onClick={() => itemAskClick()} id="itemAskWrite">문의하기</div>
-                <div id="askBoard">
-                    <div className="boardRow">
-                        <div></div>
-                        <div>제목</div>
-                        <div>답변</div>
-                        <div>작성자</div>
-                        <div>작성일자</div>
-                    </div>
-
-                    {
-                        !itemAskList ?
-                            itemAskList.map((e, i) => <AskBoardRow itemAsk={e} key={i} />)
-                            : <AskBoardRow />
-                    }
-
+        <div id="askBoardBox" className="container appearContainer">
+            <h5>상품문의</h5>
+            <span>상품문의 - 상품에 궁금하신점을 남겨주세요.</span>
+            <div onClick={() => itemAskClick()} id="itemAskWrite">문의하기</div>
+            <div id="askBoard">
+                <div className="boardRow">
+                    <div></div>
+                    <div>제목</div>
+                    <div>답변</div>
+                    <div>작성자</div>
+                    <div>작성일자</div>
                 </div>
-                <div id="askBoardBtn">
-                    <i className="fa-solid fa-angles-left"></i>
-                    <i className="fa-solid fa-angle-left"></i>
-                    <span> 1 </span>
-                    <span> 2 </span>
-                    <span> 3 </span>
-                    <i className="fa-solid fa-angle-right"></i>
-                    <i className="fa-solid fa-angles-right"></i>
-                </div>
-                {askWrite ? <ItemAskWrite item={item} /> : null}
+
+                {
+                    !itemAskList ?
+                        itemAskList.map((e, i) => <AskBoardRow itemAsk={e} key={i} />)
+                        :
+                        <div id='askNone'>
+                            해당 상품에 문의사항이 없습니다.
+                        </div>
+                }
+
             </div>
-
-        </>
+            <div id="askBoardBtn">
+                <i className="fa-solid fa-angles-left"></i>
+                <i className="fa-solid fa-angle-left"></i>
+                <span> 1 </span>
+                <span> 2 </span>
+                <span> 3 </span>
+                <i className="fa-solid fa-angle-right"></i>
+                <i className="fa-solid fa-angles-right"></i>
+            </div>
+            {askWrite ? <ItemAskWrite item={item} /> : null}
+        </div>
     );
 }
 

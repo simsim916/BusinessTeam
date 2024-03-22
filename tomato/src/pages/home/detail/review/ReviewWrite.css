@@ -39,27 +39,11 @@
     font-weight: inherit;
 }
 
-#reviewWriteTop div:nth-of-type(4) {
-    font-size: 20px;
-    height: 30px;
-    color: #9B1B30;
-    left: 230px;
-    position: relative;
-}
-
-#reviewWriteImg{
-    overflow: hidden;
-    width: 25%;
-    height: 180px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#reviewWriteImg~div{
+#reviewWriteImg~div {
     width: 75%;
     padding-left: 30px;
 }
+
 #reviewWriteImg img {
     width: 120%;
 
@@ -70,56 +54,41 @@
     margin-top: 10px;
 }
 
-#BasketContent{
-    font-size: 20px;
-    display: block;
-    color: gray;
-    margin-top: 10px;
-}
-
-#reviewStarBox{
-    position: absolute;
-    bottom: 10px;
+#reviewStarBox {
     color: #9B1B30;
     font-size: 25px;
 }
 
 #reviewWriteBottom {
     border-bottom: 1px solid rgb(221, 221, 221);
-    height: 600px;
     width: 100%;
     display: flex;
     position: relative;
-    padding-top: 20px;
+    padding: 0 20px;
     flex-direction: column;
 }
 
-#reviewWriteTitle {
+.reviewWriteTag {
     position: relative;
     display: flex;
-    text-align: center;
     border-bottom: 1px solid rgb(221, 221, 221);
     gap: 30px;
     text-align: center;
     align-items: center;
 }
 
-#reviewWriteTitle div {
-    display: flex;
-    position: block;
+.reviewWriteTag div {
     font-size: 20px;
-    width: 200px;
-    height: 50px;
-    justify-content: center;
-    align-items: center;
+    width: 20%;
+    line-height: 50px;
     font-weight: 500;
-    margin-bottom: 20px;
+    margin: 15px 0;
 }
 
-#reviewWriteTitle textarea{
+.reviewWriteTag textarea {
     padding: 10px 20px;
     font-size: 18px;
-    width: 90%;
+    width: 80%;
     height: 50px;
     display: block;
     border-radius: 10px;
@@ -127,9 +96,21 @@
     resize: none;
 }
 
+#reviewWriteStarBox {
+    font-size: 30px;
+    width: 80%;
+    height: 50px;
+    text-align: left;
+    color: #9B1B30;
+}
+
+#reviewWriteTag_detail{
+    height: 250px;
+    margin: 15px 0;
+}
+
 #reviewWriteContent {
     margin-top: 20px;
-    height: 200px;
     gap: 0px 30px;
     position: relative;
     display: flex;
@@ -161,11 +142,8 @@
 }
 
 #reviewWriteContentBottom {
-    position: relative;
-    height: 40px;
-    gap: 10px;
-    left: 200px;
-    margin: 10px;
+    margin: 15px 0;
+    padding-left: 15px;
 }
 
 #reviewWritePhoto {
@@ -175,17 +153,6 @@
     display: flex;
 }
 
-#reviewPhoto {
-    display: flex;
-    position: block;
-    font-size: 20px;
-    width: 200px;
-    height: 50px;
-    justify-content: center;
-    align-items: center;
-    font-weight: 500;
-    margin-top: 20px;
-}
 
 #reviewWritePhoto label {
     font-size: 20px;
@@ -209,7 +176,7 @@
     justify-content: center;
     gap: 0 50px;
     text-align: center;
-    padding-top: 20px;
+    padding-top: 40px;
 
 }
 
@@ -239,8 +206,8 @@
 
 #reviewWriteBoxClose {
     position: absolute;
-    bottom: calc(100% + 10px);
-    right: 0px;
+    top: 20px;
+    right: 20px;
     background-color: #9B1B30;
     color: #fff;
     font-size: 35px;

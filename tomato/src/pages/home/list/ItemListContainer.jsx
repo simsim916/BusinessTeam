@@ -1,8 +1,12 @@
 import { useSearchParams } from "react-router-dom";
-import './itemList.css'
+import './ItemListContainer.css'
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import ItemBox from './../../components/ItemBox';
+import ItemBox_vertical from './../../components/itemBox_vertical/ItemBox_vertical';
+
+const ItemListContainer = ({ keyword, itemList }) => {
+    const [view, setView] = useState(false);
 
 
 
@@ -68,7 +72,7 @@ const ItemListContainer = ({ keyword, itemList, setItemList }) => {
 
     return (
         <>
-            <div id="listContainer">
+            <div id="listContainer" style={{ display: view ? 'flex' : 'grid', height: view ? 'auto' : '' }}>
                 <div onClick={getPageNum(16)}>총 <span></span> 개</div>
                 <div id="containerOption">
                     <div id="total">총 <span>{itemList ? itemList.length : '0'}</span> 개</div>
@@ -82,6 +86,13 @@ const ItemListContainer = ({ keyword, itemList, setItemList }) => {
                 {itemList ? (paging()(1, 16).map((e, i) => <ItemBox key={i} item={e} />)) : ('')}
                 {/* 이거 뭔 코드가 이래? 클로저 라는걸 써서 그렇다는데 이해가 안돼 */}
             </div>
+            {
+                view ?
+                    itemList.slice(0, 6).map((e, i) => <ItemBox_vertical key={i} item={e} />)
+                    :
+                    itemList.map((e, i) => <ItemBox key={i} item={e} />)
+            }
+        </div>
             <div id="pagingBox">
                 <div><i class="fa-solid fa-angles-left"></i></div>
                 {getPageNum.map((e, i) => {
