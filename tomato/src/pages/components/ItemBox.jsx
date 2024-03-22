@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import './itemBox.css';
+import { makeComa } from './MathFunction';
 
 const ItemBox = ({ item }) => {
     return (
@@ -45,7 +46,3 @@ const ItemBox = ({ item }) => {
 }
 
 export default ItemBox;
-
-function makeComa(number) {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-}

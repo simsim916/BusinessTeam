@@ -89,11 +89,11 @@ const LoginForm = () => {
 
   return (
     <>
-      <div id="bodyBG" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/img/signup/signupBGI.png)` }}></div>
+      <div id="bodyBG" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/img/signup/signup.jpg)` }}></div>
       <div id="contentBox">
         <LoginBG signBox={signBox} changeSignBox={changeSignBox}
-          checkId={checkId} checkPassword={checkPassword} 
-          changeOpacity={changeOpacity}/>
+          checkId={checkId} checkPassword={checkPassword}
+          changeOpacity={changeOpacity} />
         <SignBG signBox={signBox} changeSignBox={changeSignBox} />
       </div>
     </>

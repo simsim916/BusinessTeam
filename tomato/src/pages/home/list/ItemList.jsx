@@ -4,10 +4,14 @@ import axios from "axios";
 import Header from './../index/header/Header';
 import ItemListFilter from './ItemListFilter';
 import ItemListContainer from './ItemListContainer';
+import Loading from './../../components/Loading';
+import Error from './../../components/Error';
 
 const ItemList = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const keyword = searchParams.get("keyword");
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
 
     const [itemList, setItemList] = useState(null);
     const [sortList, setSortList] = useState(null);
@@ -18,8 +22,11 @@ const ItemList = () => {
         axios.get(url
         ).then(res => {
             setSortList(res.data)
+            setLoading(false);
         }).catch(err => {
             console.log(`${err.message}`)
+            setLoading(false);
+            setError(true);
         })
     }, [])
 
@@ -28,10 +35,17 @@ const ItemList = () => {
         axios.get(url
         ).then(res => {
             setItemList(res.data)
+            setLoading(false);
         }).catch(err => {
             console.log(`${err.message}`)
+            setLoading(false);
+            setError(true);
         })
     }, [])
+
+
+    if (loading) return <Loading />
+    if (error) return <Error />
 
     return (
         <>

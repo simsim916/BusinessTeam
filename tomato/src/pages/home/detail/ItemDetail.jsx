@@ -32,7 +32,6 @@ const ItemDetail = () => {
 
     return (
         <>
-            <Header />
             <ItemDetailBox item={item} />
             <ReviewBoardBox item={item} />
             <AskBoardBox item={item} />
