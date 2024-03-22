@@ -39,20 +39,11 @@
     font-weight: inherit;
 }
 
-
-#reviewWriteImg{
-    overflow: hidden;
-    width: 25%;
-    height: 180px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#reviewWriteImg~div{
+#reviewWriteImg~div {
     width: 75%;
     padding-left: 30px;
 }
+
 #reviewWriteImg img {
     width: 120%;
 
@@ -63,16 +54,7 @@
     margin-top: 10px;
 }
 
-#BasketContent{
-    font-size: 20px;
-    display: block;
-    color: gray;
-    margin-top: 10px;
-}
-
-#reviewStarBox{
-    position: absolute;
-    bottom: 10px;
+#reviewStarBox {
     color: #9B1B30;
     font-size: 25px;
 }
@@ -82,42 +64,49 @@
     width: 100%;
     display: flex;
     position: relative;
-    padding: 20px;
+    padding: 0 20px;
     flex-direction: column;
 }
 
-#reviewWriteTitle {
+.reviewWriteTag {
     position: relative;
     display: flex;
-    text-align: center;
     border-bottom: 1px solid rgb(221, 221, 221);
     gap: 30px;
     text-align: center;
     align-items: center;
 }
 
-#reviewWriteTitle div {
-    display: flex;
-    position: block;
+.reviewWriteTag div {
     font-size: 20px;
-    width: 200px;
-    height: 50px;
-    justify-content: center;
-    align-items: center;
+    width: 20%;
+    line-height: 50px;
     font-weight: 500;
-    margin-bottom: 20px;
+    margin: 15px 0;
 }
 
-#reviewWriteTitle textarea{
+.reviewWriteTag textarea {
     padding: 10px 20px;
     font-size: 18px;
-    width: 90%;
+    width: 80%;
     height: 50px;
     display: block;
     border-radius: 10px;
     white-space: wrap;
     resize: none;
-    margin-bottom: 20px;
+}
+
+#reviewWriteStarBox {
+    font-size: 30px;
+    width: 80%;
+    height: 50px;
+    text-align: left;
+    color: #9B1B30;
+}
+
+#reviewWriteTag_detail{
+    height: 250px;
+    margin: 15px 0;
 }
 
 #reviewWriteContent {
@@ -127,7 +116,7 @@
     display: flex;
     justify-content: center;
     text-align: center;
-    
+
 }
 
 #reviewWriteContent div {
@@ -153,10 +142,8 @@
 }
 
 #reviewWriteContentBottom {
-    margin-top: 20px;
-    position: relative;
-    left: 200px;
-    width: 70%;
+    margin: 15px 0;
+    padding-left: 15px;
 }
 
 #reviewWritePhoto {
@@ -166,17 +153,6 @@
     display: flex;
 }
 
-#reviewPhoto {
-    display: flex;
-    position: block;
-    font-size: 20px;
-    width: 200px;
-    height: 50px;
-    justify-content: center;
-    align-items: center;
-    font-weight: 500;
-    margin-top: 20px;
-}
 
 #reviewWritePhoto label {
     font-size: 20px;

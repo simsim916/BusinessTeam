@@ -52,7 +52,7 @@ const ReviewBoardBox = ({ item }) => {
                     </div>
                 </div>
 
-                {itemReviewList ? (itemReviewList.map((e, i) => <ReviewContent itemReview={e} key={i} />)) : ('')}
+                {itemReviewList ? (itemReviewList.slice(0,5).map((e, i) => <ReviewContent itemReview={e} key={i} />)) : ('')}
 
 
                 <div id="reviewBoardBtn">
