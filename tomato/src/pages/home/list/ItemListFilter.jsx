@@ -70,12 +70,32 @@ const ItemListFilter = ({ filterCheckedList, sortList }) => {
                 <ul>
                     <li onClick={showList} className="sortB">
                         <i onClick={checkAll} className="fa-regular fa-circle-check"></i>
-                        <span>밀키트</span>
+                        밀키트
+                        <span className="itemList_count">
+                            {sortList.filter((e) => e.sort1 == '밀키트').reduce((result, val) => result + val.count, 0)}
+                        </span>
+                        <ul>
+                            {sortList.filter((e) => e.sort1 == '밀키트').sort((b, a) => a.count - b.count).map((e) => (
+                                <li>
+                                    <i className="fa-regular fa-circle-check"></i>
+                                    <span>{e.sort2}</span><span className="itemList_count">{e.count}</span>
+                                </li>
+                            ))}
+                        </ul>
                     </li>
+                    <hr />
                     <li onClick={showList} className="sortB">
                         <i onClick={checkAll} className="fa-regular fa-circle-check"></i>식재료
+                        <span className="itemList_count">
+                            {sortList.filter((e) => e.sort1 == '식재료').reduce((result, val) => result + val.count, 0)}
+                        </span>
                         <ul>
-                            {/* {sortList.map((e,i)=><SortList sort2={e} />)} */}
+                            {sortList.filter((e) => e.sort1 == '식재료').sort((b, a) => a.count - b.count).map((e) => (
+                                <li>
+                                    <i className="fa-regular fa-circle-check"></i>
+                                    <span>{e.sort2}</span><span className="itemList_count">{e.count}</span>
+                                </li>
+                            ))}
                         </ul>
                     </li>
                     <li>

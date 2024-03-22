@@ -79,10 +79,10 @@
 }
 
 #listfilter>ul>li>ul {
-    max-height: 200px;
+    max-height: 160px;
     width: 95%;
     overflow: auto;
-    display: none;
+    /* display: none; */
 }
 
 #listfilter ul>li>ul::-webkit-scrollbar {
@@ -131,3 +131,8 @@
     height: 30px;
 }
 
+.itemList_count{
+    margin-left: 10px;
+    font-size: 0.8em;
+    color: #9B1B3060;
+}

@@ -12,6 +12,8 @@ const ItemList = () => {
     const keyword = searchParams.get("keyword");
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
+    const [sortloading, setSortloading] = useState(true);
+    const [sorterror, setSorterror] = useState(false);
 
     const [itemList, setItemList] = useState(null);
     const [sortList, setSortList] = useState(null);
@@ -22,13 +24,13 @@ const ItemList = () => {
         axios.get(url
         ).then(res => {
             setSortList(res.data)
-            setLoading(false);
+            setSortloading(false);
         }).catch(err => {
             console.log(`${err.message}`)
-            setLoading(false);
-            setError(true);
+            setSortloading(false);
+            setSorterror(true);
         })
-    }, [])
+    }, [searchParams])
 
     useEffect(() => {
         const url = `http://localhost:8090/item/search?keyword=${keyword}`;
@@ -41,11 +43,11 @@ const ItemList = () => {
             setLoading(false);
             setError(true);
         })
-    }, [])
+    }, [searchParams])
 
 
-    if (loading) return <Loading />
-    if (error) return <Error />
+    if (loading || sortloading) return <Loading />
+    if (error || sorterror) return <Error />
 
     return (
         <>
