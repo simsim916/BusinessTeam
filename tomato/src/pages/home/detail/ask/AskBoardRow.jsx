@@ -1,4 +1,4 @@
-import './BoardRow.css';
+import './AskBoardBox.css';
 
 
 const BaordRow = ({ itemAsk }) => {

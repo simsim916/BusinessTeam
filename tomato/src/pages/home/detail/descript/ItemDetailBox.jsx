@@ -1,7 +1,7 @@
 import './ItemDetailBox.css';
 
 import { useRef, useState } from 'react';
-import { makeComa, makeDiscountPrice } from '../components/MathFunction';
+import { makeComa, makeDiscountPrice } from '../../../components/MathFunction';
 
 const ItemDetailBox = ({ item }) => {
     const [inputCountValue, setInputCountValue] = useState(1);

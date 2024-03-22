@@ -1,10 +1,10 @@
 
 import { useEffect, useRef, useState } from 'react';
-import ItemBox from './../../components/ItemBox';
 import './SecondContainer.css'
+import Loading from './../../../components/Loading';
+import Error from './../../../components/Error';
+import ItemBox from './../../../components/ItemBox';
 import axios from 'axios';
-import Loading from './../../components/Loading';
-import Error from './../../components/Error';
 
 
 const SecondContainer = () => {

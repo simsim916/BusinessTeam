@@ -6,6 +6,7 @@ import Header from './../index/header/Header';
 import ItemDetailBox from './descript/ItemDetailBox';
 import ReviewBoardBox from './review/ReviewBoardBox';
 import AskBoardBox from './ask/AskBoardBox';
+import axios from 'axios';
 
 const ItemDetail = () => {
     const [searchParams, setSearchParams] = useSearchParams();

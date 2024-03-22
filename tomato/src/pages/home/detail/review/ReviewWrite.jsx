@@ -1,8 +1,8 @@
 
-import './ReviewWriteForm.css';
+import './ReviewWrite.css';
 import { useState } from 'react';
 
-const ReviewWriteForm = ({ item }) => {
+const ReviewWrite = ({ item }) => {
     const [writeBoxClose, setWriteBoxClose] = useState(true);
 
     function reviewWriteBoxClose() {
@@ -66,4 +66,4 @@ const ReviewWriteForm = ({ item }) => {
     );
 }
 
-export default ReviewWriteForm;
+export default ReviewWrite;

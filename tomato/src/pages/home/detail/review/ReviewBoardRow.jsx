@@ -1,9 +1,9 @@
 
 import { useState } from 'react';
-import './ReviewContent.css';
-import ReviewDetailForm from './ReviewDetailForm';
+import './ReviewBoardRow.css';
+import ReviewWrite from './ReviewWrite';
 
-const ReviewContent = ({ itemReview }) => {
+const ReviewBoardRow = ({ itemReview }) => {
     const [rendereviewDetailForm, setReviewDetailForm] = useState(false);
 
     const reviewDetailClick = () => {
@@ -33,7 +33,7 @@ const ReviewContent = ({ itemReview }) => {
                 <div>작성자3</div>
                 <div>작성일4</div>
             </div>
-            {rendereviewDetailForm ? <ReviewDetailForm itemReview={itemReview} /> : <></>}
+            {rendereviewDetailForm ? <ReviewWrite itemReview={itemReview} /> : <></>}
 
         </>
 
@@ -42,4 +42,4 @@ const ReviewContent = ({ itemReview }) => {
 
 }
 
-export default ReviewContent;
+export default ReviewBoardRow;

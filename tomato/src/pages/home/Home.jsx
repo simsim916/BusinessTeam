@@ -1,9 +1,8 @@
-import { Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Header from './index/header/Header';
-import AdImgBox from './index/adImgBox/AdImgBox';
-import FirstContainer from './index/firstContainer/FirstContainer';
-import SecondContainer from './index/secondContainer/SecondContainer';
-import ThirdContainer from './index/thirdContainer/ThridContainer';
+import Index from './index/Index';
+import ItemList from "./list/ItemList";
+import ItemDetail from './detail/ItemDetail';
 
 
 const Home = () => {
@@ -11,12 +10,13 @@ const Home = () => {
     return (
         <>
             <Header />
-            <AdImgBox />
-            <FirstContainer />
-            <hr />
-            <SecondContainer />
-            <hr />
-            <ThirdContainer />
+
+            <Routes>
+                <Route path='/list' element={<ItemList />} />
+                <Route path='/detail' element={<ItemDetail />} />
+                <Route path='/' element={<Index />} />
+                <Route path='/*' element={'잘못된경로'} />
+            </Routes>
         </>
     )
 }

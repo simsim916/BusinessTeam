@@ -1,7 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 import './itemList.css'
 import { useEffect, useMemo, useRef } from "react";
-import SortList from './SortList';
 
 const ItemListFilter = ({ filterCheckedList, sortList }) => {
     const [searchParams, setSearchParams] = useSearchParams();

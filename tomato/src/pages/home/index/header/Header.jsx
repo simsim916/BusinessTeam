@@ -1,25 +1,29 @@
 import "./header.css";
-import Nav from './Nav';
 import { Link, useNavigate } from 'react-router-dom';
-import { SortContext } from './../../../App';
+import Nav from './Nav';
+import { useState } from "react";
 
 
 
 const Header = () => {
-
+    console.log(`Header 랜더링`);
+    const [keyword, setKeyword] = useState('');
     const navigate = useNavigate();
 
 
     const searchBox = (event) => {
         event.preventDefault();
-        let keyword = event.target.closest('form').children[0].value;
-        navigate('/list?keyword=프레시지');
+        navigate(`/home/list?keyword=${keyword}`);
     }
 
     function searchBoxEnterKey(event) {
         if (event.which == 13) {
             searchBox(event)
         }
+    }
+
+    const changeKeyword = event => {
+        setKeyword(event.target.value);
     }
 
     function appearinputBoxResetButton(event) {
@@ -53,8 +57,8 @@ const Header = () => {
                         </a>
                     </div>
                     <form id="searchBox">
-                        <input onKeyUp={searchBoxEnterKey} onInput={appearinputBoxResetButton}
-                            id="searchBoxInput" type="text" placeholder="검색어를 입력해주세요." />
+                        <input onKeyUp={searchBoxEnterKey} onInput={appearinputBoxResetButton} onChange={changeKeyword}
+                            id="searchBoxInput" type="text" placeholder="검색어를 입력해주세요." value={keyword} />
                         <i onClick={resetInputBox} className="fa-solid fa-circle-xmark"></i>
                         <button onClick={searchBox}><i className="fa-solid fa-magnifying-glass"></i></button>
                     </form>
@@ -72,7 +76,7 @@ const Header = () => {
                 </div>
             </div>
 
-                <Nav appearinputBoxResetButton={appearinputBoxResetButton} resetInputBox={resetInputBox} />
+            <Nav appearinputBoxResetButton={appearinputBoxResetButton} resetInputBox={resetInputBox} />
         </header>
     );
 }

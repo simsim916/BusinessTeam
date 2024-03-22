@@ -4,6 +4,7 @@ import EventDetail from './eventDetail/EventDetail';
 import EventList from './eventList/EventList';
 import EventItemList from './eventItemList/EventItemList';
 import SecondContainer from './../home/index/secondContainer/SecondContainer';
+import Header from './../home/index/header/Header';
 
 
 const EventPage = () => {

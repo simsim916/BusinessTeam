@@ -1,10 +1,10 @@
 import './AskBoardBox.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import BoardRow from '../BoardRow';
-import ItemAskForm from './ItemAskForm';
-import Loading from '../../../components/Loading';
-import Error from '../../../components/Error';
+import Loading from './../../../components/Loading';
+import Error from './../../../components/Error';
+import AskBoardRow from './AskBoardRow';
+import ItemAskWrite from './ItemAskWrite';
 
 
 const AskBoardBox = ({ item }) => {
@@ -52,8 +52,8 @@ const AskBoardBox = ({ item }) => {
 
                     {
                         !itemAskList ?
-                            itemAskList.map((e, i) => <BoardRow itemAsk={e} key={i} />)
-                            : <BoardRow />
+                            itemAskList.map((e, i) => <AskBoardRow itemAsk={e} key={i} />)
+                            : <AskBoardRow />
                     }
 
                 </div>
@@ -66,7 +66,7 @@ const AskBoardBox = ({ item }) => {
                     <i className="fa-solid fa-angle-right"></i>
                     <i className="fa-solid fa-angles-right"></i>
                 </div>
-                {askWrite ? <ItemAskForm item={item} /> : null}
+                {askWrite ? <ItemAskWrite item={item} /> : null}
             </div>
 
         </>

@@ -1,10 +1,8 @@
 import axios from 'axios';
 import './nav.css'
-import CategoryList from './CategoryList';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { SortContext } from './../../../App';
-import { useContext } from 'react';
+import CategoryList from './CategoryList';
 
 function Nav({ appearinputBoxResetButton, resetInputBox }) {
 
