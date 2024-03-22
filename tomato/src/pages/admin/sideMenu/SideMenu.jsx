@@ -13,8 +13,8 @@ const SideMenu = ({ setWhichBox, whichBox }) => {
         console.log(sideBarOpen)
     };
 
-    const changeAdminBox = () => {
-        setWhichBox(!whichBox);
+    const changeAdminBox = (num) => {
+        setWhichBox(num);
     }
 
     return (
@@ -43,11 +43,15 @@ const SideMenu = ({ setWhichBox, whichBox }) => {
                     <li>
                         <div><i className="fa-solid fa-comment-dots"></i><br />고객센터</div>
                     </li>
+                    
                     <li>
-                        <div><i className="fa-solid fa-gear"></i><br />설정</div>
+                        <div onClick={() => changeAdminBox(1)}><i className="fa-solid fa-gear"></i><br />데이터 조회</div>
                     </li>
                     <li>
-                        <div onClick={changeAdminBox}><i className="fa-solid fa-gear"></i><br />데이터 입력</div>
+                        <div onClick={() => changeAdminBox(2)}><i className="fa-solid fa-gear"></i><br />데이터 입력</div>
+                    </li>
+                    <li>
+                        <div onClick={() => changeAdminBox(3)}><i className="fa-solid fa-gear"></i><br />문의글</div>
                     </li>
                 </ul>
                 <div id="sideBarButton" onClick={openSideBar}>

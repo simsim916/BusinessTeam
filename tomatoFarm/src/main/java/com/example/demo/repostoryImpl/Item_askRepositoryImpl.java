@@ -37,9 +37,9 @@ public class Item_askRepositoryImpl implements Item_askRepository{
 	public List<Item_ask> selectItemAskListIntegerWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
 		return jPAQueryFactory
 				.selectFrom(item_ask)
-				.where(Expressions.numberPath(Integer.class,searchRequest.getColumn()).stringValue().eq(searchRequest.getKeyword()))
+//				.where(Expressions.numberPath(Integer.class,searchRequest.getColumn()).stringValue().eq(searchRequest.getKeyword()))
 //				.orderBy(item_ask.regdate.desc())
-				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum())
+//				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum())
 				.fetch();
 	}
 	
