@@ -56,7 +56,6 @@ const SelectDataBox = () => {
         let sortedList;
         if (columnName != lastSort) {
             sortedList = [...itemList].sort((a, b) => {
-                console.log('bb')
                 if (typeof a[columnName] === 'string' && typeof b[columnName] === 'string') {
                     return a[columnName].localeCompare(b[columnName]);
                 } else {
@@ -71,7 +70,6 @@ const SelectDataBox = () => {
                 } else {
                     return a[columnName] - b[columnName];
                 }
-
             });
             setLastSort(null);
         }

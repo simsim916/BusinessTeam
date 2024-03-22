@@ -167,3 +167,10 @@
         max-height: calc((1200px - 280px - 30px - 10px)*2);
     }
 }
+
+/* ================================== */
+
+#pagingBox {
+    display: flex;
+    gap: 50px;
+}

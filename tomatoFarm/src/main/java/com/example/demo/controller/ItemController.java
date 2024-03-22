@@ -49,13 +49,13 @@ public class ItemController {
 		return result;
 	}
 
-	@GetMapping("/branditem/{keyword}")
-	public ResponseEntity<?> selectItemWherebrand(@PathVariable("keyword") String keyword) {
+	@GetMapping("/searchtype/")
+	public ResponseEntity<?> selectItemWherebrand(SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
 		PageRequest pageRequest = new PageRequest(1, 6);
-		SearchRequest searchRequest = new SearchRequest(keyword);
 
 		List<ItemDTO> list = itemService.selectItemWherebrand(pageRequest, searchRequest);
+		System.out.println(list);
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}
@@ -64,7 +64,6 @@ public class ItemController {
 	@GetMapping("/search")
 	public ResponseEntity<?> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
-		System.out.println(pageRequest);
 		List<ItemDTO> list = itemService.selectItemWhereSearchType(pageRequest, searchRequest);
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;

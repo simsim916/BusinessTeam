@@ -6,7 +6,7 @@ const ItemListFilter = ({ filterCheckedList, sortList }) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const listfilter = useRef(null);
 
-    console.log(sortList)
+    // console.log(sortList)
 
     function checkAll(event) {
         let target = event.target.closest('li');
