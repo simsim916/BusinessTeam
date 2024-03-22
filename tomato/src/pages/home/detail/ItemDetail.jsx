@@ -32,9 +32,10 @@ const ItemDetail = () => {
 
     return (
         <>
-            <Header />
             <ItemDetailBox item={item} />
+            <hr className='container' />
             <ReviewBoardBox item={item} />
+            <hr className='container' />
             <AskBoardBox item={item} />
         </>
     );

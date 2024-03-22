@@ -28,13 +28,11 @@ public class Itme_askController {
 	private final Item_askService item_askService;
 	
 	@GetMapping("/select")
-	public ResponseEntity<?> selectItem_askList(SearchRequest searchRequest){
+	public ResponseEntity<?> selectItem_askList(PageRequest pageRequest, SearchRequest searchRequest){
 		ResponseEntity<?> result = null;
-		PageRequest pageRequest = new PageRequest(1,11);
 		
-		List<Item_ask> list = item_askService.selectItemAskList(pageRequest, searchRequest);
-		System.out.println(list);
-			result = ResponseEntity.status(HttpStatus.OK).body(list);
+		List<Item_ask> list = item_askService.selectItemAskListIntegerWhereType(pageRequest, searchRequest);
+		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}
 }

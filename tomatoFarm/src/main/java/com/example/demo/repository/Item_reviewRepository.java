@@ -12,8 +12,9 @@ import com.example.demo.module.SearchRequest;
 @Repository
 public interface Item_reviewRepository {
 
-	//** 상품리뷰 조회
-	List<Item_review> selectItemReviewList(PageRequest pageRequest , SearchRequest searchRequest);
+	List<Item_review> selectItemRevieListStringWhereType(PageRequest pageRequest , SearchRequest searchRequest);
+	List<Item_review> selectItemRevieListIntegerWhereType(PageRequest pageRequest , SearchRequest searchRequest);
+	
 	
 	//** 상품리뷰 등록
 	int insertItemReview(Item_reviewDTO dto);

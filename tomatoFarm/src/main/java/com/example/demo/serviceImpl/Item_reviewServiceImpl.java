@@ -24,9 +24,13 @@ public class Item_reviewServiceImpl implements Item_reviewService{
 	
 	@Override
 	//** 상품리뷰 조회
-	public List<Item_review> selectItemReviewList(PageRequest pageRequest, SearchRequest searchRequest) {
-		
-		return item_reviewRepository.selectItemReviewList(pageRequest, searchRequest);
+	public List<Item_review> selectItemRevieListStringWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
+		return item_reviewRepository.selectItemRevieListStringWhereType(pageRequest, searchRequest);
+	}
+	@Override
+	//** 상품리뷰 조회
+	public List<Item_review> selectItemRevieListIntegerWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
+		return item_reviewRepository.selectItemRevieListIntegerWhereType(pageRequest, searchRequest);
 	}
 
 	@Override
