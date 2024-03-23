@@ -1,10 +1,10 @@
 import "./EventPage.css";
-import Header from "../0home/header/Header";
-import EventPageTop from "./eventPageTop/EventPageTop";
+import EventPageTop from './eventPageTop/EventPageTop';
 import EventDetail from './eventDetail/EventDetail';
 import EventList from './eventList/EventList';
-import EventItemList from "./eventItemList/EventItemList";
-import SecondContainer from "../0home/secondContainer/SecondContainer";
+import EventItemList from './eventItemList/EventItemList';
+import SecondContainer from './../home/index/secondContainer/SecondContainer';
+import Header from './../home/index/header/Header';
 
 
 const EventPage = () => {

@@ -71,10 +71,21 @@ public class ItemController {
 	@GetMapping("/searchsort")
 	public ResponseEntity<?> selectSortWhereKeyword(SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
-		List<SortDTO> list = itemService.selectSortWhereKeyword(searchRequest);
-		System.out.println(searchRequest);
-		result = ResponseEntity.status(HttpStatus.OK).body(list);
+		List<SortDTO> list = itemService.selectSortList();
+		List<SortDTO> countList = itemService.selectSortWhereKeyword(searchRequest);
+		for(SortDTO a : countList) {
+			for (SortDTO b : list) {
+				if(a.getSort1().equals(b.getSort1())) {
+					if(a.getSort2().equals(b.getSort2())) {
+						b.setCount(a.getCount());
+						break;
+					}
+				}
+			}
+		}
+		System.out.println(countList);
 		System.out.println(list);
+		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}
 
@@ -82,14 +93,7 @@ public class ItemController {
 	public ResponseEntity<?> selectSortList() {
 		ResponseEntity<?> result = null;
 		List<SortDTO> list = itemService.selectSortList();
-		System.out.println(list);
-		if (list != null && list.size() > 0) {
 			result = ResponseEntity.status(HttpStatus.OK).body(list);
-			log.info("sort check");
-		} else {
-			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
-			log.info("sort check");
-		}
 		return result;
 	}
 

@@ -10,7 +10,10 @@ import com.example.demo.module.SearchRequest;
 public interface Item_reviewService {
 
 	//** 상품리뷰 조회
-	List<Item_review> selectItemReviewList(PageRequest pageRequest, SearchRequest searchRequest);
+		//* 글자조회
+	List<Item_review> selectItemRevieListStringWhereType(PageRequest pageRequest, SearchRequest searchRequest);
+		//* 숫자조회
+	List<Item_review> selectItemRevieListIntegerWhereType(PageRequest pageRequest, SearchRequest searchRequest);
 	
 	//** 상품리뷰 등록
 	int insertItemReview(Item_reviewDTO dto);

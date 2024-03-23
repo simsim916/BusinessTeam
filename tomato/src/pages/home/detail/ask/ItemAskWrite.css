@@ -1,0 +1,197 @@
+#itemAskForm {
+    background-color: #9999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+#itemAskBox {
+    background-color: white;
+    position: fixed;
+    height: 900px;
+    max-height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    max-width: 1000px;
+    width: calc(90vw - 30px);
+}
+
+#itemAskTop {
+    border-bottom: 1px solid rgb(221, 221, 221);
+    position: relative;
+    display: flex;
+    
+}
+#itemAskBox h4 {
+    font-size: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgb(221, 221, 221);
+    font-weight: inherit;
+}
+#itemAskImg {
+    overflow: hidden;
+    width: 25%;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#itemAskImg img{
+    width: 100%;
+}
+#itemAskImg~div {
+    width: 75%;
+    padding-left: 30px;
+}
+
+#itemTitle {
+    margin-top: 20px;
+    font-size: 20px;
+    color: gray;
+    display: block;
+    width: 200px;
+}
+
+#itemAskBottom {
+    display: flex;
+    width: 100%;
+    position: relative;
+    padding: 20px;
+    flex-direction: column;
+}
+
+#itemAskTitle{
+    position: relative;
+    display: flex;
+    text-align: center;
+    border-bottom: 1px solid rgb(221, 221, 221);
+    gap: 20px;
+    text-align: center;
+    align-items: center;
+}
+
+#itemAskTitle div{
+    display: flex;
+    position: block;
+    font-size: 20px;
+    width: 200px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+#itemAskTitle textarea {
+    padding: 10px 20px;
+    font-size: 18px;
+    width: 70%;
+    height: 50px;
+    display: block;
+    border-radius: 10px;
+    white-space: wrap;
+    resize: none;
+    margin-bottom: 20px;
+}
+#itemAskContent{
+    margin-top: 20px;
+    position: relative;
+    display: flex;
+    text-align: center;
+    border-bottom: 1px solid rgb(221, 221, 221);
+    gap: 20px;
+    text-align: center;
+    align-items: center;
+}
+
+#itemAskContent div {
+    display: flex;
+    position: block;
+    font-size: 20px;
+    width: 200px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+#itemAskContent textarea {
+    padding: 10px 20px;
+    font-size: 18px;
+    width: 70%;
+    height: 300px;
+    display: block;
+    border-radius: 10px;
+    white-space: wrap;
+    resize: none;
+    margin-bottom: 20px;
+}
+
+#itemAskPrivacy {
+    position: relative;
+    display: flex;
+    gap: 10px;
+    left: 30px;
+}
+
+#itemAskPrivacy input {
+    width: 20px;
+    height: 20px;
+}
+
+#itemAskButton {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    gap: 0 50px;
+    text-align: center;
+    padding-top: 50px;
+
+}
+
+#itemAskBoxCancle {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(221, 221, 221);
+    padding: 0 15px;
+    display: block;
+    text-align: center;
+    width: 200px;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+#itemAskBoxEnter {
+    background-color: rgb(221, 221, 221);
+    border: 0px none;
+    padding: 0 15px;
+    display: block;
+    text-align: center;
+    width: 200px;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+#itemAskBoxClose {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #9B1B30;
+    color: #fff;
+    font-size: 35px;
+    width: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 10px;
+}
