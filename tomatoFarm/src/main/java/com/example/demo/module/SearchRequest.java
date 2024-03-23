@@ -10,6 +10,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 //** JPA Paging & Sort
 		// => https://bnzn2426.tistory.com/135
@@ -23,11 +24,13 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class SearchRequest {
 	
-	private List<String> type; // 검색 옵션
+	private String column; // 검색 컬럼
 	private String keyword; // 검색 키워드
-	private String sortType;
+	private String sortType;// 정렬 타입
+	private String access;// 접근권한
 	
 	public SearchRequest(String keyword) {
 		this.keyword=keyword;

@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- nav CSS -->
-    <link rel="stylesheet" href="../css/nav2.css">
+    <link rel="stylesheet" href="../nav2.css">
     <!-- nav JS-->
-    <script defer src="../js/nav2.js"></script>
+    <script defer src="../nav2.js"></script>
     <!-- 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -82,19 +82,48 @@
             <!-- 최상단 -->
             <div id="topBoxLeftYH">
                 <h3>★ 식재주문등록</h3>&nbsp;&nbsp;
-                <h4>주문>식재주문등록</h4>
+                <div>
+                    <button onclick="plusColumn()">행추가<i class="fa-duotone fa-square-plus"></i></button>
+                    <button onclick="getExcelData()">추가완료<i class="fa-duotone fa-square-plus"></i></button>
+                </div>
             </div>
 
 
-            <div id="topSearchBoxYH">
-                <!-- 상단 검색창 -->
-                <label for="search">
-                    사업장 <input type="text" name="search" id="search">
-                </label>
-
-                <label for="date">
-                    입고일자 <input type="date" name="date" id="date">
-                </label>
+            <div id=excelBox>
+                <div id="excelHead">
+                    <input type="text" value="상품코드" readonly>
+                    <input type="text" value="대분류" readonly>
+                    <input type="text" value="중분류" readonly>
+                    <input type="text" value="소분류" readonly>
+                    <input type="text" value="브랜드" readonly>
+                    <input type="text" value="제품명" readonly>
+                    <input type="text" value="중량" readonly>
+                    <input type="text" value="보관방식" readonly>
+                    <input type="text" value="포장단위" readonly>
+                    <input type="text" value="배송비" readonly>
+                    <input type="text" value="제품가격" readonly>
+                    <input type="text" value="VAT" readonly>
+                    <input type="text" value="원산지" readonly>
+                    <input type="text" value="재고량" readonly>
+                    <input type="text" value="제품등록자" readonly>
+                </div>
+                <div class="excelColumn">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                </div>
             </div>
         </div>
 
@@ -112,25 +141,112 @@
 
 
 
-            <div id="currentOrderHeadYH">
-                <div>주문건수</div>
-                <div>주문금액</div>
-                <div>여신금액</div>
-                <div>주문가능잔여시간</div>
-                <div>면세합계</div>
-                <div>과세합계</div>
-                <div>부가세합계</div>
-                <div>총주문금액</div>
-                <div>30일평균(VAT제외)</div>
-                <div>1</div>
-                <div>1</div>
-                <div>1</div>
-                <div>1</div>
-                <div>1</div>
-                <div>1</div>
-                <div>1</div>
-                <div>1</div>
+            <div id=excelBox>
+                <div id="excelHead">
+                    <input type="text" value="상품코드" readonly>
+                    <input type="text" value="대분류" readonly>
+                    <input type="text" value="중분류" readonly>
+                    <input type="text" value="소분류" readonly>
+                    <input type="text" value="브랜드" readonly>
+                    <input type="text" value="제품명" readonly>
+                    <input type="text" value="중량" readonly>
+                    <input type="text" value="보관방식" readonly>
+                    <input type="text" value="포장단위" readonly>
+                    <input type="text" value="배송비" readonly>
+                    <input type="text" value="제품가격" readonly>
+                    <input type="text" value="VAT" readonly>
+                    <input type="text" value="원산지" readonly>
+                    <input type="text" value="재고량" readonly>
+                    <input type="text" value="제품등록자" readonly>
+                </div>
+                <div class="dataColumn">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                </div>
+                <div class="dataColumn">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                </div>
+                <div class="dataColumn">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                </div>
+                <div class="dataColumn">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                </div>
+                <div class="dataColumn">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                </div>
             </div>
+
+
             <!-- 
             테이블로 치면 th만 정의해둔 상황에서
             td들은 결국 데이터를 가져올텐데, grid로 설정해두면
@@ -211,7 +327,6 @@
 
 
 
-        <input type="submit" value="${test.jno}">
 
     </div>
 </body>

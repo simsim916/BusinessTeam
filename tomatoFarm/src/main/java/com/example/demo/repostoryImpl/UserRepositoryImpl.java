@@ -1,6 +1,7 @@
 package com.example.demo.repostoryImpl;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 import com.example.demo.domain.UserDTO;
@@ -30,15 +31,19 @@ public class UserRepositoryImpl implements UserRepository {
 		.fetchOne();
 	}
 	
+	
+	
 	@Override
+	@Transactional
 	public int insertUser(UserDTO dto) {
 		// SQL insert 사용시 EntityManager 사용
 		return entityManager
-					.createNativeQuery("INSERT INTO USER(id,password,name,phonenumber"
-											+ ",address2,email,email2,gender,birthdate)")
+					.createNativeQuery("INSERT INTO user(id,password,username,phonenumber"
+											+ ",address2,email,email2,gender,birthdate) "
+											+ "VALUE(?,?,?,?,?,?,?,?,?)")
 					.setParameter(1, dto.getId())
 					.setParameter(2, dto.getPassword())
-					.setParameter(3, dto.getName())
+					.setParameter(3, dto.getUsername())
 					.setParameter(4, dto.getPhonenumber())
 					.setParameter(5, dto.getAddress2())
 					.setParameter(6, dto.getEmail())

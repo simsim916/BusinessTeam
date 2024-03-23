@@ -1,0 +1,138 @@
+.opened>ul {
+    display: block !important;
+}
+
+.selected>i {
+    color: #9B1B30;
+    opacity: 1 !important;
+}
+
+#searchTitle {
+    margin: 35px auto 0 auto;
+    text-align: center;
+    font-size: 30px;
+    height: 50px;
+}
+
+#searchTitle>span {
+    font-size: 20px;
+}
+
+#searchTitle>b {
+    color: #9B1B30;
+}
+
+#total {
+    position: absolute;
+    left: 290px;
+}
+
+#listOption {
+    position: absolute;
+    right: 10px;
+    display: flex;
+}
+
+#listOption>div {
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+#listfilter {
+    position: fixed;
+    width: 250px;
+    border: 1px solid #9B1B30;
+    border-radius: 40px;
+    height: calc(100vh - 320px - 30px);
+    top: 325px;
+    max-height: calc(100vh - 60px);
+    font-size: 20px;
+    overflow: hidden;
+}
+
+#listfilter hr {
+    border: 0.2px solid #9B1B3030;
+    margin: 10px 0;
+}
+
+#listfilter ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+#listfilter li {
+    padding-left: 0;
+}
+
+#listfilter li>i {
+    margin-right: 10px;
+    opacity: 0.3;
+}
+
+#listfilter>ul {
+    margin-top: 20px;
+}
+
+#listfilter>ul>li {
+    line-height: 40px;
+    text-indent: 15px;
+}
+
+#listfilter>ul>li>ul {
+    max-height: 160px;
+    width: 95%;
+    overflow: auto;
+    /* display: none; */
+}
+
+#listfilter ul>li>ul::-webkit-scrollbar {
+    width: 7px;
+}
+
+#listfilter ul>li>ul::-webkit-scrollbar-thumb {
+    background-color: #9b1b1f70;
+    border-radius: 10px;
+}
+
+#listfilter ul>li>ul>li>ul::-webkit-scrollbar {
+    width: 4px;
+}
+
+#listfilter ul>li>ul>li>ul::-webkit-scrollbar-thumb {
+    background-color: #9b1b1f40;
+    border-radius: 10px;
+}
+
+#listfilter>ul>li>ul>li {
+    line-height: 30px;
+    font-size: 80%;
+    text-indent: 25px;
+}
+
+#listfilter>ul>li>ul>li>ul {
+    line-height: 23px;
+    font-size: 80%;
+    text-indent: 35px;
+    overflow: auto;
+    max-height: 100px;
+    width: 98%;
+    display: none;
+}
+
+#filterPrice>div {
+    display: flex;
+    justify-content: center;
+    text-indent: 0;
+    margin-top: 10px;
+}
+
+#filterPrice input {
+    width: 90px;
+    height: 30px;
+}
+
+.itemList_count{
+    margin-left: 10px;
+    font-size: 0.8em;
+    color: #9B1B3060;
+}

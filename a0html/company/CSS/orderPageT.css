@@ -5,12 +5,12 @@
     padding: 0;
 }
 
-.container {
+/* .container {
     margin: auto;
     margin-left: 100px;
     width: calc(100vw - 100px - 20px);
     transition: 1s;
-}
+} */
 
 .headtitle {
     font-weight: 700;
@@ -29,12 +29,13 @@
 /* ============= 최상단 제목 ============== */
 #topBoxYH {
     position: relative;
-    height: 80px;
+    height: auto;
 }
 
 #topBoxLeftYH {
     display: flex;
     align-items: end;
+    justify-content: space-between;
     height: 30px;
     margin-top: 20px;
 }
@@ -90,6 +91,7 @@
     border-top: 1px solid #4C4556;
 }
 
+/* 
 #sortBt {
     display: flex;
 }
@@ -105,7 +107,7 @@
 #sortBt>div:hover {
     background-color: #4C4556;
     color: white;
-}
+} */
 
 
 #currentOrderHeadYH>div {
@@ -194,4 +196,45 @@
 
 #insertRowYH>div:nth-child(12n+1) {
     border-left: 1px solid #4C4556;
+}
+
+
+/* ===================================== */
+
+
+#excelHead {
+    display: flex;
+}
+
+
+#excelHead>input {
+    word-break: keep-all;
+    text-align: center;
+    width: calc((100% / 15));
+    /* background-color: #c0c0c0; */
+    font-weight: 700;
+}
+
+.excelColumn {
+    display: flex;
+
+}
+
+.excelColumn>input {
+    width: calc((100% / 15));
+    /* border: none; */
+    /* outline: none; */
+}
+
+
+#excelBox {
+    margin-top: 10px;
+}
+
+.dataColumn {
+    display: flex;
+}
+
+.dataColumn>input {
+    width: calc((100% / 15));
 }

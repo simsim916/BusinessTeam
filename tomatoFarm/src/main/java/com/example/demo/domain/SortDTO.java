@@ -11,6 +11,6 @@ public class SortDTO {
 
 	private String sort1;
 	private String sort2;
-	private Long acount;
+	private Long count;
 	
 }

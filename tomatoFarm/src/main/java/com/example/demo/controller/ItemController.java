@@ -3,10 +3,12 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,138 +26,118 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @AllArgsConstructor
 @RestController
-@RequestMapping(value="/item")
+@RequestMapping(value = "/item")
 public class ItemController {
 	private final ItemService itemService;
-	
-	@GetMapping("/eventitem")
-	public ResponseEntity<?> selectItemWhereEvent_D() {
+
+	@GetMapping("/selectnotnull")
+	public ResponseEntity<?> selectItemWhereEvent(SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
-		PageRequest pageRequest = new PageRequest(1,11);
-		
-		List<ItemDTO> list = itemService.selectItemWhereEvent(pageRequest);
-		
-		if (list != null && list.size() > 0) {
-			result = ResponseEntity.status(HttpStatus.OK).body(list);
-			log.info("eventitem check");
-		} else {
-			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
-			log.info("eventitem check");
-		}
+		PageRequest pageRequest = new PageRequest(1, 11);
+		List<ItemDTO> list = itemService.selectItemListStringWhereTypeNotNull(pageRequest, searchRequest);
+		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}
-	
+
+	@GetMapping("/detailn")
+	public ResponseEntity<?> selectItemWhereType(SearchRequest searchRequest) {
+		ResponseEntity<?> result = null;
+		ItemDTO dto = itemService.selectItemIntegerWhereType(searchRequest);
+		result = ResponseEntity.status(HttpStatus.OK).body(dto);
+		return result;
+	}
+
 	@GetMapping("/branditem/{keyword}")
 	public ResponseEntity<?> selectItemWherebrand(@PathVariable("keyword") String keyword) {
 		ResponseEntity<?> result = null;
-		PageRequest pageRequest = new PageRequest(1,6);
+		PageRequest pageRequest = new PageRequest(1, 6);
 		SearchRequest searchRequest = new SearchRequest(keyword);
-		
-		List<ItemDTO> list = itemService.selectItemWherebrand(pageRequest,searchRequest);
-		System.out.println("\n\n"+keyword+list);
-		if (list != null && list.size() > 0) {
-			result = ResponseEntity.status(HttpStatus.OK).body(list);
-			log.info("branditem check");
-		} else {
-			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
-			log.info("branditem check");
-		}
+
+		List<ItemDTO> list = itemService.selectItemWherebrand(pageRequest, searchRequest);
+		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}
-/* 페이징 + 정렬 기능 되는 search
+
+//페이징 + 정렬 기능 되는 search
 	@GetMapping("/search")
-	public ResponseEntity<?> selectItemWhereSearchType( @RequestParam("keyword") String keyword, @RequestParam("sorttype")String sortType) {
+	public ResponseEntity<?> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
-		PageRequest pageRequest = new PageRequest(1,24);
-		// 1. 파라미터로 정렬하고자 하는 방법을 전달받는다.
-		//SearchRequest searchRequest = new SearchRequest();
-		//searchRequest.setSortType("파라미터");
-		// 2. searchRequest 객체를 생성해서 담아주고
-		
-		SearchRequest searchRequest = new SearchRequest(keyword,sortType);
-		
-		List<Item> list = itemService.selectItemWhereSearchType(pageRequest, searchRequest);
-		log.info("\n"+keyword);
-		if (list != null && list.size() > 0) {
-			result = ResponseEntity.status(HttpStatus.OK).body(list);
-			log.info("search check");
-		} else {
-			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
-			log.info("search check");
-		}
-		log.info(result);
+		System.out.println(pageRequest);
+		List<ItemDTO> list = itemService.selectItemWhereSearchType(pageRequest, searchRequest);
+		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}
-*/
-	
-	@GetMapping("/search")
-	public ResponseEntity<?> selectItemWhereKeyword(@RequestParam("keyword") String keyword) {
-		ResponseEntity<?> result = null;
-		SearchRequest searchRequest = new SearchRequest(keyword);
-		
-		List<ItemDTO> list = itemService.selectItemWhereKeyword(searchRequest);
-		if (list != null && list.size() > 0) {
-			result = ResponseEntity.status(HttpStatus.OK).body(list);
-			log.info("search check");
-		} else {
-			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
-			log.info("search check");
-		}
-		return result;
-	}
+
 	@GetMapping("/searchsort")
-	public ResponseEntity<?> selectSortWhereKeyword(@RequestParam("keyword") String keyword) {
-		ResponseEntity<?> result = null;
-		SearchRequest searchRequest = new SearchRequest(keyword);
-		
-		List<SortDTO> list = itemService.selectSortWhereKeyword(searchRequest);
-		log.info("\naaaaaaaaa\n"+list+"\n\n");
-		if (list != null && list.size() > 0) {
-			result = ResponseEntity.status(HttpStatus.OK).body(list);
-			log.info("searchsort check");
-		} else {
-			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
-			log.info("searchsort check");
-		}
-		return result;
-	}
-	
-	@GetMapping("/sort")
-	public ResponseEntity<?> selectSortList( ) {
+	public ResponseEntity<?> selectSortWhereKeyword(SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
 		List<SortDTO> list = itemService.selectSortList();
-		System.out.println(list);
-		if (list != null && list.size() > 0) {
-			result = ResponseEntity.status(HttpStatus.OK).body(list);
-			log.info("sort check");
-		} else {
-			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
-			log.info("sort check");
+		List<SortDTO> countList = itemService.selectSortWhereKeyword(searchRequest);
+		for(SortDTO a : countList) {
+			for (SortDTO b : list) {
+				if(a.getSort1().equals(b.getSort1())) {
+					if(a.getSort2().equals(b.getSort2())) {
+						b.setCount(a.getCount());
+						break;
+					}
+				}
+			}
 		}
+		System.out.println(countList);
+		System.out.println(list);
+		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}
-	
+
+	@GetMapping("/sort")
+	public ResponseEntity<?> selectSortList() {
+		ResponseEntity<?> result = null;
+		List<SortDTO> list = itemService.selectSortList();
+			result = ResponseEntity.status(HttpStatus.OK).body(list);
+		return result;
+	}
+
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 
-
-	@GetMapping("/detail")
-	public ResponseEntity<?> selectItemWhereCode(@RequestParam("code") String keyword){
+	@GetMapping("/allitem")
+	public ResponseEntity<?> selectAll() {
 		ResponseEntity<?> result = null;
-		
-		SearchRequest searchRequest = new SearchRequest(keyword);
-		ItemDTO dto = itemService.selectItemWhereCode(searchRequest);
-		System.out.println(dto);
-		if(dto != null) {
-			result = ResponseEntity.status(HttpStatus.OK).body(dto);
-			log.info("search check");
+		List<ItemDTO> itemList = itemService.selectAll();
+
+		if (itemList != null && itemList.size() > 0) {
+			result = ResponseEntity.status(HttpStatus.OK).body(itemList);
+			log.info("출력한다");
 		} else {
 			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
-			log.info("search check");
+			log.info("데이터 못찾겠다");
 		}
-		
+
 		return result;
-		
 	}
+
+	@PostMapping(value = "/insert")
+//    @GetMapping("/insert")
+	public ResponseEntity<?> insertItem(ItemDTO entity) {
+		System.out.println("getCode => " + entity.getCode());
+		System.out.println("getAdmin => " + entity.getAdmin());
+		System.out.println("getSort1 => " + entity.getSort1());
+		System.out.println("getLikes => " + entity.getLikes());
+		ResponseEntity<?> result = null;
+//        itemService.insertItem(entity);
+		result = ResponseEntity.status(HttpStatus.OK).body("insert성공");
+		return result;
+	}
+
+	// 테스트 메서드야 지워도 돼
+	@PostMapping("/test")
+	public void test(ItemDTO entity) {
+		System.out.println("*************************************");
+		System.out.println("getCode =>" + entity.getCode());
+		System.out.println("getSort1 =>" + entity.getSort1());
+		System.out.println("getSort1 =>" + entity.getSort1());
+		System.out.println("getSort3 =>" + entity.getSort3());
+		System.out.println("getName =>" + entity.getName());
+		System.out.println("*************************************");
+	}
+
 }
-	
-	

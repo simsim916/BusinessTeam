@@ -1,0 +1,87 @@
+#askBoardBox {
+    position: relative;
+    margin-top: 30px;
+}
+
+#askBoardBox>h5 {
+    font-size: 32px;
+    display: inline;
+}
+
+#askBoardBox>span {
+    color: #00000080;
+    margin-left: 20px;
+}
+
+#itemAskWrite {
+    position: absolute;
+    right: 50px;
+    background-color: #CA4046;
+    top: 20px;
+    width: 100px;
+    line-height: 40px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+}
+
+#askBoard {
+    border-top: 3px solid #000;
+    border-bottom: 3px solid #000;
+    margin-top: 30px;
+}
+
+.boardRow {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    flex-wrap: wrap;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.boardRow:nth-of-type(1) {
+    line-height: 60px;
+    border-bottom: 1px solid #000;
+}
+
+.boardRow>div:nth-of-type(1) {
+    width: 10%;
+}
+
+.boardRow>div:nth-of-type(2) {
+    width: 10%;
+}
+
+.boardRow>div:nth-of-type(3) {
+    width: 40%;
+}
+
+.boardRow>div:nth-of-type(4) {
+    width: 20%;
+}
+
+.boardRow>div:nth-of-type(5) {
+    width: 20%;
+}
+
+#askBoardBtn {
+    margin-top: 30px;
+    text-align: center;
+}
+
+#askBoardBtn i {
+    margin: 0 10px;
+}
+
+#askBoardBtn span {
+    margin: 0 8px;
+}
+#askNone {
+    height: 200px;
+    font-weight: 500;
+    font-size: 20px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}

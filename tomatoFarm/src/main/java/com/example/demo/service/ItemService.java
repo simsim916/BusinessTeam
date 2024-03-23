@@ -29,7 +29,7 @@ public interface ItemService {
 				.sales(dto.getSales())
 				.stock(dto.getStock())
 				.views(dto.getViews())
-				.like(dto.getLike())
+				.likes(dto.getLikes())
 				.event_code(dto.getEvent_code())
 				.admin(dto.getAdmin()).build();
 		return entity;
@@ -53,21 +53,26 @@ public interface ItemService {
 				.sales(entity.getSales())
 				.stock(entity.getStock())
 				.views(entity.getViews())
-				.like(entity.getLike())
+				.likes(entity.getLikes())
 				.event_code(entity.getEvent_code())
 				.admin(entity.getAdmin()).build();
 		return dto;
 	}
 
-	List<ItemDTO> selectItemWhereEvent(PageRequest pageRequest);
+	List<ItemDTO> selectItemListStringWhereType(PageRequest pageRequest,SearchRequest searchRequest);
+	List<ItemDTO> selectItemListIntegerWhereType(PageRequest pageRequest,SearchRequest searchRequest);
+	List<ItemDTO> selectItemListStringWhereTypeNotNull(PageRequest pageRequest,SearchRequest searchRequest);
+	ItemDTO selectItemIntegerWhereType(SearchRequest searchRequest);
+	
 	List<ItemDTO> selectItemWherebrand(PageRequest pageRequest, SearchRequest searchRequest);
 	List<ItemDTO> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest);
-	List<ItemDTO> selectItemWhereKeyword(SearchRequest searchRequest);
 	List<SortDTO> selectSortWhereKeyword(SearchRequest searchRequest);
 	List<SortDTO> selectSortList();
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 	
-	ItemDTO selectItemWhereCode(SearchRequest searchRequest);
+	int batchInsert(List<Item> entity);
+	List<ItemDTO> selectAll();
+	void insertItem(Item entity);
 	
 	
 }
