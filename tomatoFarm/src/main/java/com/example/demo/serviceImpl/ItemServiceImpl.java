@@ -88,4 +88,9 @@ public class ItemServiceImpl implements ItemService {
 	public void insertItem(Item entity) {
 		itemRepository.insertItem(entity);
 	}
+	
+	@Override
+	public List<ItemDTO> test(SearchRequest searchRequest) {
+		return itemRepository.test(searchRequest);
+	}
 }

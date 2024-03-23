@@ -73,6 +73,6 @@ public interface ItemService {
 	int batchInsert(List<Item> entity);
 	List<ItemDTO> selectAll();
 	void insertItem(Item entity);
-	
+	List<ItemDTO> test(SearchRequest searchRequest);
 	
 }

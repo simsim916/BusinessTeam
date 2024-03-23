@@ -7,63 +7,41 @@ import PagingBox from "../PagingBox";
 
 const SelectDataBox = () => {
 
-    const [formData, setFormData] = useState({});
+    console.log(`SelectDataBox 렌더링`);
+    // admin 페이지 들어오면 이 컴포넌트가 최초로 보이도록 해뒀다.
+    // 근데 페이지에 들어오면 렌더링이 두번일어나는데 이유가 뭘까?
+
+    const [formData, setFormData] = useState({
+        column: 'name',
+        keyword: ''
+    });
     const [itemList, setItemList] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
     const [column, setColumn] = useState(null);
     const [lastSort, setLastSort] = useState(null);
     const [currPage, setCurrPage] = useState(1);
-    const [limit, setLimit] = useState(30);
+    const [limit, setLimit] = useState(20);
+    const [searchedList, setSearchedList] = useState();
 
     useEffect(() => {
         axios.get(`http://localhost:8090/item/allitem`
         ).then(res => {
             setItemList(res.data);
+            setSearchedList(res.data)
             setColumn(Object.keys(res.data[0]));
-            setLoading(false);
         }).catch(err => {
             console.log(err.message)
-            setLoading(false);
-            setError(true);
         })
     }, [])
 
 
-    const paging = () => (pageNum, size) => {
-        console.log('````````````````````````````````')
-        console.log('currPage =>' + currPage)
-        console.log('````````````````````````````````')
-        // slice 한 List 를 반환시키는 메서드
+    const paging = () => (list, pageNum, size) => {
         const start = size * (pageNum - 1);
         const end = pageNum * size;
-        return itemList.slice(start, end);
+        return list.slice(start, end);
     }
-
-
-    const insertAll = () => {
-        console.log(formData)
-        axios.post(`http://localhost:8090/item/insert`, JSON.stringify(formData), {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => console.log(res.data)
-        ).catch(err => console.log(err.message));
-    }
-
-    const checkInputChange = (event, col, rowIndex) => {
-        const value = event.target.value;
-        setFormData((formData) => ({
-            ...formData,
-            [col]: value,
-            code: itemList[rowIndex].code
-        }));
-
-    };
 
     const sortByColumn = (event) => {
         const columnName = event.target.closest('div').id;
-        console.log(columnName)
         let sortedList;
         if (columnName != lastSort) {
             sortedList = [...itemList].sort((a, b) => {
@@ -90,8 +68,31 @@ const SelectDataBox = () => {
         } else {
             icon.classList.replace('fa-caret-down', 'fa-caret-up');
         }
-        setItemList(sortedList);
+        setSearchedList(sortedList);
+        setCurrPage(1);
     };
+
+    const searchBoxChange = (event) => {
+        const { name, value } = event.target;
+        setFormData((formData) => ({
+            ...formData,
+            [name]: value
+        }));
+    };
+
+    const search = (event, list) => {
+        if((formData.keyword).length >= 2) {
+            event.preventDefault();
+            setSearchedList(list.filter(item => item[formData.column].includes(formData.keyword)));
+            setCurrPage(1);
+        } else {
+            alert('검색어는 2글자 이상!');
+        }
+    }
+
+
+
+
 
     return (
         <>
@@ -101,8 +102,8 @@ const SelectDataBox = () => {
                         <i className="fa-solid fa-list"></i>&nbsp;&nbsp;식자재 조회
                         &nbsp;&nbsp;
                         <select name="" id="">
-                            <option value="">밀키트</option>
-                            <option value="">식재료</option>
+                            <option value="밀키트">밀키트</option>
+                            <option value="식재료">식재료</option>
                         </select>
                         &nbsp;&nbsp;
                         <select name="" id="">
@@ -110,11 +111,19 @@ const SelectDataBox = () => {
                             <option value="">--------</option>
                         </select>
                         &nbsp;&nbsp;
-                        &nbsp;<input type="text" />
-                        &nbsp;&nbsp;<button>검색</button>
                     </div>
                     <div id="topButtonBox">
-                        <div onClick={insertAll}>insertAll</div>
+                        <form onSubmit={(event) => search(event, itemList)}>
+                            <select name="column" id="column" onChange={searchBoxChange}>
+                                <option value="name">상품이름</option>
+                                <option value="brand">브랜드명</option>
+                                <option value="sort1">대분류</option>
+                                <option value="sort2">중분류</option>
+                                <option value="sort3">소분류</option>
+                            </select>
+                            <input type="text" name="keyword" onChange={searchBoxChange} />
+                            <input type="submit" value='검색' />
+                        </form>
                     </div>
                 </div>
                 <div id="excelHead">
@@ -124,13 +133,13 @@ const SelectDataBox = () => {
                     <div id="dataListBox">
                         <div>
                             {itemList ?
-                                paging()(currPage, limit).map((item, rowIndex) => (
+                                // paging()(itemList, currPage, limit).map((item, rowIndex) => (
+                                paging()(searchedList, currPage, limit).map((item, rowIndex) => (
                                     <div className="excelColumn" key={rowIndex}>
                                         <input id='codeInput' style={{ width: `calc((100% - 15px) / ${column.length})` }} type="text" value={item.code} readOnly />
                                         {Object.keys(item).slice(1).map((e, j) => (
                                             <input
                                                 name=""
-                                                onChange={(event) => checkInputChange(event, e, rowIndex)}
                                                 style={{ width: `calc((100% - 15px) / ${column.length})` }}
                                                 type="text"
                                                 placeholder={item[e]}
@@ -144,7 +153,7 @@ const SelectDataBox = () => {
                         </div>
                         <PagingBox
                             limit={limit}
-                            list={itemList}
+                            list={searchedList}
                             currPage={currPage}
                             setCurrPage={setCurrPage} />
                     </div>

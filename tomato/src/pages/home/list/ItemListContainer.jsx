@@ -7,30 +7,6 @@ import ItemBox_vertical from './../../components/itemBox_vertical/ItemBox_vertic
 import PagingBox from "../../admin/PagingBox";
 
 
-
-
-
-// const pageMaker = () => {
-
-//     const paging = () => (pageNum, size) => {
-//         const start = size * (pageNum - 1)
-//         const end = pageNum * size
-
-//         return this.slice(start, end);
-//     }
-
-//     const sortItemList = (event, list, setFunc) => {
-//         let sortType = event.target.name;
-
-//         list = list.sort((a, b) => {
-//             return b[sortType] - a[sortType];
-//         })
-//         setFunc(list)
-//     }
-// }
-// 모듈화 위해 잠시 빼둔다.
-
-
 const ItemListContainer = ({ keyword, itemList, setItemList }) => {
     console.log('ItemListContainer 랜더링')
     const [sort, setSort] = useState('sales');
@@ -45,11 +21,10 @@ const ItemListContainer = ({ keyword, itemList, setItemList }) => {
         return itemList.slice(start, end);
     }
 
-
     const sortItemList = (event, list, setFunc) => {
         // 1. 정렬하고자 하는 Column 의 이름을 onClick 주는 요소의 id로 지정
         // 2. list = 정렬하고자 하는 List
-        // 3. setFunc() = 원본ItemList를 정렬된itemList로 덮어씌운다.
+        // 3. setFunc() = 원본List를 정렬된List로 덮어씌운다.
         let sortType = event.target.id;
         let sortedList;
         if (sortType.includes("D")) {

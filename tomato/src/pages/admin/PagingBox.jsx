@@ -20,8 +20,6 @@ const PagingBox = ({ limit, list, currPage, setCurrPage }) => {
 
 
     const getPageNumArray = (limit, list) => {
-        console.log(list)
-        console.log('limit =>' + limit)
         // 페이징 할 <div> 태그 만들때 쓰는 함수
         let needPageCount = 1;
         let arr = [];

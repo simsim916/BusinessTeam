@@ -119,6 +119,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 	// ** 키워드 상품 페이징 조회
 	public List<ItemDTO> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest) {
 		return jPAQueryFactory
+				
 				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price,
 						item.sales, item.stock, item.views, item.likes, item.event_code, item_event.discount,
 						item_event.name.as("event_name")))
@@ -200,5 +201,17 @@ public class ItemRepositoryImpl implements ItemRepository {
 	public void insertItem(Item entity) {
 		entityManager.persist(entity);
 	}
+	
+	public List<ItemDTO> test(SearchRequest searchRequest) {
+		return jPAQueryFactory
+				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price, item.storage,
+						item.weight, item.packing, item.sales, item.stock, item.views, item.likes, item.event_code,
+						item_event.discount, item_event.name.as("event_name")))
+				.from(item).join(item_event).on(item.event_code.eq(item_event.code))
+				.where(Expressions.stringPath(searchRequest.getColumn()).contains(searchRequest.getKeyword()))
+				.fetch();
+	}
+	
+	
 
 }

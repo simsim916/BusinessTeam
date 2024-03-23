@@ -49,10 +49,11 @@ public class ItemController {
 		return result;
 	}
 
-	@GetMapping("/searchtype/")
+	@GetMapping("/searchtype")
 	public ResponseEntity<?> selectItemWherebrand(SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
 		PageRequest pageRequest = new PageRequest(1, 6);
+		System.out.println("\nselectItemWherebrand\n");
 
 		List<ItemDTO> list = itemService.selectItemWherebrand(pageRequest, searchRequest);
 		System.out.println(list);
@@ -113,7 +114,6 @@ public class ItemController {
 	}
 
     @PostMapping(value="/insert")
-//    @JsonProperty(value="insert")
     public ResponseEntity<?> insertItem(@RequestBody List<Item> entity) {
     	ResponseEntity<?> result = null;
     	for(Item e : entity) {
@@ -125,6 +125,13 @@ public class ItemController {
         return result;
     }
     
+    @GetMapping("/test")
+    public ResponseEntity<?> test(SearchRequest searchRequest) {
+    	ResponseEntity<?> result = null;
+    	List<ItemDTO> itemList = itemService.test(searchRequest);
+    	result = ResponseEntity.status(HttpStatus.OK).body(itemList);
+		return result;
+    }
     
 
 	
