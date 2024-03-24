@@ -144,14 +144,14 @@ const SelectAskBox = () => {
                     <div>작성일시</div>
                     <div>답변여부</div>
                 </div>
-                <div onclick="showContent(this)">
+                <div onClick="showContent(this)">
                     <div>공지</div>
                     <div>토마토팜 홈페이지 이용시 </div>
                     <div><img src="/tomatoFarmA/resources/img/logo.png" alt="" /></div>
                     <div>2024-02-02</div>
                     <div></div>
                 </div>
-                <div onclick="showContent(this)">
+                <div onClick="showContent(this)">
                     <div>공지</div>
                     <div>명절 배송지연 관련 공지사항</div>
                     <div>홍길동</div>

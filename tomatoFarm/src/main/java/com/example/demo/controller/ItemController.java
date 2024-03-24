@@ -125,10 +125,22 @@ public class ItemController {
         return result;
     }
     
-    @GetMapping("/test")
-    public ResponseEntity<?> test(SearchRequest searchRequest) {
+    @GetMapping("/admin")
+    public ResponseEntity<?> adminStringColumn(SearchRequest searchRequest,PageRequest pageRequest) {
+    	System.out.println("getColumn => " +searchRequest.getColumn());
+    	System.out.println("getKeyword => " +searchRequest.getKeyword());
+    	pageRequest.setStartEndNum(pageRequest.getPage());
+    	String column = searchRequest.getColumn();
+    	List<ItemDTO> itemList = null;
+        // 숫자 여부를 확인해서 Expression.stringPath OR numPath 메서드 지정해주기
+        if (column.matches("[-+]?\\d*\\.?\\d+")) {
+        	itemList = itemService.adminIntegerColumn(searchRequest,pageRequest);
+        	System.out.println("IntegerColumn");
+        } else {
+        	System.out.println("StringColumn");
+        	itemList = itemService.adminStringColumn(searchRequest,pageRequest);
+        }
     	ResponseEntity<?> result = null;
-    	List<ItemDTO> itemList = itemService.test(searchRequest);
     	result = ResponseEntity.status(HttpStatus.OK).body(itemList);
 		return result;
     }

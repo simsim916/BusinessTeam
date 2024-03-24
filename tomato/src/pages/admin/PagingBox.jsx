@@ -17,8 +17,6 @@ import "./PagingBox.css";
 const PagingBox = ({ limit, list, currPage, setCurrPage }) => {
 
 
-
-
     const getPageNumArray = (limit, list) => {
         // 페이징 할 <div> 태그 만들때 쓰는 함수
         let needPageCount = 1;
@@ -35,38 +33,6 @@ const PagingBox = ({ limit, list, currPage, setCurrPage }) => {
     }
 
     return (
-        // <div id="pagingBox">
-        //     <div onClick={() => setCurrPage(1)}><i className="fa-solid fa-angles-left"></i></div>
-        //     {getPageNum(limit, list).map((pageNum, i) => {
-        //         const startPage = Math.max(currPage - 2, 1);
-        //         const endPage = Math.min(startPage + 4, getPageNum(limit, list).length);
-
-        //         if (pageNum >= startPage && pageNum <= endPage) {
-        //             return (
-        //                 <div
-        //                     style={{
-        //                         textAlign: 'center',
-        //                         width: '25px',
-        //                         lineHeight: '25px',
-        //                         fontWeight: pageNum === currPage ? 'bold' : '',
-        //                         border: pageNum === currPage ? '1px solid' : 'none'
-        //                     }}
-        //                     onClick={() => setCurrPage(pageNum)}
-        //                     id={pageNum}
-        //                     key={i}>
-        //                     {pageNum}
-        //                 </div>
-        //             );
-        //         } else {
-        //             return null;
-        //         }
-        //     })}
-        //     <div onClick={() => setCurrPage(getPageNum(limit, list).length)}>
-        //         <i className="fa-solid fa-angles-right"></i>
-        //     </div>
-
-        // </div >
-        // ============================================================================
         <div id="pagingBox">
             <div onClick={() => setCurrPage(1)}>
                 <i className="fa-solid fa-angles-left"></i>

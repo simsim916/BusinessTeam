@@ -32,6 +32,7 @@ public interface ItemRepository {
 	int batchInsert(List<Item> entity);
 	List<ItemDTO> selectAll();
 	void insertItem(Item entity);
-	List<ItemDTO> test(SearchRequest searchRequest);
-	
+	List<ItemDTO> adminStringColumn(SearchRequest searchRequest,PageRequest pageRequest);
+	List<ItemDTO> adminIntegerColumn(SearchRequest searchRequest, PageRequest pageRequest);
+	int itemListCount();
 }
