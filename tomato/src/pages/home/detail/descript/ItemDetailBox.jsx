@@ -138,7 +138,7 @@ const ItemDetailBox = ({ item }) => {
                 <div className="subTitle">
                     <hr />
                     <h4>상품 표시사항
-                        <img src={process.env.PUBLIC_URL + `/img/logo2.png" alt="제품 조리 사진`} />
+                        <img src={process.env.PUBLIC_URL + `/img/logo2.png`} alt="제품 조리 사진" />
                     </h4>
                     <hr />
                 </div>

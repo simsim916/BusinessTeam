@@ -6,8 +6,6 @@ const ItemListFilter = ({ filterCheckedList, sortList }) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const listfilter = useRef(null);
 
-    // console.log(sortList)
-
     function checkAll(event) {
         let target = event.target.closest('li');
 
@@ -51,18 +49,19 @@ const ItemListFilter = ({ filterCheckedList, sortList }) => {
 
     useEffect(() => {
         const listScroll = () => {
-            listfilter.style.height = `calc(100vh - 320px - 30px + ${window.scrollY}px)`;
+            listfilter.current.style.height = `calc(100vh - 320px - 30px + ${window.scrollY}px)`;
             if (window.scrollY <= 300) {
-                listfilter.style.top = `calc(325px - ${window.scrollY}px)`;
+                listfilter.current.style.top = `calc(325px - ${window.scrollY}px)`;
             } else {
-                listfilter.style.top = `30px`;
+                listfilter.current.style.top = `30px`;
             }
         }
 
-
         window.addEventListener('scroll', listScroll);
-        return window.removeEventListener('scroll', listScroll)
-    }, [])
+        return () => {
+            window.removeEventListener('scroll', listScroll)
+        }
+    }, [sortList])
 
     return (
         <>
@@ -75,9 +74,9 @@ const ItemListFilter = ({ filterCheckedList, sortList }) => {
                             {sortList.filter((e) => e.sort1 == '밀키트').reduce((result, val) => result + val.count, 0)}
                         </span>
                         <ul>
-                            {sortList.filter((e) => e.sort1 == '밀키트').sort((b, a) => a.count - b.count).map((e) => (
-                                <li>
-                                    <i className="fa-regular fa-circle-check"></i>
+                            {sortList.filter((e) => e.sort1 == '밀키트').sort((b, a) => a.count - b.count).map((e, i) => (
+                                <li key={i} style={{ opacity: e.count ? '1' : '0.5' }}>
+                                    <i className="fa-regular fa-circle-check" style={{ color: e.count ? '#9B1B30' : '#000', opacity: e.count ? '1' : '0.5' }}></i>
                                     <span>{e.sort2}</span><span className="itemList_count">{e.count}</span>
                                 </li>
                             ))}
@@ -90,8 +89,8 @@ const ItemListFilter = ({ filterCheckedList, sortList }) => {
                             {sortList.filter((e) => e.sort1 == '식재료').reduce((result, val) => result + val.count, 0)}
                         </span>
                         <ul>
-                            {sortList.filter((e) => e.sort1 == '식재료').sort((b, a) => a.count - b.count).map((e) => (
-                                <li>
+                            {sortList.filter((e) => e.sort1 == '식재료').sort((b, a) => a.count - b.count).map((e, i) => (
+                                <li key={i} style={{opacity: e.count ? '1' : '0.5'}}>
                                     <i className="fa-regular fa-circle-check"></i>
                                     <span>{e.sort2}</span><span className="itemList_count">{e.count}</span>
                                 </li>
