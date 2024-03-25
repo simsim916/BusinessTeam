@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Loading from './../../../components/Loading';
 import Error from './../../../components/Error';
-import ReviewContent from './ReviewBoardRow';
-import ReviewWriteForm from './ReviewWrite';
+import ReviewBoardRow from './ReviewBoardRow';
+import ReviewWrite from './ReviewWrite';
 
 
 const ReviewBoardBox = ({ item }) => {
@@ -49,7 +49,7 @@ const ReviewBoardBox = ({ item }) => {
                     </div>
                 </div>
 
-                {itemReviewList ? (itemReviewList.slice(0, 5).map((e, i) => <ReviewContent itemReview={e} key={i} />)) : ('')}
+                {itemReviewList ? (itemReviewList.slice(0, 5).map((e, i) => <ReviewBoardRow itemReview={e} key={i} />)) : ('')}
 
 
                 <div id="reviewBoardBtn">
@@ -61,7 +61,7 @@ const ReviewBoardBox = ({ item }) => {
                     <i className="fa-solid fa-angle-right"></i>
                     <i className="fa-solid fa-angles-right"></i>
                 </div>
-                {reviewWrite ? <ReviewWriteForm item={item} reviewWriteClick={reviewWriteClick} /> : null}
+                {reviewWrite ? <ReviewWrite item={item} reviewWriteClick={reviewWriteClick} /> : null}
 
             </div>
         </>

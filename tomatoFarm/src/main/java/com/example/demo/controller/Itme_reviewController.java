@@ -41,7 +41,6 @@ public class Itme_reviewController {
 	@PostMapping("/iteminsert")
 	public ResponseEntity<?> iteminsert(@RequestBody Item_reviewDTO dto) {
 		ResponseEntity<?> result = null;
-		System.out.println(dto);
 		
 		result = ResponseEntity.status(HttpStatus.OK).body(item_reviewService.insertItemReview(dto));
 		return result;
