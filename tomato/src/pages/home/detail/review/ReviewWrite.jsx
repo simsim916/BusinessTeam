@@ -7,26 +7,32 @@ import axios from 'axios';
 
 const ReviewWrite = ({ item, reviewWriteClick }) => {
     const [writeBoxClose, setWriteBoxClose] = useState(true);
-    const [score, setScore] = useState(0)
+    const [score, setScore] = useState(0);
     const [review, setReview] = useState({
         writer: 'manager1',
         item_code: item.code,
         title: '',
         contents: '',
         score: '0',
-        image1: '',
-        image2: '',
-        image3: ''
-    })
+    });
+    const [file, setfile] = useState(null);
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
-    const submitReview = () => {
+    const submitReview = async () => {
         setLoading(true);
-        await = axios.post(`http://localhost:8090/itemreview/iteminsert`, review, {
+        const formData = new FormData();
+        formData.append('writer', review.writer);
+        formData.append('item_code', review.item_code);
+        formData.append('title', review.title);
+        formData.append('contents', review.contents);
+        formData.append('score', review.score);
+        formData.append('uploadfilef', file);
+
+        await axios.post(`http://localhost:8090/itemreview/iteminsert`, formData, {
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'multipart/form-data'
             }
         }).then(res => {
             setLoading(false);
@@ -39,6 +45,10 @@ const ReviewWrite = ({ item, reviewWriteClick }) => {
         reviewWriteBoxClose();
     }
 
+    const changeFile = (e) => {
+        setfile(e.target.files[0]);
+    };
+
     if (loading) return <Loading />
     if (error) return <Error />
 
@@ -48,6 +58,8 @@ const ReviewWrite = ({ item, reviewWriteClick }) => {
             [event.target.name]: event.target.value
         }))
     }
+
+
 
     const changeScore = (event) => {
         setScore(event.target.id);
@@ -128,13 +140,13 @@ const ReviewWrite = ({ item, reviewWriteClick }) => {
                                 </div>
                                 <div className="reviewWriteTag">
                                     <div>사진첨부</div>
-                                    <input type='file' />
+                                    <input onChange={changeFile} type='file' name='uploadfilef' />
                                 </div>
                                 <div id="reviewWriteContentBottom">
                                     <p>* 상품 품질과 관계 없는 내용은 비공개 처리 될 수 있습니다</p>
                                     <p>* 작성된 리뷰는 '마이페이지 - 상품 후기 관리' 에서 수정 및 삭제 가능합니다</p>
                                 </div>
-                            </div>
+                            </div> 
                             <div id="reviewWriteButton">
                                 <button onClick={reviewWriteBoxClose} id="reviewWriteCancle">취소</button>
                                 <button onClick={submitReview} id="reviewWriteEnter">등록</button>
