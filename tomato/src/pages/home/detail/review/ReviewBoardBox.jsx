@@ -5,6 +5,7 @@ import Loading from './../../../components/Loading';
 import Error from './../../../components/Error';
 import ReviewBoardRow from './ReviewBoardRow';
 import ReviewWrite from './ReviewWrite';
+import PagingBox from '../../../admin/PagingBox';
 
 
 const ReviewBoardBox = ({ item }) => {
@@ -13,12 +14,17 @@ const ReviewBoardBox = ({ item }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const [reviewWrite, setReviewWrite] = useState(false);
+    const [limit, setLimit] = useState(5);
+    const [currPage, setCurrPage] = useState(1);
+    const [pageList, setPageList] = useState(null);
 
     useEffect(() => {
         axios.get(`http://localhost:8090/itemreview/select?column=item_code&keyword=${item.code}`
         ).then(res => {
-            setItemReviewList(res.data);
             setLoading(false);
+            setItemReviewList(res.data);
+            setPageList(res.data);
+            setCurrPage(1);
         }).catch(err => {
             console.log(err.message)
             setLoading(false);
@@ -32,6 +38,15 @@ const ReviewBoardBox = ({ item }) => {
     const reviewWriteClick = () => {
         setReviewWrite(!reviewWrite);
     }
+
+    const paging = () => (list, currPage, limit) => {
+        if (list != null) {
+            const start = limit * (currPage - 1);
+            const end = currPage * limit;
+            return list.slice(start, end);
+        }
+    }
+
 
     return (
         <>
@@ -48,16 +63,11 @@ const ReviewBoardBox = ({ item }) => {
                     </div>
                 </div>
 
-                {itemReviewList ?
-                    (itemReviewList.slice(0, 5).map((e, i) => <ReviewBoardRow itemReview={e} key={i} />))
-                    :
-                    <div id='reviewNone'>
-                        해당 상품에 리뷰가 없습니다.
-                    </div>
-                }
+                {pageList ?
+                    paging()(pageList, currPage, limit).map((e, i) => <ReviewBoardRow itemReview={e} key={i} />)
+                    : ''}
 
-
-                <div id="reviewBoardBtn">
+                {/* <div id="reviewBoardBtn">
                     <i className="fa-solid fa-angles-left"></i>
                     <i className="fa-solid fa-angle-left"></i>
                     <span> 1 </span>
@@ -65,7 +75,12 @@ const ReviewBoardBox = ({ item }) => {
                     <span> 3 </span>
                     <i className="fa-solid fa-angle-right"></i>
                     <i className="fa-solid fa-angles-right"></i>
-                </div>
+                </div> */}
+                <PagingBox
+                    list={pageList}
+                    limit={limit}
+                    currPage={currPage}
+                    setCurrPage={setCurrPage} />
                 {reviewWrite ? <ReviewWrite refresh={refresh} setRefrsh={setRefrsh} item={item} reviewWriteClick={reviewWriteClick} /> : null}
 
             </div>
