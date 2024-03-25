@@ -36,7 +36,7 @@ const ReviewWrite = ({ item, refresh, setRefresh }) => {
             setError(true);
         });
         setRefresh(!refresh);
-        reviewWriteBoxClose()
+        reviewWriteBoxClose();
     }
 
     if (loading) return <Loading />

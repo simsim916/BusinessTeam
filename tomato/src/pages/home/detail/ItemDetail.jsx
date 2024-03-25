@@ -7,7 +7,7 @@ import ItemDetailBox from './descript/ItemDetailBox';
 import ReviewBoardBox from './review/ReviewBoardBox';
 import AskBoardBox from './ask/AskBoardBox';
 import axios from 'axios';
-import ShopBasketSelectBox from './../../shopBasket/ShopBasketSelectBox';
+// import ShopBasketSelectBox from './../../shopBasket/ShopBasketSelectBox';
 
 const ItemDetail = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -38,7 +38,7 @@ const ItemDetail = () => {
             <ReviewBoardBox item={item} />
             <hr className='container' />
             <AskBoardBox item={item} />
-            <ShopBasketSelectBox item={item} />
+            {/* <ShopBasketSelectBox item={item} /> */}
         </>
     );
 }

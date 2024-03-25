@@ -1,13 +1,17 @@
+import { useState } from 'react';
 import './AskBoardRow.css';
 
 
 const AskBaordRow = ({ itemAsk }) => {
+    const [askDetail, setAskDetail] = useState(false);
 
+    const contentsDetail = document.getElementsByClassName('boardAnswer_content');
     const showContent = () => {
-
+        setAskDetail(!askDetail);
     }
 
     return (
+        <>
         <div onClick={showContent} className="boardAnswer">
             <div>
                 {
@@ -17,15 +21,19 @@ const AskBaordRow = ({ itemAsk }) => {
                 }
             </div>
             <div className="boardAnswer_reply">미답변</div>
-            <div className="boardAnswer_title">{itemAsk.title}</div>
+                <div onClick={showContent} className="boardAnswer_title">{itemAsk.title}</div>
             <div className="boardAnswer_writer">{itemAsk.writer}</div>
             <div className="boardAnswer_regdate">{itemAsk.regdate}</div>
-            <div className="boardAnswer_content">{itemAsk.content}
-                {/* <a>답변</a>
-                <a>삭제</a> */}
             </div>
-        </div>
-
+            <div>
+                {askDetail &&
+                    <div className="boardAnswer_content">{itemAsk.contents}
+                        {/* <a>답변</a>
+                <a>삭제</a> */}
+                </div>
+                }
+            </div>
+    </>
     );
 }
 

@@ -16,8 +16,11 @@ public class Item_askDTO {
 	private String writer;	//글쓴이
 	private String title;	//제목
 	private String contents;	//내용
-	private String password; 	//비밀번호
+	private String password; 	// 비밀글 비밀번호
 	private String reply;	//답변
 	private LocalDateTime regdate;	//날짜
+	
+	private Boolean secret; //비밀글 유무
+	
 	
 }

@@ -7,6 +7,7 @@ import EventPage from "./pages/event/EventPage";
 import Admin from "./pages/admin/Admin";
 import React, { useEffect, useState } from 'react';
 import ItemDetail from './pages/home/detail/ItemDetail';
+import ShopBasketSelectBox from './pages/shopBasket/ShopBasketSelectBox';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
                 <Route path='/login' element={<LoginForm />} />
                 <Route path='/event' element={<EventPage />} />
                 <Route path='/admin' element={<Admin />} />
+                <Route path='/basket' element={<ShopBasketSelectBox />} />
                 {/* <Route path='/home/list' element={<ItemList />} /> */}
                 <Route path='/home/*' element={<Home />} />
                 <Route path='/*' element={<Home />} />

@@ -15,12 +15,24 @@ const ItemAskForm = ({ item, setRefresh, refresh }) => {
         contents: '',
         reply: '',
     })
+    // const [askPassword, setAskPassword] = useState({
+    //     value{
+    //         password: ''
+    //     },
+    //     error: {
+    //         password: null
+    //     },
+    //     check: {
+    //         password:false
+    // },
+        
+    // })
 
     const changeAsk = (event) => {
-        setAsk((ask) => ({
-            ...ask,
-            [event.target.name]: event.target.value
-        }))
+    //     setAsk((ask) => ({
+    //         ...ask,
+    //         [event.target.name]: event.target.value
+    //     }))
     }
 
     const submitAsk = async () => {
@@ -43,6 +55,28 @@ const ItemAskForm = ({ item, setRefresh, refresh }) => {
     const itemAskBoxClose = () => {
         setAskBoxClose(!askBoxClose);
     }
+
+// const checkPassword = (event) => {
+//     let value = event.target.value;
+//     const passwordAsk = event.target.closest('div');
+//     let message = '';
+//     let check = false;
+//     let key = /[0-9]/gi;
+
+//     if (value.length == 4) {
+//         passwordAsk.style.border = "2px solid #FF3F3F";
+//         message = `비밀번호는 4글자로 입력해주세요.`;
+//     } else {
+//         passwordBox.style.border = "2px solid #03C75A";
+//         passwordBox.children[0].style.color = "#03C75A";
+//         check = true;
+//     }
+//     return {
+//         message: message,
+//         check:check
+//     }
+// }
+
 
 
     const [Loading, setLoading] = useState(false);
@@ -76,9 +110,12 @@ const ItemAskForm = ({ item, setRefresh, refresh }) => {
                                     </textarea>
                                 </div>
                             </div>
-                            <div id="itemAskPrivacy">
-                                <input type="checkbox" name="privacyBox" />
-                                <div>비밀글로 문의하기</div>
+                            <div id='itemAskPrivacyBox'>
+                                <div id="itemAskPrivacy">
+                                    <input type="checkbox" name="privacyBox" />
+                                    <div>비밀글로 문의하기</div>
+                                </div>
+                                <input type='passwordAsk' id='passwordAsk' name='passwordAsk' placeholder='숫자 4개로 비밀번호를 입력해주세요.'></input>
                             </div>
                             <div id="itemAskButton">
                                 <button onClick={itemAskBoxClose} id="itemAskBoxCancle">취소</button>

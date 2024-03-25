@@ -152,17 +152,30 @@
     resize: none;
     margin-bottom: 20px;
 }
+#itemAskPrivacyBox{
+    display: flex;
+    position: relative;
+    gap: 20px;
+}
 
 #itemAskPrivacy {
     position: relative;
     display: flex;
-    gap: 10px;
     left: 30px;
+    width: 28%;
+    gap: 10px;
+    text-align: center;
 }
 
 #itemAskPrivacy input {
     width: 20px;
     height: 20px;
+}
+#passwordAsk{
+    width: 30%;
+    height: 30px;
+    border-radius: 5px;
+    padding: 10px;
 }
 
 #itemAskButton {
