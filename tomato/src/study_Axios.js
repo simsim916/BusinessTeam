@@ -81,3 +81,19 @@ const checkInputChange = (event, col) => {
     console.log(formData);
 };
 
+
+
+// ============ 해결방법 ==================
+// @restController 지정해 주면 @RequestBody 가 필요없다고 알고 있었다.
+// 하지만 @RequestBody 애노테이션 문제 였다.
+const insertAll = () => {
+    console.log(formData)
+    axios.post(`http://localhost:8090/item/insert`, JSON.stringify(formData), {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(res => console.log(res.data)
+    ).catch(err => console.log(err.message));
+}
+
+// ============ 해결방법 ==================

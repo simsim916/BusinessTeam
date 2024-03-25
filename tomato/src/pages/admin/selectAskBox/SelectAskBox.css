@@ -8,13 +8,18 @@
 #annTopBox {
     display: flex;
     justify-content: space-between;
-    line-height: 80px;
-    font-size: 34px;
     border-radius: 20px 20px;
     margin-top: 30px;
     margin-left: 20px;
 }
 
+#annTopBox>h3 {
+    font-size: 34px;
+}
+
+#annTopBox label {
+    font-size: initial;
+}
 /* ================================================= */
 
 #announceBoard {
@@ -37,6 +42,7 @@
     height: 30px;
     text-indent: 5px;
 }
+
 #announceBoard>form>select {
     width: 80px;
     height: 30px;
@@ -55,7 +61,7 @@
 
 #announceBoard>div {
     display: grid;
-    grid-template-columns: 1fr 6fr 1.5fr 2fr 1fr;
+    grid-template-columns: 1fr 5fr 1.5fr 2fr 1fr;
     line-height: 60px;
     border-bottom: 1px solid rgba(128, 128, 128, 0.316);
 }
@@ -79,7 +85,7 @@
 
 #announceBoard>div:not(:nth-of-type(1))>div:nth-of-type(2) {
     text-align: left;
-    text-indent: 60px;
+    text-indent: 100px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -90,60 +96,4 @@
     font-size: 12px;
     text-indent: 10px;
     color: #9B1B20;
-}
-
-/* ================================== */
-.contentBox {
-    grid-column: span 5;
-    background-color: #00000008;
-    position: relative;
-    opacity: 1;
-    display: none;
-    order: 1;
-}
-
-.contentBox>div {
-    font-weight: bold;
-    font-size: 20px;
-}
-
-.contentBox>p {
-    width: 80%;
-    margin: auto;
-    text-align: left;
-    word-break: keep-all;
-    line-height: 24px;
-}
-
-.contentBox>a {
-    background-color: #9B1B20;
-    color: white;
-    border-radius: 7px;
-    padding: 5px;
-    margin: 10px 10px;
-}
-
-#NationContainer {
-    width: 399px;
-    margin: 0 auto;
-    height: 50px;
-    margin-top: 30px;
-    display: grid;
-    grid-template-columns: repeat(7, 57px);
-    text-align: center;
-    margin-bottom: 30px;
-    position: relative;
-}
-
-#NationContainer>div {
-    line-height: 50px;
-}
-
-/* ====== Test ======== */
-
-#tomatoChess {
-    position: absolute;
-    width: 60px;
-    left: 70px;
-    top: 6px;
 }

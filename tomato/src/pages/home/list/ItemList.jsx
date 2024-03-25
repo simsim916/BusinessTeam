@@ -55,7 +55,7 @@ const ItemList = () => {
             </div>
             <div className="container">
                 <ItemListFilter sortList={sortList} keyword={keyword} />
-                <ItemListContainer itemList={itemList} keyword={keyword} />
+                <ItemListContainer itemList={itemList} keyword={keyword} setItemList={setItemList} />
             </div>
         </>
     );
