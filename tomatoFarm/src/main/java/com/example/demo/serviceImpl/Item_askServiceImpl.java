@@ -32,6 +32,10 @@ public class Item_askServiceImpl implements Item_askService{
 		return item_askRepository.selectItemAskListIntegerWhereType( pageRequest,  searchRequest);
 	}
 	
+	public int updateItemAsk(Item_ask entity) {
+		return item_askRepository.updateItemAsk(entity);
+	}
+	
 	
 }
 	

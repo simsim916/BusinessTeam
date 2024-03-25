@@ -15,5 +15,5 @@ public interface Item_askService {
 	List<Item_ask> selectItemAskListIntegerWhereType(PageRequest pageRequest, SearchRequest searchRequest);
 	
 //	=================================
-	
+	 int updateItemAsk(Item_ask entity);
 }

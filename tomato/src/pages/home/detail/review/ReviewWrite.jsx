@@ -6,6 +6,10 @@ import Error from './../../../components/Error';
 import axios from 'axios';
 
 const ReviewWrite = ({ item, reviewWriteClick }) => {
+
+    console.log('--------------------')
+    console.log(item)
+    console.log('--------------------')
     const [writeBoxClose, setWriteBoxClose] = useState(true);
     const [score, setScore] = useState(0)
     const [review, setReview] = useState({

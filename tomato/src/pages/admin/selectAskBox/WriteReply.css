@@ -1,0 +1,137 @@
+#AskWriteReplyContainer {
+    background-color: #9999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+}
+
+#AskWriteReplyContainer>div>div {
+    text-indent: 0;
+}
+
+#AskWriteReplyContainer>div {
+    margin: 0 auto;
+}
+
+.WriteReplyBox {
+    background-color: white;
+    height: 1000px;
+    max-height: 70vh;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    max-width: 800px;
+    width: 800PX;
+}
+
+
+.ReplyTop {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.432);
+    border-top: 1px solid rgba(128, 128, 128, 0.432);
+}
+
+.ReplyTop input {
+    text-align: center;
+    border-radius: 7px;
+}
+
+.ReplyTop>div {
+    display: flex;
+}
+
+
+.ReplyTop>div>div:nth-child(1) {
+    width: 25%;
+    padding: 10px;
+}
+
+.ReplyTop>div>div:nth-child(2) {
+    width: 100%;
+    display: flex;
+    gap: 30px;
+}
+
+.ReplyTop>div>div:nth-child(2)>div {
+    width: 50%;
+}
+
+.ReplyTop img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    /* height: 100px; */
+    /* 이미지 퍼센트 주면 줄일때 */
+
+}
+
+.ReplyTop>div>div:nth-child(1)>div {}
+
+
+/* 
+.ReplyTop>div>div:nth-child(odd) {
+    width: 15;
+}
+
+.ReplyTop>div>div:nth-child(even) {
+    width: 35%;
+}
+
+.ReplyTop>div>div:first-child {
+    width: ;
+} */
+
+
+.ReplyDetailBox {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+
+.ReplyDetailBox>div {
+    margin: 0 10px;
+}
+
+.ReplyDetailBox input {
+    height: 50%;
+    text-indent: 10px;
+    border-radius: 7px;
+}
+
+.ReplyDetailBox>div:nth-child(1) {
+    min-width: 5%;
+    word-break: keep-all;
+}
+
+.ReplyDetailBox>div:nth-child(2) {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-indent: 0;
+}
+
+.ReplyDetailBox>div>textarea {
+    border-radius: 7px;
+    height: 400px;
+    min-width: 90%;
+    padding: 10px;
+}
+
+#ReplyDetailContainer {
+    margin-top: 20px;
+}
+
+/* =================================== */

@@ -13,6 +13,17 @@ import "./PagingBox.css";
 //    부모컴포넌트에  const [currPage, setCurrPage] = useState(1);  지정
 // 4. setCurrPage 함수도 같이 보내줘야한다.
 
+// 5. 부모컴포넌트에 필요한 메서드
+//    const paging = () => (list, currPage, limit) => {
+//        const start = limit * (currPage - 1);
+//        const end = currPage * limit;
+//        return list.slice(start, end);
+//    }
+//    화면에 출력시키고자 하는 List를 map 돌리고 있을텐데
+//    그 List 자리에 paging(사용할List, 상태값으로 쓸 currPage, 상태값으로 쓸 limit) 를 전달해주면
+//    현재 페이지, limit에 맞게 slice해서 화면에 출력해준다.
+
+
 
 const PagingBox = ({ limit, list, currPage, setCurrPage }) => {
 
@@ -36,6 +47,15 @@ const PagingBox = ({ limit, list, currPage, setCurrPage }) => {
             <div onClick={() => setCurrPage(1)}>
                 <i className="fa-solid fa-angles-left"></i>
             </div>
+            {currPage == 1
+                ?
+                <div>
+                    <i class="fa-solid fa-chevron-left"></i>
+                </div>
+                :
+                <div onClick={() => setCurrPage(currPage - 1)}>
+                    <i class="fa-solid fa-chevron-left"></i>
+                </div>}
             {getPageNumArray(limit, list).map((pageNum, i) => {
                 const numPagesToShow = 5;
                 const totalPages = getPageNumArray(limit, list).length;
@@ -55,7 +75,7 @@ const PagingBox = ({ limit, list, currPage, setCurrPage }) => {
                                 width: '25px',
                                 lineHeight: '25px',
                                 fontWeight: pageNum === currPage ? 'bold' : '',
-                                border: pageNum === currPage ? '1px solid' : 'none'
+                                fontSize: pageNum === currPage ? '1.8em' : '1em',
                             }}
                             onClick={() => setCurrPage(pageNum)}
                             id={pageNum}
@@ -67,6 +87,16 @@ const PagingBox = ({ limit, list, currPage, setCurrPage }) => {
                     return null;
                 }
             })}
+            {currPage == getPageNumArray(limit, list).length
+                ?
+                <div>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+                :
+                <div onClick={() => setCurrPage(currPage + 1)}>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>}
+
             <div onClick={() => setCurrPage(getPageNumArray(limit, list).length)}>
                 <i className="fa-solid fa-angles-right"></i>
             </div>

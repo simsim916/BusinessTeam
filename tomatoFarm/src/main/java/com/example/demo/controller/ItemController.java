@@ -135,9 +135,10 @@ public class ItemController {
     	System.out.println("getKeyword => " +searchRequest.getKeyword());
     	pageRequest.setStartEndNum(pageRequest.getPage());
     	String column = searchRequest.getColumn();
+    	String keyword = searchRequest.getKeyword();
     	List<ItemDTO> itemList = null;
         // 숫자 여부를 확인해서 Expression.stringPath OR numPath 메서드 지정해주기
-        if (column.matches("[-+]?\\d*\\.?\\d+")) {
+        if (keyword.matches("[-+]?\\d*\\.?\\d+")) {
         	itemList = itemService.adminIntegerColumn(searchRequest,pageRequest);
         	System.out.println("IntegerColumn");
         } else {

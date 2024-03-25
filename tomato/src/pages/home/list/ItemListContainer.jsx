@@ -61,38 +61,36 @@ const ItemListContainer = ({ keyword, itemList, setItemList }) => {
 
 
     return (
-        <>
-            <div id="listContainer" style={{ display: view ? 'flex' : 'grid', height: view ? 'auto' : '' }}>
-                <div id="containerOption">
-                    <div id="total">총 <span>{itemList ? itemList.length : '0'}</span> 개</div>
-                    <div id="listOption">
-                        <div id="sales" style={{ opacity: sort == "sales" ? '1' : '0.5' }} onClick={(event) => sortItemList(event, itemList, setItemList)}>인기상품순</div>
-                        <div id="price" style={{ opacity: sort == "price" ? '1' : '0.5' }} onClick={(event) => sortItemList(event, itemList, setItemList)}>가격낮은순</div>
-                        <div id="priceD" style={{ opacity: sort == "priceD" ? '1' : '0.5' }} onClick={(event) => sortItemList(event, itemList, setItemList)}>가격높은순</div>
-                    </div>
+        <div id="listContainer" style={{ display: view ? 'flex' : 'grid', height: view ? 'auto' : '' }}>
+            <div id="containerOption">
+                <div id="total">총 <span>{itemList ? itemList.length : '0'}</span> 개</div>
+                <div id="listOption">
+                    <div id="sales" style={{ opacity: sort == "sales" ? '1' : '0.5' }} onClick={(event) => sortItemList(event, itemList, setItemList)}>인기상품순</div>
+                    <div id="price" style={{ opacity: sort == "price" ? '1' : '0.5' }} onClick={(event) => sortItemList(event, itemList, setItemList)}>가격낮은순</div>
+                    <div id="priceD" style={{ opacity: sort == "priceD" ? '1' : '0.5' }} onClick={(event) => sortItemList(event, itemList, setItemList)}>가격높은순</div>
                 </div>
-                {
-                    // view ?
-                    //     (paging()(currPage, 6).map((e, i) => <ItemBox_vertical key={i} item={e} />))
-                    //     :
-                    //     (paging()(currPage, 16).map((e, i) => <ItemBox key={i} item={e} />))
-
-                    // 페이징컴포넌트 사용할때 limit 변수가 있으면 편해서 지정해준 상태
-                    // limit를 이용하면 view 변수가 필요없음
-                    limit == 16 ?
-                        (paging()(currPage, limit).map((e, i) => <ItemBox key={i} item={e} />))
-                        :
-                        (paging()(currPage, limit).map((e, i) => <ItemBox_vertical key={i} item={e} />))
-
-                }
             </div>
+            {
+                // view ?
+                //     (paging()(currPage, 6).map((e, i) => <ItemBox_vertical key={i} item={e} />))
+                //     :
+                //     (paging()(currPage, 16).map((e, i) => <ItemBox key={i} item={e} />))
+
+                // 페이징컴포넌트 사용할때 limit 변수가 있으면 편해서 지정해준 상태
+                // limit를 이용하면 view 변수가 필요없음
+                limit == 16 ?
+                    (paging()(currPage, limit).map((e, i) => <ItemBox key={i} item={e} />))
+                    :
+                    (paging()(currPage, limit).map((e, i) => <ItemBox_vertical key={i} item={e} />))
+
+            }
             <PagingBox
                 limit={limit}
                 setLimit={setLimit}
                 list={itemList}
                 currPage={currPage}
                 setCurrPage={setCurrPage} />
-        </>
+        </div>
     );
 }
 
