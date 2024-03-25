@@ -29,7 +29,6 @@ const AskBoardBox = ({ item }) => {
 
     function itemAskClick() {
         setAskWrite(!askWrite);
-
     }
 
     if (loading) return <Loading />
