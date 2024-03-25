@@ -24,7 +24,7 @@ const ReviewWrite = ({ item, reviewWriteClick }) => {
 
     const submitReview = () => {
         setLoading(true);
-        axios.post(`http://localhost:8090/itemreview/iteminsert`, review, {
+        await = axios.post(`http://localhost:8090/itemreview/iteminsert`, review, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -36,6 +36,7 @@ const ReviewWrite = ({ item, reviewWriteClick }) => {
             setLoading(false);
             setError(true);
         });
+        reviewWriteBoxClose();
     }
 
     if (loading) return <Loading />

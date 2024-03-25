@@ -46,6 +46,8 @@ const ItemList = () => {
     }, [searchParams])
 
 
+    
+
     if (loading || sortloading) return <Loading />
     if (error || sorterror) return <Error />
 

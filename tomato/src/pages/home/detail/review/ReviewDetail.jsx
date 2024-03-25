@@ -1,10 +1,8 @@
-import './ReviewDetailForm.css';
+import './ReviewDetail.css';
 import { useState } from 'react';
 
 
-const ReviewDetailForm = ({ itemReview }) => {
-
-    const [detailBoxClose, setDetailBoxClose] = useState(true);
+const ReviewDetail = ({ itemReview, reviewDetail, setReviewDetail }) => {
 
     const reivewDetailImgChange = (event) => {
         let ele = event.target.closest('div');
@@ -18,38 +16,38 @@ const ReviewDetailForm = ({ itemReview }) => {
     }
 
     const reviewDetailClose = () => {
-        setDetailBoxClose(false);
+        setReviewDetail(!reviewDetail);
     }
 
     return (
         <>
-            {detailBoxClose &&
-            <div id="reviewDetailForm">
-                <div id="reviewDetailBox">
-                    <div id="reviewDetailImg">
-                        <div id="reviewDetailImgTop">
-                            <img src={process.env.PUBLIC_URL + '/img/itemImg/5000001_2.jpg'} alt="" />
-                            <i className="fa-solid fa-arrow-left"></i>
-                            <i className="fa-solid fa-arrow-right"></i>
+            {reviewDetail &&
+                <div id="reviewDetailForm">
+                    <div id="reviewDetailBox">
+                        <div id="reviewDetailImg">
+                            <div id="reviewDetailImgTop">
+                                <img src={process.env.PUBLIC_URL + '/img/itemImg/5000001_2.jpg'} alt="" />
+                                <i className="fa-solid fa-arrow-left"></i>
+                                <i className="fa-solid fa-arrow-right"></i>
+                            </div>
+                            <div id="reviewDetailImgBottom">
+                                <div onClick={reivewDetailImgChange}><img src={process.env.PUBLIC_URL + `/img/itemImg/5000001_1.jpg`} alt={""} /></div>
+                                <div onClick={reivewDetailImgChange}><img src={process.env.PUBLIC_URL + `/img/itemImg/5000001_2.jpg`} alt={""} /></div>
+                            </div>
                         </div>
-                        <div id="reviewDetailImgBottom">
-                            <div onClick={reivewDetailImgChange}><img src={process.env.PUBLIC_URL + `/img/itemImg/5000001_1.jpg`} alt={""} /></div>
-                            <div onClick={reivewDetailImgChange}><img src={process.env.PUBLIC_URL + `/img/itemImg/5000001_2.jpg`} alt={""} /></div>
+                        <div id="reviewDetail_Write">
+                            <p>{itemReview.name}</p>
+                            <p>{itemReview.writer}</p>
+                            <p>작성 날짜</p>
+                            <p id="reviewDetail_Final">후기다 후기다 후기다
+                                후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다
+                                후기다 후기다
+                                후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다
+                            </p>
                         </div>
+                        <div onClick={reviewDetailClose} id="reviewDetailBoxClose"><i className="fa-solid fa-xmark"></i></div>
                     </div>
-                    <div id="reviewDetail_Write">
-                        <p>{itemReview.name}</p>
-                        <p>{itemReview.writer}</p>
-                        <p>작성 날짜</p>
-                        <p id="reviewDetail_Final">후기다 후기다 후기다
-                            후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다
-                            후기다 후기다
-                            후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다후기다
-                        </p>
-                    </div>
-                    <div onClick={reviewDetailClose} id="reviewDetailBoxClose"><i className="fa-solid fa-xmark"></i></div>
                 </div>
-            </div>
             }
         </>
 
@@ -60,4 +58,4 @@ const ReviewDetailForm = ({ itemReview }) => {
     );
 }
 
-export default ReviewDetailForm;
+export default ReviewDetail;

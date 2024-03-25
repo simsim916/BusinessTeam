@@ -2,6 +2,9 @@ package com.example.demo.module;
 
 import java.util.List;
 
+import com.querydsl.core.types.Order;
+import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.core.types.dsl.NumberPath;
 import com.querydsl.core.types.dsl.StringPath;
 
@@ -29,15 +32,23 @@ public class SearchRequest {
 	
 	private String column; // 검색 컬럼
 	private String keyword; // 검색 키워드
-	private String sortType;// 정렬 타입
 	private String access;// 접근권한
+private OrderSpecifier<?> orderColumn;
+	private String orderType;// 정렬 타입
+	private String scending ;// 정렬 순서
+	
 	
 	public SearchRequest(String keyword) {
 		this.keyword=keyword;
 	}
-	public SearchRequest(String keyword, String sortType) {
+	public SearchRequest(String keyword, String orderType) {
 		this.keyword=keyword;
-		this.sortType=sortType;
+		this.orderType=orderType;
 	}
 	
+	public void makeOrder(SearchRequest searchRequest) {
+		if (searchRequest.getScending() != null && searchRequest.getOrderType() != null ) {
+			this.orderColumn = new OrderSpecifier<>(scending == "asc"? Order.ASC : Order.DESC, Expressions.stringPath(searchRequest.getOrderType()));
+		} 
+	}
 }
