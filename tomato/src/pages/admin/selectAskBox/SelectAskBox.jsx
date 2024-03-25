@@ -79,11 +79,11 @@ const SelectAskBox = () => {
 
     // ====================================================================
     const openAskDetail = (askRow) => {
-        if (askRow.privacy == 0) {
-            // 답변 등록창으로
-        } else {
-            // 해당 문의글 조회창으로
-        }
+        // if (askRow.privacy == 0) {
+        //     // 답변 등록창으로
+        // } else {
+        //     // 해당 문의글 조회창으로
+        // }
         // const newWindow = window.open(
         //     "",
         //     "_blank",

@@ -16,7 +16,6 @@ import "./PagingBox.css";
 
 const PagingBox = ({ limit, list, currPage, setCurrPage }) => {
 
-
     const getPageNumArray = (limit, list) => {
         // 페이징 할 <div> 태그 만들때 쓰는 함수
         let needPageCount = 1;
