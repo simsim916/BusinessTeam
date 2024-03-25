@@ -16,6 +16,6 @@ public interface Item_reviewService {
 	List<Item_review> selectItemRevieListIntegerWhereType(PageRequest pageRequest, SearchRequest searchRequest);
 	
 	//** 상품리뷰 등록
-	int insertItemReview(Item_reviewDTO dto);
+	int insertItemReview(Item_review entity);
 	
 }

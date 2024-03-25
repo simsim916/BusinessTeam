@@ -1,13 +1,13 @@
 
 import { useState } from 'react';
 import './ReviewBoardRow.css';
-import ReviewWrite from './ReviewWrite';
+import ReviewDetail from './ReviewDetail';
 
 const ReviewBoardRow = ({ itemReview }) => {
-    const [rendereviewDetailForm, setReviewDetailForm] = useState(false);
+    const [reviewDetail, setReviewDetail] = useState(false);
 
     const reviewDetailClick = () => {
-        setReviewDetailForm(!rendereviewDetailForm)
+        setReviewDetail(!reviewDetail)
 
     }
 
@@ -63,7 +63,7 @@ const ReviewBoardRow = ({ itemReview }) => {
                     </div>
                 </div>
             </div>
-            {rendereviewDetailForm ? <ReviewWrite itemReview={itemReview} /> : <></>}
+            {reviewDetail ? <ReviewDetail setReviewDetail={setReviewDetail} reviewDetail={reviewDetail} itemReview={itemReview} /> : <></>}
 
         </>
 
