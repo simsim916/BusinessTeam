@@ -8,11 +8,10 @@ import ReviewWrite from './ReviewWrite';
 
 
 const ReviewBoardBox = ({ item }) => {
-    console.log('ReviewBoardBox 랜더링')
     const [itemReviewList, setItemReviewList] = useState(null);
+    const [refresh, setRefrsh] = useState(true);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
-
     const [reviewWrite, setReviewWrite] = useState(false);
 
     useEffect(() => {
@@ -25,7 +24,7 @@ const ReviewBoardBox = ({ item }) => {
             setLoading(false);
             setError(true);
         })
-    }, [])
+    }, [refresh])
 
     if (loading) return <Loading />
     if (error) return <Error />
@@ -49,7 +48,13 @@ const ReviewBoardBox = ({ item }) => {
                     </div>
                 </div>
 
-                {itemReviewList ? (itemReviewList.slice(0, 5).map((e, i) => <ReviewBoardRow itemReview={e} key={i} />)) : ('')}
+                {itemReviewList ?
+                    (itemReviewList.slice(0, 5).map((e, i) => <ReviewBoardRow itemReview={e} key={i} />))
+                    :
+                    <div id='reviewNone'>
+                        해당 상품에 리뷰가 없습니다.
+                    </div>
+                }
 
 
                 <div id="reviewBoardBtn">
@@ -61,7 +66,7 @@ const ReviewBoardBox = ({ item }) => {
                     <i className="fa-solid fa-angle-right"></i>
                     <i className="fa-solid fa-angles-right"></i>
                 </div>
-                {reviewWrite ? <ReviewWrite item={item} reviewWriteClick={reviewWriteClick} /> : null}
+                {reviewWrite ? <ReviewWrite refresh={refresh} setRefrsh={setRefrsh} item={item} reviewWriteClick={reviewWriteClick} /> : null}
 
             </div>
         </>
