@@ -8,6 +8,7 @@ import ReviewWriteForm from './ReviewWrite';
 
 
 const ReviewBoardBox = ({ item }) => {
+    console.log('ReviewBoardBox 랜더링')
     const [itemReviewList, setItemReviewList] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
@@ -18,7 +19,6 @@ const ReviewBoardBox = ({ item }) => {
         axios.get(`http://localhost:8090/itemreview/select?column=item_code&keyword=${item.code}`
         ).then(res => {
             setItemReviewList(res.data);
-            console.log(itemReviewList)
             setLoading(false);
         }).catch(err => {
             console.log(err.message)
@@ -27,15 +27,12 @@ const ReviewBoardBox = ({ item }) => {
         })
     }, [])
 
+    if (loading) return <Loading />
+    if (error) return <Error />
+
     const reviewWriteClick = () => {
         setReviewWrite(!reviewWrite);
     }
-
-    console.log(reviewWrite);
-
-
-    if (loading) return <Loading />
-    if (error) return <Error />
 
     return (
         <>
@@ -52,7 +49,7 @@ const ReviewBoardBox = ({ item }) => {
                     </div>
                 </div>
 
-                {itemReviewList ? (itemReviewList.slice(0,5).map((e, i) => <ReviewContent itemReview={e} key={i} />)) : ('')}
+                {itemReviewList ? (itemReviewList.slice(0, 5).map((e, i) => <ReviewContent itemReview={e} key={i} />)) : ('')}
 
 
                 <div id="reviewBoardBtn">
@@ -64,7 +61,7 @@ const ReviewBoardBox = ({ item }) => {
                     <i className="fa-solid fa-angle-right"></i>
                     <i className="fa-solid fa-angles-right"></i>
                 </div>
-                {reviewWrite ? <ReviewWriteForm item={item} /> : null}
+                {reviewWrite ? <ReviewWriteForm item={item} reviewWriteClick={reviewWriteClick} /> : null}
 
             </div>
         </>
