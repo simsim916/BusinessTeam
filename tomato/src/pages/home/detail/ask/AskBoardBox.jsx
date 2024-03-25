@@ -9,27 +9,26 @@ import ItemAskWrite from './ItemAskWrite';
 
 const AskBoardBox = ({ item }) => {
     const [itemAskList, setItemAskList] = useState(null);
+    const [refresh, setRefresh] = useState(true);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
-
     const [askWrite, setAskWrite] = useState(false);
 
+
     useEffect(() => {
-        axios.get(`http://localhost:8090/itemask/select?column=item_ask&keyword=${item.code}`
+        axios.get(`http://localhost:8090/itemask/select?column=item_code&keyword=${item.code}`
         ).then(res => {
             setItemAskList(res.data);
-            console.log(itemAskList)
             setLoading(false);
         }).catch(err => {
             console.log(err.message)
             setLoading(false);
             setError(true);
         })
-    }, [])
+    }, [refresh])
 
-    function itemAskClick() {
+    const itemAskClick = () => {
         setAskWrite(!askWrite);
-
     }
 
     if (loading) return <Loading />
@@ -41,24 +40,23 @@ const AskBoardBox = ({ item }) => {
             <span>상품문의 - 상품에 궁금하신점을 남겨주세요.</span>
             <div onClick={() => itemAskClick()} id="itemAskWrite">문의하기</div>
             <div id="askBoard">
-                <div className="boardRow">
-                    <div></div>
-                    <div>제목</div>
+                <div className="askBoardRow">
+                    <div>공개</div>
                     <div>답변</div>
+                    <div>제목</div>
                     <div>작성자</div>
                     <div>작성일자</div>
                 </div>
 
-                {
-                    !itemAskList ?
-                        itemAskList.map((e, i) => <AskBoardRow itemAsk={e} key={i} />)
-                        :
-                        <div id='askNone'>
-                            해당 상품에 문의사항이 없습니다.
-                        </div>
+                {itemAskList ?
+                    (itemAskList.slice(0, 5).map((e, i) => <AskBoardRow itemAsk={e} key={i} />))
+                    :
+                    <div id='askNone'>
+                        해당 상품에 문의사항이 없습니다.
+                    </div>
                 }
-
             </div>
+
             <div id="askBoardBtn">
                 <i className="fa-solid fa-angles-left"></i>
                 <i className="fa-solid fa-angle-left"></i>
@@ -68,7 +66,7 @@ const AskBoardBox = ({ item }) => {
                 <i className="fa-solid fa-angle-right"></i>
                 <i className="fa-solid fa-angles-right"></i>
             </div>
-            {askWrite ? <ItemAskWrite item={item} /> : null}
+            {askWrite ? <ItemAskWrite refresh={refresh} setRefresh={setRefresh} item={item} itemAskClick={itemAskClick} /> : null}
         </div>
     );
 }

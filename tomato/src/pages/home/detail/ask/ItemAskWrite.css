@@ -11,32 +11,45 @@
     z-index: 10;
 }
 
+#itemAskForm>div {
+    position: relative;
+}
+
 #itemAskBox {
     background-color: white;
-    position: fixed;
     height: 900px;
     max-height: 80vh;
     overflow-y: auto;
     overflow-x: hidden;
-    justify-content: center;
-    align-items: center;
     padding: 50px;
     max-width: 1000px;
     width: calc(90vw - 30px);
+    margin: auto;
+}
+
+#itemAskBox::-webkit-scrollbar {
+    width: 10px;
+}
+
+#itemAskBox::-webkit-scrollbar-thumb {
+    background-color: #9b1b1f70;
+    border-radius: 10px;
 }
 
 #itemAskTop {
     border-bottom: 1px solid rgb(221, 221, 221);
     position: relative;
     display: flex;
-    
+
 }
+
 #itemAskBox h4 {
     font-size: 30px;
     padding-bottom: 20px;
     border-bottom: 1px solid rgb(221, 221, 221);
     font-weight: inherit;
 }
+
 #itemAskImg {
     overflow: hidden;
     width: 25%;
@@ -45,9 +58,11 @@
     justify-content: center;
     align-items: center;
 }
-#itemAskImg img{
+
+#itemAskImg img {
     width: 100%;
 }
+
 #itemAskImg~div {
     width: 75%;
     padding-left: 30px;
@@ -69,7 +84,7 @@
     flex-direction: column;
 }
 
-#itemAskTitle{
+#itemAskTitle {
     position: relative;
     display: flex;
     text-align: center;
@@ -79,7 +94,7 @@
     align-items: center;
 }
 
-#itemAskTitle div{
+#itemAskTitle div {
     display: flex;
     position: block;
     font-size: 20px;
@@ -102,7 +117,8 @@
     resize: none;
     margin-bottom: 20px;
 }
-#itemAskContent{
+
+#itemAskContent {
     margin-top: 20px;
     position: relative;
     display: flex;
@@ -185,8 +201,8 @@
 
 #itemAskBoxClose {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: -50px;
+    right: 10px;
     background-color: #9B1B30;
     color: #fff;
     font-size: 35px;

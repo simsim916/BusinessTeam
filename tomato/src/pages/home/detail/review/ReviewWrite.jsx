@@ -5,7 +5,7 @@ import Loading from './../../../components/Loading';
 import Error from './../../../components/Error';
 import axios from 'axios';
 
-const ReviewWrite = ({ item, reviewWriteClick }) => {
+const ReviewWrite = ({ item, refresh, setRefresh }) => {
     const [writeBoxClose, setWriteBoxClose] = useState(true);
     const [score, setScore] = useState(0);
     const [review, setReview] = useState({
@@ -42,7 +42,8 @@ const ReviewWrite = ({ item, reviewWriteClick }) => {
             setLoading(false);
             setError(true);
         });
-        reviewWriteBoxClose();
+        setRefresh(!refresh);
+        reviewWriteBoxClose()
     }
 
     const changeFile = (e) => {
@@ -76,7 +77,6 @@ const ReviewWrite = ({ item, reviewWriteClick }) => {
     }
 
     const reviewWriteBoxClose = () => {
-        reviewWriteClick();
         setWriteBoxClose(!writeBoxClose);
     }
     return (

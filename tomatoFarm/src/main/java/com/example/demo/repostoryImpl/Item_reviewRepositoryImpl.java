@@ -1,8 +1,6 @@
 package com.example.demo.repostoryImpl;
 
-import static com.example.demo.entity.QItem.item;
 import static com.example.demo.entity.QItem_review.item_review;
-import static com.example.demo.entity.Qitem_event.item_event;
 
 import java.util.List;
 
@@ -11,13 +9,11 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.domain.ItemDTO;
 import com.example.demo.domain.Item_reviewDTO;
 import com.example.demo.entity.Item_review;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.repository.Item_reviewRepository;
-import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 

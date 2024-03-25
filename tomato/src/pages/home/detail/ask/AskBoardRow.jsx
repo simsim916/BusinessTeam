@@ -1,31 +1,32 @@
-import './AskBoardBox.css';
+import './AskBoardRow.css';
 
 
-const BaordRow = ({ itemAsk }) => {
+const AskBaordRow = ({ itemAsk }) => {
 
-    function showContent() {
+    const showContent = () => {
 
     }
+
     return (
         <div onClick={showContent} className="boardAnswer">
             <div>
                 {
                     itemAsk.privacy == 1 ?
-                        <i class="fa-solid fa-lock"></i>
-                        : <i class="fa-solid fa-lock-open"></i>
+                        <i className="fa-solid fa-lock"></i>
+                        : <i className="fa-solid fa-lock-open"></i>
                 }
             </div>
-            <div>미답변</div>
-            <div>{itemAsk.title}</div>
-            <div>{itemAsk.writer}</div>
-            <div>{itemAsk.regdate}</div>
-            <div class="askContents">{itemAsk.content}
-                <a>답변</a>
-                <a>삭제</a>
+            <div className="boardAnswer_reply">미답변</div>
+            <div className="boardAnswer_title">{itemAsk.title}</div>
+            <div className="boardAnswer_writer">{itemAsk.writer}</div>
+            <div className="boardAnswer_regdate">{itemAsk.regdate}</div>
+            <div className="boardAnswer_content">{itemAsk.content}
+                {/* <a>답변</a>
+                <a>삭제</a> */}
             </div>
         </div>
 
     );
 }
 
-export default BaordRow;
+export default AskBaordRow;

@@ -28,6 +28,15 @@
     width: calc(90vw - 30px);
 }
 
+#reviewWriteBox::-webkit-scrollbar {
+    width: 10px;
+}
+
+#reviewWriteBox::-webkit-scrollbar-thumb {
+    background-color: #9b1b1f70;
+    border-radius: 10px;
+}
+
 #reviewWriteBoxClose {
     position: absolute;
     top: -50px;
@@ -211,4 +220,3 @@
     font-size: 20px;
     border-radius: 10px;
 }
-

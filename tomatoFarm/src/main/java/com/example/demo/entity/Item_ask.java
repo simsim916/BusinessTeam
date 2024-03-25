@@ -28,6 +28,5 @@ public class Item_ask {
 	private String password; 	//비밀번호
 	private String reply;	//답변
 	private Date regdate;	//날짜
-	private int privacy; 	//비공개설정
 
 }
