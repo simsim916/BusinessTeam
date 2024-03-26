@@ -110,6 +110,9 @@ const SelectDataBox = () => {
 
 
 
+    const showItemDetail = (item) => {
+
+    }
 
     return (
         <>
@@ -152,7 +155,7 @@ const SelectDataBox = () => {
                         <div>
                             {searchedList ?
                                 paging()(searchedList, currPage, limit).map((item, rowIndex) => (
-                                    <div className="excelColumn" key={rowIndex}>
+                                    <div onClick={() => showItemDetail(item)} className="excelColumn" key={rowIndex}>
                                         <input id='codeInput' style={{ width: `calc((100% - 15px) / ${column.length})` }} type="text" value={item.code} readOnly />
                                         {Object.keys(item).slice(1).map((e, j) => (
                                             <input
@@ -169,14 +172,14 @@ const SelectDataBox = () => {
                                 : <div>데이터가 너무 많습니다. 검색을 통해 조회하세요</div>
                             }
                         </div>
-                        <PagingBox
-                            limit={limit}
-                            list={searchedList}
-                            currPage={currPage}
-                            setCurrPage={setCurrPage} />
                     </div>
                 </div>
             </div>
+            <PagingBox
+                limit={limit}
+                list={searchedList}
+                currPage={currPage}
+                setCurrPage={setCurrPage} />
         </>
     )
 }

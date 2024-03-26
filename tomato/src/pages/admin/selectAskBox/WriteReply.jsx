@@ -20,8 +20,8 @@ const WriteReply = ({ askRow, setClickReply, clickReply }) => {
             ...replyData,
             [name]: value,
             'seq': askRow.seq,
-            'writer': askRow.writer,
-            'regdate': askRow.regdate,
+            // 'writer': askRow.writer,
+            // 'regdate': askRow.regdate,
 
         }));
         console.log(replyData);
@@ -44,7 +44,6 @@ const WriteReply = ({ askRow, setClickReply, clickReply }) => {
 
     return (
         <div id="AskWriteReplyContainer" >
-            <div id="AskBoxClose"><i className="fa-solid fa-xmark"></i></div> 
             <div>
                 <div className="WriteReplyBox">
                     <div className="ReplyTop">

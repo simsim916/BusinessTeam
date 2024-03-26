@@ -36,9 +36,6 @@ public class Itme_askController {
 		ResponseEntity<?> result = null;
 		
 		List<Item_ask> list = item_askService.selectItemAskListIntegerWhereType(pageRequest, searchRequest);
-		for(Item_ask item : list) {
-			System.out.println(item.getItem_code());
-		}
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}
