@@ -9,7 +9,7 @@ import ReviewWrite from './ReviewWrite';
 
 const ReviewBoardBox = ({ item }) => {
     const [itemReviewList, setItemReviewList] = useState(null);
-    const [refresh, setRefrsh] = useState(true);
+    const [refresh, setRefresh] = useState(true);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const [reviewWrite, setReviewWrite] = useState(false);
@@ -66,7 +66,7 @@ const ReviewBoardBox = ({ item }) => {
                     <i className="fa-solid fa-angle-right"></i>
                     <i className="fa-solid fa-angles-right"></i>
                 </div>
-                {reviewWrite ? <ReviewWrite refresh={refresh} setRefrsh={setRefrsh} item={item} reviewWriteClick={reviewWriteClick} /> : null}
+                {reviewWrite ? <ReviewWrite refresh={refresh} setRefresh={setRefresh} item={item} reviewWriteClick={reviewWriteClick} /> : null}
 
             </div>
         </>

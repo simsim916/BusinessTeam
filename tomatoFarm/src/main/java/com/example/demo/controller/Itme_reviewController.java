@@ -48,9 +48,9 @@ public class Itme_reviewController {
 	}
 
 	@PostMapping("/iteminsert")
-	public ResponseEntity<?> iteminsert(HttpServletRequest request, Item_review entity) throws IOException{
+	public ResponseEntity<?> iteminsert(HttpServletRequest request, Item_review entity , @RequestBody Item_review entityJ) throws IOException{
 		ResponseEntity<?> result = null;
-		System.out.println(entity);
+		if (entity != null) {
 		String realPath = request.getRealPath("/");
 		log.info("\n\n\n** realPath => " + realPath);
 		realPath += "\\resources\\img\\itemAskImg\\" + entity.getItem_code() + "\\";
@@ -66,6 +66,10 @@ public class Itme_reviewController {
 			entity.setImage1(entity.getWriter()+"_" +uploadfilef.getOriginalFilename());
 		}
 		result = ResponseEntity.status(HttpStatus.OK).body(item_reviewService.insertItemReview(entity));
+		} else {
+			result = ResponseEntity.status(HttpStatus.OK).body(item_reviewService.insertItemReview(entityJ));
+		}
+		
 		return result;
 	}
 

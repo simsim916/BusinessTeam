@@ -15,7 +15,7 @@ const ReviewWrite = ({ item, refresh, setRefresh }) => {
         contents: '',
         score: '0',
     });
-    const [file, setfile] = useState(null);
+    const [file, setfile] = useState();
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
@@ -23,16 +23,17 @@ const ReviewWrite = ({ item, refresh, setRefresh }) => {
     const submitReview = async () => {
         setLoading(true);
         const formData = new FormData();
-        formData.append('writer', review.writer);
-        formData.append('item_code', review.item_code);
-        formData.append('title', review.title);
-        formData.append('contents', review.contents);
-        formData.append('score', review.score);
-        formData.append('uploadfilef', file);
-
-        await axios.post(`http://localhost:8090/itemreview/iteminsert`, formData, {
+        if (file) {
+            formData.append('writer', review.writer);
+            formData.append('item_code', review.item_code);
+            formData.append('title', review.title);
+            formData.append('contents', review.contents);
+            formData.append('score', review.score);
+            formData.append('uploadfilef', file);
+        }
+        await axios.post(`http://localhost:8090/itemreview/iteminsert`, file ? formData : review, {
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': file ? 'multipart/form-data' : 'application/json'
             }
         }).then(res => {
             setLoading(false);
@@ -43,7 +44,7 @@ const ReviewWrite = ({ item, refresh, setRefresh }) => {
             setError(true);
         });
         setRefresh(!refresh);
-        reviewWriteBoxClose()
+        reviewWriteBoxClose();
     }
 
     const changeFile = (e) => {
@@ -146,7 +147,7 @@ const ReviewWrite = ({ item, refresh, setRefresh }) => {
                                     <p>* 상품 품질과 관계 없는 내용은 비공개 처리 될 수 있습니다</p>
                                     <p>* 작성된 리뷰는 '마이페이지 - 상품 후기 관리' 에서 수정 및 삭제 가능합니다</p>
                                 </div>
-                            </div> 
+                            </div>
                             <div id="reviewWriteButton">
                                 <button onClick={reviewWriteBoxClose} id="reviewWriteCancle">취소</button>
                                 <button onClick={submitReview} id="reviewWriteEnter">등록</button>
