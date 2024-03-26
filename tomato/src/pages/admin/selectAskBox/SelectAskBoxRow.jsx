@@ -7,12 +7,12 @@ const SelectAskBoxRow = ({ ask }) => {
     const currentDate = new Date();
     const [writeReply, setWriteReply] = useState(false);
 
-    const changeWriteReply = () => {
-        setWriteReply(!writeReply);
+    const openWriteReply = (e) => {
+        setWriteReply(true);
     }
 
     return (
-        <div onClick={changeWriteReply}>
+        <div onClick={openWriteReply}>
             <div>{ask.seq}</div>
             <div>
                 {ask.title}
@@ -30,7 +30,7 @@ const SelectAskBoxRow = ({ ask }) => {
             <div>{ask.writer}</div>
             <div>{ask.regdate}</div>
             <div>{ask.privacy === 0 ? '미답변' : '답변'}</div>
-            {writeReply ? <WriteReply ask={ask} changeWriteReply={changeWriteReply} /> : null}
+            {writeReply ? <WriteReply ask={ask} setWriteReply={setWriteReply} /> : null}
         </div>
     );
 }

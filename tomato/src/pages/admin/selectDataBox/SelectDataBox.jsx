@@ -1,5 +1,5 @@
 import "./SelectDataBox.css";
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import Error from '../../components/Error';
 import Loading from '../../components/Loading';
@@ -15,23 +15,25 @@ const SelectDataBox = () => {
         column: 'name',
         keyword: ''
     });
+    const column = useRef(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
     const [itemList, setItemList] = useState(null);
-    const [column, setColumn] = useState(null);
     const [lastSort, setLastSort] = useState(null);
     const [currPage, setCurrPage] = useState(1);
-    const [limit, setLimit] = useState(20);
-    const [searchedList, setSearchedList] = useState();
-    const [listCount, setListCount] = useState();
+    const [limit, setLimit] = useState(25);
 
     useEffect(() => {
         axios.get(`http://localhost:8090/item/allitem`
         ).then(res => {
-            // setItemList(res.data);
+            setItemList(res.data);
             // setSearchedList(null)
-            setColumn(Object.keys(res.data[0]));
-            setListCount(res.data.length);
+            column = (Object.keys(res.data[0]));
+            setLoading(false);
         }).catch(err => {
             console.log(err.message)
+            setLoading(false);
+            setError(true);
         })
     }, [])
 
@@ -48,7 +50,7 @@ const SelectDataBox = () => {
         const columnName = event.target.closest('div').id;
         let sortedList;
         if (columnName != lastSort) {
-            sortedList = [...searchedList].sort((a, b) => {
+            sortedList = [...itemList].sort((a, b) => {
                 if (typeof a[columnName] === 'string' && typeof b[columnName] === 'string') {
                     return a[columnName].localeCompare(b[columnName]);
                 } else {
@@ -57,7 +59,7 @@ const SelectDataBox = () => {
             });
             setLastSort(columnName);
         } else {
-            sortedList = [...searchedList].sort((b, a) => {
+            sortedList = [...itemList].sort((b, a) => {
                 if (typeof a[columnName] === 'string' && typeof b[columnName] === 'string') {
                     return a[columnName].localeCompare(b[columnName]);
                 } else {
@@ -72,7 +74,7 @@ const SelectDataBox = () => {
         } else {
             icon.classList.replace('fa-caret-down', 'fa-caret-up');
         }
-        setSearchedList(sortedList);
+        setItemList(sortedList);
         setCurrPage(1);
     };
 
@@ -84,39 +86,11 @@ const SelectDataBox = () => {
         }));
         console.log(formData);
     };
-
-
-
-    const test = () => {
-        const { column, keyword } = formData;
-        let sortType = 'sales';
-        axios.get(`http://localhost:8090/item/admin`, {
-            params: {
-                column: column,
-                keyword: keyword,
-                sortType: sortType,
-                // size: limit,
-                page: currPage
-            }
-        }
-        ).then(res => {
-            setSearchedList(res.data);
-            console.log((res.data).length);
-            setCurrPage(1);
-        }).catch(err => {
-            console.log(err.message);
-        })
-    }
-
-
-
-    const showItemDetail = (item) => {
-
-    }
-
+    if (loading) return <Loading />
+    if (error) return <Error />
     return (
         <>
-            <div id="excelBox">
+            <div id="excelBox" className="containerA">
                 <div id="topBox">
                     <div>
                         <i className="fa-solid fa-list"></i>&nbsp;&nbsp;식자재 조회
@@ -133,51 +107,45 @@ const SelectDataBox = () => {
                         &nbsp;&nbsp;
                     </div>
                     <div id="topButtonBox">
-                        {/* <form> */}
                         <select name="column" id="column" onChange={searchBoxChange}>
-                            <option value="item.code">코드</option>
-                            <option value="item.name">상품이름</option>
-                            <option value="brand">브랜드명</option>
-                            <option value="sort1">대분류</option>
-                            <option value="sort2">중분류</option>
-                            <option value="sort3">소분류</option>
+                            {Object.keys(itemList[0]).map((e, i) => (<option key={i} value={e}>{e}</option>))}
                         </select>
                         <input type="text" name="keyword" onChange={searchBoxChange} />
-                        <button onClick={test} type="button">검색</button>
-                        {/* </form> */}
+                        <button type="button">검색</button>
                     </div>
                 </div>
                 <div id="excelHead">
-                    {column ? column.map((col, i) => <div style={{ width: `calc(100% / ${column.length})` }} id={col} key={i} onClick={sortByColumn}>{col}<i style={{ display: 'inline-block' }} className="fa-solid fa-caret-up"></i></div>) : ""}
+                    {/* {column ? column.map((col, i) => <div id={col} key={i} onClick={sortByColumn}>{col}<i style={{ display: 'inline-block' }} className="fa-solid fa-caret-up"></i></div>) : ""} */}
                 </div>
                 <div id="dataListBox">
                     <div id="dataListBox">
                         <div>
-                            {searchedList ?
-                                paging()(searchedList, currPage, limit).map((item, rowIndex) => (
-                                    <div onClick={() => showItemDetail(item)} className="excelColumn" key={rowIndex}>
-                                        <input id='codeInput' style={{ width: `calc((100% - 15px) / ${column.length})` }} type="text" value={item.code} readOnly />
-                                        {Object.keys(item).slice(1).map((e, j) => (
-                                            <input
-                                                name=""
-                                                style={{ width: `calc((100% - 15px) / ${column.length})` }}
-                                                type="text"
-                                                placeholder={item[e]}
-                                                key={j}
-                                            />
-                                        ))}
-                                    </div>
-                                ))
-                                // : <Loading />
-                                : <div>데이터가 너무 많습니다. 검색을 통해 조회하세요</div>
-                            }
+                            {/* {
+                                itemList ?
+                                    paging()(itemList, currPage, limit).map((item, rowIndex) => (
+                                        <div className="excelColumn" key={rowIndex}>
+                                            <input id='codeInput' type="text" value={item.code} readOnly />
+                                            {Object.keys(item).slice(1).map((e, j) => (
+                                                <input
+                                                    name=""
+                                                    style={{ width: `calc((100% - 15px) / ${column.length})` }}
+                                                    type="text"
+                                                    placeholder={item[e]}
+                                                    key={j}
+                                                />
+                                            ))}
+                                        </div>
+                                    ))
+                                    // : <Loading />
+                                    : <div>데이터가 너무 많습니다. 검색을 통해 조회하세요</div>
+                            } */}
                         </div>
                     </div>
                 </div>
             </div>
             <PagingBox
                 limit={limit}
-                list={searchedList}
+                list={itemList}
                 currPage={currPage}
                 setCurrPage={setCurrPage} />
         </>
