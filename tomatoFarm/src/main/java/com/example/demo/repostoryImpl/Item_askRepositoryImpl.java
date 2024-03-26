@@ -1,6 +1,10 @@
 package com.example.demo.repostoryImpl;
 
+import static com.example.demo.entity.QItem_ask.item_ask;
+
 import java.util.List;
+
+import javax.persistence.EntityManager;
 
 import org.springframework.stereotype.Repository;
 
@@ -11,8 +15,6 @@ import com.example.demo.repository.Item_askRepository;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
-import static com.example.demo.entity.QItem_ask.item_ask;
-
 import lombok.AllArgsConstructor;
 
 
@@ -21,6 +23,7 @@ import lombok.AllArgsConstructor;
 public class Item_askRepositoryImpl implements Item_askRepository{
 	
 	private final JPAQueryFactory jPAQueryFactory;
+	private final EntityManager entityManager;
 
 	@Override
 	// ** 상품 리뷰 조회
@@ -37,10 +40,18 @@ public class Item_askRepositoryImpl implements Item_askRepository{
 	public List<Item_ask> selectItemAskListIntegerWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
 		return jPAQueryFactory
 				.selectFrom(item_ask)
-				.where(Expressions.numberPath(Integer.class,searchRequest.getColumn()).stringValue().eq(searchRequest.getKeyword()))
+//				.where(Expressions.numberPath(Integer.class,searchRequest.getColumn()).stringValue().eq(searchRequest.getKeyword()))
 //				.orderBy(item_ask.regdate.desc())
-				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum())
+//				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum())
 				.fetch();
+	}
+	
+	public int updateItemAsk(Item_ask entity) {
+		return entityManager
+		.createNativeQuery("UPDATE item_ask set reply=?,privacy=1 WHERE seq=?")
+		.setParameter(1, entity.getReply())
+		.setParameter(2, entity.getSeq())
+		.executeUpdate();
 	}
 	
 	

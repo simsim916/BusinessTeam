@@ -3,21 +3,23 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.domain.ItemDTO;
 import com.example.demo.domain.SortDTO;
+import com.example.demo.entity.Item;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.service.ItemService;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -47,13 +49,14 @@ public class ItemController {
 		return result;
 	}
 
-	@GetMapping("/branditem/{keyword}")
-	public ResponseEntity<?> selectItemWherebrand(@PathVariable("keyword") String keyword) {
+	@GetMapping("/searchtype")
+	public ResponseEntity<?> selectItemWherebrand(SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
 		PageRequest pageRequest = new PageRequest(1, 6);
-		SearchRequest searchRequest = new SearchRequest(keyword);
+		System.out.println("\nselectItemWherebrand\n");
 
 		List<ItemDTO> list = itemService.selectItemWherebrand(pageRequest, searchRequest);
+		System.out.println(list);
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}
@@ -62,7 +65,6 @@ public class ItemController {
 	@GetMapping("/search")
 	public ResponseEntity<?> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
-		System.out.println(pageRequest);
 		List<ItemDTO> list = itemService.selectItemWhereSearchType(pageRequest, searchRequest);
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
@@ -115,29 +117,39 @@ public class ItemController {
 		return result;
 	}
 
-	@PostMapping(value = "/insert")
-//    @GetMapping("/insert")
-	public ResponseEntity<?> insertItem(ItemDTO entity) {
-		System.out.println("getCode => " + entity.getCode());
-		System.out.println("getAdmin => " + entity.getAdmin());
-		System.out.println("getSort1 => " + entity.getSort1());
-		System.out.println("getLikes => " + entity.getLikes());
-		ResponseEntity<?> result = null;
-//        itemService.insertItem(entity);
-		result = ResponseEntity.status(HttpStatus.OK).body("insert성공");
+    @PostMapping(value="/insert")
+    public ResponseEntity<?> insertItem(@RequestBody List<Item> entity) {
+    	ResponseEntity<?> result = null;
+    	for(Item e : entity) {
+    		System.out.println(e.getCode());
+    	}
+//    	System.out.println("****" + entity.getCode());
+//      itemService.insertItem(entity);
+        result = ResponseEntity.status(HttpStatus.OK).body("insert성공");
+        return result;
+    }
+    
+    @GetMapping("/admin")
+    public ResponseEntity<?> adminStringColumn(SearchRequest searchRequest,PageRequest pageRequest) {
+    	System.out.println("getColumn => " +searchRequest.getColumn());
+    	System.out.println("getKeyword => " +searchRequest.getKeyword());
+    	pageRequest.setStartEndNum(pageRequest.getPage());
+    	String column = searchRequest.getColumn();
+    	String keyword = searchRequest.getKeyword();
+    	List<ItemDTO> itemList = null;
+        // 숫자 여부를 확인해서 Expression.stringPath OR numPath 메서드 지정해주기
+        if (keyword.matches("[-+]?\\d*\\.?\\d+")) {
+        	itemList = itemService.adminIntegerColumn(searchRequest,pageRequest);
+        	System.out.println("IntegerColumn");
+        } else {
+        	System.out.println("StringColumn");
+        	itemList = itemService.adminStringColumn(searchRequest,pageRequest);
+        }
+    	ResponseEntity<?> result = null;
+    	result = ResponseEntity.status(HttpStatus.OK).body(itemList);
 		return result;
-	}
+    }
+    
 
-	// 테스트 메서드야 지워도 돼
-	@PostMapping("/test")
-	public void test(ItemDTO entity) {
-		System.out.println("*************************************");
-		System.out.println("getCode =>" + entity.getCode());
-		System.out.println("getSort1 =>" + entity.getSort1());
-		System.out.println("getSort1 =>" + entity.getSort1());
-		System.out.println("getSort3 =>" + entity.getSort3());
-		System.out.println("getName =>" + entity.getName());
-		System.out.println("*************************************");
-	}
-
+	
 }

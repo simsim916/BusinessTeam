@@ -2,11 +2,15 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,10 +34,23 @@ public class Itme_askController {
 	@GetMapping("/select")
 	public ResponseEntity<?> selectItem_askList(PageRequest pageRequest, SearchRequest searchRequest){
 		ResponseEntity<?> result = null;
-		
+		System.out.println(searchRequest);
 		List<Item_ask> list = item_askService.selectItemAskListIntegerWhereType(pageRequest, searchRequest);
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
+	}
+	
+	@Transactional
+	@PostMapping("/update")
+	public void updateAskReply(@RequestBody Item_ask entity) {
+		System.out.println("getSeq => " + entity.getSeq());
+		System.out.println("getReply => " +entity.getReply());
+		if(item_askService.updateItemAsk(entity) > 0) {
+			System.out.println("업데이트 성공~~");
+		} else {
+			System.out.println("실패 ~~");
+		}
+		
 	}
 }
 	

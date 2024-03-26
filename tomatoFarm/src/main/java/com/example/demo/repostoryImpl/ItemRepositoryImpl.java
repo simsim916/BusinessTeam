@@ -119,6 +119,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 	// ** 키워드 상품 페이징 조회
 	public List<ItemDTO> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest) {
 		return jPAQueryFactory
+				
 				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price,
 						item.sales, item.stock, item.views, item.likes, item.event_code, item_event.discount,
 						item_event.name.as("event_name")))
@@ -192,7 +193,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 				.select(Projections.bean(ItemDTO.class, item.code, item.sort1, item.sort2, item.sort3, item.brand,
 						item.name, item.weight, item.storage, item.packing, item.delivery, item.price, item.vat,
 						item.origin, item.stock, item.admin))
-				.from(item).offset(0).limit(500).orderBy(item.sales.desc()).fetch();
+				.from(item).offset(0).limit(200).orderBy(item.sales.desc()).fetch();
 	}
 
 	@Override
@@ -200,5 +201,43 @@ public class ItemRepositoryImpl implements ItemRepository {
 	public void insertItem(Item entity) {
 		entityManager.persist(entity);
 	}
-
+	
+	@Override
+	public List<ItemDTO> adminStringColumn(SearchRequest searchRequest,PageRequest pageRequest) {
+		return jPAQueryFactory
+				.select(Projections.bean(ItemDTO.class, item.code, item.sort1, item.sort2, item.sort3, item.brand, item.name, item.delivery, 
+						item.price, item.storage, item.weight, item.packing, item.sales, item.stock, item.views, item.likes, item.event_code,
+						item_event.discount, item_event.name.as("event_name")))
+				.from(item).join(item_event).on(item.event_code.eq(item_event.code))
+				.where(Expressions.stringPath(searchRequest.getColumn()).contains(searchRequest.getKeyword()))
+//				.limit(pageRequest.getSize()).offset(pageRequest.getStartNum())
+				.orderBy(getSortType(searchRequest))
+//				.orderBy(Expressions.numberPath(Integer.class ,searchRequest.getColumn()).desc())
+//				.orderBy(Expressions.stringPath(searchRequest.getColumn()).desc())
+//				Expressions.stringPath(searchRequest.getColumn()) <<= 이걸로 정렬 기능은 안되는거 같은데 내 코드 문제인가?
+				.fetch();
+	}
+	
+	@Override
+	public List<ItemDTO> adminIntegerColumn(SearchRequest searchRequest, PageRequest pageRequest) {
+		return jPAQueryFactory
+				.select(Projections.bean(ItemDTO.class, item.code, item.sort1, item.sort2, item.sort3, item.brand, item.name, item.delivery, 
+						item.price, item.storage, item.weight, item.packing, item.sales, item.stock, item.views, item.likes, item.event_code,
+						item_event.discount, item_event.name.as("event_name")))
+				.from(item).join(item_event).on(item.event_code.eq(item_event.code))
+				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue().contains(searchRequest.getKeyword()))
+				.limit(pageRequest.getSize()).offset(pageRequest.getStartNum())
+				.orderBy(getSortType(searchRequest))
+				.fetch();
+	}
+	
+	@Override
+	public int itemListCount() {
+		// TODO Auto-generated method stub
+		return (int) jPAQueryFactory
+				.selectFrom(item)
+				.fetchCount();
+	}
+	
+	
 }

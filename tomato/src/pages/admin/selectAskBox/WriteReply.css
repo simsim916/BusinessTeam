@@ -1,0 +1,121 @@
+#AskWriteReplyContainer {
+    background-color: #9999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    display: flex;
+}
+
+.WriteReplyBox {
+    background-color: white;
+    height: 1000px;
+    max-height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    width: 750px;
+}
+
+.replyTop {
+    display: flex;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.432);
+    border-top: 1px solid rgba(128, 128, 128, 0.432);
+    height: 150px;
+}
+
+#AskWriteReplyContainer .productIMG {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#AskWriteReplyContainer .productIMG img {
+    width: 130%;
+}
+
+#AskWriteReplyContainer .itemIntro {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0 10px;
+}
+
+#AskWriteReplyContainer .itemIntro label {
+    width: 50%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+#AskWriteReplyContainer .itemIntro input {
+    text-align: center;
+    border-radius: 7px;
+    height: 30px;
+    border: none;
+    width: 60%;
+}
+
+#AskWriteReplyContainer .replyDetailBox {
+    display: flex;
+    flex-wrap: wrap;
+    height: calc(100% - 150px - 20px);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+#AskWriteReplyContainer .replyDetailBox label {
+    display: flex;
+    width: 100%;
+    justify-content: right;
+}
+
+
+#AskWriteReplyContainer .replyDetailBox textarea {
+    width: 85%;
+    height: 100%;
+    margin-left: 20px;
+    resize: none;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#AskWriteReplyContainer #writeButton {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+#AskWriteReplyContainer #writeCancle {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(221, 221, 221);
+    padding: 0 15px;
+    display: block;
+    width: 200px;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+#AskWriteReplyContainer #writeEnter {
+    background-color: rgb(221, 221, 221);
+    border: 0px none;
+    padding: 0 15px;
+    display: block;
+    width: 200px;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 10px;
+}

@@ -13,6 +13,6 @@ public interface Item_askRepository {
 
 	List<Item_ask> selectItemAskListStringWhereType(PageRequest pageRequest , SearchRequest searchRequest);
 	List<Item_ask> selectItemAskListIntegerWhereType(PageRequest pageRequest , SearchRequest searchRequest);
-	
+	int updateItemAsk(Item_ask entity);
 
 }

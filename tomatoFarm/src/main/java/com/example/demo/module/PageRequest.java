@@ -26,12 +26,11 @@ public class PageRequest {
 	private int endNum; // 페이지의 나타날 데이터 중 끝데이터 번호
 	private int currPage;
 	
-	public void setStartEndNum(int currPage) {
+	public void setStartEndNum(int page) {
 		if(this.startNum < 1) {
 			this.startNum = 1;
 		}
-		this.startNum = ((this.currPage-1) * (this.size));
-		this.endNum = (startNum+1) * this.size;
+		this.startNum = (page-1)*size;
 	}
 	
 	public PageRequest(int page, int size){

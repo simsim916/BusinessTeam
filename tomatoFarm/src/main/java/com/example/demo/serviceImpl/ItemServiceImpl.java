@@ -61,8 +61,7 @@ public class ItemServiceImpl implements ItemService {
 		List<ItemDTO> result = itemRepository.selectItemWhereSearchType(pageRequest, searchRequest);
 		return result;
 	}
-
-
+	
 	@Override
 	public List<SortDTO> selectSortWhereKeyword(SearchRequest searchRequest) {
 		List<SortDTO> result = itemRepository.selectSortWhereKeyword(searchRequest);
@@ -88,4 +87,20 @@ public class ItemServiceImpl implements ItemService {
 	public void insertItem(Item entity) {
 		itemRepository.insertItem(entity);
 	}
+	
+	@Override
+	public List<ItemDTO> adminStringColumn(SearchRequest searchRequest,PageRequest pageRequest) {
+		return itemRepository.adminStringColumn(searchRequest,pageRequest);
+	}
+	
+	@Override
+	public List<ItemDTO> adminIntegerColumn(SearchRequest searchRequest, PageRequest pageRequest) {
+		return itemRepository.adminIntegerColumn(searchRequest,pageRequest);
+	}
+	
+	@Override
+	public int itemListCount() {
+		return 0;
+	}
+	
 }

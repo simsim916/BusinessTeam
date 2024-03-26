@@ -39,6 +39,17 @@ input[type="number"]::-webkit-inner-spin-button {
     position: relative;
 }
 
+#adminContents {
+    width: calc(100vw - 30px - 100px);
+    margin-left: 100px;
+}
+
+.containerA {
+    width: calc(100% - 30px);
+    margin: auto;
+    position: relative;
+}
+
 .hide {
     visibility: hidden !important;
     margin-top: 200px !important;

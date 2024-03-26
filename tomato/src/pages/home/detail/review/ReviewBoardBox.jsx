@@ -5,6 +5,7 @@ import Loading from './../../../components/Loading';
 import Error from './../../../components/Error';
 import ReviewContent from './ReviewBoardRow';
 import ReviewWriteForm from './ReviewWrite';
+import PagingBox from '../../../admin/PagingBox';
 
 
 const ReviewBoardBox = ({ item }) => {
@@ -12,6 +13,9 @@ const ReviewBoardBox = ({ item }) => {
     const [itemReviewList, setItemReviewList] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
+    const [currPage, setCurrPage] = useState(1);
+    const [limit, setLimit] = useState(5);
+    const [pagingList, setPagingList] = useState(null);
 
     const [reviewWrite, setReviewWrite] = useState(false);
 
@@ -19,6 +23,7 @@ const ReviewBoardBox = ({ item }) => {
         axios.get(`http://localhost:8090/itemreview/select?column=item_code&keyword=${item.code}`
         ).then(res => {
             setItemReviewList(res.data);
+            setPagingList(res.data);
             setLoading(false);
         }).catch(err => {
             console.log(err.message)
@@ -32,6 +37,12 @@ const ReviewBoardBox = ({ item }) => {
 
     const reviewWriteClick = () => {
         setReviewWrite(!reviewWrite);
+    }
+
+    const paging = () => (list, pageNum, size) => {
+        const start = size * (pageNum - 1);
+        const end = pageNum * size;
+        return list.slice(start, end);
     }
 
     return (
@@ -49,18 +60,16 @@ const ReviewBoardBox = ({ item }) => {
                     </div>
                 </div>
 
-                {itemReviewList ? (itemReviewList.slice(0, 5).map((e, i) => <ReviewContent itemReview={e} key={i} />)) : ('')}
+                {pagingList ?
+                    paging()(pagingList, currPage, limit).map((e, i) => <ReviewContent itemReview={e} key={i} />)
+                    : ''}
 
-
-                <div id="reviewBoardBtn">
-                    <i className="fa-solid fa-angles-left"></i>
-                    <i className="fa-solid fa-angle-left"></i>
-                    <span> 1 </span>
-                    <span> 2 </span>
-                    <span> 3 </span>
-                    <i className="fa-solid fa-angle-right"></i>
-                    <i className="fa-solid fa-angles-right"></i>
-                </div>
+                <PagingBox
+                    limit={limit}
+                    list={itemReviewList}
+                    currPage={currPage}
+                    setCurrPage={setCurrPage}
+                />
                 {reviewWrite ? <ReviewWriteForm item={item} reviewWriteClick={reviewWriteClick} /> : null}
 
             </div>

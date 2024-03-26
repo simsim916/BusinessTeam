@@ -1,18 +1,26 @@
+import { useState } from "react";
 import "./Admin.css";
-import InsertDataBox from "./InsertDataBox";
-import SelectDataBox from "./SelectDataBox";
-import SideMenu from "./SideMenu";
+import InsertDataBox from "./insertDataBox/InsertDataBox";
+import SelectDataBox from "./selectDataBox/SelectDataBox";
+import SideMenu from './sideMenu/SideMenu';
+import SelectAskBox from "./selectAskBox/SelectAskBox";
+import { Route, Routes } from 'react-router-dom';
 
 
 
 
 const Admin = () => {
+
+
     return (
         <>
             <SideMenu />
-            <div id="containerYH">
-                {/* <InsertDataBox /> */}
-                <SelectDataBox />
+            <div id="adminContents">
+                <Routes>
+                    <Route path='/select' element={<SelectDataBox />} />
+                    <Route path='/insert' element={<InsertDataBox />} />
+                    <Route path='/ask' element={<SelectAskBox />} />
+                </Routes>
             </div>
         </>
     );

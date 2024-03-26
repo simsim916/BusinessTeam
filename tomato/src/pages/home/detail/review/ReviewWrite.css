@@ -11,9 +11,12 @@
     z-index: 10;
 }
 
+#reviewWriteForm>div {
+    position: relative;
+}
+
 #reviewWriteBox {
     background-color: white;
-    position: fixed;
     height: 1000px;
     max-height: 80vh;
     overflow-y: auto;
@@ -23,6 +26,19 @@
     padding: 50px;
     max-width: 1000px;
     width: calc(90vw - 30px);
+}
+
+#reviewWriteBoxClose {
+    position: absolute;
+    top: -50px;
+    right: 10px;
+    background-color: #9B1B30;
+    color: #fff;
+    font-size: 35px;
+    width: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 10px;
 }
 
 #reviewWriteBox h4 {
@@ -196,15 +212,3 @@
     border-radius: 10px;
 }
 
-#reviewWriteBoxClose {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background-color: #9B1B30;
-    color: #fff;
-    font-size: 35px;
-    width: 40px;
-    line-height: 40px;
-    text-align: center;
-    border-radius: 10px;
-}
