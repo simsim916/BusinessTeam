@@ -18,4 +18,6 @@ public interface UserRepository{
 	public User selectUser(UserDTO dto);
 	
 	public int insertUser(UserDTO dto);
+	
+	public User updateUser(User entity);
 }

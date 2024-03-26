@@ -53,30 +53,20 @@ public class UserController {
 	
 	
 	@PostMapping("/signup")
-	public ResponseEntity<?> singup(@RequestBody UserDTO dto) {
+	public ResponseEntity<?> singup(@RequestBody User entity) {
 		ResponseEntity<?> result = null;
 		
-		System.out.println("\n***************\n");
-		System.out.println("getId => " + dto.getId());
-		System.out.println("password => " + dto.getPassword());
-		System.out.println("getName => " + dto.getUsername());
-		System.out.println("getPhonenumber => " + dto.getPhonenumber());
-		System.out.println("getAddress2 => " + dto.getAddress2());
-		
-		
-		String password = dto.getPassword();
+		String password = entity.getPassword();
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		
-		dto.setPassword(encoder.encode(password));
+		entity.setPassword(encoder.encode(password));
 		
-		if(userService.insertUser(dto)>0) {
+		if(userService.updateUser(entity) != null) {
 			result = ResponseEntity.status(HttpStatus.OK).body("signUp_successed");
 		}else {
 			result = ResponseEntity.status(HttpStatus.OK).body("signUp_failed");
 		}
 		return result;	
-		
-		
 	}
 	
 	

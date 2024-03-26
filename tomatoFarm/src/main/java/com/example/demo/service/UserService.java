@@ -28,6 +28,8 @@ public interface UserService {
 	
 	public int insertUser(UserDTO dto);
 	
+	public User updateUser(User entity);
+	
 //	=================================
 	
 }

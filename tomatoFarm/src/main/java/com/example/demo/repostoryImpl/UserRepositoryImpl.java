@@ -53,7 +53,11 @@ public class UserRepositoryImpl implements UserRepository {
 					.executeUpdate();
 	}
 
-	
+	@Override
+	@Transactional
+	public User updateUser(User entity) {
+		return entityManager.merge(entity);
+	}
 	
 	
 
