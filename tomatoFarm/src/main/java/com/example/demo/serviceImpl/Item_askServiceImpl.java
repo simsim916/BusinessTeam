@@ -35,17 +35,9 @@ public class Item_askServiceImpl implements Item_askService{
 	public Item_ask updateAsk(Item_ask entity) {
 		return item_askRepository.updateItemAsk(entity);
 	}
+
+
 	
-	@Override
-	//**상품문의 등록
-	public int insertItemAsk(Item_askDTO dto) {
-		
-		LocalDateTime currentDateTime = LocalDateTime.now();
-		
-		dto.setRegdate(currentDateTime);
-		
-		return item_askRepository.insertItemAsk(dto);
-	}
 	
 }
 	

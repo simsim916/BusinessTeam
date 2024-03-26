@@ -53,22 +53,6 @@ public class Item_askRepositoryImpl implements Item_askRepository{
 	public Item_ask updateItemAsk(Item_ask entity) {
 		return entityManager.merge(entity);
 	}
+
 	
-	@Transactional
-	@Override
-	//** 상품문의 등록
-	public int insertItemAsk(Item_askDTO dto) {
-			return entityManager
-					.createNativeQuery("INSERT INTO item_ask(item_code, writer, title"
-							+ ", contents, password, reply, regdate) "
-							+ "VALUES(?,?,?,?,?,?,?)")
-					.setParameter(1, dto.getItem_code())
-					.setParameter(2, dto.getWriter())
-					.setParameter(3, dto.getTitle())
-					.setParameter(4, dto.getContents())
-					.setParameter(5, dto.getPassword())
-					.setParameter(6, dto.getReply())
-					.setParameter(7, dto.getRegdate())
-					.executeUpdate();
-	}
 }

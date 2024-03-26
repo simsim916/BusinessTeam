@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -43,16 +45,17 @@ public class Itme_askController {
 		return result;
 	}
 	
-	@PostMapping("/askinsert")
-	public ResponseEntity<?>askinsert(@RequestBody Item_askDTO dto){
+	@Transactional
+	@PostMapping("/update")
+	public ResponseEntity<?>askinsert(@RequestBody Item_ask entity){
 		ResponseEntity<?> result = null;
-		if(dto.getPassword() != null) {
-			String password = dto.getPassword();
+		if(entity.getPassword() != null) {
+			String password = entity.getPassword();
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-			dto.setPassword(encoder.encode(password));
-			result = ResponseEntity.status(HttpStatus.OK).body(item_askService.insertItemAsk(dto));
+			entity.setPassword(encoder.encode(password));
+			result = ResponseEntity.status(HttpStatus.OK).body(item_askService.updateAsk(entity));
 		} else {
-			result = ResponseEntity.status(HttpStatus.OK).body(item_askService.insertItemAsk(dto));
+			result = ResponseEntity.status(HttpStatus.OK).body(item_askService.updateAsk(entity));
 		}
 		return result;
 	}
@@ -73,22 +76,14 @@ public class Itme_askController {
 		if(dto.getPassword() != null) {
 			String password = dto.getPassword();
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-			dto.setPassword(encoder.encode(seq));
+			dto.setPassword(encoder.encode(password));
 		}
 		
 		
 		return result;
 	}
 	
-	@Transactional
-	@PostMapping("/update")
-	public void updateAsk(@RequestBody Item_ask entity) {
-		if(item_askService.updateAsk(entity) != null) {
-			System.out.println("업데이트 성공~~");
-		} else {
-			System.out.println("실패 ~~");
-		}
-	}
+
 }
 	
 	

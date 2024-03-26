@@ -55,51 +55,16 @@ public class Itme_reviewController {
 			// => 저장폴더가 존재하지 않는경우 만들어줌
 			file.mkdir();
 		}
-//
-//		file = new File(realPath + "basicman1.jpg"); // uploadImages 폴더에 화일존재 확인을 위함
-//		if (!file.isFile()) { // 존재하지않는 경우
-//			String basicImagePath = "C:\\MTest\\MyWork\\demoM\\src\\main\\webapp\\resources\\images\\basicman1.jpg";
-//			FileInputStream fi = new FileInputStream(new File(basicImagePath));
-//			// => basicImage 읽어 파일 입력바이트스트림 생성
-//			FileOutputStream fo = new FileOutputStream(file);
-//			// => 목적지 파일(realPath+"basicman1.jpg") 출력바이트스트림 생성
-//			FileCopyUtils.copy(fi, fo);
-//		}
-//
-//		// 1.4) 저장경로 완성
-//		// => 기본 이미지 저장
-//		String file1 = "", file2 = "basicman1.jpg";
-//
-//		MultipartFile uploadfilef = entity.getUploadfilef();
-//		if (uploadfilef != null && !uploadfilef.isEmpty()) {
-//			// => image_File 을 선택함
-//			// 1.4.1) 물리적위치 저장 (file1)
-//			file1 = realPath + uploadfilef.getOriginalFilename(); // 저장경로(relaPath+화일명) 완성
-//			uploadfilef.transferTo(new File(file1)); // 해당경로에 저장(붙여넣기)
-//
-//			// 1.4.2) Table 저장경로 완성 (file2)
-//			file2 = uploadfilef.getOriginalFilename();
-//		}
-//		// --------------------------------------------
-//
-//		entity.setUploadfile(file2);
-//		// 2. Service & 결과
-//		// => PasswordEncoder 적용
-//		entity.setPassword(passwordEncoder.encode(entity.getPassword()));
 
-		result = ResponseEntity.status(HttpStatus.OK).body(item_reviewService.insertItemReview(entity));
+		result = ResponseEntity.status(HttpStatus.OK).body(item_reviewService.updateReview(entity));
 		return result;
 	}
 	
 	@PostMapping("/replyUpdate")
-	public ResponseEntity<?> replyUpdate(@RequestBody Item_reviewDTO dto) {
+	public ResponseEntity<?> replyUpdate(@RequestBody Item_review entity) {
 		ResponseEntity<?> result = null;
-		System.out.println(dto);
-		
-		
-		
-		
-		result = ResponseEntity.status(HttpStatus.OK).body(item_reviewService.insertItemReview(dto));
+		System.out.println(entity);
+		result = ResponseEntity.status(HttpStatus.OK).body(item_reviewService.updateReview(entity));
 		return result;
 	}
 	

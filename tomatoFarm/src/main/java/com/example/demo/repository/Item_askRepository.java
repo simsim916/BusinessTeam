@@ -15,6 +15,4 @@ public interface Item_askRepository {
 	List<Item_ask> selectItemAskListStringWhereType(PageRequest pageRequest , SearchRequest searchRequest);
 	List<Item_ask> selectItemAskListIntegerWhereType(PageRequest pageRequest , SearchRequest searchRequest);
 	Item_ask updateItemAsk(Item_ask entity);
-	//** 상품문의 등록
-	int insertItemAsk(Item_askDTO dto);
 }

@@ -17,6 +17,4 @@ public interface Item_askService {
 	
 //	=================================
 	 Item_ask updateAsk(Item_ask entity);
-	//** 상품문의 등록
-	int insertItemAsk(Item_askDTO dto);
 }

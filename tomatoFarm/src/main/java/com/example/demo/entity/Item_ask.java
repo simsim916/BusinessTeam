@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -27,6 +28,6 @@ public class Item_ask {
 	private String contents;	//내용
 	private String password; 	//비밀번호
 	private String reply;	//답변
-	private Date regdate;	//날짜
+	private LocalDateTime regdate;	//날짜
 
 }

@@ -45,27 +45,8 @@ public class Item_reviewRepositoryImpl implements Item_reviewRepository {
 				.fetch();
 	}
 	
-	@Transactional
 	@Override
-	//** 상품리뷰 등록
-	public int insertItemReview(Item_review entity) {
-		return entityManager
-				.createNativeQuery("INSERT INTO item_review(item_code, writer, title"
-									+ ", contents, score, regdate, image1, image2, image3) "
-									+ "VALUES(?,?,?,?,?,?,?,?,?)")
-				.setParameter(1, entity.getItem_code())
-				.setParameter(2, entity.getWriter())
-				.setParameter(3, entity.getTitle())
-				.setParameter(4, entity.getContents())
-				.setParameter(5, entity.getScore())
-				.setParameter(6, entity.getRegdate())
-				.setParameter(7, entity.getImage1())
-				.setParameter(8, entity.getImage2())
-				.setParameter(9, entity.getImage3())
-				.executeUpdate();
-		
-	}
-	
+	@Transactional
 	public Item_review updateReview(Item_review entity) {
 		return entityManager.merge(entity);
 	}
