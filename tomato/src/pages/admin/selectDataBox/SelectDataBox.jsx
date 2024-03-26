@@ -4,12 +4,11 @@ import axios from 'axios';
 import Error from '../../components/Error';
 import Loading from '../../components/Loading';
 import PagingBox from "../PagingBox";
+import SelectDataBoxRow from './SelectDataBoxRow';
 
 const SelectDataBox = () => {
 
     console.log(`SelectDataBox 렌더링`);
-    // admin 페이지 들어오면 이 컴포넌트가 최초로 보이도록 해뒀다.
-    // 근데 페이지에 들어오면 렌더링이 두번일어나는데 이유가 뭘까?
 
     const [formData, setFormData] = useState({
         column: 'name',
@@ -22,13 +21,13 @@ const SelectDataBox = () => {
     const [lastSort, setLastSort] = useState(null);
     const [currPage, setCurrPage] = useState(1);
     const [limit, setLimit] = useState(25);
+    const itemForm = useRef([]);
 
     useEffect(() => {
         axios.get(`http://localhost:8090/item/allitem`
         ).then(res => {
             setItemList(res.data);
-            // setSearchedList(null)
-            column = (Object.keys(res.data[0]));
+            column.current = (Object.keys(res.data[0]));
             setLoading(false);
         }).catch(err => {
             console.log(err.message)
@@ -37,6 +36,17 @@ const SelectDataBox = () => {
         })
     }, [])
 
+    const changeItemList = (data) => {
+        let item = itemList.filter((e) => e[column.current[0]] == data[column.current[0]]);
+        setItemList((itemList) => [
+            ...itemList,
+            data
+        ])
+        let item2 = itemList.filter((e) => e[column.current[0]] == data[column.current[0]]);
+        console.log(item)
+        console.log(item2)
+        console.log(itemList)
+    }
 
     const paging = () => (list, pageNum, size) => {
         if (list != null) {
@@ -68,7 +78,7 @@ const SelectDataBox = () => {
             });
             setLastSort(null);
         }
-        const icon = event.target;
+        const icon = event.target.closest('div').children[0];
         if (icon.classList.contains('fa-caret-up')) {
             icon.classList.replace('fa-caret-up', 'fa-caret-down');
         } else {
@@ -93,56 +103,30 @@ const SelectDataBox = () => {
             <div id="excelBox" className="containerA">
                 <div id="topBox">
                     <div>
-                        <i className="fa-solid fa-list"></i>&nbsp;&nbsp;식자재 조회
-                        &nbsp;&nbsp;
-                        <select name="" id="">
-                            <option value="밀키트">밀키트</option>
-                            <option value="식재료">식재료</option>
-                        </select>
-                        &nbsp;&nbsp;
-                        <select name="" id="">
-                            <option value="">--------</option>
-                            <option value="">--------</option>
-                        </select>
+                        <h3>
+                            <i className="fa-solid fa-list"></i>자료 조회
+                        </h3>
                         &nbsp;&nbsp;
                     </div>
-                    <div id="topButtonBox">
+                    <form id="topButtonBox">
                         <select name="column" id="column" onChange={searchBoxChange}>
                             {Object.keys(itemList[0]).map((e, i) => (<option key={i} value={e}>{e}</option>))}
                         </select>
                         <input type="text" name="keyword" onChange={searchBoxChange} />
                         <button type="button">검색</button>
-                    </div>
-                </div>
-                <div id="excelHead">
-                    {/* {column ? column.map((col, i) => <div id={col} key={i} onClick={sortByColumn}>{col}<i style={{ display: 'inline-block' }} className="fa-solid fa-caret-up"></i></div>) : ""} */}
+                    </form>
                 </div>
                 <div id="dataListBox">
-                    <div id="dataListBox">
-                        <div>
-                            {/* {
-                                itemList ?
-                                    paging()(itemList, currPage, limit).map((item, rowIndex) => (
-                                        <div className="excelColumn" key={rowIndex}>
-                                            <input id='codeInput' type="text" value={item.code} readOnly />
-                                            {Object.keys(item).slice(1).map((e, j) => (
-                                                <input
-                                                    name=""
-                                                    style={{ width: `calc((100% - 15px) / ${column.length})` }}
-                                                    type="text"
-                                                    placeholder={item[e]}
-                                                    key={j}
-                                                />
-                                            ))}
-                                        </div>
-                                    ))
-                                    // : <Loading />
-                                    : <div>데이터가 너무 많습니다. 검색을 통해 조회하세요</div>
-                            } */}
-                        </div>
+                    <div id="excelHead" style={{ width: `${column.current.length * 150}px` }}>
+                        {column.current ? column.current.map((col, i) => <div id={col} key={i} onClick={sortByColumn}>{col}<i className="fa-solid fa-caret-up"></i></div>) : ""}
+                    </div>
+                    <div>
+                        {
+                            paging()(itemList, currPage, limit).map((e, i) => (<SelectDataBoxRow changeItemList={changeItemList} column={column} item={e} key={i} />))
+                        }
                     </div>
                 </div>
-            </div>
+            </div >
             <PagingBox
                 limit={limit}
                 list={itemList}

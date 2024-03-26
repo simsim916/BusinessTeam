@@ -1,5 +1,13 @@
-#excelBox {
-    margin-top: 30px;
+#topBox {
+    height: 40px;
+}
+
+#topBox h3 {
+    font-size: 1.5em;
+}
+
+#topBox h3 i {
+    margin-right: 10px;
 }
 
 #topButtonBox input {
@@ -7,67 +15,52 @@
     height: 30px;
 }
 
+#topButtonBox {
+    height: 30px;
+    gap: 10px;
+    font-size: 16px;
+}
+
 #topButtonBox select {
     width: 80px;
     text-indent: 10px;
 }
 
-#topButtonBox button{
+#topButtonBox button {
     width: 50px;
-}
-
-#topButtonBox {
-    gap: 10px;
-    font-size: 16px;
-}
-
-#topButtonBox>form {
-    display: flex;
-    gap: 20px;
-}
-
-#topButtonBox>div #topBox>div {
-    font-size: 20px;
-}
-
-#topBox>div>button {
     padding: 2px;
     background-color: #9B1B30;
     color: white;
 }
 
-
-#pagingBox {
-    display: flex;
-    gap: 50px;
-    margin: 30px auto;
-    width: 500px;
-}
-
 #dataListBox {
-    height: 700px;
-    overflow-x: hidden;
+    height: 100%;
+    overflow-x: auto;
 }
 
 #excelHead {
     display: flex;
-    width: 100%;
-    white-space: nowrap;
 }
 
 #excelHead>div {
     text-align: center;
     background-color: rgba(128, 128, 128, 0.336);
     border-color: #00000040;
-    width: 50px;
-    position: initial;
+    width: 150px;
+    display: inline-block;
+    position: relative;
+}
+
+#excelHead>div>i {
+    position: absolute;
+    right: 5px;
+    top: 5px;
 }
 
 .excelColumn {
     display: flex;
     border-width: 1px;
     border-color: #00000040;
-    width: calc(100vw - 100px - 20px);
 }
 
 
@@ -79,8 +72,16 @@
     text-indent: 5px;
     border-right: 1px;
     border-bottom: 1px;
+    width: 150px;
 }
 
 input:focus {
     outline: none;
+}
+
+#pagingBox {
+    display: flex;
+    gap: 50px;
+    margin: 30px auto;
+    width: 500px;
 }
