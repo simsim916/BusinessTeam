@@ -2,6 +2,8 @@ package com.example.demo.repostoryImpl;
 
 import static com.example.demo.entity.QItem_ask.item_ask;
 
+import static com.example.demo.entity.QItem_ask.item_ask;
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -47,10 +49,11 @@ public class Item_askRepositoryImpl implements Item_askRepository{
 				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum())
 				.fetch();
 	}
-
+	
 	@Override
 	public Item_ask updateItemAsk(Item_ask entity) {
-        return entityManager.merge(entity);
-    }
+		return entityManager.merge(entity);
+	}
+
 	
 }

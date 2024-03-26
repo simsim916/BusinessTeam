@@ -34,4 +34,8 @@ public class UserServiceImpl implements UserService{
 		return userRepository.insertUser(dto);
 	}
 	
+	@Override
+	public User updateUser(User entity) {
+		return userRepository.updateUser(entity);
+	}
 }
