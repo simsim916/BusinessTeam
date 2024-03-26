@@ -72,15 +72,27 @@ public class Itme_askController {
 	 */
 	@PostMapping("/askpassword")
 	public ResponseEntity<?>askpassword(@RequestBody Item_askDTO dto){
-		ResponseEntity<?> result = null;
-		if(dto.getPassword() != null) {
-			String password = dto.getPassword();
-			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-			dto.setPassword(encoder.encode(password));
+		try {
+			if(dto.getPassword() != null && dto.getSeq() != null) {
+				BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+				String password = encoder.encode(dto.getPassword());
+				
+				boolean passwordMatch = encoder.matches(dto.getSeq(), passwordMatch);
+			
+				if(passwordMatch) {
+				
+				}else {
+					
+				}
+			}else {
+				
+			}
+		} catch (Exception e) {
+			
 		}
 		
 		
-		return result;
+		return null;
 	}
 	
 }
