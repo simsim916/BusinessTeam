@@ -28,20 +28,20 @@ const AddDataHead = () => {
     const insertAll = () => {
         console.log(formData);
         axios.post(`http://localhost:8090/item/insert`, [{
-            code : "1",
-            sort1 : "a"
+            code: "1",
+            sort1: "a"
         },
         {
             code: "2",
             sort1: "b"
         }
-    ]
-        , {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => console.log(res.data)
-        ).catch(err => console.log(err.message));
+        ]
+            , {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => console.log(res.data)
+            ).catch(err => console.log(err.message));
     }
 
 
@@ -63,7 +63,7 @@ const AddDataHead = () => {
 
 
     return (
-        <div id="excelBox">
+        <div id="excelBox" className="containerA">
             <div id="topBox">
                 <div style={{ fontWeight: 'bold' }}><i className="fa-solid fa-list"></i>&nbsp;&nbsp;식자재 등록</div>
                 <div id="topButtonBox">

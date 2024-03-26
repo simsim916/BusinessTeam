@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import './SideMenu.css'
+import { Link } from 'react-router-dom';
 
 const SideMenu = ({ setWhichBox, whichBox }) => {
 
@@ -43,15 +44,15 @@ const SideMenu = ({ setWhichBox, whichBox }) => {
                     <li>
                         <div><i className="fa-solid fa-comment-dots"></i><br />고객센터</div>
                     </li>
-                    
+
                     <li>
-                        <div onClick={() => changeAdminBox(1)}><i className="fa-solid fa-gear"></i><br />데이터 조회</div>
+                        <Link to="/admin/select"><i className="fa-solid fa-gear"></i><br />데이터 조회</Link>
                     </li>
                     <li>
-                        <div onClick={() => changeAdminBox(2)}><i className="fa-solid fa-gear"></i><br />데이터 입력</div>
+                        <Link to="/admin/insert"><i className="fa-solid fa-gear"></i><br />데이터 입력</Link>
                     </li>
                     <li>
-                        <div onClick={() => changeAdminBox(3)}><i className="fa-solid fa-gear"></i><br />문의글</div>
+                        <Link to="/admin/ask"><i className="fa-solid fa-gear"></i><br />문의글</Link>
                     </li>
                 </ul>
                 <div id="sideBarButton" onClick={openSideBar}>

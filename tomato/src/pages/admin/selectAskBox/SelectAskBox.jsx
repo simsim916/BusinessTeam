@@ -63,7 +63,7 @@ const SelectAskBox = () => {
 
 
     return (
-        <div className="container">
+        <div className="containerA">
             <div id="annTopBox">
                 <h3>문의글
                     &nbsp;&nbsp;
@@ -108,16 +108,16 @@ const SelectAskBox = () => {
                     <div>제목</div>
                     <div>작성자</div>
                     <div>작성일시</div>
-                    <div>답변여부</div>
+                    <div>답변</div>
                 </div>
-                <div onClick="showContent(this)">
+                <div>
                     <div>공지</div>
                     <div>토마토팜 홈페이지 이용시 </div>
                     <div><img src="/tomatoFarmA/resources/img/logo.png" alt="" /></div>
                     <div>2024-02-02</div>
                     <div></div>
                 </div>
-                <div onClick="showContent(this)">
+                <div>
                     <div>공지</div>
                     <div>명절 배송지연 관련 공지사항</div>
                     <div>홍길동</div>

@@ -40,7 +40,6 @@ public class Itme_askController {
 		return result;
 	}
 	
-	
 	@Transactional
 	@PostMapping("/update")
 	public void updateAskReply(@RequestBody Item_ask entity) {

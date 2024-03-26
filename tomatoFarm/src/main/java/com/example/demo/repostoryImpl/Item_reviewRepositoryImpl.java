@@ -26,7 +26,7 @@ import lombok.AllArgsConstructor;
 
 @Repository
 @AllArgsConstructor
-public class Item_reviewRepositoryImpl implements Item_reviewRepository{
+public class Item_reviewRepositoryImpl implements Item_reviewRepository {
 	
 	private final JPAQueryFactory jPAQueryFactory;
 	private final EntityManager entityManager;

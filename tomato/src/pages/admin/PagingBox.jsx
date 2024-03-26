@@ -50,11 +50,11 @@ const PagingBox = ({ limit, list, currPage, setCurrPage }) => {
             {currPage == 1
                 ?
                 <div>
-                    <i class="fa-solid fa-chevron-left"></i>
+                    <i className="fa-solid fa-chevron-left"></i>
                 </div>
                 :
                 <div onClick={() => setCurrPage(currPage - 1)}>
-                    <i class="fa-solid fa-chevron-left"></i>
+                    <i className="fa-solid fa-chevron-left"></i>
                 </div>}
             {getPageNumArray(limit, list).map((pageNum, i) => {
                 const numPagesToShow = 5;
@@ -87,15 +87,17 @@ const PagingBox = ({ limit, list, currPage, setCurrPage }) => {
                     return null;
                 }
             })}
-            {currPage == getPageNumArray(limit, list).length
-                ?
-                <div>
-                    <i class="fa-solid fa-chevron-right"></i>
-                </div>
-                :
-                <div onClick={() => setCurrPage(currPage + 1)}>
-                    <i class="fa-solid fa-chevron-right"></i>
-                </div>}
+            {
+                currPage == getPageNumArray(limit, list).length
+                    ?
+                    <div>
+                        <i className="fa-solid fa-chevron-right"></i>
+                    </div>
+                    :
+                    <div onClick={() => setCurrPage(currPage + 1)}>
+                        <i className="fa-solid fa-chevron-right"></i>
+                    </div>
+            }
 
             <div onClick={() => setCurrPage(getPageNumArray(limit, list).length)}>
                 <i className="fa-solid fa-angles-right"></i>
