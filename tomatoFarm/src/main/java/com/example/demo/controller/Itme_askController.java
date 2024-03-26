@@ -34,7 +34,7 @@ public class Itme_askController {
 	@GetMapping("/select")
 	public ResponseEntity<?> selectItem_askList(PageRequest pageRequest, SearchRequest searchRequest){
 		ResponseEntity<?> result = null;
-		
+		System.out.println(searchRequest);
 		List<Item_ask> list = item_askService.selectItemAskListIntegerWhereType(pageRequest, searchRequest);
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;

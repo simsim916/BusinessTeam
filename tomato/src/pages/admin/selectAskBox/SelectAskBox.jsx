@@ -3,50 +3,40 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import PagingBox from "../PagingBox";
 import WriteReply from "./WriteReply";
+import { paging } from '../../components/paging';
+import SelectAskBoxRow from './SelectAskBoxRow';
 
 
 const SelectAskBox = () => {
 
-
-
-    const [formData, setFormData] = useState({
-        column: 'title',
-        keyword: ''
-    });
     const [askList, setAskList] = useState([]);
     const [currPage, setCurrPage] = useState(1);
     const [limit, setLimit] = useState(8);
-    const currentDate = new Date();
+
     const [answered, setAnswered] = useState(2);
-    const [searchedList, setSearchedList] = useState();
-    const [clickReply, setClickReply] = useState(false);
+
+    const [refresh, setRefresh] = useState(true);
+    const [searchRequest, setSearchRequest] = useState({
+        column: 'title',
+        keyword: ''
+    });
 
     useEffect(() => {
-        axios.get(`http://localhost:8090/itemask/select`
+        axios.get(`http://localhost:8090/itemask/select?column=${searchRequest.column}&keyword=${searchRequest.keyword}`
         ).then(res => {
             setAskList(res.data);
-            setSearchedList(res.data);
         }).catch(err => {
             console.log(err.message);
         })
-    }, [])
+    }, [refresh])
 
-    const paging = () => (list, pageNum, size) => {
-        const start = size * (pageNum - 1);
-        const end = pageNum * size;
-        return list.slice(start, end);
-    }
-
-    const filteredList = (list, answered) => {
-        if (!list) {
-            return [];
-        }
+    const filterList = (answered) => {
         if (answered == 0) {
-            return list.filter(list => list.privacy == 0);
+            return askList.filter(list => list.reply == null);
         } else if (answered == 1) {
-            return list.filter(list => list.privacy == 1);
+            return askList.filter(list => list.reply != null);
         } else {
-            return list;
+            return askList;
         }
     }
 
@@ -61,36 +51,33 @@ const SelectAskBox = () => {
 
     const searchBoxChange = (event) => {
         const { name, value } = event.target;
-        setFormData((formData) => ({
-            ...formData,
+        setSearchRequest((searchRequest) => ({
+            ...searchRequest,
             [name]: value
         }));
-        console.log(formData)
     };
 
-    const search = (event, list) => {
-        if ((formData.keyword).length >= 2) {
-            event.preventDefault();
-            setSearchedList(list.filter(item => item[formData.column].includes(formData.keyword)));
-            setCurrPage(1);
-        } else {
-            alert('검색어는 2글자 이상!');
-        }
+    const changRefresh = () => {
+        setRefresh(!refresh);
     }
 
-
-    const openAskDetail = () => {
-        setClickReply(!clickReply)
-    }
 
     return (
         <div className="container">
             <div id="annTopBox">
                 <h3>문의글
                     &nbsp;&nbsp;
+                    <label>모두보기&nbsp;
+                        <input
+                            type="radio"
+                            checked={answered == 2}
+                            onChange={() => CheckAnswered(2)}
+                        />
+                    </label>
+                    &nbsp;&nbsp;
                     <label>답변&nbsp;
                         <input
-                            type="checkbox"
+                            type="radio"
                             checked={answered == 1}
                             onChange={() => CheckAnswered(1)}
                         />
@@ -98,7 +85,7 @@ const SelectAskBox = () => {
                     &nbsp;&nbsp;
                     <label>미답변&nbsp;
                         <input
-                            type="checkbox"
+                            type="radio"
                             checked={answered == 0}
                             onChange={() => CheckAnswered(0)}
                         />
@@ -114,7 +101,7 @@ const SelectAskBox = () => {
                     </select>
                     &nbsp;&nbsp;
                     <input type="text" name="keyword" onChange={searchBoxChange} />
-                    <button onClick={(event) => search(event, askList)}><i className="fa-solid fa-magnifying-glass"></i></button>
+                    <button onClick={changRefresh}><i className="fa-solid fa-magnifying-glass"></i></button>
                 </form>
                 <div>
                     <div>번호</div>
@@ -137,38 +124,15 @@ const SelectAskBox = () => {
                     <div>2024-02-02</div>
                     <div></div>
                 </div>
-                {paging()(filteredList(searchedList, answered), currPage, limit).map((askRow, i) => (
-                    <>
-                        {clickReply ? <WriteReply askRow={askRow} clickReply={clickReply} setClickReply={setClickReply} /> : null}
-                        <div onClick={() => openAskDetail(askRow)} key={i}>
-                            <div>{askRow.seq}</div>
-                            <div>
-                                {askRow.title}
-                                {currentDate.getTime() - new Date(askRow.regdate).getTime() <= 3 * 24 * 60 * 60 * 1000
-                                    ?
-                                    (
-                                        <span className="latestAnnounce">
-                                            <i className="fa-solid fa-n"></i>
-                                        </span>
-                                    )
-                                    :
-                                    null
-                                }
-                            </div>
-                            <div>{askRow.writer}</div>
-                            <div>{askRow.regdate}</div>
-                            <div>{askRow.privacy === 0 ? '미답변' : '답변'}</div>
-                        </div>
-                    </>
+                {paging()(filterList(answered), currPage, limit).map((ask, i) => (
+                    <SelectAskBoxRow key={i} ask={ask} />
                 ))}
-
             </div>
             <PagingBox
                 limit={limit}
-                list={filteredList(searchedList, answered)}
+                list={filterList(answered)}
                 currPage={currPage}
                 setCurrPage={setCurrPage} />
-
         </div >
     );
 }
