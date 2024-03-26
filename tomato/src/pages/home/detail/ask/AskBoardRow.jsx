@@ -29,6 +29,7 @@ const AskBaordRow = ({ itemAsk }) => {
 
     const showContent = () => {
         //비밀번호 없는 글 = 보여주기
+        
         setAskDetail(!askDetail);
     }
 
