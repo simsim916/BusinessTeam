@@ -3,20 +3,9 @@ import { useState } from 'react';
 import './SideMenu.css'
 import { Link } from 'react-router-dom';
 
-const SideMenu = ({ setWhichBox, whichBox }) => {
-
-    const [sideBarOpen, setSideBarOpen] = useState(true);
+const SideMenu = ({ openSideBar, sideBarOpen }) => {
 
 
-
-    const openSideBar = () => {
-        setSideBarOpen(!sideBarOpen);
-        console.log(sideBarOpen)
-    };
-
-    const changeAdminBox = (num) => {
-        setWhichBox(num);
-    }
 
     return (
         <>

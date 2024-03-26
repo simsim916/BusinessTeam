@@ -10,12 +10,16 @@ import { Route, Routes } from 'react-router-dom';
 
 
 const Admin = () => {
+    const [sideBarOpen, setSideBarOpen] = useState(true);
 
+    const openSideBar = () => {
+        setSideBarOpen(!sideBarOpen);
+    };
 
     return (
         <>
-            <SideMenu />
-            <div id="adminContents">
+            <SideMenu openSideBar={openSideBar} sideBarOpen={sideBarOpen} />
+            <div id="adminContents" style={{ marginLeft: sideBarOpen ? '100px' : '65px' }}>
                 <Routes>
                     <Route path='/select' element={<SelectDataBox />} />
                     <Route path='/insert' element={<InsertDataBox />} />

@@ -108,7 +108,7 @@ public class ItemController {
 
 		if (itemList != null && itemList.size() > 0) {
 			result = ResponseEntity.status(HttpStatus.OK).body(itemList);
-			log.info("출력한다");
+			log.info(itemList);
 		} else {
 			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
 			log.info("데이터 못찾겠다");
