@@ -5,11 +5,7 @@ import Loading from './../../../components/Loading';
 import Error from './../../../components/Error';
 import axios from 'axios';
 
-const ReviewWrite = ({ item, reviewWriteClick }) => {
-
-    console.log('--------------------')
-    console.log(item)
-    console.log('--------------------')
+const ReviewWrite = ({ item, refresh, setRefresh, reviewWriteClick }) => {
     const [writeBoxClose, setWriteBoxClose] = useState(true);
     const [score, setScore] = useState(0)
     const [review, setReview] = useState({
@@ -26,9 +22,8 @@ const ReviewWrite = ({ item, reviewWriteClick }) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
-    const submitReview = () => {
-        setLoading(true);
-        axios.post(`http://localhost:8090/itemreview/iteminsert`, review, {
+    const submitReview = async () => {
+        await axios.post(`http://localhost:8090/itemreview/iteminsert`, review, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -40,6 +35,8 @@ const ReviewWrite = ({ item, reviewWriteClick }) => {
             setLoading(false);
             setError(true);
         });
+        setRefresh(!refresh);
+        reviewWriteBoxClose();
     }
 
     if (loading) return <Loading />
@@ -67,8 +64,8 @@ const ReviewWrite = ({ item, reviewWriteClick }) => {
     }
 
     const reviewWriteBoxClose = () => {
-        reviewWriteClick();
         setWriteBoxClose(!writeBoxClose);
+        reviewWriteClick();
     }
     return (
         <>

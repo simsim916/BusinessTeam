@@ -1,8 +1,6 @@
 package com.example.demo.repostoryImpl;
 
-import static com.example.demo.entity.QItem.item;
 import static com.example.demo.entity.QItem_review.item_review;
-import static com.example.demo.entity.Qitem_event.item_event;
 
 import java.util.List;
 
@@ -11,13 +9,11 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.domain.ItemDTO;
 import com.example.demo.domain.Item_reviewDTO;
 import com.example.demo.entity.Item_review;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.repository.Item_reviewRepository;
-import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
@@ -44,6 +40,7 @@ public class Item_reviewRepositoryImpl implements Item_reviewRepository {
 		return jPAQueryFactory
 				.selectFrom(item_review)
 				.where(Expressions.numberPath(Integer.class,searchRequest.getColumn()).stringValue().eq(searchRequest.getKeyword()))
+				.orderBy(item_review.regdate.desc())
 				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum())
 				.fetch();
 	}
@@ -51,21 +48,22 @@ public class Item_reviewRepositoryImpl implements Item_reviewRepository {
 	@Transactional
 	@Override
 	//** 상품리뷰 등록
-	public int insertItemReview(Item_reviewDTO dto) {
+	public int insertItemReview(Item_review entity) {
 		return entityManager
 				.createNativeQuery("INSERT INTO item_review(item_code, writer, title"
 									+ ", contents, score, regdate, image1, image2, image3) "
 									+ "VALUES(?,?,?,?,?,?,?,?,?)")
-				.setParameter(1, dto.getItem_code())
-				.setParameter(2, dto.getWriter())
-				.setParameter(3, dto.getTitle())
-				.setParameter(4, dto.getContents())
-				.setParameter(5, dto.getScore())
-				.setParameter(6, dto.getRegdate())
-				.setParameter(7, dto.getImage1())
-				.setParameter(8, dto.getImage2())
-				.setParameter(9, dto.getImage3())
+				.setParameter(1, entity.getItem_code())
+				.setParameter(2, entity.getWriter())
+				.setParameter(3, entity.getTitle())
+				.setParameter(4, entity.getContents())
+				.setParameter(5, entity.getScore())
+				.setParameter(6, entity.getRegdate())
+				.setParameter(7, entity.getImage1())
+				.setParameter(8, entity.getImage2())
+				.setParameter(9, entity.getImage3())
 				.executeUpdate();
+		
 	}
 	
 
