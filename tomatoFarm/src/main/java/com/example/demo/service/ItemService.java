@@ -76,4 +76,5 @@ public interface ItemService {
 	List<ItemDTO> adminStringColumn(SearchRequest searchRequest,PageRequest pageRequest);
 	List<ItemDTO> adminIntegerColumn(SearchRequest searchRequest,PageRequest pageRequest);
 	int itemListCount();
+	
 }
