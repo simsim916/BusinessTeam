@@ -36,13 +36,13 @@ public class Item_reviewServiceImpl implements Item_reviewService{
 
 	@Override
 	//** 상품리뷰 등록
-	public int insertItemReview(Item_reviewDTO dto) {
+	public int insertItemReview(Item_review entity) {
 		
 		LocalDateTime currentDateTime = LocalDateTime.now();
 		
-		dto.setRegdate(currentDateTime);
+		entity.setRegdate(currentDateTime);
 		
-		return item_reviewRepository.insertItemReview(dto);
+		return item_reviewRepository.insertItemReview(entity);
 	}
 	
 	@Override

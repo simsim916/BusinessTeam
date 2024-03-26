@@ -9,28 +9,28 @@ import PagingBox from '../../../components/PagingBox';
 
 
 const ReviewBoardBox = ({ item }) => {
-    console.log('ReviewBoardBox 랜더링')
     const [itemReviewList, setItemReviewList] = useState(null);
+    const [refresh, setRefrsh] = useState(true);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
-    const [currPage, setCurrPage] = useState(1);
-    const [limit, setLimit] = useState(5);
-    const [pagingList, setPagingList] = useState(null);
-
     const [reviewWrite, setReviewWrite] = useState(false);
+    const [limit, setLimit] = useState(5);
+    const [currPage, setCurrPage] = useState(1);
+    const [pageList, setPageList] = useState(null);
 
     useEffect(() => {
         axios.get(`http://localhost:8090/itemreview/select?column=item_code&keyword=${item.code}`
         ).then(res => {
-            setItemReviewList(res.data);
-            setPagingList(res.data);
             setLoading(false);
+            setItemReviewList(res.data);
+            setPageList(res.data);
+            setCurrPage(1);
         }).catch(err => {
             console.log(err.message)
             setLoading(false);
             setError(true);
         })
-    }, [])
+    }, [refresh])
 
     if (loading) return <Loading />
     if (error) return <Error />
@@ -39,10 +39,12 @@ const ReviewBoardBox = ({ item }) => {
         setReviewWrite(!reviewWrite);
     }
 
-    const paging = () => (list, pageNum, size) => {
-        const start = size * (pageNum - 1);
-        const end = pageNum * size;
-        return list.slice(start, end);
+    const paging = () => (list, currPage, limit) => {
+        if (list != null) {
+            const start = limit * (currPage - 1);
+            const end = currPage * limit;
+            return list.slice(start, end);
+        }
     }
 
     return (
@@ -58,25 +60,33 @@ const ReviewBoardBox = ({ item }) => {
                         <div>작성자</div>
                         <div>등록일</div>
                     </div>
+                    {pageList.length > 0 ?
+                        paging()(pageList, currPage, limit).map((e, i) => <ReviewBoardRow itemReview={e} key={i} />)
+                        :
+                        <div id='reviewNone'>
+                            해당 상품에 후기가 없습니다.
+                        </div>
+                    }
                 </div>
 
-                {pagingList ?
-                    paging()(pagingList, currPage, limit).map((e, i) => <ReviewContent itemReview={e} key={i} />)
-                    : ''}
-
+                {/* <div id="reviewBoardBtn">
+                    <i className="fa-solid fa-angles-left"></i>
+                    <i className="fa-solid fa-angle-left"></i>
+                    <span> 1 </span>
+                    <span> 2 </span>
+                    <span> 3 </span>
+                    <i className="fa-solid fa-angle-right"></i>
+                    <i className="fa-solid fa-angles-right"></i>
+                </div> */}
                 <PagingBox
+                    list={pageList}
                     limit={limit}
-                    list={itemReviewList}
                     currPage={currPage}
-                    setCurrPage={setCurrPage}
-                />
-                {reviewWrite ? <ReviewWriteForm item={item} reviewWriteClick={reviewWriteClick} /> : null}
-
+                    setCurrPage={setCurrPage} />
+                {reviewWrite ? <ReviewWrite refresh={refresh} setRefrsh={setRefrsh} item={item} reviewWriteClick={reviewWriteClick} /> : null}
             </div>
         </>
     );
-
-
 }
 
 export default ReviewBoardBox;

@@ -1,10 +1,12 @@
 package com.example.demo.serviceImpl;
 
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.domain.Item_askDTO;
 import com.example.demo.entity.Item_ask;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
@@ -34,6 +36,16 @@ public class Item_askServiceImpl implements Item_askService{
 		return item_askRepository.updateItemAsk(entity);
 	}
 	
+	@Override
+	//**상품문의 등록
+	public int insertItemAsk(Item_askDTO dto) {
+		
+		LocalDateTime currentDateTime = LocalDateTime.now();
+		
+		dto.setRegdate(currentDateTime);
+		
+		return item_askRepository.insertItemAsk(dto);
+	}
 	
 }
 	

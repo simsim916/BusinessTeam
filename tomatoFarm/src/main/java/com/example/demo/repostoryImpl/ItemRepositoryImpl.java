@@ -42,8 +42,8 @@ public class ItemRepositoryImpl implements ItemRepository {
 
 	// queryDSL 동적 정렬을 위해 OrderSpecifier객체를 이용한 동적 정렬
 	public OrderSpecifier<?> getSortType(SearchRequest searchRequest) {
-		if (searchRequest.getSortType() != null) {
-			switch (searchRequest.getSortType()) {
+		if (searchRequest.getOrderType() != null) {
+			switch (searchRequest.getOrderType()) {
 			case "priceD":
 				return new OrderSpecifier<>(Order.DESC, QItem.item.price);
 			case "priceA":
