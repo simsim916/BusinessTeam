@@ -2,8 +2,6 @@ package com.example.demo.repostoryImpl;
 
 import static com.example.demo.entity.QItem_ask.item_ask;
 
-import static com.example.demo.entity.QItem_ask.item_ask;
-
 import java.util.List;
 
 import javax.persistence.EntityManager;

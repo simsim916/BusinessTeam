@@ -8,8 +8,10 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.domain.ItemDTO;
+import com.example.demo.domain.Item_reviewDTO;
 import com.example.demo.domain.SortDTO;
 import com.example.demo.entity.Item;
+import com.example.demo.entity.Item_review;
 import com.example.demo.entity.QItem;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
@@ -239,5 +241,8 @@ public class ItemRepositoryImpl implements ItemRepository {
 				.fetchCount();
 	}
 	
+	public Item updateItem(Item entity) {
+		return entityManager.merge(entity);
+	}
 	
 }

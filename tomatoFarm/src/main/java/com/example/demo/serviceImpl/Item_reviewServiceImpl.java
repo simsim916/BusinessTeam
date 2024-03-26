@@ -34,16 +34,15 @@ public class Item_reviewServiceImpl implements Item_reviewService{
 		return item_reviewRepository.selectItemRevieListIntegerWhereType(pageRequest, searchRequest);
 	}
 
+	
 	@Override
-	//** 상품리뷰 등록
-	public int insertItemReview(Item_review entity) {
-		
+	public Item_review updateReview(Item_review entity) {
 		LocalDateTime currentDateTime = LocalDateTime.now();
 		
 		entity.setRegdate(currentDateTime);
-		
-		return item_reviewRepository.insertItemReview(entity);
+		return item_reviewRepository.updateReview(entity);
 	}
+	
 	
 	
 	

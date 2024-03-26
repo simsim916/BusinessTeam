@@ -35,4 +35,5 @@ public interface ItemRepository {
 	List<ItemDTO> adminStringColumn(SearchRequest searchRequest,PageRequest pageRequest);
 	List<ItemDTO> adminIntegerColumn(SearchRequest searchRequest, PageRequest pageRequest);
 	int itemListCount();
+	Item updateItem(Item entity);
 }

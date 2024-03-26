@@ -2,6 +2,7 @@ package com.example.demo.serviceImpl;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
@@ -15,15 +16,15 @@ import com.example.demo.repository.ItemRepository;
 import com.example.demo.service.ItemService;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 
-@Log4j2
 @Transactional
 @AllArgsConstructor
 @Service
 public class ItemServiceImpl implements ItemService {
 
 	private final ItemRepository itemRepository;
+	private final EntityManager entityManager;
+	
 
 	@Override
 	public List<ItemDTO> selectItemListStringWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
@@ -102,5 +103,11 @@ public class ItemServiceImpl implements ItemService {
 	public int itemListCount() {
 		return 0;
 	}
+	
+	@Override
+	public Item updateItem(Item entity) {
+		return entityManager.merge(entity);
+	}
+
 	
 }

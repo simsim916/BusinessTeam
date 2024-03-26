@@ -16,7 +16,5 @@ public interface Item_askService {
 	List<Item_ask> selectItemAskListIntegerWhereType(PageRequest pageRequest, SearchRequest searchRequest);
 	
 //	=================================
-	
-	//** 상품문의 등록
-	int insertItemAsk(Item_askDTO dto);
+	 Item_ask updateAsk(Item_ask entity);
 }

@@ -29,7 +29,7 @@ const ItemAskForm = ({ item, setRefresh, refresh, itemAskClick }) => {
         setChecked(!checked)
     }
     const submitAsk = async () => {
-        await axios.post(`http://localhost:8090/itemask/askinsert`, ask, {
+        await axios.post(`http://localhost:8090/itemask/update`, ask, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -78,7 +78,7 @@ const ItemAskForm = ({ item, setRefresh, refresh, itemAskClick }) => {
                                                 <input type="checkbox" name="privacyBox" onChange={changeChecked} checked={checked} />
                                                 비밀글로 문의하기
                                             </label>
-                                            {checked && <input type='number' id='passwordAsk' name='password' value={ask.password} onChange={changeAsk} onInput={maxLengthCheck} maxlength="4" placeholder='4자리 숫자' /> }
+                                            {checked && <input type='number' id='passwordAsk' name='password' value={ask.password} onChange={changeAsk} onInput={maxLengthCheck} maxlength="4" placeholder='4자리 숫자' />}
                                         </div>
                                     </div>
                                 </div>

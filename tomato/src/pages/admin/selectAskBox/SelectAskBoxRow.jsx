@@ -12,7 +12,7 @@ const SelectAskBoxRow = ({ ask }) => {
     }
 
     return (
-        <div onClick={openWriteReply}>
+        <div onClick={ask.reply == "" ? openWriteReply : undefined}>
             <div>{ask.seq}</div>
             <div>
                 {ask.title}
@@ -29,9 +29,9 @@ const SelectAskBoxRow = ({ ask }) => {
             </div>
             <div>{ask.writer}</div>
             <div>{ask.regdate}</div>
-            <div>{ask.privacy === 0 ? '미답변' : '답변'}</div>
+            <div>{ask.reply == "" ? '미답변' : '답변'}</div>
             {writeReply ? <WriteReply ask={ask} setWriteReply={setWriteReply} /> : null}
-        </div>
+        </div >
     );
 }
 

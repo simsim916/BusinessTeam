@@ -3,9 +3,11 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Loading from './../../../components/Loading';
 import Error from './../../../components/Error';
+import ReviewContent from './ReviewBoardRow';
+import ReviewWriteForm from './ReviewWrite';
+import PagingBox from '../../../components/PagingBox';
 import ReviewBoardRow from './ReviewBoardRow';
 import ReviewWrite from './ReviewWrite';
-import PagingBox from '../../../admin/PagingBox';
 
 
 const ReviewBoardBox = ({ item }) => {

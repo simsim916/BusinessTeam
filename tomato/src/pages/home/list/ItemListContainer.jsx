@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import ItemBox from './../../components/ItemBox';
 import ItemBox_vertical from './../../components/itemBox_vertical/ItemBox_vertical';
-import PagingBox from "../../admin/PagingBox";
+import PagingBox from "../../components/PagingBox";
 
 
 const ItemListContainer = ({ keyword, itemList, setItemList }) => {
