@@ -12,9 +12,7 @@ import com.example.demo.repository.Item_askRepository;
 import com.example.demo.service.Item_askService;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 
-@Log4j2
 @AllArgsConstructor
 @Service
 public class Item_askServiceImpl implements Item_askService{
@@ -32,7 +30,7 @@ public class Item_askServiceImpl implements Item_askService{
 		return item_askRepository.selectItemAskListIntegerWhereType( pageRequest,  searchRequest);
 	}
 	
-	public int updateItemAsk(Item_ask entity) {
+	public Item_ask updateAsk(Item_ask entity) {
 		return item_askRepository.updateItemAsk(entity);
 	}
 	

@@ -5,7 +5,7 @@ import Loading from './../../../components/Loading';
 import Error from './../../../components/Error';
 import ReviewContent from './ReviewBoardRow';
 import ReviewWriteForm from './ReviewWrite';
-import PagingBox from '../../../admin/PagingBox';
+import PagingBox from '../../../components/PagingBox';
 
 
 const ReviewBoardBox = ({ item }) => {

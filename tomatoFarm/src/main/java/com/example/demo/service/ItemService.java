@@ -5,6 +5,7 @@ import java.util.List;
 import com.example.demo.domain.ItemDTO;
 import com.example.demo.domain.SortDTO;
 import com.example.demo.entity.Item;
+import com.example.demo.entity.Item_ask;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 
@@ -76,5 +77,5 @@ public interface ItemService {
 	List<ItemDTO> adminStringColumn(SearchRequest searchRequest,PageRequest pageRequest);
 	List<ItemDTO> adminIntegerColumn(SearchRequest searchRequest,PageRequest pageRequest);
 	int itemListCount();
-	
+	Item updateItem(Item entity);
 }

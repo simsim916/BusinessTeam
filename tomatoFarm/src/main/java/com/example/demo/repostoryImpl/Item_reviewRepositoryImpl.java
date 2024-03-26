@@ -68,6 +68,10 @@ public class Item_reviewRepositoryImpl implements Item_reviewRepository {
 				.executeUpdate();
 	}
 	
+	public Item_review updateReview(Item_review entity) {
+		return entityManager.merge(entity);
+	}
+	
 
 	
 	

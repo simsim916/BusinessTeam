@@ -1,7 +1,7 @@
 import "./SelectAskBox.css";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import PagingBox from "../PagingBox";
+import PagingBox from "../../components/PagingBox";
 import WriteReply from "./WriteReply";
 import { paging } from '../../components/paging';
 import SelectAskBoxRow from './SelectAskBoxRow';

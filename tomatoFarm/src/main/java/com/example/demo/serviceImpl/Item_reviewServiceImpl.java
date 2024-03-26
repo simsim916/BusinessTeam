@@ -45,6 +45,12 @@ public class Item_reviewServiceImpl implements Item_reviewService{
 		return item_reviewRepository.insertItemReview(dto);
 	}
 	
+	@Override
+	public Item_review updateReview(Item_review entity) {
+		return item_reviewRepository.updateReview(entity);
+	}
+	
+	
 	
 	
 	

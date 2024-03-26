@@ -17,5 +17,6 @@ public interface Item_reviewService {
 	
 	//** 상품리뷰 등록
 	int insertItemReview(Item_reviewDTO dto);
+	Item_review updateReview(Item_review entity);
 	
 }

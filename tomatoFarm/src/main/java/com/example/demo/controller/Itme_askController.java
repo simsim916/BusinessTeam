@@ -42,15 +42,12 @@ public class Itme_askController {
 	
 	@Transactional
 	@PostMapping("/update")
-	public void updateAskReply(@RequestBody Item_ask entity) {
-		System.out.println("getSeq => " + entity.getSeq());
-		System.out.println("getReply => " +entity.getReply());
-		if(item_askService.updateItemAsk(entity) > 0) {
+	public void updateAsk(@RequestBody Item_ask entity) {
+		if(item_askService.updateAsk(entity) != null) {
 			System.out.println("업데이트 성공~~");
 		} else {
 			System.out.println("실패 ~~");
 		}
-		
 	}
 }
 	

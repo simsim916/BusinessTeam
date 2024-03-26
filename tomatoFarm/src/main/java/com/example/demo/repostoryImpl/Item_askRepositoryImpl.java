@@ -46,12 +46,8 @@ public class Item_askRepositoryImpl implements Item_askRepository{
 				.fetch();
 	}
 	
-	public int updateItemAsk(Item_ask entity) {
-		return entityManager
-		.createNativeQuery("UPDATE item_ask set reply=?,privacy=1 WHERE seq=?")
-		.setParameter(1, entity.getReply())
-		.setParameter(2, entity.getSeq())
-		.executeUpdate();
+	public Item_ask updateItemAsk(Item_ask entity) {
+		return entityManager.merge(entity);
 	}
 	
 	

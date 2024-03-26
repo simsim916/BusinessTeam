@@ -12,7 +12,7 @@ const WriteReply = ({ ask, setWriteReply }) => {
     }
 
 
-    const submitReview = () => {
+    const submitReply = (e) => {
         axios.post(`http://localhost:8090/itemask/update`, {
             ...ask,
             reply: reply
@@ -25,14 +25,17 @@ const WriteReply = ({ ask, setWriteReply }) => {
         }).catch(err => {
             console.log(err.message)
         });
-        // 서버단에서 Executing an update/delete query 오류
-        closeWriteReply();
+        closeWriteReply(e);
     }
 
     const closeWriteReply = (e) => {
-        e.stopPropagation();
+        if (e) {
+            e.stopPropagation();
+        }
         setWriteReply(false);
     }
+
+
     return (
         <div id="AskWriteReplyContainer">
             <div>
@@ -56,7 +59,7 @@ const WriteReply = ({ ask, setWriteReply }) => {
                     </div>
                     <div id="writeButton">
                         <button onClick={closeWriteReply} id="writeCancle">취소</button>
-                        <button id="writeEnter">등록</button>
+                        <button onClick={submitReply} id="writeEnter">등록</button>
                     </div>
                 </div>
             </div>

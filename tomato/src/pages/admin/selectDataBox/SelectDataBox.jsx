@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import Error from '../../components/Error';
 import Loading from '../../components/Loading';
-import PagingBox from "../PagingBox";
+import PagingBox from "../../components/PagingBox";
 
 const SelectDataBox = () => {
 
