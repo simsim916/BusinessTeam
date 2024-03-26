@@ -16,6 +16,8 @@
 .askBoardRow {
     display: flex;
     text-align: center;
+    font-size: 20px;
+    font-weight: 500;
 }
 
 .askBoardRow:nth-of-type(1) {

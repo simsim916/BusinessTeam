@@ -7,8 +7,7 @@ const ReviewBoardRow = ({ itemReview }) => {
     const [reviewDetail, setReviewDetail] = useState(false);
 
     const reviewDetailClick = () => {
-        setReviewDetail(!reviewDetail)
-
+        setReviewDetail(!reviewDetail);
     }
 
     return (

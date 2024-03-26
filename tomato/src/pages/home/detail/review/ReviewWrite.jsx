@@ -5,7 +5,7 @@ import Loading from './../../../components/Loading';
 import Error from './../../../components/Error';
 import axios from 'axios';
 
-const ReviewWrite = ({ item, refresh, setRefresh }) => {
+const ReviewWrite = ({ item, refresh, setRefresh, reviewWriteClick }) => {
     const [writeBoxClose, setWriteBoxClose] = useState(true);
     const [score, setScore] = useState(0)
     const [review, setReview] = useState({
@@ -65,6 +65,7 @@ const ReviewWrite = ({ item, refresh, setRefresh }) => {
 
     const reviewWriteBoxClose = () => {
         setWriteBoxClose(!writeBoxClose);
+        reviewWriteClick();
     }
     return (
         <>

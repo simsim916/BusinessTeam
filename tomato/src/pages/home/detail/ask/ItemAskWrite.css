@@ -152,27 +152,35 @@
     resize: none;
     margin-bottom: 20px;
 }
+
+#itemAskPrivacyContainer{
+    display: flex;
+    position: absolute;
+    bottom: 15px;
+    width: 75%;
+}
+
 #itemAskPrivacyBox{
     display: flex;
-    position: relative;
-    gap: 20px;
+    align-items: center;
+    line-height: 30px;
 }
 
 #itemAskPrivacy {
-    position: relative;
     display: flex;
-    left: 30px;
-    width: 28%;
-    gap: 10px;
-    text-align: center;
+    align-items: center;
+    font-size: 18px;
+    color: black;
+    margin-right: 15px;
 }
 
 #itemAskPrivacy input {
     width: 20px;
     height: 20px;
+    margin-right: 10px;
 }
 #passwordAsk{
-    width: 30%;
+    width: 150px;
     height: 30px;
     border-radius: 5px;
     padding: 10px;

@@ -5,10 +5,12 @@ import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Setter;
+import lombok.ToString;
 
 @Data
 @Builder
 @Setter
+@ToString
 public class Item_askDTO {
 
 	private int seq; //순번

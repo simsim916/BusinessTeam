@@ -47,7 +47,6 @@ const ReviewBoardBox = ({ item }) => {
         }
     }
 
-
     return (
         <>
             <div id="reviewBoardBox" className="container appearContainer">
@@ -61,11 +60,14 @@ const ReviewBoardBox = ({ item }) => {
                         <div>작성자</div>
                         <div>등록일</div>
                     </div>
+                    {pageList.length > 0 ?
+                        paging()(pageList, currPage, limit).map((e, i) => <ReviewBoardRow itemReview={e} key={i} />)
+                        :
+                        <div id='reviewNone'>
+                            해당 상품에 후기가 없습니다.
+                        </div>
+                    }
                 </div>
-
-                {pageList ?
-                    paging()(pageList, currPage, limit).map((e, i) => <ReviewBoardRow itemReview={e} key={i} />)
-                    : ''}
 
                 {/* <div id="reviewBoardBtn">
                     <i className="fa-solid fa-angles-left"></i>
@@ -82,12 +84,9 @@ const ReviewBoardBox = ({ item }) => {
                     currPage={currPage}
                     setCurrPage={setCurrPage} />
                 {reviewWrite ? <ReviewWrite refresh={refresh} setRefrsh={setRefrsh} item={item} reviewWriteClick={reviewWriteClick} /> : null}
-
             </div>
         </>
     );
-
-
 }
 
 export default ReviewBoardBox;

@@ -32,18 +32,27 @@
     width: 15%;
 }
 
-.boardAnswer_content a::before {
-    content: " | ";
-    margin: 0px 10px;
-}
-
-
 .boardAnswer_content{
     height: 100px;
     width: 100%;
     text-align: left;
     padding: 20px;
-    border: gray 1px solid;
-    background-color: yellow;
-    color: red;
+    /* border: gray 1px solid; */
+    background-color: aliceblue;
+    margin-bottom: 10px;
+}
+
+#passwordCheck{
+    padding: 10px;
+    margin-left: 70px;
+}
+#passwordCheck input{
+    padding: 10px;
+    font-size: 15px;
+    margin-right: 10px;
+}
+#passwordCheck button{
+    padding: 10px;
+    font-size: 15px;
+    cursor: pointer;
 }

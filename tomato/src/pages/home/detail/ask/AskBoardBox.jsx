@@ -18,7 +18,6 @@ const AskBoardBox = ({ item }) => {
     const [currPage, setCurrPage] = useState(1);
     const [pageList, setPageList] = useState(null);
 
-
     useEffect(() => {
         axios.get(`http://localhost:8090/itemask/select?column=item_code&keyword=${item.code}`
         ).then(res => {
@@ -49,10 +48,11 @@ const AskBoardBox = ({ item }) => {
     if (error) return <Error />
 
     return (
+        <>
         <div id="askBoardBox" className="container appearContainer">
             <h5>상품문의</h5>
             <span>상품문의 - 상품에 궁금하신점을 남겨주세요.</span>
-            <div onClick={() => itemAskClick()} id="itemAskWrite">문의하기</div>
+            <div onClick={itemAskClick} id="itemAskWrite">문의하기</div>
             <div id="askBoard">
                 <div className="askBoardRow">
                     <div>공개</div>
@@ -61,7 +61,6 @@ const AskBoardBox = ({ item }) => {
                     <div>작성자</div>
                     <div>작성일자</div>
                 </div>
-
                 {itemAskList ?
                     paging()(pageList, currPage, limit).map((e, i) => <AskBoardRow itemAsk={e} key={i} />)
                     :
@@ -86,7 +85,8 @@ const AskBoardBox = ({ item }) => {
                 currPage={currPage}
                 setCurrPage={setCurrPage} />
             {askWrite ? <ItemAskWrite refresh={refresh} setRefresh={setRefresh} item={item} itemAskClick={itemAskClick} /> : null}
-        </div>
+            </div>
+        </>
     );
 }
 
