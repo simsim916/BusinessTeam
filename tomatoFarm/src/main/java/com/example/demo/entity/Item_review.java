@@ -26,8 +26,6 @@ public class Item_review {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer seq; //순번
 	private Integer item_code; //제품코드
-	private Integer seq; //순번
-	private Integer item_code; //제품코드
 	private String writer;	//글쓴이
 	private String title;	//제목
 	private String contents;	//내용

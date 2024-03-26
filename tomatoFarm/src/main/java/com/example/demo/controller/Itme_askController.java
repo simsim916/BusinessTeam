@@ -83,18 +83,6 @@ public class Itme_askController {
 		return result;
 	}
 	
-	@Transactional
-	@PostMapping("/update")
-	public void updateAskReply(@RequestBody Item_ask entity) {
-		System.out.println("getSeq => " + entity.getSeq());
-		System.out.println("getReply => " +entity.getReply());
-		if(item_askService.updateItemAsk(entity) > 0) {
-			System.out.println("업데이트 성공~~");
-		} else {
-			System.out.println("실패 ~~");
-		}
-		
-	}
 }
 	
 	
