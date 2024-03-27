@@ -49,28 +49,27 @@ public class Itme_reviewController {
 	}
 
 	@PostMapping("/iteminsert")
-	public ResponseEntity<?> iteminsert(HttpServletRequest request, Item_review entity , @RequestBody Item_review entityJ) throws IOException{
+	public ResponseEntity<?> iteminsert(HttpServletRequest request, Item_review entity) throws IOException {
 		ResponseEntity<?> result = null;
 		if (entity != null) {
-		String realPath = request.getRealPath("/");
-		log.info("\n\n\n** realPath => " + realPath);
-		realPath += "\\resources\\img\\itemAskImg\\" + entity.getItem_code() + "\\";
-		File file = new File(realPath); // uploadImages 폴더에 화일존재 확인을 위함
-		if (!file.exists()) {
-			file.mkdir();
-		}
-		
-		MultipartFile uploadfilef = entity.getUploadfilef();
-		if (uploadfilef != null && !uploadfilef.isEmpty()) {
-			String file1 = realPath  +entity.getWriter()+"_" +uploadfilef.getOriginalFilename(); // 저장경로(relaPath+화일명) 완성
-			uploadfilef.transferTo(new File(file1)); // 해당경로에 저장(붙여넣기)
-			entity.setImage1(entity.getWriter()+"_" +uploadfilef.getOriginalFilename());
-		}
-		result = ResponseEntity.status(HttpStatus.OK).body(item_reviewService.insertItemReview(entity));
-		} else {
-			result = ResponseEntity.status(HttpStatus.OK).body(item_reviewService.insertItemReview(entityJ));
-		}
-		
+			String realPath = request.getRealPath("/");
+			log.info("\n\n\n** realPath => " + realPath);
+			realPath += "\\resources\\img\\itemReviewImg\\" + entity.getItem_code() + "\\";
+			File file = new File(realPath); // uploadImages 폴더에 화일존재 확인을 위함
+			if (!file.exists()) {
+				file.mkdir();
+			}
+
+			MultipartFile uploadfilef = entity.getUploadfilef();
+			if (uploadfilef != null && !uploadfilef.isEmpty()) {
+				String file1 = realPath + entity.getWriter() + "_" + uploadfilef.getOriginalFilename(); // 저장경로(relaPath+화일명)
+																										// 완성
+				uploadfilef.transferTo(new File(file1)); // 해당경로에 저장(붙여넣기)
+				entity.setImage1(entity.getWriter() + "_" + uploadfilef.getOriginalFilename());
+			}
+			result = ResponseEntity.status(HttpStatus.OK).body(item_reviewService.updateReview(entity));
+		} 
+
 		return result;
 	}
 

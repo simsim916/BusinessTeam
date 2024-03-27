@@ -134,13 +134,6 @@
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 
-		<!-- multipartfile -->
-		<dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
-			<version>1.4</version> 
-		</dependency>
-
 		<!-- ** for JWT-->
         <dependency>
             <groupId>javax.xml.bind</groupId>

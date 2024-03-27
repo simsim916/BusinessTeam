@@ -2,11 +2,21 @@ import { useSearchParams } from "react-router-dom";
 import './ItemListFilter.css'
 import { useEffect, useMemo, useRef } from "react";
 
-const ItemListFilter = ({ filterCheckedList, sortList }) => {
+const ItemListFilter = ({ filterCheckedList, setFilterCheckedList, sortList }) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const listfilter = useRef(null);
-    let mealkit, ingre = 0;
+    const mealkit = useRef(0);
+    const ingre = useRef(0);
 
+    mealkit.current = 0;
+    ingre.current = 0;
+
+    for (let e of sortList) {
+        if (e.sort1 == '밀키트')
+            mealkit.current += e.count;
+        else
+            ingre.current += e.count
+    }
 
     const checkAll = (event) => {
         let target = event.target.closest('li');
@@ -15,20 +25,27 @@ const ItemListFilter = ({ filterCheckedList, sortList }) => {
             target.classList.remove('selected');
             for (let e of target.getElementsByTagName('li')) {
                 e.classList.remove('selected');
-                filterCheckedList = filterCheckedList.filter((ele) =>
-                    ele !== e.innerText
-                );
+                setFilterCheckedList((prev) => {
+                    return prev.filter((ele) => ele.sort2 != e.children[1].innerText);
+                });
             }
         } else {
             target.classList.add('opened');
             target.classList.add('selected');
             target.closest('.sortB').classList.add('selected');
             for (let e of target.getElementsByTagName('li')) {
-                e.classList.add('selected');
-                if (!filterCheckedList.includes(e.innerText))
-                    filterCheckedList.push(e.innerText);
+                if (e.children[2].innerText > 0) {
+                    console.log(e.children[2].innerText)
+                    e.classList.add('selected');
+                    setFilterCheckedList([...filterCheckedList, {
+                        sort1: 'aa',
+                        sort2: e.children[1].innerText,
+                        count: e.children[2].innerText
+                    }])
+                }
             }
         }
+        console.log(filterCheckedList)
         event.stopPropagation();
         checkList();
     }
@@ -38,6 +55,7 @@ const ItemListFilter = ({ filterCheckedList, sortList }) => {
         for (let e of filterCheckedList) {
             console.log(e);
         }
+        // console.log(filterCheckedList);
     }
 
     const showList = (event) => {
@@ -59,6 +77,7 @@ const ItemListFilter = ({ filterCheckedList, sortList }) => {
             }
         }
 
+
         window.addEventListener('scroll', listScroll);
         return () => {
             window.removeEventListener('scroll', listScroll)
@@ -68,30 +87,30 @@ const ItemListFilter = ({ filterCheckedList, sortList }) => {
     return (
         <div id="listfilter" ref={listfilter}>
             <ul>
-                <li onClick={showList} className="sortB">
-                    <i onClick={checkAll} className="fa-regular fa-circle-check"></i>
+                <li onClick={showList} className={mealkit.current > 0 ? 'sortB opened selected' : 'sortB'}>
+                    <i onClick={checkAll} className="fa-regular fa-circle-check" ></i>
                     밀키트
                     <span className="itemList_count">
-                        {sortList.filter((e) => e.sort1 == '밀키트').reduce((result, val) => result + val.count, 0)}
+                        {mealkit.current}
                     </span>
                     <ul>
                         {sortList.filter((e) => e.sort1 == '밀키트').sort((b, a) => a.count - b.count).map((e, i) => (
-                            <li key={i} style={{ opacity: e.count ? '1' : '0.5' }}>
-                                <i className="fa-regular fa-circle-check" style={{ color: e.count ? '#9B1B30' : '#000', opacity: e.count ? '1' : '0.5' }}></i>
+                            <li key={i} className={e.count > 0 ? 'selected' : ''}>
+                                <i className="fa-regular fa-circle-check"></i>
                                 <span>{e.sort2}</span><span className="itemList_count">{e.count}</span>
                             </li>
                         ))}
                     </ul>
                 </li>
                 <hr />
-                <li onClick={showList} className="sortB">
+                <li onClick={showList} className={ingre.current > 0 ? 'sortB opened selected' : 'sortB'}>
                     <i onClick={checkAll} className="fa-regular fa-circle-check"></i>식재료
                     <span className="itemList_count">
-                        {sortList.filter((e) => e.sort1 == '식재료').reduce((result, val) => result + val.count, 0)}
+                        {ingre.current}
                     </span>
                     <ul>
                         {sortList.filter((e) => e.sort1 == '식재료').sort((b, a) => a.count - b.count).map((e, i) => (
-                            <li key={i} style={{ opacity: e.count ? '1' : '0.5' }}>
+                            <li key={i} className={e.count > 0 ? 'selected' : ''}>
                                 <i className="fa-regular fa-circle-check"></i>
                                 <span>{e.sort2}</span><span className="itemList_count">{e.count}</span>
                             </li>

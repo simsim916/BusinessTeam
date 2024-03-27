@@ -3,7 +3,7 @@ function makeComa(number) {
 }
 
 function makeDiscountPrice(number, discount) {
-    return number * (100 - discount) / 100;
+    return Math.floor(number * (100 - discount) / 100);
 }
 
 export {makeComa, makeDiscountPrice};

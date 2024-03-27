@@ -23,17 +23,17 @@ const ReviewWrite = ({ item, refresh, setRefresh, reviewWriteClick }) => {
     const submitReview = async () => {
         setLoading(true);
         const formData = new FormData();
+        formData.append('writer', review.writer);
+        formData.append('item_code', review.item_code);
+        formData.append('title', review.title);
+        formData.append('contents', review.contents);
+        formData.append('score', review.score);
         if (file) {
-            formData.append('writer', review.writer);
-            formData.append('item_code', review.item_code);
-            formData.append('title', review.title);
-            formData.append('contents', review.contents);
-            formData.append('score', review.score);
             formData.append('uploadfilef', file);
         }
-        await axios.post(`http://localhost:8090/itemreview/iteminsert`, file ? formData : review, {
+        await axios.post(`http://localhost:8090/itemreview/iteminsert`, formData, {
             headers: {
-                'Content-Type': file ? 'multipart/form-data' : 'application/json'
+                'Content-Type': 'multipart/form-data'
             }
         }).then(res => {
             setLoading(false);

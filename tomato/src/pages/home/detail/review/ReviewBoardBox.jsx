@@ -56,10 +56,8 @@ const ReviewBoardBox = ({ item }) => {
                 <div onClick={reviewWriteClick} id="reviewWrite"> 후기작성 </div>
                 <div id="reviewBoard">
                     <div className="reviewBoardRow">
-                        <div>별점</div>
-                        <div>제목</div>
-                        <div>작성자</div>
-                        <div>등록일</div>
+                        <div>사진</div>
+                        <div>내용</div>
                     </div>
                     {pageList.length > 0 ?
                         paging()(pageList, currPage, limit).map((e, i) => <ReviewBoardRow itemReview={e} key={i} />)

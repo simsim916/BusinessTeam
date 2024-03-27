@@ -31,8 +31,4 @@ public class DemoConfig {
 		return new JPAQueryFactory(entityManager);
 	}
 	
-	@Bean
-    public CommonsMultipartResolver multipartResolver() {
-        return new CommonsMultipartResolver();
-    }
 }
