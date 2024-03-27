@@ -1,5 +1,7 @@
 package com.example.demo.serviceImpl;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
@@ -20,6 +22,11 @@ public class VisitServiceImpl implements VisitService {
 	@Transactional
 	public Visit_page update(Visit_page visit_page) {
 		return visitRepository.update(visit_page);
+	}
+	
+	@Override
+	public List<Visit_page> selectAll() {
+		return visitRepository.selectAll();
 	}
 
 }
