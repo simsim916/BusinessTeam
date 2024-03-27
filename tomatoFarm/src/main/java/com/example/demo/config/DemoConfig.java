@@ -12,6 +12,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
@@ -34,4 +35,9 @@ public class DemoConfig {
 		System.out.println("jpaQueryFactory");
 		return new JPAQueryFactory(entityManager);
 	}
+	
+	@Bean
+    public CommonsMultipartResolver multipartResolver() {
+        return new CommonsMultipartResolver();
+    }
 }

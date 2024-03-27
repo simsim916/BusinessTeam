@@ -60,13 +60,13 @@ const ItemDetailBox = ({ item }) => {
         <div id="itemDetailBox" className="container">
             <div id="imgBox">
                 <div id="imgBoxImg">
-                    <img src={process.env.PUBLIC_URL + `/img/itemImg/${item.code}_1.jpg`} alt={`${item.name} 사진`} />
+                    <img src={"http://localhost:8090/resources" + `/img/itemImg/${item.code}_1.jpg`} alt={`${item.name} 사진`} />
                 </div>
                 <div id="imgBoxImgList">
-                    <div onClick={changeMainImg}><img src={process.env.PUBLIC_URL + `/img/itemImg/${item.code}_1.jpg`} alt={`${item.name} 조리`} /></div>
-                    <div onClick={changeMainImg}><img src={process.env.PUBLIC_URL + `/img/itemImg/${item.code}_2.jpg`} alt={`${item.name} 제품`} /></div>
-                    <div onClick={changeMainImg}><img src={process.env.PUBLIC_URL + `/img/itemImg/${item.code}_3.jpg`} alt={`${item.name} 구성품`} /></div>
-                    <div onClick={changeMainImg}><img src={process.env.PUBLIC_URL + `/img/itemImg/${item.code}_4.jpg`} alt={`${item.name} 상세표기`} /></div>
+                    <div onClick={changeMainImg}><img src={"http://localhost:8090/resources" + `/img/itemImg/${item.code}_1.jpg`} alt={`${item.name} 조리`} /></div>
+                    <div onClick={changeMainImg}><img src={"http://localhost:8090/resources" + `/img/itemImg/${item.code}_2.jpg`} alt={`${item.name} 제품`} /></div>
+                    <div onClick={changeMainImg}><img src={"http://localhost:8090/resources" + `/img/itemImg/${item.code}_3.jpg`} alt={`${item.name} 구성품`} /></div>
+                    <div onClick={changeMainImg}><img src={"http://localhost:8090/resources" + `/img/itemImg/${item.code}_4.jpg`} alt={`${item.name} 상세표기`} /></div>
                 </div>
             </div>
 
@@ -122,27 +122,27 @@ const ItemDetailBox = ({ item }) => {
                 <div id="introItem1" className="subTitle">
                     <hr />
                     <h4>상품 조리 사진
-                        <img src={process.env.PUBLIC_URL + `/img/logo3.png`} alt="제품 조리 사진" />
+                        <img src={"http://localhost:8090/resources" + `/img/logo3.png`} alt="제품 조리 사진" />
                     </h4>
                     <hr />
                 </div>
-                <img src={process.env.PUBLIC_URL + `/img/itemImg/${item.code}_2.jpg`} alt={`${item.name} 제품`} />
+                <img src={"http://localhost:8090/resources" + `/img/itemImg/${item.code}_2.jpg`} alt={`${item.name} 제품`} />
                 <div id="introItem2" className="subTitle">
                     <hr />
                     <h4>상품 구성
-                        <img src={process.env.PUBLIC_URL + `/img/logo4.png`} alt="상품 구성" />
+                        <img src={"http://localhost:8090/resources" + `/img/logo4.png`} alt="상품 구성" />
                     </h4>
                     <hr />
                 </div>
-                <img src={process.env.PUBLIC_URL + `/img/itemImg/${item.code}_3.jpg`} alt={`${item.name} 구성품`} />
+                <img src={"http://localhost:8090/resources" + `/img/itemImg/${item.code}_3.jpg`} alt={`${item.name} 구성품`} />
                 <div className="subTitle">
                     <hr />
                     <h4>상품 표시사항
-                        <img src={process.env.PUBLIC_URL + `/img/logo2.png`} alt="제품 조리 사진" />
+                        <img src={"http://localhost:8090/resources" + `/img/logo2.png`} alt="제품 조리 사진" />
                     </h4>
                     <hr />
                 </div>
-                <img src={process.env.PUBLIC_URL + `/img/itemImg/${item.code}_4.jpg`} alt={`${item.name} 상세표기`} />
+                <img src={"http://localhost:8090/resources" + `/img/itemImg/${item.code}_4.jpg`} alt={`${item.name} 상세표기`} />
             </div>
             {
                 introItem ?

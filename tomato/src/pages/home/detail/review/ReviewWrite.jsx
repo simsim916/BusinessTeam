@@ -14,22 +14,29 @@ const ReviewWrite = ({ item, refresh, setRefresh, reviewWriteClick }) => {
         title: '',
         contents: '',
         score: '0',
-        image1: '',
-        image2: '',
-        image3: ''
     })
+    const [uploadFile, setUploadFile] = useState(null);
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
     const submitReview = async () => {
-        await axios.post(`http://localhost:8090/itemreview/iteminsert`, review, {
+        const formData = new FormData();
+        if (uploadFile) {
+            formData.append('writer', review.writer);
+            formData.append('item_code', review.item_code);
+            formData.append('title', review.title);
+            formData.append('contents', review.contents);
+            formData.append('score', review.score);
+            formData.append('uploadfile', uploadFile);
+        }
+        console.log(review)
+        await axios.post(`h ttp://localhost:8090/itemreview/iteminsert`, uploadFile ? formData : review, {
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': uploadFile ? 'multipart/form-data' : 'application/json'
             }
         }).then(res => {
             setLoading(false);
-            console.log('제출성공')
         }).catch(err => {
             console.log(err.message)
             setLoading(false);
@@ -48,7 +55,9 @@ const ReviewWrite = ({ item, refresh, setRefresh, reviewWriteClick }) => {
             [event.target.name]: event.target.value
         }))
     }
-
+    const changeFile = (event) => {
+        setUploadFile(event.target.files[0]);
+    }
     const changeScore = (event) => {
         setScore(event.target.id);
     }
@@ -128,7 +137,7 @@ const ReviewWrite = ({ item, refresh, setRefresh, reviewWriteClick }) => {
                                 </div>
                                 <div className="reviewWriteTag">
                                     <div>사진첨부</div>
-                                    <input type='file' />
+                                    <input type='file' onChange={changeFile} />
                                 </div>
                                 <div id="reviewWriteContentBottom">
                                     <p>* 상품 품질과 관계 없는 내용은 비공개 처리 될 수 있습니다</p>

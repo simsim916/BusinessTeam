@@ -3,8 +3,6 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Loading from './../../../components/Loading';
 import Error from './../../../components/Error';
-import ReviewContent from './ReviewBoardRow';
-import ReviewWriteForm from './ReviewWrite';
 import PagingBox from '../../../components/PagingBox';
 import ReviewBoardRow from './ReviewBoardRow';
 import ReviewWrite from './ReviewWrite';
@@ -12,7 +10,7 @@ import ReviewWrite from './ReviewWrite';
 
 const ReviewBoardBox = ({ item }) => {
     const [itemReviewList, setItemReviewList] = useState(null);
-    const [refresh, setRefrsh] = useState(true);
+    const [refresh, setRefresh] = useState(true);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const [reviewWrite, setReviewWrite] = useState(false);
@@ -77,7 +75,7 @@ const ReviewBoardBox = ({ item }) => {
                     limit={limit}
                     currPage={currPage}
                     setCurrPage={setCurrPage} />
-                {reviewWrite ? <ReviewWrite refresh={refresh} setRefrsh={setRefrsh} item={item} reviewWriteClick={reviewWriteClick} /> : null}
+                {reviewWrite ? <ReviewWrite refresh={refresh} setRefresh={setRefresh} item={item} reviewWriteClick={reviewWriteClick} /> : null}
             </div>
         </>
     );

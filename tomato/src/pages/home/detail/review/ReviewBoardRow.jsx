@@ -14,7 +14,7 @@ const ReviewBoardRow = ({ itemReview }) => {
         <>
             <div onClick={reviewDetailClick} className="reviewContent">
                 <div className='ReviewBoardRow_img'>
-                    <img src={process.env.PUBLIC_URL + 'img/itemImg/5000001_2.jpg'} alt="" />
+                    <img src={"http://localhost:8090/resources" + '/img/itemImg/5000001_2.jpg'} alt="" />
                 </div>
                 <div className='ReviewBoardRow_text'>
                     <div className='ReviewBoardRow_rightTop'>

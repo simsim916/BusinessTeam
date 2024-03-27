@@ -10,10 +10,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -44,22 +46,34 @@ public class Itme_reviewController {
 	}
 
 	@PostMapping("/iteminsert")
-	public ResponseEntity<?> iteminsert(HttpServletRequest request, @RequestBody Item_review entity) {
+	public ResponseEntity<?> iteminsert(HttpServletRequest request, @ModelAttribute Item_review entityf) {
 		ResponseEntity<?> result = null;
-		System.out.println(entity);
-
+		System.out.println(entityf);
 		String realPath = request.getRealPath("/");
 		log.info("\n\n\n** realPath => " + realPath);
+		realPath += "img\\item_review\\" + entityf.getItem_code() + "\\";
 		File file = new File(realPath);
 		if (!file.exists()) {
-			// => 저장폴더가 존재하지 않는경우 만들어줌
 			file.mkdir();
 		}
 
-		result = ResponseEntity.status(HttpStatus.OK).body(item_reviewService.updateReview(entity));
+		MultipartFile uploadfile = entityf.getUploadfile();
+		realPath += uploadfile.getOriginalFilename();
+		try {
+			uploadfile.transferTo(new File(realPath));
+		} catch (Exception e) {
+			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("자료 전송 실패");
+		}
+		entityf.setImage1(uploadfile.getOriginalFilename());
+
+		if (item_reviewService.updateReview(entityf) != null) {
+			result = ResponseEntity.status(HttpStatus.OK).body("등록 성공");
+		} else {
+			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("자료 전송 실패");
+		}
 		return result;
 	}
-	
+
 	@PostMapping("/replyUpdate")
 	public ResponseEntity<?> replyUpdate(@RequestBody Item_review entity) {
 		ResponseEntity<?> result = null;
@@ -67,6 +81,5 @@ public class Itme_reviewController {
 		result = ResponseEntity.status(HttpStatus.OK).body(item_reviewService.updateReview(entity));
 		return result;
 	}
-	
 
 }
