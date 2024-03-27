@@ -40,5 +40,6 @@ public class Item_review {
 	private String image3; 
 
 	@Transient
-	private MultipartFile uploadfile;
+	private MultipartFile uploadfilef;
+	
 }

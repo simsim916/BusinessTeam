@@ -79,7 +79,11 @@ const PresentBox = ({ brand }) => {
             {
                 brandItem != null ?
                     <Link to={`/detail?code=${brandItem[0].code}`} className="typeBoxImg">
-                        <img src={"http://localhost:8090/resources" + `/img/itemImg/${brandItem[0].code}_1.jpg`} alt={brandItem[0].name} />
+                        <div className="itemImgPresent">
+                            <i className="fa-solid fa-cart-shopping"></i>
+                            <i className="fa-solid fa-magnifying-glass"></i>
+                            <img src={"http://localhost:8090/resources" + `/img/itemImg/${brandItem[0].code}_1.jpg`} alt={brandItem[0].name} />
+                        </div>
                         <div className="typeBoxImgTitle">
                             <div className="typeBoxImgTitleName"> {brandItem[0].name} </div>
                             <p className="typeBoxImgTitlePrice">{makeComa(brandItem[0].price)}원</p>

@@ -26,7 +26,7 @@
     color: white;
 }
 
-#reviewBoard {
+#reviewBoardBox #reviewBoard {
     margin-top: 30px;
     border-top: 3px solid #000;
     border-bottom: 3px solid #000;
@@ -34,7 +34,7 @@
     font-weight: 500;
 }
 
-.reviewBoardRow {
+#reviewBoardBox .reviewBoardRow {
     line-height: 60px;
     display: flex;
     align-items: center;

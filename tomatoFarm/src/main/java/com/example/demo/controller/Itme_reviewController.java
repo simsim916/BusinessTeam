@@ -2,12 +2,15 @@ package com.example.demo.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -46,39 +49,28 @@ public class Itme_reviewController {
 	}
 
 	@PostMapping("/iteminsert")
-	public ResponseEntity<?> iteminsert(HttpServletRequest request, @ModelAttribute Item_review entityf) {
+	public ResponseEntity<?> iteminsert(HttpServletRequest request, Item_review entity , @RequestBody Item_review entityJ) throws IOException{
 		ResponseEntity<?> result = null;
-		System.out.println(entityf);
+		if (entity != null) {
 		String realPath = request.getRealPath("/");
 		log.info("\n\n\n** realPath => " + realPath);
-		realPath += "img\\item_review\\" + entityf.getItem_code() + "\\";
-		File file = new File(realPath);
+		realPath += "\\resources\\img\\itemAskImg\\" + entity.getItem_code() + "\\";
+		File file = new File(realPath); // uploadImages 폴더에 화일존재 확인을 위함
 		if (!file.exists()) {
 			file.mkdir();
 		}
-
-		MultipartFile uploadfile = entityf.getUploadfile();
-		realPath += uploadfile.getOriginalFilename();
-		try {
-			uploadfile.transferTo(new File(realPath));
-		} catch (Exception e) {
-			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("자료 전송 실패");
+		
+		MultipartFile uploadfilef = entity.getUploadfilef();
+		if (uploadfilef != null && !uploadfilef.isEmpty()) {
+			String file1 = realPath  +entity.getWriter()+"_" +uploadfilef.getOriginalFilename(); // 저장경로(relaPath+화일명) 완성
+			uploadfilef.transferTo(new File(file1)); // 해당경로에 저장(붙여넣기)
+			entity.setImage1(entity.getWriter()+"_" +uploadfilef.getOriginalFilename());
 		}
-		entityf.setImage1(uploadfile.getOriginalFilename());
-
-		if (item_reviewService.updateReview(entityf) != null) {
-			result = ResponseEntity.status(HttpStatus.OK).body("등록 성공");
+		result = ResponseEntity.status(HttpStatus.OK).body(item_reviewService.insertItemReview(entity));
 		} else {
-			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("자료 전송 실패");
+			result = ResponseEntity.status(HttpStatus.OK).body(item_reviewService.insertItemReview(entityJ));
 		}
-		return result;
-	}
-
-	@PostMapping("/replyUpdate")
-	public ResponseEntity<?> replyUpdate(@RequestBody Item_review entity) {
-		ResponseEntity<?> result = null;
-		System.out.println(entity);
-		result = ResponseEntity.status(HttpStatus.OK).body(item_reviewService.updateReview(entity));
+		
 		return result;
 	}
 

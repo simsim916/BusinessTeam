@@ -7,33 +7,33 @@ import axios from 'axios';
 
 const ReviewWrite = ({ item, refresh, setRefresh, reviewWriteClick }) => {
     const [writeBoxClose, setWriteBoxClose] = useState(true);
-    const [score, setScore] = useState(0)
+    const [score, setScore] = useState(0);
     const [review, setReview] = useState({
         writer: 'manager1',
         item_code: item.code,
         title: '',
         contents: '',
         score: '0',
-    })
-    const [uploadFile, setUploadFile] = useState(null);
+    });
+    const [file, setfile] = useState();
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
     const submitReview = async () => {
+        setLoading(true);
         const formData = new FormData();
-        if (uploadFile) {
+        if (file) {
             formData.append('writer', review.writer);
             formData.append('item_code', review.item_code);
             formData.append('title', review.title);
             formData.append('contents', review.contents);
             formData.append('score', review.score);
-            formData.append('uploadfile', uploadFile);
+            formData.append('uploadfilef', file);
         }
-        console.log(review)
-        await axios.post(`h ttp://localhost:8090/itemreview/iteminsert`, uploadFile ? formData : review, {
+        await axios.post(`http://localhost:8090/itemreview/iteminsert`, file ? formData : review, {
             headers: {
-                'Content-Type': uploadFile ? 'multipart/form-data' : 'application/json'
+                'Content-Type': file ? 'multipart/form-data' : 'application/json'
             }
         }).then(res => {
             setLoading(false);
@@ -46,6 +46,10 @@ const ReviewWrite = ({ item, refresh, setRefresh, reviewWriteClick }) => {
         reviewWriteBoxClose();
     }
 
+    const changeFile = (e) => {
+        setfile(e.target.files[0]);
+    };
+
     if (loading) return <Loading />
     if (error) return <Error />
 
@@ -55,9 +59,9 @@ const ReviewWrite = ({ item, refresh, setRefresh, reviewWriteClick }) => {
             [event.target.name]: event.target.value
         }))
     }
-    const changeFile = (event) => {
-        setUploadFile(event.target.files[0]);
-    }
+
+
+
     const changeScore = (event) => {
         setScore(event.target.id);
     }
@@ -137,7 +141,7 @@ const ReviewWrite = ({ item, refresh, setRefresh, reviewWriteClick }) => {
                                 </div>
                                 <div className="reviewWriteTag">
                                     <div>사진첨부</div>
-                                    <input type='file' onChange={changeFile} />
+                                    <input onChange={changeFile} type='file' name='uploadfilef' />
                                 </div>
                                 <div id="reviewWriteContentBottom">
                                     <p>* 상품 품질과 관계 없는 내용은 비공개 처리 될 수 있습니다</p>
