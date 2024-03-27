@@ -8,8 +8,8 @@ const ShopBasketSelectBox = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
-    // if (loading) return <Loading />
-    // if (error) return <Error />
+    if (loading) return <Loading />
+    if (error) return <Error />
 
     return (
         <div>
@@ -21,10 +21,8 @@ const ShopBasketSelectBox = () => {
                 </h3>
                 <div id="shopBasketSelectBox">
                     <ul id="shopBasketSelect">
-                        <li><input type="checkbox"></input></li>
-                        <li>전체선택</li>
-                        <li><input type="checkbox"></input></li>
-                        <li>전체삭제</li>
+                        <li><input type="checkbox"></input>전체선택</li>
+                        <li><input type="checkbox"></input>전체삭제</li>
                     </ul>
                 </div>
                 <div id="shopBasketItemBox">
@@ -108,6 +106,7 @@ const ShopBasketSelectBox = () => {
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     );
