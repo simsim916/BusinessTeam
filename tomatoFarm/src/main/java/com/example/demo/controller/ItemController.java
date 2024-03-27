@@ -45,6 +45,16 @@ public class ItemController {
 	public ResponseEntity<?> selectItemWhereType(SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
 		ItemDTO dto = itemService.selectItemIntegerWhereType(searchRequest);
+//		=====================================
+//		view 를 +1 하는과정 
+//		( 레포지토리에서 한번에 해결하고 싶었으나 dto 사용한다는것과 entity 사용한다는 차이점이 존재
+//		  dtoToEntity 메서드는 ~ 서비스를 통해 호출해서 사용하는데 
+//		  Repository 에서 service를 필드변수로 사용하기엔 문제가 생길까봐 보류
+//	    )
+		dto.setViews(dto.getViews()+1);
+		Item Entity = itemService.dtotoEntity(dto);
+//		=====================================
+		itemService.updateItem(Entity);
 		result = ResponseEntity.status(HttpStatus.OK).body(dto);
 		return result;
 	}

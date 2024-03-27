@@ -95,14 +95,35 @@ public class ItemRepositoryImpl implements ItemRepository {
 
 	@Override
 	public ItemDTO selectItemIntegerWhereType(SearchRequest searchRequest) {
+//		ItemDTO dto = jPAQueryFactory
+//		.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price, item.storage,
+//				item.weight, item.packing, item.sales, item.stock, item.views, item.likes, item.event_code,
+//				item_event.discount, item_event.name.as("event_name")))
+//		.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
+//		.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
+//				.eq(searchRequest.getKeyword()))
+//		.fetchOne();
+//		
+//		if(dto != null) {
+//			dto.setViews(dto.getViews()+1);
+//			updateItem(dtoToEntity(dto))
+//		} else {
+//			updateItem(dtoToEntity(dto))
+//		}
+//		===============================
+//		merge, persist 는 매개변수로 entity를 사용하는데
+//		우리가 동적검색하는 메서드는 전부 dto를 이용하기 때문에
+//		레포지토리에서 한번에 해결할 수 없는 문제
 		return jPAQueryFactory
 				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price, item.storage,
 						item.weight, item.packing, item.sales, item.stock, item.views, item.likes, item.event_code,
-						item_event.discount, item_event.name.as("event_name")))
+						item.admin, item_event.discount, item_event.name.as("event_name")))
 				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
 				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
 						.eq(searchRequest.getKeyword()))
 				.fetchOne();
+		
+		
 	}
 
 	@Override

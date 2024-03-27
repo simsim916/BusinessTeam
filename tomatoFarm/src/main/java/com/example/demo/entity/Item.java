@@ -6,6 +6,7 @@ import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Builder.Default;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -31,10 +32,10 @@ public class Item {
 	private Integer price; // 가격
 	private Integer vat; // 과세여부
 	private String origin; // 원산지
-	private Integer sales=0; // 판매 수량
+	@Builder.Default private Integer sales=0; // 판매 수량
 	private Integer stock; // 재고 수량
-	private Integer views=0; // 조회수
-	private Integer likes=0; // 좋아요수
+	@Builder.Default private Integer views=0; // 조회수
+	@Builder.Default private Integer likes=0; // 좋아요수
 	private Integer event_code; // 이벤트명
 	private String admin; // 등록자
 

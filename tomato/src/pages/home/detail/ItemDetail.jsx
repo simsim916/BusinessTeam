@@ -26,6 +26,13 @@ const ItemDetail = () => {
             setLoading(false);
             setError(true);
         })
+
+        axios.get(`http://localhost:8090/visit/update`, {
+            params: {
+                page: 'itemDetail',
+            }
+        })
+
     }, [])
 
     if (loading) return <Loading />

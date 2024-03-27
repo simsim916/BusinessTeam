@@ -45,6 +45,15 @@ const ItemList = () => {
         })
     }, [searchParams])
 
+    useEffect(() => {
+        axios.get(`http://localhost:8090/visit/update`, {
+            params: {
+                page: 'itemList'
+            }
+        })
+    }, [])
+
+
     if (loading || sortloading) return <Loading />
     if (error || sorterror) return <Error />
 
