@@ -33,6 +33,8 @@ public class Item_askServiceImpl implements Item_askService{
 	}
 	
 	public Item_ask updateAsk(Item_ask entity) {
+		LocalDateTime date = LocalDateTime.now();
+		entity.setRegdate(date);
 		return item_askRepository.updateItemAsk(entity);
 	}
 

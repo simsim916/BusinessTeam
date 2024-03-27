@@ -41,9 +41,9 @@ private OrderSpecifier<?> orderColumn;
 	public SearchRequest(String keyword) {
 		this.keyword=keyword;
 	}
-	public SearchRequest(String keyword, String orderType) {
+	public SearchRequest(String column, String keyword) {
+		this.column=column;
 		this.keyword=keyword;
-		this.orderType=orderType;
 	}
 	
 	public void makeOrder(SearchRequest searchRequest) {
