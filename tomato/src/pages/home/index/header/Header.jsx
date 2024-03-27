@@ -52,7 +52,7 @@ const Header = () => {
                 <div className="container">
                     <div id="logoBox">
                         <a href="/">
-                            <img src={process.env.PUBLIC_URL + "/img/logo.png"} alt="로고" />
+                            <img src={"http://localhost:8090/resources" + "/img/logo.png"} alt="로고" />
                             <h1>토마토팜 tomatoFarm</h1>
                         </a>
                     </div>
