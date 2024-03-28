@@ -128,6 +128,15 @@ const ReviewWrite = ({ item, refresh, setRefresh, reviewWriteClick }) => {
                                         }
                                     </div>
                                 </div>
+                                <div className="reviewWriteKeword">
+                                    <div id='kewordSelect'>키워드 선택</div>
+                                    <div id='kewordList' onChange={changeReview}>
+                                        <label><input type='checkbox' id='checkbox'></input>맛있어요</label>
+                                        <label><input type='checkbox' id='checkbox'></input>신선해요</label>
+                                        <label><input type='checkbox' id='checkbox'></input>가성비 좋아요</label>
+                                        <label><input type='checkbox' id='checkbox'></input>배송이 빨라요</label>
+                                    </div>
+                                </div>
                                 <div className="reviewWriteTag">
                                     <div>리뷰제목</div>
                                     <textarea onChange={changeReview} name="title" type="text" placeholder="상품 후기의 제목을 입력해주세요" value={review.title}></textarea>

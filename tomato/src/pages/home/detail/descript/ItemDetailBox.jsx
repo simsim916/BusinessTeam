@@ -6,6 +6,7 @@ import { makeComa, makeDiscountPrice } from '../../../components/MathFunction';
 const ItemDetailBox = ({ item }) => {
     const [inputCountValue, setInputCountValue] = useState(1);
     const [introItem, setIntroItem] = useState(false)
+    const [cartItem, setCartItem] = useState(true);
 
     const currentDate = new Date();
     const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
@@ -54,6 +55,12 @@ const ItemDetailBox = ({ item }) => {
     const changeInputCount = (event) => {
         setInputCountValue(event.target.value);
         console.log(inputCountValue)
+    }
+
+    const addCart = () => {
+        
+
+
     }
 
     return (
@@ -106,9 +113,20 @@ const ItemDetailBox = ({ item }) => {
                     </div>
                     <div id="priceBox">
                         <div id="priceAmount">총 상품금액&nbsp; : &nbsp;<span ref={priceRef}>{makeComa(makeDiscountPrice(item.price, item.discount) * inputCountValue)}원</span></div>
-                        <a href="" id="gotocart">장바구니 담기</a>
+                        {/* onclick이 맞나? 장바구니 컴포넌트를 넣는게 맞나? */}
+                        <a onClick={() => addCart("장바구니 담기")} href="" id="gotocart">장바구니 담기</a>
                         <a href="" id="gotobuy">구매하기</a>
                     </div>
+                </div>
+                <div id='goCartContainer'>
+                    <div id='goCartBox'>
+                        <div id="itemName">{item.name}</div>
+                        <div>장바구니에 상품을 담았습니다.</div>
+                        <div>장바구니로 이동하시겠습니까?</div>
+                        <button id="cartOK">확인</button>
+                        <button id="cartNO">취소</button>
+                    </div>
+                    <div id='triangle_bottom'></div>
                 </div>
             </div>
 

@@ -7,10 +7,10 @@ const AskBaordRow = ({ itemAsk }) => {
     const [askDetail, setAskDetail] = useState(false);
     const [askPassword, setAskPassword] = useState("");
     const [passwordSubmit, setPasswordSubmit] = useState(false);
+    const [passwordFail, setPasswordFail] = useState(true);
 
     const showContentP = () => {
         // 비밀번호 있는 글 = 비밀번호 확인 후 보여주기
-        // 비밀번호 확인을 해야함 -? 어떻게 할껀데
         setAskDetail(!askDetail);
     }
 
@@ -26,12 +26,12 @@ const AskBaordRow = ({ itemAsk }) => {
         }).then(res => {
             setPasswordSubmit(true);
         }).catch(err => {
-
+            setPasswordFail();
         });
     }
 
     const showContent = () => {
-        console.log('showContent')
+        // 비밀번호 없는 글 보여주기
         setAskDetail(!askDetail);
     }
 
@@ -65,9 +65,15 @@ const AskBaordRow = ({ itemAsk }) => {
                         passwordSubmit ?
                             <div className="boardAnswer_content">{itemAsk.contents}</div>
                             :
+                            passwordFail ?
                             <div id='passwordCheck'>
-                                <input type="password" value={askPassword} onClick={(e) => e.stopPropagation()} onChange={PasswordChange} placeholder="비밀번호 입력" />
+                                <input type="password" value={askPassword} onClick={(e) => e.stopPropagation()} onChange={PasswordChange} placeholder="4자리 숫자 입력" />
                                 <button onClick={checkPassword}>확인</button>
+                            </div>   
+                            :
+                            <div id='passwordCheck'>
+                                    <input type="password" value={askPassword} onClick={(e) => e.stopPropagation()} onChange={PasswordChange} placeholder="비밀번호 입력" />
+                                    <button onClick={checkPassword}>확인</button>비밀번호가 틀렸습니다. 다시 입력해주세요
                             </div>
                     :
                     null

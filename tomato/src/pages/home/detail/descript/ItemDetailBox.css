@@ -205,6 +205,45 @@
     line-height: 50px;
     border-radius: 15px;
 }
+#goCartContainer{
+    position: absolute;
+    top: 550px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    width: 300px;
+    padding: 20px;
+    text-align: center;
+}
+#goCartBox {
+}
+
+#goCartBox div{
+    width: 100%;
+}
+#goCartBox button {
+    padding: 10px 20px;
+    background-color: #CA4046;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 50%;
+
+}
+
+#triangle_bottom{
+    display: inline-block;
+    border: 30px solid transparent;
+    border-color: #CA4046;
+    width: 0px;
+    height: 0px;
+    border-right: 27px solid transparent;
+    border-left: 27px solid transparent;
+    border-bottom: 0;
+    top: 750px;
+    left: 50px;
+    position: absolute;
+}
 
 #detailClick {
     margin-top: 50px;

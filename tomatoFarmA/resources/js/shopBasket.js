@@ -67,3 +67,17 @@ function delCheckItem() {
 //     sumPrice = 0;
 
 // }
+
+
+function selectAll(event) {
+    const clickList = event.currentTarget;
+    const checkbox = clickList.querySelector('input[type="checkbox"]');
+
+    // 전체선택 또는 해제
+    const isChecked = checkbox.checked;
+    const checkboxes = document.querySelectorAll('.shopBasketItem input[type="checkbox"]');
+    
+    checkboxes.forEach(function (item) {
+        item.checked = isChecked;
+    });
+}

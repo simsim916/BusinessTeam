@@ -1,6 +1,9 @@
 import Header from '../0home/header/Header';
-import ShopBasket from './ShopBasket.css';
 import ShopBasketSelectBox from './ShopBasketSelectBox';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import Loading from './../components/Loading';
+import Error from './../components/Error';
 
 
 const ShopBasket = () => {
@@ -29,6 +32,10 @@ const ShopBasket = () => {
         <>
             <Header />
             <ShopBasketSelectBox />
+
+            <ShopBasketPayBox />
+
+            <BestItemBox />
         
         
         
