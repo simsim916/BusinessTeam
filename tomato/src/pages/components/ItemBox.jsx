@@ -4,7 +4,7 @@ import { makeComa } from './MathFunction';
 
 const ItemBox = ({ item }) => {
     return (
-        <Link to={"/detail?code=" + item.code} className="itemBox">
+        <Link to={"/home/detail?code=" + item.code} className="itemBox">
             <div className="itemImg">
                 <i className="fa-solid fa-cart-shopping"></i>
                 <i className="fa-solid fa-magnifying-glass"></i>

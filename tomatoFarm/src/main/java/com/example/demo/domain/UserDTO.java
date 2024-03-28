@@ -23,4 +23,7 @@ public class UserDTO {
 	private String birthdate;
 	private Integer point;
 	
+	
+	private String token;
+	
 }

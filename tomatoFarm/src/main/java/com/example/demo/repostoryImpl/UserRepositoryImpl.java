@@ -25,9 +25,9 @@ public class UserRepositoryImpl implements UserRepository {
 	private final EntityManager entityManager;
 
 	@Override
-	public User selectUser(UserDTO dto) {
+	public User selectUser(User entity) {
 		return jpaQueryfactory.selectFrom(user)
-		.where(user.id.eq(dto.getId()))
+		.where(user.id.eq(entity.getId()))
 		.fetchOne();
 	}
 	

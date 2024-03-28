@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Loading from './../../../components/Loading';
 import Error from '../../../components/Error';
+import { SERVER_RESOURCE } from '../../../../model/server-config';
+import { api } from '../../../../model/model';
 
 const LoginBG = ({ signBox, changeSignBox, checkId, checkPassword, changeOpacity }) => {
     const [loading, setLoading] = useState(false)
@@ -32,7 +34,7 @@ const LoginBG = ({ signBox, changeSignBox, checkId, checkPassword, changeOpacity
         if (handle) result = handle(event);
         valueChange(event, result.message, result.check);
         toggleJoinButton();
-        
+
     }
 
     const valueChange = (event, message, check) => {
@@ -59,18 +61,15 @@ const LoginBG = ({ signBox, changeSignBox, checkId, checkPassword, changeOpacity
     }
 
     const requestLogin = () => {
-        axios.post(`http://localhost:8090/user/login`, loginValue.value, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => {
-            setLoading(false);
-            console.log('제출성공')
-        }).catch(err => {
-            console.log(err.message)
-            setLoading(false);
-            setError(true);
-        });
+        api('/user/login', 'post', loginValue.value)
+            .then(res => {
+                setLoading(false);
+                sessionStorage.setItem("loginInfo", JSON.stringify(res));
+            }).catch(err => {
+                console.log(err.message)
+                setLoading(false);
+                setError(true);
+            });
     }
 
     if (loading) return <Loading />
@@ -79,7 +78,7 @@ const LoginBG = ({ signBox, changeSignBox, checkId, checkPassword, changeOpacity
     return (
         <div id="loginBG" style={{ transform: signBox ? 'translate(-100%, 0)' : 'translate(0%, 0)' }}>
             <div>
-                <Link to="/"><img id="logo" src={process.env.PUBLIC_URL + `/img/logo.png`} alt="logo" /></Link>
+                <Link to="/"><img id="logo" src={SERVER_RESOURCE + `/img/logo.png`} alt="logo" /></Link>
                 <form id="loginBox" action="/tomatoFarm/member/login" method="post">
                     <div id="loginButton">
                         <div>일반 로그인</div>
@@ -89,14 +88,14 @@ const LoginBG = ({ signBox, changeSignBox, checkId, checkPassword, changeOpacity
                     <div id="idBox">
                         <i className="fa-solid fa-circle-user"></i>
                         <input id="id" type="text" name="id" placeholder="아이디"
-                            onChange={(event) => handleInputChange(event, checkId)}
+                            onKeyUp={(event) => handleInputChange(event, checkId)}
                             onBlur={(event) => handleInputChange(event, checkId)}
                             onFocus={changeOpacity} />
                     </div>
                     <div id="passwordBox">
                         <i className="fa-solid fa-key"></i>
                         <input id="password" type="password" name="password" placeholder="비밀번호"
-                            onChange={(event) => handleInputChange(event, checkPassword)}
+                            onKeyUp={(event) => handleInputChange(event, checkPassword)}
                             onBlur={(event) => handleInputChange(event, checkPassword)}
                             onFocus={changeOpacity} />
                     </div>
