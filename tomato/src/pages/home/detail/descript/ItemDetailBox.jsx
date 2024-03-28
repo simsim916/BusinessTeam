@@ -6,6 +6,7 @@ import { makeComa, makeDiscountPrice } from '../../../components/MathFunction';
 const ItemDetailBox = ({ item }) => {
     const [inputCountValue, setInputCountValue] = useState(1);
     const [introItem, setIntroItem] = useState(false)
+    const [cartItem, setCartItem] = useState(true);
 
     const currentDate = new Date();
     const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
@@ -56,17 +57,23 @@ const ItemDetailBox = ({ item }) => {
         console.log(inputCountValue)
     }
 
+    const addCart = () => {
+        
+
+
+    }
+
     return (
         <div id="itemDetailBox" className="container">
             <div id="imgBox">
                 <div id="imgBoxImg">
-                    <img src={process.env.PUBLIC_URL + `/img/itemImg/${item.code}_1.jpg`} alt={`${item.name} 사진`} />
+                    <img src={"http://localhost:8090/resources" + `/img/itemImg/${item.code}_1.jpg`} alt={`${item.name} 사진`} />
                 </div>
                 <div id="imgBoxImgList">
-                    <div onClick={changeMainImg}><img src={process.env.PUBLIC_URL + `/img/itemImg/${item.code}_1.jpg`} alt={`${item.name} 조리`} /></div>
-                    <div onClick={changeMainImg}><img src={process.env.PUBLIC_URL + `/img/itemImg/${item.code}_2.jpg`} alt={`${item.name} 제품`} /></div>
-                    <div onClick={changeMainImg}><img src={process.env.PUBLIC_URL + `/img/itemImg/${item.code}_3.jpg`} alt={`${item.name} 구성품`} /></div>
-                    <div onClick={changeMainImg}><img src={process.env.PUBLIC_URL + `/img/itemImg/${item.code}_4.jpg`} alt={`${item.name} 상세표기`} /></div>
+                    <div onClick={changeMainImg}><img src={"http://localhost:8090/resources" + `/img/itemImg/${item.code}_1.jpg`} alt={`${item.name} 조리`} /></div>
+                    <div onClick={changeMainImg}><img src={"http://localhost:8090/resources" + `/img/itemImg/${item.code}_2.jpg`} alt={`${item.name} 제품`} /></div>
+                    <div onClick={changeMainImg}><img src={"http://localhost:8090/resources" + `/img/itemImg/${item.code}_3.jpg`} alt={`${item.name} 구성품`} /></div>
+                    <div onClick={changeMainImg}><img src={"http://localhost:8090/resources" + `/img/itemImg/${item.code}_4.jpg`} alt={`${item.name} 상세표기`} /></div>
                 </div>
             </div>
 
@@ -106,9 +113,20 @@ const ItemDetailBox = ({ item }) => {
                     </div>
                     <div id="priceBox">
                         <div id="priceAmount">총 상품금액&nbsp; : &nbsp;<span ref={priceRef}>{makeComa(makeDiscountPrice(item.price, item.discount) * inputCountValue)}원</span></div>
-                        <a href="" id="gotocart">장바구니 담기</a>
+                        {/* onclick이 맞나? 장바구니 컴포넌트를 넣는게 맞나? */}
+                        <a onClick={() => addCart("장바구니 담기")} href="" id="gotocart">장바구니 담기</a>
                         <a href="" id="gotobuy">구매하기</a>
                     </div>
+                </div>
+                <div id='goCartContainer'>
+                    <div id='goCartBox'>
+                        <div id="itemName">{item.name}</div>
+                        <div>장바구니에 상품을 담았습니다.</div>
+                        <div>장바구니로 이동하시겠습니까?</div>
+                        <button id="cartOK">확인</button>
+                        <button id="cartNO">취소</button>
+                    </div>
+                    <div id='triangle_bottom'></div>
                 </div>
             </div>
 
@@ -122,27 +140,27 @@ const ItemDetailBox = ({ item }) => {
                 <div id="introItem1" className="subTitle">
                     <hr />
                     <h4>상품 조리 사진
-                        <img src={process.env.PUBLIC_URL + `/img/logo3.png`} alt="제품 조리 사진" />
+                        <img src={"http://localhost:8090/resources" + `/img/logo3.png`} alt="제품 조리 사진" />
                     </h4>
                     <hr />
                 </div>
-                <img src={process.env.PUBLIC_URL + `/img/itemImg/${item.code}_2.jpg`} alt={`${item.name} 제품`} />
+                <img src={"http://localhost:8090/resources" + `/img/itemImg/${item.code}_2.jpg`} alt={`${item.name} 제품`} />
                 <div id="introItem2" className="subTitle">
                     <hr />
                     <h4>상품 구성
-                        <img src={process.env.PUBLIC_URL + `/img/logo4.png`} alt="상품 구성" />
+                        <img src={"http://localhost:8090/resources" + `/img/logo4.png`} alt="상품 구성" />
                     </h4>
                     <hr />
                 </div>
-                <img src={process.env.PUBLIC_URL + `/img/itemImg/${item.code}_3.jpg`} alt={`${item.name} 구성품`} />
+                <img src={"http://localhost:8090/resources" + `/img/itemImg/${item.code}_3.jpg`} alt={`${item.name} 구성품`} />
                 <div className="subTitle">
                     <hr />
                     <h4>상품 표시사항
-                        <img src={process.env.PUBLIC_URL + `/img/logo2.png`} alt="제품 조리 사진" />
+                        <img src={"http://localhost:8090/resources" + `/img/logo2.png`} alt="제품 조리 사진" />
                     </h4>
                     <hr />
                 </div>
-                <img src={process.env.PUBLIC_URL + `/img/itemImg/${item.code}_4.jpg`} alt={`${item.name} 상세표기`} />
+                <img src={"http://localhost:8090/resources" + `/img/itemImg/${item.code}_4.jpg`} alt={`${item.name} 상세표기`} />
             </div>
             {
                 introItem ?

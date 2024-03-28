@@ -8,7 +8,7 @@ const ItemBox = ({ item }) => {
             <div className="itemImg">
                 <i className="fa-solid fa-cart-shopping"></i>
                 <i className="fa-solid fa-magnifying-glass"></i>
-                <img src={process.env.PUBLIC_URL + `/img/itemImg/${item.code < 10000 ? 'default' : item.code}_1.jpg`} alt={item.name} />
+                <img src={"http://localhost:8090/resources" + `/img/itemImg/${item.code < 10000 ? 'default' : item.code}_1.jpg`} alt={item.name} />
             </div>
             <div className="itemName">{item.name}</div>
             <div className="itemInfo">{item.brand}<br /></div>

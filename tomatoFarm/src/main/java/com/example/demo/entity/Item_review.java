@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,5 +38,10 @@ public class Item_review {
 	private String image1; 
 	private String image2; 
 	private String image3; 
+	private String tag; 
+	
 
+	@Transient
+	private MultipartFile uploadfilef;
+	
 }

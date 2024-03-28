@@ -32,7 +32,9 @@ public interface ItemService {
 				.views(dto.getViews())
 				.likes(dto.getLikes())
 				.event_code(dto.getEvent_code())
-				.admin(dto.getAdmin()).build();
+				.admin(dto.getAdmin())
+				.intro(dto.getIntro())
+				.build();
 		return entity;
 	}
 
@@ -56,7 +58,9 @@ public interface ItemService {
 				.views(entity.getViews())
 				.likes(entity.getLikes())
 				.event_code(entity.getEvent_code())
-				.admin(entity.getAdmin()).build();
+				.admin(entity.getAdmin())
+				.intro(entity.getIntro())
+				.build();
 		return dto;
 	}
 
