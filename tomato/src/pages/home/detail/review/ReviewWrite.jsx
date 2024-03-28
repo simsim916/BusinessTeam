@@ -35,7 +35,7 @@ const ReviewWrite = ({ item, refresh, setRefresh, reviewWriteClick }) => {
         const loginInfoString = sessionStorage.getItem('logininfo');
         const loginInfoObject = JSON.parse(loginInfoString);
 
-        await api('/itemreview/insertmultipart', 'post', formData, loginInfoObject.token)
+        await api('/itemreview/insertmultipart', 'post', formData, "loginInfoObject.token")
             .then(res => {
                 setLoading(false);
             }).catch(err => {

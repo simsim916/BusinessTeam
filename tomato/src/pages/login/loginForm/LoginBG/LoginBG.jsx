@@ -6,8 +6,12 @@ import Loading from './../../../components/Loading';
 import Error from '../../../components/Error';
 import { SERVER_RESOURCE } from '../../../../model/server-config';
 import { api } from '../../../../model/model';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchData } from '../../../redux/axios/axios';
 
 const LoginBG = ({ signBox, changeSignBox, checkId, checkPassword, changeOpacity }) => {
+    const dispatch = useDispatch();
+    const dataState = useSelector(state => state.user);
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false);
     const [loginValue, setLoginValue] = useState({
@@ -60,16 +64,19 @@ const LoginBG = ({ signBox, changeSignBox, checkId, checkPassword, changeOpacity
             setLoginValue(loginValue => ({ ...loginValue, isLoginable: true })) : setLoginValue(loginValue => ({ ...loginValue, isLoginable: false }));
     }
 
-    const requestLogin = () => {
-        api('/user/login', 'post', loginValue.value)
-            .then(res => {
-                setLoading(false);
-                sessionStorage.setItem("loginInfo", JSON.stringify(res));
-            }).catch(err => {
-                console.log(err.message)
-                setLoading(false);
-                setError(true);
-            });
+    const requestLogin = async () => {
+        await dispatch(fetchData('/user/login', 'post', loginValue.value));
+
+
+        // api('/user/login', 'post', loginValue.value)
+        //     .then(res => {
+        //         setLoading(false);
+        //         sessionStorage.setItem("loginInfo", JSON.stringify(res));
+        //     }).catch(err => {
+        //         console.log(err.message)
+        //         setLoading(false);
+        //         setError(true);
+        //     });
     }
 
     if (loading) return <Loading />

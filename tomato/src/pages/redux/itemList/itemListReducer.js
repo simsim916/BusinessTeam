@@ -6,7 +6,7 @@ const initialState = {
         data: [],
         error: null
     },
-    user:{
+    user: {
         loading: false,
         data: [],
         error: null

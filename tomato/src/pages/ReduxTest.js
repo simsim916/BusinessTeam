@@ -5,8 +5,8 @@ import { SERVER_URL } from '../model/server-config';
 
 const ReduxTest = () => {
     const dispatch = useDispatch();
-    const dataState = useSelector(state => state.itemList);
-
+    const dataState = useSelector(state => state.basic);
+    console.log(dataState)
     useEffect(() => {
         dispatch(fetchData());
     }, [dispatch]);

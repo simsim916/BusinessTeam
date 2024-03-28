@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.demo.domain.Item_reviewDTO;
 import com.example.demo.domain.UserToken;
 import com.example.demo.entity.Item_review;
+import com.example.demo.entity.User;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.service.Item_reviewService;
@@ -54,6 +55,7 @@ public class Itme_reviewController {
 		ResponseEntity<?> result = null;
 		System.out.println("\n\n"+ entity +"\n\n");
 		System.out.println("\n\n"+ userToken +"\n\n");
+		
 		if (entity != null) {
 			String realPath = request.getRealPath("/");
 			log.info("\n\n\n** realPath => " + realPath);
