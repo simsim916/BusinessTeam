@@ -3,7 +3,7 @@ import { useState } from 'react';
 import './SideMenu.css'
 import { Link } from 'react-router-dom';
 
-const SideMenu = ({ openSideBar, sideBarOpen }) => {
+const SideMenu = ({ openSideBar, sideBarOpen, currLocation }) => {
 
 
 
@@ -11,6 +11,17 @@ const SideMenu = ({ openSideBar, sideBarOpen }) => {
         <>
             <div id="topBarA" style={{ paddingLeft: sideBarOpen ? '95px' : '15px' }}>
                 <i className="fa-solid fa-house"></i>
+                &nbsp;&nbsp; 관리자페이지 &nbsp;&nbsp;
+                {currLocation === ""
+                    ? currLocation
+                    : (
+                        <span>
+                            <i className="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;{currLocation}
+                        </span>
+                    )
+                }
+
+
             </div>
             <div id="sideBar" style={{ transform: sideBarOpen ? 'translateX(0%)' : 'translateX(-100%)' }}>
                 <div>토마토팜</div>
@@ -31,17 +42,18 @@ const SideMenu = ({ openSideBar, sideBarOpen }) => {
                         <div><i className="fa-solid fa-bell"></i><br />알림</div>
                     </li>
                     <li>
-                        <div><i className="fa-solid fa-comment-dots"></i><br />고객센터</div>
+                        {/* <Link to="/admin/graph"><i className="fa-solid fa-comment-dots"></i><br />그래프</Link> */}
+                        <Link to="/admin/graph"><i className="fa-solid fa-square-poll-vertical"></i><br />통계</Link>
                     </li>
 
                     <li>
-                        <Link to="/admin/select"><i className="fa-solid fa-gear"></i><br />데이터 조회</Link>
+                        <Link to="/admin/select"><i className="fa-solid fa-magnifying-glass"></i><br />상품 조회</Link>
                     </li>
                     <li>
-                        <Link to="/admin/insert"><i className="fa-solid fa-gear"></i><br />데이터 입력</Link>
+                        <Link to="/admin/insert"><i className="fa-solid fa-file-import"></i><br />상품 입력</Link>
                     </li>
                     <li>
-                        <Link to="/admin/ask"><i className="fa-solid fa-gear"></i><br />문의글</Link>
+                        <Link to="/admin/ask"><i className="fa-solid fa-comment-dots"></i><br />문의 목록</Link>
                     </li>
                 </ul>
                 <div id="sideBarButton" onClick={openSideBar}>

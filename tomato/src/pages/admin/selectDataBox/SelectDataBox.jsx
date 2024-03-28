@@ -6,9 +6,10 @@ import Loading from '../../components/Loading';
 import PagingBox from "../../components/PagingBox";
 import SelectDataBoxRow from './SelectDataBoxRow';
 
-const SelectDataBox = () => {
+const SelectDataBox = ({ myLocation }) => {
 
     console.log(`SelectDataBox 렌더링`);
+
 
     const [formData, setFormData] = useState({
         column: 'name',
@@ -34,6 +35,7 @@ const SelectDataBox = () => {
             setLoading(false);
             setError(true);
         })
+        myLocation();
     }, [])
 
     const changeItemList = (data) => {

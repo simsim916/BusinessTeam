@@ -1,5 +1,6 @@
 package com.example.demo.module;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.querydsl.core.types.Order;
@@ -33,9 +34,12 @@ public class SearchRequest {
 	private String column; // 검색 컬럼
 	private String keyword; // 검색 키워드
 	private String access;// 접근권한
-private OrderSpecifier<?> orderColumn;
+	private OrderSpecifier<?> orderColumn;
 	private String orderType;// 정렬 타입
 	private String scending ;// 정렬 순서
+	private String whichTable; // 어떤 테이블의 정보를 가져올 것인지
+	private Integer howManyDays; // 어느기간의 데이터를 볼 것인지
+	
 	
 	
 	public SearchRequest(String keyword) {

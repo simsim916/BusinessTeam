@@ -7,7 +7,7 @@ import { paging } from '../../components/paging';
 import SelectAskBoxRow from './SelectAskBoxRow';
 
 
-const SelectAskBox = () => {
+const SelectAskBox = ({ myLocation }) => {
 
     const [askList, setAskList] = useState([]);
     const [currPage, setCurrPage] = useState(1);
@@ -20,6 +20,10 @@ const SelectAskBox = () => {
         column: 'title',
         keyword: ''
     });
+
+    useEffect(() => {
+        myLocation();
+    }, [])
 
     useEffect(() => {
         axios.get(`http://localhost:8090/itemask/select?column=${searchRequest.column}&keyword=${searchRequest.keyword}`
