@@ -22,5 +22,6 @@ public class Item_reviewDTO {
 	private String image1; 
 	private String image2; 
 	private String image3; 
+	private String tag; 
 	
 }

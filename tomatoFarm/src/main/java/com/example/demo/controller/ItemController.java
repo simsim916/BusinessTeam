@@ -1,25 +1,28 @@
 package com.example.demo.controller;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.domain.ItemDTO;
 import com.example.demo.domain.SortDTO;
 import com.example.demo.entity.Item;
+import com.example.demo.entity.Keyword;
+import com.example.demo.entity.KeywordID;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.service.ItemService;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.example.demo.service.KeywordService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -31,6 +34,7 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping(value = "/item")
 public class ItemController {
 	private final ItemService itemService;
+	private final KeywordService keywordService;
 
 	@GetMapping("/selectnotnull")
 	public ResponseEntity<?> selectItemWhereEvent(SearchRequest searchRequest) {
@@ -45,6 +49,18 @@ public class ItemController {
 	public ResponseEntity<?> selectItemWhereType(SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
 		ItemDTO dto = itemService.selectItemIntegerWhereType(searchRequest);
+//		=====================================
+//		** view 를 +1 하는과정 
+//		( 
+//		  레포지토리에서 한번에 해결하고 싶었으나 검색시에는
+//		  dto 사용하지만, merge는 매개변수로 entity를 필요로 한다는 차이점이 존재!
+//		  dtoToEntity 메서드는  서비스를 통해 호출해서 사용하는데 
+//		  Repository 에서 service를 필드변수로 사용하기엔 문제가 생길까봐 보류
+//	    )
+		dto.setViews(dto.getViews()+1);
+		Item Entity = itemService.dtotoEntity(dto);
+		itemService.updateItem(Entity);
+//		=====================================
 		result = ResponseEntity.status(HttpStatus.OK).body(dto);
 		return result;
 	}
@@ -65,6 +81,21 @@ public class ItemController {
 	@GetMapping("/search")
 	public ResponseEntity<?> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
+//		===========================================================
+		ZoneId koreaZone = ZoneId.of("Asia/Seoul");
+		ZonedDateTime currentDateTimeInKorea = ZonedDateTime.now(koreaZone);
+		LocalDate currentDateInKorea = currentDateTimeInKorea.toLocalDate();
+		
+		KeywordID keywordID = new KeywordID().builder()
+				.keyword(searchRequest.getKeyword())
+				.search_date(currentDateInKorea)
+				.build();
+		Keyword entity = new Keyword().builder()
+				.keywordID(keywordID)
+				.build();
+		keywordService.updateKeyword(entity);
+//		===========================================================
+		
 		List<ItemDTO> list = itemService.selectItemWhereSearchType(pageRequest, searchRequest);
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;

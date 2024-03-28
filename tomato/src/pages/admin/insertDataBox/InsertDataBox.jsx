@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 
-const AddDataHead = () => {
+const AddDataHead = ({ myLocation }) => {
     const [column, setColumn] = useState(null);
     const [length2, setLength] = useState(null);
     const [formData, setFormData] = useState([])
@@ -20,7 +20,11 @@ const AddDataHead = () => {
             .catch(err => {
                 console.log(err.message);
             });
+
+        myLocation();
     }, []);
+
+
 
 
 
