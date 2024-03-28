@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.domain.Item_reviewDTO;
+import com.example.demo.domain.UserToken;
 import com.example.demo.entity.Item_review;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
@@ -48,9 +49,11 @@ public class Itme_reviewController {
 		return result;
 	}
 
-	@PostMapping("/iteminsert")
-	public ResponseEntity<?> iteminsert(HttpServletRequest request, Item_review entity) throws IOException {
+	@PostMapping("/insertmultipart")
+	public ResponseEntity<?> iteminsert(HttpServletRequest request, Item_review entity, UserToken userToken) throws IOException {
 		ResponseEntity<?> result = null;
+		System.out.println("\n\n"+ entity +"\n\n");
+		System.out.println("\n\n"+ userToken +"\n\n");
 		if (entity != null) {
 			String realPath = request.getRealPath("/");
 			log.info("\n\n\n** realPath => " + realPath);
