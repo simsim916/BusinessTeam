@@ -118,6 +118,16 @@ const ItemDetailBox = ({ item }) => {
                         <a href="" id="gotobuy">구매하기</a>
                     </div>
                 </div>
+                <div id='goCartContainer'>
+                    <div id='goCartBox'>
+                        <div id="itemName">{item.name}</div>
+                        <div>장바구니에 상품을 담았습니다.</div>
+                        <div>장바구니로 이동하시겠습니까?</div>
+                        <button id="cartOK">확인</button>
+                        <button id="cartNO">취소</button>
+                    </div>
+                    <div id='triangle_bottom'></div>
+                </div>
             </div>
 
             <ul id="detailClick" className="container">

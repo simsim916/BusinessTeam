@@ -102,3 +102,14 @@ function reviewWriteClick(event) {
 function reviewWriteBoxClose(ele) {
     ele.closest('#reviewWriteForm').style.display = 'none';
 }
+
+document.getElementById("cartOK").addEventListener("click", function () {
+    // 장바구니에 추가된 후의 동작을 여기에 추가할 수 있습니다.
+    alert("장바구니로 이동합니다.");
+    // window.location.href = "장바구니 페이지 URL";
+});
+
+document.getElementById("cartNO").addEventListener("click", function () {
+    // 취소 버튼을 눌렀을 때의 동작을 여기에 추가할 수 있습니다.
+    alert("상품 추가를 취소합니다.");
+});
