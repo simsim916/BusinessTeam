@@ -1,7 +1,11 @@
 package com.example.demo.entity;
 
+import java.time.LocalDate;
+
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -10,19 +14,28 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "shopbasket")
+@Table(name = "user_cart")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ShopBasket {
+@IdClass(UserCartID.class)
+public class UserCart {
 
+//	@EmbeddedId
+//	private UserCartID user_cartID;
+	
 	@Id
-	private Integer code; //제품코드
-	private String brand; //브랜드
-	private String name; //제품명
-	private String prcie;	//가격
-	private Integer delivery; // 배송비
-	private Integer sales; // 판매 수량
+	private Integer item_code; // 상품코드
+	@Id
+	private String id; // 사용자 아이디
+	
+	@Builder.Default 
+	private Integer item_amount = 0; // 장바구니 수량
+	@Builder.Default 
+	private Integer views = 1; // 조회수
+	@Builder.Default 
+	private Integer like_item = 0; // 관심상품 등록 여부
+	private LocalDate regdate; // 최근 조회 날짜
 
 }
