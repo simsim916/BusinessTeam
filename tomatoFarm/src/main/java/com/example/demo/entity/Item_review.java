@@ -38,6 +38,8 @@ public class Item_review {
 	private String image1; 
 	private String image2; 
 	private String image3; 
+	private String tag; 
+	
 
 	@Transient
 	private MultipartFile uploadfilef;

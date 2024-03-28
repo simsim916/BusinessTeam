@@ -38,5 +38,6 @@ public class Item {
 	@Builder.Default private Integer likes=0; // 좋아요수
 	private Integer event_code; // 이벤트명
 	private String admin; // 등록자
+	private String intro; // 상품설명
 
 }

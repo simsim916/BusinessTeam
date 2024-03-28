@@ -30,6 +30,7 @@ public class ItemDTO {
 	private Integer likes; // 좋아요수
 	private Integer event_code; // 이벤트명
 	private String admin; // 등록자
+	private String intro; // 상품설명
 	
 	/*  Join용 필드  */
 	private Integer discount; // 이벤트 할인
