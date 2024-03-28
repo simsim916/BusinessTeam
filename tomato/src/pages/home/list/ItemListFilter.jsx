@@ -1,44 +1,64 @@
 import { useSearchParams } from "react-router-dom";
-import './itemList.css'
+import './ItemListFilter.css'
 import { useEffect, useMemo, useRef } from "react";
 
-const ItemListFilter = ({ filterCheckedList, sortList }) => {
+const ItemListFilter = ({ filterCheckedList, setFilterCheckedList, sortList }) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const listfilter = useRef(null);
+    const mealkit = useRef(0);
+    const ingre = useRef(0);
 
-    function checkAll(event) {
+    mealkit.current = 0;
+    ingre.current = 0;
+
+    for (let e of sortList) {
+        if (e.sort1 == '밀키트')
+            mealkit.current += e.count;
+        else
+            ingre.current += e.count
+    }
+
+    const checkAll = (event) => {
         let target = event.target.closest('li');
 
         if (target.classList.contains('selected')) {
             target.classList.remove('selected');
             for (let e of target.getElementsByTagName('li')) {
                 e.classList.remove('selected');
-                filterCheckedList = filterCheckedList.filter((ele) =>
-                    ele !== e.innerText
-                );
+                setFilterCheckedList((prev) => {
+                    return prev.filter((ele) => ele.sort2 != e.children[1].innerText);
+                });
             }
         } else {
             target.classList.add('opened');
             target.classList.add('selected');
             target.closest('.sortB').classList.add('selected');
             for (let e of target.getElementsByTagName('li')) {
-                e.classList.add('selected');
-                if (!filterCheckedList.includes(e.innerText))
-                    filterCheckedList.push(e.innerText);
+                if (e.children[2].innerText > 0) {
+                    console.log(e.children[2].innerText)
+                    e.classList.add('selected');
+                    setFilterCheckedList([...filterCheckedList, {
+                        sort1: 'aa',
+                        sort2: e.children[1].innerText,
+                        count: e.children[2].innerText
+                    }])
+                }
             }
         }
+        console.log(filterCheckedList)
         event.stopPropagation();
         checkList();
     }
 
-    function checkList() {
+    const checkList = () => {
         console.log("--- checkC ---")
         for (let e of filterCheckedList) {
             console.log(e);
         }
+        // console.log(filterCheckedList);
     }
 
-    function showList(event) {
+    const showList = (event) => {
         let target = event.target.closest('li');
         if (target.classList.contains('opened')) {
             target.classList.remove('opened');
@@ -57,6 +77,7 @@ const ItemListFilter = ({ filterCheckedList, sortList }) => {
             }
         }
 
+
         window.addEventListener('scroll', listScroll);
         return () => {
             window.removeEventListener('scroll', listScroll)
@@ -64,57 +85,55 @@ const ItemListFilter = ({ filterCheckedList, sortList }) => {
     }, [sortList])
 
     return (
-        <>
-            <div id="listfilter" ref={listfilter}>
-                <ul>
-                    <li onClick={showList} className="sortB">
-                        <i onClick={checkAll} className="fa-regular fa-circle-check"></i>
-                        밀키트
-                        <span className="itemList_count">
-                            {sortList.filter((e) => e.sort1 == '밀키트').reduce((result, val) => result + val.count, 0)}
-                        </span>
-                        <ul>
-                            {sortList.filter((e) => e.sort1 == '밀키트').sort((b, a) => a.count - b.count).map((e, i) => (
-                                <li key={i} style={{ opacity: e.count ? '1' : '0.5' }}>
-                                    <i className="fa-regular fa-circle-check" style={{ color: e.count ? '#9B1B30' : '#000', opacity: e.count ? '1' : '0.5' }}></i>
-                                    <span>{e.sort2}</span><span className="itemList_count">{e.count}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </li>
-                    <hr />
-                    <li onClick={showList} className="sortB">
-                        <i onClick={checkAll} className="fa-regular fa-circle-check"></i>식재료
-                        <span className="itemList_count">
-                            {sortList.filter((e) => e.sort1 == '식재료').reduce((result, val) => result + val.count, 0)}
-                        </span>
-                        <ul>
-                            {sortList.filter((e) => e.sort1 == '식재료').sort((b, a) => a.count - b.count).map((e, i) => (
-                                <li key={i} style={{opacity: e.count ? '1' : '0.5'}}>
-                                    <i className="fa-regular fa-circle-check"></i>
-                                    <span>{e.sort2}</span><span className="itemList_count">{e.count}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </li>
-                    <li>
-                        <i className="fa-regular fa-circle-check"></i>행사
-                        <ul>
-                            <li><i className="fa-regular fa-circle-check"></i>채선당</li>
-                            <li><i className="fa-regular fa-circle-check"></i>도리깨침</li>
-                        </ul>
-                    </li>
-                    <li id="filterPrice">
-                        <i className="fa-regular fa-circle-check"></i>가격
-                        <form>
-                            <input type="text" placeholder="0" />
-                            &nbsp;&nbsp;~&nbsp;&nbsp;
-                            <input type="text" placeholder="1000000" />
-                        </form>
-                    </li>
-                </ul>
-            </div>
-        </>
+        <div id="listfilter" ref={listfilter}>
+            <ul>
+                <li onClick={showList} className={mealkit.current > 0 ? 'sortB opened selected' : 'sortB'}>
+                    <i onClick={checkAll} className="fa-regular fa-circle-check" ></i>
+                    밀키트
+                    <span className="itemList_count">
+                        {mealkit.current}
+                    </span>
+                    <ul>
+                        {sortList.filter((e) => e.sort1 == '밀키트').sort((b, a) => a.count - b.count).map((e, i) => (
+                            <li key={i} className={e.count > 0 ? 'selected' : ''}>
+                                <i className="fa-regular fa-circle-check"></i>
+                                <span>{e.sort2}</span><span className="itemList_count">{e.count}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </li>
+                <hr />
+                <li onClick={showList} className={ingre.current > 0 ? 'sortB opened selected' : 'sortB'}>
+                    <i onClick={checkAll} className="fa-regular fa-circle-check"></i>식재료
+                    <span className="itemList_count">
+                        {ingre.current}
+                    </span>
+                    <ul>
+                        {sortList.filter((e) => e.sort1 == '식재료').sort((b, a) => a.count - b.count).map((e, i) => (
+                            <li key={i} className={e.count > 0 ? 'selected' : ''}>
+                                <i className="fa-regular fa-circle-check"></i>
+                                <span>{e.sort2}</span><span className="itemList_count">{e.count}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </li>
+                <li>
+                    <i className="fa-regular fa-circle-check"></i>행사
+                    <ul>
+                        <li><i className="fa-regular fa-circle-check"></i>채선당</li>
+                        <li><i className="fa-regular fa-circle-check"></i>도리깨침</li>
+                    </ul>
+                </li>
+                <li id="filterPrice">
+                    <i className="fa-regular fa-circle-check"></i>가격
+                    <form>
+                        <input type="text" placeholder="0" />
+                        &nbsp;&nbsp;~&nbsp;&nbsp;
+                        <input type="text" placeholder="1000000" />
+                    </form>
+                </li>
+            </ul>
+        </div>
     );
 }
 

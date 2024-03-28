@@ -4,4 +4,5 @@
     margin: 30px auto;
     width: 500px;
     grid-column: span 4;
+    justify-content: center;
 }

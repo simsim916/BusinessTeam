@@ -24,6 +24,7 @@ const ItemList = () => {
         axios.get(url
         ).then(res => {
             setSortList(res.data)
+            setFilterCheckedList(res.data.filter(e => e.count > 0))
             setSortloading(false);
         }).catch(err => {
             console.log(`${err.message}`)
@@ -54,7 +55,7 @@ const ItemList = () => {
                 " <b>{keyword}</b> " <span>에 대한 검색 결과</span>
             </div>
             <div className="container">
-                <ItemListFilter sortList={sortList} keyword={keyword} />
+                <ItemListFilter sortList={sortList} filterCheckedList={filterCheckedList} setFilterCheckedList={setFilterCheckedList} />
                 <ItemListContainer itemList={itemList} keyword={keyword} setItemList={setItemList} />
             </div>
         </>

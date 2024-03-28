@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,11 +32,14 @@ public class Item_review {
 	private String writer;	//글쓴이
 	private String title;	//제목
 	private String contents;	//내용
-	private String score; 	//조회수
+	private Integer score; 	//조회수
 	private LocalDateTime regdate;	//날짜
-	private Integer likes;	//공감수
+	private Integer likes=0;	//공감수
 	private String image1; 
 	private String image2; 
 	private String image3; 
 
+	@Transient
+	private MultipartFile uploadfilef;
+	
 }

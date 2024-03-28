@@ -2,18 +2,23 @@ package com.example.demo.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -44,29 +49,28 @@ public class Itme_reviewController {
 	}
 
 	@PostMapping("/iteminsert")
-	public ResponseEntity<?> iteminsert(HttpServletRequest request, @RequestBody Item_review entity) {
+	public ResponseEntity<?> iteminsert(HttpServletRequest request, Item_review entity) throws IOException {
 		ResponseEntity<?> result = null;
-		System.out.println(entity);
+		if (entity != null) {
+			String realPath = request.getRealPath("/");
+			log.info("\n\n\n** realPath => " + realPath);
+			realPath += "\\resources\\img\\itemReviewImg\\" + entity.getItem_code() + "\\";
+			File file = new File(realPath); // uploadImages 폴더에 화일존재 확인을 위함
+			if (!file.exists()) {
+				file.mkdir();
+			}
 
-		String realPath = request.getRealPath("/");
-		log.info("\n\n\n** realPath => " + realPath);
-		File file = new File(realPath);
-		if (!file.exists()) {
-			// => 저장폴더가 존재하지 않는경우 만들어줌
-			file.mkdir();
-		}
+			MultipartFile uploadfilef = entity.getUploadfilef();
+			if (uploadfilef != null && !uploadfilef.isEmpty()) {
+				String file1 = realPath + entity.getWriter() + "_" + uploadfilef.getOriginalFilename(); // 저장경로(relaPath+화일명)
+																										// 완성
+				uploadfilef.transferTo(new File(file1)); // 해당경로에 저장(붙여넣기)
+				entity.setImage1(entity.getWriter() + "_" + uploadfilef.getOriginalFilename());
+			}
+			result = ResponseEntity.status(HttpStatus.OK).body(item_reviewService.updateReview(entity));
+		} 
 
-		result = ResponseEntity.status(HttpStatus.OK).body(item_reviewService.updateReview(entity));
 		return result;
 	}
-	
-	@PostMapping("/replyUpdate")
-	public ResponseEntity<?> replyUpdate(@RequestBody Item_review entity) {
-		ResponseEntity<?> result = null;
-		System.out.println(entity);
-		result = ResponseEntity.status(HttpStatus.OK).body(item_reviewService.updateReview(entity));
-		return result;
-	}
-	
 
 }

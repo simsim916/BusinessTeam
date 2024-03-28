@@ -20,7 +20,7 @@ public class User {
 	@Id
 	private String id;
 	private String password;
-	private String level;
+	private Integer level = 100;
 	private String username;
 	private String phonenumber;
 	private Integer address_code;
