@@ -26,11 +26,8 @@ const ItemDetailBox = ({ item }) => {
         }
         ).then(res => {
             setCartItem(res.data);
-            // setLoading(false);
         }).catch(err => {
             console.log(err.message)
-            // setLoading(false);
-            // setError(true);
         })
 
     }, [])
