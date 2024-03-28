@@ -72,7 +72,7 @@ function delCheckItem() {
 function selectAll(event) {
     const clickList = event.currentTarget;
     const checkbox = clickList.querySelector('input[type="checkbox"]');
-
+    
     // 전체선택 또는 해제
     const isChecked = checkbox.checked;
     const checkboxes = document.querySelectorAll('.shopBasketItem input[type="checkbox"]');
@@ -80,4 +80,27 @@ function selectAll(event) {
     checkboxes.forEach(function (item) {
         item.checked = isChecked;
     });
+}
+
+function deleteAll(event) {
+    const clickList = event.currentTarget;
+    const checkbox = clickList.querySelectorAll('#shopBasketSelect li');
+    
+    const isChecked = checkbox.checked;
+    const checkboxes = document.querySelectorAll('.shopBasketItem input[type="checkbox"]');
+    checkbox.forEach(function (item) {
+        item.remove();
+    });
+}
+
+function deleteSelect(event) {
+    const clickList = event.currentTarget;
+    const checkbox = clickList.querySelectorAll('#shopBasketSelect input[type="checkbox"]:checked');
+    
+    const isChecked = checkbox.checked;
+    const checkboxes = document.querySelectorAll('.shopBasketItem input[type="checkbox"]');
+    checkbox.forEach(function (item) {
+        item.parentElement.remove();
+    });
+
 }
