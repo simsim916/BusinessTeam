@@ -1,11 +1,11 @@
 package com.example.demo.entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-import javax.persistence.EmbeddedId;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -14,19 +14,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Entity
-@Table(name = "keyword")
+@Embeddable
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
-@Data
-@IdClass(KeywordID.class)
-public class Keyword {
-	
-	@Id
-	private String keyword;
-	@Id
-	private LocalDate search_date;
-	@Builder.Default private Integer search_count=1;
+public class UserCartID  implements Serializable{
+
+	private Integer item_code; // 상품코드
+	private String id; // 사용자 아이디
+
 }
