@@ -45,6 +45,7 @@ const Admin = () => {
         })
     }, [])
 
+
     return (
         <>
             <SideMenu currLocation={currLocation} openSideBar={openSideBar} sideBarOpen={sideBarOpen} />
@@ -57,6 +58,7 @@ const Admin = () => {
                     <Route path='/graph' element={<Graph myLocation={myLocation} />} />
                 </Routes>
             </div>
+
         </>
     );
 }

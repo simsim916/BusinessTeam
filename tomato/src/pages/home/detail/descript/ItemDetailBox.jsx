@@ -24,6 +24,7 @@ const ItemDetailBox = ({ item }) => {
     const date = currentDate.getDate();
     const hour = currentDate.getHours();
     const dayOfWeek = currentDate.getDay();
+    const [loginTest, setLoginTest] = useState(false);
 
     let inputCountRef = useRef(null)
     let priceRef = useRef(null)
@@ -99,16 +100,9 @@ const ItemDetailBox = ({ item }) => {
         if (/*로그인했을때*/ false) {
             postCartData()
         } else {
-            /* 로컬 스토리지에 저장 */
-            let cart = localStorage.getItem('cart')
-            console.log(cart);
-            if (cart.indexOf(item.code)<0) {
-                cart += `/${item.code}()`
-            }
-            localStorage.setItem('cart', cart)
-
         }
     }
+
 
     useMemo(changeCartForm, [inputCountValue])
 
