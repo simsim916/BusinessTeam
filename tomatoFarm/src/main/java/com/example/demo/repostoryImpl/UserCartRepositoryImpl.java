@@ -5,6 +5,7 @@ import static com.example.demo.entity.QUserCart.userCart;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
@@ -25,6 +26,7 @@ public class UserCartRepositoryImpl implements UserCartRepository {
 	private final JPAQueryFactory jpaQueryfactory;
 	private final EntityManager entityManager;
 
+	@Override
 	public UserCart update(UserCart userCart) {
 		return entityManager.merge(userCart);
 	}

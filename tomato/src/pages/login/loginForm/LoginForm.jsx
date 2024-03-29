@@ -2,6 +2,7 @@ import './LoginForm.css'
 import LoginBG from "./LoginBG/LoginBG";
 import SignBG from "./SignBG/SignBG";
 import { useState } from 'react';
+import { SERVER_RESOURCE } from '../../../model/server-config';
 
 const LoginForm = () => {
   const [signBox, setSignBox] = useState(false);
@@ -89,7 +90,7 @@ const LoginForm = () => {
 
   return (
     <>
-      <div id="bodyBG" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/img/signup/signup.jpg)` }}></div>
+      <div id="bodyBG" style={{ backgroundImage: `url(${SERVER_RESOURCE}/img/signup/signup.jpg)` }}></div>
       <div id="contentBox">
         <LoginBG signBox={signBox} changeSignBox={changeSignBox}
           checkId={checkId} checkPassword={checkPassword}

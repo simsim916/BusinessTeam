@@ -24,9 +24,9 @@ public class UserServiceImpl implements UserService{
 	private final UserRepository userRepository;
 	
 	@Override
-	public User selectUser(UserDTO dto) {
+	public User selectUser(User entity) {
 		
-		return userRepository.selectUser(dto);
+		return userRepository.selectUser(entity);
 	}
 	
 	@Override

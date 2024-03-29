@@ -1,13 +1,17 @@
 import { useRef, useState } from 'react';
 import './LoginBG.css';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 import Loading from './../../../components/Loading';
 import Error from '../../../components/Error';
+import { SERVER_RESOURCE } from '../../../../model/server-config';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginFailure, loginRequest, loginSuccess } from '../../../redux/user/action';
+import { api } from '../../../../model/model'
 
 const LoginBG = ({ signBox, changeSignBox, checkId, checkPassword, changeOpacity }) => {
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = useState(false);
+    const user = useSelector(state => state.user);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [loginValue, setLoginValue] = useState({
         value: {
             id: '',
@@ -25,6 +29,9 @@ const LoginBG = ({ signBox, changeSignBox, checkId, checkPassword, changeOpacity
     })
 
     const handleInputChange = (event, handle) => {
+        if (event.which == 13) {
+            requestLogin()
+        }
         let result = {
             message: '',
             check: false
@@ -32,7 +39,7 @@ const LoginBG = ({ signBox, changeSignBox, checkId, checkPassword, changeOpacity
         if (handle) result = handle(event);
         valueChange(event, result.message, result.check);
         toggleJoinButton();
-        
+
     }
 
     const valueChange = (event, message, check) => {
@@ -58,28 +65,38 @@ const LoginBG = ({ signBox, changeSignBox, checkId, checkPassword, changeOpacity
             setLoginValue(loginValue => ({ ...loginValue, isLoginable: true })) : setLoginValue(loginValue => ({ ...loginValue, isLoginable: false }));
     }
 
-    const requestLogin = () => {
-        axios.post(`http://localhost:8090/user/login`, loginValue.value, {
-            headers: {
-                'Content-Type': 'application/json'
+
+
+    const requestLogin = (loginValue) => {
+        return async (dispatch) => {
+            dispatch(loginRequest());
+            try {
+                const response = await api('/user/login', 'post', loginValue.value)
+                dispatch(loginSuccess(response.data));
+                sessionStorage.setItem('userinfo', JSON.stringify({
+                    token: response.data.token,
+                    username: response.data.username,
+                    login: true
+                }));
+                navigate("/home");
+            } catch (error) {
+                console.log('fetchData' + error.message);
+                dispatch(loginFailure(error.message));
             }
-        }).then(res => {
-            setLoading(false);
-            console.log('제출성공')
-        }).catch(err => {
-            console.log(err.message)
-            setLoading(false);
-            setError(true);
-        });
+        }
     }
 
-    if (loading) return <Loading />
-    if (error) return <Error />
+    const handleLogin = () => {
+        dispatch(requestLogin(loginValue));
+    };
+
+    if (user.loading) return <Loading />
+    if (user.error) return <Error />
 
     return (
         <div id="loginBG" style={{ transform: signBox ? 'translate(-100%, 0)' : 'translate(0%, 0)' }}>
             <div>
-                <Link to="/"><img id="logo" src={process.env.PUBLIC_URL + `/img/logo.png`} alt="logo" /></Link>
+                <Link to="/"><img id="logo" src={SERVER_RESOURCE + `/img/logo.png`} alt="logo" /></Link>
                 <form id="loginBox" action="/tomatoFarm/member/login" method="post">
                     <div id="loginButton">
                         <div>일반 로그인</div>
@@ -89,14 +106,14 @@ const LoginBG = ({ signBox, changeSignBox, checkId, checkPassword, changeOpacity
                     <div id="idBox">
                         <i className="fa-solid fa-circle-user"></i>
                         <input id="id" type="text" name="id" placeholder="아이디"
-                            onChange={(event) => handleInputChange(event, checkId)}
+                            onKeyUp={(event) => handleInputChange(event, checkId)}
                             onBlur={(event) => handleInputChange(event, checkId)}
                             onFocus={changeOpacity} />
                     </div>
                     <div id="passwordBox">
                         <i className="fa-solid fa-key"></i>
                         <input id="password" type="password" name="password" placeholder="비밀번호"
-                            onChange={(event) => handleInputChange(event, checkPassword)}
+                            onKeyUp={(event) => handleInputChange(event, checkPassword)}
                             onBlur={(event) => handleInputChange(event, checkPassword)}
                             onFocus={changeOpacity} />
                     </div>
@@ -105,7 +122,7 @@ const LoginBG = ({ signBox, changeSignBox, checkId, checkPassword, changeOpacity
                         <span id="pwError"></span>
                     </p>
 
-                    <button onClick={requestLogin} type="button" id="loginInBox"
+                    <button onClick={handleLogin} type="button" id="loginInBox"
                         style={{ opacity: loginValue.isLoginable ? '1' : '0.3' }} disabled={!loginValue.isLoginable}>로그인</button>
                 </form>
                 <p id="successOrNot">

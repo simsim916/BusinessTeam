@@ -32,7 +32,8 @@
     height: 80px;
 }
 
-#loginBox {
+
+#shopBasketPayContainer #loginBox {
     text-align: center;
     padding: 20px;
     margin: 20px;
@@ -43,6 +44,7 @@
     font-size: 20px;
     border-radius: 10px;
 }
+
 #shopBasketCancel {
     margin: 20px;
     width: 85%;
