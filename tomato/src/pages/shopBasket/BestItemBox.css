@@ -24,7 +24,7 @@
     align-items: end;
 }
 
-.itemBox {
+#bestItemContainer .itemBox {
     border: #9B1B30 3px solid;
     background-color: rgb(255, 247, 247);
     width: 100%;
@@ -34,27 +34,27 @@
     padding: 10px;
 }
 
-.itemBox>img {
+#bestItemContainer .itemBox>img {
     justify-content: center;
     background-color: rgb(0, 0, 0);
     width: 100%;
     text-align: center;
 }
 
-.itemName {
+#bestItemContainer .itemName {
     margin-top: 5px;
     padding-left: 10px;
     font-weight: 500;
     font-size: 1em;
 }
 
-.itemInfo {
+#bestItemContainer .itemInfo {
     padding-left: 10px;
     font-size: 0.75em;
     color: rgba(54, 54, 54, 0.699);
 }
 
-.itemPrice {
+#bestItemContainer .itemPrice {
     margin: 0;
     margin-top: 7px;
     padding-left: 10px;
@@ -62,7 +62,7 @@
     font-weight: 600;
 }
 
-.itemOption {
+#bestItemContainer .itemOption {
     margin-left: 10px;
     margin-top: 10px;
     width: 55px;

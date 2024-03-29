@@ -1,3 +1,4 @@
+import { Routes, Route } from 'react-router-dom';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Loading from './../../components/Loading';
@@ -45,7 +46,8 @@ const ItemDetail = () => {
             <ReviewBoardBox item={item} />
             <hr className='container' />
             <AskBoardBox item={item} />
-            {/* <ShopBasketSelectBox item={item} /> */}
+
+
         </>
     );
 }

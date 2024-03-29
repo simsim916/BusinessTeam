@@ -1,7 +1,5 @@
-import { useSearchParams } from "react-router-dom";
 import './ItemListContainer.css'
-import { useEffect, useRef, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 import ItemBox from './../../components/ItemBox';
 import ItemBox_vertical from './../../components/itemBox_vertical/ItemBox_vertical';
 import PagingBox from "../../components/PagingBox";
@@ -10,7 +8,6 @@ import PagingBox from "../../components/PagingBox";
 const ItemListContainer = ({ keyword, itemList, setItemList }) => {
     console.log('ItemListContainer 랜더링')
     const [sort, setSort] = useState('sales');
-    const [view, setView] = useState(false);
     const [currPage, setCurrPage] = useState(1);
     const [limit, setLimit] = useState(16);
 
@@ -19,6 +16,19 @@ const ItemListContainer = ({ keyword, itemList, setItemList }) => {
         const start = size * (pageNum - 1);
         const end = pageNum * size;
         return itemList.slice(start, end);
+    }
+
+    const howManyItems = (event) => {
+        event.target.style.opacity = "1";
+        console.log(event.target.parentNode.children);
+        for (let t of event.target.parentNode.children) {
+            if (t != event.target) {
+                t.style.opacity = "0.3";
+            }
+        }
+        console.log(event.target.innerText);
+        // setLimit(event.target.innerText);
+        // setCurrPage(1);
     }
 
     const sortItemList = (event, list, setFunc) => {
@@ -59,38 +69,38 @@ const ItemListContainer = ({ keyword, itemList, setItemList }) => {
         // ex) 필요한 페이지 수 7 => [1,2,3,4,5,6,7] 배열 return
     }
 
-
+    console.log(window.innerWidth)
     return (
-        <div id="listContainer" style={{ display: view ? 'flex' : 'grid', height: view ? 'auto' : '' }}>
-            <div id="containerOption">
-                <div id="total">총 <span>{itemList ? itemList.length : '0'}</span> 개</div>
-                <div id="listOption">
-                    <div id="sales" style={{ opacity: sort == "sales" ? '1' : '0.5' }} onClick={(event) => sortItemList(event, itemList, setItemList)}>인기상품순</div>
-                    <div id="price" style={{ opacity: sort == "price" ? '1' : '0.5' }} onClick={(event) => sortItemList(event, itemList, setItemList)}>가격낮은순</div>
-                    <div id="priceD" style={{ opacity: sort == "priceD" ? '1' : '0.5' }} onClick={(event) => sortItemList(event, itemList, setItemList)}>가격높은순</div>
+        <>
+
+            <div id="listContainer" style={{ display: limit != 16 ? 'flex' : 'grid', height: limit != 16 ? 'auto' : '' }}>
+                <div id="containerOption">
+                    <div id="listButton">
+                        <div className={window.innerWidth > 1024 ? '16' : '15'} onClick={howManyItems}></div>
+                        <div onClick={howManyItems}></div>
+                        <div onClick={howManyItems}></div>
+                    </div>
+                    <div id="total">총 <span>{itemList ? itemList.length : '0'}</span> 개</div>
+                    <div id="listOption">
+                        <div id="sales" style={{ opacity: sort == "sales" ? '1' : '0.5' }} onClick={(event) => sortItemList(event, itemList, setItemList)}>인기상품순</div>
+                        <div id="price" style={{ opacity: sort == "price" ? '1' : '0.5' }} onClick={(event) => sortItemList(event, itemList, setItemList)}>가격낮은순</div>
+                        <div id="priceD" style={{ opacity: sort == "priceD" ? '1' : '0.5' }} onClick={(event) => sortItemList(event, itemList, setItemList)}>가격높은순</div>
+                    </div>
                 </div>
+                {
+                    limit == 16 ?
+                        (paging()(currPage, limit).map((e, i) => <ItemBox key={i} item={e} />))
+                        :
+                        (paging()(currPage, limit).map((e, i) => <ItemBox_vertical key={i} item={e} />))
+                }
+                <PagingBox
+                    limit={limit}
+                    setLimit={setLimit}
+                    list={itemList}
+                    currPage={currPage}
+                    setCurrPage={setCurrPage} />
             </div>
-            {
-                // view ?
-                //     (paging()(currPage, 6).map((e, i) => <ItemBox_vertical key={i} item={e} />))
-                //     :
-                //     (paging()(currPage, 16).map((e, i) => <ItemBox key={i} item={e} />))
-
-                // 페이징컴포넌트 사용할때 limit 변수가 있으면 편해서 지정해준 상태
-                // limit를 이용하면 view 변수가 필요없음
-                limit == 16 ?
-                    (paging()(currPage, limit).map((e, i) => <ItemBox key={i} item={e} />))
-                    :
-                    (paging()(currPage, limit).map((e, i) => <ItemBox_vertical key={i} item={e} />))
-
-            }
-            <PagingBox
-                limit={limit}
-                setLimit={setLimit}
-                list={itemList}
-                currPage={currPage}
-                setCurrPage={setCurrPage} />
-        </div>
+        </>
     );
 }
 

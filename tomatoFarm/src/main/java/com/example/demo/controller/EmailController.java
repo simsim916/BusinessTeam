@@ -70,6 +70,6 @@ public class EmailController {
 	@GetMapping("/emailtest")
 	public void emailTest() throws MessagingException {
 		System.out.print("\n**********************]\n");
-		emailService.sendMail("dydgusc66");
+		emailService.sendMail("simsim916");
 	}
 }

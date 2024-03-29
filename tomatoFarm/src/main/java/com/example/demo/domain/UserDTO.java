@@ -24,6 +24,5 @@ public class UserDTO {
 	private Integer point;
 	
 	
-	private String token;
 	
 }

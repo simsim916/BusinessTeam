@@ -15,6 +15,6 @@ public class KeywordController {
 
 	@GetMapping("/update")
 	public void updateKeyword(Keyword keyword) {
-		keywordService.updateKeyword(keyword);
+//		keywordService.updateKeyword(keyword);
 	}
 }

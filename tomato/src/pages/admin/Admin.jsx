@@ -43,7 +43,8 @@ const Admin = () => {
                 page: 'admin'
             }
         })
-    })
+    }, [])
+
 
     return (
         <>
@@ -57,6 +58,7 @@ const Admin = () => {
                     <Route path='/graph' element={<Graph myLocation={myLocation} />} />
                 </Routes>
             </div>
+
         </>
     );
 }
