@@ -102,11 +102,34 @@ const ItemDetailBox = ({ item }) => {
         } else {
             /* 로컬 스토리지에 저장 */
             let cart = localStorage.getItem('cart')
-            console.log(cart);
-            if (cart.indexOf(item.code)<0) {
-                cart += `/${item.code}()`
+            if (cart != null) {
+                if (cart.indexOf(item.code) < 0) {
+                    cart += `/${item.code}(${inputCountValue})`
+                } else {
+                    //기존에 있는 아이템 코드의 수량을 구한다
+                    let firstidx = cart.indexOf(item.code);
+                    let amountFrontidx = cart.indexOf('(', firstidx)
+                    let amountLastidx = cart.indexOf(')', firstidx)
+                    let amount = cart.slice(amountFrontidx + 1, amountLastidx)
+
+                    console.log('amount : ' + amount);
+
+                    //기존에 있는 아이템 코드를 삭제한다
+                    let lastidx = cart.indexOf('/', firstidx)
+                    cart = cart.slice(0, firstidx - 1) + cart.slice(lastidx)
+                    console.log('cart : ' + cart);
+
+                    //아이템 코드와 코드를 추가한다
+                    cart += `/${item.code}(${+inputCountValue + +amount})`
+                    console.log('result : ' + cart);
+
+                }
+            } else {
+                cart = `/${item.code}(${inputCountValue})`
             }
             localStorage.setItem('cart', cart)
+            console.log(localStorage.getItem('cart'));
+            // localStorage.removeItem('cart')
 
         }
     }
@@ -118,6 +141,25 @@ const ItemDetailBox = ({ item }) => {
 
         })
     }
+
+    function aa() {
+
+        const str = "/1005(3)/2003(10)/3006(3)";
+        let result;
+        let firstidx = str.indexOf("/2003")
+        result = str.slice(0, firstidx)
+
+        let result2;
+        let secondidx = str.indexOf("/3006(3)");
+        result2 = str.slice(secondidx)
+
+        console.log('result : ' + result);
+        console.log('result2 : ' + result2);
+        console.log(result + result2)
+    }
+
+
+
 
 
     return (
