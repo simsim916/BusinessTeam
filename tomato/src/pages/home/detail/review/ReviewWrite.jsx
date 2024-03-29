@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import Loading from './../../../components/Loading';
 import Error from './../../../components/Error';
 import axios from 'axios';
+import { api } from '../../../../model/model';
 
 const ReviewWrite = ({ item, refresh, setRefresh, reviewWriteClick }) => {
     const [writeBoxClose, setWriteBoxClose] = useState(true);
@@ -31,17 +32,17 @@ const ReviewWrite = ({ item, refresh, setRefresh, reviewWriteClick }) => {
         if (file) {
             formData.append('uploadfilef', file);
         }
-        await axios.post(`http://localhost:8090/itemreview/iteminsert`, formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        }).then(res => {
-            setLoading(false);
-        }).catch(err => {
-            console.log(err.message)
-            setLoading(false);
-            setError(true);
-        });
+        const loginInfoString = sessionStorage.getItem('logininfo');
+        const loginInfoObject = JSON.parse(loginInfoString);
+
+        await api('/itemreview/insertmultipart', 'post', formData, "loginInfoObject.token")
+            .then(res => {
+                setLoading(false);
+            }).catch(err => {
+                console.log(err.message)
+                setLoading(false);
+                setError(true);
+            });
         setRefresh(!refresh);
         reviewWriteBoxClose();
     }

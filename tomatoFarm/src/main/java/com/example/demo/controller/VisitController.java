@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -15,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.domain.Visit_pageDTO;
 import com.example.demo.entity.Visit_page;
 import com.example.demo.entity.Visit_pageID;
-import com.example.demo.module.SearchRequest;
 import com.example.demo.service.VisitService;
 
 import lombok.AllArgsConstructor;
@@ -32,41 +33,21 @@ public class VisitController {
 	
 	@Transactional
 	@GetMapping("/update")
-	public void update(@RequestParam("page")String page) {
-		ZoneId koreaZone = ZoneId.of("Asia/Seoul");
-		ZonedDateTime currentDateTimeInKorea = ZonedDateTime.now(koreaZone);
-		LocalDate currentDateInKorea = currentDateTimeInKorea.toLocalDate();
-		
-		Visit_pageID visit_pageID 
-			= new Visit_pageID().builder()
-				.page(page)
-				.visit_date(currentDateInKorea)
-				.build();
-		
-		Visit_page visitPage 
-		= new Visit_page().builder().visit_pageID(visit_pageID).build();
-		
-		visitService.update(visitPage); 
+	public void update(Visit_page entity) {
+		visitService.update(entity); 
 	}
 	
 	@GetMapping("/selectall")
-	public ResponseEntity<?> selectAll() {
-		System.out.println("=====================");
-		System.out.println("=====================");
-		System.out.println("=====================");
+	public ResponseEntity<?> selectAll(Visit_page entity) {
+		System.out.println(entity);
 		ResponseEntity result = null;
-//		if (searchRequest.getHowManyDays() == null) {
-////			List<Visit_page> list = visitService.selectAll(null)
-//		} else {
-//			
-//		}
-		List<Visit_page> list = visitService.selectAll();
-//		for(Visit_page page : list) {
-//			System.out.println(page);
-//		}
-//		
-//		result = ResponseEntity.status(HttpStatus.OK).body("list"); 
-//		
+		
+		LocalDate now = LocalDateTime.now().plusHours(9).toLocalDate();
+		
+		
+		List<Visit_page> list = visitService.selectAll(entity);
+		System.out.println(list);
+		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}
 	

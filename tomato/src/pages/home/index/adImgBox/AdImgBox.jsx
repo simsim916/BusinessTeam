@@ -7,7 +7,7 @@ const AdImgBox = () => {
         event.stopPropagation();
         let index = 0;
         for (let e of event.target.closest('#adRightTab').children) {
-            if (e == event.target) break;
+            if (e == event.target.closest('div')) break;
             index++;
         }
         event.target.closest('#adImg').children[0].src = "http://localhost:8090/resources" + `/img/adimg/${adImgList[index]}`;

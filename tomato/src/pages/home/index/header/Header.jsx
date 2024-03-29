@@ -2,14 +2,22 @@ import "./header.css";
 import { Link, useNavigate } from 'react-router-dom';
 import Nav from './Nav';
 import { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { changeKeyword } from "../../../redux/basic/actions";
 
 
 
 const Header = () => {
     console.log(`Header 랜더링`);
-    const [keyword, setKeyword] = useState('');
+    const user = useSelector(state => state.user);
+    const keyword = useSelector(state => state.basic.keyword);
     const navigate = useNavigate();
-
+    const dispatch = useDispatch()
+    const userinfo = JSON.parse(sessionStorage.getItem('userinfo')) && {}
+    console.log(userinfo)
+    const logOut = () => {
+        sessionStorage.removeItem('userinfo')
+    }
 
     const searchBox = (event) => {
         event.preventDefault();
@@ -22,8 +30,8 @@ const Header = () => {
         }
     }
 
-    const changeKeyword = event => {
-        setKeyword(event.target.value);
+    const changeKeyworda = event => {
+        dispatch(changeKeyword(event.target.value))
     }
 
     function appearinputBoxResetButton(event) {
@@ -37,15 +45,24 @@ const Header = () => {
         event.target.visibility = "hidden"
     }
 
+
     return (
         <header>
             <div id="loginBar">
                 <div className="container">
                     <Link to="/admin">고객센터</Link>
-                    &nbsp;&nbsp;|&nbsp;&nbsp;
-                    <Link to="/login">로그인</Link>
-                    &nbsp;&nbsp;|&nbsp;&nbsp;
-                    <a>회원가입</a>
+                    {
+                        userinfo != null && userinfo.login ?
+                            <>
+                                <Link onClick={logOut} to="/">로그아웃</Link>
+                                <Link to="/login"> {userinfo.username} 님 </Link>
+                            </>
+                            :
+                            <>
+                                <Link to="/login">로그인</Link>
+                                <a>회원가입</a>
+                            </>
+                    }
                 </div>
             </div>
             <div id="searchBar">
@@ -57,7 +74,7 @@ const Header = () => {
                         </a>
                     </div>
                     <form id="searchBox">
-                        <input onKeyUp={searchBoxEnterKey} onInput={appearinputBoxResetButton} onChange={changeKeyword}
+                        <input onKeyUp={searchBoxEnterKey} onInput={appearinputBoxResetButton} onChange={changeKeyworda}
                             id="searchBoxInput" type="text" placeholder="검색어를 입력해주세요." value={keyword} />
                         <i onClick={resetInputBox} className="fa-solid fa-circle-xmark"></i>
                         <button onClick={searchBox}><i className="fa-solid fa-magnifying-glass"></i></button>

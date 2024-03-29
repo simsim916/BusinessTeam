@@ -24,7 +24,7 @@ public interface UserService {
 		return dto;
 	}
 	
-	public User selectUser(UserDTO dto);
+	public User selectUser(User dto);
 	
 	public int insertUser(UserDTO dto);
 	

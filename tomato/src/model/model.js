@@ -1,6 +1,8 @@
+import { SERVER_URL } from "./server-config";
+import axios from 'axios';
 
 
-const api = (url, method, requestData, token) => {
+export async function api(url, method, requestData, token) {
 
     let headers = '';
 
@@ -15,19 +17,19 @@ const api = (url, method, requestData, token) => {
         headers = { 'Content-Type': 'application/json' };
     }
 
-    if (requestData) {
-        options.data = requestData;
-    }
-
     let options = {
-        url: "http://localhost:8090" + url,
+        url: SERVER_URL + url,
         method: method,
         headers: headers,
     };
 
+    console.log('api : url' + options.url)
+    if (requestData) {
+        options.data = requestData;
+    }
     return axios(options)
         .then(response => {
-            return response.data;
+            return response;
         }).catch(err => {
             console.error(`** apiCall Error status=${err.response.status}, message=${err.message}`);
             return Promise.reject(err.response.status);

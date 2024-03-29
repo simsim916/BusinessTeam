@@ -15,7 +15,7 @@ public interface UserRepository{
 	
 	/* 🎃🎃🎃🎃🎃🎃 수미 🎃🎃🎃🎃🎃🎃 */
 	
-	public User selectUser(UserDTO dto);
+	public User selectUser(User entity);
 	
 	public int insertUser(UserDTO dto);
 	
