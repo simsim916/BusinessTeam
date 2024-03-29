@@ -1,6 +1,6 @@
 import './ItemDetailBox.css';
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useMemo } from 'react';
 import { makeComa, makeDiscountPrice } from '../../../components/MathFunction';
 import axios from 'axios';
 
@@ -11,30 +11,9 @@ const ItemDetailBox = ({ item }) => {
     const [gotoCart, setGotoCart] = useState(false);
     const [cartForm, setCartForm] = useState({
         id: 'manager2',
-        item_code: '',
-        item_amount: '',
+        item_code: item.code,
+        item_amount: inputCountValue
     })
-
-    useEffect(() => {
-        axios.get(`http://localhost:8090/usercart/selectall`, {
-            params: {
-                id: "김수미",
-                item_amount: 5,
-                like_item: 1,
-                item_code: "298785"
-            }
-        }
-        ).then(res => {
-            setCartItem(res.data);
-            // setLoading(false);
-        }).catch(err => {
-            console.log(err.message)
-            // setLoading(false);
-            // setError(true);
-        })
-
-    }, [])
-
     const currentDate = new Date();
     const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
     const date = currentDate.getDate();
@@ -68,6 +47,7 @@ const ItemDetailBox = ({ item }) => {
             value++
             setInputCountValue(value);
         }
+        changeCartForm()
     }
 
     const sumTotal = (value) => {
@@ -87,12 +67,38 @@ const ItemDetailBox = ({ item }) => {
 
     const changeInputCount = (event) => {
         setInputCountValue(event.target.value);
-        console.log(inputCountValue)
+        changeCartForm()
+    }
+    const postCartData = () => {
+        console.log(cartForm)
+        axios.post('http://localhost:8090/usercart/update', cartForm, {
+            headers: 'application/json'
+        }).then(res => {
+
+        }).catch(err => {
+
+        });
+    }
+
+    const changeCartForm = () => {
+        setCartForm((preCartForm) => ({
+            ...preCartForm,
+            item_amount: inputCountValue
+        }));
     }
     const addCart = () => {
         setGotoCart(!gotoCart);
-
+        postCartData()
     }
+
+    useMemo(changeCartForm, [inputCountValue])
+
+    const order = () => {
+        axios.post(`http://localhost:8090/usercart/update`, {
+
+        })
+    }
+
 
     return (
         <div id="itemDetailBox" className="container">
@@ -145,7 +151,7 @@ const ItemDetailBox = ({ item }) => {
                     <div id="priceBox">
                         <div id="priceAmount">총 상품금액&nbsp; : &nbsp;<span ref={priceRef}>{makeComa(makeDiscountPrice(item.price, item.discount) * inputCountValue)}원</span></div>
                         {/* onclick이 맞나? 장바구니 컴포넌트를 넣는게 맞나? */}
-                        <div onClick={addCart} id="gotocart">장바구니 담기</div>
+                        <div onClick={gotoCart ? null : addCart} id="gotocart">장바구니 담기</div>
                         <a href="" id="gotobuy">구매하기</a>
                     </div>
                 </div>
@@ -155,7 +161,7 @@ const ItemDetailBox = ({ item }) => {
                         <div>장바구니에 상품을 담았습니다.</div>
                         <div>장바구니로 이동하시겠습니까?</div>
                         <button id="cartOK">이동</button>
-                        <button id="cartNO">닫기</button>
+                        <button onClick={() => setGotoCart(!gotoCart)} id="cartNO">닫기</button>
                     </div>
                     <div id='triangle_bottom'></div>
                 </div>}

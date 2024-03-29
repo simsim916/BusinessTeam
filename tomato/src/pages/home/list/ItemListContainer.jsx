@@ -10,7 +10,6 @@ import PagingBox from "../../components/PagingBox";
 const ItemListContainer = ({ keyword, itemList, setItemList }) => {
     console.log('ItemListContainer 랜더링')
     const [sort, setSort] = useState('sales');
-    const [view, setView] = useState(false);
     const [currPage, setCurrPage] = useState(1);
     const [limit, setLimit] = useState(16);
 
@@ -19,6 +18,19 @@ const ItemListContainer = ({ keyword, itemList, setItemList }) => {
         const start = size * (pageNum - 1);
         const end = pageNum * size;
         return itemList.slice(start, end);
+    }
+
+    const howManyItems = (event) => {
+        console.log(event.target.id);
+
+        if (event.target.id == "16") {
+            setLimit(16);
+        } else if (event.target.id == "6") {
+            setLimit(6);
+        } else {
+            setLimit(0);
+        }
+        setCurrPage(1);
     }
 
     const sortItemList = (event, list, setFunc) => {
@@ -61,8 +73,13 @@ const ItemListContainer = ({ keyword, itemList, setItemList }) => {
 
 
     return (
-        <div id="listContainer" style={{ display: view ? 'flex' : 'grid', height: view ? 'auto' : '' }}>
+        <div id="listContainer" style={{ display: limit != 16 ? 'flex' : 'grid', height: limit != 16 ? 'auto' : '' }}>
             <div id="containerOption">
+                <div id="listButton">
+                    <div id="16" onClick={howManyItems}></div>
+                    <div id="6" onClick={howManyItems}></div>
+                    <div onClick={howManyItems}></div>
+                </div>
                 <div id="total">총 <span>{itemList ? itemList.length : '0'}</span> 개</div>
                 <div id="listOption">
                     <div id="sales" style={{ opacity: sort == "sales" ? '1' : '0.5' }} onClick={(event) => sortItemList(event, itemList, setItemList)}>인기상품순</div>
@@ -71,18 +88,10 @@ const ItemListContainer = ({ keyword, itemList, setItemList }) => {
                 </div>
             </div>
             {
-                // view ?
-                //     (paging()(currPage, 6).map((e, i) => <ItemBox_vertical key={i} item={e} />))
-                //     :
-                //     (paging()(currPage, 16).map((e, i) => <ItemBox key={i} item={e} />))
-
-                // 페이징컴포넌트 사용할때 limit 변수가 있으면 편해서 지정해준 상태
-                // limit를 이용하면 view 변수가 필요없음
                 limit == 16 ?
                     (paging()(currPage, limit).map((e, i) => <ItemBox key={i} item={e} />))
                     :
                     (paging()(currPage, limit).map((e, i) => <ItemBox_vertical key={i} item={e} />))
-
             }
             <PagingBox
                 limit={limit}

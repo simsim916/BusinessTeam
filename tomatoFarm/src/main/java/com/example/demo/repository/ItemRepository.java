@@ -16,7 +16,7 @@ public interface ItemRepository {
 	List<ItemDTO> selectItemListStringWhereType(PageRequest pageRequest,SearchRequest searchRequest);
 	List<ItemDTO> selectItemListIntegerWhereType(PageRequest pageRequest,SearchRequest searchRequest);
 	List<ItemDTO> selectItemListStringWhereTypeNotNull(PageRequest pageRequest,SearchRequest searchRequest);
-	ItemDTO selectItemIntegerWhereType(SearchRequest searchRequest);
+	Item selectItemIntegerWhereType(SearchRequest searchRequest);
 	
 	
 	// ** 브랜드 상품 조회 

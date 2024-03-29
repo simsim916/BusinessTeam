@@ -1,5 +1,7 @@
 package com.example.demo.serviceImpl;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Service;
 import com.example.demo.domain.ItemDTO;
 import com.example.demo.domain.SortDTO;
 import com.example.demo.entity.Item;
+import com.example.demo.entity.Keyword;
+import com.example.demo.entity.KeywordID;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.repository.ItemRepository;
@@ -46,8 +50,9 @@ public class ItemServiceImpl implements ItemService {
 	}
 	
 	@Override
-	public ItemDTO selectItemIntegerWhereType(SearchRequest searchRequest) {
-		ItemDTO result = itemRepository.selectItemIntegerWhereType(searchRequest);
+	public Item selectItemIntegerWhereType(SearchRequest searchRequest) {
+		Item result = itemRepository.selectItemIntegerWhereType(searchRequest);
+		result.setViews(result.getViews()+1);
 		return result;
 	}
 	

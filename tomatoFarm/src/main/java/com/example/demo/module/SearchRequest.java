@@ -38,7 +38,7 @@ public class SearchRequest {
 	private String orderType;// 정렬 타입
 	private String scending ;// 정렬 순서
 	private String whichTable; // 어떤 테이블의 정보를 가져올 것인지
-	private Integer howManyDays; // 어느기간의 데이터를 볼 것인지
+	private Integer howManyRecords; // 몇개의 데이터(상위 몇 건)를 볼 것인지
 	
 	
 	

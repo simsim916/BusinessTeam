@@ -43,7 +43,7 @@ const Admin = () => {
                 page: 'admin'
             }
         })
-    })
+    }, [])
 
     return (
         <>
