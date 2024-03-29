@@ -2,7 +2,6 @@ import { FETCH_DATA_REQUEST, FETCH_DATA_SUCCESS, FETCH_DATA_FAILURE } from '../a
 
 const initialState = {
     user: {
-        loginStatus: false,
         loading: false,
         error: null,
         data: [],
@@ -14,7 +13,6 @@ const userReducer = (state = initialState.user, action) => {
         case FETCH_DATA_REQUEST:
             return {
                 ...state,
-                loginStatus: false,
                 loading: true,
                 error: false
             };
@@ -22,7 +20,6 @@ const userReducer = (state = initialState.user, action) => {
             return {
                 ...state,
                 loading: false,
-                loginStatus: true,
                 data: action.payload
             };
         case FETCH_DATA_FAILURE:

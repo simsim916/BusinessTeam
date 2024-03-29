@@ -13,7 +13,7 @@ const Header = () => {
     const keyword = useSelector(state => state.basic.keyword);
     const navigate = useNavigate();
     const dispatch = useDispatch()
-    const userinfo = JSON.parse(sessionStorage.getItem('userinfo')) && {}
+    const userinfo = JSON.parse(sessionStorage.getItem('userinfo'))
     console.log(userinfo)
     const logOut = () => {
         sessionStorage.removeItem('userinfo')
@@ -68,7 +68,7 @@ const Header = () => {
             <div id="searchBar">
                 <div className="container">
                     <div id="logoBox">
-                        <a href="/">
+                        <a href="/home">
                             <img src={"http://localhost:8090/resources" + "/img/logo.png"} alt="로고" />
                             <h1>토마토팜 tomatoFarm</h1>
                         </a>

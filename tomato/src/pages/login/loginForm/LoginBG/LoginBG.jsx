@@ -96,7 +96,7 @@ const LoginBG = ({ signBox, changeSignBox, checkId, checkPassword, changeOpacity
     return (
         <div id="loginBG" style={{ transform: signBox ? 'translate(-100%, 0)' : 'translate(0%, 0)' }}>
             <div>
-                <Link to="/"><img id="logo" src={SERVER_RESOURCE + `/img/logo.png`} alt="logo" /></Link>
+                <Link to="/home"><img id="logo" src={SERVER_RESOURCE + `/img/logo.png`} alt="logo" /></Link>
                 <form id="loginBox" action="/tomatoFarm/member/login" method="post">
                     <div id="loginButton">
                         <div>일반 로그인</div>

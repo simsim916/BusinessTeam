@@ -1,7 +1,5 @@
-import { useSearchParams } from "react-router-dom";
 import './ItemListContainer.css'
-import { useEffect, useRef, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 import ItemBox from './../../components/ItemBox';
 import ItemBox_vertical from './../../components/itemBox_vertical/ItemBox_vertical';
 import PagingBox from "../../components/PagingBox";
@@ -21,20 +19,13 @@ const ItemListContainer = ({ keyword, itemList, setItemList }) => {
     }
 
     const howManyItems = (event) => {
-        // let box = event.target;
         event.target.style.opacity = "1";
         for (let t of event.target.parentNode.children) {
             if (t != event.target) {
                 t.style.opacity = "0.3";
             }
         }
-        if (event.target.id == "16") {
-            setLimit(16);
-        } else if (event.target.id == "6") {
-            setLimit(6);
-        } else {
-            setLimit(0);
-        }
+        setLimit(event.target.innerText);
         setCurrPage(1);
     }
 
@@ -83,8 +74,8 @@ const ItemListContainer = ({ keyword, itemList, setItemList }) => {
             <div id="listContainer" style={{ display: limit != 16 ? 'flex' : 'grid', height: limit != 16 ? 'auto' : '' }}>
                 <div id="containerOption">
                     <div id="listButton">
-                        <div id="16" onClick={howManyItems}></div>
-                        <div id="6" onClick={howManyItems}></div>
+                        <div onClick={howManyItems}></div>
+                        <div onClick={howManyItems}></div>
                         <div onClick={howManyItems}></div>
                     </div>
                     <div id="total">총 <span>{itemList ? itemList.length : '0'}</span> 개</div>
