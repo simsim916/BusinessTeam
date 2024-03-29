@@ -1,3 +1,5 @@
+import { api } from '../../../model/model';
+
 export const FETCH_DATA_REQUEST = 'FETCH_DATA_REQUEST';
 export const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS';
 export const FETCH_DATA_FAILURE = 'FETCH_DATA_FAILURE';
@@ -15,3 +17,18 @@ export const fetchDataFailure = (error) => ({
     type: FETCH_DATA_FAILURE,
     payload: error
 });
+
+export const fetchData = (url, method, requestData, token) => {
+    return async (dispatch) => {
+        dispatch(fetchDataRequest());
+        try {
+            const response = await api(url, method, requestData, token)
+            dispatch(fetchDataSuccess(response.data));
+            console.log("fetchData : response" + response)
+            console.log("fetchData : response.data" + response.data)
+        } catch (error) {
+            console.log('fetchData' + error.message)
+            dispatch(fetchDataFailure(error.message));
+        }
+    };
+};

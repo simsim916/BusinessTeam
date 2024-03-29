@@ -13,9 +13,10 @@ const Header = () => {
     const keyword = useSelector(state => state.basic.keyword);
     const navigate = useNavigate();
     const dispatch = useDispatch()
-
+    const userinfo = JSON.parse(sessionStorage.getItem('userinfo')) && {}
+    console.log(userinfo)
     const logOut = () => {
-
+        sessionStorage.removeItem('userinfo')
     }
 
     const searchBox = (event) => {
@@ -51,10 +52,10 @@ const Header = () => {
                 <div className="container">
                     <Link to="/admin">고객센터</Link>
                     {
-                        user.loginStatus ?
+                        userinfo != null && userinfo.login ?
                             <>
                                 <Link onClick={logOut} to="/">로그아웃</Link>
-                                <Link to="/login"> {JSON.parse(sessionStorage.getItem('userInfo')).username} 님 </Link>
+                                <Link to="/login"> {userinfo.username} 님 </Link>
                             </>
                             :
                             <>

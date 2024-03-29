@@ -5,7 +5,8 @@ import Loading from './../../../components/Loading';
 import Error from '../../../components/Error';
 import { SERVER_RESOURCE } from '../../../../model/server-config';
 import { useDispatch, useSelector } from 'react-redux';
-import { requestLogin } from '../../../redux/axios/axios';
+import { loginFailure, loginRequest, loginSuccess } from '../../../redux/user/action';
+import { api } from '../../../../model/model'
 
 const LoginBG = ({ signBox, changeSignBox, checkId, checkPassword, changeOpacity }) => {
     const user = useSelector(state => state.user);
@@ -28,6 +29,9 @@ const LoginBG = ({ signBox, changeSignBox, checkId, checkPassword, changeOpacity
     })
 
     const handleInputChange = (event, handle) => {
+        if (event.which == 13) {
+            requestLogin()
+        }
         let result = {
             message: '',
             check: false
@@ -61,12 +65,29 @@ const LoginBG = ({ signBox, changeSignBox, checkId, checkPassword, changeOpacity
             setLoginValue(loginValue => ({ ...loginValue, isLoginable: true })) : setLoginValue(loginValue => ({ ...loginValue, isLoginable: false }));
     }
 
-    const requestLoginAction = () => {
-        dispatch(requestLogin('/user/login', 'post', loginValue.value))
-            .then(res => {
-                console.log(res)
-            });
-        navigate("/home");
+
+
+    const requestLogin = (loginValue) => {
+        return async (dispatch) => {
+            dispatch(loginRequest());
+            try {
+                const response = await api('/user/login', 'post', loginValue.value)
+                dispatch(loginSuccess(response.data));
+                sessionStorage.setItem('userinfo', JSON.stringify({
+                    token: response.data.token,
+                    username: response.data.username,
+                    login: true
+                }));
+                navigate("/home");
+            } catch (error) {
+                console.log('fetchData' + error.message);
+                dispatch(loginFailure(error.message));
+            }
+        }
+    }
+
+    const handleLogin = () => {
+        dispatch(requestLogin(loginValue));
     };
 
     if (user.loading) return <Loading />
@@ -101,7 +122,7 @@ const LoginBG = ({ signBox, changeSignBox, checkId, checkPassword, changeOpacity
                         <span id="pwError"></span>
                     </p>
 
-                    <button onClick={requestLoginAction} type="button" id="loginInBox"
+                    <button onClick={handleLogin} type="button" id="loginInBox"
                         style={{ opacity: loginValue.isLoginable ? '1' : '0.3' }} disabled={!loginValue.isLoginable}>로그인</button>
                 </form>
                 <p id="successOrNot">
