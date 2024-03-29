@@ -17,6 +17,7 @@ import lombok.AllArgsConstructor;
 public interface UserCartRepository{
 
 	UserCart update(UserCart usercart);
+	
 	List<UserCart> selectAll(UserCartID entity);
 
 	

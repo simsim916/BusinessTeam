@@ -20,14 +20,13 @@ import lombok.AllArgsConstructor;
 @Repository
 @AllArgsConstructor
 public class UserCartRepositoryImpl implements UserCartRepository {
-	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 
 	/* 🎃🎃🎃🎃🎃🎃 수미 🎃🎃🎃🎃🎃🎃 */
 	private final JPAQueryFactory jpaQueryfactory;
 	private final EntityManager entityManager;
 
-	public UserCart update(UserCart entity) {
-		return entityManager.merge(entity);
+	public UserCart update(UserCart userCart) {
+		return entityManager.merge(userCart);
 	}
 
 	@Override

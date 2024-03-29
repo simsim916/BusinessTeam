@@ -9,5 +9,6 @@ public interface UserCartService {
 
 	
 	public UserCart update(UserCart usercart);
+	
 	public List<UserCart> selectAll(UserCartID entity);
 }
