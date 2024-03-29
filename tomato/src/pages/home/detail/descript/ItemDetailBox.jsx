@@ -3,12 +3,16 @@ import './ItemDetailBox.css';
 import { useRef, useState, useEffect, useMemo } from 'react';
 import { makeComa, makeDiscountPrice } from '../../../components/MathFunction';
 import axios from 'axios';
+import Loading from './../../../components/Loading';
+import Error from './../../../components/Error';
 
 const ItemDetailBox = ({ item }) => {
     const [inputCountValue, setInputCountValue] = useState(1);
     const [introItem, setIntroItem] = useState(false)
     const [cartItem, setCartItem] = useState(true);
     const [gotoCart, setGotoCart] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
     const [cartForm, setCartForm] = useState({
         id: 'manager2',
         item_code: item.code,
@@ -69,14 +73,17 @@ const ItemDetailBox = ({ item }) => {
         setInputCountValue(event.target.value);
         changeCartForm()
     }
+
     const postCartData = () => {
-        console.log(cartForm)
+        setLoading(true)
         axios.post('http://localhost:8090/usercart/update', cartForm, {
             headers: 'application/json'
         }).then(res => {
-            
+            setLoading(false);
+            setCartItem(res.data);
         }).catch(err => {
-
+            setLoading(false);
+            setError(true);
         });
     }
 
@@ -86,9 +93,15 @@ const ItemDetailBox = ({ item }) => {
             item_amount: inputCountValue
         }));
     }
+
     const addCart = () => {
         setGotoCart(!gotoCart);
-        postCartData()
+        if (/*로그인했을때*/ true) {
+            postCartData()
+        } else {
+            /* 로컬 스토리지에 저장 */
+            localStorage.setItem('cart', `${item.code}`)
+        }
     }
 
     useMemo(changeCartForm, [inputCountValue])
@@ -145,20 +158,28 @@ const ItemDetailBox = ({ item }) => {
                     <div id="priceBox">
                         <div id="priceAmount">총 상품금액&nbsp; : &nbsp;<span ref={priceRef}>{makeComa(makeDiscountPrice(item.price, item.discount) * inputCountValue)}원</span></div>
                         {/* onclick이 맞나? 장바구니 컴포넌트를 넣는게 맞나? */}
-                        <div onClick={gotoCart? null : addCart} id="gotocart">장바구니 담기</div>
+                        <div onClick={gotoCart ? null : addCart} id="gotocart">장바구니 담기</div>
                         <a href="" id="gotobuy">구매하기</a>
                     </div>
                 </div>
-                {gotoCart && <div id='goCartContainer'>
-                    <div id='goCartBox'>
-                        <div id="itemName">{item.name}</div>
-                        <div>장바구니에 상품을 담았습니다.</div>
-                        <div>장바구니로 이동하시겠습니까?</div>
-                        <button id="cartOK">이동</button>
-                        <button onClick={() => setGotoCart(!gotoCart)} id="cartNO">닫기</button>
-                    </div>
-                    <div id='triangle_bottom'></div>
-                </div>}
+                {
+                    loading ?
+                        <Loading />
+                        :
+                        gotoCart ?
+                            <div id='goCartContainer'>
+                                <div id='goCartBox'>
+                                    <div id="itemName">{item.name}</div>
+                                    <div>장바구니에 상품을 담았습니다.</div>
+                                    <div>장바구니로 이동하시겠습니까?</div>
+                                    <button id="cartOK">이동</button>
+                                    <button onClick={() => setGotoCart(!gotoCart)} id="cartNO">닫기</button>
+                                </div>
+                                <div id='triangle_bottom'></div>
+                            </div>
+                            :
+                            null
+                }
             </div>
 
             <ul id="detailClick" className="container">

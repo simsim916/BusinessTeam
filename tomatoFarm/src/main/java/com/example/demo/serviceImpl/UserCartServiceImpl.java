@@ -1,5 +1,6 @@
 package com.example.demo.serviceImpl;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -24,6 +25,11 @@ public class UserCartServiceImpl implements UserCartService {
 	@Transactional
 	@Override
 	public UserCart update(UserCart usercart) {
+		// LocalDate 클래스를 이용해서 entity에 등록일자 담기
+		LocalDate today = LocalDate.now();
+
+		usercart.setRegdate(today);
+		System.out.println(usercart);
 		return usercartRepository.update(usercart);
 	}
 	

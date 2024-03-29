@@ -1,9 +1,5 @@
 package com.example.demo.controller;
 
-
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -35,7 +31,6 @@ public class UserController {
 	@PostMapping("/login") 
 	public ResponseEntity<?> login(@RequestBody UserDTO dto) {
 		ResponseEntity<?> result = null;
-		System.out.println(dto);
 		String password = dto.getPassword(); // user가 입력한 password를 변수에 저장
 		User user = userService.selectUser(dto); // user가 입력한 id로 userData를 조회 하여 dto를 채운다.
 		if(dto.getUsername() != null) { // 조회성공

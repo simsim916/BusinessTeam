@@ -45,7 +45,11 @@ const ItemDetail = () => {
             <ReviewBoardBox item={item} />
             <hr className='container' />
             <AskBoardBox item={item} />
-            {/* <ShopBasketSelectBox item={item} /> */}
+            
+
+            {/* <Routes>
+                <Route path='/' element={<ShopBasket />} />
+            </Routes> */}
         </>
     );
 }

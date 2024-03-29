@@ -10,6 +10,7 @@ const ShopBasket = () => {
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
+    const [item, setItem] = useState(null);
 
     console.log(item)
     useEffect(() => {
@@ -18,7 +19,6 @@ const ShopBasket = () => {
             setItem(res.data);
             setLoading(false);
         }).catch(err => {
-            console.log(err.message)
             setLoading(false);
             setError(true);
         })
@@ -31,7 +31,7 @@ const ShopBasket = () => {
     return (
         <>
             <Header />
-            <ShopBasketSelectBox />
+            <ShopBasketSelectBox item={item} />
 
             <ShopBasketPayBox />
 
