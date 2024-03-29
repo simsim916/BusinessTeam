@@ -1,7 +1,18 @@
 import { useEffect, useState } from "react";
 import "./Graph.css";
 import axios from 'axios';
-
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
+import LineChart from "./lineChart/LineChart";
 
 const Graph = ({ myLocation }) => {
 
@@ -23,17 +34,6 @@ const Graph = ({ myLocation }) => {
         ).catch(err => console.log('*********' + err.message))
     }, [whichTable])
 
-    // useEffect(() => {
-    //     axios.get(`http://localhost:8090/${whichTable}`
-    //     ).then(res => {
-    //         setGraphData(res.data)
-    //         console.log('aaaaaa');
-    //     }
-    //     ).catch(err => console.log('*********' + err.message))
-    // }, [whichTable])
-
-
-
     const checkMainCategory = (event) => {
         if (event.target.value == 'x') return;
 
@@ -41,7 +41,7 @@ const Graph = ({ myLocation }) => {
         switch (event.target.value) {
             case "admin": uri = "visit/selectall?page='admin'";
                 break;
-            case "itemDetail": uri = "visit/selectall?page='itemDetail'";
+            case "item": uri = "item/selectall?page='itemDetail'";
                 break;
             case "itemList": uri = "visit/selectall?page='itemList'";
                 break;
@@ -63,8 +63,8 @@ const Graph = ({ myLocation }) => {
             <div id="GraphContainer">
                 <select name="mainCategory" id="" onChange={checkMainCategory}>
                     <option value="x">페이지별</option>
-                    <option value="admin">관리자</option>
-                    <option value="itemDetail">상품상세조회</option>
+                    <option value="item">상품 좋아요</option>
+                    <option value="item">상품 조회수</option>
                     <option value="itemList">상품리스트</option>
                 </select>
                 &nbsp;&nbsp;
@@ -75,7 +75,7 @@ const Graph = ({ myLocation }) => {
                 </select>
             </div>
             <div id="graphBox">
-
+                {graphData && <LineChart graphData={graphData} />}
             </div>
         </>
     );

@@ -6,10 +6,8 @@ import javax.persistence.EntityManager;
 
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.domain.ItemDTO;
 import com.example.demo.entity.Visit_page;
 import com.example.demo.entity.Visit_pageID;
-import com.example.demo.module.SearchRequest;
 import com.example.demo.repository.VisitRepository;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -39,12 +37,30 @@ public class VisitRepositoryImpl implements VisitRepository {
 	}
 
 	@Override
+//	public List<Visit_page> selectAll(Visit_page entity) {
+//	    return jPAQueryFactory
+//	            .select(Projections.bean(Visit_page.class, visit_page.page.max().as("page"),
+//	                    visit_page.visit_date, visit_page.visit_count.sum().as("visit_count")))
+//	            .from(visit_page)
+//	            .groupBy(visit_page.visit_date) // visit_date만 GROUP BY에 추가
+//	            .fetch();
+//	}
+//	public List<Visit_page> selectAll(Visit_page entity) {
+//	    return jPAQueryFactory
+//	            .select(Projections.bean(Visit_page.class, visit_page.page.max().as("page"),
+//	                    visit_page.visit_date, visit_page.visit_count.sum().as("visit_count")))
+//	            .from(visit_page)
+//	            .groupBy(visit_page.visit_date) // visit_date만 GROUP BY에 추가
+//	            .fetch();
+//	}
 	public List<Visit_page> selectAll(Visit_page entity) {
 		return jPAQueryFactory
-				.select(Projections.bean(Visit_page.class,visit_page.page,visit_page.visit_date,visit_page.visit_count))
+				.select(Projections.bean(Visit_page.class,
+						visit_page.page,visit_page.visit_date,visit_page.visit_count))
 				.from(visit_page)
-				.groupBy(visit_page.page,visit_page.visit_date)
+				.orderBy(visit_page.visit_date.asc())
 				.fetch();
 	}
+	
 
 }

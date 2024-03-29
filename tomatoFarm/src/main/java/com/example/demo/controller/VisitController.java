@@ -34,10 +34,6 @@ public class VisitController {
 	@Transactional
 	@GetMapping("/update")
 	public void update(Visit_page entity) {
-//		ZoneId koreaZone = ZoneId.of("Asia/Seoul");
-//		ZonedDateTime currentDateTimeInKorea = ZonedDateTime.now(koreaZone);
-//		LocalDate currentDateInKorea = currentDateTimeInKorea.toLocalDate();
-		System.out.println(entity);
 		visitService.update(entity); 
 	}
 	
