@@ -74,7 +74,7 @@ const ItemDetailBox = ({ item }) => {
         axios.post('http://localhost:8090/usercart/update', cartForm, {
             headers: 'application/json'
         }).then(res => {
-            
+
         }).catch(err => {
 
         });
@@ -92,6 +92,12 @@ const ItemDetailBox = ({ item }) => {
     }
 
     useMemo(changeCartForm, [inputCountValue])
+
+    const order = () => {
+        axios.post(`http://localhost:8090/usercart/update`, {
+
+        })
+    }
 
 
     return (
@@ -145,7 +151,7 @@ const ItemDetailBox = ({ item }) => {
                     <div id="priceBox">
                         <div id="priceAmount">총 상품금액&nbsp; : &nbsp;<span ref={priceRef}>{makeComa(makeDiscountPrice(item.price, item.discount) * inputCountValue)}원</span></div>
                         {/* onclick이 맞나? 장바구니 컴포넌트를 넣는게 맞나? */}
-                        <div onClick={gotoCart? null : addCart} id="gotocart">장바구니 담기</div>
+                        <div onClick={gotoCart ? null : addCart} id="gotocart">장바구니 담기</div>
                         <a href="" id="gotobuy">구매하기</a>
                     </div>
                 </div>

@@ -72,17 +72,8 @@ public class ItemController {
 	public ResponseEntity<?> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
 //		===========================================================
-		LocalDateTime KoreaTime = LocalDateTime.now() // 현재 시간
-                .plus(9, ChronoUnit.HOURS); // +9 시간
-		
-		KeywordID keywordID = new KeywordID().builder()
-				.keyword(searchRequest.getKeyword())
-				.search_date(KoreaTime.toLocalDate())
-				.build();
-		Keyword entity = new Keyword().builder()
-				.keywordID(keywordID)
-				.build();
-		keywordService.updateKeyword(entity);
+
+		keywordService.updateKeyword(searchRequest);
 		// 이걸 서비스단에서 처리하고자 하는데
 		// 서비스단에서 entity 객체를 만드는거 까진 오케이
 		// 하지만 keyword를 업데이트 시키려면 
