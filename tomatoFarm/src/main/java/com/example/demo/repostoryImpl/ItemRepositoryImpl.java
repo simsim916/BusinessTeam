@@ -8,24 +8,16 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.domain.ItemDTO;
-import com.example.demo.domain.Item_reviewDTO;
 import com.example.demo.domain.SortDTO;
 import com.example.demo.entity.Item;
-import com.example.demo.entity.Item_review;
 import com.example.demo.entity.QItem;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.repository.ItemRepository;
-import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
-import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.Expressions;
-import com.querydsl.core.types.dsl.NumberPath;
-import com.querydsl.core.types.dsl.PathBuilder;
-import com.querydsl.core.types.dsl.PathBuilderFactory;
-import com.querydsl.core.types.dsl.StringPath;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import static com.example.demo.entity.QItem.item;
@@ -94,34 +86,25 @@ public class ItemRepositoryImpl implements ItemRepository {
 	}
 
 	@Override
-	public ItemDTO selectItemIntegerWhereType(SearchRequest searchRequest) {
-//		ItemDTO dto = jPAQueryFactory
-//		.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price, item.storage,
-//				item.weight, item.packing, item.sales, item.stock, item.views, item.likes, item.event_code,
-//				item_event.discount, item_event.name.as("event_name")))
-//		.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
-//		.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
-//				.eq(searchRequest.getKeyword()))
-//		.fetchOne();
-//		
-//		if(dto != null) {
-//			dto.setViews(dto.getViews()+1);
-//			updateItem(dtoToEntity(dto))
-//		} else {
-//			updateItem(dtoToEntity(dto))
-//		}
-//		===============================
-//		merge, persist 는 매개변수로 entity를 사용하는데
-//		우리가 동적검색하는 메서드는 전부 dto를 이용하기 때문에
-//		레포지토리에서 한번에 해결할 수 없는 문제
+	public Item selectItemIntegerWhereType(SearchRequest searchRequest) {
 		return jPAQueryFactory
-				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price, item.storage,
+			    .select(Projections.bean(Item.class, item.code, item.brand, item.name, item.delivery, item.price, item.storage,
 						item.weight, item.packing, item.sales, item.stock, item.views, item.likes, item.event_code, item.intro,
 						item.admin, item_event.discount, item_event.name.as("event_name")))
-				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
-				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
-						.eq(searchRequest.getKeyword()))
-				.fetchOne();
+			    .from(item)
+			    .leftJoin(item_event).on(item.event_code.eq(item_event.code))
+			    .where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
+			            .eq(searchRequest.getKeyword()))
+			    .fetchFirst();
+
+//		return jPAQueryFactory
+//				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price, item.storage,
+//						item.weight, item.packing, item.sales, item.stock, item.views, item.likes, item.event_code, item.intro,
+//						item.admin, item_event.discount, item_event.name.as("event_name")))
+//				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
+//				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
+//						.eq(searchRequest.getKeyword()))
+//				.fetchOne();
 		
 		
 	}
@@ -142,7 +125,6 @@ public class ItemRepositoryImpl implements ItemRepository {
 	// ** 키워드 상품 페이징 조회
 	public List<ItemDTO> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest) {
 		return jPAQueryFactory
-				
 				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price,
 						item.sales, item.stock, item.views, item.likes, item.event_code, item_event.discount, item.intro,
 						item_event.name.as("event_name")))

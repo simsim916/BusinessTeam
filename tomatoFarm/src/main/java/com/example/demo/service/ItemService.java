@@ -5,7 +5,6 @@ import java.util.List;
 import com.example.demo.domain.ItemDTO;
 import com.example.demo.domain.SortDTO;
 import com.example.demo.entity.Item;
-import com.example.demo.entity.Item_ask;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 
@@ -67,7 +66,7 @@ public interface ItemService {
 	List<ItemDTO> selectItemListStringWhereType(PageRequest pageRequest,SearchRequest searchRequest);
 	List<ItemDTO> selectItemListIntegerWhereType(PageRequest pageRequest,SearchRequest searchRequest);
 	List<ItemDTO> selectItemListStringWhereTypeNotNull(PageRequest pageRequest,SearchRequest searchRequest);
-	ItemDTO selectItemIntegerWhereType(SearchRequest searchRequest);
+	Item selectItemIntegerWhereType(SearchRequest searchRequest);
 	
 	List<ItemDTO> selectItemWherebrand(PageRequest pageRequest, SearchRequest searchRequest);
 	List<ItemDTO> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest);

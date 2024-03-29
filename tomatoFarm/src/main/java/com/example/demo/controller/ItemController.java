@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -48,20 +50,8 @@ public class ItemController {
 	@GetMapping("/detailn")
 	public ResponseEntity<?> selectItemWhereType(SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
-		ItemDTO dto = itemService.selectItemIntegerWhereType(searchRequest);
-//		=====================================
-//		** view 를 +1 하는과정 
-//		( 
-//		  레포지토리에서 한번에 해결하고 싶었으나 검색시에는
-//		  dto 사용하지만, merge는 매개변수로 entity를 필요로 한다는 차이점이 존재!
-//		  dtoToEntity 메서드는  서비스를 통해 호출해서 사용하는데 
-//		  Repository 에서 service를 필드변수로 사용하기엔 문제가 생길까봐 보류
-//	    )
-		dto.setViews(dto.getViews()+1);
-		Item Entity = itemService.dtotoEntity(dto);
-		itemService.updateItem(Entity);
-//		=====================================
-		result = ResponseEntity.status(HttpStatus.OK).body(dto);
+		Item entity= itemService.selectItemIntegerWhereType(searchRequest);
+		result = ResponseEntity.status(HttpStatus.OK).body(entity);
 		return result;
 	}
 
@@ -82,18 +72,21 @@ public class ItemController {
 	public ResponseEntity<?> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
 //		===========================================================
-		ZoneId koreaZone = ZoneId.of("Asia/Seoul");
-		ZonedDateTime currentDateTimeInKorea = ZonedDateTime.now(koreaZone);
-		LocalDate currentDateInKorea = currentDateTimeInKorea.toLocalDate();
+		LocalDateTime KoreaTime = LocalDateTime.now() // 현재 시간
+                .plus(9, ChronoUnit.HOURS); // +9 시간
 		
 		KeywordID keywordID = new KeywordID().builder()
 				.keyword(searchRequest.getKeyword())
-				.search_date(currentDateInKorea)
+				.search_date(KoreaTime.toLocalDate())
 				.build();
 		Keyword entity = new Keyword().builder()
 				.keywordID(keywordID)
 				.build();
 		keywordService.updateKeyword(entity);
+		// 이걸 서비스단에서 처리하고자 하는데
+		// 서비스단에서 entity 객체를 만드는거 까진 오케이
+		// 하지만 keyword를 업데이트 시키려면 
+		// itemService 에서~ keywordService를 사용해야하는데 이래도 될까?
 //		===========================================================
 		
 		List<ItemDTO> list = itemService.selectItemWhereSearchType(pageRequest, searchRequest);
