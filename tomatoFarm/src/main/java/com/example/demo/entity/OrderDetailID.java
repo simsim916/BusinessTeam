@@ -9,6 +9,6 @@ import lombok.Data;
 @Data
 @Builder
 public class OrderDetailID implements Serializable {
-    private int orderCode;
-    private int itemCode;
+    private Integer orderCode;
+    private Integer itemCode;
 }

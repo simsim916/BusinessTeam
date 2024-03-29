@@ -24,6 +24,7 @@ const ItemDetailBox = ({ item }) => {
     const date = currentDate.getDate();
     const hour = currentDate.getHours();
     const dayOfWeek = currentDate.getDay();
+    const [loginTest, setLoginTest] = useState(false);
 
     let inputCountRef = useRef(null)
     let priceRef = useRef(null)
@@ -68,7 +69,6 @@ const ItemDetailBox = ({ item }) => {
     const gotoCartClick = () => {
 
     };
-
 
     const changeInputCount = (event) => {
         setInputCountValue(event.target.value);
@@ -134,6 +134,7 @@ const ItemDetailBox = ({ item }) => {
         }
     }
 
+
     useMemo(changeCartForm, [inputCountValue])
 
     const order = () => {
@@ -141,6 +142,9 @@ const ItemDetailBox = ({ item }) => {
 
         })
     }
+
+
+
 
     function aa() {
 
@@ -213,7 +217,7 @@ const ItemDetailBox = ({ item }) => {
                     <div id="priceBox">
                         <div id="priceAmount">총 상품금액&nbsp; : &nbsp;<span ref={priceRef}>{makeComa(makeDiscountPrice(item.price, item.discount) * inputCountValue)}원</span></div>
                         <div onClick={gotoCart ? null : addCart} id="gotocart">장바구니 담기</div>
-                        <a href="" id="gotobuy">구매하기</a>
+                        <a onClick={(event) => order(event, item)} href="" id="gotobuy">구매하기</a>
                     </div>
                 </div>
                 {

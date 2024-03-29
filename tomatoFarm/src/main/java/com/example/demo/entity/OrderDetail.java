@@ -6,14 +6,17 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 @Entity
 @Table(name = "order_detail") // order_detail 테이블과 매핑
 @IdClass(OrderDetailID.class) // 복합 기본 키 클래스를 지정
+@Data
 public class OrderDetail {
 
     @Id
     @Column(name = "order_code")
-    private int orderCode;
+    private Integer orderCode;
 
     @Id
     @Column(name = "item_code")
