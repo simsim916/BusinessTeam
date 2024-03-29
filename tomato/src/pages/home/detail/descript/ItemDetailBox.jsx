@@ -64,7 +64,6 @@ const ItemDetailBox = ({ item }) => {
 
     };
 
-
     const changeInputCount = (event) => {
         setInputCountValue(event.target.value);
         changeCartForm()
@@ -93,10 +92,18 @@ const ItemDetailBox = ({ item }) => {
 
     useMemo(changeCartForm, [inputCountValue])
 
-    const order = () => {
-        axios.post(`http://localhost:8090/usercart/update`, {
-
-        })
+    const order = (event, item) => {
+        // 1. 부모컴포넌트로부터 받은 item(객체데이터)를 제이슨데이터 화
+        // 2. 던져줬는데 400 에러
+        // 3. 리퀘스트 바디안해주면 못받아...
+        let test = JSON.stringify(item);
+        event.preventDefault();
+        axios.post(`http://localhost:8090/order/test`, test, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => console.log(res.date)
+        ).catch(err => err.message);
     }
 
 
@@ -152,7 +159,7 @@ const ItemDetailBox = ({ item }) => {
                         <div id="priceAmount">총 상품금액&nbsp; : &nbsp;<span ref={priceRef}>{makeComa(makeDiscountPrice(item.price, item.discount) * inputCountValue)}원</span></div>
                         {/* onclick이 맞나? 장바구니 컴포넌트를 넣는게 맞나? */}
                         <div onClick={gotoCart ? null : addCart} id="gotocart">장바구니 담기</div>
-                        <a href="" id="gotobuy">구매하기</a>
+                        <a onClick={(event) => order(event, item)} href="" id="gotobuy">구매하기</a>
                     </div>
                 </div>
                 {gotoCart && <div id='goCartContainer'>

@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -13,17 +14,19 @@ import javax.persistence.TemporalType;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.ToString;
 
 @Entity
-@Table(name = "order") // order 테이블과 매핑
+@Table(name = "itemorder") // order 테이블과 매핑
 @Data
 @Builder
-public class Order {
+@ToString
+public class ItemOrder {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer code;
-    @Column(name = "user_id", nullable = false, length = 15)
+    @Column(name = "user_id")
     private String userId;
     private String name;
     @Column(name = "address_code")
@@ -38,11 +41,9 @@ public class Order {
     private Integer point;
     
     @Column(name = "orderdate")
-    @Temporal(TemporalType.DATE)
-    private Date orderDate;
+    private LocalDate orderDate;
     
-    @Temporal(TemporalType.DATE)
-    private Date deliveryDate;
+    private LocalDate deliveryDate;
 
     private boolean check;
 

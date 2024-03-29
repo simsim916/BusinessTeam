@@ -21,8 +21,13 @@ const ItemListContainer = ({ keyword, itemList, setItemList }) => {
     }
 
     const howManyItems = (event) => {
-        console.log(event.target.id);
-
+        // let box = event.target;
+        event.target.style.opacity = "1";
+        for (let t of event.target.parentNode.children) {
+            if (t != event.target) {
+                t.style.opacity = "0.3";
+            }
+        }
         if (event.target.id == "16") {
             setLimit(16);
         } else if (event.target.id == "6") {
