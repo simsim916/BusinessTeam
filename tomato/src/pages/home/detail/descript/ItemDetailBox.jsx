@@ -5,6 +5,7 @@ import { makeComa, makeDiscountPrice } from '../../../components/MathFunction';
 import axios from 'axios';
 import Loading from './../../../components/Loading';
 import Error from './../../../components/Error';
+import { Link } from 'react-router-dom';
 
 const ItemDetailBox = ({ item }) => {
     const [inputCountValue, setInputCountValue] = useState(1);
@@ -157,7 +158,6 @@ const ItemDetailBox = ({ item }) => {
                     </div>
                     <div id="priceBox">
                         <div id="priceAmount">총 상품금액&nbsp; : &nbsp;<span ref={priceRef}>{makeComa(makeDiscountPrice(item.price, item.discount) * inputCountValue)}원</span></div>
-                        {/* onclick이 맞나? 장바구니 컴포넌트를 넣는게 맞나? */}
                         <div onClick={gotoCart ? null : addCart} id="gotocart">장바구니 담기</div>
                         <a href="" id="gotobuy">구매하기</a>
                     </div>
@@ -172,8 +172,8 @@ const ItemDetailBox = ({ item }) => {
                                     <div id="itemName">{item.name}</div>
                                     <div>장바구니에 상품을 담았습니다.</div>
                                     <div>장바구니로 이동하시겠습니까?</div>
-                                    <button id="cartOK">이동</button>
-                                    <button onClick={() => setGotoCart(!gotoCart)} id="cartNO">닫기</button>
+                                    <Link to="/home/cart" id="cartOK">이동</Link>
+                                    <a onClick={() => setGotoCart(!gotoCart)} id="cartNO">닫기</a>
                                 </div>
                                 <div id='triangle_bottom'></div>
                             </div>

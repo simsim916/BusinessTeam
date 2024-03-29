@@ -1,8 +1,7 @@
 import './BestItemBox.css';
 
 
-const BestItemBox = ({item}) => {
-
+const BestItemBox = ({ item }) => {
 
     return (
         <>
@@ -46,7 +45,8 @@ const BestItemBox = ({item}) => {
                     </div>
                 </a>
             </div>
-    </>
+        </>
     );
-
 }
+
+export default BestItemBox;

@@ -4,7 +4,7 @@ import Error from '../components/Error';
 import { useState } from 'react';
 
 
-const ShopBasketSelectBox = ({item}) => {
+const ShopBasketSelectBox = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
@@ -37,15 +37,15 @@ const ShopBasketSelectBox = ({item}) => {
                         <div className="shopBasketItem">
                             <div><input className="check" type="checkbox" onClick="shopBasket()" name="buy"></input></div>
                             <div className="shopBasketItemImg"><img src={process.env.PUBLIC_URL + `/img/itemImg/5000001_2.jpg`} alt="" /></div>
-                            <div className="shopBasketItemIfo">{item.name}
-                                <div className="price">{makeComa(item.price)}원</div>
+                            <div className="shopBasketItemIfo">상품이름 - 샤브샤브
+                                <div className="price">상품가격:5000</div>
                             </div>
                             <div id="itemCount">
                                 <button onClick='count(event,"-")'><i className="fa-solid fa-minus"></i></button>
                                 <input onKeyDown="inputCount(event)" id="inputCount" type="text" value="1" />
                                 <button onClick='count(event,"+")'><i className="fa-solid fa-plus"></i></button>
                             </div>
-                            <div className="sumPrice">총합계</div>
+                            <div className="sumPrice">5000</div>
                             <div>무료배송</div>
                         </div>
                         <div className="shopBasketItem">

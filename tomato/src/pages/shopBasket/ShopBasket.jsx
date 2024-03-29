@@ -1,9 +1,10 @@
-import Header from '../0home/header/Header';
 import ShopBasketSelectBox from './ShopBasketSelectBox';
+import ShopBasketPayBox from './ShopBasketPayBox';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Loading from './../components/Loading';
 import Error from './../components/Error';
+import BestItemBox from './BestItemBox';
 
 
 const ShopBasket = () => {
@@ -13,16 +14,16 @@ const ShopBasket = () => {
     const [item, setItem] = useState(null);
 
     console.log(item)
-    useEffect(() => {
-        axios.get(`http://localhost:8090/item/`
-        ).then(res => {
-            setItem(res.data);
-            setLoading(false);
-        }).catch(err => {
-            setLoading(false);
-            setError(true);
-        })
-    }, [])
+    // useEffect(() => {
+    //     axios.get(`http://localhost:8090/item/`
+    //     ).then(res => {
+    //         setItem(res.data);
+    //         setLoading(false);
+    //     }).catch(err => {
+    //         setLoading(false);
+    //         setError(true);
+    //     })
+    // }, [])
 
     if (loading) return <Loading />
     if (error) return <Error />
@@ -30,15 +31,14 @@ const ShopBasket = () => {
 
     return (
         <>
-            <Header />
             <ShopBasketSelectBox item={item} />
 
             <ShopBasketPayBox />
 
             <BestItemBox />
-        
-        
-        
+
+
+
         </>
 
 

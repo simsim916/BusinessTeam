@@ -222,7 +222,7 @@
 #goCartBox div:nth-child(1){
     margin-bottom: 20px;
 }
-#goCartBox button {
+#goCartBox a {
     padding: 10px 20px;
     background-color: #CA4046;
     color: #fff;
