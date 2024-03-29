@@ -20,13 +20,15 @@ const ItemListContainer = ({ keyword, itemList, setItemList }) => {
 
     const howManyItems = (event) => {
         event.target.style.opacity = "1";
+        console.log(event.target.parentNode.children);
         for (let t of event.target.parentNode.children) {
             if (t != event.target) {
                 t.style.opacity = "0.3";
             }
         }
-        setLimit(event.target.innerText);
-        setCurrPage(1);
+        console.log(event.target.innerText);
+        // setLimit(event.target.innerText);
+        // setCurrPage(1);
     }
 
     const sortItemList = (event, list, setFunc) => {
@@ -67,14 +69,14 @@ const ItemListContainer = ({ keyword, itemList, setItemList }) => {
         // ex) 필요한 페이지 수 7 => [1,2,3,4,5,6,7] 배열 return
     }
 
-
+    console.log(window.innerWidth)
     return (
         <>
 
             <div id="listContainer" style={{ display: limit != 16 ? 'flex' : 'grid', height: limit != 16 ? 'auto' : '' }}>
                 <div id="containerOption">
                     <div id="listButton">
-                        <div onClick={howManyItems}></div>
+                        <div className={window.innerWidth > 1024 ? '16' : '15'} onClick={howManyItems}></div>
                         <div onClick={howManyItems}></div>
                         <div onClick={howManyItems}></div>
                     </div>
