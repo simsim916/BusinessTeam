@@ -1,19 +1,16 @@
 import { useRef, useState } from 'react';
 import './LoginBG.css';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 import Loading from './../../../components/Loading';
 import Error from '../../../components/Error';
 import { SERVER_RESOURCE } from '../../../../model/server-config';
-import { api } from '../../../../model/model';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchData } from '../../../redux/axios/axios';
+import { requestLogin } from '../../../redux/axios/axios';
 
 const LoginBG = ({ signBox, changeSignBox, checkId, checkPassword, changeOpacity }) => {
+    const user = useSelector(state => state.user);
+    const navigate = useNavigate();
     const dispatch = useDispatch();
-    const dataState = useSelector(state => state.user);
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = useState(false);
     const [loginValue, setLoginValue] = useState({
         value: {
             id: '',
@@ -64,23 +61,16 @@ const LoginBG = ({ signBox, changeSignBox, checkId, checkPassword, changeOpacity
             setLoginValue(loginValue => ({ ...loginValue, isLoginable: true })) : setLoginValue(loginValue => ({ ...loginValue, isLoginable: false }));
     }
 
-    const requestLogin = async () => {
-        await dispatch(fetchData('/user/login', 'post', loginValue.value));
+    const requestLoginAction = () => {
+        dispatch(requestLogin('/user/login', 'post', loginValue.value))
+            .then(res => {
+                console.log(res)
+            });
+        navigate("/home");
+    };
 
-
-        // api('/user/login', 'post', loginValue.value)
-        //     .then(res => {
-        //         setLoading(false);
-        //         sessionStorage.setItem("loginInfo", JSON.stringify(res));
-        //     }).catch(err => {
-        //         console.log(err.message)
-        //         setLoading(false);
-        //         setError(true);
-        //     });
-    }
-
-    if (loading) return <Loading />
-    if (error) return <Error />
+    if (user.loading) return <Loading />
+    if (user.error) return <Error />
 
     return (
         <div id="loginBG" style={{ transform: signBox ? 'translate(-100%, 0)' : 'translate(0%, 0)' }}>
@@ -111,7 +101,7 @@ const LoginBG = ({ signBox, changeSignBox, checkId, checkPassword, changeOpacity
                         <span id="pwError"></span>
                     </p>
 
-                    <button onClick={requestLogin} type="button" id="loginInBox"
+                    <button onClick={requestLoginAction} type="button" id="loginInBox"
                         style={{ opacity: loginValue.isLoginable ? '1' : '0.3' }} disabled={!loginValue.isLoginable}>로그인</button>
                 </form>
                 <p id="successOrNot">

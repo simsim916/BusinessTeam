@@ -24,7 +24,9 @@
     font-size: 0.8em;
     color: #9b1b20;
 }
-
+#loginBar>.container>a{
+    margin-left: 12px;
+}
 #searchBar {
     display: flex;
     align-items: center;

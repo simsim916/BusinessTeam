@@ -1,34 +1,18 @@
-import { FETCH_DATA_REQUEST, FETCH_DATA_SUCCESS, FETCH_DATA_FAILURE } from '../axios/actions';
+import { CHANGEKEYWORD } from "./actions";
+
 
 const initialState = {
-    user: {
-        loginStatus: false,
-        loading: false,
-        error: null,
-        data: [],
+    basic: {
+        keyword: '',
     }
 };
 
-const basicReducer = (state = initialState.user, action) => {
+const basicReducer = (state = initialState.basic, action) => {
     switch (action.type) {
-        case FETCH_DATA_REQUEST:
+        case CHANGEKEYWORD:
             return {
-                ...state.user,
-                loading: true,
-                error: null
-            };
-        case FETCH_DATA_SUCCESS:
-            return {
-                ...state.user,
-                loading: false,
-                loginStatus: true,
-                data: action.payload
-            };
-        case FETCH_DATA_FAILURE:
-            return {
-                ...state.user,
-                loading: false,
-                error: action.payload
+                ...state,
+                keyword: action.nkeyword
             };
         default:
             return state;

@@ -23,14 +23,13 @@ export async function api(url, method, requestData, token) {
         headers: headers,
     };
 
-    console.log('aaaaa'+options.url)
+    console.log('api : url' + options.url)
     if (requestData) {
         options.data = requestData;
     }
-
     return axios(options)
         .then(response => {
-            return response.data;
+            return response;
         }).catch(err => {
             console.error(`** apiCall Error status=${err.response.status}, message=${err.message}`);
             return Promise.reject(err.response.status);

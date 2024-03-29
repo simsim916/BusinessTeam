@@ -91,7 +91,7 @@ public class ItemController {
 				.search_date(currentDateInKorea)
 				.build();
 		Keyword entity = new Keyword().builder()
-				.keywordID(keywordID)
+//				.keywordID(keywordID)
 				.build();
 		keywordService.updateKeyword(entity);
 //		===========================================================
