@@ -20,7 +20,6 @@ function App() {
                     <Route path='/signup' element={<LoginForm />} />
                     <Route path='/event' element={<EventPage />} />
                     <Route path='/admin/*' element={<Admin />} />
-                    <Route path='/basket' element={<ShopBasketSelectBox />} />
                     <Route path='/home/*' element={<Home />} />
                     <Route path='/test' element={<ReduxTest />} />
                     <Route path='/' element={<Home />} />

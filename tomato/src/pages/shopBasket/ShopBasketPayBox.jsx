@@ -1,8 +1,7 @@
 import './ShopBasketPayBox.css';
 
 const ShopBasketPayBox = () => {
-   
-   
+
     return (
         <div id="shopBasketPayContainer">
             <div id="shopBasketPayBox">
@@ -34,7 +33,6 @@ const ShopBasketPayBox = () => {
 
 
     );
-
-
-
 }
+
+export default ShopBasketPayBox;

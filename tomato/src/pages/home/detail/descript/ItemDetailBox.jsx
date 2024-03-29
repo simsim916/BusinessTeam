@@ -3,12 +3,17 @@ import './ItemDetailBox.css';
 import { useRef, useState, useEffect, useMemo } from 'react';
 import { makeComa, makeDiscountPrice } from '../../../components/MathFunction';
 import axios from 'axios';
+import Loading from './../../../components/Loading';
+import Error from './../../../components/Error';
+import { Link } from 'react-router-dom';
 
 const ItemDetailBox = ({ item }) => {
     const [inputCountValue, setInputCountValue] = useState(1);
     const [introItem, setIntroItem] = useState(false)
     const [cartItem, setCartItem] = useState(true);
     const [gotoCart, setGotoCart] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
     const [cartForm, setCartForm] = useState({
         id: 'manager2',
         item_code: item.code,
@@ -69,14 +74,17 @@ const ItemDetailBox = ({ item }) => {
         setInputCountValue(event.target.value);
         changeCartForm()
     }
+
     const postCartData = () => {
-        console.log(cartForm)
+        setLoading(true)
         axios.post('http://localhost:8090/usercart/update', cartForm, {
             headers: 'application/json'
         }).then(res => {
-
+            setLoading(false);
+            setCartItem(res.data);
         }).catch(err => {
-
+            setLoading(false);
+            setError(true);
         });
     }
 
@@ -86,9 +94,44 @@ const ItemDetailBox = ({ item }) => {
             item_amount: inputCountValue
         }));
     }
+
     const addCart = () => {
         setGotoCart(!gotoCart);
-        postCartData()
+        if (/*로그인했을때*/ false) {
+            postCartData()
+        } else {
+            /* 로컬 스토리지에 저장 */
+            let cart = localStorage.getItem('cart')
+            if (cart != null) {
+                if (cart.indexOf(item.code) < 0) {
+                    cart += `/${item.code}(${inputCountValue})`
+                } else {
+                    //기존에 있는 아이템 코드의 수량을 구한다
+                    let firstidx = cart.indexOf(item.code);
+                    let amountFrontidx = cart.indexOf('(', firstidx)
+                    let amountLastidx = cart.indexOf(')', firstidx)
+                    let amount = cart.slice(amountFrontidx + 1, amountLastidx)
+
+                    console.log('amount : ' + amount);
+
+                    //기존에 있는 아이템 코드를 삭제한다
+                    let lastidx = cart.indexOf('/', firstidx)
+                    cart = cart.slice(0, firstidx - 1) + cart.slice(lastidx)
+                    console.log('cart : ' + cart);
+
+                    //아이템 코드와 코드를 추가한다
+                    cart += `/${item.code}(${+inputCountValue + +amount})`
+                    console.log('result : ' + cart);
+
+                }
+            } else {
+                cart = `/${item.code}(${inputCountValue})`
+            }
+            localStorage.setItem('cart', cart)
+            console.log(localStorage.getItem('cart'));
+            // localStorage.removeItem('cart')
+
+        }
     }
 
     useMemo(changeCartForm, [inputCountValue])
@@ -98,6 +141,25 @@ const ItemDetailBox = ({ item }) => {
 
         })
     }
+
+    function aa() {
+
+        const str = "/1005(3)/2003(10)/3006(3)";
+        let result;
+        let firstidx = str.indexOf("/2003")
+        result = str.slice(0, firstidx)
+
+        let result2;
+        let secondidx = str.indexOf("/3006(3)");
+        result2 = str.slice(secondidx)
+
+        console.log('result : ' + result);
+        console.log('result2 : ' + result2);
+        console.log(result + result2)
+    }
+
+
+
 
 
     return (
@@ -150,21 +212,28 @@ const ItemDetailBox = ({ item }) => {
                     </div>
                     <div id="priceBox">
                         <div id="priceAmount">총 상품금액&nbsp; : &nbsp;<span ref={priceRef}>{makeComa(makeDiscountPrice(item.price, item.discount) * inputCountValue)}원</span></div>
-                        {/* onclick이 맞나? 장바구니 컴포넌트를 넣는게 맞나? */}
                         <div onClick={gotoCart ? null : addCart} id="gotocart">장바구니 담기</div>
                         <a href="" id="gotobuy">구매하기</a>
                     </div>
                 </div>
-                {gotoCart && <div id='goCartContainer'>
-                    <div id='goCartBox'>
-                        <div id="itemName">{item.name}</div>
-                        <div>장바구니에 상품을 담았습니다.</div>
-                        <div>장바구니로 이동하시겠습니까?</div>
-                        <button id="cartOK">이동</button>
-                        <button onClick={() => setGotoCart(!gotoCart)} id="cartNO">닫기</button>
-                    </div>
-                    <div id='triangle_bottom'></div>
-                </div>}
+                {
+                    loading ?
+                        <Loading />
+                        :
+                        gotoCart ?
+                            <div id='goCartContainer'>
+                                <div id='goCartBox'>
+                                    <div id="itemName">{item.name}</div>
+                                    <div>장바구니에 상품을 담았습니다.</div>
+                                    <div>장바구니로 이동하시겠습니까?</div>
+                                    <Link to="/home/cart" id="cartOK">이동</Link>
+                                    <a onClick={() => setGotoCart(!gotoCart)} id="cartNO">닫기</a>
+                                </div>
+                                <div id='triangle_bottom'></div>
+                            </div>
+                            :
+                            null
+                }
             </div>
 
             <ul id="detailClick" className="container">
