@@ -80,7 +80,7 @@ const ItemDetailBox = ({ item }) => {
         axios.post('http://localhost:8090/usercart/update', cartForm, {
             headers: 'application/json'
         }).then(res => {
-setLoading(false);
+            setLoading(false);
             setCartItem(res.data);
         }).catch(err => {
             setLoading(false);
@@ -97,11 +97,17 @@ setLoading(false);
 
     const addCart = () => {
         setGotoCart(!gotoCart);
-        if (/*로그인했을때*/ true) {
+        if (/*로그인했을때*/ false) {
             postCartData()
         } else {
             /* 로컬 스토리지에 저장 */
-            localStorage.setItem('cart', `${item.code}`)
+            let cart = localStorage.getItem('cart')
+            console.log(cart);
+            if (cart.indexOf(item.code)<0) {
+                cart += `/${item.code}()`
+            }
+            localStorage.setItem('cart', cart)
+
         }
     }
 
@@ -164,7 +170,7 @@ setLoading(false);
                     </div>
                     <div id="priceBox">
                         <div id="priceAmount">총 상품금액&nbsp; : &nbsp;<span ref={priceRef}>{makeComa(makeDiscountPrice(item.price, item.discount) * inputCountValue)}원</span></div>
-                        <div onClick={gotoCart  ? null : addCart} id="gotocart">장바구니 담기</div>
+                        <div onClick={gotoCart ? null : addCart} id="gotocart">장바구니 담기</div>
                         <a href="" id="gotobuy">구매하기</a>
                     </div>
                 </div>
