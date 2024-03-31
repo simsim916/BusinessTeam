@@ -95,52 +95,77 @@ const ItemDetailBox = ({ item }) => {
         }));
     }
 
+    // const addCart = () => {
+    //     setGotoCart(!gotoCart);
+    //     if (/*로그인했을때*/ false) {
+    //         postCartData()
+    //     } else {
+    //         /* 로컬 스토리지에 저장 */
+    //         let cart = localStorage.getItem('cart')
+    //         if (cart != null) {
+    //             if (cart.indexOf(item.code) < 0) {
+    //                 cart += `/${item.code}(${inputCountValue})`
+    //             } else {
+    //                 //기존에 있는 아이템 코드의 수량을 구한다
+    //                 let firstidx = cart.indexOf(item.code);
+    //                 let amountFrontidx = cart.indexOf('(', firstidx)
+    //                 let amountLastidx = cart.indexOf(')', firstidx)
+    //                 let amount = cart.slice(amountFrontidx + 1, amountLastidx)
+
+    //                 console.log('amount : ' + amount);
+
+    //                 //기존에 있는 아이템 코드를 삭제한다
+    //                 let lastidx = cart.indexOf('/', firstidx)
+    //                 cart = cart.slice(0, firstidx - 1) + cart.slice(lastidx)
+    //                 console.log('cart : ' + cart);
+
+    //                 //아이템 코드와 코드를 추가한다
+    //                 cart += `/${item.code}(${+inputCountValue + +amount})`
+    //                 console.log('result : ' + cart);
+
+    //             }
+    //         } else {
+    //             cart = `/${item.code}(${inputCountValue})`
+    //         }
+    //         localStorage.setItem('cart', cart)
+    //         console.log(localStorage.getItem('cart'));
+    //         // localStorage.removeItem('cart')
+
+    //     }
+    // }
+
     const addCart = () => {
         setGotoCart(!gotoCart);
         if (/*로그인했을때*/ false) {
-            postCartData()
+            postCartData();
         } else {
-            /* 로컬 스토리지에 저장 */
-            let cart = localStorage.getItem('cart')
-            if (cart != null) {
-                if (cart.indexOf(item.code) < 0) {
-                    cart += `/${item.code}(${inputCountValue})`
-                } else {
-                    //기존에 있는 아이템 코드의 수량을 구한다
-                    let firstidx = cart.indexOf(item.code);
-                    let amountFrontidx = cart.indexOf('(', firstidx)
-                    let amountLastidx = cart.indexOf(')', firstidx)
-                    let amount = cart.slice(amountFrontidx + 1, amountLastidx)
+            let cart = localStorage.getItem('cart');
+            let cartArray = cart ? JSON.parse(cart) : [];
 
-                    console.log('amount : ' + amount);
+            const itemIndex = cartArray.findIndex(cartItem => cartItem.item_code === item.code);
 
-                    //기존에 있는 아이템 코드를 삭제한다
-                    let lastidx = cart.indexOf('/', firstidx)
-                    cart = cart.slice(0, firstidx - 1) + cart.slice(lastidx)
-                    console.log('cart : ' + cart);
-
-                    //아이템 코드와 코드를 추가한다
-                    cart += `/${item.code}(${+inputCountValue + +amount})`
-                    console.log('result : ' + cart);
-
-                }
+            if (itemIndex !== -1) {
+                // 중복된 아이템이 있으면 수량만 증가
+                cartArray[itemIndex].item_amount += +inputCountValue;
             } else {
-                cart = `/${item.code}(${inputCountValue})`
+                // 중복된 아이템이 없으면 새로운 아이템 추가
+                cartArray.push({ item_code: item.code, item_amount: +inputCountValue });
             }
-            localStorage.setItem('cart', cart)
-            console.log(localStorage.getItem('cart'));
-            // localStorage.removeItem('cart')
 
+            localStorage.setItem('cart', JSON.stringify(cartArray));
         }
-    }
+    };
 
 
     useMemo(changeCartForm, [inputCountValue])
 
-    const order = () => {
-        axios.post(`http://localhost:8090/usercart/update`, {
+    const order = (event) => {
+        event.preventDefault();
+        let cart = localStorage.getItem('cart');
+        axios.post(`http://localhost:8090/test/test`, cart
+        ).then(res => console.log('aa')
+        ).catch(err => console.log(err.message));
 
-        })
     }
 
 
@@ -217,7 +242,7 @@ const ItemDetailBox = ({ item }) => {
                     <div id="priceBox">
                         <div id="priceAmount">총 상품금액&nbsp; : &nbsp;<span ref={priceRef}>{makeComa(makeDiscountPrice(item.price, item.discount) * inputCountValue)}원</span></div>
                         <div onClick={gotoCart ? null : addCart} id="gotocart">장바구니 담기</div>
-                        <a onClick={(event) => order(event, item)} href="" id="gotobuy">구매하기</a>
+                        <a onClick={order} href="" id="gotobuy">구매하기</a>
                     </div>
                 </div>
                 {
