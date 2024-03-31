@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import './itemBox.css';
 import { makeComa } from './MathFunction';
+import { SERVER_RESOURCE, SERVER_URL } from './../../model/server-config';
 
 const ItemBox = ({ item }) => {
     return (
@@ -8,7 +9,7 @@ const ItemBox = ({ item }) => {
             <div className="itemImg">
                 <i className="fa-solid fa-cart-shopping"></i>
                 <i className="fa-solid fa-magnifying-glass"></i>
-                <img src={"http://localhost:8090/resources" + `/img/itemImg/${item.code < 10000 ? 'default' : item.code}_1.jpg`} alt={item.name} />
+                <img src={SERVER_RESOURCE + `/img/itemImg/${item.code < 10000 ? 'default' : item.code}_1.jpg`} alt={item.name} />
             </div>
             <div className="itemName">{item.name}</div>
             <div className="itemInfo">{item.brand}<br /></div>
