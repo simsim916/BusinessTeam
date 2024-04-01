@@ -25,60 +25,54 @@
     font-size: 1.2em;
 }
 
-
-
 #listButton {
     position: absolute;
     right: 10px;
-    top: -50px;
+    top: -20px;
     display: flex;
-    gap: 10px;
+    gap: 5px;
 }
 
-#listButton>div {
+#listButton>li {
     border: 1px solid rgba(128, 128, 128, 0.397);
+    opacity: 0.3;
     border-radius: 5px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#listButton>li {
     opacity: 0.3;
 }
 
-#listButton>div {
-    width: 50px;
-    height: 50px;
-    background-size: cover;
-    background-image: url('http://localhost:8090/resources/img/listbutton.png');
-    font-size: 0px;
-    border: 1px solid rgba(128, 128, 128, 0.397);
-    border-radius: 5px;
-    opacity: 0.3;
-}
-
-
-
-
-#listButton>div:nth-child(1) {
-    background-position: 0 0;
+#listButton>li:nth-child(1) {
     opacity: 1;
 }
 
-#listButton>div:nth-child(2) {
-    background-position: -48px 0;
+#listButton>li>div {
+    border-radius: 5px;
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+    background-image: url('http://localhost:8090/resources/img/listbutton.png');
+    font-size: 0px;
 }
 
-#listButton>div:nth-child(3) {
-    background-position: -96px 0;
+#listButton>li:nth-child(1)>div {
+    background-position: 0.5px 0;
 }
 
-#listButton>div:nth-child(1)::before {
-    content: "16";
+#listButton>li:nth-child(2)>div {
+    background-position: -20px 0;
 }
 
-#listButton>div:nth-child(2)::before {
-    content: "6";
+#listButton>li:nth-child(3)>div {
+    background-position: -39.5px 0;
 }
 
-#listButton>div:nth-child(3)::before {
-    content: "100";
-}
 
 /* 모바일 반응형 */
 

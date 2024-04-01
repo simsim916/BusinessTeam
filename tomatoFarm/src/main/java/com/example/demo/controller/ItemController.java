@@ -50,8 +50,9 @@ public class ItemController {
 	@GetMapping("/detailn")
 	public ResponseEntity<?> selectItemWhereType(SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
-		Item entity= itemService.selectItemIntegerWhereType(searchRequest);
-		result = ResponseEntity.status(HttpStatus.OK).body(entity);
+		PageRequest pageRequest = new PageRequest(1,1);
+		ItemDTO dto= itemService.selectItemListIntegerWhereType(pageRequest,searchRequest).get(0);
+		result = ResponseEntity.status(HttpStatus.OK).body(dto);
 		return result;
 	}
 

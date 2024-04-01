@@ -19,13 +19,10 @@ const ItemListContainer = ({ keyword, itemList, setItemList }) => {
     }
 
     const howManyItems = (event) => {
-        event.target.style.opacity = "1";
-        console.log(event.target.parentNode.children);
-        for (let t of event.target.parentNode.children) {
-            if (t != event.target) {
-                t.style.opacity = "0.3";
-            }
+        for (let t of event.target.closest('ul').children) {
+            t.style.opacity = "0.3";
         }
+        event.target.closest('li').style.opacity = "1";
         console.log(event.target.innerText);
         // setLimit(event.target.innerText);
         // setCurrPage(1);
@@ -75,11 +72,11 @@ const ItemListContainer = ({ keyword, itemList, setItemList }) => {
 
             <div id="listContainer" style={{ display: limit != 16 ? 'flex' : 'grid', height: limit != 16 ? 'auto' : '' }}>
                 <div id="containerOption">
-                    <div id="listButton">
-                        <div className={window.innerWidth > 1024 ? '16' : '15'} onClick={howManyItems}></div>
-                        <div onClick={howManyItems}></div>
-                        <div onClick={howManyItems}></div>
-                    </div>
+                    <ul id="listButton">
+                        <li onClick={howManyItems}><div></div></li>
+                        <li onClick={howManyItems}><div></div></li>
+                        <li onClick={howManyItems}><div></div></li>
+                    </ul>
                     <div id="total">총 <span>{itemList ? itemList.length : '0'}</span> 개</div>
                     <div id="listOption">
                         <div id="sales" style={{ opacity: sort == "sales" ? '1' : '0.5' }} onClick={(event) => sortItemList(event, itemList, setItemList)}>인기상품순</div>

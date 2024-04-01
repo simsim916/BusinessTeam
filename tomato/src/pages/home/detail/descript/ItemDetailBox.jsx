@@ -8,6 +8,7 @@ import Error from './../../../components/Error';
 import { Link } from 'react-router-dom';
 
 const ItemDetailBox = ({ item }) => {
+    console.log(item.discount)
     const [inputCountValue, setInputCountValue] = useState(1);
     const [introItem, setIntroItem] = useState(false)
     const [cartItem, setCartItem] = useState(true);

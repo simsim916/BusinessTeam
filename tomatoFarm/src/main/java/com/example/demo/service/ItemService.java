@@ -66,7 +66,6 @@ public interface ItemService {
 	List<ItemDTO> selectItemListStringWhereType(PageRequest pageRequest,SearchRequest searchRequest);
 	List<ItemDTO> selectItemListIntegerWhereType(PageRequest pageRequest,SearchRequest searchRequest);
 	List<ItemDTO> selectItemListStringWhereTypeNotNull(PageRequest pageRequest,SearchRequest searchRequest);
-	Item selectItemIntegerWhereType(SearchRequest searchRequest);
 	
 	List<ItemDTO> selectItemWherebrand(PageRequest pageRequest, SearchRequest searchRequest);
 	List<ItemDTO> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest);

@@ -23,8 +23,6 @@ import "./PagingBox.css";
 //    그 List 자리에 paging(사용할List, 상태값으로 쓸 currPage, 상태값으로 쓸 limit) 를 전달해주면
 //    현재 페이지, limit에 맞게 slice해서 화면에 출력해준다.
 
-
-
 const PagingBox = ({ limit, list, currPage, setCurrPage }) => {
 
     const getPageNumArray = (limit, list) => {
