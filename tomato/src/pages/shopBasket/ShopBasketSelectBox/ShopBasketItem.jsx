@@ -1,12 +1,14 @@
 import { SERVER_RESOURCE } from '../../../model/server-config';
 import { makeComa, makeDiscountPrice } from '../../components/MathFunction';
 
-const ShopBasketItem = ({ item, changeItemList, idx }) => {
+const ShopBasketItem = ({ item, idx, changeItemList }) => {
 
-    const handleClick = (e) => {
-        e.stopPropagation()
-        console.log(idx)
-        changeItemList(idx);
+    const handleClick = (type) => {
+        changeItemList(idx, type);
+    }
+
+    const handleChange = (event) => {
+        changeItemList(idx, event.target.value)
     }
 
     return (
@@ -16,15 +18,32 @@ const ShopBasketItem = ({ item, changeItemList, idx }) => {
             <li className="shopBasketItemIfo">
                 <p className="shopBasketItemIfo_name">{item.name}</p>
                 <p className="shopBasketItemIfo_price">{makeComa(item.price)}원</p>
+                {
+                    item.discount ?
+                        <p className="shopBasketItemIfo_sale">{makeComa(item.price)}원</p>
+                        :
+                        null
+                }
             </li>
             <li className="shopBasketItem_count">
-                <button onClick={handleClick}><i className="fa-solid fa-minus"></i></button>
-                <input id="inputCount" type="text" value={item.amount} />
-                <button><i className="fa-solid fa-plus"></i></button>
+                <button onClick={() => handleClick('-')}><i className="fa-solid fa-minus"></i></button>
+                <input id="inputCount" type="number" value={item.amount} onChange={handleChange} />
+                <button><i onClick={() => handleClick('+')} className="fa-solid fa-plus"></i></button>
             </li>
-            <li className="sumPrice">100,000 원</li>
+            {
+                item.discount ? (
+                    <li className="shopBasketItemIfo_sumprice">
+                        <p className="shopBasketItemIfo_sale">{makeComa(item.price)}원</p>
+                        <p>{makeComa(Math.round(item.price * (100 - item.discount) / 100) * item.amount)}원</p>
+                    </li>
+                ) : (
+                    <li className="shopBasketItemIfo_sumprice">
+                        {makeComa(item.price * item.amount)}원
+                    </li>
+                )
+            }
             <li>{item.delivery ? makeComa(item.delivery) + ' 원' : '무료배송'} </li>
-        </ul>
+        </ul >
     );
 }
 

@@ -3,10 +3,13 @@ import { useState } from "react";
 import ItemBox from './../../components/ItemBox';
 import ItemBox_vertical from './../../components/itemBox_vertical/ItemBox_vertical';
 import PagingBox from "../../components/PagingBox";
+import { useDispatch } from 'react-redux';
+import { setItemList } from '../../redux/itemList/actions';
 
 
-const ItemListContainer = ({ keyword, itemList, setItemList }) => {
+const ItemListContainer = ({ itemList }) => {
     console.log('ItemListContainer 랜더링')
+    const dispatch = useDispatch();
     const [sort, setSort] = useState('sales');
     const [currPage, setCurrPage] = useState(1);
     const [limit, setLimit] = useState(16);
@@ -28,10 +31,9 @@ const ItemListContainer = ({ keyword, itemList, setItemList }) => {
         // setCurrPage(1);
     }
 
-    const sortItemList = (event, list, setFunc) => {
+    const sortItemList = (event, list) => {
         // 1. 정렬하고자 하는 Column 의 이름을 onClick 주는 요소의 id로 지정
         // 2. list = 정렬하고자 하는 List
-        // 3. setFunc() = 원본List를 정렬된List로 덮어씌운다.
         let sortType = event.target.id;
         let sortedList;
         if (sortType.includes("D")) {
@@ -48,22 +50,7 @@ const ItemListContainer = ({ keyword, itemList, setItemList }) => {
                 return a[sortType] - b[sortType];
             })
         }
-        setFunc(sortedList)
-    }
-
-    const getPageNum = (size, list) => {
-        // 페이징 할 <div> 태그 만들때 쓰는 함수
-        let needPageCount = 1;
-        let arr = [];
-        if (list) {
-            needPageCount = Math.ceil(list.length / size);
-            for (let i = 0; i < needPageCount; i++) {
-                arr.push(i + 1);
-            }
-        }
-        return arr;
-        // 우리가 보고자 하는 데이터의 개수를 가지고 필요한 페이지 수를 계산  
-        // ex) 필요한 페이지 수 7 => [1,2,3,4,5,6,7] 배열 return
+        dispatch(setItemList(sortedList));
     }
 
     return (
@@ -77,9 +64,9 @@ const ItemListContainer = ({ keyword, itemList, setItemList }) => {
                     </ul>
                     <div id="total">총 <span>{itemList ? itemList.length : '0'}</span> 개</div>
                     <div id="listOption">
-                        <div id="sales" style={{ opacity: sort == "sales" ? '1' : '0.5' }} onClick={(event) => sortItemList(event, itemList, setItemList)}>인기상품순</div>
-                        <div id="price" style={{ opacity: sort == "price" ? '1' : '0.5' }} onClick={(event) => sortItemList(event, itemList, setItemList)}>가격낮은순</div>
-                        <div id="priceD" style={{ opacity: sort == "priceD" ? '1' : '0.5' }} onClick={(event) => sortItemList(event, itemList, setItemList)}>가격높은순</div>
+                        <div id="sales" style={{ opacity: sort == "sales" ? '1' : '0.5' }} onClick={(event) => sortItemList(event, itemList)}>인기상품순</div>
+                        <div id="price" style={{ opacity: sort == "price" ? '1' : '0.5' }} onClick={(event) => sortItemList(event, itemList)}>가격낮은순</div>
+                        <div id="priceD" style={{ opacity: sort == "priceD" ? '1' : '0.5' }} onClick={(event) => sortItemList(event, itemList)}>가격높은순</div>
                     </div>
                 </div>
                 {

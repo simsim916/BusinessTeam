@@ -7,15 +7,18 @@ import { setItemList } from '../redux/itemList/actions';
 
 const ShopBasketSelectBox = ({ itemList }) => {
     const dispatch = useDispatch();
-    console.log(itemList)
 
-
-    const changeItemList = (key) => {
+    const changeItemList = (key, type) => {
         let ar = [...itemList];
-        ar[key].amount++;
+        if (type == '+') {
+            ar[key].amount++;
+        } else if (type == '-') {
+            ar[key].amount--;
+        } else {
+            ar[key].amount = type
+        }
         dispatch(setItemList(ar));
     }
-
 
     return (
         <div id='shopBasketSelectBox'>

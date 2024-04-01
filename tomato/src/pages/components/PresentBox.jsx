@@ -78,7 +78,7 @@ const PresentBox = ({ brand }) => {
             </div>
             {
                 brandItem != null ?
-                    <Link to={`/detail?code=${brandItem[0].code}`} className="typeBoxImg">
+                    <Link to={`/home/detail?code=${brandItem[0].code}`} className="typeBoxImg">
                         <div className="itemImgPresent">
                             <i className="fa-solid fa-cart-shopping"></i>
                             <i className="fa-solid fa-magnifying-glass"></i>
@@ -97,7 +97,7 @@ const PresentBox = ({ brand }) => {
                     <div className="typeBoxList">
                         <div className="slideBox" ref={slideBox} style={{ marginLeft: '0px' }}>
                             {brandItem.slice(1, 5).map((e, i) => <ItemBox item={e} key={i} />)}
-                            <Link to={'/list?keyword=' + brand} className="linkBox">
+                            <Link to={'/home/list?keyword=' + brand} className="linkBox">
                                 <p>{brandItem[0].brand}</p>
                                 <i className="fa-regular fa-circle-play"></i> 상품 더 보러가기
                             </Link>

@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import Header from './../index/header/Header';
 import ItemListFilter from './ItemListFilter';
@@ -17,7 +17,8 @@ const ItemList = () => {
     const dispatch = useDispatch();
     const itemList = useSelector(state => state.itemList);
     const itemListSort = useSelector(state => state.itemListSort);
-    const [filterCheckedList, setFilterCheckedList] = useState()
+    const filterCheckedList = useRef()
+    const [deletedSort, setDeletedSort] = useState([]);
 
     useEffect(() => {
         dispatch(getItemList(`/item/search?keyword=${keyword}`, 'get'))
@@ -32,27 +33,24 @@ const ItemList = () => {
         })
     }, [])
 
-    useEffect(() => {
-        if (itemListSort.data) {
-            const filteredList = itemListSort.data.filter(e => e.count > 0);
-            setFilterCheckedList(filteredList);
-        }
-    }, [itemListSort.data]);
-
-    const asdf = (event) => {
-        if(filterCheckedList.includes(event.target.value)){
-            setFilterCheckedList(filterCheckedList.filter(e => e.sort2 != event.target.value));
-        } else {
-            setFilterCheckedList(...filterCheckedList, event.target.value);
-        }
-    }
-
-    const qwer = ()=>{
-        
+    const changeDeletedSort = (event) => {
+        const value = event.target.value;
+        if (filterCheckedList.current.includes(value)) {
+            if (deletedSort.includes(value)){
+                setDeletedSort(deletedSort.filter(e=>e!=value))
+            } else {
+                setDeletedSort([...deletedSort, value])
+            }
+        } 
+        console.log(deletedSort)
     }
 
     if (itemList.loading || itemListSort.loading) return <Loading />
     if (itemList.error || itemListSort.error) return <Error />
+
+    if (itemListSort.data) {
+        filterCheckedList.current = itemListSort.data.filter(e => e.count > 0);
+    }
 
     return (
         <>
@@ -60,8 +58,8 @@ const ItemList = () => {
                 " <b>{keyword}</b> " <span>에 대한 검색 결과</span>
             </div>
             <div className="container">
-                <ItemListFilter itemListSort={itemListSort.data} filterCheckedList={filterCheckedList} setFilterCheckedList={setFilterCheckedList} />
-                {/* <ItemListContainer itemList={itemList} keyword={keyword} setItemList={setItemList} /> */}
+                <ItemListFilter itemListSort={itemListSort.data} changeDeletedSort={changeDeletedSort} />
+                <ItemListContainer itemList={itemList.data} />
             </div>
         </>
     );
