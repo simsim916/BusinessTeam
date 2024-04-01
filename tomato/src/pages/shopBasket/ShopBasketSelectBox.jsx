@@ -1,8 +1,9 @@
+
 import './ShopBasketSelectBox.css';
-import { SERVER_RESOURCE } from '../../model/server-config';
+import ShopBasketItem from './ShopBasketSelectBox/ShopBasketItem';
 
 
-const ShopBasketSelectBox = () => {
+const ShopBasketSelectBox = ({ itemList, amountList }) => {
 
     return (
         <div id='shopBasketSelectBox'>
@@ -20,21 +21,7 @@ const ShopBasketSelectBox = () => {
                     <li>총 상품금액</li>
                     <li>배송비</li>
                 </ul>
-                <ul className="shopBasketItem">
-                    <li><input className="check" type="checkbox" onClick="shopBasket()" name="buy"></input></li>
-                    <li className="shopBasketItemImg"><img src={SERVER_RESOURCE + `/img/itemImg/5000001_2.jpg`} alt="" /></li>
-                    <li className="shopBasketItemIfo">
-                        <p className="shopBasketItemIfo_name">등촌식 얼큰 미나리 칼국수 전골</p>
-                        <p className="shopBasketItemIfo_price">15,000 원</p>
-                    </li>
-                    <li className="shopBasketItem_count">
-                        <button><i className="fa-solid fa-minus"></i></button>
-                        <input id="inputCount" type="text" value="1" />
-                        <button><i className="fa-solid fa-plus"></i></button>
-                    </li>
-                    <li className="sumPrice">100,000 원</li>
-                    <li>무료배송</li>
-                </ul>
+                {itemList.map((e, i) => <ShopBasketItem item={e} key={i} />)}
             </div>
 
         </div>

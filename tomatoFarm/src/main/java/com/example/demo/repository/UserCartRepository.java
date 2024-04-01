@@ -18,7 +18,6 @@ import lombok.AllArgsConstructor;
 
 public interface UserCartRepository extends JpaRepository<UserCart, UserCartID>{
 
-	List<Item> nonLoginItem(List<Integer> codeList, List<UserCart> list);
 
 	List<UserCart> save(List<UserCart> list);
 }

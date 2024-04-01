@@ -44,7 +44,6 @@ public class UserController {
 						.token(token)
 						.id(user.getId())
 						.username(user.getUsername())
-						.loginStatus(true)
 						.build();
 				result = ResponseEntity.status(HttpStatus.OK).body(userToken);
 			}else {

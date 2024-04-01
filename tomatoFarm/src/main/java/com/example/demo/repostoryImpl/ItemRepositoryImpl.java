@@ -11,6 +11,7 @@ import com.example.demo.domain.ItemDTO;
 import com.example.demo.domain.SortDTO;
 import com.example.demo.entity.Item;
 import com.example.demo.entity.QItem;
+import com.example.demo.entity.UserCart;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.repository.ItemRepository;
@@ -96,17 +97,6 @@ public class ItemRepositoryImpl implements ItemRepository {
 			    .where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
 			            .eq(searchRequest.getKeyword()))
 			    .fetchFirst();
-
-//		return jPAQueryFactory
-//				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price, item.storage,
-//						item.weight, item.packing, item.sales, item.stock, item.views, item.likes, item.event_code, item.intro,
-//						item.admin, item_event.discount, item_event.name.as("event_name")))
-//				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
-//				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
-//						.eq(searchRequest.getKeyword()))
-//				.fetchOne();
-		
-		
 	}
 
 	@Override
@@ -248,6 +238,17 @@ public class ItemRepositoryImpl implements ItemRepository {
 	
 	public Item updateItem(Item entity) {
 		return entityManager.merge(entity);
+	}
+	
+	public List<Item> selectItemListWhereInCode(List<Integer> codeList) {
+		System.out.println(codeList);
+		return jPAQueryFactory
+				.select(Projections.bean(Item.class, item.code, item.brand, item.name, item.delivery, item.price,
+						item.storage, item.weight, item.packing, item.sales, item.stock, item.views, item.likes,
+						item.event_code, item.intro, item_event.discount, item_event.name.as("event_name")))
+				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
+				.where(item.code.in(codeList))
+				.fetch();
 	}
 	
 }

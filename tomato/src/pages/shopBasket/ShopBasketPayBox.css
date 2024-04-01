@@ -18,7 +18,7 @@
 
 #shopBasketPrice>div {
     border-radius: 10px;
-    background-color: rgb(248, 245, 241);
+    background-color: #fff1f4;
     display: flex;
     justify-content: space-between;
     align-items: center;

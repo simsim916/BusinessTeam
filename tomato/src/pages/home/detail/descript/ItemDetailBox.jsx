@@ -226,7 +226,7 @@ const ItemDetailBox = ({ item }) => {
                     <div id="itemSalePrice">{makeComa(makeDiscountPrice(item.price, item.discount))}원</div>
                 </div>
                 <div>배송</div>
-                <div>{makeComa(item.delivery)}원<br />
+                <div>{item.delivery ? makeComa(item.delivery) + ' 원' : '무료배송'}<br />
                     {
                         hour < 15 ?
                             `(15시 전 주문 시 내일 "${date + 1}일 (${weekdays[dayOfWeek + 1]})" 도착 예정)`

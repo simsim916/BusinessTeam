@@ -83,11 +83,14 @@
     position: relative;
     list-style: none;
     padding-inline-start: 0;
+    background-color: #9B1B30;
+    color: white;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
 
 #shopBasketItemBox li {
     line-height: 50px;
-    border: 1px solid #4C455630;
     width: 200px;
     text-align: center;
     display: flex;
@@ -121,8 +124,9 @@
 
 .shopBasketItem {
     display: flex;
-    height: 150px;
+    height: 120px;
     border: 1px solid #4C455630;
+    border-top: none;
 }
 
 .shopBasketItemImg {

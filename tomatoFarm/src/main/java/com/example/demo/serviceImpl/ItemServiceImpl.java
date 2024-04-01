@@ -102,6 +102,11 @@ public class ItemServiceImpl implements ItemService {
 	public Item updateItem(Item entity) {
 		return entityManager.merge(entity);
 	}
+	
+	@Override
+	public List<Item> selectItemListWhereInCode(List<Integer> codeList) {
+		return itemRepository.selectItemListWhereInCode(codeList);
+	}
 
 	
 }

@@ -33,10 +33,7 @@ public class UserCartServiceImpl implements UserCartService {
 	}
 	
 
-	@Override
-	public List<Item> nonLoginItem(List<Integer> codeList, List<UserCart> list) {
-		return usercartRepository.nonLoginItem(codeList, list);
-	}
+	
 	
     @Override
     @Transactional
