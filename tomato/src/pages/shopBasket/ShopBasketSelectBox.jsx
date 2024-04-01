@@ -1,9 +1,21 @@
 
+import { useState } from 'react';
 import './ShopBasketSelectBox.css';
 import ShopBasketItem from './ShopBasketSelectBox/ShopBasketItem';
+import { useDispatch } from 'react-redux';
+import { setItemList } from '../redux/itemList/actions';
+
+const ShopBasketSelectBox = ({ itemList }) => {
+    const dispatch = useDispatch();
+    console.log(itemList)
 
 
-const ShopBasketSelectBox = ({ itemList, amountList }) => {
+    const changeItemList = (key) => {
+        let ar = [...itemList];
+        ar[key].amount++;
+        dispatch(setItemList(ar));
+    }
+
 
     return (
         <div id='shopBasketSelectBox'>
@@ -21,7 +33,7 @@ const ShopBasketSelectBox = ({ itemList, amountList }) => {
                     <li>총 상품금액</li>
                     <li>배송비</li>
                 </ul>
-                {itemList.map((e, i) => <ShopBasketItem item={e} key={i} />)}
+                {itemList.map((e, i) => <ShopBasketItem item={e} key={i} idx={i} changeItemList={changeItemList} />)}
             </div>
 
         </div>

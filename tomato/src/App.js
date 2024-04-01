@@ -5,10 +5,10 @@ import LoginForm from "./pages/login/LoginForm";
 import EventPage from "./pages/event/EventPage";
 import Admin from "./pages/admin/Admin";
 import React from 'react';
-import ShopBasketSelectBox from './pages/shopBasket/ShopBasketSelectBox';
 import { Provider } from 'react-redux';
 import store from "./pages/redux/store";
 import ReduxTest from "./pages/ReduxTest";
+import Study_state from "./Study_state";
 
 function App() {
 
@@ -22,6 +22,7 @@ function App() {
                     <Route path='/admin/*' element={<Admin />} />
                     <Route path='/home/*' element={<Home />} />
                     <Route path='/test' element={<ReduxTest />} />
+                    <Route path='/study' element={<Study_state />} />
                     <Route path='/' element={<Home />} />
                 </Routes>
             </div>
