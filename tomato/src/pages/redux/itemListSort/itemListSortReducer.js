@@ -1,30 +1,30 @@
-import { ITEMLIST_DATA_REQUEST, ITEMLIST_DATA_SUCCESS, ITEMLIST_DATA_FAILURE } from './actions';
+import { ITEMLISTSORT_DATA_REQUEST, ITEMLISTSORT_DATA_SUCCESS, ITEMLISTSORT_DATA_FAILURE } from './actions';
 
 const initialState = {
-    itemList: {
+    itemListSort: {
         loading: true,
         data: [],
         error: null
     }
 };
 
-const itemListReducer = (state = initialState.itemList, action) => {
+const itemListSortReducer = (state = initialState.itemListSort, action) => {
     switch (action.type) {
-        case ITEMLIST_DATA_REQUEST:
+        case ITEMLISTSORT_DATA_REQUEST:
             return {
-                ...state.itemList,
+                ...state.itemListSort,
                 loading: true,
                 error: null
             };
-        case ITEMLIST_DATA_SUCCESS:
+        case ITEMLISTSORT_DATA_SUCCESS:
             return {
-                ...state.itemList,
+                ...state.itemListSort,
                 loading: false,
                 data: action.payload
             };
-        case ITEMLIST_DATA_FAILURE:
+        case ITEMLISTSORT_DATA_FAILURE:
             return {
-                ...state.itemList,
+                ...state.itemListSort,
                 loading: false,
                 data: [],
                 error: action.payload
@@ -34,4 +34,4 @@ const itemListReducer = (state = initialState.itemList, action) => {
     }
 };
 
-export { itemListReducer };
+export { itemListSortReducer };

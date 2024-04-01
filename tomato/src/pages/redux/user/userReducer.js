@@ -1,28 +1,30 @@
-import { FETCH_DATA_REQUEST, FETCH_DATA_SUCCESS, FETCH_DATA_FAILURE } from '../axios/actions';
 
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from './action';
 const initialState = {
     user: {
         loading: false,
         error: null,
         data: [],
+        id: ''
     }
 };
 
 const userReducer = (state = initialState.user, action) => {
     switch (action.type) {
-        case FETCH_DATA_REQUEST:
+        case LOGIN_REQUEST:
             return {
                 ...state,
                 loading: true,
-                error: false
+                error: false,
+                id: action.payload
             };
-        case FETCH_DATA_SUCCESS:
+        case LOGIN_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 data: action.payload
             };
-        case FETCH_DATA_FAILURE:
+        case LOGIN_FAILURE:
             return {
                 ...state,
                 loading: false,

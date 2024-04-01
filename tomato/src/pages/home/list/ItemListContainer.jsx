@@ -66,10 +66,8 @@ const ItemListContainer = ({ keyword, itemList, setItemList }) => {
         // ex) 필요한 페이지 수 7 => [1,2,3,4,5,6,7] 배열 return
     }
 
-    console.log(window.innerWidth)
     return (
         <>
-
             <div id="listContainer" style={{ display: limit != 16 ? 'flex' : 'grid', height: limit != 16 ? 'auto' : '' }}>
                 <div id="containerOption">
                     <ul id="listButton">

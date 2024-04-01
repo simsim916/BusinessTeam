@@ -2,12 +2,12 @@ import { Link } from "react-router-dom";
 import "./SignBG.css"
 import { useState, useRef, useMemo } from "react";
 import axios from 'axios';
-import Loading from './../../../components/Loading';
-import Error from './../../../components/Error';
-import { SERVER_RESOURCE } from "../../../../model/server-config";
+import Loading from '../../components/Loading';
+import Error from '../../components/Error';
+import { SERVER_RESOURCE } from "../../../model/server-config";
 
 
-const SignBG = ({ signBox, changeSignBox }) => {
+const SignBG = ({ }) => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false);
     const [signValue, setSignValue] = useState({
@@ -240,8 +240,8 @@ const SignBG = ({ signBox, changeSignBox }) => {
     if (error) return <Error />
 
     return (
-        <div id="signBG" style={{ transform: signBox ? 'translate(-100%, 0)' : 'translate(0, 0)' }} >
-            <div id="historyback" onClick={changeSignBox}><i className="fa-solid fa-arrow-left"></i></div>
+        <div id="signBG">
+            <div id="historyback"></div>
             <div>
                 <Link to="/home"><img id="logo" src={SERVER_RESOURCE + `/img/logo.png`} alt="logo" /></Link>
                 <h3>회원가입</h3>

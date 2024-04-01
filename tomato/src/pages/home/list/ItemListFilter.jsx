@@ -2,7 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import './ItemListFilter.css'
 import { useEffect, useMemo, useRef } from "react";
 
-const ItemListFilter = ({ filterCheckedList, setFilterCheckedList, sortList }) => {
+const ItemListFilter = ({ itemListSort, filterCheckedList, setFilterCheckedList }) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const listfilter = useRef(null);
     const mealkit = useRef(0);
@@ -11,9 +11,10 @@ const ItemListFilter = ({ filterCheckedList, setFilterCheckedList, sortList }) =
     mealkit.current = 0;
     ingre.current = 0;
 
-    for (let e of sortList) {
-        if (e.sort1 == '밀키트')
+    for (let e of itemListSort) {
+        if (e.sort1 == '밀키트') {
             mealkit.current += e.count;
+        }
         else
             ingre.current += e.count
     }
@@ -77,12 +78,11 @@ const ItemListFilter = ({ filterCheckedList, setFilterCheckedList, sortList }) =
             }
         }
 
-
         window.addEventListener('scroll', listScroll);
         return () => {
             window.removeEventListener('scroll', listScroll)
         }
-    }, [sortList])
+    }, [itemListSort])
 
     return (
         <div id="listfilter" ref={listfilter}>
@@ -94,7 +94,7 @@ const ItemListFilter = ({ filterCheckedList, setFilterCheckedList, sortList }) =
                         {mealkit.current}
                     </span>
                     <ul>
-                        {sortList.filter((e) => e.sort1 == '밀키트').sort((b, a) => a.count - b.count).map((e, i) => (
+                        {itemListSort.filter((e) => e.sort1 == '밀키트').sort((b, a) => a.count - b.count).map((e, i) => (
                             <li key={i} className={e.count > 0 ? 'selected' : ''}>
                                 <i className="fa-regular fa-circle-check"></i>
                                 <span>{e.sort2}</span><span className="itemList_count">{e.count}</span>
@@ -109,7 +109,7 @@ const ItemListFilter = ({ filterCheckedList, setFilterCheckedList, sortList }) =
                         {ingre.current}
                     </span>
                     <ul>
-                        {sortList.filter((e) => e.sort1 == '식재료').sort((b, a) => a.count - b.count).map((e, i) => (
+                        {itemListSort.filter((e) => e.sort1 == '식재료').sort((b, a) => a.count - b.count).map((e, i) => (
                             <li key={i} className={e.count > 0 ? 'selected' : ''}>
                                 <i className="fa-regular fa-circle-check"></i>
                                 <span>{e.sort2}</span><span className="itemList_count">{e.count}</span>

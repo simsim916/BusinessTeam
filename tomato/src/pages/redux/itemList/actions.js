@@ -1,24 +1,24 @@
 import { api } from '../../../model/model';
 
-export const FETCH_DATA_REQUEST = 'FETCH_DATA_REQUEST';
-export const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS';
-export const FETCH_DATA_FAILURE = 'FETCH_DATA_FAILURE';
+export const ITEMLIST_DATA_REQUEST = 'ITEMLIST_DATA_REQUEST';
+export const ITEMLIST_DATA_SUCCESS = 'ITEMLIST_DATA_SUCCESS';
+export const ITEMLIST_DATA_FAILURE = 'ITEMLIST_DATA_FAILURE';
 
 export const fetchDataRequest = () => ({
-    type: FETCH_DATA_REQUEST
+    type: ITEMLIST_DATA_REQUEST
 });
 
 export const fetchDataSuccess = (data) => ({
-    type: FETCH_DATA_SUCCESS,
+    type: ITEMLIST_DATA_SUCCESS,
     payload: data
 });
 
 export const fetchDataFailure = (error) => ({
-    type: FETCH_DATA_FAILURE,
+    type: ITEMLIST_DATA_FAILURE,
     payload: error
 });
 
-export const fetchData = (url, method, requestData, token) => {
+export const getItemList = (url, method, requestData, token) => {
     return async (dispatch) => {
         dispatch(fetchDataRequest());
         try {

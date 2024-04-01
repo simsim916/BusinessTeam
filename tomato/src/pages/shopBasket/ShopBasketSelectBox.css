@@ -1,27 +1,16 @@
-.heightAuto {
+#shopBasketSelectBox .heightAuto {
     height: auto !important;
 }
 
-h3 {
-    font-size: 30px;
-    font-weight: 500;
-    color: #4c4556;
-    text-align: center;
-    margin-top: 30px;
-}
-
-h3 i {
-    color: #F6C026;
-}
-
-.shopBasketItem>div>input {
-    transition: 1s;
-}
-
-.shopBasketItem>div:nth-of-type(1)>input:checked {
+#shopBasketSelectBox input:checked {
     animation: jelly 1s ease;
     z-index: 1;
     background-color: black;
+    transition: 1s;
+}
+
+#shopBasketSelectBox {
+    width: 70%;
 }
 
 @keyframes jelly {
@@ -54,50 +43,38 @@ h3 i {
     }
 }
 
-#shopBasketTitle {
-    width: auto;
-    height: 100px;
-    text-align: center;
-    position: relative;
-    justify-content: center;
-    align-items: center;
-    line-height: 100px;
-    font-size: 25px;
-}
-
-#shopBasketSelectBox {
-    position: relative;
-    top: 50px;
-}
 
 #shopBasketSelect {
+    margin-top: 30px;
     display: flex;
     position: relative;
     list-style: none;
     padding-inline-start: 0px;
-
+    margin-left: 15px;
+    margin-bottom: 5px;
 }
 
 #shopBasketSelect>li {
-    display: block;
-    width: 100px;
-    padding: 10px;
-    text-align: center;
-    font-size: 18px;
+    display: flex;
+    margin-right: 15px;
+    font-size: 14px;
     font-weight: 400;
+    justify-content: center;
+    align-items: center;
+}
+
+#shopBasketSelect>li>input {
+    margin-right: 8px;
 }
 
 #shopBasketItemBox {
     height: auto;
-    width: 70%;
     padding: 0 10px;
-    position: relative;
     display: block;
     text-align: center;
     align-items: center;
     justify-content: center;
     justify-items: center;
-    top: 50px;
 }
 
 #shopBasketItemBoxTitle {
@@ -106,123 +83,91 @@ h3 i {
     position: relative;
     list-style: none;
     padding-inline-start: 0;
+    background-color: #9B1B30;
+    color: white;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
 
-#shopBasketItemBoxTitle>li {
-    display: block;
+#shopBasketItemBox li {
     line-height: 50px;
-    border: 1px solid #4C455630;
     width: 200px;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#shopBasketItemBoxTitle>li:nth-child(1) {
-    width: 40px;
+#shopBasketItemBox li:nth-child(1) {
+    width: 50px;
 }
 
-#shopBasketItemBoxTitle>li:nth-child(2) {
-    width: 400px;
+#shopBasketItemBox li:nth-child(2) {
+    width: 20%;
 }
 
-#shopBasketItemBoxTitle>li:nth-child(3) {
+#shopBasketItemBox li:nth-child(3) {
+    width: calc(100% - 50px - 20% - 90px - 100px - 90px);
+}
+
+#shopBasketItemBox li:nth-child(4) {
+    width: 90px;
+}
+
+#shopBasketItemBox li:nth-child(5) {
     width: 100px;
-
 }
 
-#shopBasketItemBoxTitle>li:nth-child(4) {
-    width: 150px;
-}
-
-#shopBasketItemBoxTitle>li:nth-child(5) {
-    width: 130px;
+#shopBasketItemBox li:nth-child(6) {
+    width: 90px
 }
 
 .shopBasketItem {
     display: flex;
-    position: relative;
-    height: 130px;
+    height: 120px;
     border: 1px solid #4C455630;
-}
-
-.shopBasketItem>div {
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    position: relative;
+    border-top: none;
 }
 
 .shopBasketItemImg {
     overflow: hidden;
+
 }
 
 .shopBasketItemImg img {
+    object-fit: contain;
     width: 100%;
-    height: 95%;
-    object-fit: cover;
-}
-
-.shopBasketItem>div:nth-child(1) {
-    width: 40px;
-}
-
-.shopBasketItem>div:nth-child(2) {
-    width: 200px;
-}
-
-.shopBasketItem>div:nth-child(3) {
-    width: 200px;
-
 }
 
 .shopBasketItemIfo {
     flex-direction: column;
 }
 
-.shopBasketItemIfo>div {
+.shopBasketItemIfo p {
     font-size: 15px;
+    line-height: 1em;
 }
 
-.shopBasketItem>div:nth-child(4) {
-    width: 100px;
+.shopBasketItemIfo .shopBasketItemIfo_price {
+    margin-top: 10px;
+    color: #00000080;
 }
 
-.shopBasketItem>div:nth-child(5) {
-    width: 150px;
-}
-
-.shopBasketItem>div:nth-child(6) {
-    width: 130px;
-}
-
-.shopBasketItem>img {
-    width: 100px;
-    height: 100px;
-    position: absolute;
-}
-
-.shopBasketItem>div>input {
-    border: 2px solid white;
-    width: 15px;
-    height: 15px;
-    list-style: none;
-    /* margin: 10px; */
-    font-size: 20px;
-}
-
-#itemCount {
+.shopBasketItem_count {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-#itemCount>input {
-    height: 40px;
-    width: 40px;
+.shopBasketItem_count>input {
+    height: 30px;
+    width: 30px;
     text-align: center;
+    margin: 0 6px;
 }
 
-#itemCount>button {
-    width: 20px;
-    height: 20px;
+.shopBasketItem_count>button {
+    width: 15px;
+    line-height: 15px;
+    font-size: 10px;
 }

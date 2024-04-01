@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ItemDTO {
+public class ItemDTO{
 
 	private Integer code; // 제품코드
 	private String sort1; // 대분류 (밀키트,식재료)
@@ -35,5 +35,5 @@ public class ItemDTO {
 	/*  Join용 필드  */
 	private Integer discount; // 이벤트 할인
 	private String event_name; // 이벤트명
-
+	
 }

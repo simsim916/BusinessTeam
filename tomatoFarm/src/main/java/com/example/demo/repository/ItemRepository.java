@@ -27,7 +27,6 @@ public interface ItemRepository {
 	List<SortDTO> selectSortWhereKeyword(SearchRequest searchRequest);
 	// ** 분류 검색 조회
 	List<SortDTO> selectSortList();
-	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 	
 	int batchInsert(List<Item> entity);
 	List<ItemDTO> selectAll();
@@ -36,4 +35,5 @@ public interface ItemRepository {
 	List<ItemDTO> adminIntegerColumn(SearchRequest searchRequest, PageRequest pageRequest);
 	int itemListCount();
 	Item updateItem(Item entity);
+	List<Item> selectItemListWhereInCode(List<Integer> codeList);
 }

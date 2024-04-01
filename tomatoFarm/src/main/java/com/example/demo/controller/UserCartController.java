@@ -44,31 +44,6 @@ public class UserCartController {
 		return result;
 	}
 
-	@PostMapping("/insertItem")
-	public ResponseEntity<?> insertItem(@RequestBody List<UserCart> list) {
-		ResponseEntity<?> result = null;
-		String id = tokenProvider.validateAndGetUserId(list.get(0).getId());
-		LocalDate now = LocalDateTime.now().plusHours(9).toLocalDate();
-		List<Integer> codeList = new ArrayList<>();
-
-		for (UserCart t : list) { if (list != null) t.setRegdate(now); }
-		
-		if (id != null) {
-			for (UserCart t : list) {
-				if (list != null) {
-					t.setId(id);
-				}
-			}
-			result = ResponseEntity.status(HttpStatus.OK).body(userCartService.insertUserCarts(list));
-		} else {
-			for (UserCart t : list) {
-				if (list != null) { codeList.add(t.getItem_code()); }
-			}
-			
-			List<Item> itemList = userCartService.nonLoginItem(codeList, list);
-			result = ResponseEntity.status(HttpStatus.OK).body(itemList);
-		}
-		return result;
-	}
+	
 
 }
