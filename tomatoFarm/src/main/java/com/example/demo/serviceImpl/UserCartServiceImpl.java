@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.entity.Item;
 import com.example.demo.entity.UserCart;
 import com.example.demo.entity.UserCartID;
 import com.example.demo.repository.UserCartRepository;
@@ -27,15 +28,19 @@ public class UserCartServiceImpl implements UserCartService {
 	public UserCart update(UserCart usercart) {
 		// LocalDate 클래스를 이용해서 entity에 등록일자 담기
 		LocalDate today = LocalDate.now();
-
 		usercart.setRegdate(today);
-		System.out.println(usercart);
-		return usercartRepository.update(usercart);
+		return usercartRepository.save(usercart);
 	}
 	
+
 	@Override
-	public List<UserCart> selectAll(UserCartID entity) {
-		return usercartRepository.selectAll(entity);
+	public List<Item> nonLoginItem(List<Integer> codeList, List<UserCart> list) {
+		return usercartRepository.nonLoginItem(codeList, list);
 	}
 	
+    @Override
+    @Transactional
+    public List<UserCart> insertUserCarts(List<UserCart> cartList) {
+        return usercartRepository.saveAll(cartList);
+    }
 }
