@@ -1,7 +1,14 @@
 import { SERVER_RESOURCE } from '../../../model/server-config';
 import { makeComa, makeDiscountPrice } from '../../components/MathFunction';
 
-const ShopBasketItem = ({ item }) => {
+const ShopBasketItem = ({ item, changeItemList, idx }) => {
+
+    const handleClick = (e) => {
+        e.stopPropagation()
+        console.log(idx)
+        changeItemList(idx);
+    }
+
     return (
         <ul className="shopBasketItem">
             <li><input className="check" type="checkbox" name="buy"></input></li>
@@ -11,8 +18,8 @@ const ShopBasketItem = ({ item }) => {
                 <p className="shopBasketItemIfo_price">{makeComa(item.price)}원</p>
             </li>
             <li className="shopBasketItem_count">
-                <button><i className="fa-solid fa-minus"></i></button>
-                <input id="inputCount" type="text" value="1" />
+                <button onClick={handleClick}><i className="fa-solid fa-minus"></i></button>
+                <input id="inputCount" type="text" value={item.amount} />
                 <button><i className="fa-solid fa-plus"></i></button>
             </li>
             <li className="sumPrice">100,000 원</li>
