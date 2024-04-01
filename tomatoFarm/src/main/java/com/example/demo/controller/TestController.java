@@ -1,9 +1,13 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.domain.TestDTO;
 import com.example.demo.entity.UserCart;
 import com.example.demo.service.ItemService;
 
@@ -29,12 +33,6 @@ public class TestController {
 //		
 ////		itemService.batchInsert(entity);
 //	}
-	@PostMapping("/test")
-	public void batchInsert(UserCart entity) {
-		System.out.println("=====================");
-		System.out.println(entity);
-		System.out.println("=====================");
-	}
-	
+
 
 }

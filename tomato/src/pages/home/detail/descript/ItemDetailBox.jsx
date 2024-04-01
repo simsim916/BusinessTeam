@@ -6,9 +6,12 @@ import axios from 'axios';
 import Loading from './../../../components/Loading';
 import Error from './../../../components/Error';
 import { Link } from 'react-router-dom';
+import { api } from '../../../../model/model'
+import { useDispatch, useSelector } from 'react-redux';
+import { loginFailure, loginRequest, loginSuccess } from '../../../redux/user/action';
 
 const ItemDetailBox = ({ item }) => {
-    console.log(item.discount)
+    // console.log(item.discount)
     const [inputCountValue, setInputCountValue] = useState(1);
     const [introItem, setIntroItem] = useState(false)
     const [cartItem, setCartItem] = useState(true);
@@ -160,20 +163,27 @@ const ItemDetailBox = ({ item }) => {
 
     useMemo(changeCartForm, [inputCountValue])
 
-    const order = (event) => {
+    // const order = (event) => {
+    //     event.preventDefault();
+    //     let cart = localStorage.getItem('cart');
+    //     axios.post(`http://localhost:8090/test/test`, cart
+    //     ).then(res => console.log('aa')
+    //     ).catch(err => console.log(err.message));
+    // }
+
+    const order = async (event) => {
         event.preventDefault();
         let cart = localStorage.getItem('cart');
-        axios.post(`http://localhost:8090/test/test`, cart
-        ).then(res => console.log('aa')
+        let user = sessionStorage.getItem('userinfo');
+        await api('/usercart/insertItem', 'post', cart, user.token
+        ).then(res => console.log(res.data)
         ).catch(err => console.log(err.message));
-
     }
 
 
 
 
     function aa() {
-
         const str = "/1005(3)/2003(10)/3006(3)";
         let result;
         let firstidx = str.indexOf("/2003")

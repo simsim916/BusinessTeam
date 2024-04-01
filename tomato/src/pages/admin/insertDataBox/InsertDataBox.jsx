@@ -72,7 +72,6 @@ const AddDataHead = ({ myLocation }) => {
                 <div id="topButtonBox">
                     <div onClick={() => changeRowCount(1)}>+</div>
                     <div onClick={() => changeRowCount(-1)}>-</div>
-                    <button onClick={test}>연습</button>
                     <div onClick={insertAll}>등록</div>
                 </div>
             </div>
