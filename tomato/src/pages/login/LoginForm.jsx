@@ -2,7 +2,8 @@ import './LoginForm.css'
 import LoginBG from "./LoginBG/LoginBG";
 import SignBG from "./SignBG/SignBG";
 import { useState } from 'react';
-import { SERVER_RESOURCE } from '../../../model/server-config';
+import { SERVER_RESOURCE } from '../../model/server-config';
+import { Routes, Route } from 'react-router-dom';
 
 const LoginForm = () => {
   const [signBox, setSignBox] = useState(false);
@@ -92,10 +93,10 @@ const LoginForm = () => {
     <>
       <div id="bodyBG" style={{ backgroundImage: `url(${SERVER_RESOURCE}/img/signup/signup.jpg)` }}></div>
       <div id="contentBox">
-        <LoginBG signBox={signBox} changeSignBox={changeSignBox}
-          checkId={checkId} checkPassword={checkPassword}
-          changeOpacity={changeOpacity} />
-        <SignBG signBox={signBox} changeSignBox={changeSignBox} />
+        <Routes>
+          <Route path='/signup' element={<SignBG />} />
+          <Route path='/*' element={<LoginBG checkId={checkId} checkPassword={checkPassword} changeOpacity={changeOpacity} />} />
+        </Routes>
       </div>
     </>
   );

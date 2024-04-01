@@ -1,6 +1,7 @@
 import ShopBasketSelectBox from './ShopBasketSelectBox';
 import ShopBasketPayBox from './ShopBasketPayBox';
 import { useState, useEffect } from 'react';
+import './ShopBasket.css'
 import axios from 'axios';
 import Loading from './../components/Loading';
 import Error from './../components/Error';
@@ -25,21 +26,24 @@ const ShopBasket = () => {
     //     })
     // }, [])
 
-    if (loading) return <Loading />
-    if (error) return <Error />
+    // if (loading) return <Loading />
+    // if (error) return <Error />
 
 
     return (
-        <>
+        <div id='shopBasket' className='container'>
+            <h3>
+                <i className="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                &nbsp;&nbsp;장바구니&nbsp;&nbsp;
+                <i className="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+            </h3>
             <ShopBasketSelectBox item={item} />
 
             <ShopBasketPayBox />
 
-            <BestItemBox />
+            {/* <BestItemBox /> */}
 
-
-
-        </>
+        </div>
 
 
 

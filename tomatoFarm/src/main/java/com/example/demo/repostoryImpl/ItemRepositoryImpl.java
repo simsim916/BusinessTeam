@@ -149,6 +149,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 						.or(item.name.contains(searchRequest.getKeyword()))
 						.and(item.sort1.ne("밀키트")))
 				.groupBy(item.sort1, item.sort2)
+				.orderBy(item.sort2.count().desc())
 				.fetch();
 
 		result.addAll(jPAQueryFactory
@@ -160,6 +161,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 		                        .or(item.brand.contains(searchRequest.getKeyword()))
 		                        .or(item.name.contains(searchRequest.getKeyword()))))
 		        .groupBy(item.brand)
+		        .orderBy(item.brand.count().desc())
 		        .fetch());
 
 		return result;

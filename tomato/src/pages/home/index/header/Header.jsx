@@ -9,12 +9,10 @@ import { changeKeyword } from "../../../redux/basic/actions";
 
 const Header = () => {
     console.log(`Header 랜더링`);
-    const user = useSelector(state => state.user);
     const keyword = useSelector(state => state.basic.keyword);
     const navigate = useNavigate();
     const dispatch = useDispatch()
     const userinfo = JSON.parse(sessionStorage.getItem('userinfo'))
-    console.log(userinfo)
     const logOut = () => {
         sessionStorage.removeItem('userinfo')
     }
@@ -54,13 +52,13 @@ const Header = () => {
                     {
                         userinfo != null && userinfo.login ?
                             <>
-                                <Link onClick={logOut} to="/">로그아웃</Link>
-                                <Link to="/login"> {userinfo.username} 님 </Link>
+                                <Link onClick={logOut} to="/home">로그아웃</Link>
+                                <a> {userinfo.username} 님 </a>
                             </>
                             :
                             <>
                                 <Link to="/login">로그인</Link>
-                                <a>회원가입</a>
+                                <Link to="/login/signup">회원가입</Link>
                             </>
                     }
                 </div>

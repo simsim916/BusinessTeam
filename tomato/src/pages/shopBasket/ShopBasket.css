@@ -1,0 +1,17 @@
+#shopBasket{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#shopBasket h3 {
+    font-size: 30px;
+    font-weight: 500;
+    color: #4c4556;
+    text-align: center;
+    margin-top: 30px;
+    width: 100%;
+}
+
+#shopBasket h3 i {
+    color: #F6C026;
+}
