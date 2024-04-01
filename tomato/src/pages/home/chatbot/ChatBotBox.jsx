@@ -1,13 +1,27 @@
 import './ChatBotBox.css';
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 const ChatBotBox = () => {
-
+    /* URL에서 채팅방 ID 가져오기 */
+    const { userID } = useParams();
+    /* 메세지 입력 상태 */
     const [text, setText] = useState('');
+    /* 채팅 메세지 상태 */
     const [chat, setChat] = useState('');
 
 
-
+    const sendMessage = () => {
+        if () {
+            const messageOBJ = {
+                seq: 1,
+                writer: manager,
+                contents: "안녕하세요",
+                
+            };
+            setText("");
+        }
+    };
 
 
 

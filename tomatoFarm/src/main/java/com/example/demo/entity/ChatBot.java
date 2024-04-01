@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ChatBot {
 	private Integer seq;
-	private String wirter;
+	private String writer;
 	private String contents;
 	private Integer root;
 	private LocalDateTime regdate;
