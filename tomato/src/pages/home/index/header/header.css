@@ -25,6 +25,7 @@
     color: #9b1b20;
 }
 #loginBar>.container>a{
+    line-height: 30px;
     margin-left: 12px;
 }
 #searchBar {

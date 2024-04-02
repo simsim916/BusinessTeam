@@ -23,7 +23,9 @@ export async function api(url, method, requestData, token) {
         headers: headers,
     };
 
-    console.log('api : url' + options.url)
+    console.log('api - url : ' + options.url)
+    console.log('api - data : ')
+    console.log(requestData)
     if (requestData) {
         options.data = requestData;
     }

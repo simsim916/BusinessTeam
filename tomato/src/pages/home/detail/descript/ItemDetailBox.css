@@ -216,13 +216,13 @@
     padding: 20px;
     text-align: center;
 }
-#goCartBox div{
+#goCartContainer div{
     width: 100%;
 }
-#goCartBox div:nth-child(1){
-    margin-bottom: 20px;
+#goCartContainer p:nth-child(2){
+    margin-top: 20px;
 }
-#goCartBox a {
+#goCartContainer a {
     padding: 10px 20px;
     background-color: #CA4046;
     color: #fff;
@@ -230,12 +230,18 @@
     border-radius: 10px;
     cursor: pointer;
     width: 40%;
-    margin-top: 20px;
-    margin-right: 10px;
+    display: inline-block;
+    margin: 0 10px;
+    margin-top: 15px;
 }
 
-#triangle_bottom{
-    display: inline-block;
+#goCartContainer a:nth-of-type(2) {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #CA4046;
+}
+
+#goCartContainer #triangle_bottom{
     border: 30px solid transparent;
     border-color: rgb(204, 202, 202);
     width: 0px;
@@ -243,8 +249,8 @@
     border-right: 20px solid transparent;
     border-left: 20px solid transparent;
     border-bottom: 0;
-    top: 200px;
-    left: -3px;
+    top: calc(100% + 4px);
+    left: -4px;
     position: absolute;
 }
 

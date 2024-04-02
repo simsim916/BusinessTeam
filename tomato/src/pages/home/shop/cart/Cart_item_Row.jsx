@@ -1,13 +1,13 @@
-import { useDispatch } from 'react-redux';
-import { SERVER_RESOURCE } from '../../../model/server-config';
-import { makeComa, makeDiscountPrice } from '../../components/MathFunction';
-import { setBuyItemList } from '../../redux/buyItem/actions';
-import { setItemList } from '../../redux/itemList/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { SERVER_RESOURCE } from '../../../../model/server-config';
+import { makeComa, makeDiscountPrice } from '../../../components/MathFunction';
+import { setBuyItemList } from '../../../redux/buyItem/actions';
+import { getItemListAmount, setItemList } from '../../../redux/itemList/actions';
+import { Link } from 'react-router-dom';
 
-const ShopBasketItem = ({ item, idx, changeItemList, buyItem }) => {
+const Cart_item_Row = ({ item, idx, changeItemList, buyItem }) => {
 
     const dispatch = useDispatch();
-
     const handleClick = (type) => {
         changeItemList(idx, type);
     }
@@ -29,19 +29,19 @@ const ShopBasketItem = ({ item, idx, changeItemList, buyItem }) => {
     }
 
     const handleDelete = () => {
-        let local = JSON.parse(localStorage.getItem('cart'));
+        const local = JSON.parse(localStorage.getItem('cart'));
         let filtered = local.filter(i => +i.item_code != +item.code);
-        // localStorage.setItem('cart', JSON.stringify(filtered));
-        dispatch(setItemList(filtered));
+        localStorage.setItem('cart', JSON.stringify(filtered));
+        const cart = localStorage.getItem('cart');
+        dispatch(getItemListAmount('/item/selectin', 'post', filtered, null, cart));
     }
-
 
     return (
         <ul className="shopBasketItem">
             <li><input className="check" type="checkbox" name="buy" onChange={() => handleCheckBox(item)}></input></li>
-            <li className="shopBasketItemImg"><img src={SERVER_RESOURCE + `/img/itemImg/${item.code}_2.jpg`} alt="" /></li>
+            <li className="shopBasketItemImg"><Link to={'/home/detail?code=' + item.code}><img src={SERVER_RESOURCE + `/img/itemImg/${item.code}_2.jpg`} alt="" /></Link></li>
             <li className="shopBasketItemIfo">
-                <p className="shopBasketItemIfo_name">{item.name}</p>
+                <Link to={'/home/detail?code=' + item.code} className="shopBasketItemIfo_name">{item.name}</Link>
                 {
                     item.discount
                         ?
@@ -71,11 +71,11 @@ const ShopBasketItem = ({ item, idx, changeItemList, buyItem }) => {
                 )
             }
             <li>
-                <div className='xButton' onClick={handleDelete}><i className="fa-solid fa-xmark"></i></div>
                 {item.delivery ? makeComa(item.delivery) + ' 원' : '무료배송'}
+                <div className='xButton' onClick={handleDelete}><i className="fa-solid fa-xmark"></i></div>
             </li>
         </ul >
     );
 }
 
-export default ShopBasketItem;
+export default Cart_item_Row;

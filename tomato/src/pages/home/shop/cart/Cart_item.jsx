@@ -1,12 +1,12 @@
 
 import { useEffect, useState } from 'react';
-import './ShopBasketSelectBox.css';
-import ShopBasketItem from './ShopBasketSelectBox/ShopBasketItem';
+import './Cart_item.css';
+import ShopBasketItem from './Cart_item_Row';
 import { useDispatch } from 'react-redux';
-import { setItemList } from '../redux/itemList/actions';
-import { setBuyItemList } from '../redux/buyItem/actions';
+import { setItemList } from '../../../redux/itemList/actions';
+import { setBuyItemList } from '../../../redux/buyItem/actions';
 
-const ShopBasketSelectBox = ({ buyItem, setCheckedItem, itemList }) => {
+const Cart_item = ({ buyItem, itemList }) => {
     const dispatch = useDispatch();
 
 
@@ -35,7 +35,6 @@ const ShopBasketSelectBox = ({ buyItem, setCheckedItem, itemList }) => {
         }
     }
 
-
     return (
         <div id='shopBasketSelectBox'>
 
@@ -61,4 +60,4 @@ const ShopBasketSelectBox = ({ buyItem, setCheckedItem, itemList }) => {
     );
 
 }
-export default ShopBasketSelectBox;
+export default Cart_item;

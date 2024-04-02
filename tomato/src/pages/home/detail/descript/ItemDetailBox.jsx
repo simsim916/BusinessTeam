@@ -9,20 +9,16 @@ import { Link } from 'react-router-dom';
 import { api } from '../../../../model/model'
 import { useDispatch, useSelector } from 'react-redux';
 import { loginFailure, loginRequest, loginSuccess } from '../../../redux/user/action';
+import { getUserCart } from '../../../redux/userCart/action';
 
 const ItemDetailBox = ({ item }) => {
-    // console.log(item.discount)
+    const dispatch = useDispatch();
     const [inputCountValue, setInputCountValue] = useState(1);
     const [introItem, setIntroItem] = useState(false)
     const [cartItem, setCartItem] = useState(true);
     const [gotoCart, setGotoCart] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
-    const [cartForm, setCartForm] = useState({
-        id: 'manager2',
-        item_code: item.code,
-        item_amount: inputCountValue
-    })
     const currentDate = new Date();
     const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
     const date = currentDate.getDate();
@@ -57,7 +53,6 @@ const ItemDetailBox = ({ item }) => {
             value++
             setInputCountValue(value);
         }
-        changeCartForm()
     }
 
     const sumTotal = (value) => {
@@ -76,72 +71,23 @@ const ItemDetailBox = ({ item }) => {
 
     const changeInputCount = (event) => {
         setInputCountValue(event.target.value);
-        changeCartForm()
     }
 
-    const postCartData = () => {
-        setLoading(true)
-        axios.post('http://localhost:8090/usercart/update', cartForm, {
-            headers: 'application/json'
-        }).then(res => {
-            setLoading(false);
-            setCartItem(res.data);
-        }).catch(err => {
-            setLoading(false);
-            setError(true);
-        });
-    }
-
-    const changeCartForm = () => {
-        setCartForm((preCartForm) => ({
-            ...preCartForm,
-            item_amount: inputCountValue
-        }));
-    }
-
-    // const addCart = () => {
-    //     setGotoCart(!gotoCart);
-    //     if (/*로그인했을때*/ false) {
-    //         postCartData()
-    //     } else {
-    //         /* 로컬 스토리지에 저장 */
-    //         let cart = localStorage.getItem('cart')
-    //         if (cart != null) {
-    //             if (cart.indexOf(item.code) < 0) {
-    //                 cart += `/${item.code}(${inputCountValue})`
-    //             } else {
-    //                 //기존에 있는 아이템 코드의 수량을 구한다
-    //                 let firstidx = cart.indexOf(item.code);
-    //                 let amountFrontidx = cart.indexOf('(', firstidx)
-    //                 let amountLastidx = cart.indexOf(')', firstidx)
-    //                 let amount = cart.slice(amountFrontidx + 1, amountLastidx)
-
-    //                 console.log('amount : ' + amount);
-
-    //                 //기존에 있는 아이템 코드를 삭제한다
-    //                 let lastidx = cart.indexOf('/', firstidx)
-    //                 cart = cart.slice(0, firstidx - 1) + cart.slice(lastidx)
-    //                 console.log('cart : ' + cart);
-
-    //                 //아이템 코드와 코드를 추가한다
-    //                 cart += `/${item.code}(${+inputCountValue + +amount})`
-    //                 console.log('result : ' + cart);
-
-    //             }
-    //         } else {
-    //             cart = `/${item.code}(${inputCountValue})`
-    //         }
-    //         localStorage.setItem('cart', cart)
-    //         console.log(localStorage.getItem('cart'));
-    //         // localStorage.removeItem('cart')
-
-    //     }
-    // }
 
     const addCart = () => {
         setGotoCart(!gotoCart);
-        if (/*로그인했을때*/ false) {
-            postCartData();
+        const userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
+        if (userinfo && userinfo.login) {
+            console.log('aa')
+            const formData = {
+                item_code: item.code,
+                item_amount: inputCountValue,
+                id: userinfo.id
+            };
+            const ar = [];
+            ar.push(formData);
+
+            dispatch(getUserCart('/usercart/merge', 'post', ar, userinfo.token))
         } else {
             let cart = localStorage.getItem('cart');
             let cartArray = cart ? JSON.parse(cart) : [];
@@ -160,17 +106,6 @@ const ItemDetailBox = ({ item }) => {
         }
     };
 
-
-    useMemo(changeCartForm, [inputCountValue])
-
-    // const order = (event) => {
-    //     event.preventDefault();
-    //     let cart = localStorage.getItem('cart');
-    //     axios.post(`http://localhost:8090/test/test`, cart
-    //     ).then(res => console.log('aa')
-    //     ).catch(err => console.log(err.message));
-    // }
-
     const order = async (event) => {
         event.preventDefault();
         let cart = localStorage.getItem('cart');
@@ -179,28 +114,6 @@ const ItemDetailBox = ({ item }) => {
         ).then(res => console.log(res.data)
         ).catch(err => console.log(err.message));
     }
-
-
-
-
-    function aa() {
-        const str = "/1005(3)/2003(10)/3006(3)";
-        let result;
-        let firstidx = str.indexOf("/2003")
-        result = str.slice(0, firstidx)
-
-        let result2;
-        let secondidx = str.indexOf("/3006(3)");
-        result2 = str.slice(secondidx)
-
-        console.log('result : ' + result);
-        console.log('result2 : ' + result2);
-        console.log(result + result2)
-    }
-
-
-
-
 
     return (
         <div id="itemDetailBox" className="container">
@@ -262,13 +175,11 @@ const ItemDetailBox = ({ item }) => {
                         :
                         gotoCart ?
                             <div id='goCartContainer'>
-                                <div id='goCartBox'>
-                                    <div id="itemName">{item.name}</div>
-                                    <div>장바구니에 상품을 담았습니다.</div>
-                                    <div>장바구니로 이동하시겠습니까?</div>
-                                    <Link to="/home/cart" id="cartOK">이동</Link>
-                                    <a onClick={() => setGotoCart(!gotoCart)} id="cartNO">닫기</a>
-                                </div>
+                                <p id="itemName">{item.name}</p>
+                                <p>장바구니에 상품을 담았습니다.</p>
+                                <p>장바구니로 이동하시겠습니까?</p>
+                                <Link to="/home/cart" id="cartOK">이동</Link>
+                                <a onClick={() => setGotoCart(!gotoCart)} id="cartNO">닫기</a>
                                 <div id='triangle_bottom'></div>
                             </div>
                             :

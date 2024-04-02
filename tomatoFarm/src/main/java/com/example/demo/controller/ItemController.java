@@ -44,7 +44,6 @@ import lombok.extern.log4j.Log4j2;
 public class ItemController {
 	private final ItemService itemService;
 	private final KeywordService keywordService;
-	private final UserCartService userCartService;
 	private final TokenProvider tokenProvider;
 
 	@GetMapping("/selectnotnull")
@@ -176,25 +175,13 @@ public class ItemController {
 	}
 
 	@PostMapping("/selectin")
-	public ResponseEntity<?> selectin(@RequestBody List<UserCart> list, HttpServletRequest request) {
+	public ResponseEntity<?> selectin(@RequestBody List<UserCart> list) {
 		List<Integer> codeList = new ArrayList<>();
 		for (UserCart e : list) {
 			codeList.add(e.getItem_code());
 		}
 		List<ItemDTO> itemList = itemService.selectItemListWhereInCode(codeList);
-		
-		String token = tokenProvider.parseBearerToken(request);
-		if (token != null) {
 			
-//			LocalDate now = LocalDateTime.now().plusHours(9).toLocalDate();
-			LocalDate now = LocalDateTime.now().plusDays(2).toLocalDate();
-			String id = tokenProvider.validateAndGetUserId(token);
-			for (UserCart e : list) {
-				e.setId(id);
-				e.setRegdate(now);
-			}
-			userCartService.insertUserCarts(list);
-		}
 		ResponseEntity<?> result = null;
 		result = ResponseEntity.status(HttpStatus.OK).body(itemList);
 		return result;

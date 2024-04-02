@@ -34,11 +34,6 @@ const userCartReducer = (state = initialState.userCart, action) => {
                 ...state.userCart,
                 data: action.payload
             };
-        case GET_USERCART_DATA:
-            return {
-                ...state.userCart,
-                // data: action.payload
-            };
         default:
             return state;
     }
