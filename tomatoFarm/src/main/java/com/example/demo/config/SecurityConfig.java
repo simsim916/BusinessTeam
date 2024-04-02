@@ -36,7 +36,7 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 // => session 기반이 아님을 선언
 				.authorizeRequests()
-				.antMatchers("/", "/home","/resources/**","/item/**", "/itemask/**" , "/itemreview/**", "/keyword/**", "/user/**", "/visit/**").permitAll() 
+				.antMatchers("/", "/home","/resources/**","/item/**", "/itemask/**" , "/itemreview/**", "/keyword/**", "/user/**", "/visit/**", "/chatbot/**").permitAll() 
 				// => "/", "/home" 등의 경로는 인증 안해도 됨.
 				.anyRequest().authenticated().and() 
 				// => 위 이외의 모든 경로는 인증해야됨.

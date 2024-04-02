@@ -23,8 +23,8 @@ function App() {
                     <Route path='/admin/*' element={<Admin />} />
                     <Route path='/home/*' element={<Home />} />
                     <Route path='/test' element={<ReduxTest />} />
-                    <Route path='/' element={<Home />} />
                     <Route path='/chatBot' element={<ChatBotBox />} />
+                    <Route path='/' element={<Home />} />
                 </Routes>
             </div>
         </Provider>

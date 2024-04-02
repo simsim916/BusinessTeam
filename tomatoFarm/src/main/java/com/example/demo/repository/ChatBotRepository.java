@@ -4,12 +4,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.domain.ChatBotDTO;
-import com.example.demo.module.PageRequest;
-import com.example.demo.module.SearchRequest;
+import com.example.demo.entity.ChatBot;
 
 @Repository
 public interface ChatBotRepository {
-	List<ChatBotDTO> saveMessage (SearchRequest searchRequest, PageRequest pageRequest);
 
+	ChatBot save(ChatBot chatbot);
+	List<ChatBot> selectAllFromRoot (ChatBot chatbot);
 }

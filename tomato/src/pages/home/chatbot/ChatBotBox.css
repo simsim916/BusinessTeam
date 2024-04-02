@@ -1,4 +1,4 @@
-#mainDiv {
+#ChatBotBox {
     right: 0;
     position: absolute;
     width: 500px;
@@ -6,9 +6,11 @@
     background-color: #F2EECA;
     top: 0;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
-h3 {
+#ChatBotBox h3 {
     font-size: 30px;
     text-align: center;
     background-color: #fff;
@@ -18,28 +20,53 @@ h3 {
     font-weight: 600;
 }
 
-img {
-    height: 120px;
+#chatBotTitle {
+    margin-bottom: 40px;
+}
+
+#chatBotTitle img {
+    height: 180px;
     position: relative;
     margin: auto;
     display: inline-block;
     left: 30%;
-    margin-bottom: 20px;
 }
 
 #chatBotTitle div {
-    font-size: 28px;
+    font-size: 25px;
     font-weight: 600;
     text-align: center;
 }
 
 #chatBotTitle div:nth-child(4) {
     color: gray;
-    font-size: 20px;
+    font-size: 18px;
     margin-top: 10px;
 }
 
-#openQuestion {
+.managerChat {
+    background: #f8dbe1;
+    min-width: 55%;
+    max-width: 80%;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    align-self: flex-start;
+}
+
+.userChat {
+    background: #fff;
+    min-width: 55%;
+    max-width: 80%;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: inline-block;
+    align-self: flex-end;
+}
+
+/* #openQuestion {
     height: 150px;
     margin: 50px auto 0px auto;
 }
@@ -113,7 +140,7 @@ img {
     display: inline-flex;
     border: none;
     font-weight: 500;
-}
+} */
 
 #chatBotTextBox {
     margin-top: 100px;
@@ -123,9 +150,8 @@ img {
 }
 
 #chatBotTextBox input {
-    padding: 0px 90px;
     font-size: 18px;
-    width: 220px;
+    width: 85%;
     border: none;
     text-align: center;
     border-radius: 10px;
@@ -133,8 +159,7 @@ img {
 
 #chatBotTextBox button {
     border-radius: 10px;
-    background: #fff;
-    padding: 30px;
+    padding: 15px;
     text-align: center;
     margin-left: 10px;
     border: none;

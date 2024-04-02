@@ -12,7 +12,7 @@ import lombok.Setter;
 public class ChatBotDTO {
 	private Integer seq;
 	private String writer;
-	private String contents;
+	private String content;
 	private Integer root;
 	private LocalDateTime regdate;
 

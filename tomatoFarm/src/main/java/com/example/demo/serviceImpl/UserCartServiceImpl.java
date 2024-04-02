@@ -29,7 +29,6 @@ public class UserCartServiceImpl implements UserCartService {
 		LocalDate today = LocalDate.now();
 
 		usercart.setRegdate(today);
-		System.out.println(usercart);
 		return usercartRepository.update(usercart);
 	}
 	

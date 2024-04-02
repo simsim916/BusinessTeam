@@ -2,10 +2,11 @@ package com.example.demo.service;
 
 import java.util.List;
 
-import com.example.demo.domain.ChatBotDTO;
+import com.example.demo.entity.ChatBot;
 
 public interface ChatBotService {
 	
-	List<ChatBotDTO> saveMessage();
-
+	ChatBot save(ChatBot chatbot);
+	List<ChatBot> selectAllFromRoot(ChatBot chatbot);
+	
 }
