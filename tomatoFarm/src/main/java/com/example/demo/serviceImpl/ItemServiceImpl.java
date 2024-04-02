@@ -104,7 +104,7 @@ public class ItemServiceImpl implements ItemService {
 	}
 	
 	@Override
-	public List<Item> selectItemListWhereInCode(List<Integer> codeList) {
+	public List<ItemDTO> selectItemListWhereInCode(List<Integer> codeList) {
 		return itemRepository.selectItemListWhereInCode(codeList);
 	}
 

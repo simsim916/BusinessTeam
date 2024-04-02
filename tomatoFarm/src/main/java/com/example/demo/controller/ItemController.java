@@ -178,7 +178,7 @@ public class ItemController {
 		List<Integer> codeList = new ArrayList<>();
 		for (UserCart e : list)
 			codeList.add(e.getItem_code());
-		List<Item> itemList = itemService.selectItemListWhereInCode(codeList);
+		List<ItemDTO> itemList = itemService.selectItemListWhereInCode(codeList);
 		result = ResponseEntity.status(HttpStatus.OK).body(itemList);
 		return result;
 	}
