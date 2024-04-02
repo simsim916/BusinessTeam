@@ -28,7 +28,6 @@ public class ChatBotController {
 		String userId = "manager3";
 		chatbot.setWriter(userId);
 		chatbot=chatBotService.save(chatbot);
-		System.out.println(chatbot);
 		if(chatbot != null) {
 			List<ChatBot> list = chatBotService.selectAllFromRoot(chatbot);
 			System.out.println(list);

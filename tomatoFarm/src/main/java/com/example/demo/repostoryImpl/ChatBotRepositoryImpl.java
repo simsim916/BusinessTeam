@@ -37,7 +37,6 @@ public class ChatBotRepositoryImpl implements ChatBotRepository {
 			.setParameter("regdate", chatbot.getRegdate())
 			.setParameter("root", chatbot.getRoot())
 			.executeUpdate();
-		System.out.println(result);
 		if (result > 0)
 			return jPAQueryFactory.selectFrom(chatBot)
 					.where(chatBot.writer.eq(chatbot.getWriter()))
