@@ -1,50 +1,29 @@
 import { useSearchParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import Header from './../index/header/Header';
 import ItemListFilter from './ItemListFilter';
 import ItemListContainer from './ItemListContainer';
 import Loading from './../../components/Loading';
 import Error from './../../components/Error';
+import { useSelector, useDispatch } from 'react-redux';
+import { getItemList } from "../../redux/itemList/actions";
+import { getItemSortList } from "../../redux/itemListSort/actions";
 
 const ItemList = () => {
+    console.log('ItemList랜더링')
     const [searchParams, setSearchParams] = useSearchParams();
     const keyword = searchParams.get("keyword");
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
-    const [sortloading, setSortloading] = useState(true);
-    const [sorterror, setSorterror] = useState(false);
-
-    const [itemList, setItemList] = useState(null);
-    const [sortList, setSortList] = useState(null);
-    const [filterCheckedList, setFilterCheckedList] = useState(null);
+    const dispatch = useDispatch();
+    const itemList = useSelector(state => state.itemList);
+    const itemListSort = useSelector(state => state.itemListSort);
+    const filterCheckedList = useRef()
+    const [deletedSort, setDeletedSort] = useState([]);
 
     useEffect(() => {
-        const url = `http://localhost:8090/item/searchsort?keyword=${keyword}`;
-        axios.get(url
-        ).then(res => {
-            setSortList(res.data)
-            setFilterCheckedList(res.data.filter(e => e.count > 0))
-            setSortloading(false);
-        }).catch(err => {
-            console.log(`${err.message}`)
-            setSortloading(false);
-            setSorterror(true);
-        })
-    }, [searchParams])
-
-    useEffect(() => {
-        const url = `http://localhost:8090/item/search?keyword=${keyword}`;
-        axios.get(url
-        ).then(res => {
-            setItemList(res.data)
-            setLoading(false);
-        }).catch(err => {
-            console.log(`${err.message}`)
-            setLoading(false);
-            setError(true);
-        })
-    }, [searchParams])
+        dispatch(getItemList(`/item/search?keyword=${keyword}`, 'get'))
+        dispatch(getItemSortList(`/item/searchsort?keyword=${keyword}`, 'get'))
+    }, [])
 
     useEffect(() => {
         axios.get(`http://localhost:8090/visit/update`, {
@@ -54,9 +33,24 @@ const ItemList = () => {
         })
     }, [])
 
+    const changeDeletedSort = (event) => {
+        const value = event.target.value;
+        if (filterCheckedList.current.includes(value)) {
+            if (deletedSort.includes(value)){
+                setDeletedSort(deletedSort.filter(e=>e!=value))
+            } else {
+                setDeletedSort([...deletedSort, value])
+            }
+        } 
+        console.log(deletedSort)
+    }
 
-    if (loading || sortloading) return <Loading />
-    if (error || sorterror) return <Error />
+    if (itemList.loading || itemListSort.loading) return <Loading />
+    if (itemList.error || itemListSort.error) return <Error />
+
+    if (itemListSort.data) {
+        filterCheckedList.current = itemListSort.data.filter(e => e.count > 0);
+    }
 
     return (
         <>
@@ -64,8 +58,8 @@ const ItemList = () => {
                 " <b>{keyword}</b> " <span>에 대한 검색 결과</span>
             </div>
             <div className="container">
-                <ItemListFilter sortList={sortList} filterCheckedList={filterCheckedList} setFilterCheckedList={setFilterCheckedList} />
-                <ItemListContainer itemList={itemList} keyword={keyword} setItemList={setItemList} />
+                <ItemListFilter itemListSort={itemListSort.data} changeDeletedSort={changeDeletedSort} />
+                <ItemListContainer itemList={itemList.data} />
             </div>
         </>
     );

@@ -31,7 +31,6 @@ export async function api(url, method, requestData, token) {
         .then(response => {
             return response;
         }).catch(err => {
-            console.error(`** apiCall Error status=${err.response.status}, message=${err.message}`);
-            return Promise.reject(err.response.status);
+            return Promise.reject(err);
         });
 }

@@ -1,6 +1,7 @@
-#shopBasket{
+#shopBasket {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 #shopBasket h3 {
@@ -14,4 +15,8 @@
 
 #shopBasket h3 i {
     color: #F6C026;
+}
+
+#shopBasket #shopBasket_left {
+    width: 70%;
 }

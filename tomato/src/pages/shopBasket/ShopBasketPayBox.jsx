@@ -19,11 +19,11 @@ const ShopBasketPayBox = () => {
                         <div>4500원</div>
                     </div>
                 </div>
-            </div>
-            <div id="loginBox">로그인</div>
-            <div id="shopBasketCancel">
-                <div>* [주문완료] 상태일 경우에만 주문 취소 가능합니다.</div>
-                <div>* [마이페이지] - [주문내역 상세페이지]에서 직접 취소 가능합니다.</div>
+                <div id="loginBox">주문하기</div>
+                <div id="shopBasketCancel">
+                    <div>* [주문완료] 상태일 경우에만 주문 취소 가능합니다.</div>
+                    <div>* [마이페이지] - [주문내역 상세페이지]에서 직접 취소 가능합니다.</div>
+                </div>
             </div>
         </div>
 

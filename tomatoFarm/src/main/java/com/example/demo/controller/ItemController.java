@@ -5,7 +5,10 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +24,8 @@ import com.example.demo.domain.SortDTO;
 import com.example.demo.entity.Item;
 import com.example.demo.entity.Keyword;
 import com.example.demo.entity.KeywordID;
+import com.example.demo.entity.UserCart;
+import com.example.demo.jwtToken.TokenProvider;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.service.ItemService;
@@ -50,8 +55,8 @@ public class ItemController {
 	@GetMapping("/detailn")
 	public ResponseEntity<?> selectItemWhereType(SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
-		PageRequest pageRequest = new PageRequest(1,1);
-		ItemDTO dto= itemService.selectItemListIntegerWhereType(pageRequest,searchRequest).get(0);
+		PageRequest pageRequest = new PageRequest(1, 1);
+		ItemDTO dto = itemService.selectItemListIntegerWhereType(pageRequest, searchRequest).get(0);
 		result = ResponseEntity.status(HttpStatus.OK).body(dto);
 		return result;
 	}
@@ -77,10 +82,10 @@ public class ItemController {
 		keywordService.updateKeyword(searchRequest);
 		// 이걸 서비스단에서 처리하고자 하는데
 		// 서비스단에서 entity 객체를 만드는거 까진 오케이
-		// 하지만 keyword를 업데이트 시키려면 
+		// 하지만 keyword를 업데이트 시키려면
 		// itemService 에서~ keywordService를 사용해야하는데 이래도 될까?
 //		===========================================================
-		
+
 		List<ItemDTO> list = itemService.selectItemWhereSearchType(pageRequest, searchRequest);
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
@@ -91,10 +96,10 @@ public class ItemController {
 		ResponseEntity<?> result = null;
 		List<SortDTO> list = itemService.selectSortList();
 		List<SortDTO> countList = itemService.selectSortWhereKeyword(searchRequest);
-		for(SortDTO a : countList) {
+		for (SortDTO a : countList) {
 			for (SortDTO b : list) {
-				if(a.getSort1().equals(b.getSort1())) {
-					if(a.getSort2().equals(b.getSort2())) {
+				if (a.getSort1().equals(b.getSort1())) {
+					if (a.getSort2().equals(b.getSort2())) {
 						b.setCount(a.getCount());
 						break;
 					}
@@ -111,7 +116,7 @@ public class ItemController {
 	public ResponseEntity<?> selectSortList() {
 		ResponseEntity<?> result = null;
 		List<SortDTO> list = itemService.selectSortList();
-			result = ResponseEntity.status(HttpStatus.OK).body(list);
+		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}
 
@@ -133,39 +138,49 @@ public class ItemController {
 		return result;
 	}
 
-    @PostMapping(value="/insert")
-    public ResponseEntity<?> insertItem(@RequestBody List<Item> entity) {
-    	ResponseEntity<?> result = null;
-    	for(Item e : entity) {
-    		System.out.println(e.getCode());
-    	}
+	@PostMapping(value = "/insert")
+	public ResponseEntity<?> insertItem(@RequestBody List<Item> entity) {
+		ResponseEntity<?> result = null;
+		for (Item e : entity) {
+			System.out.println(e.getCode());
+		}
 //    	System.out.println("****" + entity.getCode());
 //      itemService.insertItem(entity);
-        result = ResponseEntity.status(HttpStatus.OK).body("insert성공");
-        return result;
-    }
-    
-    @GetMapping("/admin")
-    public ResponseEntity<?> adminStringColumn(SearchRequest searchRequest,PageRequest pageRequest) {
-    	System.out.println("getColumn => " +searchRequest.getColumn());
-    	System.out.println("getKeyword => " +searchRequest.getKeyword());
-    	pageRequest.setStartEndNum(pageRequest.getPage());
-    	String column = searchRequest.getColumn();
-    	String keyword = searchRequest.getKeyword();
-    	List<ItemDTO> itemList = null;
-        // 숫자 여부를 확인해서 Expression.stringPath OR numPath 메서드 지정해주기
-        if (keyword.matches("[-+]?\\d*\\.?\\d+")) {
-        	itemList = itemService.adminIntegerColumn(searchRequest,pageRequest);
-        	System.out.println("IntegerColumn");
-        } else {
-        	System.out.println("StringColumn");
-        	itemList = itemService.adminStringColumn(searchRequest,pageRequest);
-        }
-    	ResponseEntity<?> result = null;
-    	result = ResponseEntity.status(HttpStatus.OK).body(itemList);
+		result = ResponseEntity.status(HttpStatus.OK).body("insert성공");
 		return result;
-    }
-    
+	}
 
-	
+	@GetMapping("/admin")
+	public ResponseEntity<?> adminStringColumn(SearchRequest searchRequest, PageRequest pageRequest) {
+		System.out.println("getColumn => " + searchRequest.getColumn());
+		System.out.println("getKeyword => " + searchRequest.getKeyword());
+		pageRequest.setStartEndNum(pageRequest.getPage());
+		String column = searchRequest.getColumn();
+		String keyword = searchRequest.getKeyword();
+		List<ItemDTO> itemList = null;
+		// 숫자 여부를 확인해서 Expression.stringPath OR numPath 메서드 지정해주기
+		if (keyword.matches("[-+]?\\d*\\.?\\d+")) {
+			itemList = itemService.adminIntegerColumn(searchRequest, pageRequest);
+			System.out.println("IntegerColumn");
+		} else {
+			System.out.println("StringColumn");
+			itemList = itemService.adminStringColumn(searchRequest, pageRequest);
+		}
+		ResponseEntity<?> result = null;
+		result = ResponseEntity.status(HttpStatus.OK).body(itemList);
+		return result;
+	}
+
+	@PostMapping("/selectin")
+	public ResponseEntity<?> selectin(@RequestBody List<UserCart> list, HttpServletRequest request) {
+		System.out.println(list);
+		ResponseEntity<?> result = null;
+		List<Integer> codeList = new ArrayList<>();
+		for (UserCart e : list)
+			codeList.add(e.getItem_code());
+		List<Item> itemList = itemService.selectItemListWhereInCode(codeList);
+		result = ResponseEntity.status(HttpStatus.OK).body(itemList);
+		return result;
+	}
+
 }

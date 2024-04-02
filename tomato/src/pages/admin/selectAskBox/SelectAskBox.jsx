@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import PagingBox from "../../components/PagingBox";
 import WriteReply from "./WriteReply";
-import { paging } from '../../components/paging';
+// import { paging } from '../../components/paging';
 import SelectAskBoxRow from './SelectAskBoxRow';
 
 
@@ -29,6 +29,7 @@ const SelectAskBox = ({ myLocation }) => {
         axios.get(`http://localhost:8090/itemask/select?column=${searchRequest.column}&keyword=${searchRequest.keyword}`
         ).then(res => {
             setAskList(res.data);
+            console.log(res.data)
         }).catch(err => {
             console.log(err.message);
         })
@@ -36,9 +37,9 @@ const SelectAskBox = ({ myLocation }) => {
 
     const filterList = (answered) => {
         if (answered == 0) {
-            return askList.filter(list => list.reply == null);
+            return askList.filter(list => list.reply === "");
         } else if (answered == 1) {
-            return askList.filter(list => list.reply != null);
+            return askList.filter(list => list.reply !== "");
         } else {
             return askList;
         }
@@ -65,6 +66,17 @@ const SelectAskBox = ({ myLocation }) => {
         setRefresh(!refresh);
     }
 
+    const paging = () => (list, pageNum, size) => {
+        if (Array.isArray(list)) { // 배열 여부 확인
+            const start = size * (pageNum - 1);
+            const end = pageNum * size;
+            return list.slice(start, end);
+        } else {
+            return []; // 배열이 아닌 경우 빈 배열 반환
+        }
+    }
+
+
 
     return (
         <div className="containerA">
@@ -75,7 +87,7 @@ const SelectAskBox = ({ myLocation }) => {
                         <input
                             type="radio"
                             checked={answered == 2}
-                            onChange={() => CheckAnswered(2)}
+                            onChange={(num) => CheckAnswered(2)}
                         />
                     </label>
                     &nbsp;&nbsp;
@@ -83,7 +95,7 @@ const SelectAskBox = ({ myLocation }) => {
                         <input
                             type="radio"
                             checked={answered == 1}
-                            onChange={() => CheckAnswered(1)}
+                            onChange={(num) => CheckAnswered(1)}
                         />
                     </label>
                     &nbsp;&nbsp;
@@ -91,7 +103,7 @@ const SelectAskBox = ({ myLocation }) => {
                         <input
                             type="radio"
                             checked={answered == 0}
-                            onChange={() => CheckAnswered(0)}
+                            onChange={(num) => CheckAnswered(0)}
                         />
                     </label>
                 </h3>

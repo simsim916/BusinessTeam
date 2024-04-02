@@ -13,9 +13,10 @@
     border: none !important;
 }
 
-#errorBox p{
+#errorBox p {
     line-height: 1.5em;
 }
+
 #historyback {
     max-width: 30px;
     max-height: 30px;
@@ -27,19 +28,16 @@
     color: #9B1B30;
 }
 
-#signBG>div>a{
+#signBG>div>a {
     display: inline-block;
     text-align: center;
     margin-left: calc(50%);
     margin-top: 20px;
-    transform: translate(-50%,0);
+    transform: translate(-50%, 0);
 }
 
 #signBG {
     width: 100%;
-    position: absolute;
-    left: 100%;
-    transition: 1.5s;
     height: 100vh;
 }
 
@@ -53,7 +51,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
 }
 
 #signBG h3 {

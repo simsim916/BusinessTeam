@@ -2,7 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import './ItemListFilter.css'
 import { useEffect, useMemo, useRef } from "react";
 
-const ItemListFilter = ({ filterCheckedList, setFilterCheckedList, sortList }) => {
+const ItemListFilter = ({ itemListSort, changeDeletedSort }) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const listfilter = useRef(null);
     const mealkit = useRef(0);
@@ -11,52 +11,53 @@ const ItemListFilter = ({ filterCheckedList, setFilterCheckedList, sortList }) =
     mealkit.current = 0;
     ingre.current = 0;
 
-    for (let e of sortList) {
-        if (e.sort1 == '밀키트')
+    for (let e of itemListSort) {
+        if (e.sort1 == '밀키트') {
             mealkit.current += e.count;
+        }
         else
             ingre.current += e.count
     }
 
     const checkAll = (event) => {
-        let target = event.target.closest('li');
+        //     let target = event.target.closest('li');
 
-        if (target.classList.contains('selected')) {
-            target.classList.remove('selected');
-            for (let e of target.getElementsByTagName('li')) {
-                e.classList.remove('selected');
-                setFilterCheckedList((prev) => {
-                    return prev.filter((ele) => ele.sort2 != e.children[1].innerText);
-                });
-            }
-        } else {
-            target.classList.add('opened');
-            target.classList.add('selected');
-            target.closest('.sortB').classList.add('selected');
-            for (let e of target.getElementsByTagName('li')) {
-                if (e.children[2].innerText > 0) {
-                    console.log(e.children[2].innerText)
-                    e.classList.add('selected');
-                    setFilterCheckedList([...filterCheckedList, {
-                        sort1: 'aa',
-                        sort2: e.children[1].innerText,
-                        count: e.children[2].innerText
-                    }])
-                }
-            }
-        }
-        console.log(filterCheckedList)
-        event.stopPropagation();
-        checkList();
+        //     if (target.classList.contains('selected')) {
+        //         target.classList.remove('selected');
+        //         for (let e of target.getElementsByTagName('li')) {
+        //             e.classList.remove('selected');
+        //             setFilterCheckedList((prev) => {
+        //                 return prev.filter((ele) => ele.sort2 != e.children[1].innerText);
+        //             });
+        //         }
+        //     } else {
+        //         target.classList.add('opened');
+        //         target.classList.add('selected');
+        //         target.closest('.sortB').classList.add('selected');
+        //         for (let e of target.getElementsByTagName('li')) {
+        //             if (e.children[2].innerText > 0) {
+        //                 console.log(e.children[2].innerText)
+        //                 e.classList.add('selected');
+        //                 setFilterCheckedList([...filterCheckedList, {
+        //                     sort1: 'aa',
+        //                     sort2: e.children[1].innerText,
+        //                     count: e.children[2].innerText
+        //                 }])
+        //             }
+        //         }
+        //     }
+        //     console.log(filterCheckedList)
+        //     event.stopPropagation();
+        //     checkList();
     }
 
-    const checkList = () => {
-        console.log("--- checkC ---")
-        for (let e of filterCheckedList) {
-            console.log(e);
-        }
-        // console.log(filterCheckedList);
-    }
+    // const checkList = () => {
+    //     console.log("--- checkC ---")
+    //     for (let e of filterCheckedList) {
+    //         console.log(e);
+    //     }
+    //     // console.log(filterCheckedList);
+    // }
 
     const showList = (event) => {
         let target = event.target.closest('li');
@@ -77,12 +78,11 @@ const ItemListFilter = ({ filterCheckedList, setFilterCheckedList, sortList }) =
             }
         }
 
-
         window.addEventListener('scroll', listScroll);
         return () => {
             window.removeEventListener('scroll', listScroll)
         }
-    }, [sortList])
+    }, [itemListSort])
 
     return (
         <div id="listfilter" ref={listfilter}>
@@ -94,8 +94,8 @@ const ItemListFilter = ({ filterCheckedList, setFilterCheckedList, sortList }) =
                         {mealkit.current}
                     </span>
                     <ul>
-                        {sortList.filter((e) => e.sort1 == '밀키트').sort((b, a) => a.count - b.count).map((e, i) => (
-                            <li key={i} className={e.count > 0 ? 'selected' : ''}>
+                        {itemListSort.filter((e) => e.sort1 == '밀키트').sort((b, a) => a.count - b.count).map((e, i) => (
+                            <li onClick={changeDeletedSort} key={i} className={e.count > 0 ? 'selected' : ''}>
                                 <i className="fa-regular fa-circle-check"></i>
                                 <span>{e.sort2}</span><span className="itemList_count">{e.count}</span>
                             </li>
@@ -109,8 +109,8 @@ const ItemListFilter = ({ filterCheckedList, setFilterCheckedList, sortList }) =
                         {ingre.current}
                     </span>
                     <ul>
-                        {sortList.filter((e) => e.sort1 == '식재료').sort((b, a) => a.count - b.count).map((e, i) => (
-                            <li key={i} className={e.count > 0 ? 'selected' : ''}>
+                        {itemListSort.filter((e) => e.sort1 == '식재료').sort((b, a) => a.count - b.count).map((e, i) => (
+                            <li onClick={changeDeletedSort} key={i} className={e.count > 0 ? 'selected' : ''}>
                                 <i className="fa-regular fa-circle-check"></i>
                                 <span>{e.sort2}</span><span className="itemList_count">{e.count}</span>
                             </li>

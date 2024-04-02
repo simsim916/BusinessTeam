@@ -34,8 +34,12 @@ public class Itme_askController {
 	@GetMapping("/select")
 	public ResponseEntity<?> selectItem_askList(PageRequest pageRequest, SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
-		System.out.println(searchRequest);
-		List<Item_ask> list = item_askService.selectItemAskListIntegerWhereType(pageRequest, searchRequest);
+		List<Item_ask> list = null;
+		if (searchRequest.getKeyword().matches("[0-9]+")) {
+			list = item_askService.selectItemAskListIntegerWhereType(pageRequest, searchRequest);
+		} else {
+			list = item_askService.selectItemAskListStringWhereType(pageRequest, searchRequest);
+		}
 		result = ResponseEntity.status(HttpStatus.OK).body(list.size() > 0 ? list : null);
 		return result;
 	}
@@ -69,15 +73,15 @@ public class Itme_askController {
 		PageRequest pageRequest = new PageRequest();
 		SearchRequest searchRequest = new SearchRequest();
 		searchRequest.setColumn("seq");
-		searchRequest.setKeyword(entity.getSeq()+"");
+		searchRequest.setKeyword(entity.getSeq() + "");
 		String password = entity.getPassword();
-		
+
 		entity = item_askService.selectItemAskListIntegerWhereType(pageRequest, searchRequest).get(0);
 
 		if (encoder.matches(password, entity.getPassword())) {
 			// 비밀번호 일치
 			result = ResponseEntity.status(HttpStatus.OK).body(entity);
-		}else {
+		} else {
 			// 비밀번호 불일치
 			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("비밀번호 불일치");
 		}

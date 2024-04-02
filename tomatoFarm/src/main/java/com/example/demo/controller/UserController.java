@@ -34,24 +34,23 @@ public class UserController {
 	@PostMapping("/login") 
 	public ResponseEntity<?> login(@RequestBody User entity) {
 		ResponseEntity<?> result = null;
-		System.out.println(entity);
 		String password = entity.getPassword(); // user가 입력한 password를 변수에 저장
 		User user = userService.selectUser(entity); // user가 입력한 id로 userData를 조회 하여 dto를 채운다.
-		if(user.getUsername() != null) { // 조회성공
+		
+		if(user != null) { // 조회성공
 			if(passwordEncoder.matches(password, user.getPassword())) {
 				final String token = tokenProvider.create(user);
 				final UserToken userToken = UserToken.builder()
 						.token(token)
 						.id(user.getId())
 						.username(user.getUsername())
-						.loginStatus(true)
 						.build();
 				result = ResponseEntity.status(HttpStatus.OK).body(userToken);
 			}else {
-				result = ResponseEntity.status(HttpStatus.OK).body("Password_uncorrected");
+				result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("비밀번호가 일치하지 않습니다.");
 			}
 		}else { // 조회실패
-			result = ResponseEntity.status(HttpStatus.OK).body("ID_uncorrectasdfed");
+			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("일치하는 ID가 없습니다.");
 		}
 		
 		return result;

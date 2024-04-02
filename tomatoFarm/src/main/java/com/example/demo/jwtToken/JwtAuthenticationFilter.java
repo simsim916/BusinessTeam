@@ -78,8 +78,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 		try {
 			// 1) request 에서 토큰 가져오기.
-			String token = parseBearerToken(request);
-			log.info("** TokenProvider.java, doFilterInternal(), token 확인=> "+token);
+			String token = tokenProvider.parseBearerToken(request);
 			
 			if (token != null && !token.equalsIgnoreCase("null")) {
 				
@@ -152,13 +151,4 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	// 	- deleteWhitespace() , trim() : 문자열에 공백 문자가 있으면 모두 제거
 	// 	- equals() : 파라미터 값의 동일성
 	
-	private String parseBearerToken(HttpServletRequest request) {
-	// => Http request 의 헤더를 파싱해 Bearer 토큰을 리턴한다.	
-		
-		String bearerToken = request.getHeader("Authorization");  
-		if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
-			return bearerToken.substring(7);
-		}
-		return null;
-	}
 } //class

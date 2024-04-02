@@ -6,7 +6,10 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.example.demo.entity.User;
 
@@ -18,7 +21,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 @Service
 public class TokenProvider {
-	private static final String SECRET_KEY = "CMSJWHKSMBMJ";
+	private static final String SECRET_KEY = "NMA8JPctFuna59f5";
 
 	// 1. JWT Token 생성
 	public String create(User entity) {
@@ -50,4 +53,14 @@ public class TokenProvider {
 
 		return claims.getSubject();
 	}
+	
+	public String parseBearerToken(HttpServletRequest request) {
+		// => Http request 의 헤더를 파싱해 Bearer 토큰을 리턴한다.	
+			
+			String bearerToken = request.getHeader("Authorization");  
+			if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
+				return bearerToken.substring(7);
+			}
+			return null;
+		}
 } //class

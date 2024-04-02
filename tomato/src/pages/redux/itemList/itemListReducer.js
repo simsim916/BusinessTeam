@@ -1,13 +1,8 @@
-import { FETCH_DATA_REQUEST, FETCH_DATA_SUCCESS, FETCH_DATA_FAILURE } from '../axios/actions';
+import { ITEMLIST_DATA_REQUEST, ITEMLIST_DATA_SUCCESS, ITEMLIST_DATA_FAILURE, SET_ITEMLIST_DATA } from './actions';
 
 const initialState = {
     itemList: {
-        loading: false,
-        data: [],
-        error: null
-    },
-    user: {
-        loading: false,
+        loading: true,
         data: [],
         error: null
     }
@@ -15,49 +10,29 @@ const initialState = {
 
 const itemListReducer = (state = initialState.itemList, action) => {
     switch (action.type) {
-        case FETCH_DATA_REQUEST:
+        case ITEMLIST_DATA_REQUEST:
             return {
                 ...state.itemList,
                 loading: true,
                 error: null
             };
-        case FETCH_DATA_SUCCESS:
+        case ITEMLIST_DATA_SUCCESS:
             return {
                 ...state.itemList,
                 loading: false,
                 data: action.payload
             };
-        case FETCH_DATA_FAILURE:
+        case ITEMLIST_DATA_FAILURE:
             return {
                 ...state.itemList,
                 loading: false,
                 data: [],
                 error: action.payload
             };
-        default:
-            return state;
-    }
-};
-const userListReducer = (state = initialState.user, action) => {
-    switch (action.type) {
-        case FETCH_DATA_REQUEST:
+        case SET_ITEMLIST_DATA:
             return {
                 ...state.itemList,
-                loading: true,
-                error: null
-            };
-        case FETCH_DATA_SUCCESS:
-            return {
-                ...state.itemList,
-                loading: false,
                 data: action.payload
-            };
-        case FETCH_DATA_FAILURE:
-            return {
-                ...state.itemList,
-                loading: false,
-                data: [],
-                error: action.payload
             };
         default:
             return state;
