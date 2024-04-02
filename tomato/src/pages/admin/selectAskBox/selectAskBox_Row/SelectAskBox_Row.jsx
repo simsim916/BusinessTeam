@@ -1,9 +1,9 @@
-import "./SelectAskBoxRow.css";
+import "./SelectAskBox_Row.css";
 import { useState } from 'react';
-import WriteReply from './WriteReply';
+import WriteReply from '../writeReply/WriteReply';
 
 
-const SelectAskBoxRow = ({ ask }) => {
+const SelectAskBox_Row = ({ ask }) => {
     const currentDate = new Date();
     const [writeReply, setWriteReply] = useState(false);
 
@@ -35,4 +35,4 @@ const SelectAskBoxRow = ({ ask }) => {
     );
 }
 
-export default SelectAskBoxRow;
+export default SelectAskBox_Row;

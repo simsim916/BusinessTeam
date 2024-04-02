@@ -18,8 +18,9 @@ const ShopBasket = () => {
     const buyItem = useSelector(state => state.buyItem)
 
     useEffect(() => {
-        const user = sessionStorage.getItem('userinfo');
-        dispatch(getItemListAmount('/item/selectin', 'post', cart, null, cart))
+        const user = JSON.parse(sessionStorage.getItem('userinfo'));
+        
+        dispatch(getItemListAmount('/item/selectin', 'post', cart, user!=null ? user.token : null, cart))
     }, [])
 
     if (itemList.loading) return <Loading />
