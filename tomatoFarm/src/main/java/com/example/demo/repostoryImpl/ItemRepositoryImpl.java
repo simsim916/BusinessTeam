@@ -1,5 +1,8 @@
 package com.example.demo.repostoryImpl;
 
+import static com.example.demo.entity.QItem.item;
+import static com.example.demo.entity.Qitem_event.item_event;
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,7 +14,6 @@ import com.example.demo.domain.ItemDTO;
 import com.example.demo.domain.SortDTO;
 import com.example.demo.entity.Item;
 import com.example.demo.entity.QItem;
-import com.example.demo.entity.UserCart;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.repository.ItemRepository;
@@ -20,9 +22,6 @@ import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-
-import static com.example.demo.entity.QItem.item;
-import static com.example.demo.entity.Qitem_event.item_event;
 
 import lombok.AllArgsConstructor;
 
@@ -240,10 +239,10 @@ public class ItemRepositoryImpl implements ItemRepository {
 		return entityManager.merge(entity);
 	}
 	
-	public List<Item> selectItemListWhereInCode(List<Integer> codeList) {
+	public List<ItemDTO> selectItemListWhereInCode(List<Integer> codeList) {
 		System.out.println(codeList);
 		return jPAQueryFactory
-				.select(Projections.bean(Item.class, item.code, item.brand, item.name, item.delivery, item.price,
+				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price,
 						item.storage, item.weight, item.packing, item.sales, item.stock, item.views, item.likes,
 						item.event_code, item.intro, item_event.discount, item_event.name.as("event_name")))
 				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
