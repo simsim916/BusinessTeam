@@ -1,22 +1,21 @@
-import ShopBasketSelectBox from './ShopBasketSelectBox';
-import ShopBasketPayBox from './ShopBasketPayBox';
+import Cart_item from './Cart_item';
+import Cart_total from './Cart_total';
 import { useState, useEffect, useMemo } from 'react';
-import './ShopBasket.css'
-import Loading from './../components/Loading';
-import Error from './../components/Error';
-import BestItemBox from './BestItemBox';
+import './Cart.css'
+import Loading from '../../../components/Loading';
+import Error from '../../../components/Error';
+import BestItemBox from './Cart_item';
 import { useDispatch, useSelector } from 'react-redux';
-import { getItemListAmount, setItemList } from '../redux/itemList/actions';
+import { getItemListAmount, setItemList } from '../../../redux/itemList/actions';
 
 
-const ShopBasket = () => {
-    let cart = localStorage.getItem('cart')
-    // let cart;
+const Cart = () => {
     const dispatch = useDispatch();
     const itemList = useSelector(state => state.itemList)
     const buyItem = useSelector(state => state.buyItem)
-
+    
     useEffect(() => {
+        const cart = localStorage.getItem('cart')
         const user = sessionStorage.getItem('userinfo');
         dispatch(getItemListAmount('/item/selectin', 'post', cart, null, cart))
     }, [])
@@ -31,9 +30,8 @@ const ShopBasket = () => {
                 &nbsp;&nbsp;장바구니&nbsp;&nbsp;
                 <i className="fa-solid fa-cart-shopping" aria-hidden="true"></i>
             </h3>
-            <ShopBasketSelectBox buyItem={buyItem.data} itemList={itemList.data} />
-
-            <ShopBasketPayBox buyItem={buyItem.data} />
+            <Cart_item buyItem={buyItem.data} itemList={itemList.data} />
+            <Cart_total buyItem={buyItem.data} />
 
             {/* <BestItemBox /> */}
 
@@ -41,4 +39,4 @@ const ShopBasket = () => {
     );
 }
 
-export default ShopBasket;
+export default Cart;

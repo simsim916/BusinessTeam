@@ -11,7 +11,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginFailure, loginRequest, loginSuccess } from '../../../redux/user/action';
 
 const ItemDetailBox = ({ item }) => {
-    // console.log(item.discount)
     const [inputCountValue, setInputCountValue] = useState(1);
     const [introItem, setIntroItem] = useState(false)
     const [cartItem, setCartItem] = useState(true);
@@ -262,13 +261,11 @@ const ItemDetailBox = ({ item }) => {
                         :
                         gotoCart ?
                             <div id='goCartContainer'>
-                                <div id='goCartBox'>
-                                    <div id="itemName">{item.name}</div>
-                                    <div>장바구니에 상품을 담았습니다.</div>
-                                    <div>장바구니로 이동하시겠습니까?</div>
-                                    <Link to="/home/cart" id="cartOK">이동</Link>
-                                    <a onClick={() => setGotoCart(!gotoCart)} id="cartNO">닫기</a>
-                                </div>
+                                <p id="itemName">{item.name}</p>
+                                <p>장바구니에 상품을 담았습니다.</p>
+                                <p>장바구니로 이동하시겠습니까?</p>
+                                <Link to="/home/cart" id="cartOK">이동</Link>
+                                <a onClick={() => setGotoCart(!gotoCart)} id="cartNO">닫기</a>
                                 <div id='triangle_bottom'></div>
                             </div>
                             :
