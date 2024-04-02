@@ -43,7 +43,6 @@ const Cart_item = ({ buyItem, itemList }) => {
                     <input {...buyItem.length === itemList.length && { checked: true }} type="checkbox" value='' onChange={handleAllCheckBox} />
                     전체선택
                 </li>
-
             </ul>
             <div id="shopBasketItemBox">
                 <ul id="shopBasketItemBoxTitle">

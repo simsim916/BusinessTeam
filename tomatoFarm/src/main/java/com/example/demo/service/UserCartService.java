@@ -8,9 +8,6 @@ import com.example.demo.entity.UserCartID;
 
 public interface UserCartService {
 
-	
 	public UserCart update(UserCart usercart);
-	
-	
 	List<UserCart> insertUserCarts(List<UserCart> cartList);
 }

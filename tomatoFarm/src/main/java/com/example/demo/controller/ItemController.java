@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,7 @@ import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.service.ItemService;
 import com.example.demo.service.KeywordService;
+import com.example.demo.service.UserCartService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -42,6 +44,8 @@ import lombok.extern.log4j.Log4j2;
 public class ItemController {
 	private final ItemService itemService;
 	private final KeywordService keywordService;
+	private final UserCartService userCartService;
+	private final TokenProvider tokenProvider;
 
 	@GetMapping("/selectnotnull")
 	public ResponseEntity<?> selectItemWhereEvent(SearchRequest searchRequest) {
@@ -173,12 +177,25 @@ public class ItemController {
 
 	@PostMapping("/selectin")
 	public ResponseEntity<?> selectin(@RequestBody List<UserCart> list, HttpServletRequest request) {
-		System.out.println(list);
-		ResponseEntity<?> result = null;
 		List<Integer> codeList = new ArrayList<>();
-		for (UserCart e : list)
+		for (UserCart e : list) {
 			codeList.add(e.getItem_code());
+		}
 		List<ItemDTO> itemList = itemService.selectItemListWhereInCode(codeList);
+		
+		String token = tokenProvider.parseBearerToken(request);
+		if (token != null) {
+			
+//			LocalDate now = LocalDateTime.now().plusHours(9).toLocalDate();
+			LocalDate now = LocalDateTime.now().plusDays(2).toLocalDate();
+			String id = tokenProvider.validateAndGetUserId(token);
+			for (UserCart e : list) {
+				e.setId(id);
+				e.setRegdate(now);
+			}
+			userCartService.insertUserCarts(list);
+		}
+		ResponseEntity<?> result = null;
 		result = ResponseEntity.status(HttpStatus.OK).body(itemList);
 		return result;
 	}

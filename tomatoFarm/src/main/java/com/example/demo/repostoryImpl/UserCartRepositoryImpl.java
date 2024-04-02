@@ -29,8 +29,7 @@ import static com.example.demo.entity.Qitem_event.item_event;
 public class UserCartRepositoryImpl{
 
 	private final JPAQueryFactory jpaQueryfactory;
-
-
+	
 	
 	public List<UserCart> save(List<UserCart> list) {
 		return save(list);
