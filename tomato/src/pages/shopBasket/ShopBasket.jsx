@@ -12,12 +12,15 @@ import { getItemListAmount, setItemList } from '../redux/itemList/actions';
 
 const ShopBasket = () => {
     let cart = localStorage.getItem('cart')
+    // let cart;
     const dispatch = useDispatch();
     const itemList = useSelector(state => state.itemList)
+    const buyItem = useSelector(state => state.buyItem)
+
     useEffect(() => {
+        const user = sessionStorage.getItem('userinfo');
         dispatch(getItemListAmount('/item/selectin', 'post', cart, null, cart))
     }, [])
-
 
     if (itemList.loading) return <Loading />
     if (itemList.error) return <Error />
@@ -29,18 +32,13 @@ const ShopBasket = () => {
                 &nbsp;&nbsp;장바구니&nbsp;&nbsp;
                 <i className="fa-solid fa-cart-shopping" aria-hidden="true"></i>
             </h3>
-            <ShopBasketSelectBox itemList={itemList.data} />
+            <ShopBasketSelectBox buyItem={buyItem.data} itemList={itemList.data} />
 
-            <ShopBasketPayBox />
+            <ShopBasketPayBox buyItem={buyItem.data} />
 
             {/* <BestItemBox /> */}
 
         </div>
-
-
-
-
-
     );
 }
 

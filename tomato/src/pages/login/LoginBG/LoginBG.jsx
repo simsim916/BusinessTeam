@@ -88,6 +88,7 @@ const LoginBG = ({ checkId, checkPassword, changeOpacity }) => {
                     username: response.data.username,
                     login: true
                 }));
+                
                 navigate("/home");
             } catch (error) {
                 console.log(error.response.data);

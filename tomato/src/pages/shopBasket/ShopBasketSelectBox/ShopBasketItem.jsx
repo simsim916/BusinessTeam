@@ -1,7 +1,12 @@
+import { useDispatch } from 'react-redux';
 import { SERVER_RESOURCE } from '../../../model/server-config';
 import { makeComa, makeDiscountPrice } from '../../components/MathFunction';
+import { setBuyItemList } from '../../redux/buyItem/actions';
+import { setItemList } from '../../redux/itemList/actions';
 
-const ShopBasketItem = ({ item, idx, changeItemList }) => {
+const ShopBasketItem = ({ item, idx, changeItemList, buyItem }) => {
+
+    const dispatch = useDispatch();
 
     const handleClick = (type) => {
         changeItemList(idx, type);
@@ -11,18 +16,41 @@ const ShopBasketItem = ({ item, idx, changeItemList }) => {
         changeItemList(idx, event.target.value)
     }
 
+    const handleCheckBox = () => {
+        const find = buyItem.find(i => i.code === item.code);
+        let arr = [...buyItem];
+        if (find === undefined) {
+            arr.push(item);
+            dispatch(setBuyItemList(arr));
+        } else {
+            const filtered = arr.filter(i => i.code !== item.code);
+            dispatch(setBuyItemList(filtered));
+        }
+    }
+
+    const handleDelete = () => {
+        let local = JSON.parse(localStorage.getItem('cart'));
+        let filtered = local.filter(i => +i.item_code != +item.code);
+        // localStorage.setItem('cart', JSON.stringify(filtered));
+        dispatch(setItemList(filtered));
+    }
+
+
     return (
         <ul className="shopBasketItem">
-            <li><input className="check" type="checkbox" name="buy"></input></li>
+            <li><input className="check" type="checkbox" name="buy" onChange={() => handleCheckBox(item)}></input></li>
             <li className="shopBasketItemImg"><img src={SERVER_RESOURCE + `/img/itemImg/${item.code}_2.jpg`} alt="" /></li>
             <li className="shopBasketItemIfo">
                 <p className="shopBasketItemIfo_name">{item.name}</p>
-                <p className="shopBasketItemIfo_price">{makeComa(item.price)}원</p>
                 {
-                    item.discount ?
-                        <p className="shopBasketItemIfo_sale">{makeComa(item.price)}원</p>
+                    item.discount
+                        ?
+                        <>
+                            <p style={{ textDecoration: 'line-through', marginBottom: '5px' }} className="shopBasketItemIfo_price">{makeComa(item.price)}원</p>
+                            <p className="shopBasketItemIfo_sale">{makeComa(item.price)}원</p>
+                        </>
                         :
-                        null
+                        <p style={{ color: 'black' }} className="shopBasketItemIfo_price">{makeComa(item.price)}원</p>
                 }
             </li>
             <li className="shopBasketItem_count">
@@ -33,7 +61,7 @@ const ShopBasketItem = ({ item, idx, changeItemList }) => {
             {
                 item.discount ? (
                     <li className="shopBasketItemIfo_sumprice">
-                        <p className="shopBasketItemIfo_sale">{makeComa(item.price)}원</p>
+                        <p style={{ textDecoration: 'line-through' }}>{makeComa(item.price * item.amount)}원</p>
                         <p>{makeComa(Math.round(item.price * (100 - item.discount) / 100) * item.amount)}원</p>
                     </li>
                 ) : (
@@ -42,7 +70,10 @@ const ShopBasketItem = ({ item, idx, changeItemList }) => {
                     </li>
                 )
             }
-            <li>{item.delivery ? makeComa(item.delivery) + ' 원' : '무료배송'} </li>
+            <li>
+                <div className='xButton' onClick={handleDelete}><i className="fa-solid fa-xmark"></i></div>
+                {item.delivery ? makeComa(item.delivery) + ' 원' : '무료배송'}
+            </li>
         </ul >
     );
 }
