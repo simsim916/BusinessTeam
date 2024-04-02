@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.domain.UserCartDTO;
 import com.example.demo.entity.Item;
 import com.example.demo.entity.UserCart;
 import com.example.demo.entity.UserCartID;
@@ -16,8 +17,9 @@ import com.querydsl.core.QueryFactory;
 import lombok.AllArgsConstructor;
 
 
-public interface UserCartRepository extends JpaRepository<UserCart, UserCartID>{
+public interface UserCartRepository{
 
 
-	List<UserCart> save(List<UserCart> list);
+	List<UserCart> merge(List<UserCart> list);
+	List<UserCartDTO> selectItemListWhereUserID(UserCart userCart);
 }

@@ -13,11 +13,11 @@ const Cart = () => {
     const dispatch = useDispatch();
     const itemList = useSelector(state => state.itemList)
     const buyItem = useSelector(state => state.buyItem)
-    
+
     useEffect(() => {
         const cart = localStorage.getItem('cart')
         const user = sessionStorage.getItem('userinfo');
-        dispatch(getItemListAmount('/item/selectin', 'post', cart, null, cart))
+        dispatch(getItemListAmount('/item/selectin', 'post', cart, user != null ? JSON.parse(user).token : null, cart))
     }, [])
 
     if (itemList.loading) return <Loading />

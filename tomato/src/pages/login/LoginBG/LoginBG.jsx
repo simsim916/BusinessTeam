@@ -7,6 +7,7 @@ import { SERVER_RESOURCE } from '../../../model/server-config';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginFailure, loginRequest, loginSuccess } from '../../redux/user/action';
 import { api } from '../../../model/model'
+import { getUserCart } from '../../redux/userCart/action';
 
 const LoginBG = ({ checkId, checkPassword, changeOpacity }) => {
     console.log('LoginBG 랜더링')
@@ -40,7 +41,6 @@ const LoginBG = ({ checkId, checkPassword, changeOpacity }) => {
         }
         if (handle) result = handle(event);
         valueChange(event, result.message, result.check);
-        console.log(loginValue.check)
     }
 
     const handelInputBlur = (event, handle) => {
@@ -79,9 +79,8 @@ const LoginBG = ({ checkId, checkPassword, changeOpacity }) => {
     const requestLogin = (loginValue) => {
         return async (dispatch) => {
             dispatch(loginRequest(loginValue.value.id));
-            console.log(loginValue.value.id)
             try {
-                const response = await api('/user/login', 'post', loginValue.value)
+                const response = await api('/user/login', 'post', loginValue.value);
                 dispatch(loginSuccess(response.data));
                 sessionStorage.setItem('userinfo', JSON.stringify({
                     token: response.data.token,
@@ -89,7 +88,7 @@ const LoginBG = ({ checkId, checkPassword, changeOpacity }) => {
                     login: true,
                     id: response.data.id
                 }));
-                
+                dispatch(getUserCart('/usercart/select', 'get', null, response.data.token));
                 navigate("/home");
             } catch (error) {
                 console.log(error.response.data);

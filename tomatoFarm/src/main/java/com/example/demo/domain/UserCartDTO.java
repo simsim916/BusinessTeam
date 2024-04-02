@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package com.example.demo.domain;
 
 import java.time.LocalDate;
 
@@ -13,26 +13,26 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "user_cart")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@IdClass(UserCartID.class)
-public class UserCart {
+public class UserCartDTO {
 
-	@Id
-	private Integer item_code; // 상품코드
-	@Id
-	private String id; // 사용자 아이디
 	
-	@Builder.Default 
+	private Integer item_code; // 상품코드
+	private String id; // 사용자 아이디
 	private Integer item_amount = 0; // 장바구니 수량
-	@Builder.Default 
 	private Integer views = 1; // 조회수
-	@Builder.Default 
 	private Integer like_item = 0; // 관심상품 등록 여부
 	private LocalDate regdate; // 최근 조회 날짜
 
+	private String item_name;
+	private Integer price;
+	private Integer delivery;
+	private Integer vat;
+	private Integer stock;
+	private Integer event_code;
+	private Integer discount;
+	
 }
