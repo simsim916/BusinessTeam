@@ -65,10 +65,8 @@ public class ItemController {
 	public ResponseEntity<?> selectItemWherebrand(SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
 		PageRequest pageRequest = new PageRequest(1, 6);
-		System.out.println("\nselectItemWherebrand\n");
 
 		List<ItemDTO> list = itemService.selectItemWherebrand(pageRequest, searchRequest);
-		System.out.println(list);
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}

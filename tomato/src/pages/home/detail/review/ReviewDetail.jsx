@@ -4,6 +4,9 @@ import { useState } from 'react';
 
 const ReviewDetail = ({ itemReview, reviewDetail, setReviewDetail }) => {
 
+
+    
+
     const reivewDetailImgChange = (event) => {
         let ele = event.target.closest('div');
         ele.style.opacity = 1;
