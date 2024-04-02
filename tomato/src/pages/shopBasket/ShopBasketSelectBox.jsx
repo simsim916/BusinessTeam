@@ -25,7 +25,6 @@ const ShopBasketSelectBox = ({ itemList }) => {
 
             <ul id="shopBasketSelect">
                 <li><input type="checkbox"></input>전체선택</li>
-                <li><input type="checkbox"></input>전체삭제</li>
             </ul>
             <div id="shopBasketItemBox">
                 <ul id="shopBasketItemBoxTitle">
