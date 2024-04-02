@@ -2,7 +2,6 @@ import ShopBasketSelectBox from './ShopBasketSelectBox';
 import ShopBasketPayBox from './ShopBasketPayBox';
 import { useState, useEffect, useMemo } from 'react';
 import './ShopBasket.css'
-import axios from 'axios';
 import Loading from './../components/Loading';
 import Error from './../components/Error';
 import BestItemBox from './BestItemBox';

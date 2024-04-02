@@ -4,6 +4,7 @@ import Index from './index/Index';
 import ItemList from "./list/ItemList";
 import ItemDetail from './detail/ItemDetail';
 import ShopBasket from "../shopBasket/ShopBasket";
+import BuyBox from './shop/buy/BuyBox';
 
 
 const Home = () => {
@@ -16,6 +17,7 @@ const Home = () => {
                 <Route path='/list' element={<ItemList />} />
                 <Route path='/detail' element={<ItemDetail />} />
                 <Route path='/cart' element={<ShopBasket />} />
+                <Route path='/buy' element={<BuyBox />} />
                 <Route path='/' element={<Index />} />
                 <Route path='/*' element={'잘못된경로'} />
             </Routes>

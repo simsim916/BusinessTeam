@@ -86,7 +86,8 @@ const LoginBG = ({ checkId, checkPassword, changeOpacity }) => {
                 sessionStorage.setItem('userinfo', JSON.stringify({
                     token: response.data.token,
                     username: response.data.username,
-                    login: true
+                    login: true,
+                    id: response.data.id
                 }));
                 navigate("/home");
             } catch (error) {
