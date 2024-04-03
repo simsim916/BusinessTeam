@@ -4,7 +4,7 @@ import { SERVER_RESOURCE } from '../../../model/server-config';
 import { api } from '../../../model/model'
 import { Link } from 'react-router-dom';
 
-const ChatBotBox = ({ root }) => {
+const ChatBotBox = ({ root, setShowChatbot }) => {
     const userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
     const inputBox = useRef(null);
     /* 메세지 입력 상태 */
@@ -52,10 +52,10 @@ const ChatBotBox = ({ root }) => {
     }
 
     const changeType = (event) => {
-        console.log(event.target.closest('button').children[1].innerText);
+        console.log(event.target.closest('div').children[1].innerText);
         setText((prev) => ({
             ...prev,
-            type: event.target.closest('button').children[1].innerText
+            type: event.target.closest('div').children[1].innerText
         }))
     }
     const changeType_Option = (event) => {
@@ -82,12 +82,17 @@ const ChatBotBox = ({ root }) => {
     return (
         <div id='ChatBotBox'>
             <div id='ChatBox'>
-                <h3>토마토팜 상담챗봇</h3>
+                <h3>
+                    토마토팜 상담챗봇
+                    {setShowChatbot && <div onClick={() => setShowChatbot()} className="close"><i className="fa-solid fa-xmark"></i></div>}
+                </h3>
                 <div id="chatBotTitle">
-                    <Link to="/home"><img id="logo" src={SERVER_RESOURCE + "/img/logo2.png"} /></Link>
-                    <div>고객님, 안녕하세요.</div>
-                    <div>무엇을 도와드릴까요?</div>
-                    <div >궁금한 내용을 선택하거나, 직접 입력해주세요.</div>
+                    <img src={SERVER_RESOURCE + "/img/logo2.png"} />
+                    <p>
+                        {userinfo.username} 고객님, 안녕하세요.<br />
+                        무엇을 도와드릴까요?<br />
+                        <span>궁금한 내용을 선택하거나, 직접 입력해주세요.</span>
+                    </p>
                 </div>
                 {/* <div className='managerChat_Intro'>
                     <div>안녕하세요. 토마토팜입니다.<br></br>무엇을 도와드릴까요?</div>
@@ -98,18 +103,18 @@ const ChatBotBox = ({ root }) => {
                     <div id="openQuestion">
                         <h2>자주 묻는 질문</h2>
                         <div id="openQuestionBox">
-                            <button onClick={changeType}>
+                            <div onClick={changeType}>
                                 <i class="fa-solid fa-truck"></i>
                                 <span>배송</span>
-                            </button>
-                            <button onClick={changeType}>
+                            </div>
+                            <div onClick={changeType}>
                                 <i class="fa-solid fa-cubes"></i>
-                                <span>입고</span>
-                            </button>
-                            <button onClick={changeType}>
+                                <span>상품</span>
+                            </div>
+                            <div onClick={changeType}>
                                 <i class="fa-solid fa-gift"></i>
-                                <span>이벤트</span>
-                            </button>
+                                <span>일반</span>
+                            </div>
                         </div>
                     </div>}
 
@@ -118,9 +123,9 @@ const ChatBotBox = ({ root }) => {
                     <div id="clickQuestion">
                         <h2>질문 선택</h2>
                         <div id="clickQuestionSelect">
-                            <button onClick={changeType_Option}>배송일정</button>
-                            <button>셀프픽업</button>
-                            <button>취소/교환/환불</button>
+                            <div onClick={changeType_Option}>배송일정</div>
+                            <div>셀프픽업</div>
+                            <div>취소/교환/환불</div>
                         </div>
                     </div>
                 }
@@ -143,9 +148,9 @@ const ChatBotBox = ({ root }) => {
                     <div id="clickQuestion">
                         <h2>질문 선택</h2>
                         <div id="clickQuestionSelect">
-                            <button>재입고 날짜</button>
-                            <button>대량주문</button>
-                            <button>포장</button>
+                            <div>재입고 날짜</div>
+                            <div>대량주문</div>
+                            <div>포장</div>
                         </div>
                     </div>}
                 {/* <div className='managerChat_message' >품절 상태인 상품은 5~7일 이내에 재입고 될 예정이며, 자세한 상품 입고 안내는 상품코드를 입력해주세요.</div> */}
@@ -153,10 +158,10 @@ const ChatBotBox = ({ root }) => {
                     <div id="clickQuestion">
                         <h2>질문 선택</h2>
                         <div id="clickQuestionSelect">
-                            <button>선물하기</button>
-                            <button>쿠폰</button>
-                            <button>이벤트</button>
-                            <button onClick={changeType_Option}>적립금</button>
+                            <div>선물하기</div>
+                            <div>쿠폰</div>
+                            <div>이벤트</div>
+                            <div onClick={changeType_Option}>적립금</div>
                         </div>
                     </div>}
                 {text.type == '적립금' &&
@@ -165,7 +170,9 @@ const ChatBotBox = ({ root }) => {
                         - 후기 작성 : 후기 작성 후, 차주 첫 영업일 지급<br></br>
                         - 웰컴/감사 적립금 : 회원가입 후, 첫 주문 시 쿠폰 제공
                     </div>}
-                {messageAll && messageAll.map((e, i) => <p className='userChat'>{e.content}</p>)}
+                <div id='messageBox'>
+                    {messageAll && messageAll.map((e, i) => <p className={e.writer == userinfo.id? 'myChat' : 'otherChat'}>{e.content}</p>)}
+                </div>
             </div>
             <div id="chatBotTextBox">
                 <input type="text" placeholder="텍스트를 입력해주세요." value={text.content} onChange={(event) => changeContent(event)} ref={inputBox}

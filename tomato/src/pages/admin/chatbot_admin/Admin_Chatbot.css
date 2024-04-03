@@ -100,22 +100,6 @@
     padding: 10px;
 }
 
-#ChatBotBox {
-    position: fixed;
-    right: 20px;
-    bottom: 0;
-    /* width: 500px; */
-    display: block;
-    background-color: #ffffff;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    height: 600px;
-    gap: 10px;
-}
-
 #admin_ChatBotRoom_ChatBox {
     overflow: hidden;
     width: 100%;

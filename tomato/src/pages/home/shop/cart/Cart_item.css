@@ -148,7 +148,8 @@
     flex-direction: column;
 }
 
-.shopBasketItemIfo p,a {
+.shopBasketItemIfo p,
+.shopBasketItemIfo a {
     font-size: 15px;
     line-height: 1em;
 }
