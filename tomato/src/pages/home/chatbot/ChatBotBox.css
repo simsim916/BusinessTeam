@@ -14,6 +14,7 @@
     height: 100%;   /*600px*/
     gap: 10px;
 }
+
 #ChatBox {
     padding: 10px;
     overflow: hidden;
@@ -165,6 +166,17 @@
     display: inline-flex;
     border: #9B1B30 2px solid;
     font-weight: 500;
+}
+#Back_Chat{
+    display: flex;
+    justify-content: center;
+    background-color:#cbe3f7;
+    width: 50%;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 10px;
+    border-radius: 30px;
+    margin-top: 20px;
 }
 
 #chatBotTextBox {
