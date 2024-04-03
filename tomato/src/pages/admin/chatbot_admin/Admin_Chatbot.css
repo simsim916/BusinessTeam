@@ -33,14 +33,14 @@
     border: #9B1B30 2px solid;
 
 }
-#chatBot_Unidentified #chatBot_Unidentified_Title li:nth-child(4){
+#chatBot_Unidentified #chatBot_Unidentified_Title li:nth-child(5){
     /* background-color:  */
     border-radius: 0;
 }
 
 #chatBot_Unidentified ul {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     
     
 }
@@ -56,7 +56,7 @@
     width: 100%;
     margin-bottom: 5px;
 }
-#chatBot_Unidentified li:nth-child(4){
+#chatBot_Unidentified li:nth-child(5){
     cursor: pointer;
     background-color: #9B1B30;
     color: white;

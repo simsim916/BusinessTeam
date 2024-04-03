@@ -4,11 +4,13 @@ import javax.persistence.EntityManager;
 
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.domain.ChatBotDTO;
 import com.example.demo.entity.ChatBot;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.repository.ChatBotRepository;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import static com.example.demo.entity.QChatBot.chatBot;
 import static com.example.demo.entity.QUser.user;
@@ -58,11 +60,15 @@ public class ChatBotRepositoryImpl implements ChatBotRepository {
 	}
 	
 	@Override
-	public List<ChatBot> selectRootList(PageRequest pageRequest, SearchRequest searchRequest) {
-		return jPAQueryFactory.select(Projections.bean(ChatBot.class, 
-				chatBot.writer, chatBot.root, chatBot.ing, chatBot.regdate.max(), user.level.as("user_level")))
-				.from(chatBot).leftJoin(user).on(chatBot.writer.eq(user.id))
+	public List<ChatBotDTO> selectRootList(PageRequest pageRequest, SearchRequest searchRequest) {
+		return jPAQueryFactory.select(Projections.bean(ChatBotDTO.class, 
+				chatBot.writer, chatBot.root, chatBot.ing, chatBot.regdate.max().as("regdate"), user.level.as("user_level")))
+				.from(chatBot)
+				.leftJoin(user).on(chatBot.writer.eq(user.id))
+//				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue().contains(searchRequest.getKeyword()))
 				.groupBy(chatBot.root,chatBot.writer,chatBot.ing)
+//				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum())
+//				.orderBy(chatBot.regdate.max().desc())
 				.fetch();
 	}
 }

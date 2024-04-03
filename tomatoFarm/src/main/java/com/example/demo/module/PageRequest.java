@@ -20,8 +20,8 @@ import lombok.ToString;
 @ToString
 public class PageRequest {
 	
-	private int page; // 출력페이지
-	private int size; // 1page 당 출력 row 갯수
+	private int page = 1; // 출력페이지
+	private int size = 500; // 1page 당 출력 row 갯수
 	private int startNum; // 페이지의 나타날 데이터 중 시작데이터 번호
 	private int endNum; // 페이지의 나타날 데이터 중 끝데이터 번호
 	private int currPage;
@@ -42,8 +42,6 @@ public class PageRequest {
 	}
 	
 	public PageRequest() {
-		this.page = 1;
-		this.size = 500;
 		this.startNum = (page-1)*size;
 		this.endNum = page*size;
 	}

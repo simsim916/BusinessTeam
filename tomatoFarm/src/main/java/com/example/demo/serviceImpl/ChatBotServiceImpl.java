@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.domain.ChatBotDTO;
 import com.example.demo.entity.ChatBot;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
@@ -36,7 +37,7 @@ public class ChatBotServiceImpl implements ChatBotService {
 	}
 	
 	@Override
-	public List<ChatBot> selectRootList(PageRequest pageRequest, SearchRequest searchRequest) {
+	public List<ChatBotDTO> selectRootList(PageRequest pageRequest, SearchRequest searchRequest) {
 		return chatbotrepository.selectRootList(pageRequest, searchRequest);
 	}
 }
