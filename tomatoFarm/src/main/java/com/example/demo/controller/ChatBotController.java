@@ -32,11 +32,11 @@ public class ChatBotController {
 	UserService userService;
 
 	@PostMapping("/insert")
-	public ResponseEntity<?> save(@RequestBody ChatBot chatbot) {
+	public ResponseEntity<?> save(HttpServletRequest request, @RequestBody ChatBot chatbot) {
 		ResponseEntity<?> result = null;
-		String token = "토근예시";
-		String userId = "manager3";
-		chatbot.setWriter(userId);
+		String token = tokenProvider.parseBearerToken(request);
+		String id = tokenProvider.validateAndGetUserId(token);
+		chatbot.setWriter(id);
 		chatbot = chatBotService.save(chatbot);
 		if (chatbot != null) {
 			List<ChatBot> list = chatBotService.selectAllFromRoot(chatbot);

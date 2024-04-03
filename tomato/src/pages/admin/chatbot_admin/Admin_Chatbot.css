@@ -21,19 +21,22 @@
     padding: 10px;
     margin: 15px 0;
 }
-#chatBot_Unidentified #chatBot_Unidentified_Title{
+
+#chatBot_Unidentified #chatBot_Unidentified_Title {
     /* border: #9B1B30 2px solid; */
     margin-bottom: 20px;
 }
-#chatBot_Unidentified #chatBot_Unidentified_Title li{
-    background-color:  #fff4f4;
+
+#chatBot_Unidentified #chatBot_Unidentified_Title li {
+    background-color: #fff4f4;
     color: black;
     border: 500;
     font-size: 18px;
     border: #9B1B30 2px solid;
 
 }
-#chatBot_Unidentified #chatBot_Unidentified_Title li:nth-child(5){
+
+#chatBot_Unidentified #chatBot_Unidentified_Title li:nth-child(5) {
     /* background-color:  */
     border-radius: 0;
 }
@@ -41,8 +44,8 @@
 #chatBot_Unidentified ul {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    
-    
+
+
 }
 
 #chatBot_Unidentified li {
@@ -56,7 +59,8 @@
     width: 100%;
     margin-bottom: 5px;
 }
-#chatBot_Unidentified li:nth-child(5){
+
+#chatBot_Unidentified li:nth-child(5) {
     cursor: pointer;
     background-color: #9B1B30;
     color: white;
@@ -64,7 +68,7 @@
     border-radius: 20px;
 }
 
-#admin_ChatBotRoom{
+#admin_ChatBotRoom {
     width: 50%;
     height: 100%;
     position: absolute;
@@ -75,24 +79,27 @@
     gap: 10px;
     display: grid;
     /* border: 2px solid #9B1B30; */
-    
+
 }
-#admin_ChatBotRoom_Box{
+
+#admin_ChatBotRoom_Box {
     border: 2px solid #9B1B30;
     position: relative;
 
 }
-#admin_ChatBotRoom_Box h4{
+
+#admin_ChatBotRoom_Box h4 {
     width: 50%;
 }
-#admin_ChatBotRoom_Box h4:nth-child(2){
+
+#admin_ChatBotRoom_Box h4:nth-child(2) {
     margin-bottom: 20px;
 }
 
-#admin_ChatBotRoom div{
+#admin_ChatBotRoom div {
     padding: 10px;
-    border: 1px solid #ccc;
 }
+
 #ChatBotBox {
     position: fixed;
     right: 20px;
@@ -165,6 +172,7 @@
     color: white;
     cursor: pointer;
 }
+
 #admin_ChatBotClose {
     position: absolute;
     right: 0;

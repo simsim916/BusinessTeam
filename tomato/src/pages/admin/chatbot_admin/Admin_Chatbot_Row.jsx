@@ -1,6 +1,6 @@
 
 
-const Admin_Chatbot_Row = ({ root, rootList }) => {
+const Admin_Chatbot_Row = ({ root, rootList, changeshowChatbot }) => {
     let thispageRoot = rootList.filter(e => e.root == root);
 
     return (
@@ -15,9 +15,9 @@ const Admin_Chatbot_Row = ({ root, rootList }) => {
                     :
                     '미확인'
             }</li>
-            <li>{thispageRoot.filter(e => e.user_level >= 100).map(e => `${e}`)}</li>
+            <li>{thispageRoot.filter(e => e.user_level >= 100).map(e => `${e.writer}`)}</li>
             <li>{thispageRoot.filter(e => e.user_level < 100).map(e => e.writer)}</li>
-            <li>채팅하기</li>
+            <li onClick={() => changeshowChatbot(root)} >채팅하기</li>
         </ul>
     );
 }

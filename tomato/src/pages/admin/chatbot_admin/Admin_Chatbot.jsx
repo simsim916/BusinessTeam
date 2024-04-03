@@ -37,6 +37,16 @@ const Admin_Chatbot = () => {
         return result;
     }
 
+    const changeshowChatbot = (value) => {
+        console.log(value)
+        if (showChatbot.includes(value)) {
+            if (showChatbot.length < 5) {
+                setShowChatbot(showChatbot.filter(e => e != value));
+            }
+        } else
+            setShowChatbot([...showChatbot, value]);
+    }
+    console.log("showChatbot : " + showChatbot)
     return (
         <div id="admin_ChatBotBox">
             <div id="chatBot_Unidentified">
@@ -49,7 +59,7 @@ const Admin_Chatbot = () => {
                     <li>채팅</li>
                 </ul>
                 {
-                    root.current && root.current.map((e, i) => <Admin_Chatbot_Row key={i} root={e} rootList={rootList} />)
+                    root.current && root.current.map((e, i) => <Admin_Chatbot_Row key={i} root={e} rootList={rootList} changeshowChatbot={changeshowChatbot} />)
                 }
             </div>
 

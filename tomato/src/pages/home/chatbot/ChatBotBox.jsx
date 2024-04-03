@@ -1,11 +1,11 @@
 import './ChatBotBox.css';
-import { useState, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState, useRef, useEffect } from 'react';
 import { SERVER_RESOURCE } from '../../../model/server-config';
-import axios from 'axios';
+import { api } from '../../../model/model'
+import { Link } from 'react-router-dom';
 
-const ChatBotBox = () => {
-
+const ChatBotBox = ({ root }) => {
+    const userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
     const inputBox = useRef(null);
     /* 메세지 입력 상태 */
     const [text, setText] = useState({
@@ -18,23 +18,37 @@ const ChatBotBox = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
-    const userChatbot = () => {
-        setLoading(true)
-        axios.post('http://localhost:8090/chatbot/insert', text, {
-            headers: 'application/json'
-        }).then(res => {
-            setLoading(false);
-            setMessageAll(res.data);
+    useEffect(() => {
+        const getMessageAll = async () => {
+            const response = await api(`/chatbot/select?root=${root}`, 'get', null, userinfo.token)
+            setMessageAll(response.data);
             setText((prev) => ({
                 ...prev,
-                root: res.data[0].root,
+                root: response.data[0].root,
                 content: ''
             }))
-            inputBox.current.focus();
-        }).catch(err => {
-            setLoading(false);
-            setError(true);
-        });
+        }
+
+        root && getMessageAll()
+    }, [])
+
+    const userChatbot = async () => {
+
+        setLoading(true);
+        await api('/chatbot/insert', 'post', text, userinfo.token)
+            .then(res => {
+                setLoading(false);
+                setMessageAll(res.data);
+                setText((prev) => ({
+                    ...prev,
+                    root: res.data[0].root,
+                    content: ''
+                }))
+                inputBox.current.focus();
+            }).catch(err => {
+                setLoading(false);
+                setError(true);
+            });
     }
 
     const changeType = (event) => {
@@ -70,7 +84,7 @@ const ChatBotBox = () => {
             <div id='ChatBox'>
                 <h3>토마토팜 상담챗봇</h3>
                 <div id="chatBotTitle">
-                    <a href="/tomatoFarm/"><img id="logo" src={SERVER_RESOURCE + "/img/logo2.png"} /></a>
+                    <Link to="/home"><img id="logo" src={SERVER_RESOURCE + "/img/logo2.png"} /></Link>
                     <div>고객님, 안녕하세요.</div>
                     <div>무엇을 도와드릴까요?</div>
                     <div >궁금한 내용을 선택하거나, 직접 입력해주세요.</div>
