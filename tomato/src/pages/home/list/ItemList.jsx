@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import axios from "axios";
 import Header from './../index/header/Header';
 import ItemListFilter from './ItemListFilter';
@@ -23,7 +23,7 @@ const ItemList = () => {
     useEffect(() => {
         dispatch(getItemList(`/item/search?keyword=${keyword}`, 'get'))
         dispatch(getItemSortList(`/item/searchsort?keyword=${keyword}`, 'get'))
-    }, [])
+    }, [keyword])
 
     useEffect(() => {
         axios.get(`http://localhost:8090/visit/update`, {
@@ -34,16 +34,30 @@ const ItemList = () => {
     }, [])
 
     const changeDeletedSort = (event) => {
-        const value = event.target.value;
-        if (filterCheckedList.current.includes(value)) {
-            if (deletedSort.includes(value)){
-                setDeletedSort(deletedSort.filter(e=>e!=value))
-            } else {
-                setDeletedSort([...deletedSort, value])
+        const value = event.target.closest('li').children[1].innerText;
+        for (let e of filterCheckedList.current) {
+            if (e.sort2 == value) {
+                if (deletedSort.includes(value)) {
+                    setDeletedSort(deletedSort.filter(e => e != value))
+                } else {
+                    setDeletedSort([...deletedSort, value])
+                }
             }
-        } 
-        console.log(deletedSort)
+        }
     }
+    const changeItemList = () => {
+        let result = [...itemList.data];
+        for (let ele of deletedSort) {
+            console.log(ele)
+            result = result.filter((e) => e.sort2 != ele && e.brand != ele)
+        }
+        return result;
+    }
+
+    useMemo(() => {
+        console.log(deletedSort)
+        changeItemList()
+    }, [deletedSort])
 
     if (itemList.loading || itemListSort.loading) return <Loading />
     if (itemList.error || itemListSort.error) return <Error />
@@ -58,8 +72,8 @@ const ItemList = () => {
                 " <b>{keyword}</b> " <span>에 대한 검색 결과</span>
             </div>
             <div className="container">
-                <ItemListFilter itemListSort={itemListSort.data} changeDeletedSort={changeDeletedSort} />
-                <ItemListContainer itemList={itemList.data} />
+                <ItemListFilter itemListSort={itemListSort.data} deletedSort={deletedSort} changeDeletedSort={changeDeletedSort} />
+                <ItemListContainer itemList={changeItemList()} />
             </div>
         </>
     );

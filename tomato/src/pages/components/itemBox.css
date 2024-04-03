@@ -1,12 +1,22 @@
 .itemBox {
     display: inline-block;
-    height: 400px;
+    min-height: 380px;
     border-radius: 10px;
     overflow: hidden;
     background-color: rgb(255, 247, 247);
     text-align: initial;
     position: relative;
     cursor: pointer;
+}
+
+#listContainer .itemBox {
+    width: calc((100% - 30px)/4);
+}
+
+@media (max-width : 1024px) {
+    #listContainer .itemBox {
+        width: calc((100% - 20px)/3);
+    }
 }
 
 .itemBox:hover {
@@ -67,20 +77,21 @@
 }
 
 .itemName {
-    margin-top: 5px;
+    margin-top: 8px;
     padding-left: 10px;
     font-weight: 500;
     font-size: 1em;
 }
 
 .itemInfo {
+    margin-top: 4px;
     padding-left: 10px;
     font-size: 0.75em;
     color: rgba(54, 54, 54, 0.699);
+    margin-bottom: 7px;
 }
 
 .itemPriceB {
-    margin-top: 7px;
     padding-left: 10px;
     font-size: 0.8em;
     color: #00000080;

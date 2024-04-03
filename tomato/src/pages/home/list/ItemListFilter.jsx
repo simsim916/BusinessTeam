@@ -2,7 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import './ItemListFilter.css'
 import { useEffect, useMemo, useRef } from "react";
 
-const ItemListFilter = ({ itemListSort, changeDeletedSort }) => {
+const ItemListFilter = ({ itemListSort, changeDeletedSort, deletedSort }) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const listfilter = useRef(null);
     const mealkit = useRef(0);
@@ -95,7 +95,7 @@ const ItemListFilter = ({ itemListSort, changeDeletedSort }) => {
                     </span>
                     <ul>
                         {itemListSort.filter((e) => e.sort1 == '밀키트').sort((b, a) => a.count - b.count).map((e, i) => (
-                            <li onClick={changeDeletedSort} key={i} className={e.count > 0 ? 'selected' : ''}>
+                            <li onClick={changeDeletedSort} key={i} className={e.count && !deletedSort.includes(e.sort2) > 0 ? 'selected' : ''}>
                                 <i className="fa-regular fa-circle-check"></i>
                                 <span>{e.sort2}</span><span className="itemList_count">{e.count}</span>
                             </li>
@@ -110,7 +110,7 @@ const ItemListFilter = ({ itemListSort, changeDeletedSort }) => {
                     </span>
                     <ul>
                         {itemListSort.filter((e) => e.sort1 == '식재료').sort((b, a) => a.count - b.count).map((e, i) => (
-                            <li onClick={changeDeletedSort} key={i} className={e.count > 0 ? 'selected' : ''}>
+                            <li onClick={changeDeletedSort} key={i} className={e.count > 0 && !deletedSort.includes(e.sort2) ? 'selected' : ''}>
                                 <i className="fa-regular fa-circle-check"></i>
                                 <span>{e.sort2}</span><span className="itemList_count">{e.count}</span>
                             </li>

@@ -73,7 +73,6 @@ const ItemDetailBox = ({ item }) => {
         setInputCountValue(event.target.value);
     }
 
-
     const addCart = () => {
         setGotoCart(!gotoCart);
         const userinfo = JSON.parse(sessionStorage.getItem('userinfo'));

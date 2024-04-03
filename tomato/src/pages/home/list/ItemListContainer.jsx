@@ -2,24 +2,28 @@ import './ItemListContainer.css'
 import { useState } from "react";
 import ItemBox from './../../components/ItemBox';
 import ItemBox_vertical from './../../components/itemBox_vertical/ItemBox_vertical';
-import PagingBox from "../../components/PagingBox";
+import PagingBox, { paging } from "../../components/PagingBox";
 import { useDispatch } from 'react-redux';
 import { setItemList } from '../../redux/itemList/actions';
 
 
 const ItemListContainer = ({ itemList }) => {
     console.log('ItemListContainer 랜더링')
+    let size = 16;
+    const makeListSize = () => {
+        if (window.matchMedia("(max-width : 1024px)").matches) {
+            size = 15;
+        } else {
+            size = 16;
+        }
+        setLimit(size)
+    }
+    window.addEventListener('resize', makeListSize);
+
     const dispatch = useDispatch();
     const [sort, setSort] = useState('sales');
     const [currPage, setCurrPage] = useState(1);
     const [limit, setLimit] = useState(16);
-
-    const paging = () => (pageNum, size) => {
-        // slice 한 List 를 반환시키는 메서드
-        const start = size * (pageNum - 1);
-        const end = pageNum * size;
-        return itemList.slice(start, end);
-    }
 
     const howManyItems = (event) => {
         for (let t of event.target.closest('ul').children) {
@@ -55,7 +59,7 @@ const ItemListContainer = ({ itemList }) => {
 
     return (
         <>
-            <div id="listContainer" style={{ display: limit != 16 ? 'flex' : 'grid', height: limit != 16 ? 'auto' : '' }}>
+            <div id="listContainer">
                 <div id="containerOption">
                     <ul id="listButton">
                         <li onClick={howManyItems}><div></div></li>
@@ -70,17 +74,12 @@ const ItemListContainer = ({ itemList }) => {
                     </div>
                 </div>
                 {
-                    limit == 16 ?
-                        (paging()(currPage, limit).map((e, i) => <ItemBox key={i} item={e} />))
+                    limit <= 16 ?
+                        (paging(itemList,currPage,size).map((e, i) => <ItemBox key={i} item={e} />))
                         :
-                        (paging()(currPage, limit).map((e, i) => <ItemBox_vertical key={i} item={e} />))
+                        (paging(itemList, currPage, size).map((e, i) => <ItemBox_vertical key={i} item={e} />))
                 }
-                <PagingBox
-                    limit={limit}
-                    setLimit={setLimit}
-                    list={itemList}
-                    currPage={currPage}
-                    setCurrPage={setCurrPage} />
+                <PagingBox limit={limit} setLimit={setLimit} list={itemList} currPage={currPage} setCurrPage={setCurrPage} />
             </div>
         </>
     );
