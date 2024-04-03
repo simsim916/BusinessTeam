@@ -11,7 +11,7 @@
     display: flex;
     flex-direction: column;
     padding: 10px;
-    height: 600px;
+    height: 100%;   /*600px*/
     gap: 10px;
 }
 #ChatBox {
@@ -20,7 +20,9 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    height: 600px;
+    height: 100%;    /*600px*/
+    overflow-y: auto;
+    scroll-behavior: smooth;
     overflow-y: auto;
 }
 
@@ -55,7 +57,17 @@
     margin-top: 10px;
 }
 
-.managerChat {
+.managerChat_Intro {
+    margin-top: 20px;
+    background: #f8dbe1;
+    max-width: 80%;
+    border-radius: 10px;
+    padding: 10px;
+    font-weight: 500;
+    align-self: flex-start;
+}
+
+.managerChat_message {
     margin-top: 20px;
     background: #f8dbe1;
     max-width: 80%;
@@ -76,7 +88,7 @@
     text-align: right;
 }
 
-/* #openQuestion {
+#openQuestion {
     height: 150px;
     margin: 50px auto 0px auto;
 }
@@ -84,7 +96,7 @@
 #openQuestion h2,
 #clickQuestion h2 {
     background-color: #9B1B30;
-    width: 250px;
+    width: 200px;
     border-radius: 10px;
     color: white;
     font-size: 20px;
@@ -102,10 +114,12 @@
 }
 
 #openQuestionBox button {
-    border-radius: 10px;
-    background: #fff;
+    border-radius: 100px;
+    background: #f8dbe1;
+    color: #9B1B30;
     align-items: center;
     justify-content: center;
+    /* border: #9B1B30 2px solid; */
     font-size: 20px;
     height: 130px;
     width: 130px;
@@ -115,7 +129,7 @@
 
 #openQuestionBox i {
     color: #9B1B30;
-    font-size: 50px;
+    font-size: 40px;
     display: block;
     padding: 10px
 }
@@ -125,8 +139,8 @@
 }
 
 #clickQuestion {
-    margin: 100px auto 0 auto;
-    width: 100%;
+    height: 150px;
+    margin: 50px auto 0px auto;
 }
 
 #clickQuestionSelect {
@@ -137,20 +151,21 @@
 
 }
 
-#clickQuestionSelect>label {
+#clickQuestionSelect>button {
     padding: 10px;
-    margin: 0 auto 10px auto;
-    font-size: 20px;
-    border-radius: 10px;
+    margin: 0 10px 10px auto;
+    font-size: 18px;
+    border-radius: 50px;
     cursor: pointer;
     font-weight: 500;
-    background-color: #fff;
+    background: #fff;
+    background: #f8dbe1;
     position: relative;
     width: auto;
     display: inline-flex;
-    border: none;
+    border: #9B1B30 2px solid;
     font-weight: 500;
-} */
+}
 
 #chatBotTextBox {
     display: flex;

@@ -11,4 +11,4 @@ const Admin_Chatbot_Room = () => {
     );
 }
 
-export default Admin_Chatbot_Room;
+export default Admin_Chatbot_Room;  

@@ -59,7 +59,7 @@ const Admin_Chatbot = () => {
                     showChatbot && showChatbot.map((e, i) => <Admin_Chatbot_Room key={i} root={e} />)
                 }
 
-                {/* <div id='admin_ChatBotRoom_Box'>
+                <div id='admin_ChatBotRoom_Box'>
                     <h4>첫번째 채팅방</h4>
                     <h4>상담 받는 아이디 : sumi</h4>
                     <div id='admin_ChatBotRoom_ChatBox'>
@@ -72,7 +72,7 @@ const Admin_Chatbot = () => {
                         <button>전송</button>
                     </div>
                     <div id="admin_ChatBotClose"><i className="fa-solid fa-xmark"></i></div>
-                </div> */}
+                </div>
 
             </div>
         </div>
