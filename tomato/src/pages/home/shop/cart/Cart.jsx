@@ -15,23 +15,21 @@ const Cart = () => {
     const buyItem = useSelector(state => state.buyItem)
     const [refresh, setRefresh] = useState(false);
 
+
     const handleRefresh = () => {
         setRefresh(!refresh);
     }
 
-    console.log(userCart)
     useEffect(() => {
         const cart = localStorage.getItem('cart')
         const user = sessionStorage.getItem('userinfo');
         if (user != null) {
             const token = JSON.parse(user).token;
-            console.log('로그인 ㅇㅇ');
             dispatch(getUserCart('/usercart/select', 'get', null, token));
         } else {
-            console.log('로그인 ㄴㄴ');
-            if(cart != null)
+            if (cart != null) {
                 dispatch(getItemListAmount('/item/selectin', 'post', cart, null, cart));
-            
+            }
         }
     }, [refresh])
 
@@ -45,7 +43,7 @@ const Cart = () => {
                 &nbsp;&nbsp;장바구니&nbsp;&nbsp;
                 <i className="fa-solid fa-cart-shopping" aria-hidden="true"></i>
             </h3>
-            <Cart_item buyItem={buyItem.data} userCart={userCart.data} handleRefresh ={handleRefresh}/>
+            <Cart_item buyItem={buyItem.data} userCart={userCart.data} handleRefresh={handleRefresh} />
             <Cart_total buyItem={buyItem.data} />
 
             {/* <BestItemBox /> */}

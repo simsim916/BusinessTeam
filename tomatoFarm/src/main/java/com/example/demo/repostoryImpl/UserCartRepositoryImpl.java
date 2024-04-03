@@ -33,22 +33,21 @@ public class UserCartRepositoryImpl implements UserCartRepository {
 		for (UserCart e : list) {
 			result.add(entityManager.merge(e));
 		}
-		 
-		 return result;
+
+		return result;
 	}
 
 	@Override
 	public List<UserCartDTO> selectItemListWhereUserID(UserCart entity) {
-		return jpaQueryfactory.select(Projections.bean(UserCartDTO.class,
-				userCart.code, userCart.id, userCart.amount, 
-				item.name.as("item_name"), item.price, item.delivery, item.vat, item.stock,
-				item_event.code.as("event_code"), item_event.discount))
-				.from(userCart).leftJoin(item).on(userCart.code.eq(item.code))
-				.leftJoin(item_event).on(item.event_code.eq(item_event.code))
-				.where(userCart.id.eq(entity.getId()))
-				.fetch();
+
+		return jpaQueryfactory
+				.select(Projections.bean(UserCartDTO.class, userCart.code, userCart.id, userCart.amount,
+						item.name.as("item_name"), item.price, item.delivery, item.vat, item.stock,
+						item_event.code.as("event_code"), item_event.discount))
+				.from(userCart).leftJoin(item).on(userCart.code.eq(item.code)).leftJoin(item_event)
+				.on(item.event_code.eq(item_event.code)).where(userCart.id.eq(entity.getId())).fetch();
 	}
-	
+
 	@Override
 	public void delete(UserCart entity) {
 //		System.out.println("entity Before 레포지토리 => " + entity);

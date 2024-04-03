@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { getItemListAmount, getUserCart } from '../../../redux/userCart/action';
 import { useState } from 'react';
+// import './Cart_item.css';
 
 const Cart_item_Row = ({ item, idx, changeItemList, buyItem, handleRefresh }) => {
 
@@ -29,11 +30,11 @@ const Cart_item_Row = ({ item, idx, changeItemList, buyItem, handleRefresh }) =>
             const filtered = arr.filter(i => i.code !== item.code);
             dispatch(setBuyItemList(filtered));
         }
+        console.log(buyItem);
     }
 
     const handleDelete = async () => {
         let user = sessionStorage.getItem('userinfo');
-        console.log(item);
         if (user != null) {
             axios.get('http://localhost:8090/usercart/delete', {
                 params: {

@@ -1,9 +1,14 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './BuyItemBox.css';
+import BuyItemBoxRow from './BuyItemBoxRow';
+import { useNavigate } from 'react-router-dom';
 
-const BuyItemBox = ({ }) => {
-
+const BuyItemBox = ({ buyItem }) => {
+    console.log(buyItem);
+    useEffect(() => {
+    })
+    console.log(buyItem);
     return (
         <div id='BuyItemBox'>
             <input type="checkbox"></input>전체선택
@@ -15,7 +20,7 @@ const BuyItemBox = ({ }) => {
                 <li>총 상품금액</li>
                 <li>배송비</li>
             </ul>
-            {/* {itemList.map((e, i) => <ShopBasketItem item={e} key={i} idx={i} changeItemList={changeItemList} />)} */}
+            {/* {buyItem.map((e, i) => <BuyItemBoxRow item={e} key={i} idx={i} />)} */}
 
         </div>
     );

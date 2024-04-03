@@ -14,6 +14,7 @@
     height: 80vh;
     margin: 10vh auto;
     border: 1px solid #9B1B30;
+    position: relative;
 }
 
 #deliverySelectContainer>h4 {
@@ -62,4 +63,10 @@
     border: none;
     color: #fff;
     background-color: #9B1B30;
+}
+
+#exitBt {
+    position: absolute;
+    right: 20px;
+    top: 12px;
 }
