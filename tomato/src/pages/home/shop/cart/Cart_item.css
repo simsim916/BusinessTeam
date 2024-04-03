@@ -116,17 +116,21 @@
 
 #shopBasketItemBox li:nth-child(5) {
     width: 100px;
+    flex-direction: column;
+    line-height: 25px;
 }
 
 #shopBasketItemBox li:nth-child(6) {
     width: 90px
 }
 
+
 .shopBasketItem {
     display: flex;
     height: 120px;
     border: 1px solid #4C455630;
     border-top: none;
+    position: relative;
 }
 
 
@@ -144,7 +148,7 @@
     flex-direction: column;
 }
 
-.shopBasketItemIfo p {
+.shopBasketItemIfo p,a {
     font-size: 15px;
     line-height: 1em;
 }
@@ -171,4 +175,17 @@
     width: 15px;
     line-height: 15px;
     font-size: 10px;
+}
+
+.shopBasketItem>li:last-child {
+    position: relative;
+}
+
+.xButton {
+    position: absolute;
+    right: 5px;
+    top: 0px;
+    width: 20px;
+    height: 20px;
+    opacity: 0.6;
 }

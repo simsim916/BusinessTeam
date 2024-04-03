@@ -1,6 +1,6 @@
+import Cart_total from '../cart/Cart_total';
 import './BuyBox.css'
 import BuyItemBox from './buyItemBox/BuyItemBox';
-import ShopBasketPayBox from './../../../shopBasket/ShopBasketPayBox';
 import BuyDeliveryBox from './deliveryAddress/BuyDeliveryBox';
 
 
@@ -25,7 +25,7 @@ const BuyBox = () => {
                 <BuyDeliveryBox />
             </div>
 
-            <ShopBasketPayBox />
+            <Cart_total />
 
             {/* <BestItemBox /> */}
 

@@ -1,6 +1,13 @@
-import './BuyDeliveryBox.css'
+import { useState } from 'react';
+import './BuyDeliveryBox.css';
+import DeliverySelect from './DeliverySelect';
 
 const BuyDeliveryBox = () => {
+    const [deliverySelect, setDeliverySelect] = useState(true);
+    const handleOnClick = () => {
+        setDeliverySelect(!deliverySelect);
+        console.log('aa')
+    }
     return (
         <div id="buyDeliveryBox">
             <h4>우리집</h4>
@@ -11,10 +18,11 @@ const BuyDeliveryBox = () => {
                 <option value="">부재 시 경비실에 맡겨주세요.</option>
                 <option value="">직접 입력</option>
             </select>
-            <div id='delivery_select'>
+            <div onClick={handleOnClick} id='delivery_select'>
                 배송지 선택
             </div>
-        </div>
+            {deliverySelect && <DeliverySelect />}
+        </div >
     );
 }
 

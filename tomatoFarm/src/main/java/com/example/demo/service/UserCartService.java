@@ -2,15 +2,14 @@ package com.example.demo.service;
 
 import java.util.List;
 
+import com.example.demo.domain.UserCartDTO;
 import com.example.demo.entity.Item;
 import com.example.demo.entity.UserCart;
 import com.example.demo.entity.UserCartID;
 
 public interface UserCartService {
 
+	List<UserCart> merge(List<UserCart> list);
 	
-	public UserCart update(UserCart usercart);
-	
-	
-	List<UserCart> insertUserCarts(List<UserCart> cartList);
+	List<UserCartDTO> selectItemListWhereUserID(UserCart entity);
 }

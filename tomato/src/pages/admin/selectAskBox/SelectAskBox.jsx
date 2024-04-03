@@ -2,9 +2,9 @@ import "./SelectAskBox.css";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import PagingBox from "../../components/PagingBox";
-import WriteReply from "./WriteReply";
+import WriteReply from "./writeReply/WriteReply";
 // import { paging } from '../../components/paging';
-import SelectAskBoxRow from './SelectAskBoxRow';
+import SelectAskBox_Row from './selectAskBox_Row/SelectAskBox_Row';
 
 
 const SelectAskBox = ({ myLocation }) => {
@@ -141,7 +141,7 @@ const SelectAskBox = ({ myLocation }) => {
                     <div></div>
                 </div>
                 {paging()(filterList(answered), currPage, limit).map((ask, i) => (
-                    <SelectAskBoxRow key={i} ask={ask} />
+                    <SelectAskBox_Row key={i} ask={ask} />
                 ))}
             </div>
             <PagingBox
