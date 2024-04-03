@@ -3,6 +3,8 @@ import { useState } from 'react';
 import './SideMenu.css'
 import { Link } from 'react-router-dom';
 
+import Chatbot_admin from '../chatbot_admin/Admin_Chatbot';
+
 const SideMenu = ({ openSideBar, sideBarOpen, currLocation }) => {
 
 
@@ -36,7 +38,7 @@ const SideMenu = ({ openSideBar, sideBarOpen, currLocation }) => {
                         <div><i className="fa-solid fa-list-check"></i><br />최근메뉴</div>
                     </li>
                     <li>
-                        <div><i className="fa-solid fa-bullhorn"></i><br />공지사항</div>
+                        <Link to="/admin/chatbot"><i className="fa-solid fa-bullhorn"></i><br />고객상담</Link>
                     </li>
                     <li>
                         <div><i className="fa-solid fa-bell"></i><br />알림</div>

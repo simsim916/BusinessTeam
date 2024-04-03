@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import store from "./pages/redux/store";
 import ReduxTest from "./pages/ReduxTest";
 import Study_state from "./Study_state";
+import ChatBotBox from './pages/home/chatbot/ChatBotBox';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
                     <Route path='/home/*' element={<Home />} />
                     <Route path='/test' element={<ReduxTest />} />
                     <Route path='/study' element={<Study_state />} />
+                    <Route path='/chatBot' element={<ChatBotBox />} />
                     <Route path='/' element={<Home />} />
                 </Routes>
             </div>

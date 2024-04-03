@@ -7,6 +7,8 @@ import SelectAskBox from "./selectAskBox/SelectAskBox";
 import Graph from "./graph/Graph";
 import { Route, Routes } from 'react-router-dom';
 import axios from 'axios';
+import Admin_Chatbot from './chatbot_admin/Admin_Chatbot';
+
 
 
 
@@ -56,9 +58,9 @@ const Admin = () => {
                     <Route path='/insert' element={<InsertDataBox myLocation={myLocation} />} />
                     <Route path='/ask' element={<SelectAskBox myLocation={myLocation} />} />
                     <Route path='/graph' element={<Graph myLocation={myLocation} />} />
+                    <Route path='/chatbot' element={<Admin_Chatbot myLocation={myLocation} />} />
                 </Routes>
             </div>
-
         </>
     );
 }
