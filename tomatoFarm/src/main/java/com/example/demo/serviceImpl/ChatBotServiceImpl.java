@@ -1,6 +1,5 @@
 package com.example.demo.serviceImpl;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -8,7 +7,6 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.example.demo.domain.ChatBotDTO;
 import com.example.demo.entity.ChatBot;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
@@ -35,5 +33,10 @@ public class ChatBotServiceImpl implements ChatBotService {
 	@Override
 	public List<ChatBot> selectAllFromRoot(ChatBot chatbot) {
 		return chatbotrepository.selectAllFromRoot(chatbot);
+	}
+	
+	@Override
+	public List<ChatBot> selectRootList(PageRequest pageRequest, SearchRequest searchRequest) {
+		return chatbotrepository.selectRootList(pageRequest, searchRequest);
 	}
 }

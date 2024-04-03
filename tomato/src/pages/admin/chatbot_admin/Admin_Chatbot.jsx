@@ -1,10 +1,19 @@
+import { api } from '../../../model/model';
 import { SERVER_RESOURCE } from '../../../model/server-config';
 import './Admin_Chatbot.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Admin_Chatbot = () => {
-
+    
     const [messageAll, setMessageAll] = useState(null)
+    const [rootList, setRootList] = useState(null)
+    
+    useEffect(() => {
+        const response = api('/chatbot/selectroot', 'get', null, null);
+        console.log(response.data)
+    },[])
+
+    
 
     return (
         <div id="admin_ChatBotBox">
@@ -88,9 +97,49 @@ const Admin_Chatbot = () => {
                     <li>미정</li>
                     <li>채팅하기</li>
                 </ul>
-
+                <ul>
+                    <li>상담종료</li>
+                    <li>아이디 : sumi2</li>
+                    <li>미정</li>
+                    <li>채팅하기</li>
+                </ul>
+                <ul>
+                    <li>상담종료</li>
+                    <li>아이디 : sumi2</li>
+                    <li>미정</li>
+                    <li>채팅하기</li>
+                </ul>
+                <ul>
+                    <li>상담종료</li>
+                    <li>아이디 : sumi2</li>
+                    <li>미정</li>
+                    <li>채팅하기</li>
+                </ul>
+                <ul>
+                    <li>상담종료</li>
+                    <li>아이디 : sumi2</li>
+                    <li>미정</li>
+                    <li>채팅하기</li>
+                </ul>
+                <ul>
+                    <li>상담종료</li>
+                    <li>아이디 : sumi2</li>
+                    <li>미정</li>
+                    <li>채팅하기</li>
+                </ul>
+                <ul>
+                    <li>상담종료</li>
+                    <li>아이디 : sumi2</li>
+                    <li>미정</li>
+                    <li>채팅하기</li>
+                </ul>
+                <ul>
+                    <li>상담종료</li>
+                    <li>아이디 : sumi2</li>
+                    <li>미정</li>
+                    <li>채팅하기</li>
+                </ul>
             </div>
-
 
 
             <div id='admin_ChatBotRoom'>
@@ -101,7 +150,7 @@ const Admin_Chatbot = () => {
                         <div className='admin_ChatBotRoom_managerChat'>
                             <div>안녕하세요. 토마토팜입니다.<br></br>무엇을 도와드릴까요?</div>
                         </div>
-                        {messageAll && messageAll.map((e, i) => <p className='userChat'>{e.content}</p>)}
+                        {messageAll && messageAll.map((e, i) => <p className='admin_ChatBotRoom_userChat'>{e.content}</p>)}
                     </div>
                     <div id="admin_ChatBotRoom_chatBotTextBox">
                         <input type="text" placeholder="텍스트를 입력해주세요."></input>
@@ -116,7 +165,7 @@ const Admin_Chatbot = () => {
                         <div className='admin_ChatBotRoom_managerChat'>
                             <div>안녕하세요. 토마토팜입니다.<br></br>무엇을 도와드릴까요?</div>
                         </div>
-                        {messageAll && messageAll.map((e, i) => <p className='userChat'>{e.content}</p>)}
+                        {messageAll && messageAll.map((e, i) => <p className='admin_ChatBotRoom_userChat'>{e.content}</p>)}
                     </div>
                     <div id="admin_ChatBotRoom_chatBotTextBox">
                         <input type="text" placeholder="텍스트를 입력해주세요."></input>
@@ -131,7 +180,7 @@ const Admin_Chatbot = () => {
                         <div className='admin_ChatBotRoom_managerChat'>
                             <div>안녕하세요. 토마토팜입니다.<br></br>무엇을 도와드릴까요?</div>
                         </div>
-                        {messageAll && messageAll.map((e, i) => <p className='userChat'>{e.content}</p>)}
+                        {messageAll && messageAll.map((e, i) => <p className='admin_ChatBotRoom_userChat'>{e.content}</p>)}
                     </div>
                     <div id="admin_ChatBotRoom_chatBotTextBox">
                         <input type="text" placeholder="텍스트를 입력해주세요."></input>
@@ -146,7 +195,7 @@ const Admin_Chatbot = () => {
                         <div className='admin_ChatBotRoom_managerChat'>
                             <div>안녕하세요. 토마토팜입니다.<br></br>무엇을 도와드릴까요?</div>
                         </div>
-                        {messageAll && messageAll.map((e, i) => <p className='userChat'>{e.content}</p>)}
+                        {messageAll && messageAll.map((e, i) => <p className='admin_ChatBotRoom_userChat'>{e.content}</p>)}
                     </div>
                     <div id="admin_ChatBotRoom_chatBotTextBox">
                         <input type="text" placeholder="텍스트를 입력해주세요."></input>

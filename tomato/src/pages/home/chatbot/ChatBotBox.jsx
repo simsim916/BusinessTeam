@@ -16,8 +16,6 @@ const ChatBotBox = () => {
         writer: JSON.parse(sessionStorage.getItem('userinfo')).id,
     });
     const [messageAll, setMessageAll] = useState(null)
-    /* 채팅 메세지 상태 */
-    const [chat, setChat] = useState('');
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
@@ -43,30 +41,11 @@ const ChatBotBox = () => {
         
     }
 
-    // const managerChatbot = () => {
-    //     return async (dispatch) => {
-    //         try {
-    //             const response = await api('/chatbot/insert', 'post')
-    //             sessionStorage.setItem('userinfo', JSON.stringify({
-    //                 id: response.data.id,
-    //                 login: true,
-    //                 token: response.data.token,
-    //                 username: response.data.username
-    //             }));
-    //         } catch (error) {
-
-    //         }
-    //     }
-    // }
-
-
-
     const changeContent = (event) => {
         setText((prev) => ({
             ...prev,
             content: event.target.value
         }))
-       
     }
     
     const handleKeyUp = (event) => {

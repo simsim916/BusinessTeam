@@ -14,6 +14,8 @@ public class ChatBotDTO {
 	private String writer;
 	private String content;
 	private Integer root;
+	private Integer ing;
 	private LocalDateTime regdate;
 
+	private Integer user_level;
 }

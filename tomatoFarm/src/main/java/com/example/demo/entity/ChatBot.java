@@ -27,6 +27,7 @@ public class ChatBot {
 	private String type;
 	private String content;
 	private Integer root;
+	private Integer ing = 0;
 	private LocalDateTime regdate;
 
 }

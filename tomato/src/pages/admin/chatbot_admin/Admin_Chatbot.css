@@ -4,9 +4,10 @@
 }
 
 #chatBot_Unidentified {
-    height: 90%;
+    height: 100%;
     width: 40%;
     margin-left: 30px;
+    overflow-y: auto;
 }
 
 #chatBot_Unidentified div {
@@ -40,6 +41,7 @@
 #chatBot_Unidentified ul {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    
     
 }
 
@@ -77,6 +79,7 @@
 }
 #admin_ChatBotRoom_Box{
     border: 2px solid #9B1B30;
+    position: relative;
 
 }
 #admin_ChatBotRoom_Box h4{
@@ -163,9 +166,9 @@
     cursor: pointer;
 }
 #admin_ChatBotClose {
-    position: relative;
-    top: -240px;
-    left: 560px;
+    position: absolute;
+    right: 0;
+    top: 0;
     background-color: #9B1B30;
     color: #fff;
     width: 25px;

@@ -2,14 +2,19 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.domain.ChatBotDTO;
 import com.example.demo.entity.ChatBot;
+import com.example.demo.module.PageRequest;
+import com.example.demo.module.SearchRequest;
 import com.example.demo.service.ChatBotService;
 
 import lombok.AllArgsConstructor;
@@ -38,4 +43,11 @@ public class ChatBotController {
 		return result;
 	}
 
+	@GetMapping("/selectroot")
+	public ResponseEntity<?> selectroot(HttpRequest request, PageRequest pageRequest, SearchRequest searchRequest){
+		ResponseEntity<?> result = null;
+		
+		return result;
+	
+	}
 }
