@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.domain.ItemDTO;
 import com.example.demo.domain.UserCartDTO;
 import com.example.demo.entity.Item;
 import com.example.demo.entity.UserCart;
@@ -40,12 +41,11 @@ public class UserCartController {
 		String token = tokenProvider.parseBearerToken(request);
 		String id = tokenProvider.validateAndGetUserId(token);
 		System.out.println(id);
-		for ( UserCart e : list)
+		for (UserCart e : list)
 			e.setId(id);
-			
 		// 자료를 서비스를 통해서 저장
-		if (list!=null && list.size()>0) {
-			userCartService.merge(list);
+		if (list != null && list.size() > 0) {
+			userCartService.merge(list); // 장바구니 DB에 들어갔어
 			result = ResponseEntity.status(HttpStatus.OK).body("merge Success");
 		} else {
 			result = ResponseEntity.status(HttpStatus.OK).body("merge Failed");
@@ -54,17 +54,33 @@ public class UserCartController {
 	}
 
 	@GetMapping("/select")
-	public ResponseEntity<?> select(UserCart entity){
+	public ResponseEntity<?> select(UserCart entity, HttpServletRequest request) {
 		ResponseEntity<?> result = null;
-		
+		String token = tokenProvider.parseBearerToken(request);
+		String id = tokenProvider.validateAndGetUserId(token);
+		entity.setId(id);
+
 		List<UserCartDTO> list = userCartService.selectItemListWhereUserID(entity);
-		
-		if(list!=null && list.size()>0)
-			result = ResponseEntity.status(HttpStatus.OK).body(list);
-		else
-			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(null);
-			
+
+		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
+	}
+
+	@GetMapping("delete")
+	public ResponseEntity<?> delete(UserCart entity) {
+		ResponseEntity<?> result = null;
+//		String token = tokenProvider.parseBearerToken(request);
+//		String id = tokenProvider.validateAndGetUserId(token);
+//		entity.setId(id);
+
+		System.out.println("\n" + entity + "\n");
+
+		userCartService.delete(entity);
+
+		result = ResponseEntity.status(HttpStatus.OK).body("삭제성공");
+
+		return result;
+
 	}
 
 }

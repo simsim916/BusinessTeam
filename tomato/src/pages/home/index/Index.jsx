@@ -1,4 +1,3 @@
-import { Route } from "react-router-dom";
 import AdImgBox from './adImgBox/AdImgBox';
 import FirstContainer from './firstContainer/FirstContainer';
 import SecondContainer from './secondContainer/SecondContainer';

@@ -74,32 +74,33 @@ const ItemDetailBox = ({ item }) => {
     }
 
 
-    const addCart = () => {
+    const addCart = async () => {
         setGotoCart(!gotoCart);
         const userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
         if (userinfo && userinfo.login) {
             console.log('aa')
             const formData = {
-                item_code: item.code,
-                item_amount: inputCountValue,
+                code: item.code,
+                amount: inputCountValue,
                 id: userinfo.id
             };
             const ar = [];
             ar.push(formData);
 
             dispatch(getUserCart('/usercart/merge', 'post', ar, userinfo.token))
+            // await axios.post('http://localhost:8090/usercart/merge', ar);
         } else {
             let cart = localStorage.getItem('cart');
             let cartArray = cart ? JSON.parse(cart) : [];
 
-            const itemIndex = cartArray.findIndex(cartItem => cartItem.item_code === item.code);
+            const itemIndex = cartArray.findIndex(cartItem => cartItem.code === item.code);
 
             if (itemIndex !== -1) {
                 // 중복된 아이템이 있으면 수량만 증가
-                cartArray[itemIndex].item_amount += +inputCountValue;
+                cartArray[itemIndex].amount += +inputCountValue;
             } else {
                 // 중복된 아이템이 없으면 새로운 아이템 추가
-                cartArray.push({ item_code: item.code, item_amount: +inputCountValue });
+                cartArray.push({ code: item.code, amount: +inputCountValue });
             }
 
             localStorage.setItem('cart', JSON.stringify(cartArray));
