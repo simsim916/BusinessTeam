@@ -10,6 +10,7 @@ import store from "./pages/redux/store";
 import ReduxTest from "./pages/ReduxTest";
 import Study_state from "./Study_state";
 import ChatBotBox from './pages/home/chatbot/ChatBotBox';
+import EventPage2 from './pages/event/EventPage2';
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
                     <Route path='/test' element={<ReduxTest />} />
                     <Route path='/study' element={<Study_state />} />
                     <Route path='/chatBot' element={<ChatBotBox />} />
+                    <Route path='/chatBot' element={<EventPage2 />} />
                     <Route path='/' element={<Home />} />
                 </Routes>
             </div>

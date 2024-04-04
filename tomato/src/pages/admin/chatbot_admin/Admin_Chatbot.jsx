@@ -1,6 +1,6 @@
 import { api } from '../../../model/model';
 import './Admin_Chatbot.css';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Admin_Chatbot_Row from './Admin_Chatbot_Row';
 import ChatBotBox from './../../home/chatbot/ChatBotBox';
 
@@ -34,6 +34,7 @@ const Admin_Chatbot = () => {
     const changeShowChatbot = (value) => {
         if (showChatbot.includes(value)) {
             setShowChatbot(showChatbot.filter(e => e != value));
+
         } else {
             if (showChatbot.length < 3) {
                 setShowChatbot([...showChatbot, value]);
@@ -55,7 +56,7 @@ const Admin_Chatbot = () => {
                 </ul>
                 <div>
                     {
-                        root.current && root.current.map((e, i) => <Admin_Chatbot_Row key={i} root={e} rootList={rootList} changeShowChatbot={changeShowChatbot} />)
+                        root.current && root.current.map((e, i) => <Admin_Chatbot_Row key={i} root={e} rootList={rootList} showChatbot={showChatbot} changeShowChatbot={changeShowChatbot} />)
                     }
                 </div>
             </div>
