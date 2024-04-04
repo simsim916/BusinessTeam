@@ -4,13 +4,15 @@ import { userReducer } from './user/userReducer';
 import { basicReducer } from './basic/basicReducer';
 import { itemListSortReducer } from './itemListSort/itemListSortReducer';
 import { buyItemReducer } from './buyItem/buyItemReducer';
+import { userCartReducer } from './userCart/userCartReducer';
 
 const rootReducer = combineReducers({
     itemList: itemListReducer,
     itemListSort: itemListSortReducer,
     user: userReducer,
     basic: basicReducer,
-    buyItem: buyItemReducer
+    buyItem: buyItemReducer,
+    userCart: userCartReducer
 });
 
 export default rootReducer;

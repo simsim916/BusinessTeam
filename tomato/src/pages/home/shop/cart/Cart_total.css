@@ -41,11 +41,12 @@
     color: white;
     font-size: 20px;
     border-radius: 10px;
+    display: block;
 }
 
 #shopBasketCancel {
-    margin: 10px auto;
     width: 90%;
+    margin: 10px auto;
     top: 350px;
     font-size: 12px;
 }

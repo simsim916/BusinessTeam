@@ -25,6 +25,7 @@ public class ItemOrder {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+	// 이게 Auto Increment 할때 필요하대
     private Integer code;
     @Column(name = "user_id")
     private String userId;

@@ -86,7 +86,7 @@
     width: 90px
 }
 
-/* .shopBasketItem {
+.shopBasketItem {
     display: flex;
     height: 120px;
     border: 1px solid #4C455630;
@@ -134,4 +134,4 @@
     width: 15px;
     line-height: 15px;
     font-size: 10px;
-} */
+}

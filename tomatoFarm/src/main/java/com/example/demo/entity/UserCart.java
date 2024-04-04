@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -23,12 +24,15 @@ import lombok.NoArgsConstructor;
 public class UserCart {
 
 	@Id
-	private Integer item_code; // 상품코드
+	@Column(name = "item_code")
+	private Integer code;
+	
 	@Id
 	private String id; // 사용자 아이디
 	
 	@Builder.Default 
-	private Integer item_amount = 0; // 장바구니 수량
+	@Column(name = "item_amount")
+	private Integer amount = 0; // 장바구니 수량
 	@Builder.Default 
 	private Integer views = 1; // 조회수
 	@Builder.Default 

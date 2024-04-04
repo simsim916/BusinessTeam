@@ -3,7 +3,7 @@ import './BuyDeliveryBox.css';
 import DeliverySelect from './DeliverySelect';
 
 const BuyDeliveryBox = () => {
-    const [deliverySelect, setDeliverySelect] = useState(true);
+    const [deliverySelect, setDeliverySelect] = useState(false);
     const handleOnClick = () => {
         setDeliverySelect(!deliverySelect);
         console.log('aa')
@@ -21,7 +21,8 @@ const BuyDeliveryBox = () => {
             <div onClick={handleOnClick} id='delivery_select'>
                 배송지 선택
             </div>
-            {deliverySelect && <DeliverySelect />}
+
+            {deliverySelect && <DeliverySelect handleOnClick={handleOnClick} />}
         </div >
     );
 }

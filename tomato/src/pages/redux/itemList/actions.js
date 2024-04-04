@@ -36,22 +36,3 @@ export const getItemList = (url, method, requestData, token) => {
     };
 };
 
-export const getItemListAmount = (url, method, requestData, token, localStorage) => {
-    return async (dispatch) => {
-        dispatch(fetchDataRequest());
-        try {
-            const response = await api(url, method, requestData, token)
-            for (let e of response.data) {
-                for (let i of JSON.parse(localStorage)) {
-                    if (i.item_code == e.code) {
-                        e.amount = i.item_amount
-                    }
-                }
-            }
-            dispatch(fetchDataSuccess(response.data));
-        } catch (error) {
-            console.log('fetchData : ' + error.message)
-            dispatch(fetchDataFailure(error.message));
-        }
-    };
-};

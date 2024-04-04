@@ -2,16 +2,21 @@ import Cart_total from '../cart/Cart_total';
 import './BuyBox.css'
 import BuyItemBox from './buyItemBox/BuyItemBox';
 import BuyDeliveryBox from './deliveryAddress/BuyDeliveryBox';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { getBuyItemList } from '../../../redux/buyItem/actions';
 
 
 const BuyBox = () => {
-    // const itemList = useSelector(state => state.itemList)
-    // useEffect(() => {
-    //     dispatch(getItemListAmount('/item/selectin', 'post', cart, null, cart))
-    // }, [])
+    let buyItem;
+    const buy = useSelector(state => state.buyItem);
+    useEffect(() => {
+        sessionStorage.setItem('buyItem', buy);
 
-    // if (itemList.loading) return <Loading />
-    // if (itemList.error) return <Error />
+        buyItem = sessionStorage.getItem('buyItem');
+    }, [])
+
+    console.log(buyItem);
 
     return (
         <div id='shopBasket' className='container'>
@@ -21,7 +26,7 @@ const BuyBox = () => {
                 <i className="fa-solid fa-cart-shopping" aria-hidden="true"></i>
             </h3>
             <div id='shopBasket_left'>
-                <BuyItemBox />
+                <BuyItemBox buyItem={buyItem} />
                 <BuyDeliveryBox />
             </div>
 
