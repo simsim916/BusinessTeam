@@ -10,6 +10,7 @@ import { api } from '../../../../model/model'
 import { useDispatch, useSelector } from 'react-redux';
 import { loginFailure, loginRequest, loginSuccess } from '../../../redux/user/action';
 import { getUserCart } from '../../../redux/userCart/action';
+import { setBuyItemList } from '../../../redux/buyItem/actions';
 
 const ItemDetailBox = ({ item }) => {
     const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const ItemDetailBox = ({ item }) => {
     const hour = currentDate.getHours();
     const dayOfWeek = currentDate.getDay();
     const [loginTest, setLoginTest] = useState(false);
+    const buyItem = useSelector(state => state.buyItem);
 
     let inputCountRef = useRef(null)
     let priceRef = useRef(null)
@@ -73,47 +75,37 @@ const ItemDetailBox = ({ item }) => {
         setInputCountValue(event.target.value);
     }
 
-
     const addCart = () => {
         setGotoCart(!gotoCart);
         const userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
         if (userinfo && userinfo.login) {
             console.log('aa')
             const formData = {
-                item_code: item.code,
-                item_amount: inputCountValue,
+                code: item.code,
+                amount: inputCountValue,
                 id: userinfo.id
             };
             const ar = [];
             ar.push(formData);
 
             dispatch(getUserCart('/usercart/merge', 'post', ar, userinfo.token))
+            // await axios.post('http://localhost:8090/usercart/merge', ar);
         } else {
             let cart = localStorage.getItem('cart');
             let cartArray = cart ? JSON.parse(cart) : [];
 
-            const itemIndex = cartArray.findIndex(cartItem => cartItem.item_code === item.code);
+            const itemIndex = cartArray.findIndex(cartItem => cartItem.code === item.code);
 
             if (itemIndex !== -1) {
-                // 중복된 아이템이 있으면 수량만 증가
-                cartArray[itemIndex].item_amount += +inputCountValue;
+                cartArray[itemIndex].amount += +inputCountValue;
             } else {
-                // 중복된 아이템이 없으면 새로운 아이템 추가
-                cartArray.push({ item_code: item.code, item_amount: +inputCountValue });
+                cartArray.push({ code: item.code, amount: +inputCountValue });
             }
 
             localStorage.setItem('cart', JSON.stringify(cartArray));
         }
     };
 
-    const order = async (event) => {
-        event.preventDefault();
-        let cart = localStorage.getItem('cart');
-        let user = sessionStorage.getItem('userinfo');
-        await api('/usercart/insertItem', 'post', cart, user.token
-        ).then(res => console.log(res.data)
-        ).catch(err => console.log(err.message));
-    }
 
     return (
         <div id="itemDetailBox" className="container">
@@ -166,7 +158,7 @@ const ItemDetailBox = ({ item }) => {
                     <div id="priceBox">
                         <div id="priceAmount">총 상품금액&nbsp; : &nbsp;<span ref={priceRef}>{makeComa(makeDiscountPrice(item.price, item.discount) * inputCountValue)}원</span></div>
                         <div onClick={gotoCart ? null : addCart} id="gotocart">장바구니 담기</div>
-                        <a onClick={order} href="" id="gotobuy">구매하기</a>
+                        <Link to="/home/buy" id="gotobuy">구매하기</Link>
                     </div>
                 </div>
                 {

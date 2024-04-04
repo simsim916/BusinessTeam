@@ -1,6 +1,7 @@
 package com.example.demo.serviceImpl;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -28,12 +29,23 @@ public class UserCartServiceImpl implements UserCartService {
 	public List<UserCart> merge(List<UserCart> list) {
 		// LocalDate 클래스를 이용해서 entity에 등록일자 담기
 		LocalDate today = LocalDate.now();
-		for (UserCart e : list)
+		for (UserCart e : list) {
 			e.setRegdate(today);
-		return userCartRepository.merge(list);
+		}
+
+		userCartRepository.merge(list);
+		return null;
 	}
-@Override
-public List<UserCartDTO> selectItemListWhereUserID(UserCart entity) {
-	return userCartRepository.selectItemListWhereUserID(entity);
-}
+
+	@Override
+	public List<UserCartDTO> selectItemListWhereUserID(UserCart entity) {
+		return userCartRepository.selectItemListWhereUserID(entity);
+	}
+	
+	
+	@Override
+	@Transactional
+	public void delete(UserCart entity) {
+		userCartRepository.delete(entity);
+	}
 }

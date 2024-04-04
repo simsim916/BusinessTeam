@@ -10,7 +10,7 @@ import AskBoardBox from './ask/AskBoardBox';
 import axios from 'axios';
 // import ShopBasketSelectBox from './../../shopBasket/ShopBasketSelectBox';
 
-const ItemDetail = () => {
+const ItemDetail = ({ propscode }) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const itemCode = searchParams.get("code");
     const [item, setItem] = useState(null);
@@ -18,7 +18,7 @@ const ItemDetail = () => {
     const [error, setError] = useState(false);
 
     useEffect(() => {
-        axios.get(`http://localhost:8090/item/detailn?column=item.code&keyword=${itemCode}`
+        axios.get(`http://localhost:8090/item/detailn?column=item.code&keyword=${propscode || itemCode}`
         ).then(res => {
             setItem(res.data);
             setLoading(false);

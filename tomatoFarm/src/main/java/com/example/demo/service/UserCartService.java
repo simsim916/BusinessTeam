@@ -12,4 +12,6 @@ public interface UserCartService {
 	List<UserCart> merge(List<UserCart> list);
 	
 	List<UserCartDTO> selectItemListWhereUserID(UserCart entity);
+	
+	void delete(UserCart entity);
 }

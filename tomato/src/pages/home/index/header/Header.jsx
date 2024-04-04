@@ -9,6 +9,7 @@ import { changeKeyword } from "../../../redux/basic/actions";
 
 const Header = () => {
     console.log(`Header 랜더링`);
+
     const keyword = useSelector(state => state.basic.keyword);
     const navigate = useNavigate();
     const dispatch = useDispatch()
@@ -82,7 +83,7 @@ const Header = () => {
                             <a to="/"><i className="fa-solid fa-user"></i></a>
                         </div>
                         <div id="myCart">
-                            <a to="/"><i className="fa-solid fa-cart-shopping"></i></a>
+                            <Link to="/home/cart"><i className="fa-solid fa-cart-shopping"></i></Link>
                         </div>
                         <div id="myItem">
                             <a href="/"><i className="fa-solid fa-box-archive"></i></a>

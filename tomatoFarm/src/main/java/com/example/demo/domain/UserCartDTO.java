@@ -20,9 +20,11 @@ import lombok.NoArgsConstructor;
 public class UserCartDTO {
 
 	
-	private Integer item_code; // 상품코드
+//	private Integer item_code; // 상품코드
+	private Integer code; // 상품코드
 	private String id; // 사용자 아이디
-	private Integer item_amount = 0; // 장바구니 수량
+//	private Integer item_amount = 0; // 장바구니 수량
+	private Integer amount = 0; // 장바구니 수량
 	private Integer views = 1; // 조회수
 	private Integer like_item = 0; // 관심상품 등록 여부
 	private LocalDate regdate; // 최근 조회 날짜

@@ -21,7 +21,7 @@ import lombok.ToString;
 @ToString
 public class UserCartID  implements Serializable{
 
-	private Integer item_code; // 상품코드
+	private Integer code; // 상품코드
 	private String id; // 사용자 아이디
 
 }

@@ -1,5 +1,5 @@
-import { SERVER_RESOURCE } from '../../../model/server-config';
-import { makeComa, makeDiscountPrice } from '../../components/MathFunction';
+import { SERVER_RESOURCE } from '../../../../../model/server-config';
+import { makeComa,makeDiscountPrice } from '../../../../components/MathFunction';
 
 const BuyItemBoxRow = ({ item, idx, changeItemList }) => {
 

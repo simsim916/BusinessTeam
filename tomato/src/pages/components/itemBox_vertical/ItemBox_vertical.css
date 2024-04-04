@@ -8,6 +8,7 @@
     position: relative;
     cursor: pointer;
     display: flex;
+    width: 100%;
 }
 
 .itemBox_vertical:hover {

@@ -32,7 +32,7 @@ const LoginBG = ({ checkId, checkPassword, changeOpacity }) => {
     })
 
     const handleInputChange = (event, handle) => {
-        if (event.which == 13) {
+        if (event.key === 'Enter') {
             requestLogin();
         }
         let result = {
@@ -78,6 +78,7 @@ const LoginBG = ({ checkId, checkPassword, changeOpacity }) => {
 
     const requestLogin = (loginValue) => {
         return async (dispatch) => {
+            const cart = localStorage.getItem('cart');
             dispatch(loginRequest(loginValue.value.id));
             try {
                 const response = await api('/user/login', 'post', loginValue.value);
@@ -88,7 +89,8 @@ const LoginBG = ({ checkId, checkPassword, changeOpacity }) => {
                     login: true,
                     id: response.data.id
                 }));
-                dispatch(getUserCart('/usercart/select', 'get', null, response.data.token));
+                dispatch(getUserCart('/usercart/merge', 'post', cart, response.data.token))
+                localStorage.removeItem('cart');
                 navigate("/home");
             } catch (error) {
                 console.log(error.response.data);

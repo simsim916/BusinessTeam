@@ -1,6 +1,7 @@
 import './Cart_total.css';
 import { useEffect, useState } from 'react';
 import { makeComa } from '../../../components/MathFunction';
+import { Link } from 'react-router-dom';
 
 const Cart_total = ({ buyItem }) => {
     if (buyItem)
@@ -49,7 +50,7 @@ const Cart_total = ({ buyItem }) => {
                             </div>
                         </div>
                     </div>
-                    <div id="loginBox">주문하기</div>
+                    <Link to="/home/buy" id="loginBox" buyItem={buyItem}>주문하기</Link>
                     <div id="shopBasketCancel">
                         <div>* [주문완료] 상태일 경우에만 주문 취소 가능합니다.</div>
                         <div>* [마이페이지] - [주문내역 상세페이지]에서 직접 취소 가능합니다.</div>

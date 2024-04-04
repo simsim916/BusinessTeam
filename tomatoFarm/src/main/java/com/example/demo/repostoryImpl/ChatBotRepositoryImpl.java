@@ -62,13 +62,11 @@ public class ChatBotRepositoryImpl implements ChatBotRepository {
 	@Override
 	public List<ChatBotDTO> selectRootList(PageRequest pageRequest, SearchRequest searchRequest) {
 		return jPAQueryFactory.select(Projections.bean(ChatBotDTO.class, 
-				chatBot.writer, chatBot.root, chatBot.ing, chatBot.regdate.max().as("regdate"), user.level.as("user_level")))
+				chatBot.writer, chatBot.root, chatBot.ing, chatBot.type, chatBot.regdate.max().as("regdate"), user.level.as("user_level")))
 				.from(chatBot)
 				.leftJoin(user).on(chatBot.writer.eq(user.id))
-//				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue().contains(searchRequest.getKeyword()))
-				.groupBy(chatBot.root,chatBot.writer,chatBot.ing)
-//				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum())
-//				.orderBy(chatBot.regdate.max().desc())
+				.groupBy(chatBot.root,chatBot.writer,chatBot.ing,chatBot.type)
+				.orderBy(chatBot.regdate.max().desc())
 				.fetch();
 	}
 }

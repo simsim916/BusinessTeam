@@ -1,10 +1,11 @@
 import './DeliverySelect.css'
 
-const DeliverySelect = () => {
+const DeliverySelect = ({ handleOnClick }) => {
     return (
         <div id="deliverySelect">
             <div id="deliverySelectContainer">
                 <h4>배송지 변경</h4>
+                <div onClick={handleOnClick} id="exitBt"><i class="fa-solid fa-xmark"></i></div>
                 <div className="addDelivery">배송지 추가하기</div>
                 <div className="deliverySelectRow">
                     <h4>우리집</h4>
