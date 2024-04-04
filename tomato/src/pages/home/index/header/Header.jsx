@@ -9,6 +9,7 @@ import { changeKeyword } from "../../../redux/basic/actions";
 
 const Header = () => {
     console.log(`Header 랜더링`);
+
     const keyword = useSelector(state => state.basic.keyword);
     const navigate = useNavigate();
     const dispatch = useDispatch()

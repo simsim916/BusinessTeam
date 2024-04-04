@@ -25,7 +25,7 @@ const ItemListContainer = ({ itemList }) => {
     const [currPage, setCurrPage] = useState(1);
     const [limit, setLimit] = useState(16);
     const [vertical, setVertical] = useState({
-        vertical: true,
+        vertical: false,
         infinite: true
     });
 

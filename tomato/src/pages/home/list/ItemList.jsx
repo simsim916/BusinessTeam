@@ -1,7 +1,5 @@
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState, useRef, useMemo } from "react";
-import axios from "axios";
-import Header from './../index/header/Header';
 import ItemListFilter from './ItemListFilter';
 import ItemListContainer from './ItemListContainer';
 import Loading from './../../components/Loading';
@@ -14,6 +12,11 @@ import { changeKeyword } from "../../redux/basic/actions";
 
 const ItemList = () => {
     console.log('ItemList랜더링')
+    /* 🫓REDUX🫓 */
+    const dispatch = useDispatch();
+    const itemList = useSelector(state => state.itemList);
+    const itemListSort = useSelector(state => state.itemListSort);
+
     /* 검색창 관련 */
     const [searchParams] = useSearchParams();
     const keyword = searchParams.get("keyword");
@@ -23,11 +26,6 @@ const ItemList = () => {
         api(`/visit/update?page=itemList`, 'get')
         dispatch(changeKeyword(searchParams.get(keyword)))
     }, [])
-
-    /* 🫓REDUX🫓 */
-    const dispatch = useDispatch();
-    const itemList = useSelector(state => state.itemList);
-    const itemListSort = useSelector(state => state.itemListSort);
 
     /* 키워드 검색시 REDUX 상태값 가져오기 */
     useEffect(() => {
@@ -68,9 +66,6 @@ const ItemList = () => {
     const handleOnClick = (event) => {
         setShowDetail(!showDetail)
     }
-
-
-
 
     if (itemList.loading || itemListSort.loading) return <Loading />
     if (itemList.error || itemListSort.error) return <Error />

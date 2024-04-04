@@ -32,7 +32,7 @@ const LoginBG = ({ checkId, checkPassword, changeOpacity }) => {
     })
 
     const handleInputChange = (event, handle) => {
-        if (event.which == 13) {
+        if (event.key === 'Enter') {
             requestLogin();
         }
         let result = {
