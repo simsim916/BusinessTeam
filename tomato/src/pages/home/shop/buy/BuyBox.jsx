@@ -3,20 +3,51 @@ import './BuyBox.css'
 import BuyItemBox from './buyItemBox/BuyItemBox';
 import BuyDeliveryBox from './deliveryAddress/BuyDeliveryBox';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getBuyItemList } from '../../../redux/buyItem/actions';
 
 
-const BuyBox = () => {
-    let buyItem;
-    const buy = useSelector(state => state.buyItem);
-    useEffect(() => {
-        sessionStorage.setItem('buyItem', buy);
 
-        buyItem = sessionStorage.getItem('buyItem');
+const BuyBox = () => {
+    /* Redux */
+
+    /* 리액트 상태값 */
+    const [buyList, setBuyList] = useState(null); // 장바구니에서 클릭해서 넘어온 리스트
+    const [checkedList, setCheckedList] = useState(); // 구매하기 페이지 내에서 클릭한 리스트
+
+    useEffect(() => {
+        let session = sessionStorage.getItem('buyList');
+
+        setBuyList(JSON.parse(session));
+        setCheckedList(JSON.parse(session));
     }, [])
 
-    console.log(buyItem);
+    // const handleCheck = (e, item) => {
+    //     const find = checkedList.find(i => i.code === item.code);
+    //     let arr = [...checkedList];
+    //     if (find === undefined) {
+    //         arr.push(item);
+    //         setCheckedList(arr);
+    //         e.target.checked = 'false';
+    //     } else {
+    //         const filtered = arr.filter(i => i.code !== item.code);
+    //         setCheckedList(filtered);
+    //         e.target.checked = 'true';
+    //     }
+    // }
+    const handleCheck = (e, item) => {
+        const find = checkedList.find(i => i.code === item.code);
+        let arr = [...checkedList];
+        if (find === undefined) {
+            arr.push(item);
+            setCheckedList(arr);
+        } else {
+            const filtered = arr.filter(i => i.code !== item.code);
+            setCheckedList(filtered);
+        }
+    }
+
+
 
     return (
         <div id='shopBasket' className='container'>
@@ -26,11 +57,11 @@ const BuyBox = () => {
                 <i className="fa-solid fa-cart-shopping" aria-hidden="true"></i>
             </h3>
             <div id='shopBasket_left'>
-                <BuyItemBox buyItem={buyItem} />
+                <BuyItemBox checkedList={checkedList} setCheckedList={setCheckedList} handleCheck={handleCheck} buyList={buyList} setBuyList={setBuyList} />
                 <BuyDeliveryBox />
             </div>
 
-            <Cart_total />
+            <Cart_total buyItem={checkedList} />
 
             {/* <BestItemBox /> */}
 

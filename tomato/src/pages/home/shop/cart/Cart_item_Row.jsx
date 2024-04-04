@@ -20,17 +20,18 @@ const Cart_item_Row = ({ item, idx, changeItemList, buyItem, handleRefresh }) =>
         changeItemList(idx, event.target.value, item)
     }
 
-    const handleCheckBox = () => {
+    const handleCheckBox = (e) => {
         const find = buyItem.find(i => i.code === item.code);
         let arr = [...buyItem];
         if (find === undefined) {
-            arr.push(item);
-            dispatch(setBuyItemList(arr));
+            if (item.amount > 0) {
+                arr.push(item);
+                dispatch(setBuyItemList(arr));
+            }
         } else {
             const filtered = arr.filter(i => i.code !== item.code);
             dispatch(setBuyItemList(filtered));
         }
-        console.log(buyItem);
     }
 
     const handleDelete = async () => {
@@ -54,7 +55,12 @@ const Cart_item_Row = ({ item, idx, changeItemList, buyItem, handleRefresh }) =>
 
     return (
         <ul className="shopBasketItem">
-            <li><input className="check" type="checkbox" name="buy" onChange={() => handleCheckBox(item)}></input></li>
+            <li>
+                <input className="check" type="checkbox" name="buy"
+                    onChange={(e) => handleCheckBox(e, item)}
+                >
+                </input>
+            </li>
             <li className="shopBasketItemImg"><Link to={'/home/detail?code=' + item.code}><img src={SERVER_RESOURCE + `/img/itemImg/${item.code}_2.jpg`} alt="" /></Link></li>
             <li className="shopBasketItemIfo">
                 <Link to={'/home/detail?code=' + item.code} className="shopBasketItemIfo_name">{item.name}</Link>

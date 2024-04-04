@@ -21,12 +21,10 @@ public class OrderController {
 
 	OrderService orderService;
 	
-	@PostMapping("/singleOrder")
-	public ItemOrder test(@RequestBody ItemOrder itemOrder ,OrderDetail orderDetail) {
-		
-		LocalDate now = LocalDateTime.now().plusHours(9).toLocalDate();
-		itemOrder.setOrderDate(now);
+	@PostMapping("/order")
+	public ItemOrder test() {
 		
 		return null;
+		
 	}
 }
