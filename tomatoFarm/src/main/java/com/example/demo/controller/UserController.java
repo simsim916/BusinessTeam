@@ -1,10 +1,13 @@
 package com.example.demo.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -72,6 +75,20 @@ public class UserController {
 			result = ResponseEntity.status(HttpStatus.OK).body("signUp_failed");
 		}
 		return result;	
+	}
+	
+	@GetMapping("/select")
+	public ResponseEntity<?> selectUserWhereID(HttpServletRequest request) {
+		String token = tokenProvider.parseBearerToken(request);
+		String id = tokenProvider.validateAndGetUserId(token);
+		User entity = new User().builder()
+						.id(id)
+						.build();
+		
+		User user = userService.selectUser(entity);
+		System.out.println(user);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(user);
 	}
 	
 	

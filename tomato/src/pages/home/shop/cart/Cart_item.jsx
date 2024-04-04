@@ -18,7 +18,8 @@ const Cart_item = ({ buyItem, userCart, handleRefresh }) => {
         if (type == '+') {
             ar[key].amount++;
         } else if (type == '-') {
-            ar[key].amount--;
+            if (ar[key].amount > 0)
+                ar[key].amount--;
         } else {
             ar[key].amount = type
         }

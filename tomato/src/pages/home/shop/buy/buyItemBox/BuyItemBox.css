@@ -35,6 +35,7 @@
     }
 }
 
+
 #BuyItemBox>input {
     margin: 0 8px 10px 20px;
 }
@@ -83,7 +84,7 @@
 }
 
 #BuyItemBoxTitle li:nth-child(6) {
-    width: 90px
+    width: 90px;
 }
 
 .shopBasketItem {
@@ -91,6 +92,52 @@
     height: 120px;
     border: 1px solid #4C455630;
     border-top: none;
+
+    list-style: none;
+    padding-inline-start: 0;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+
+
+
+
+.shopBasketItem li {
+    line-height: 50px;
+    width: 200px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.shopBasketItem li:nth-child(1) {
+    width: 50px;
+}
+
+.shopBasketItem li:nth-child(2) {
+    width: 20%;
+}
+
+.shopBasketItem li:nth-child(3) {
+    width: calc(100% - 50px - 20% - 90px - 100px - 90px);
+    text-align: center;
+    /* line-height: ; */
+}
+
+.shopBasketItem li:nth-child(4) {
+    width: 90px;
+}
+
+.shopBasketItem li:nth-child(5) {
+    width: 100px;
+    flex-direction: column;
+    line-height: 25px;
+}
+
+.shopBasketItem li:nth-child(6) {
+    width: 90px;
 }
 
 .shopBasketItemImg {
@@ -101,6 +148,8 @@
 .shopBasketItemImg img {
     object-fit: contain;
     width: 100%;
+    height: 100%;
+    padding: 10px;
 }
 
 .shopBasketItemIfo {
@@ -115,6 +164,7 @@
 .shopBasketItemIfo .shopBasketItemIfo_price {
     margin-top: 10px;
     color: #00000080;
+    margin-bottom: 5px;
 }
 
 .shopBasketItem_count {
@@ -134,4 +184,12 @@
     width: 15px;
     line-height: 15px;
     font-size: 10px;
+}
+
+.shopBasketItemIfo_price {
+    text-decoration: line-through;
+}
+
+.buyPage {
+    text-decoration: line-through;
 }
