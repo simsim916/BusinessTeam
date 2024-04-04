@@ -162,7 +162,7 @@
     margin-top: 20px;
 }
 
-.otherChat {
+#messageBox .otherChat {
     margin-top: 10px;
     background: #f8dbe1;
     max-width: 80%;
@@ -172,7 +172,7 @@
     align-self: flex-start;
 }
 
-.myChat {
+#messageBox .myChat {
     background: #fff5f5;
     max-width: 80%;
     border-radius: 10px;
