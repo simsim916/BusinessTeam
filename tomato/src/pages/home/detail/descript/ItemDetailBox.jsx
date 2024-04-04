@@ -2,31 +2,23 @@ import './ItemDetailBox.css';
 
 import { useRef, useState, useEffect, useMemo } from 'react';
 import { makeComa, makeDiscountPrice } from '../../../components/MathFunction';
-import axios from 'axios';
 import Loading from './../../../components/Loading';
-import Error from './../../../components/Error';
 import { Link } from 'react-router-dom';
-import { api } from '../../../../model/model'
 import { useDispatch, useSelector } from 'react-redux';
-import { loginFailure, loginRequest, loginSuccess } from '../../../redux/user/action';
-import { getUserCart } from '../../../redux/userCart/action';
-import { setBuyItemList } from '../../../redux/buyItem/actions';
+import { getUserCart, setUserCartSession } from '../../../redux/userCart/action';
 
 const ItemDetailBox = ({ item }) => {
     const dispatch = useDispatch();
+    const userinfo = useSelector(state => state.user.data)
     const [inputCountValue, setInputCountValue] = useState(1);
     const [introItem, setIntroItem] = useState(false)
-    const [cartItem, setCartItem] = useState(true);
     const [gotoCart, setGotoCart] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
     const currentDate = new Date();
     const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
     const date = currentDate.getDate();
     const hour = currentDate.getHours();
     const dayOfWeek = currentDate.getDay();
-    const [loginTest, setLoginTest] = useState(false);
-    const buyItem = useSelector(state => state.buyItem);
 
     let inputCountRef = useRef(null)
     let priceRef = useRef(null)
@@ -57,19 +49,9 @@ const ItemDetailBox = ({ item }) => {
         }
     }
 
-    const sumTotal = (value) => {
-        const priceValue = priceRef.current.innerText.replace('원', '');
-        priceRef.current.innerText = `${value * priceValue} 원`;
-    }
-
     const showItemDetail = () => {
         setIntroItem(!introItem)
     }
-
-
-    const gotoCartClick = () => {
-
-    };
 
     const changeInputCount = (event) => {
         setInputCountValue(event.target.value);
@@ -77,9 +59,7 @@ const ItemDetailBox = ({ item }) => {
 
     const addCart = () => {
         setGotoCart(!gotoCart);
-        const userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
         if (userinfo && userinfo.login) {
-            console.log('aa')
             const formData = {
                 code: item.code,
                 amount: inputCountValue,
@@ -87,22 +67,20 @@ const ItemDetailBox = ({ item }) => {
             };
             const ar = [];
             ar.push(formData);
-
             dispatch(getUserCart('/usercart/merge', 'post', ar, userinfo.token))
-            // await axios.post('http://localhost:8090/usercart/merge', ar);
+
         } else {
-            let cart = localStorage.getItem('cart');
-            let cartArray = cart ? JSON.parse(cart) : [];
-
-            const itemIndex = cartArray.findIndex(cartItem => cartItem.code === item.code);
-
+            let cartArray = JSON.parse(localStorage.getItem('cart')) || [];
+            const itemIndex = cartArray.findIndex(cartItem => cartItem.code == item.code);
             if (itemIndex !== -1) {
                 cartArray[itemIndex].amount += +inputCountValue;
             } else {
                 cartArray.push({ code: item.code, amount: +inputCountValue });
+                console.log({ code: item.code, amount: +inputCountValue })
+                console.log(cartArray)
+                console.log(JSON.stringify(cartArray))
             }
-
-            localStorage.setItem('cart', JSON.stringify(cartArray));
+            dispatch(setUserCartSession(cartArray));
         }
     };
 
@@ -126,9 +104,16 @@ const ItemDetailBox = ({ item }) => {
                     <div id="itemDelivery">{item.event}</div>
                     <div id="itemName">{item.name}</div>
                     <div id="itemAccount">소고기 찹스테이크 신선하고 맛있어요</div>
-                    <span id="itemSale">{item.discount}<span>%</span></span>
-                    <div id="itemPrice">{makeComa(item.price)}원</div>
-                    <div id="itemSalePrice">{makeComa(makeDiscountPrice(item.price, item.discount))}원</div>
+                    {
+                        item.discount ?
+                            <>
+                                <span id="itemSale">{item.discount}<span>%</span></span>
+                                <div id="itemPrice">{makeComa(item.price)}원</div>
+                                <div id="itemSalePrice">{makeComa(makeDiscountPrice(item.price, item.discount))}원</div>
+                            </>
+                            :
+                            <div id="itemSalePrice">{makeComa(item.price)}원</div>
+                    }
                 </div>
                 <div>배송</div>
                 <div>{item.delivery ? makeComa(item.delivery) + ' 원' : '무료배송'}<br />

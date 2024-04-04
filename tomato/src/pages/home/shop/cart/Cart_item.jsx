@@ -2,17 +2,18 @@
 import { useEffect, useState } from 'react';
 import './Cart_item.css';
 import Cart_item_Row from './Cart_item_Row';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setUserCart } from '../../../redux/userCart/action';
 import { setBuyItemList } from '../../../redux/buyItem/actions';
 import { getUserCart } from '../../../redux/userCart/action';
 
-const Cart_item = ({ buyItem, userCart, handleRefresh }) => {
+const Cart_item = () => {
 
     const dispatch = useDispatch();
+    const userCart = useSelector(state => state.userCart.data)
+    const buyItem = useSelector(state => state.buyItem.data)
 
-
-    const changeItemList = (key, type, item) => {
+    const changeItemList = (key, type) => {
         const userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
         let ar = [...userCart];
         if (type == '+') {
@@ -40,15 +41,10 @@ const Cart_item = ({ buyItem, userCart, handleRefresh }) => {
     }
 
     const handleAllCheckBox = () => {
-        let arr = [];
-        const all = document.getElementsByName('buy');
         if (userCart.length != buyItem.length) {
-            for (let item of userCart) { arr.push(item); }
-            dispatch(setBuyItemList(arr));
-            for (let c of all) c.checked = true;
+            dispatch(setBuyItemList(userCart));
         } else {
-            dispatch(setBuyItemList(arr));
-            for (let c of all) c.checked = false;
+            dispatch(setBuyItemList([]));
         }
     }
 
@@ -56,7 +52,7 @@ const Cart_item = ({ buyItem, userCart, handleRefresh }) => {
         <div id='shopBasketSelectBox'>
             <ul id="shopBasketSelect">
                 <li>
-                    <input {...buyItem.length === userCart.length && { checked: true }} type="checkbox" value='' onChange={handleAllCheckBox} />
+                    <input checked={buyItem.length == userCart.length} type="checkbox" onChange={handleAllCheckBox} />
                     전체선택
                 </li>
             </ul>
@@ -69,7 +65,7 @@ const Cart_item = ({ buyItem, userCart, handleRefresh }) => {
                     <li>총 상품금액</li>
                     <li>배송비</li>
                 </ul>
-                {userCart && userCart.map((e, i) => <Cart_item_Row handleRefresh={handleRefresh} buyItem={buyItem} item={e} key={i} idx={i} changeItemList={changeItemList} />)}
+                {userCart && userCart.map((e, i) => <Cart_item_Row  buyItem={buyItem} item={e} key={i} idx={i} changeItemList={changeItemList} />)}
             </div>
 
         </div>

@@ -2,9 +2,10 @@ import './Cart_total.css';
 import { useEffect, useState } from 'react';
 import { makeComa } from '../../../components/MathFunction';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-const Cart_total = ({ buyItem }) => {
-
+const Cart_total = () => {
+    const buyItem = useSelector(state => state.buyItem.data)
     const setSession = () => {
         sessionStorage.setItem('buyList', JSON.stringify(buyItem));
     }

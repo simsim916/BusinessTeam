@@ -136,7 +136,11 @@
 
 .shopBasketItemImg {
     overflow: hidden;
+}
 
+.shopBasketItemImg>a {
+    display: flex;
+    align-items: center;
 }
 
 .shopBasketItemImg img {

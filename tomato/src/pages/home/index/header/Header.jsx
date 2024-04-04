@@ -15,7 +15,7 @@ const Header = () => {
     const dispatch = useDispatch()
     const userinfo = JSON.parse(sessionStorage.getItem('userinfo'))
     const logOut = () => {
-        sessionStorage.removeItem('userinfo')
+        sessionStorage.removeItem('userinfo');
     }
 
     const searchBox = (event) => {

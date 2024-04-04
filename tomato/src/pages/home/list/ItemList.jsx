@@ -23,8 +23,8 @@ const ItemList = () => {
 
     /* 홈페이지 방문 기록 작성 */
     useEffect(() => {
+        dispatch(changeKeyword(searchParams.get("keyword")))
         api(`/visit/update?page=itemList`, 'get')
-        dispatch(changeKeyword(searchParams.get(keyword)))
     }, [])
 
     /* 키워드 검색시 REDUX 상태값 가져오기 */

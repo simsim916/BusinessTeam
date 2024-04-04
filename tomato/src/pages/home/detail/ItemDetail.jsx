@@ -1,17 +1,14 @@
-import { Routes, Route } from 'react-router-dom';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Loading from './../../components/Loading';
 import Error from './../../components/Error';
-import Header from './../index/header/Header';
 import ItemDetailBox from './descript/ItemDetailBox';
 import ReviewBoardBox from './review/ReviewBoardBox';
 import AskBoardBox from './ask/AskBoardBox';
 import axios from 'axios';
-// import ShopBasketSelectBox from './../../shopBasket/ShopBasketSelectBox';
 
 const ItemDetail = ({ propscode }) => {
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
     const itemCode = searchParams.get("code");
     const [item, setItem] = useState(null);
     const [loading, setLoading] = useState(true);

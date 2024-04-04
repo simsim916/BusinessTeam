@@ -1,9 +1,9 @@
-import { USERCART_DATA_REQUEST, USERCART_DATA_SUCCESS, USERCART_DATA_FAILURE, SET_USERCART_DATA} from './action';
+import { USERCART_DATA_REQUEST, USERCART_DATA_SUCCESS, USERCART_DATA_FAILURE, SET_USERCART_DATA } from './action';
 
 const initialState = {
     userCart: {
         loading: true,
-        data: [],
+        data: JSON.parse(localStorage.getItem('cart')),
         error: null
     }
 };
