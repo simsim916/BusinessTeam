@@ -5,12 +5,6 @@ import { api } from '../../../model/model'
 import Error from './../../components/Error';
 import Loading from './../../components/Loading';
 
-/*
-    1. 이전 상담내역 불러오기
-    useEffect, api함수 이용해서
-    이사람의 토큰을 보내서 아이디로 root가 뭐가 있는지 검색해서 줘야함 ->
-*/
-
 const ChatBotBox = ({
     /* admin 페이지 전용 props */
     amount, // admin페이지에서 나타낼 채팅창 갯수
@@ -165,7 +159,8 @@ const ChatBotBox = ({
                 }
 
                 <div id='messageBox'>
-                    {messageAll && messageAll.map((e, i) => <p className={e.writer == userinfo.id ? 'myChat' : 'otherChat'}>{e.content}</p>)}
+                    {/* {messageAll && messageAll.map((e, i) => <span>{new Date().toLocaleTimeString([], { hour: 'numeric', minute: 'numeric' })}</span>)} */}
+                    {messageAll && messageAll.map((e, i) => <p className={e.writer == userinfo.id ? 'myChat' : 'otherChat'}>{e.content}<br></br><span>{new Date(e.regdate).getHours()}시 {new Date(e.regdate).getMinutes()}분</span></p>)}
                 </div>
 
             </div>

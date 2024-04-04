@@ -50,6 +50,7 @@ const Admin_Chatbot = () => {
                     <li>순번</li>
                     <li>타입</li>
                     <li>진행상황</li>
+                    <li>채팅시간</li>
                     <li>고객 아이디</li>
                     <li>담당자</li>
                     <li>채팅</li>
