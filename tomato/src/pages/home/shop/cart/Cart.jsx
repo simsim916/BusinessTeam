@@ -12,26 +12,18 @@ import { getUserCart, getItemListAmount } from '../../../redux/userCart/action';
 const Cart = () => {
     const dispatch = useDispatch();
     const userCart = useSelector(state => state.userCart)
-    const buyItem = useSelector(state => state.buyItem)
-    const [refresh, setRefresh] = useState(false);
+    const userinfo = useSelector(state => state.user)
+    const buyItem = useSelector(state => state.buyItem.data)
 
-
-    const handleRefresh = () => {
-        setRefresh(!refresh);
-    }
-
+    console.log(userCart.data)
     useEffect(() => {
-        const cart = localStorage.getItem('cart')
-        const user = sessionStorage.getItem('userinfo');
-        if (user != null) {
-            const token = JSON.parse(user).token;
+        if (userinfo.login) {
+            const token = userCart.data.token;
             dispatch(getUserCart('/usercart/select', 'get', null, token));
         } else {
-            if (cart != null) {
-                dispatch(getItemListAmount('/item/selectin', 'post', cart, null, cart));
-            }
+            dispatch(getItemListAmount('/item/selectin', 'post', userCart.data, null));
         }
-    }, [refresh])
+    }, [])
 
     if (userCart.loading) return <Loading />
     if (userCart.error) return <Error />
@@ -43,8 +35,8 @@ const Cart = () => {
                 &nbsp;&nbsp;장바구니&nbsp;&nbsp;
                 <i className="fa-solid fa-cart-shopping" aria-hidden="true"></i>
             </h3>
-            <Cart_item buyItem={buyItem.data} userCart={userCart.data} handleRefresh={handleRefresh} />
-            <Cart_total buyItem={buyItem.data} />
+            <Cart_item />
+            <Cart_total />
 
             {/* <BestItemBox /> */}
 

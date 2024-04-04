@@ -37,13 +37,13 @@ export const getUserCart = (url, method, requestData, token) => {
     };
 };
 
-export const getItemListAmount = (url, method, requestData, token, localStorage) => {
+export const getItemListAmount = (url, method, requestData, token) => {
     return async (dispatch) => {
         dispatch(fetchDataRequest());
         try {
             const response = await api(url, method, requestData, token)
             for (let e of response.data) {
-                for (let i of JSON.parse(localStorage)) {
+                for (let i of requestData) {
                     if (i.code == e.code) {
                         e.amount = i.amount
                     }
@@ -51,8 +51,17 @@ export const getItemListAmount = (url, method, requestData, token, localStorage)
             }
             dispatch(fetchDataSuccess(response.data));
         } catch (error) {
-            console.log('fetchData : ' + error.message)
+            console.log('getItemListAmount : ' + error.message)
             dispatch(fetchDataFailure(error.message));
         }
     };
 };
+
+export const setUserCartSession = (data) => {
+    return async (dispatch) => {
+        if (data) {
+            localStorage.setItem('cart', JSON.stringify(data));
+            dispatch(setUserCart(data));
+        }
+    }
+}

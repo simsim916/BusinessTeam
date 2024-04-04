@@ -35,6 +35,10 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public List<ItemDTO> selectItemListIntegerWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
 		List<ItemDTO> result = itemRepository.selectItemListIntegerWhereType(pageRequest,searchRequest);
+		ItemDTO dto = result.get(0);
+		dto.setViews(dto.getViews()+1);
+		Item entity = dtotoEntity(dto);
+		entityManager.merge(entity);
 		return result;
 	}
 	
