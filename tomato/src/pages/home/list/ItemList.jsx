@@ -9,30 +9,37 @@ import Error from './../../components/Error';
 import { useSelector, useDispatch } from 'react-redux';
 import { getItemList } from "../../redux/itemList/actions";
 import { getItemSortList } from "../../redux/itemListSort/actions";
+import { api } from "../../../model/model";
+import { changeKeyword } from "../../redux/basic/actions";
 
 const ItemList = () => {
     console.log('ItemList랜더링')
-    const [searchParams, setSearchParams] = useSearchParams();
+    /* 검색창 관련 */
+    const [searchParams] = useSearchParams();
     const keyword = searchParams.get("keyword");
+
+    /* 홈페이지 방문 기록 작성 */
+    useEffect(() => {
+        api(`/visit/update?page=itemList`, 'get')
+        dispatch(changeKeyword(searchParams.get(keyword)))
+    }, [])
+
+    /* 🫓REDUX🫓 */
     const dispatch = useDispatch();
     const itemList = useSelector(state => state.itemList);
     const itemListSort = useSelector(state => state.itemListSort);
-    const filterCheckedList = useRef()
-    const [deletedSort, setDeletedSort] = useState([]);
 
+    /* 키워드 검색시 REDUX 상태값 가져오기 */
     useEffect(() => {
         dispatch(getItemList(`/item/search?keyword=${keyword}`, 'get'))
         dispatch(getItemSortList(`/item/searchsort?keyword=${keyword}`, 'get'))
     }, [keyword])
 
-    useEffect(() => {
-        axios.get(`http://localhost:8090/visit/update`, {
-            params: {
-                page: 'itemList'
-            }
-        })
-    }, [])
+    /* listFilter 관련 */
+    const filterCheckedList = useRef()
+    const [deletedSort, setDeletedSort] = useState([]);
 
+    /* 검색된 sort중 삭제할 sort를 저장할 배열(deletedSort) 저장 */
     const changeDeletedSort = (event) => {
         const value = event.target.closest('li').children[1].innerText;
         for (let e of filterCheckedList.current) {
@@ -45,19 +52,25 @@ const ItemList = () => {
             }
         }
     }
+
+    /* sort중 삭제할 sort를 저장할 배열(deletedSort)에 있는 요소들로 검색 sort 제거 */
     const changeItemList = () => {
         let result = [...itemList.data];
         for (let ele of deletedSort) {
-            console.log(ele)
             result = result.filter((e) => e.sort2 != ele && e.brand != ele)
         }
         return result;
     }
 
-    useMemo(() => {
-        console.log(deletedSort)
-        changeItemList()
-    }, [deletedSort])
+    /* list 페이지에서 detail 보기 */
+    const [showDetail, setShowDetail] = useState(false);
+
+    const handleOnClick = (event) => {
+        setShowDetail(!showDetail)
+    }
+
+
+
 
     if (itemList.loading || itemListSort.loading) return <Loading />
     if (itemList.error || itemListSort.error) return <Error />

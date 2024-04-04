@@ -34,18 +34,18 @@
     font-size: 14px;
 }
 
-.pagingBox>i:nth-of-type(1) {
-    right: calc(100% + 35px);
+.pagingBox>.left2 {
+    right: calc(100% + 45px);
 }
 
-.pagingBox>i:nth-of-type(2) {
-    right: calc(100% + 0px);
+.pagingBox>.left1 {
+    right: calc(100% + 10px);
 }
 
-.pagingBox>i:nth-last-of-type(2) {
-    left: calc(100% + 0px);
+.pagingBox>.right1 {
+    left: calc(100% + 10px);
 }
 
-.pagingBox>i:nth-last-of-type(1) {
-    left: calc(100% + 35px);
+.pagingBox>.right2 {
+    left: calc(100% + 45px);
 }

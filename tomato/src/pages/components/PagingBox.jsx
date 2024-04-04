@@ -41,17 +41,17 @@ const PagingBox = ({ limit, list, currPage, setCurrPage }) => {
     }
     return (
         <div className="pagingBox">
-            <i onClick={() => setCurrPage(1)} className="fa-solid fa-angles-left" ></i>
-            <i onClick={() => setCurrPage(currPage - 1)} className="fa-solid fa-chevron-left"></i>
+            {currPage != 1 && <i onClick={() => setCurrPage(1)} className="fa-solid fa-angles-left left2" ></i>}
+            {currPage != 1 && <i onClick={() => setCurrPage(currPage - 1)} className="fa-solid fa-chevron-left left1"></i>}
             <div className="pagingBoxNumber">
-                <p onClick={() => setCurrPage(currPage- 2)}>{arr[currPage - 1 - 2]}</p>
-                <p onClick={() => setCurrPage(currPage- 1)}>{arr[currPage - 1 - 1]}</p>
+                <p onClick={() => setCurrPage(currPage - 2)}>{arr[currPage - 1 - 2]}</p>
+                <p onClick={() => setCurrPage(currPage - 1)}>{arr[currPage - 1 - 1]}</p>
                 <p className="selected" onClick={() => setCurrPage(currPage)}>{arr[currPage - 1]}</p>
                 <p onClick={() => setCurrPage(currPage + 1)}>{arr[currPage - 1 + 1]}</p>
                 <p onClick={() => setCurrPage(currPage + 2)}>{arr[currPage - 1 + 2]}</p>
             </div >
-            <i onClick={() => setCurrPage(currPage + 1)} className="fa-solid fa-chevron-right"></i>
-            <i onClick={() => setCurrPage(arr.length)} className="fa-solid fa-angles-right"></i>
+            {currPage < arr.length && <i onClick={() => setCurrPage(currPage + 1)} className="fa-solid fa-chevron-right right1"></i>}
+            {currPage < arr.length && <i onClick={() => setCurrPage(arr.length)} className="fa-solid fa-angles-right right2"></i>}
         </div >
     );
     // 우리가 보고자 하는 데이터의 개수를 가지고 필요한 페이지 수를 계산  

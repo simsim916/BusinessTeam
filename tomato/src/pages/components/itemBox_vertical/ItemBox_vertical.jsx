@@ -1,15 +1,21 @@
 import './ItemBox_vertical.css'
 import { Link } from 'react-router-dom';
 import { makeComa } from '../MathFunction';
+import { SERVER_RESOURCE } from '../../../model/server-config';
+import { useState } from 'react';
+import ItemDetailBox from './../../home/detail/descript/ItemDetailBox';
 
 const ItemBox_vertical = ({ item }) => {
+    
 
     return (
-        <Link to={"/detail?code=" + item.code} className="itemBox_vertical">
+        <Link to={"/home/detail?code=" + item.code} className="itemBox_vertical">
+                
+
             <div className="itemImg">
                 <i className="fa-solid fa-cart-shopping"></i>
                 <i className="fa-solid fa-magnifying-glass"></i>
-                <img src={process.env.PUBLIC_URL + `/img/itemImg/${item.code < 10000 ? 'default' : item.code}_1.jpg`} alt={item.name} />
+                <img src={SERVER_RESOURCE + `/img/itemImg/${item.code < 10000 ? 'default' : item.code}_1.jpg`} alt={item.name} />
             </div>
             <div className='itemDesc'>
                 <div className="itemOption_vertical">
@@ -30,11 +36,11 @@ const ItemBox_vertical = ({ item }) => {
                 {
                     item.discount ? (
                         <>
-                            <p className="itemPriceB">{makeComa(item.price)}원</p>
-                            <p className="itemPrice">{makeComa(Math.round(item.price * (100 - item.discount) / 100))}원</p>
+                            <p className="itemPriceB">{makeComa(item.price)} 원</p>
+                            <p className="itemPrice">{makeComa(Math.round(item.price * (100 - item.discount) / 100))} 원</p>
                         </>
                     ) : (
-                        <p className="itemPrice">{makeComa(item.price)}원</p>
+                        <p className="itemPrice">{makeComa(item.price)} 원</p>
                     )
                 }
                 {
@@ -44,7 +50,7 @@ const ItemBox_vertical = ({ item }) => {
                         <div className="itemDelivery">무료배송</div>
                     )
                 }
-                
+
             </div>
         </Link>
     );

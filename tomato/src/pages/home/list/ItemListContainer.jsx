@@ -24,16 +24,10 @@ const ItemListContainer = ({ itemList }) => {
     const [sort, setSort] = useState('sales');
     const [currPage, setCurrPage] = useState(1);
     const [limit, setLimit] = useState(16);
-
-    const howManyItems = (event) => {
-        for (let t of event.target.closest('ul').children) {
-            t.style.opacity = "0.3";
-        }
-        event.target.closest('li').style.opacity = "1";
-        console.log(event.target.innerText);
-        // setLimit(event.target.innerText);
-        // setCurrPage(1);
-    }
+    const [vertical, setVertical] = useState({
+        vertical: true,
+        infinite: true
+    });
 
     const sortItemList = (event, list) => {
         // 1. 정렬하고자 하는 Column 의 이름을 onClick 주는 요소의 id로 지정
@@ -62,9 +56,9 @@ const ItemListContainer = ({ itemList }) => {
             <div id="listContainer">
                 <div id="containerOption">
                     <ul id="listButton">
-                        <li onClick={howManyItems}><div></div></li>
-                        <li onClick={howManyItems}><div></div></li>
-                        <li onClick={howManyItems}><div></div></li>
+                        <li style={{ opacity: !vertical.vertical && '1' }} onClick={() => setVertical(() => ({ ...vertical, vertical: false }))}><div></div></li>
+                        <li style={{ opacity: vertical.vertical && '1' }} onClick={() => setVertical(() => ({ ...vertical, vertical: true }))}><div></div></li>
+                        <li style={{ opacity: !vertical.infinite && '1' }} onClick={() => setVertical(() => ({ ...vertical, vertical: !vertical.infinite }))}><div></div></li>
                     </ul>
                     <div id="total">총 <span>{itemList ? itemList.length : '0'}</span> 개</div>
                     <div id="listOption">
@@ -74,10 +68,10 @@ const ItemListContainer = ({ itemList }) => {
                     </div>
                 </div>
                 {
-                    limit <= 16 ?
-                        (paging(itemList,currPage,size).map((e, i) => <ItemBox key={i} item={e} />))
-                        :
+                    vertical.vertical ?
                         (paging(itemList, currPage, size).map((e, i) => <ItemBox_vertical key={i} item={e} />))
+                        :
+                        (paging(itemList, currPage, size).map((e, i) => <ItemBox key={i} item={e} />))
                 }
                 <PagingBox limit={limit} setLimit={setLimit} list={itemList} currPage={currPage} setCurrPage={setCurrPage} />
             </div>
