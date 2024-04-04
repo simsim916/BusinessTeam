@@ -96,10 +96,17 @@ const ChatBotBox = ({
 
     /* input 박스에서 엔터키 입력 시 userChatbot함수를 호출하는 handler(함수)  */
     const handleKeyUp = (event) => {
-        if (event.key === 'Enter') {
+        if (event.key === 'Enter' && text.content.trim() !== '') {
             userChatbot();
         }
     };
+
+    // /* 이전 상담 내역을 저장할 상태*/
+    // const [saveBackChat, setSaveBackChat] = useEffect();
+
+    const clickMessageBack = () => {
+
+    }
 
     /* 채팅 가져올때 태그 제일 아래로 스크롤 */
     const chatBox = useRef(null);
@@ -152,6 +159,7 @@ const ChatBotBox = ({
                                     <span>일반</span>
                                 </div>
                             </div>
+                            <div onClick={clickMessageBack} id='messageBack'>이전 대화로 돌아가기</div>
                         </div>
                     </>
                 }
