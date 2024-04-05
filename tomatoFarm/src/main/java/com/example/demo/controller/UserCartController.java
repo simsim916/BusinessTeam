@@ -60,10 +60,7 @@ public class UserCartController {
 		String id = tokenProvider.validateAndGetUserId(token);
 		entity.setId(id);
 		List<UserCartDTO> list = userCartService.selectItemListWhereUserID(entity);
-		System.out.println(token);
-		System.out.println(entity);
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
-		System.out.println("aa" + list);
 		return result;
 	}
 

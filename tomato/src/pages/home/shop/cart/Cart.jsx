@@ -16,8 +16,8 @@ const Cart = () => {
     const userinfo = useSelector(state => state.user)
 
     useEffect(() => {
-        if (userinfo.login) {
-            const token = userCart.data.token;
+        if (userinfo.data.login) {
+            const token = userinfo.data.token;
             dispatch(getUserCart('/usercart/select', 'get', null, token));
         } else {
             dispatch(getItemListAmount('/item/selectin', 'post', userCart.data, null));
