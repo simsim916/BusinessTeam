@@ -1,4 +1,4 @@
-import { USERCART_DATA_REQUEST, USERCART_DATA_SUCCESS, USERCART_DATA_FAILURE, SET_USERCART_DATA, USERCART_REQUEST_SUCCESS } from './action';
+import { USERCART_DATA_REQUEST, USERCART_DATA_SUCCESS, USERCART_DATA_FAILURE, SET_USERCART_DATA } from './action';
 
 const initialState = {
     userCart: {
@@ -21,11 +21,6 @@ const userCartReducer = (state = initialState.userCart, action) => {
                 ...state.userCart,
                 loading: false,
                 data: action.payload
-            };
-        case USERCART_REQUEST_SUCCESS:
-            return {
-                ...state.userCart,
-                loading: false,
             };
         case USERCART_DATA_FAILURE:
             return {

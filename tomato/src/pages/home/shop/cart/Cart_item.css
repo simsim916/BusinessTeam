@@ -10,7 +10,9 @@
 }
 
 #shopBasketSelectBox {
+    position: relative;
     width: 70%;
+    margin-top: 50px;
 }
 
 @keyframes jelly {
@@ -45,16 +47,16 @@
 
 
 #shopBasketSelect {
+    position: absolute;
+    bottom: calc(100% + 0px);
     margin-top: 30px;
     display: flex;
-    position: relative;
-    list-style: none;
     padding-inline-start: 0px;
     margin-left: 15px;
     margin-bottom: 5px;
 }
 
-#shopBasketSelect>li {
+#shopBasketSelect {
     display: flex;
     margin-right: 15px;
     font-size: 14px;
@@ -63,7 +65,7 @@
     align-items: center;
 }
 
-#shopBasketSelect>li>input {
+#shopBasketSelect>input {
     margin-right: 8px;
 }
 

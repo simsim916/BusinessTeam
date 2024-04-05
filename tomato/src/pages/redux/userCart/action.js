@@ -2,7 +2,6 @@ import { api } from '../../../model/model';
 
 export const USERCART_DATA_REQUEST = 'USERCART_DATA_REQUEST';
 export const USERCART_DATA_SUCCESS = 'USERCART_DATA_SUCCESS';
-export const USERCART_REQUEST_SUCCESS = 'USERCART_REQUEST_SUCCESS';
 export const USERCART_DATA_FAILURE = 'USERCART_DATA_FAILURE';
 export const SET_USERCART_DATA = 'USERCART_SET_DATA';
 export const GET_USERCART_DATA = 'USERCART_SET_DATA';
@@ -15,10 +14,6 @@ export const fetchDataSuccess = (data) => ({
     type: USERCART_DATA_SUCCESS,
     payload: data
 });
-export const fetchRequestSuccess = () => ({
-    type: USERCART_REQUEST_SUCCESS,
-});
-
 export const fetchDataFailure = (error) => ({
     type: USERCART_DATA_FAILURE,
     payload: error
@@ -33,6 +28,7 @@ export const getUserCart = (url, method, requestData, token) => {
         dispatch(fetchDataRequest());
         try {
             const response = await api(url, method, requestData, token)
+            console.log(response.data)
             dispatch(fetchDataSuccess(response.data));
         } catch (error) {
             console.log('getUserCart : ' + error.message)
@@ -102,8 +98,8 @@ export const deleteUserCart = (url, token) => {
     return async (dispatch) => {
         dispatch(fetchDataRequest());
         try {
-            await api(url, 'get', token)
-            dispatch(fetchRequestSuccess());
+            const response = await api(url, 'get', null, token)
+            dispatch(fetchDataSuccess(response.data));
         } catch (error) {
             console.log('getUserCart : ' + error.message)
             dispatch(fetchDataFailure(error.message));
