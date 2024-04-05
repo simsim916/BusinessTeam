@@ -1,42 +1,36 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { SERVER_RESOURCE } from '../../../../model/server-config';
-import { makeComa, makeDiscountPrice } from '../../../components/MathFunction';
-import { setBuyItemList } from '../../../redux/buyItem/actions';
+import { makeComa } from '../../../components/MathFunction';
+import { setUserBuyStorage } from '../../../redux/userBuy/actions';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { useState } from 'react';
-import { setUserCartSession } from '../../../redux/userCart/action';
+import { deleteUserCart, setUserCartStorage, changeUserCart } from '../../../redux/userCart/action';
 
-const Cart_item_Row = ({ item, idx, changeItemList, buyItem }) => {
+const Cart_item_Row = ({ item, idx }) => {
+    /* 🫓REDUX🫓 */
     const dispatch = useDispatch();
     const user = useSelector(state => state.user.data);
     const userCart = useSelector(state => state.userCart.data);
+    const userBuy = useSelector(state => state.userBuy.data)
 
-    const handleCheckBox = () => {
-        if (buyItem.find(e => e.code == item.code)) {
-            dispatch(setBuyItemList(buyItem.filter(e => e.code != item.code)));
-        } else {
-            dispatch(setBuyItemList([...buyItem, item]));
-        }
+    const changeCheckBox = () => {
+        if (userBuy && userBuy.find(e => e.code == item.code))
+            dispatch(setUserBuyStorage(userBuy.filter(e => e.code != item.code)));
+        else if (userBuy)
+            dispatch(setUserBuyStorage([...userBuy, item]));
+        else
+            dispatch(setUserBuyStorage([item]));
     }
 
-    const handleDelete = async () => {
-        if (user != null) {
-            axios.get('http://localhost:8090/usercart/delete', {
-                params: {
-                    id: item.id,
-                    code: item.code
-                }
-            })
-        } else {
-            dispatch(setUserCartSession(userCart.filter(i => +i.code != +item.code)));
-        }
+    const handleXbtn = async () => {
+        userBuy && dispatch(setUserBuyStorage(userBuy.filter(i => +i.code != +item.code)));
+        dispatch(setUserCartStorage(userCart.filter(i => +i.code != +item.code)));
+        user && user.login && dispatch(deleteUserCart(`/usercart/delete?code=${item.code}`, user.token))
     }
 
     return (
         <ul className="shopBasketItem">
             <li>
-                <input className="check" checked={buyItem.find(e => e.code == item.code) || false} type="checkbox" onChange={() => handleCheckBox()} />
+                <input className="check" checked={userBuy && userBuy.find(e => e.code == item.code) || false} type="checkbox" onChange={() => changeCheckBox()} />
             </li>
             <li className="shopBasketItemImg"><Link to={'/home/detail?code=' + item.code}><img src={SERVER_RESOURCE + `/img/itemImg/${item.code}_2.jpg`} alt="" /></Link></li>
             <li className="shopBasketItemIfo">
@@ -53,9 +47,9 @@ const Cart_item_Row = ({ item, idx, changeItemList, buyItem }) => {
                 }
             </li>
             <li className="shopBasketItem_count">
-                <button onClick={() => changeItemList(idx, '-', item)}><i className="fa-solid fa-minus"></i></button>
-                <input id="inputCount" type="number" value={item.amount} onChange={(event) => changeItemList(idx, event.target.value, item)} />
-                <button><i onClick={() => changeItemList(idx, '+', item)} className="fa-solid fa-plus"></i></button>
+                <button onClick={() => dispatch(changeUserCart(idx, '-', userCart))}><i className="fa-solid fa-minus"></i></button>
+                <input id="inputCount" type="number" value={item.amount} onChange={(event) => dispatch(changeUserCart(idx, event.target.value, userCart))} />
+                <button><i onClick={() => dispatch(changeUserCart(idx, '+', userCart))} className="fa-solid fa-plus"></i></button>
             </li>
             {
                 item.discount ? (
@@ -71,7 +65,7 @@ const Cart_item_Row = ({ item, idx, changeItemList, buyItem }) => {
             }
             <li>
                 {item.delivery ? makeComa(item.delivery) + ' 원' : '무료배송'}
-                <div className='xButton' onClick={handleDelete}><i className="fa-solid fa-xmark"></i></div>
+                <div className='xButton' onClick={handleXbtn}><i className="fa-solid fa-xmark"></i></div>
             </li>
         </ul >
     );

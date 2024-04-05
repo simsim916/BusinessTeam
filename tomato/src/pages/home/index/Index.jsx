@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { SERVER_RESOURCE } from "../../../model/server-config";
 import './Index.css';
-import ChatBotBox from "../chatbot/ChatBotBox";
+import ChatBotBox from "../../components/chatbot/ChatBotBox";
 
 
 const Home = () => {

@@ -1,14 +1,11 @@
 import { Route, Routes } from "react-router-dom";
-import Header from './index/header/Header';
+import Header from './header/Header';
 import Index from './index/Index';
 import ItemList from "./list/ItemList";
 import ItemDetail from './detail/ItemDetail';
 import BuyBox from './shop/buy/BuyBox';
 import Cart from './shop/cart/Cart';
-import { useDispatch } from 'react-redux';
-import { setUser } from "../redux/user/action";
-import React, { useEffect } from "react";
-import { setUserCartSession } from "../redux/userCart/action";
+import React from "react";
 
 
 const Home = () => {

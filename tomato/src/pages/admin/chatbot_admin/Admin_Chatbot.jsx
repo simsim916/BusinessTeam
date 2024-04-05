@@ -2,7 +2,7 @@ import { api } from '../../../model/model';
 import './Admin_Chatbot.css';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Admin_Chatbot_Row from './Admin_Chatbot_Row';
-import ChatBotBox from './../../home/chatbot/ChatBotBox';
+import ChatBotBox from './../../components/chatbot/ChatBotBox';
 
 const Admin_Chatbot = () => {
 

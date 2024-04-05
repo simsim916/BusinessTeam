@@ -9,7 +9,7 @@ import { loginFailure, loginRequest, loginSuccess } from '../../redux/user/actio
 import { api } from '../../../model/model'
 import { getUserCart } from '../../redux/userCart/action';
 
-const LoginBG = ({ checkId, checkPassword, changeOpacity }) => {
+const LoginBG = () => {
     console.log('LoginBG 랜더링')
     const user = useSelector(state => state.user);
     const navigate = useNavigate();
@@ -31,6 +31,72 @@ const LoginBG = ({ checkId, checkPassword, changeOpacity }) => {
         isLoginable: false
     })
 
+    const checkId = (event) => {
+        const value = event.target.value;
+        const idBox = event.target.closest('div');
+        let message = '';
+        let check = false;
+        let key = /[a-z.0-9.-._]/gi;
+
+        if (value.length < 4 || value.length > 15) {
+            idBox.style.border = "2px solid #FF3F3F";
+            idBox.children[0].style.color = "#FF3F3F";
+            message = `아이디 : 4 ~ 15 글자 이하만 가능합니다.`;
+        } else if (value.replace(key, '').length > 0) {
+            idBox.style.border = "2px solid #FF3F3F";
+            idBox.children[0].style.color = "#FF3F3F";
+            message = `아이디 : 영문, 숫자, 특수문자(-, _)만 가능합니다.`;
+        } else {
+            idBox.style.border = "2px solid #03C75A";
+            idBox.children[0].style.color = "#03C75A";
+            check = true;
+        }
+        return {
+            message: message,
+            check: check
+        }
+    }
+
+    const checkPassword = (event) => {
+        let value = event.target.value;
+        const passwordBox = event.target.closest('div');
+        let message = '';
+        let check = false;
+        let key = /[a-z.0-9.!-*.@]/gi;
+
+        if (value.length < 4 || value.length > 14) {
+            passwordBox.style.border = "2px solid #FF3F3F";
+            passwordBox.children[0].style.color = "#FF3F3F";
+            message = `비밀번호 : 4 ~ 15 글자 이하만 입력해주세요.`;
+        } else if (value.replace(key, '').length > 0) {
+            passwordBox.style.border = "2px solid #FF3F3F";
+            passwordBox.children[0].style.color = "#FF3F3F";
+            message = `비밀번호 : 영문, 숫자, 특수문자(!,@,#,$,%,^,&,*)만 가능합니다.`;
+        } else if (value.replace(/[!-*.@]/gi, '').length >= value.length) {
+            passwordBox.style.border = "2px solid #FF3F3F";
+            passwordBox.children[0].style.color = "#FF3F3F";
+            message = `비밀번호 : 특수문자(!,@,#,$,%,^,&,*)를 반드시 포함해주세요.`;
+        } else {
+            passwordBox.style.border = "2px solid #03C75A";
+            passwordBox.children[0].style.color = "#03C75A";
+            check = true;
+        }
+
+        return {
+            message: message,
+            check: check
+        }
+    }
+
+    const changeOpacity = (event) => {
+        let box = event.target.closest('div')
+        box.style.zIndex = '1';
+        for (let e of box.children) {
+            e.style.opacity = "1";
+        }
+        box.style.border = "2px solid #9B1B30";
+    }
+
     const handleInputChange = (event, handle) => {
         if (event.key === 'Enter') {
             requestLogin();
@@ -44,6 +110,7 @@ const LoginBG = ({ checkId, checkPassword, changeOpacity }) => {
     }
 
     const handelInputBlur = (event, handle) => {
+        event.target.closest('div').style.zIndex = '2';
         let result = {
             message: '',
             check: false
@@ -100,7 +167,7 @@ const LoginBG = ({ checkId, checkPassword, changeOpacity }) => {
         }
     }
 
-    const handleLogin = (e) => {
+    const handleLogin = () => {
         dispatch(requestLogin(loginValue));
     };
 
@@ -108,47 +175,40 @@ const LoginBG = ({ checkId, checkPassword, changeOpacity }) => {
 
     return (
         <div id="loginBG">
-            <div>
-                <Link to="/home"><img id="logo" src={SERVER_RESOURCE + `/img/logo.png`} alt="logo" /></Link>
-                <form id="loginBox" action="/tomatoFarm/member/login" method="post">
-                    <div id="loginButton">
-                        <div>일반 로그인</div>
-                        <div>사업자 로그인</div>
-                    </div>
-
-                    <div id="idBox">
-                        <i className="fa-solid fa-circle-user"></i>
-                        <input id="id" type="text" name="id" placeholder="아이디"
-                            value={loginValue.value.id}
-                            onChange={(event) => handleInputChange(event, checkId)}
-                            onBlur={(event) => handelInputBlur(event, checkId)}
-                            onFocus={changeOpacity} />
-                    </div>
-                    <div id="passwordBox">
-                        <i className="fa-solid fa-key"></i>
-                        <input id="password" type="password" name="password" placeholder="비밀번호"
-                            value={loginValue.value.password}
-                            onChange={(event) => handleInputChange(event, checkPassword)}
-                            onBlur={(event) => handelInputBlur(event, checkPassword)}
-                            onFocus={changeOpacity} />
-                    </div>
-                    <p id="errorBox">
-                        <span id="idError">{loginValue.error.id}</span>
-                        <span id="pwError">{loginValue.error.password}</span>
-                        {user.error ? <span id="pwError">{user.error}</span> : null}
-                    </p>
-
-                    <button onClick={handleLogin} type="button" id="loginInBox"
-                        style={{ opacity: loginValue.isLoginable ? '1' : '0.3' }} disabled={!loginValue.isLoginable}>로그인</button>
-                </form>
-                <p id="successOrNot">
+            <Link to="/home"><img id="logo" src={SERVER_RESOURCE + `/img/logo.png`} alt="logo" /></Link>
+            <form id="loginBox" action="/tomatoFarm/member/login" method="post">
+                <div id="idBox">
+                    <i className="fa-solid fa-circle-user"></i>
+                    <input id="id" type="text" name="id" placeholder="아이디"
+                        value={loginValue.value.id}
+                        onChange={(event) => handleInputChange(event, checkId)}
+                        onBlur={(event) => handelInputBlur(event, checkId)}
+                        onFocus={(event) => changeOpacity(event)} />
+                </div>
+                <div id="passwordBox">
+                    <i className="fa-solid fa-key"></i>
+                    <input id="password" type="password" name="password" placeholder="비밀번호"
+                        value={loginValue.value.password}
+                        onChange={(event) => handleInputChange(event, checkPassword)}
+                        onBlur={(event) => handelInputBlur(event, checkPassword)}
+                        onFocus={(event) => changeOpacity(event)} />
+                </div>
+                <p id="errorBox">
+                    <p id="idError">{loginValue.error.id}</p>
+                    <p id="pwError">{loginValue.error.password}</p>
+                    {user.error ? <span id="pwError">{user.error}</span> : null}
                 </p>
-                <ul id="search">
-                    <li>아이디 찾기</li>
-                    <li>비밀번호 찾기</li>
-                    <li>회원가입</li>
-                </ul>
-            </div>
+
+                <button onClick={handleLogin} type="button" id="loginBtn"
+                    style={{ opacity: loginValue.isLoginable ? '1' : '0.3' }} disabled={!loginValue.isLoginable}>로그인</button>
+            </form>
+            <p id="successOrNot">
+            </p>
+            <ul id="search">
+                <li>아이디 찾기</li>
+                <li>비밀번호 찾기</li>
+                <li>회원가입</li>
+            </ul>
         </div>
     );
 }

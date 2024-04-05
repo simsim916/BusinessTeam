@@ -2,6 +2,7 @@ import { api } from '../../../model/model';
 
 export const USERCART_DATA_REQUEST = 'USERCART_DATA_REQUEST';
 export const USERCART_DATA_SUCCESS = 'USERCART_DATA_SUCCESS';
+export const USERCART_REQUEST_SUCCESS = 'USERCART_REQUEST_SUCCESS';
 export const USERCART_DATA_FAILURE = 'USERCART_DATA_FAILURE';
 export const SET_USERCART_DATA = 'USERCART_SET_DATA';
 export const GET_USERCART_DATA = 'USERCART_SET_DATA';
@@ -13,6 +14,9 @@ export const fetchDataRequest = () => ({
 export const fetchDataSuccess = (data) => ({
     type: USERCART_DATA_SUCCESS,
     payload: data
+});
+export const fetchRequestSuccess = () => ({
+    type: USERCART_REQUEST_SUCCESS,
 });
 
 export const fetchDataFailure = (error) => ({
@@ -57,11 +61,52 @@ export const getItemListAmount = (url, method, requestData, token) => {
     };
 };
 
-export const setUserCartSession = (data) => {
+export const setUserCartStorage = (data) => {
     return async (dispatch) => {
         if (data) {
             localStorage.setItem('cart', JSON.stringify(data));
             dispatch(setUserCart(data));
         }
     }
+}
+
+export const changeUserCart = (key, type, userCart) => {
+    return (dispatch) => {
+        const userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
+        let ar = [...userCart];
+        if (type == '+') {
+            ar[key].amount++;
+        } else if (type == '-') {
+            if (ar[key].amount > 0)
+                ar[key].amount--;
+        } else {
+            ar[key].amount = type
+        }
+        if (userinfo != null)
+            dispatch(getUserCart('/usercart/merge', 'post', ar, userinfo.token))
+        else {
+            dispatch(setUserCart(ar));
+            let result = [];
+            for (let e of ar) {
+                result.push({
+                    code: e.code,
+                    amount: e.amount
+                })
+            }
+            localStorage.setItem('cart', JSON.stringify(result));
+        }
+    }
+}
+
+export const deleteUserCart = (url, token) => {
+    return async (dispatch) => {
+        dispatch(fetchDataRequest());
+        try {
+            await api(url, 'get', token)
+            dispatch(fetchRequestSuccess());
+        } catch (error) {
+            console.log('getUserCart : ' + error.message)
+            dispatch(fetchDataFailure(error.message));
+        }
+    };
 }

@@ -65,14 +65,12 @@ public class UserCartController {
 		return result;
 	}
 
-	@GetMapping("delete")
-	public ResponseEntity<?> delete(UserCart entity) {
+	@GetMapping("/delete")
+	public ResponseEntity<?> delete(UserCart entity, HttpServletRequest request) {
+		String token = tokenProvider.parseBearerToken(request);
+		String id = tokenProvider.validateAndGetUserId(token);
+		entity.setId(id);
 		ResponseEntity<?> result = null;
-//		String token = tokenProvider.parseBearerToken(request);
-//		String id = tokenProvider.validateAndGetUserId(token);
-//		entity.setId(id);
-
-		System.out.println("\n" + entity + "\n");
 
 		userCartService.delete(entity);
 

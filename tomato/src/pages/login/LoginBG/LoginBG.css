@@ -1,84 +1,53 @@
 #loginBG {
-    transition: 1.5s;
-    width: 100%;
     position: absolute;
-    left: 0;
-}
-
-#loginBG>div {
-    right: calc((600px - 500px) / 2);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
     border-radius: 40px;
-    width: 500px;
-    height: 470px;
+    width: 450px;
+    height: 400px;
     display: block;
     background-color: white;
-    margin: calc((923px - 470px) / 2) auto;
+    text-align: center;
+}
+
+#loginBG>a {
+    display: inline-block;
+    text-align: center;
+    margin-top: 30px;
 }
 
 #loginBox {
     margin: auto;
-    margin-top: 90px;
+    margin-top: 30px;
     position: relative;
-    width: 350px;
-
-}
-
-#loginBG>div>a {
-    display: inline-block;
-    text-align: center;
-    margin-left: calc(50%);
-    margin-top: 20px;
-    transform: translate(-50%, 0);
-}
-
-#loginBox>#loginButton {
-    text-align: center;
-    font-weight: 500;
-    position: absolute;
-    bottom: 100%;
-    left: 0;
-    border: none;
-    display: flex;
-}
-
-#loginButton>div {
-    width: 50%;
-    line-height: 40px;
-    font-size: 17px;
-    cursor: pointer;
-}
-
-#loginButton>div:nth-of-type(1) {
-    border-top-left-radius: 10px;
-    border-left: 1px solid #564f45;
-    border-top: 1px solid #564f45;
-    background-color: #9B1B30;
-    color: white;
-}
-
-#loginButton>div:nth-of-type(2) {
-    border-top-right-radius: 10px;
-    border: 1px solid #564f45;
+    width: 75%;
 }
 
 #loginBox>div {
-    border: 1px solid #564f45;
-    width: 350px;
+    border: 2px solid #e0e0e0;
+    width: 100%;
     margin: auto;
-    line-height: 50px;
+    height: 50px;
     font-size: 18px;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
 }
 
+#loginBox>div:focus-within{
+    z-index: 3;
+}
 
 #loginBox>#idBox {
-    border-bottom: 0.5px solid #564f45;
-    border-top: none;
+    border-radius: 10px 10px 0 0;
 }
 
 #loginBox>#passwordBox {
-    border-top: 0.5px solid #564f45;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
+    border-radius: 0 0 10px 10px;
+    margin-top: -2px;
 }
 
 #loginBox>div>i {
@@ -90,25 +59,19 @@
 
 #loginBox>div>input {
     border: none;
-    width: 280px;
-
+    width: calc(100% - 50px);
 }
 
-#loginInBox {
+#loginBtn {
     margin: auto;
-    width: 350px;
+    width: 100%;
     height: 40px;
     font-size: 20px;
     background-color: #9B1B30;
     color: white;
-    margin-top: 20px;
+    margin-top: 0px;
     border-radius: 10px;
     cursor: pointer;
-}
-
-#loginBox>#idBox {
-    border-bottom: 0.5px solid #564f45;
-    border-top: none;
 }
 
 /* ========================== */
@@ -117,12 +80,14 @@
 }
 
 #errorBox {
-    width: 350px;
+    width: 100%;
     font-size: 12px;
     padding-left: 5px;
     color: #9B1B30;
     margin-top: 5px;
     margin-bottom: 5px;
+    height: 36px;
+    text-align: left;
 }
 
 #search {
@@ -132,7 +97,7 @@
     width: 300px;
     padding: 10px;
     font-size: 12px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 #search>li {

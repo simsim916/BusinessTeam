@@ -5,7 +5,7 @@ import { makeComa, makeDiscountPrice } from '../../../components/MathFunction';
 import Loading from './../../../components/Loading';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserCart, setUserCartSession } from '../../../redux/userCart/action';
+import { getUserCart, setUserCartStorage } from '../../../redux/userCart/action';
 
 const ItemDetailBox = ({ item }) => {
     const dispatch = useDispatch();
@@ -80,7 +80,7 @@ const ItemDetailBox = ({ item }) => {
                 console.log(cartArray)
                 console.log(JSON.stringify(cartArray))
             }
-            dispatch(setUserCartSession(cartArray));
+            dispatch(setUserCartStorage(cartArray));
         }
     };
 
