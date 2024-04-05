@@ -26,7 +26,8 @@ const Admin_Chatbot_Row = ({
                 {thispageRoot[0].ing == 1 && '상담중'}
                 {thispageRoot[0].ing == 2 && '상담완료'}
             </li>
-            <li>{new Date().toLocaleTimeString([], { hour: 'numeric', minute: 'numeric' })}</li>
+            {/* {thispageRoot.map((e, i) => <li>{new Date(e.regdate).getHours()}시 {new Date(e.regdate).getMinutes()}분</li>)} */}
+            <li>{thispageRoot.map(e => (<span>{new Date(e.regdate).getHours()}시 {new Date(e.regdate).getMinutes()}분</span>))}</li>
             <li>{thispageRoot.filter(e => e.user_level >= 100).map(e => e.writer)}</li>
             <li>{thispageRoot.filter(e => e.user_level < 100).map(e => e.writer)}</li>
             {showChatbot.includes(root) ?
