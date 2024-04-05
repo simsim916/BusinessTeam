@@ -19,14 +19,12 @@ const Cart_item = () => {
 
     return (
         <div id='shopBasketSelectBox'>
-            <ul id="shopBasketSelect">
-                {userCart && userCart.length > 0 &&
-                    <li>
-                        <input checked={userBuy && userBuy.length == userCart.length || false} type="checkbox" onChange={handleAllCheckBox} />
-                        전체선택
-                    </li>
-                }
-            </ul>
+            {userCart && userCart.length > 0 &&
+                <div id="shopBasketSelect">
+                    <input checked={userBuy && userBuy.length == userCart.length || false} type="checkbox" onChange={handleAllCheckBox} />
+                    전체선택
+                </div>
+            }
             <div id="shopBasketItemBox">
                 <ul id="shopBasketItemBoxTitle">
                     <li>선택</li>
