@@ -14,12 +14,14 @@ const BuyBox = () => {
     const dispatch = useDispatch();
 
     /* 리액트 상태값 */
-    const [buyList, setBuyList] = useState(null); // 장바구니에서 클릭해서 넘어온 리스트 = userbuy
+    const [buyList, setBuyList] = useState(); // 장바구니에서 클릭해서 넘어온 리스트 = userbuy
     const [checkedList, setCheckedList] = useState(); // 구매하기 페이지 내에서 클릭한 리스트
-    // const userBuy = useSelector(state => state.userBuy.data);
-    // const finalOrder = useSelector(state => state.finalOrder.data);
 
 
+
+    const setStorage = (data) => {
+        sessionStorage.setItem('finalOrder', JSON.stringify(data));
+    }
 
     useEffect(() => {
         let session = sessionStorage.getItem('buyList');
@@ -29,16 +31,17 @@ const BuyBox = () => {
     }, [])
 
     const handleCheck = (e, item) => {
-        if (checkedList && checkedList.find(e => e.code == item.code)) {
-            setCheckedList(checkedList.filter(e => e.code != item.code));
-        } else if (checkedList) {
-            setCheckedList([...checkedList, item])
+        if (checkedList.find(e => e.code === item.code)) {
+            console.log('있을 때')
+            setCheckedList(checkedList => checkedList.filter(e => e.code !== item.code));
+            setStorage(checkedList.filter(e => e.code !== item.code));
         } else {
-            setCheckedList([item])
+            console.log('없을 때')
+            setCheckedList(checkedList => [...checkedList, item]);
+            setStorage([...checkedList, item]);
         }
     }
 
-    console.log(checkedList);
 
     return (
         <div id='shopBasket' className='container'>

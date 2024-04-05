@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { SERVER_RESOURCE } from '../../../../../model/server-config';
 import { makeComa, makeDiscountPrice } from '../../../../components/MathFunction';
+import { useEffect, useState } from 'react';
 
 const BuyItemBoxRow = ({
     checkedList, // 구매페이지 내에서 체크된 아이템
@@ -9,7 +10,6 @@ const BuyItemBoxRow = ({
     changeItemList, // checkedList 내 아이템 수량 변경
     handleCheck // checkedList 아이템 선택/해제
 }) => {
-
 
     const handleChange = (event) => {
         changeItemList(idx, event.target.value)
@@ -24,7 +24,7 @@ const BuyItemBoxRow = ({
             <li>
                 <input className="check" type="checkbox" name="buy"
                     onChange={(event) => handleCheck(event, item)}
-                    checked={checkedList.find(e => e.code === item.code)}
+                    checked={checkedList && checkedList.some(e => e.code === item.code)}
                 />
 
             </li>

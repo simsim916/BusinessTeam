@@ -35,11 +35,12 @@ const BuyItemBox = ({
             ar = [...buyList];
             setCheckedList(ar);
         }
+
+        
     }
 
     /* 아이템 수량 (DB 및 LocalStorage 수량 변경) */
     const changeItemList = (key, type, item) => {
-        let userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
         let ar = [...checkedList];
         if (type == '+') {
             ar[key].amount++;
@@ -50,27 +51,15 @@ const BuyItemBox = ({
             ar[key].amount = type
         }
         setCheckedList(ar);
-        if (userinfo != null)
-            dispatch(getUserCart('/usercart/merge', 'post', ar, userinfo.token))
-        else {
-            dispatch(setUserCart(ar));
-            let result = [];
-            for (let e of ar) {
-                result.push({
-                    code: e.code,
-                    amount: e.amount
-                })
-            }
-            localStorage.setItem('cart', JSON.stringify(result));
-        }
+        console.log(checkedList);
     }
 
     return (
         <div id='BuyItemBox'>
             <input type="checkbox"
                 onChange={handleAllCheck}
-                // checked={checkedList && buyList && checkedList.length === buyList.length}
-                checked = 'true'
+                checked={checkedList && buyList && checkedList.length === buyList.length}
+                // checked = 'true'
             >
             </input>전체선택
             <ul id="BuyItemBoxTitle">

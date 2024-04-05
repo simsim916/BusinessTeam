@@ -3,7 +3,7 @@ import { makeComa } from '../../../components/MathFunction';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-const Cart_total = () => {
+const Cart_total = ({ checkedList }) => {
     const userBuy = useSelector(state => state.userBuy.data)
     // let check = (window.location.href).lastIndexOf('/');
     // let uri = window.location.href.slice(check + 1);
