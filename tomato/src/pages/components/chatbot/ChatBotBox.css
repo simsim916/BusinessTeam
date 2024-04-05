@@ -152,6 +152,13 @@
     flex-direction: column;
     margin-top: 20px;
 }
+#messageBox span{
+    /* background-color: #fff5f5; */
+    /* width: 50px; */
+    /* position: absolute; */
+    font-size: 12px;
+
+}
 
 #messageBox .otherChat {
     margin-top: 10px;

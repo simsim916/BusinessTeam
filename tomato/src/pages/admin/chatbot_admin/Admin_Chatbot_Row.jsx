@@ -26,6 +26,7 @@ const Admin_Chatbot_Row = ({
                 {thispageRoot[0].ing == 1 && '상담중'}
                 {thispageRoot[0].ing == 2 && '상담완료'}
             </li>
+            <li>{new Date().toLocaleTimeString([], { hour: 'numeric', minute: 'numeric' })}</li>
             <li>{thispageRoot.filter(e => e.user_level >= 100).map(e => e.writer)}</li>
             <li>{thispageRoot.filter(e => e.user_level < 100).map(e => e.writer)}</li>
             {showChatbot.includes(root) ?
