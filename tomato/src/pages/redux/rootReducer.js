@@ -3,7 +3,7 @@ import { itemListReducer } from './itemList/itemListReducer';
 import { userReducer } from './user/userReducer';
 import { basicReducer } from './basic/basicReducer';
 import { itemListSortReducer } from './itemListSort/itemListSortReducer';
-import { buyItemReducer } from './buyItem/buyItemReducer';
+import { userBuyReducer } from './userBuy/userBuyReducer';
 import { userCartReducer } from './userCart/userCartReducer';
 
 const rootReducer = combineReducers({
@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
     itemListSort: itemListSortReducer,
     user: userReducer,
     basic: basicReducer,
-    buyItem: buyItemReducer,
+    userBuy: userBuyReducer,
     userCart: userCartReducer
 });
 

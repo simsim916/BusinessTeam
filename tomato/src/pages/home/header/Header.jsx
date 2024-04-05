@@ -1,20 +1,20 @@
 import "./header.css";
 import { Link, useNavigate } from 'react-router-dom';
 import Nav from './Nav';
-import { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { changeKeyword } from "../../../redux/basic/actions";
+import { changeKeyword } from "../../redux/basic/actions";
 
 
 
 const Header = () => {
     console.log(`Header 랜더링`);
+
     const keyword = useSelector(state => state.basic.keyword);
     const navigate = useNavigate();
     const dispatch = useDispatch()
     const userinfo = JSON.parse(sessionStorage.getItem('userinfo'))
     const logOut = () => {
-        sessionStorage.removeItem('userinfo')
+        sessionStorage.removeItem('userinfo');
     }
 
     const searchBox = (event) => {
@@ -57,8 +57,8 @@ const Header = () => {
                             </>
                             :
                             <>
-                                <Link to="/login">로그인</Link>
-                                <Link to="/login/signup">회원가입</Link>
+                                <Link to="/member">로그인</Link>
+                                <Link to="/member/signup">회원가입</Link>
                             </>
                     }
                 </div>

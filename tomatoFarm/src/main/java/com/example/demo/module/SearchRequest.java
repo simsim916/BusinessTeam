@@ -32,7 +32,7 @@ import lombok.ToString;
 public class SearchRequest {
 	
 	private String column; // 검색 컬럼
-	private String keyword; // 검색 키워드
+	private String keyword = ""; // 검색 키워드
 	private String access;// 접근권한
 	private OrderSpecifier<?> orderColumn;
 	private String orderType;// 정렬 타입

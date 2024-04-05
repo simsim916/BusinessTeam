@@ -2,6 +2,10 @@
     display: block !important;
 }
 
+.selected {
+    opacity: 1 !important;
+}
+
 .selected>i {
     color: #9B1B30;
     opacity: 1 !important;
@@ -108,16 +112,7 @@
     line-height: 30px;
     font-size: 80%;
     text-indent: 25px;
-}
-
-#listfilter>ul>li>ul>li>ul {
-    line-height: 23px;
-    font-size: 80%;
-    text-indent: 35px;
-    overflow: auto;
-    max-height: 100px;
-    width: 98%;
-    display: none;
+    opacity: 0.5;
 }
 
 #filterPrice>div {
@@ -132,14 +127,17 @@
     height: 30px;
 }
 
-.itemList_count{
+.itemList_count {
     margin-left: 10px;
     font-size: 0.8em;
     color: #9B1B3060;
-}/* ================================================= */
+}
+
+/* ================================================= */
 #listContainer {
     max-height: calc((1200px - 280px - 30px - 10px)* 2);
 }
+
 /* 
 병합과정에서 css가 섞임 
 위 코드가 없으면 이상해

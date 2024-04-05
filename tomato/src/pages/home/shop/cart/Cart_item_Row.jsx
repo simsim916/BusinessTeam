@@ -1,65 +1,36 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { SERVER_RESOURCE } from '../../../../model/server-config';
-import { makeComa, makeDiscountPrice } from '../../../components/MathFunction';
-import { setBuyItemList } from '../../../redux/buyItem/actions';
+import { makeComa } from '../../../components/MathFunction';
+import { setUserBuyStorage } from '../../../redux/userBuy/actions';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { getItemListAmount, getUserCart } from '../../../redux/userCart/action';
-import { useState } from 'react';
-// import './Cart_item.css';
+import { deleteUserCart, setUserCartStorage, changeUserCart } from '../../../redux/userCart/action';
 
-const Cart_item_Row = ({ item, idx, changeItemList, buyItem, handleRefresh }) => {
-
+const Cart_item_Row = ({ item, idx }) => {
+    /* 🫓REDUX🫓 */
     const dispatch = useDispatch();
+    const user = useSelector(state => state.user.data);
+    const userCart = useSelector(state => state.userCart.data);
+    const userBuy = useSelector(state => state.userBuy.data)
 
-    const handleClick = (type) => {
-        changeItemList(idx, type, item);
+    const changeCheckBox = () => {
+        if (userBuy && userBuy.find(e => e.code == item.code))
+            dispatch(setUserBuyStorage(userBuy.filter(e => e.code != item.code)));
+        else if (userBuy)
+            dispatch(setUserBuyStorage([...userBuy, item]));
+        else
+            dispatch(setUserBuyStorage([item]));
     }
 
-    const handleChange = (event) => {
-        changeItemList(idx, event.target.value, item)
-    }
-
-    const handleCheckBox = (e) => {
-        const find = buyItem.find(i => i.code === item.code);
-        let arr = [...buyItem];
-        if (find === undefined) {
-            if (item.amount > 0) {
-                arr.push(item);
-                dispatch(setBuyItemList(arr));
-            }
-        } else {
-            const filtered = arr.filter(i => i.code !== item.code);
-            dispatch(setBuyItemList(filtered));
-        }
-    }
-
-    const handleDelete = async () => {
-        let user = sessionStorage.getItem('userinfo');
-        if (user != null) {
-            axios.get('http://localhost:8090/usercart/delete', {
-                params: {
-                    id: item.id,
-                    code: item.code
-                }
-            })
-            handleRefresh();
-        } else {
-            const local = JSON.parse(localStorage.getItem('cart'));
-            let filtered = local.filter(i => +i.code != +item.code);
-            localStorage.setItem('cart', JSON.stringify(filtered));
-            const cart = localStorage.getItem('cart');
-            handleRefresh();
-        }
+    const handleXbtn = async () => {
+        userBuy && dispatch(setUserBuyStorage(userBuy.filter(i => +i.code != +item.code)));
+        dispatch(setUserCartStorage(userCart.filter(i => +i.code != +item.code)));
+        user && user.login && dispatch(deleteUserCart(`/usercart/delete?code=${item.code}`, user.token))
     }
 
     return (
         <ul className="shopBasketItem">
             <li>
-                <input className="check" type="checkbox" name="buy"
-                    onChange={(e) => handleCheckBox(e, item)}
-                >
-                </input>
+                <input className="check" checked={userBuy && userBuy.find(e => e.code == item.code) || false} type="checkbox" onChange={() => changeCheckBox()} />
             </li>
             <li className="shopBasketItemImg"><Link to={'/home/detail?code=' + item.code}><img src={SERVER_RESOURCE + `/img/itemImg/${item.code}_2.jpg`} alt="" /></Link></li>
             <li className="shopBasketItemIfo">
@@ -76,9 +47,9 @@ const Cart_item_Row = ({ item, idx, changeItemList, buyItem, handleRefresh }) =>
                 }
             </li>
             <li className="shopBasketItem_count">
-                <button onClick={() => handleClick('-')}><i className="fa-solid fa-minus"></i></button>
-                <input id="inputCount" type="number" value={item.amount} onChange={handleChange} />
-                <button><i onClick={() => handleClick('+')} className="fa-solid fa-plus"></i></button>
+                <button onClick={() => dispatch(changeUserCart(idx, '-', userCart))}><i className="fa-solid fa-minus"></i></button>
+                <input id="inputCount" type="number" value={item.amount} onChange={(event) => dispatch(changeUserCart(idx, event.target.value, userCart))} />
+                <button><i onClick={() => dispatch(changeUserCart(idx, '+', userCart))} className="fa-solid fa-plus"></i></button>
             </li>
             {
                 item.discount ? (
@@ -94,7 +65,7 @@ const Cart_item_Row = ({ item, idx, changeItemList, buyItem, handleRefresh }) =>
             }
             <li>
                 {item.delivery ? makeComa(item.delivery) + ' 원' : '무료배송'}
-                <div className='xButton' onClick={handleDelete}><i className="fa-solid fa-xmark"></i></div>
+                <div className='xButton' onClick={handleXbtn}><i className="fa-solid fa-xmark"></i></div>
             </li>
         </ul >
     );

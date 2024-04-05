@@ -87,7 +87,7 @@
     width: 90px;
 }
 
-.shopBasketItem {
+#BuyItemBox .shopBasketItem {
     display: flex;
     height: 120px;
     border: 1px solid #4C455630;
@@ -149,7 +149,6 @@
     object-fit: contain;
     width: 100%;
     height: 100%;
-    padding: 10px;
 }
 
 .shopBasketItemIfo {
@@ -186,7 +185,7 @@
     font-size: 10px;
 }
 
-.shopBasketItemIfo_price {
+#BuyItemBox .shopBasketItemIfo_price {
     text-decoration: line-through;
 }
 

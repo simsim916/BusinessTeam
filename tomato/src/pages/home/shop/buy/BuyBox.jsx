@@ -4,7 +4,7 @@ import BuyItemBox from './buyItemBox/BuyItemBox';
 import BuyDeliveryBox from './deliveryAddress/BuyDeliveryBox';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { getBuyItemList } from '../../../redux/buyItem/actions';
+import { getBuyItemList } from '../../../redux/userBuy/actions';
 
 
 
