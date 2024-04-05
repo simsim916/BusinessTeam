@@ -6,6 +6,7 @@ import Loading from '../../../components/Loading';
 import Error from '../../../components/Error';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserCart, getItemListAmount } from '../../../redux/userCart/action';
+import { api } from '../../../../model/model';
 
 
 const Cart = () => {
@@ -16,12 +17,13 @@ const Cart = () => {
     const userinfo = useSelector(state => state.user)
 
     useEffect(() => {
-        if (userinfo.data.login) {
+        if (userinfo.data) {
             const token = userinfo.data.token;
             dispatch(getUserCart('/usercart/select', 'get', null, token));
         } else {
             dispatch(getItemListAmount('/item/selectin', 'post', userCart.data, null));
         }
+        api(`/visit/update?page=cart`, 'get');
     }, [])
 
     if (userCart.loading) return <Loading />

@@ -1,10 +1,18 @@
+import { useState } from 'react';
 import './DeliverySelect.css'
-import DaumPostcode from "react-daum-postcode";
+import DaumPostcode, { DaumPostcodeEmbed } from "react-daum-postcode";
+// import Address from './daumPostcode/DaumPostCode';
+// import { useState } from 'react';
+
+
+
 
 const DeliverySelect = ({ handleOnClick }) => {
 
+    const [addressAPI, setAddressAPI] = useState(false);
+
     const deliveryPlace = () => {
-        
+        setAddressAPI(!addressAPI);
     }
 
     return (
@@ -12,7 +20,7 @@ const DeliverySelect = ({ handleOnClick }) => {
             <div id="deliverySelectContainer">
                 <h4>배송지 변경</h4>
                 <div onClick={handleOnClick} id="exitBt"><i className="fa-solid fa-xmark"></i></div>
-                <div className="addDelivery">배송지 추가하기</div>
+                <div className="addDelivery" onClick={deliveryPlace}>배송지 추가하기</div>
                 <div className="deliverySelectRow">
                     <h4>우리집</h4>
                     <p>홍길동 010-1234-1234</p>
@@ -22,6 +30,20 @@ const DeliverySelect = ({ handleOnClick }) => {
                         <div>선택</div>
                     </div>
                 </div>
+                {/* {addressAPI
+                    ? <DaumPostcode style={{
+                        zIndex: 100,
+                        position: 'absolute',
+                        top:50,
+                        height:'100%'
+                    }} />
+                    : ""} */}
+                {addressAPI && <DaumPostcodeEmbed style={{
+                    zIndex: 100,
+                    position: 'absolute',
+                    top: 50,
+                    height: '100%'
+                }} />}
             </div>
         </div>
     );
