@@ -5,49 +5,40 @@ import BuyDeliveryBox from './deliveryAddress/BuyDeliveryBox';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { getBuyItemList } from '../../../redux/userBuy/actions';
+import { setfinalOrderStorage } from '../../../redux/userOrder/actions';
 
 
 
 const BuyBox = () => {
     /* Redux */
+    const dispatch = useDispatch();
 
     /* 리액트 상태값 */
-    const [buyList, setBuyList] = useState(null); // 장바구니에서 클릭해서 넘어온 리스트
+    const [buyList, setBuyList] = useState(null); // 장바구니에서 클릭해서 넘어온 리스트 = userbuy
     const [checkedList, setCheckedList] = useState(); // 구매하기 페이지 내에서 클릭한 리스트
+    // const userBuy = useSelector(state => state.userBuy.data);
+    // const finalOrder = useSelector(state => state.finalOrder.data);
+
+
 
     useEffect(() => {
         let session = sessionStorage.getItem('buyList');
-
+        sessionStorage.setItem('finalOrder', session);
         setBuyList(JSON.parse(session));
         setCheckedList(JSON.parse(session));
     }, [])
 
-    // const handleCheck = (e, item) => {
-    //     const find = checkedList.find(i => i.code === item.code);
-    //     let arr = [...checkedList];
-    //     if (find === undefined) {
-    //         arr.push(item);
-    //         setCheckedList(arr);
-    //         e.target.checked = 'false';
-    //     } else {
-    //         const filtered = arr.filter(i => i.code !== item.code);
-    //         setCheckedList(filtered);
-    //         e.target.checked = 'true';
-    //     }
-    // }
     const handleCheck = (e, item) => {
-        const find = checkedList.find(i => i.code === item.code);
-        let arr = [...checkedList];
-        if (find === undefined) {
-            arr.push(item);
-            setCheckedList(arr);
+        if (checkedList && checkedList.find(e => e.code == item.code)) {
+            setCheckedList(checkedList.filter(e => e.code != item.code));
+        } else if (checkedList) {
+            setCheckedList([...checkedList, item])
         } else {
-            const filtered = arr.filter(i => i.code !== item.code);
-            setCheckedList(filtered);
+            setCheckedList([item])
         }
     }
 
-
+    console.log(checkedList);
 
     return (
         <div id='shopBasket' className='container'>

@@ -78,15 +78,7 @@ public class ItemController {
 	@GetMapping("/search")
 	public ResponseEntity<?> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
-//		===========================================================
-
 		keywordService.updateKeyword(searchRequest);
-		// 이걸 서비스단에서 처리하고자 하는데
-		// 서비스단에서 entity 객체를 만드는거 까진 오케이
-		// 하지만 keyword를 업데이트 시키려면
-		// itemService 에서~ keywordService를 사용해야하는데 이래도 될까?
-//		===========================================================
-
 		List<ItemDTO> list = itemService.selectItemWhereSearchType(pageRequest, searchRequest);
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
@@ -184,5 +176,7 @@ public class ItemController {
 		result = ResponseEntity.status(HttpStatus.OK).body(itemList);
 		return result;
 	}
+	
+
 
 }
