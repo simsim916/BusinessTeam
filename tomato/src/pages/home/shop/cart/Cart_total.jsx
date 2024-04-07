@@ -2,13 +2,20 @@ import './Cart_total.css';
 import { makeComa } from '../../../components/MathFunction';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { setUserBuy } from '../../../redux/userBuy/actions';
 
-const Cart_total = ({ checkedList }) => {
-    const userBuy = useSelector(state => state.userBuy.data)
-    // let check = (window.location.href).lastIndexOf('/');
-    // let uri = window.location.href.slice(check + 1);
-    // console.log(uri);
-    // console.log(userBuy);
+const Cart_total = () => {
+    let userBuy = useSelector(state => state.userBuy.data)
+
+    useEffect(() => {
+        let final = sessionStorage.getItem('finalOrder');
+        let check = (window.location.href).lastIndexOf('/');
+        let uri = window.location.href.slice(check + 1);
+        console.log(uri);
+        if(uri === 'buy') {
+        }
+    },[])
 
     const setSession = () => {
         sessionStorage.setItem('buyList', JSON.stringify(userBuy));
@@ -56,7 +63,7 @@ const Cart_total = ({ checkedList }) => {
                         <div>
                             {
                                 userBuy ?
-                                    makeComa(Math.ceil(userBuy.reduce((result, e) => +result + ((e.price * ((100 - e.discount) / 100)) * e.amount), 0)))
+                                    makeComa(Math.ceil(userBuy.reduce((result, e) => +result + ((e.price * ((100 - e.discount) / 100)) * e.amount) + e.delivery, 0)))
                                     :
                                     0
                             } 원

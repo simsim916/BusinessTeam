@@ -12,8 +12,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Builder.Default;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
@@ -21,14 +24,17 @@ import lombok.ToString;
 @Data
 @Builder
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class ItemOrder {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer code;
     @Column(name = "user_id")
-    private String userId;
-    private String name;
+    private String id;
+    @Column(name = "name")
+    private String item_name;
     @Column(name = "address_code")
     private Integer addressCode;
     @Column(length = 50)
@@ -37,14 +43,15 @@ public class ItemOrder {
     private String address2;
     private Integer price;
     @Column(name = "deliveryprice")
-    private Integer deliveryPrice;
+    private Integer delivery;
     private Integer point;
     
     @Column(name = "orderdate")
     private LocalDate orderDate;
     
+    @Column(name="deliverydate")
     private LocalDate deliveryDate;
 
-    private boolean check;
+    private boolean checked;
 
 }

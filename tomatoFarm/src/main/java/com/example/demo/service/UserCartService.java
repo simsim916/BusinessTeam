@@ -13,5 +13,5 @@ public interface UserCartService {
 	
 	List<UserCartDTO> selectItemListWhereUserID(UserCart entity);
 	
-	void delete(UserCart entity);
+	void delete(List<UserCart> entity);
 }

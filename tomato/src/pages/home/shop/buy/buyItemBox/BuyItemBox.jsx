@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserCart } from '../../../../redux/userCart/action';
 import { setUserCart } from './../../../../redux/userCart/action';
+import { setUserBuyStorage } from '../../../../redux/userBuy/actions';
 
 const BuyItemBox = ({
     checkedList, // 구매페이지 내에서 체크된 아이템
@@ -21,22 +22,13 @@ const BuyItemBox = ({
     const dispatch = useDispatch();
 
     const handleAllCheck = () => {
-        let check = document.getElementsByName('buy');
-        let ar = [];
-        if (checkedList.length == buyList.length) {
-            for (let a of check) {
-                a.checked = false;
-            }
-            setCheckedList(ar);
+        if (checkedList.length === buyList.length) {
+            setCheckedList([]);
+            sessionStorage.setItem('finalOrder', []);
         } else {
-            for (let a of check) {
-                a.checked = true;
-            }
-            ar = [...buyList];
-            setCheckedList(ar);
+            setCheckedList(buyList);
+            sessionStorage.setItem('finalOrder', JSON.stringify(buyList));
         }
-
-        
     }
 
     /* 아이템 수량 (DB 및 LocalStorage 수량 변경) */
@@ -51,7 +43,7 @@ const BuyItemBox = ({
             ar[key].amount = type
         }
         setCheckedList(ar);
-        console.log(checkedList);
+        sessionStorage.setItem('finalOrder', JSON.stringify(ar));
     }
 
     return (
@@ -59,7 +51,7 @@ const BuyItemBox = ({
             <input type="checkbox"
                 onChange={handleAllCheck}
                 checked={checkedList && buyList && checkedList.length === buyList.length}
-                // checked = 'true'
+            // checked = 'true'
             >
             </input>전체선택
             <ul id="BuyItemBoxTitle">
