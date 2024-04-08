@@ -26,7 +26,7 @@ export const setUserBuyItemList = (data) => ({
 export const setUserBuyAddress = (obj) => ({
     type: SET_USERBUY_DATA_ADDRESS,
     address_code: obj.address_code,
-    address1: obj.address1
+    address1: obj.address1,
 });
 
 export const postUserBuy = (url, method, requestData, token) => {

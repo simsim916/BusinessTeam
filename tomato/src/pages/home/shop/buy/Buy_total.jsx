@@ -2,8 +2,13 @@ import { makeComa } from '../../../components/MathFunction';
 import { useEffect } from 'react';
 import './Buy_total.css';
 import { api } from '../../../../model/model';
+import { useSelector } from 'react-redux';
 
 const Buy_total = ({ checkedList }) => {
+
+    const userBuy = useSelector(state => state.userBuy.data.itemList);
+    console.log(userBuy);
+
 
     useEffect(() => {
     }, [])
@@ -11,7 +16,7 @@ const Buy_total = ({ checkedList }) => {
     const postOrder = () => {
         let user = sessionStorage.getItem('userinfo');
         let token = JSON.parse(user).token;
-        api('/order/order', 'post', checkedList, token
+        api('/order/order', 'post', userBuy, token
         ).then(res => {
             sessionStorage.removeItem('finalOrder')
             sessionStorage.removeItem('buyList')

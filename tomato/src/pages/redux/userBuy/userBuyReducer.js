@@ -5,11 +5,11 @@ const initialState = {
         loading: true,
         data: {
             itemList: JSON.parse(sessionStorage.getItem('buy')),
-            address_code:'',
-            address1:'',
-            address2:''
+            address_code:'111',
+            address1:'aaa',
+            address2:'bbb'
         },
-        error: null
+        error: null,
     }
 };
 

@@ -24,6 +24,7 @@ const Graph = ({ myLocation }) => {
     const [whichURL, setWhichTable] = useState('/item/admingraph');
     const [graphData, setGraphData] = useState();
 
+
     useEffect(() => {
         myLocation();
         // let whichGroup = 'visit_date';

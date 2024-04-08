@@ -9,6 +9,9 @@ const BuyDeliveryBox = () => {
 
     const [deliverySelect, setDeliverySelect] = useState(false);
     const userAddress = useSelector(state => state.userAddress.data)
+    const userBuy = useSelector(state => state.useBuy);
+
+    console.log(userBuy);
     const [orderForm, setOrderForm] = useState({
         itemList: [
             {
