@@ -1,42 +1,42 @@
 
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, SET_USER } from './action';
+import { USER_ADDRESS_REQUEST, USER_ADDRESS_SUCCESS, USER_ADDRESS_FAILURE, SET_USER_ADDRESS } from './action';
 const initialState = {
-    user: {
+    userAddress: {
         loading: false,
         error: null,
-        data: JSON.parse(sessionStorage.getItem('userinfo'))
+        data: []
     }
 };
 
-const userReducer = (state = initialState.user, action) => {
+const userAddressReducer = (state = initialState.userAddress, action) => {
     switch (action.type) {
-        case LOGIN_REQUEST:
+        case USER_ADDRESS_REQUEST:
             return {
                 ...state,
                 loading: true,
                 error: false,
                 id: action.payload
             };
-        case LOGIN_SUCCESS:
+        case USER_ADDRESS_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 data: action.payload
             };
-        case LOGIN_FAILURE:
+        case USER_ADDRESS_FAILURE:
             return {
                 ...state,
                 loading: false,
                 error: action.payload
             };
-        case SET_USER:
+        case SET_USER_ADDRESS:
             return {
                 ...state,
-                data: action.payload
+                data: [...state.data, action.payload]
             };
         default:
             return state;
     }
 };
 
-export { userReducer };
+export { userAddressReducer };

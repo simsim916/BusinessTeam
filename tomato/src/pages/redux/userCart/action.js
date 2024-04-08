@@ -28,7 +28,6 @@ export const getUserCart = (url, method, requestData, token) => {
         dispatch(fetchDataRequest());
         try {
             const response = await api(url, method, requestData, token)
-            console.log(response.data)
             dispatch(fetchDataSuccess(response.data));
         } catch (error) {
             console.log('getUserCart : ' + error.message)

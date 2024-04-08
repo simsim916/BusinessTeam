@@ -63,7 +63,7 @@ public class UserController {
 	@PostMapping("/signup")
 	public ResponseEntity<?> singup(@RequestBody User entity) {
 		ResponseEntity<?> result = null;
-		
+		System.out.println(entity);
 		String password = entity.getPassword();
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		

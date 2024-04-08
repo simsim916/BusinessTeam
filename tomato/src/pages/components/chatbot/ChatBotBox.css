@@ -57,6 +57,19 @@
     z-index: 5;
 }
 
+#chatBotBox .end {
+    position: absolute;
+    font-size: initial;
+    left: 10px;
+    background-color: white;
+    color: black;
+    line-height: 24px;
+    margin-top: 8px;
+    border-radius: 10px;
+    padding: 0 10px;
+    cursor: pointer;
+}
+
 #chatBotTitle img {
     width: 35%;
     display: block;
@@ -132,7 +145,7 @@
     margin-bottom: 10px;
 }
 
-#messageBack{
+#messageBack {
     border: #9B1B30 1px solid;
     font-size: 17px;
     display: flex;
@@ -152,7 +165,8 @@
     flex-direction: column;
     margin-top: 20px;
 }
-#messageBox span{
+
+#messageBox span {
     /* background-color: #fff5f5; */
     /* width: 50px; */
     /* position: absolute; */
@@ -244,17 +258,4 @@
 
 #admin_ChatBotContainer>div {
     padding: 10px;
-}
-
-#admin_ChatBotContainer .end {
-    position: absolute;
-    font-size: initial;
-    left: 10px;
-    background-color: white;
-    color: black;
-    line-height: 24px;
-    margin-top: 8px;
-    border-radius: 10px;
-    padding: 0 10px;
-    cursor: pointer;
 }

@@ -13,6 +13,8 @@ import Buy_total from './Buy_total';
 const BuyBox = () => {
     /* Redux */
     const dispatch = useDispatch();
+    const userinfo = useSelector(state => state.user.data)
+    
 
     /* 리액트 상태값 */
     const [buyList, setBuyList] = useState(); // 장바구니에서 클릭해서 넘어온 리스트 = userbuy
@@ -27,6 +29,7 @@ const BuyBox = () => {
         sessionStorage.setItem('finalOrder', session);
         setBuyList(JSON.parse(session));
         setCheckedList(JSON.parse(session));
+        // userinfo.login && dispatch()
     }, [])
 
     const handleCheck = (e, item) => {

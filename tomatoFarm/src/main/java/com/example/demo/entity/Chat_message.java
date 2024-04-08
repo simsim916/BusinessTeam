@@ -14,21 +14,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="chatbot")
+@Table(name="chat_message")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ChatBot {
+public class Chat_message {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer seq;
 	private String writer; 
-	private String type;
 	private String content;
-	private Integer root;
-	@Builder.Default 
-	private Integer ing = 0;
+	private Integer room_seq;
 	private LocalDateTime regdate;
 
 }

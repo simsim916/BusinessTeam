@@ -50,8 +50,7 @@ const BuyItemBox = ({
         <div id='BuyItemBox'>
             <input type="checkbox"
                 onChange={handleAllCheck}
-                checked={checkedList && buyList && checkedList.length === buyList.length}
-            // checked = 'true'
+                checked={checkedList && buyList && checkedList.length === buyList.length || false}
             >
             </input>전체선택
             <ul id="BuyItemBoxTitle">
