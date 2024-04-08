@@ -1,18 +1,18 @@
-package com.example.demo.service;
+package com.example.demo.repository;
 
 import java.util.List;
 
 import com.example.demo.domain.Chat_messageDTO;
-import com.example.demo.domain.Chat_roomDTO;
 import com.example.demo.entity.Chat_message;
 import com.example.demo.entity.Chat_room;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 
-public interface ChatService {
+public interface Chat_messageRepository {
 
 	List<Chat_messageDTO> selectAllmessageWhereRoomSeq(Chat_message entity);
-	List<Chat_roomDTO> selectAllRoom(PageRequest pageRequest, SearchRequest searchRequest);
+	
 	int insertMessage(Chat_message entity);
-	Chat_room insertRoom(Chat_room entity);
+	
+	
 }

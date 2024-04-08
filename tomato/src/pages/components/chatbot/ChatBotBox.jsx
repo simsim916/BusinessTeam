@@ -13,7 +13,6 @@ const ChatBotBox = ({
     /* index 페이지 전용 props */
     setShowChatbot, // index페이지 에서 나타낼지 여부 상태값 변경 함수 
 }) => {
-    console.log(`admin_root=${admin_root} 의 채팅 출력완료`)
     /* 로그인 상태 sessionStorage 값 */
     const userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
 
@@ -23,25 +22,54 @@ const ChatBotBox = ({
 
     /* 메세지 입력 전송 form */
     const [text, setText] = useState({
-        type: 2,
-        root: null,
+        type: null,
+        room_seq: null,
         content: '',
         writer: JSON.parse(sessionStorage.getItem('userinfo')).id, // sessionStorage에서 가져온 id
     });
 
     /* text form 상태값 변경 함수*/
-    const changeType = (event) => {
-        setText((prev) => ({
-            ...prev,
-            type: event.target.closest('div').children[1].innerText
-        }))
-    }
-
     const changeContent = (event) => {
         setText((prev) => ({
             ...prev,
             content: event.target.value
         }))
+    }
+
+    /* 채팅 시작 */
+    const startChat = (event) => {
+        api('/chat/makeroom', 'post', { type: event.target.closest('div').children[1].innerText }, userinfo.token)
+            .then(res => {
+                setText((prev) => ({
+                    ...prev,
+                    type: res.data.type,
+                    room_seq: res.data.seq
+                }))
+            })
+            .catch(err => {
+                console.log(`startChat Error : ${err.message}`)
+            })
+    }
+
+    /* 채팅 종료 */
+    const endChat = () => {
+
+        const data = {
+            seq: text.room_seq,
+            type: text.type,
+            ing: 2
+        }
+
+        api('/chat/makeroom', 'post', data, userinfo.token)
+            .then(res => {
+                if (admin_root)
+                    changeShowChatbot(admin_root)
+                else
+                    setShowChatbot(false)
+            })
+            .catch(err => {
+                console.log(`startChat Error : ${err.message}`)
+            })
     }
 
     /* 전체 메세지를 받아오는 상태값 변수 */
@@ -70,37 +98,30 @@ const ChatBotBox = ({
 
     /* 메세지를 남겼을 때 server DB에 내가 입력한 메세지를 merge하고
         지금 root에 해당되는 전체 메세지를 select 해오는 api 요청 함수 */
-    const userChatbot = async () => {
+    const insertMessage = async () => {
         setLoading(true);
-        await api('/chatbot/insert', 'post', text, userinfo.token)
+        await api('/chat/insertmessage', 'post', text, userinfo.token)
             .then(res => {
                 setLoading(false);
                 setMessageAll(res.data);
                 setText((prev) => ({
                     ...prev,
-                    root: res.data[0].root,
                     content: ''
                 }))
                 inputBox.current.focus();
             }).catch(err => {
                 setLoading(false);
                 setError(true);
+                console.log(`insertMessage Error : ${err.message}`)
             });
     }
 
     /* input 박스에서 엔터키 입력 시 userChatbot함수를 호출하는 handler(함수)  */
     const handleKeyUp = (event) => {
         if (event.key === 'Enter' && text.content.trim() !== '') {
-            userChatbot();
+            insertMessage();
         }
     };
-
-    // /* 이전 상담 내역을 저장할 상태*/
-    // const [saveBackChat, setSaveBackChat] = useEffect();
-
-    const clickMessageBack = () => {
-
-    }
 
     /* 채팅 가져올때 태그 제일 아래로 스크롤 */
     const chatBox = useRef(null);
@@ -113,7 +134,7 @@ const ChatBotBox = ({
         <div id='chatBotBox' style={{ height: amount == 2 ? 'calc(50% - 10px)' : '100%' }}>
             <div id='chatBox' ref={chatBox}>
                 <h3>
-                    {admin_root && <div className='end'>상담종료</div>}
+                    {text.type && <div onClick={() => endChat()} className='end'>상담종료</div>}
                     {admin_root ? `순번 : ${admin_root}` : '토마토팜 상담챗봇'}
                     {admin_root && <div className="close" onClick={() => changeShowChatbot(admin_root)}><i className="fa-solid fa-xmark"></i></div>}
                     {setShowChatbot && <div onClick={() => setShowChatbot()} className="close"><i className="fa-solid fa-xmark"></i></div>}
@@ -137,24 +158,25 @@ const ChatBotBox = ({
                                 <span>궁금한 내용을 선택하거나, 직접 입력해주세요.</span>
                             </p>
                         </div>
-                        <div id="openQuestion">
-                            <h2>질문유형</h2>
-                            <div id="openQuestionBox">
-                                <div onClick={changeType}>
-                                    <i class="fa-solid fa-truck"></i>
-                                    <span>배송</span>
-                                </div>
-                                <div onClick={changeType}>
-                                    <i class="fa-solid fa-cubes"></i>
-                                    <span>상품</span>
-                                </div>
-                                <div onClick={changeType}>
-                                    <i class="fa-solid fa-gift"></i>
-                                    <span>일반</span>
+                        {text.type == null &&
+                            <div id="openQuestion">
+                                <h2>문의유형</h2>
+                                <div id="openQuestionBox">
+                                    <div onClick={(event) => startChat(event)}>
+                                        <i class="fa-solid fa-truck"></i>
+                                        <span>배송</span>
+                                    </div>
+                                    <div onClick={(event) => startChat(event)}>
+                                        <i class="fa-solid fa-cubes"></i>
+                                        <span>상품</span>
+                                    </div>
+                                    <div onClick={(event) => startChat(event)}>
+                                        <i class="fa-solid fa-gift"></i>
+                                        <span>일반</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div onClick={clickMessageBack} id='messageBack'>이전 대화로 돌아가기</div>
-                        </div>
+                        }
                     </>
                 }
 
@@ -165,9 +187,9 @@ const ChatBotBox = ({
 
             </div>
             <div id="chatBotTextBox">
-                <input type="text" placeholder={!admin_root ? "텍스트를 입력해주세요." : "답변을 입력해주세요."} value={text.content} onChange={(event) => changeContent(event)} ref={inputBox}
+                <input type="text" readOnly={!text.type} placeholder={text.type ? "텍스트를 입력해주세요." : "문의유형을 선택해주세요."} value={text.content} onChange={(event) => changeContent(event)} ref={inputBox}
                     onKeyUp={handleKeyUp}></input>
-                <button onClick={userChatbot}>전송</button>
+                <button onClick={insertMessage}>전송</button>
             </div>
         </div>
     );

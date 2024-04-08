@@ -10,27 +10,27 @@ const Admin_Chatbot = () => {
     const userinfo = JSON.parse(sessionStorage.getItem('userinfo'))
 
     /* 전체 채팅(내용) 목록을 담는 변수 */
-    const [rootList, setRootList] = useState(null);
+    const [roomList, setRoomList] = useState(null);
 
-    /* 채팅의 root 번호만 저장하는 함수 */
-    const root = useRef([]);
+    /* 채팅의 roomSeq 번호만 저장하는 함수 */
+    const roomSeq = useRef([]);
 
     useEffect(() => {
         const getdata = async () => {
-            const response = await api('/chatbot/selectroot?column=root', 'get', null, userinfo.token);
-            setRootList(response.data);
-            for (let e of response.data) {  // root 변수에 채팅데이터의 root만 중복없이 담기
-                if (!root.current.includes(e.root))
-                    root.current.push(e.root);
+            const response = await api('/chat/selectroom?column=seq', 'get', null, userinfo.token);
+            setRoomList(response.data);
+            for (let e of response.data) {  // roomSeq 변수에 채팅데이터의 room_seq 중복없이 담기
+                if (!roomSeq.current.includes(e.seq))
+                    roomSeq.current.push(e.seq);
             }
         }
         getdata();
     }, [])
 
-    /* 오른쪽에 나타낼 채팅방의 root번호를 가지고 있는 배열 */
+    /* 오른쪽에 나타낼 채팅방의 roomSeq번호를 가지고 있는 배열 */
     const [showChatbot, setShowChatbot] = useState([]);
 
-    /* showChatbot 배열에 나타낼 채팅방의 root를 저장하는 배열을 만드는 함수 */
+    /* showChatbot 배열에 나타낼 채팅방의 roomSeq를 저장하는 배열을 만드는 함수 */
     const changeShowChatbot = (value) => {
         if (showChatbot.includes(value)) {
             setShowChatbot(showChatbot.filter(e => e != value));
@@ -57,7 +57,7 @@ const Admin_Chatbot = () => {
                 </ul>
                 <div>
                     {
-                        root.current && root.current.map((e, i) => <Admin_Chatbot_Row key={i} root={e} rootList={rootList} showChatbot={showChatbot} changeShowChatbot={changeShowChatbot} />)
+                        roomList && roomList.map((e, i) => <Admin_Chatbot_Row key={i} room={e} showChatbot={showChatbot} changeShowChatbot={changeShowChatbot} />)
                     }
                 </div>
             </div>

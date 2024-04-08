@@ -7,37 +7,49 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.example.demo.domain.ChatBotDTO;
-import com.example.demo.entity.ChatBot;
+import com.example.demo.domain.Chat_messageDTO;
+import com.example.demo.domain.Chat_roomDTO;
+import com.example.demo.entity.Chat_message;
+import com.example.demo.entity.Chat_room;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
-import com.example.demo.repository.ChatBotRepository;
-import com.example.demo.service.ChatBotService;
+import com.example.demo.repository.Chat_messageRepository;
+import com.example.demo.repository.Chat_roomRepository;
+import com.example.demo.repository.Chat_roomRepositoryJPA;
+import com.example.demo.service.ChatService;
 
 import lombok.AllArgsConstructor;
 
 @Transactional
 @AllArgsConstructor
 @Service
-public class ChatBotServiceImpl implements ChatBotService {
+public class ChatServiceImpl implements ChatService {
 
-	private final ChatBotRepository chatbotrepository;
+	private final Chat_messageRepository chat_messageRepository;
+	private final Chat_roomRepositoryJPA chat_roomRepositoryJPA;
+	private final Chat_roomRepository chat_roomRepository;
+	
 
+	
 	@Override
-	public ChatBot save(ChatBot chatbot) {
+	public int insertMessage(Chat_message entity) {
 		LocalDateTime today = LocalDateTime.now();
-
-		chatbot.setRegdate(today);
-		return chatbotrepository.save(chatbot);
-	}
-
-	@Override
-	public List<ChatBot> selectAllFromRoot(ChatBot chatbot) {
-		return chatbotrepository.selectAllFromRoot(chatbot);
+		entity.setRegdate(today);
+		return chat_messageRepository.insertMessage(entity);
 	}
 	
 	@Override
-	public List<ChatBotDTO> selectRootList(PageRequest pageRequest, SearchRequest searchRequest) {
-		return chatbotrepository.selectRootList(pageRequest, searchRequest);
+	public Chat_room insertRoom(Chat_room entity) {
+		return chat_roomRepositoryJPA.save(entity);
 	}
+	
+	@Override
+	public List<Chat_messageDTO> selectAllmessageWhereRoomSeq(Chat_message entity) {
+		return chat_messageRepository.selectAllmessageWhereRoomSeq(entity);
+	}
+	@Override
+	public List<Chat_roomDTO> selectAllRoom(PageRequest pageRequest, SearchRequest searchRequest) {
+		return chat_roomRepository.selectAllRoom(pageRequest, searchRequest);
+	}
+	
 }

@@ -13,14 +13,16 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Chat_messageDTO {
+public class Chat_roomDTO {
 	private Integer seq;
-	private String writer; 
-	private String content;
-	private Integer room_seq;
+	private String type;
+	private String user;
+	private String admin;
+	@Builder.Default 
+	private Integer ing = 0;
+	
+	
 	private LocalDateTime regdate;
-
-	private Integer user_level;
 }
 
 

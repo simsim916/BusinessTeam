@@ -12,6 +12,7 @@ import { getUserCart } from '../../redux/userCart/action';
 const LoginBG = () => {
     console.log('LoginBG 랜더링')
     const user = useSelector(state => state.user);
+    const passwordBox = useRef(null);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -59,26 +60,25 @@ const LoginBG = () => {
 
     const checkPassword = (event) => {
         let value = event.target.value;
-        const passwordBox = event.target.closest('div');
         let message = '';
         let check = false;
         let key = /[a-z.0-9.!-*.@]/gi;
 
         if (value.length < 4 || value.length > 14) {
-            passwordBox.style.border = "2px solid #FF3F3F";
-            passwordBox.children[0].style.color = "#FF3F3F";
+            passwordBox.current.style.border = "2px solid #FF3F3F";
+            passwordBox.current.children[0].style.color = "#FF3F3F";
             message = `비밀번호 : 4 ~ 15 글자 이하만 입력해주세요.`;
         } else if (value.replace(key, '').length > 0) {
-            passwordBox.style.border = "2px solid #FF3F3F";
-            passwordBox.children[0].style.color = "#FF3F3F";
+            passwordBox.current.style.border = "2px solid #FF3F3F";
+            passwordBox.current.children[0].style.color = "#FF3F3F";
             message = `비밀번호 : 영문, 숫자, 특수문자(!,@,#,$,%,^,&,*)만 가능합니다.`;
         } else if (value.replace(/[!-*.@]/gi, '').length >= value.length) {
-            passwordBox.style.border = "2px solid #FF3F3F";
-            passwordBox.children[0].style.color = "#FF3F3F";
+            passwordBox.current.style.border = "2px solid #FF3F3F";
+            passwordBox.current.children[0].style.color = "#FF3F3F";
             message = `비밀번호 : 특수문자(!,@,#,$,%,^,&,*)를 반드시 포함해주세요.`;
         } else {
-            passwordBox.style.border = "2px solid #03C75A";
-            passwordBox.children[0].style.color = "#03C75A";
+            passwordBox.current.style.border = "2px solid #03C75A";
+            passwordBox.current.children[0].style.color = "#03C75A";
             check = true;
         }
 
@@ -171,6 +171,16 @@ const LoginBG = () => {
         dispatch(requestLogin(loginValue));
     };
 
+
+    const handleKeyUp = (event) => {
+        console.log(event.key)
+        console.log(event.key == 'Enter')
+        if (event.key == 'Enter') {
+            if (event.target.name == 'id')
+                passwordBox.current.children[1].focus()
+            requestLogin(loginValue)(dispatch);
+        }
+    };
     if (user.loading) return <Loading />
 
     return (
@@ -181,14 +191,16 @@ const LoginBG = () => {
                     <i className="fa-solid fa-circle-user"></i>
                     <input id="id" type="text" name="id" placeholder="아이디"
                         value={loginValue.value.id}
+                        onKeyUp={handleKeyUp}
                         onChange={(event) => handleInputChange(event, checkId)}
                         onBlur={(event) => handelInputBlur(event, checkId)}
                         onFocus={(event) => changeOpacity(event)} />
                 </div>
-                <div id="passwordBox">
+                <div id="passwordBox" ref={passwordBox}>
                     <i className="fa-solid fa-key"></i>
                     <input id="password" type="password" name="password" placeholder="비밀번호"
                         value={loginValue.value.password}
+                        onKeyUp={handleKeyUp}
                         onChange={(event) => handleInputChange(event, checkPassword)}
                         onBlur={(event) => handelInputBlur(event, checkPassword)}
                         onFocus={(event) => changeOpacity(event)} />

@@ -4,15 +4,17 @@ import javax.persistence.EntityManager;
 
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.domain.ChatBotDTO;
-import com.example.demo.entity.ChatBot;
+import com.example.demo.domain.Chat_messageDTO;
+import com.example.demo.domain.ItemDTO;
+import com.example.demo.entity.Chat_message;
+import com.example.demo.entity.Chat_room;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
-import com.example.demo.repository.ChatBotRepository;
+import com.example.demo.repository.Chat_messageRepository;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import static com.example.demo.entity.QChatBot.chatBot;
+import static com.example.demo.entity.QChat_message.chat_message;
 import static com.example.demo.entity.QUser.user;
 
 import java.util.List;
@@ -21,52 +23,32 @@ import lombok.AllArgsConstructor;
 
 @Repository
 @AllArgsConstructor
-public class ChatBotRepositoryImpl implements ChatBotRepository {
+public class Chat_messageRepositoryImpl implements Chat_messageRepository {
 
 	private final EntityManager entityManager;
 	private final JPAQueryFactory jPAQueryFactory;
 
 	@Override
-	public ChatBot save(ChatBot chatbot) {
-		int result = entityManager.createNativeQuery(
-				"INSERT chatbot(writer, type, content, regdate, root) "
-				+ "SELECT"
-				+ "    :writer, :type, :content,"
-				+ "    :regdate,"
-				+ "    IFNULL(:root, (SELECT COALESCE(MAX(seq), 0) + 1 FROM chatbot))"
-				)
-			.setParameter("writer", chatbot.getWriter())
-			.setParameter("type", chatbot.getType())
-			.setParameter("content", chatbot.getContent())
-			.setParameter("regdate", chatbot.getRegdate())
-			.setParameter("root", chatbot.getRoot())
-			.executeUpdate();
-		if (result > 0)
-			return jPAQueryFactory.selectFrom(chatBot)
-					.where(chatBot.writer.eq(chatbot.getWriter()))
-					.orderBy(chatBot.regdate.desc())
-					.limit(1)
-					.fetchOne();
-		else 
-			return null;
+	public int insertMessage(Chat_message entity) {
+		return entityManager
+				.createNativeQuery("INSERT chat_message(writer, content, regdate, room_seq) " + "SELECT"
+						+ "    :writer, :content," + "    :regdate,"
+						+ "    IFNULL(:room_seq, (SELECT COALESCE(MAX(seq), 0) + 1 FROM chat_message))")
+				.setParameter("writer", entity.getWriter())
+				.setParameter("content", entity.getContent())
+				.setParameter("regdate", entity.getRegdate())
+				.setParameter("room_seq", entity.getRoom_seq())
+				.executeUpdate();
 	}
 
 	@Override
-	public List<ChatBot> selectAllFromRoot(ChatBot chatbot) {
-		return jPAQueryFactory.selectFrom(chatBot)
-				.where(chatBot.root.eq(chatbot.getRoot()))
-				.orderBy(chatBot.regdate.asc())
+	public List<Chat_messageDTO> selectAllmessageWhereRoomSeq(Chat_message entity) {
+		return jPAQueryFactory
+				.select(Projections.bean(Chat_messageDTO.class, chat_message.content,
+						chat_message.writer, chat_message.regdate, user.level.as("user_level")))
+				.from(chat_message).leftJoin(user).on(chat_message.writer.eq(user.id))
+				.where(chat_message.room_seq.eq(entity.getRoom_seq()))
 				.fetch();
 	}
-	
-	@Override
-	public List<ChatBotDTO> selectRootList(PageRequest pageRequest, SearchRequest searchRequest) {
-		return jPAQueryFactory.select(Projections.bean(ChatBotDTO.class, 
-				chatBot.writer, chatBot.root, chatBot.ing, chatBot.type, chatBot.regdate.max().as("regdate"), user.level.as("user_level")))
-				.from(chatBot)
-				.leftJoin(user).on(chatBot.writer.eq(user.id))
-				.groupBy(chatBot.root,chatBot.writer,chatBot.ing,chatBot.type)
-				.orderBy(chatBot.regdate.max().desc())
-				.fetch();
-	}
+
 }
