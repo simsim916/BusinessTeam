@@ -226,7 +226,7 @@ const SignBG = ({ }) => {
     }
 
     const requestSign = () => {
-        api('/user/signup', 'post', signValue)
+        api('/user/signup', 'post', signValue.value)
             .then(res => {
                 setLoading(false);
                 navigate('/member')

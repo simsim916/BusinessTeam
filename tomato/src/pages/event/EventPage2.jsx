@@ -27,17 +27,17 @@ const EventPage2 = () => {
                 </div>
             </div>
             
-            <div>
+            <div id="levelPointForm">
                 <h3>토마토팜 등업 & 포인트 혜택</h3>
-                <div>
-                    <div>
+                <div id="levelPointBox">
+                    <div id="level_Box">
                         <div>레드등급</div>
                         <div>20%</div>
                         <span>최대 20%할인 혜택</span>
                         <span>레드등급 혜택기간 등업일 ~ 1년</span>
                     </div> 
-                        <div><i class="fa-solid fa-plus"></i></div>    
-                    <div>
+                        <div id="levelPlusPoint"><i class="fa-solid fa-plus"></i></div>    
+                    <div id="level_point">
                         <div>포인트</div>
                         <div>3만원</div>
                         <span>20만원 이상 구매 시</span>
