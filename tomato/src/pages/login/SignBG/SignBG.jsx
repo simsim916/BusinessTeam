@@ -1,13 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./SignBG.css"
-import { useState, useRef, useMemo } from "react";
-import axios from 'axios';
+import { useState } from "react";
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
 import { SERVER_RESOURCE } from "../../../model/server-config";
+import { api } from "../../../model/model";
 
 
 const SignBG = ({ }) => {
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false);
     const [signValue, setSignValue] = useState({
@@ -48,6 +49,7 @@ const SignBG = ({ }) => {
 
     const changeOpacity = (event) => {
         let box = event.target.closest('div')
+        box.style.zIndex = '2';
         for (let e of box.children) {
             e.style.opacity = "1";
         }
@@ -55,6 +57,8 @@ const SignBG = ({ }) => {
     }
 
     const handleInputChange = (event, handle) => {
+        let box = event.target.closest('div')
+        box.style.zIndex = '1';
         let result = {
             message: '',
             check: false
@@ -222,18 +226,15 @@ const SignBG = ({ }) => {
     }
 
     const requestSign = () => {
-        axios.post(`http://localhost:8090/user/signup`, signValue.value, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => {
-            setLoading(false);
-            console.log('제출성공')
-        }).catch(err => {
-            console.log(err.message)
-            setLoading(false);
-            setError(true);
-        });
+        api('/user/signup', 'post', signValue)
+            .then(res => {
+                setLoading(false);
+                navigate('/member')
+            }).catch(err => {
+                console.log(err.message)
+                setLoading(false);
+                setError(true);
+            });
     }
 
     if (loading) return <Loading />

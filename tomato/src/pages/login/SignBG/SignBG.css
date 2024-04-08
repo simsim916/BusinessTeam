@@ -3,9 +3,10 @@
     top: 0;
 }
 
-#signBox #errorBox {
-    width: 350px;
+#signBG>div>form>#errorBox {
+    width: 75%;
     font-size: 12px;
+    height: 4em;
     padding-left: 5px;
     color: #9B1B30;
     margin-top: 5px;
@@ -43,8 +44,8 @@
 
 #signBG>div:nth-child(2) {
     background-color: white;
-    width: 500px;
-    height: 850px;
+    width:85%;
+    height: 90%;
     max-height: 95vh;
     display: block;
     border-radius: 40px;
@@ -52,6 +53,16 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    overflow-y: auto;
+}
+
+#signBG>div:nth-child(2)::-webkit-scrollbar {
+    width: 10px;
+}
+
+#signBG>div:nth-child(2)::-webkit-scrollbar-thumb {
+    background-color: #9b1b1f70;
+    border-radius: 10px;
 }
 
 #signBG h3 {
@@ -60,7 +71,7 @@
     font-weight: 500;
     background-color: #9B1B30;
     color: white;
-    width: 350px;
+    width: 75%;
     height: 40px;
     padding: 0;
     border-radius: 10px;
@@ -84,7 +95,7 @@
 }
 
 #signUpBox>#writeOption {
-    width: 350px;
+    width: 75%;
     margin: auto;
     font-size: 12px;
     text-indent: 5px;
@@ -95,13 +106,12 @@
 
 
 #signUpBox>div {
-    border: 1px solid #4C455650;
-    width: 350px;
+    border: 2px solid #e0e0e0;
+    width: 75%;
     margin: auto;
     line-height: 50px;
     font-size: 18px;
-    border-bottom: 0.5px solid #4C455650;
-    border-top: 0.5px solid #4C455650;
+    position: relative;
 }
 
 #signUpBox>div>i {
@@ -120,16 +130,21 @@
 #signUpBox>#idBox {
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
-    border-top: 1px solid #4C455650;
 }
 
+#signUpBox>#passwordBox {
+    margin-top: -2px;
+}
+
+#signUpBox>#nameBox {
+    margin-top: -2px;
+}
 
 #signUpBox>#phonenumberBox {
-    border-bottom: 1px solid #4C455650;
+    margin-top: -2px;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
     font-size: 13px;
-
 }
 
 #signUpBox>#phonenumberBox>i {
@@ -164,6 +179,18 @@
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
     border-top: 1px solid #4C455650;
+}
+
+#signUpBox>#emailBox {
+    margin-top: -2px;
+}
+
+#signUpBox>#genderBox {
+    margin-top: -2px;
+}
+
+#signUpBox>#birthdayBox {
+    margin-top: -2px;
 }
 
 #signUpBox>#emailBox>i:nth-of-type(2) {
@@ -203,7 +230,6 @@
 }
 
 #signUpBox>#birthdayBox {
-    border-bottom: 1px solid #4C455650;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
 }

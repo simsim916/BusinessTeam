@@ -90,7 +90,7 @@ const LoginBG = () => {
 
     const changeOpacity = (event) => {
         let box = event.target.closest('div')
-        box.style.zIndex = '1';
+        box.style.zIndex = '2';
         for (let e of box.children) {
             e.style.opacity = "1";
         }
@@ -110,7 +110,7 @@ const LoginBG = () => {
     }
 
     const handelInputBlur = (event, handle) => {
-        event.target.closest('div').style.zIndex = '2';
+        event.target.closest('div').style.zIndex = '1';
         let result = {
             message: '',
             check: false
@@ -207,7 +207,7 @@ const LoginBG = () => {
             <ul id="search">
                 <li>아이디 찾기</li>
                 <li>비밀번호 찾기</li>
-                <li>회원가입</li>
+                <li><Link to="/member/signup">회원가입</Link></li>
             </ul>
         </div>
     );
