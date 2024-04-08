@@ -31,7 +31,6 @@ const Admin_Chatbot_Row = ({
                 <li style={{ backgroundColor: 'black' }} id="chtaBotING" onClick={() => showChatbot(room.seq)} >채팅닫기</li>
                 :
                 <li id="chtaBotING" onClick={() => changeShowChatbot(room.seq)} >채팅하기</li>
-
             }
         </ul>
     );
