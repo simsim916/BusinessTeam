@@ -143,24 +143,12 @@ public class ItemController {
 		return result;
 	}
 
-	@GetMapping("/admin")
+	@GetMapping("/admingraph")
 	public ResponseEntity<?> adminStringColumn(SearchRequest searchRequest, PageRequest pageRequest) {
-		System.out.println("getColumn => " + searchRequest.getColumn());
-		System.out.println("getKeyword => " + searchRequest.getKeyword());
-		pageRequest.setStartEndNum(pageRequest.getPage());
-		String column = searchRequest.getColumn();
-		String keyword = searchRequest.getKeyword();
-		List<ItemDTO> itemList = null;
-		// 숫자 여부를 확인해서 Expression.stringPath OR numPath 메서드 지정해주기
-		if (keyword.matches("[-+]?\\d*\\.?\\d+")) {
-			itemList = itemService.adminIntegerColumn(searchRequest, pageRequest);
-			System.out.println("IntegerColumn");
-		} else {
-			System.out.println("StringColumn");
-			itemList = itemService.adminStringColumn(searchRequest, pageRequest);
-		}
+		
+		
 		ResponseEntity<?> result = null;
-		result = ResponseEntity.status(HttpStatus.OK).body(itemList);
+		result = ResponseEntity.status(HttpStatus.OK).body("agedwqadasgfwqd");
 		return result;
 	}
 

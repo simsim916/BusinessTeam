@@ -5,64 +5,90 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { api } from '../../../../../model/model';
 
-const BuyDeliveryBox = () => {
-
+const BuyDeliveryBox = ({ checkedList }) => {
 
     const [deliverySelect, setDeliverySelect] = useState(false);
-    const [client, setClient] = useState({
-        code : null,
-        userId : 'juh94',
-        name : '주용현',
-        addressCode:7534,
-        address1:'경기도 광주시',
-        address2:'쌍령동',
-        price:999999,
-        deliveryPrice:5000,
-        point:1234,
-    });
+    const [addressList, setAddressList] = useState(null);
+    const [whichAddress, setWhichAddress] = useState();
 
+
+    useEffect(() => {
+        let user = JSON.parse(sessionStorage.getItem('userinfo'));
+        api('/address/select', 'get', null, user.token
+        ).then(res => {
+            setAddressList(res.data);
+            setWhichAddress(res.data[0]);
+        }
+        ).catch(err => console.log(err.message));
+    }, [])
+
+    /* 배송지선택창 띄우는 상태값 */
     const handleOnClick = () => {
         setDeliverySelect(!deliverySelect);
     }
 
-    useEffect(() => {
-        let userinfo = sessionStorage.getItem('userinfo');
-        // if (userinfo != null) {
-        //     let user = api('/user/select', 'get', null, JSON.parse(userinfo).token
-        //     ).then(res => {
-        //         setClient(res.data);
-        //     }
-        //     ).catch(err => console.log(err.message));
-        // }
-    }, [])
+    const insertNewAddress = (data) => {
+        let user = JSON.parse(sessionStorage.getItem('userinfo'));
+        api('/address/merge', 'post', data, user.token);
+    }
+
+    const makeOrderRequest = (e) => {
+        setWhichAddress({
+            ...whichAddress,
+            [e.target.name] : e.target.value
+        })
+        console.log(whichAddress);
+    }
+
+    /* 배송지 선택창에서 어떤주소로 보낼지 선택 */
+    const handleWhichAddress = (data) => {
+        setWhichAddress(data);
+        setDeliverySelect(!deliverySelect);
+    }
 
 
     return (
         <div id="buyDeliveryBox">
             <h4>우리집</h4>
-            {client != null
+            {whichAddress != null
                 ?
                 <p>
-                    {client && client.username}
-                    {client && client.phonenumber}
+                    {whichAddress && whichAddress.id}&nbsp;&nbsp;&nbsp;
+                    {whichAddress && whichAddress.phonenumber}
+                    {/* 휴대폰 번호를 어디서 구하지? */}
                 </p>
                 :
                 <p>
-                    <input type="text" placeholder='이름' />
-                    <input type="text" placeholder="전화 번호" />
+                    <input type="text" placeholder='이름' name='id' onChange={makeOrderRequest} />
+                    <input type="text" placeholder="전화 번호" name='phonenumber' onChange={makeOrderRequest} />
                 </p>
             }
-            <p>경기도 성남시 분당구 돌마로 46 KR 5층</p>
-            <select name="delivery_option">
-                <option value="">배송 전 연락바랍니다.</option>
-                <option value="">부재 시 경비실에 맡겨주세요.</option>
+            {
+                whichAddress != null
+                    ?
+                    <p>{whichAddress && whichAddress.address1}</p>
+                    :
+                    <p><input type="text" placeholder='배송지 선택하기 창을 이용하세요' /></p>
+            }
+
+            상세주소&nbsp;<input type='text' style={{
+                width: '50%',
+                textIndent: '7px',
+                marginTop: '5px'
+            }} placeholder='상세주소를 입력해주세요.'
+                name="address2"
+                onChange={makeOrderRequest}
+            />
+            <select name="message" onChange={makeOrderRequest} >
+                <option value="배송 전 연락바랍니다.">배송 전 연락바랍니다.</option>
+                <option value="부재 시 경비실에 맡겨주세요.">부재 시 경비실에 맡겨주세요.</option>
                 <option value="">직접 입력</option>
             </select>
             <div onClick={handleOnClick} id='delivery_select'>
                 배송지 선택
             </div>
 
-            {deliverySelect && <DeliverySelect handleOnClick={handleOnClick} />}
+            {deliverySelect && <DeliverySelect setAddressList={setAddressList} insertNewAddress={insertNewAddress} handleWhichAddress={handleWhichAddress} addressList={addressList} handleOnClick={handleOnClick} />}
         </div >
     );
 }

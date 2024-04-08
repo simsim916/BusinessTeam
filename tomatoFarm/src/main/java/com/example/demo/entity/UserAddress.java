@@ -2,7 +2,10 @@ package com.example.demo.entity;
 
 import javax.persistence.*;
 
+import lombok.Data;
+
 @Entity
+@Data
 @Table(name = "useraddress")
 public class UserAddress {
 

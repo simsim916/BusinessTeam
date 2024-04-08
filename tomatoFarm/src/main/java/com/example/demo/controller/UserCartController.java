@@ -65,15 +65,17 @@ public class UserCartController {
 	}
 
 	@GetMapping("/delete")
-	public ResponseEntity<?> delete(UserCart entity, HttpServletRequest request) {
+	public ResponseEntity<?> delete(List<UserCart> list, HttpServletRequest request) {
 		ResponseEntity<?> result = null;
 		String token = tokenProvider.parseBearerToken(request);
 		String id = tokenProvider.validateAndGetUserId(token);
-		entity.setId(id);
+		System.out.println("aa");
+		for(UserCart entity : list) {
+			System.out.println(entity);
+			entity.setId(id);
+		}
+		userCartService.delete(list);
 
-		userCartService.delete(entity);
-
-		result = ResponseEntity.status(HttpStatus.OK).body(userCartService.selectItemListWhereUserID(entity));
 
 		return result;
 

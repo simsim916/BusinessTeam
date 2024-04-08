@@ -8,8 +8,11 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.entity.Visit_page;
 import com.example.demo.entity.Visit_pageID;
+import com.example.demo.module.SearchRequest;
 import com.example.demo.repository.VisitRepository;
+import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import lombok.AllArgsConstructor;
@@ -25,7 +28,6 @@ public class VisitRepositoryImpl implements VisitRepository {
 	private final JPAQueryFactory jPAQueryFactory;
 
 	public Visit_page update(Visit_page entity, Visit_pageID visitPageID) {
-
 		Visit_page check = entityManager.find(Visit_page.class, visitPageID);
 		if (check != null) {
 			Integer count = check.getVisit_count();
@@ -53,12 +55,13 @@ public class VisitRepositoryImpl implements VisitRepository {
 //	            .groupBy(visit_page.visit_date) // visit_date만 GROUP BY에 추가
 //	            .fetch();
 //	}
-	public List<Visit_page> selectAll(Visit_page entity) {
+	public List<Visit_page> selectAll(SearchRequest searchRequest) {
 		return jPAQueryFactory
 				.select(Projections.bean(Visit_page.class,
 						visit_page.page,visit_page.visit_date,visit_page.visit_count))
 				.from(visit_page)
-				.orderBy(visit_page.visit_date.asc())
+//				.groupBy(Expressions.stringPath(searchRequest.getWhichGroup()))
+				.limit(searchRequest.getHowManyRecords())
 				.fetch();
 	}
 	
