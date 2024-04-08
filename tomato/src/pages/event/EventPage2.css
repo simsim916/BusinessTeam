@@ -70,3 +70,16 @@
     margin-bottom: 30px;
     font-size: 20px;
 }
+
+#levelPointForm{
+    width: 100%;
+    margin-top: 40px;
+}
+
+#levelPointForm h3{
+    font-size: 20px;
+    text-align: center;
+    background-color: #F2EECA;
+    border-radius: 20px;
+    width: 300px;
+}
