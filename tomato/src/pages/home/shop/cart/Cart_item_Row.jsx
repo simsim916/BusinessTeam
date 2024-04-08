@@ -10,7 +10,7 @@ const Cart_item_Row = ({ item, idx }) => {
     const dispatch = useDispatch();
     const user = useSelector(state => state.user.data);
     const userCart = useSelector(state => state.userCart.data);
-    const userBuy = useSelector(state => state.userBuy.data)
+    const userBuy = useSelector(state => state.userBuy.data.itemList)
 
     const changeCheckBox = () => {
         if (userBuy && userBuy.find(e => e.code == item.code))
@@ -34,7 +34,7 @@ const Cart_item_Row = ({ item, idx }) => {
             </li>
             <li className="shopBasketItemImg"><Link to={'/home/detail?code=' + item.code}><img src={SERVER_RESOURCE + `/img/itemImg/${item.code}_2.jpg`} alt="" /></Link></li>
             <li className="shopBasketItemIfo">
-                <Link to={'/home/detail?code=' + item.code} className="shopBasketItemIfo_name">{item.name}</Link>
+                <Link to={'/home/detail?code=' + item.code} className="shopBasketItemIfo_name">{item.item_name}</Link>
                 {
                     item.discount
                         ?

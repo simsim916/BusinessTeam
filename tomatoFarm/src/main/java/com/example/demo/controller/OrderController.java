@@ -24,17 +24,18 @@ public class OrderController {
 	OrderService orderService;
 	
 	@PostMapping("/order")
-	public ItemOrder test(@RequestBody List<OrderDTO> list) {
+	public ItemOrder test(@RequestBody OrderDTO dto) {
 		OrderRequest orderRequest = new OrderRequest();
-		for(OrderDTO dto : list) {
-			System.out.println(dto);
-		}
+		System.out.println(dto);
+//		for(OrderDTO dto : list) {
+//			System.out.println(dto);
+//		}
+//		
+//		List<OrderDetail> detailList = orderRequest.makeDetailEntity(list);
+//		ItemOrder order = orderRequest.makeOrderEntity(list);
+//		order = orderService.order(order,detailList);
 		
-		List<OrderDetail> detailList = orderRequest.makeDetailEntity(list);
-		ItemOrder order = orderRequest.makeOrderEntity(list);
-		order = orderService.order(order,detailList);
-		
-		return order;
+		return null;
 	}
 	
 }

@@ -1,9 +1,14 @@
-import { USERBUY_DATA_REQUEST, USERBUY_DATA_SUCCESS, USERBUY_DATA_FAILURE, SET_USERBUY_DATA } from './actions';
+import { USERBUY_DATA_REQUEST, USERBUY_DATA_SUCCESS, USERBUY_DATA_FAILURE, SET_USERBUY_DATA_ITEMLIST, SET_USERBUY_DATA_ADDRESS } from './actions';
 
 const initialState = {
     userBuy: {
         loading: true,
-        data: JSON.parse(sessionStorage.getItem('buy')),
+        data: {
+            itemList: JSON.parse(sessionStorage.getItem('buy')),
+            address_code:'',
+            address1:'',
+            address2:''
+        },
         error: null
     }
 };
@@ -29,10 +34,23 @@ const userBuyReducer = (state = initialState.userBuy, action) => {
                 data: [],
                 error: action.payload
             };
-        case SET_USERBUY_DATA:
+        case SET_USERBUY_DATA_ITEMLIST:
             return {
                 ...state.buyItem,
-                data: action.payload
+                data: {
+                    ...state.data,
+                    itemList: action.payload
+                }
+            };
+        case SET_USERBUY_DATA_ADDRESS:
+            return {
+                ...state.buyItem,
+                data: {
+                    ...state.data,
+                    address_code: action.address_code,
+                    address1: action.address1,
+                    address2: action.address2
+                }
             };
         default:
             return state;

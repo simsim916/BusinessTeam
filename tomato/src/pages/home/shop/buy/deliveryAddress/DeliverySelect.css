@@ -12,10 +12,19 @@
     background-color: #fff;
     max-width: 500px;
     height: 80vh;
-    overflow-y: scroll;
+    overflow-y: auto;
     margin: 10vh auto;
     border: 1px solid #9B1B30;
     position: relative;
+}
+
+#deliverySelectContainer::-webkit-scrollbar {
+    width: 10px;
+}
+
+#deliverySelectContainer::-webkit-scrollbar-thumb {
+    background-color: #9b1b1f70;
+    border-radius: 10px;
 }
 
 #deliverySelectContainer>h4 {
@@ -23,6 +32,7 @@
     line-height: 50px;
     font-size: 20px;
     border-bottom: 1px solid #9B1B30;
+    position: sticky;
 }
 
 .addDelivery {

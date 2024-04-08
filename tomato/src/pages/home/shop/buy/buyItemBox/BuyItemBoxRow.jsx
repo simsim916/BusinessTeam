@@ -10,7 +10,6 @@ const BuyItemBoxRow = ({
     changeItemList, // checkedList 내 아이템 수량 변경
     handleCheck // checkedList 아이템 선택/해제
 }) => {
-
     const handleChange = (event) => {
         changeItemList(idx, event.target.value)
     }
@@ -30,7 +29,7 @@ const BuyItemBoxRow = ({
             </li>
             <li className="shopBasketItemImg"><img src={SERVER_RESOURCE + `/img/itemImg/${item.code}_2.jpg`} alt="" /></li>
             <li className="shopBasketItemIfo">
-                <p className="shopBasketItemIfo_name">{item.name}</p>
+                <p className="shopBasketItemIfo_name">{item.item_name}</p>
                 <p className="shopBasketItemIfo_price">{makeComa(item.price)}원</p>
                 {
                     item.discount ?

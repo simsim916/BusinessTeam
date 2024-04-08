@@ -2,21 +2,22 @@
 import './Cart_item.css';
 import Cart_item_Row from './Cart_item_Row';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUserBuy } from '../../../redux/userBuy/actions';
+import { setUserBuyItemList } from '../../../redux/userBuy/actions';
 import { setUserBuyStorage } from '../../../redux/userBuy/actions';
 
 const Cart_item = () => {
     /* 🫓REDUX🫓 */
     const dispatch = useDispatch();
     const userCart = useSelector(state => state.userCart.data);
-    const userBuy = useSelector(state => state.userBuy.data);
+    const userBuy = useSelector(state => state.userBuy.data.itemList);
+    console.log(userBuy)
 
     const handleAllCheckBox = () => {
         if (userBuy && userCart.length == userBuy.length) {
-            dispatch(setUserBuy([]));
+            dispatch(setUserBuyItemList([]));
             dispatch(setUserBuyStorage([]));
         } else {
-            dispatch(setUserBuy(userCart));
+            dispatch(setUserBuyItemList(userCart));
             dispatch(setUserBuyStorage(userCart));
         }
 
