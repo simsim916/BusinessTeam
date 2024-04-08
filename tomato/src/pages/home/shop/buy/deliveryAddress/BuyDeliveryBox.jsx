@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { api } from '../../../../../model/model';
 
+
 const BuyDeliveryBox = ({ checkedList }) => {
 
     const [deliverySelect, setDeliverySelect] = useState(false);

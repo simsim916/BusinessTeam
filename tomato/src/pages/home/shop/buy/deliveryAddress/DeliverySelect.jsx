@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import './DeliverySelect.css'
 import DeliverySelectRow from './DeliverySelectRow/DeliverySelectRow';
 // import { useState } from 'react';
+import Postcode from './daumAPI/PostCode';
+import DaumPostcodeEmbed from 'react-daum-postcode';
 
 const DeliverySelect = ({ setAddressList, insertNewAddress, handleWhichAddress, addressList, handleOnClick }) => {
 
@@ -49,6 +51,7 @@ const DeliverySelect = ({ setAddressList, insertNewAddress, handleWhichAddress, 
                 <h4>배송지 변경</h4>
                 <div onClick={handleOnClick} id="exitBt"><i className="fa-solid fa-xmark"></i></div>
                 <div className="addDelivery" onClick={openAddressAPI}>배송지 추가하기</div>
+                <DaumPostcodeEmbed />
                 {addressList.map((e, i) => <DeliverySelectRow handleWhichAddress={handleWhichAddress} key={i} address={e} />)}
             </div>
         </div>
