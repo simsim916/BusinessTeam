@@ -28,7 +28,6 @@ public class AddressController {
 	public List<UserAddress> selectAddressWhereId(HttpServletRequest request) {
 		String token = tokenProvider.parseBearerToken(request);
 		String id = tokenProvider.validateAndGetUserId(token);
-		System.out.println(addressService.selectAddressWhereId(id));
 		return addressService.selectAddressWhereId(id);
 	}
 	
@@ -37,7 +36,6 @@ public class AddressController {
 		String token = tokenProvider.parseBearerToken(request);
 		String id = tokenProvider.validateAndGetUserId(token);
 		entity.setId(id);
-		System.out.println(entity);
 		return addressService.insertUserAddress(entity);
 	}
 }

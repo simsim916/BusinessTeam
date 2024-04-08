@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.domain.Visit_pageDTO;
 import com.example.demo.entity.Visit_page;
 import com.example.demo.entity.Visit_pageID;
+import com.example.demo.module.SearchRequest;
 import com.example.demo.service.VisitService;
 
 import lombok.AllArgsConstructor;
@@ -29,7 +30,6 @@ import lombok.AllArgsConstructor;
 public class VisitController {
 	
 	VisitService visitService;
-
 	
 	@Transactional
 	@GetMapping("/update")
@@ -38,15 +38,12 @@ public class VisitController {
 	}
 	
 	@GetMapping("/selectall")
-	public ResponseEntity<?> selectAll(Visit_page entity) {
-		System.out.println(entity);
+	public ResponseEntity<?> selectAll(SearchRequest searchRequest) {
 		ResponseEntity result = null;
 		
-		LocalDate now = LocalDateTime.now().plusHours(9).toLocalDate();
+		System.out.println(searchRequest);
 		
-		
-		List<Visit_page> list = visitService.selectAll(entity);
-		System.out.println(list);
+		List<Visit_page> list = visitService.selectAll(searchRequest);
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}
