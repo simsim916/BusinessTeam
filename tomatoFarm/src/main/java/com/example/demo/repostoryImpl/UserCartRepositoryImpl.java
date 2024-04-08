@@ -49,10 +49,11 @@ public class UserCartRepositoryImpl implements UserCartRepository {
 	}
 
 	@Override
-	public void delete(UserCart entity) {
-//		System.out.println("entity Before 레포지토리 => " + entity);
-		entity = entityManager.merge(entity);
-//		System.out.println("entity After 레포지토리 => " + entity);
-		entityManager.remove(entity);
+	public void delete(List<UserCart> list) {
+		for(UserCart entity : list) {
+			entity = entityManager.merge(entity);
+			entityManager.remove(entity);
+		}
+			
 	}
 }

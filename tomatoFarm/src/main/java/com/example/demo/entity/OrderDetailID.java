@@ -2,13 +2,19 @@ package com.example.demo.entity;
 
 import java.io.Serializable;
 
-import lombok.Builder;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Data
-@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderDetailID implements Serializable {
-    private Integer orderCode;
-    private Integer itemCode;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer order_code;
+    private Integer item_code;
 }

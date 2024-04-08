@@ -72,7 +72,16 @@ const SecondContainer = () => {
             <h3> <i className="fa-solid fa-gift"></i> 특가 상품 <i className="fa-solid fa-gift"></i></h3>
             <div id="secondContainerList">
                 <div ref={slideBox} className="slideBox" style={{ marginLeft: '0px' }}>
-                    {eventItemList.map((e, i) => <ItemBox item={e} key={i} />)}
+                    <ItemBox item={eventItemList[eventItemList.length - 4]} />
+                    <ItemBox item={eventItemList[eventItemList.length - 3]} />
+                    <ItemBox item={eventItemList[eventItemList.length - 2]} />
+                    <ItemBox item={eventItemList[eventItemList.length - 1]} />
+                    <ItemBox item={eventItemList[0]} />
+                    <ItemBox item={eventItemList[1]} />
+                    <ItemBox item={eventItemList[2]} />
+                    <ItemBox item={eventItemList[3]} />
+                    <ItemBox item={eventItemList[4]} />
+                    {/* {eventItemList.map((e, i) => <ItemBox item={e} key={i} />)} */}
                 </div>
 
                 <div ref={secondSlideBtnRef} id="secondSlideBtn" onClick={secondContainerSlideBtn} >

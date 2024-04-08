@@ -18,7 +18,7 @@ export const fetchDataFailure = (error) => ({
     type: FINALORDER_DATA_FAILURE,
     payload: error
 });
-export const setUserBuy = (data) => ({
+export const setFinalOrder = (data) => ({
     type: SET_FINALORDER_DATA,
     payload: data
 });

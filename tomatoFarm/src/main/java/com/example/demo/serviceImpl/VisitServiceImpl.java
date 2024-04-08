@@ -43,9 +43,9 @@ public class VisitServiceImpl implements VisitService {
 		return visitRepository.update(entity, visitPageID);
 	}
 	
-	public List<Visit_page> selectAll(Visit_page entity) {
+	public List<Visit_page> selectAll(SearchRequest searchRequest) {
 		
-		return visitRepository.selectAll(entity);
+		return visitRepository.selectAll(searchRequest);
 	}
 	
 

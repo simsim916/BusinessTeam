@@ -3,6 +3,7 @@ import './Cart_item.css';
 import Cart_item_Row from './Cart_item_Row';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserBuy } from '../../../redux/userBuy/actions';
+import { setUserBuyStorage } from '../../../redux/userBuy/actions';
 
 const Cart_item = () => {
     /* 🫓REDUX🫓 */
@@ -11,10 +12,14 @@ const Cart_item = () => {
     const userBuy = useSelector(state => state.userBuy.data);
 
     const handleAllCheckBox = () => {
-        if (userBuy && userCart.length == userBuy.length)
+        if (userBuy && userCart.length == userBuy.length) {
             dispatch(setUserBuy([]));
-        else
+            dispatch(setUserBuyStorage([]));
+        } else {
             dispatch(setUserBuy(userCart));
+            dispatch(setUserBuyStorage(userCart));
+        }
+
     }
 
     return (

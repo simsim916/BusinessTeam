@@ -45,7 +45,7 @@ public class UserCartServiceImpl implements UserCartService {
 	
 	@Override
 	@Transactional
-	public void delete(UserCart entity) {
-		userCartRepository.delete(entity);
+	public void delete(List<UserCart> list) {
+		userCartRepository.delete(list);
 	}
 }

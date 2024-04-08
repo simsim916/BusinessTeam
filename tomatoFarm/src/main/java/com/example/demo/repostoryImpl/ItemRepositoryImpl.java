@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
+import org.hibernate.event.internal.DirtyCollectionSearchVisitor;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.domain.ItemDTO;
@@ -32,9 +33,15 @@ public class ItemRepositoryImpl implements ItemRepository {
 
 	private final JPAQueryFactory jPAQueryFactory;
 	private final EntityManager entityManager;
-	private final QBean<ItemDTO> dtoBean = Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price, item.storage,
-			item.weight, item.packing, item.sales, item.stock, item.views, item.likes, item.event_code, item.intro, item.admin,
-			item_event.discount, item_event.name.as("event_name"));
+	private final QBean<ItemDTO> dtoBean = Projections.bean(ItemDTO.class, item.code, item.brand, item.name,
+			item.delivery, item.price, item.storage, item.weight, item.packing, item.sales, item.stock, item.views,
+			item.likes, item.event_code, item.intro, item.admin, item_event.discount, item_event.name.as("event_name"));
+//	private final QBean<ItemDTO> adminDTO = Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price, item.storage,
+//			item.weight, item.packing, item.sales, item.stock, item.views, item.likes, item.event_code, item.intro, item.admin,
+//			item_event.discount, item_event.name.as("event_name"));
+//	private final QBean<ItemDTO> managerDTO = Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price, item.storage,
+//			item.weight, item.packing, item.sales, item.stock, item.views, item.likes, item.event_code, item.intro, item.admin,
+//			item_event.discount, item_event.name.as("event_name"));
 
 	// queryDSL 동적 정렬을 위해 OrderSpecifier객체를 이용한 동적 정렬
 	public OrderSpecifier<?> getSortType(SearchRequest searchRequest) {
@@ -55,9 +62,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 
 	@Override
 	public List<ItemDTO> selectItemListStringWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
-		return jPAQueryFactory
-				.select(dtoBean)
-				.from(item).join(item_event).on(item.event_code.eq(item_event.code))
+		return jPAQueryFactory.select(dtoBean).from(item).join(item_event).on(item.event_code.eq(item_event.code))
 				.where(Expressions.stringPath(searchRequest.getColumn()).contains(searchRequest.getKeyword()))
 				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum()).orderBy(getSortType(searchRequest))
 				.fetch();
@@ -65,9 +70,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 
 	@Override
 	public List<ItemDTO> selectItemListIntegerWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
-		return jPAQueryFactory
-				.select(dtoBean)
-				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
+		return jPAQueryFactory.select(dtoBean).from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
 				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
 						.eq(searchRequest.getKeyword()))
 				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum()).orderBy(getSortType(searchRequest))
@@ -76,9 +79,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 
 	@Override
 	public List<ItemDTO> selectItemListStringWhereTypeNotNull(PageRequest pageRequest, SearchRequest searchRequest) {
-		return jPAQueryFactory
-				.select(dtoBean)
-				.from(item).join(item_event).on(item.event_code.eq(item_event.code))
+		return jPAQueryFactory.select(dtoBean).from(item).join(item_event).on(item.event_code.eq(item_event.code))
 				.where(Expressions.stringPath(searchRequest.getColumn()).isNotNull()).limit(pageRequest.getEndNum())
 				.offset(pageRequest.getStartNum()).orderBy(getSortType(searchRequest)).fetch();
 	}
@@ -86,23 +87,22 @@ public class ItemRepositoryImpl implements ItemRepository {
 	@Override
 	public Item selectItemIntegerWhereType(SearchRequest searchRequest) {
 		return jPAQueryFactory
-			    .select(Projections.bean(Item.class, item.code, item.brand, item.name, item.delivery, item.price, item.storage,
-						item.weight, item.packing, item.sales, item.stock, item.views, item.likes, item.event_code, item.intro,
-						item.admin, item_event.discount, item_event.name.as("event_name")))
-			    .from(item)
-			    .leftJoin(item_event).on(item.event_code.eq(item_event.code))
-			    .where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
-			            .eq(searchRequest.getKeyword()))
-			    .fetchFirst();
+				.select(Projections.bean(Item.class, item.code, item.brand, item.name, item.delivery, item.price,
+						item.storage, item.weight, item.packing, item.sales, item.stock, item.views, item.likes,
+						item.event_code, item.intro, item.admin, item_event.discount, item_event.name.as("event_name")))
+				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
+				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
+						.eq(searchRequest.getKeyword()))
+				.fetchFirst();
 	}
 
 	@Override
 	// ** 브랜드 상품 조회
 	public List<ItemDTO> selectItemWherebrand(PageRequest pageRequest, SearchRequest searchRequest) {
 		return jPAQueryFactory
-				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price, item.storage,
-						item.sales, item.stock, item.views, item.likes, item.event_code, item_event.discount, item.intro,
-						item_event.name.as("event_name")))
+				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price,
+						item.storage, item.sales, item.stock, item.views, item.likes, item.event_code,
+						item_event.discount, item.intro, item_event.name.as("event_name")))
 				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
 				.where(item.brand.eq(searchRequest.getKeyword())).orderBy(item.sales.desc())
 				.offset(pageRequest.getStartNum()).limit(pageRequest.getEndNum()).fetch();
@@ -113,43 +113,38 @@ public class ItemRepositoryImpl implements ItemRepository {
 	public List<ItemDTO> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest) {
 		return jPAQueryFactory
 				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price,
-						item.sales, item.stock, item.views, item.likes, item.event_code, item_event.discount, item.intro,
-						item_event.name.as("event_name")))
+						item.sales, item.stock, item.views, item.likes, item.event_code, item_event.discount,
+						item.intro, item_event.name.as("event_name")))
 				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
 				.where(item.sort2.contains(searchRequest.getKeyword())
 						.or(item.sort3.contains(searchRequest.getKeyword()))
 						.or(item.brand.contains(searchRequest.getKeyword()))
 						.or(item.name.contains(searchRequest.getKeyword())))
-				.orderBy(getSortType(searchRequest))
-				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum())
+				.orderBy(getSortType(searchRequest)).limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum())
 				.fetch();
 	}
 
 	@Override
 	public List<SortDTO> selectSortWhereKeyword(SearchRequest searchRequest) {
 		List<SortDTO> result = jPAQueryFactory
-				.select(Projections.bean(SortDTO.class, item.sort1, item.sort2,item.sort2.count().as("count")))
+				.select(Projections.bean(SortDTO.class, item.sort1, item.sort2, item.sort2.count().as("count")))
 				.from(item)
 				.where(item.sort2.contains(searchRequest.getKeyword())
 						.or(item.sort3.contains(searchRequest.getKeyword()))
 						.or(item.brand.contains(searchRequest.getKeyword()))
-						.or(item.name.contains(searchRequest.getKeyword()))
-						.and(item.sort1.ne("밀키트")))
-				.groupBy(item.sort1, item.sort2)
-				.orderBy(item.sort2.count().desc())
-				.fetch();
+						.or(item.name.contains(searchRequest.getKeyword())).and(item.sort1.ne("밀키트")))
+				.groupBy(item.sort1, item.sort2).orderBy(item.sort2.count().desc()).fetch();
 
 		result.addAll(jPAQueryFactory
-				.select(Projections.bean(SortDTO.class, item.sort1, item.brand.as("sort2"), item.sort2.count().as("count")))
-		        .from(item)
-		        .where(item.sort1.eq("밀키트")
-		                .and(item.sort2.contains(searchRequest.getKeyword())
-		                        .or(item.sort3.contains(searchRequest.getKeyword()))
-		                        .or(item.brand.contains(searchRequest.getKeyword()))
-		                        .or(item.name.contains(searchRequest.getKeyword()))))
-		        .groupBy(item.brand)
-		        .orderBy(item.brand.count().desc())
-		        .fetch());
+				.select(Projections
+						.bean(SortDTO.class, item.sort1, item.brand.as("sort2"), item.sort2.count().as("count")))
+				.from(item)
+				.where(item.sort1.eq("밀키트")
+						.and(item.sort2.contains(searchRequest.getKeyword())
+								.or(item.sort3.contains(searchRequest.getKeyword()))
+								.or(item.brand.contains(searchRequest.getKeyword()))
+								.or(item.name.contains(searchRequest.getKeyword()))))
+				.groupBy(item.brand).orderBy(item.brand.count().desc()).fetch());
 
 		return result;
 	}
@@ -158,19 +153,10 @@ public class ItemRepositoryImpl implements ItemRepository {
 	// ** 키워드 상품 분류 조회
 	public List<SortDTO> selectSortList() {
 		List<SortDTO> result = jPAQueryFactory
-				.select(Projections.bean(SortDTO.class, item.sort1, item.brand.as("sort2")))
-					.where(item.sort1.eq("밀키트"))
-					.from(item)
-					.groupBy(item.sort1, item.brand)
-					.orderBy(item.brand.asc())
-					.fetch();
-		result.addAll(jPAQueryFactory
-				.select(Projections.bean(SortDTO.class, item.sort1, item.sort2))
-					.from(item)
-					.where(item.sort1.ne("밀키트"))
-					.groupBy(item.sort1, item.sort2)
-					.orderBy(item.sort2.asc())
-					.fetch());
+				.select(Projections.bean(SortDTO.class, item.sort1, item.brand.as("sort2"))).where(item.sort1.eq("밀키트"))
+				.from(item).groupBy(item.sort1, item.brand).orderBy(item.brand.asc()).fetch();
+		result.addAll(jPAQueryFactory.select(Projections.bean(SortDTO.class, item.sort1, item.sort2)).from(item)
+				.where(item.sort1.ne("밀키트")).groupBy(item.sort1, item.sort2).orderBy(item.sort2.asc()).fetch());
 		return result;
 	}
 
@@ -195,13 +181,14 @@ public class ItemRepositoryImpl implements ItemRepository {
 	public void insertItem(Item entity) {
 		entityManager.persist(entity);
 	}
-	
+
 	@Override
-	public List<ItemDTO> adminStringColumn(SearchRequest searchRequest,PageRequest pageRequest) {
+	public List<ItemDTO> adminStringColumn(SearchRequest searchRequest, PageRequest pageRequest) {
 		return jPAQueryFactory
-				.select(Projections.bean(ItemDTO.class, item.code, item.sort1, item.sort2, item.sort3, item.brand, item.name, item.delivery, 
-						item.price, item.storage, item.weight, item.packing, item.sales, item.stock, item.views, item.likes, item.event_code,
-						item_event.discount, item_event.name.as("event_name")))
+				.select(Projections.bean(ItemDTO.class, item.code, item.sort1, item.sort2, item.sort3, item.brand,
+						item.name, item.delivery, item.price, item.storage, item.weight, item.packing, item.sales,
+						item.stock, item.views, item.likes, item.event_code, item_event.discount,
+						item_event.name.as("event_name")))
 				.from(item).join(item_event).on(item.event_code.eq(item_event.code))
 				.where(Expressions.stringPath(searchRequest.getColumn()).contains(searchRequest.getKeyword()))
 //				.limit(pageRequest.getSize()).offset(pageRequest.getStartNum())
@@ -211,41 +198,61 @@ public class ItemRepositoryImpl implements ItemRepository {
 //				Expressions.stringPath(searchRequest.getColumn()) <<= 이걸로 정렬 기능은 안되는거 같은데 내 코드 문제인가?
 				.fetch();
 	}
-	
+
 	@Override
 	public List<ItemDTO> adminIntegerColumn(SearchRequest searchRequest, PageRequest pageRequest) {
 		return jPAQueryFactory
-				.select(Projections.bean(ItemDTO.class, item.code, item.sort1, item.sort2, item.sort3, item.brand, item.name, item.delivery, 
-						item.price, item.storage, item.weight, item.packing, item.sales, item.stock, item.views, item.likes, item.event_code,
-						item_event.discount, item_event.name.as("event_name")))
+				.select(Projections.bean(ItemDTO.class, item.code, item.sort1, item.sort2, item.sort3, item.brand,
+						item.name, item.delivery, item.price, item.storage, item.weight, item.packing, item.sales,
+						item.stock, item.views, item.likes, item.event_code, item_event.discount,
+						item_event.name.as("event_name")))
 				.from(item).join(item_event).on(item.event_code.eq(item_event.code))
-				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue().contains(searchRequest.getKeyword()))
-				.limit(pageRequest.getSize()).offset(pageRequest.getStartNum())
-				.orderBy(getSortType(searchRequest))
+				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
+						.contains(searchRequest.getKeyword()))
+				.limit(pageRequest.getSize()).offset(pageRequest.getStartNum()).orderBy(getSortType(searchRequest))
 				.fetch();
 	}
-	
+
 	@Override
 	public int itemListCount() {
 		// TODO Auto-generated method stub
-		return (int) jPAQueryFactory
-				.selectFrom(item)
-				.fetchCount();
+		return (int) jPAQueryFactory.selectFrom(item).fetchCount();
 	}
-	
+
 	public Item updateItem(Item entity) {
 		return entityManager.merge(entity);
 	}
-	
+
 	public List<ItemDTO> selectItemListWhereInCode(List<Integer> codeList) {
 		System.out.println(codeList);
 		return jPAQueryFactory
 				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price,
 						item.storage, item.weight, item.packing, item.sales, item.stock, item.views, item.likes,
 						item.event_code, item.intro, item_event.discount, item_event.name.as("event_name")))
-				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
-				.where(item.code.in(codeList))
+				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code)).where(item.code.in(codeList))
 				.fetch();
 	}
-	
+
+//	=====================================================================================================
+	public List<Item> SearchForAdmin(SearchRequest searchRequest, PageRequest pageRequest) {
+		if (searchRequest.getKeyword().replace("[-+]?\\d*\\.?\\d+", "").length() == 0) {
+			return jPAQueryFactory.selectFrom(item)
+					.from(item).leftJoin(item_event).on(item_event.code.eq(item_event.code))
+					.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
+							.contains(searchRequest.getKeyword()))
+					.orderBy(getSortType(searchRequest))
+					.limit(searchRequest.getHowManyRecords())
+					.fetch();
+		} else {
+			return jPAQueryFactory.selectFrom(item)
+					.from(item).leftJoin(item_event).on(item_event.code.eq(item_event.code))
+					.where(Expressions.stringPath(searchRequest.getColumn())
+							.contains(searchRequest.getKeyword()))
+					.orderBy(getSortType(searchRequest))
+					.limit(searchRequest.getHowManyRecords())
+					.fetch();
+		}
+	}
+//	=====================================================================================================
+
 }

@@ -17,3 +17,11 @@
     width: 30%;
     min-width: 550px;
 }
+
+#alertBox{
+    width: 500px;
+    height: 500px;
+    position: absolute;
+    top: 10px;
+    left: 50%
+}

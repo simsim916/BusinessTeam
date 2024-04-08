@@ -26,7 +26,7 @@
 .slideBox {
     display: flex;
     gap: 20px;
-    transition: 1s;
+    transition: 1s ease;
     padding-top: 5px;
 }
 
