@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { SERVER_RESOURCE } from '../../../../../model/server-config';
 import { makeComa, makeDiscountPrice } from '../../../../components/MathFunction';
 
@@ -19,18 +19,12 @@ const BuyItemBoxRow = ({
         changeItemList(idx, type, item);
     }
 
-    console.log((checkedList));
-    console.log((item));
-
-
     return (
         <ul className="shopBasketItem">
             <li>
                 <input className="check" type="checkbox" name="buy"
                     onChange={(event) => handleCheck(event, item)}
-                    checked='true'
-                // checked={checkedList.includes(item)}
-                // checked={checkedList.some(checkItem => checkItem.id === item.id)}
+                    checked={checkedList.find(e => e.code === item.code)}
                 />
 
             </li>

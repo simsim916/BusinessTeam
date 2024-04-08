@@ -5,9 +5,17 @@ import { useSelector } from 'react-redux';
 
 const Cart_total = () => {
     const userBuy = useSelector(state => state.userBuy.data)
+    // let check = (window.location.href).lastIndexOf('/');
+    // let uri = window.location.href.slice(check + 1);
+    // console.log(uri);
+    // console.log(userBuy);
 
     const setSession = () => {
         sessionStorage.setItem('buyList', JSON.stringify(userBuy));
+    }
+
+    const postOrder = () => {
+        
     }
 
     return (
@@ -55,7 +63,13 @@ const Cart_total = () => {
                         </div>
                     </div>
                 </div>
-                <Link to="/home/buy" id="loginBox" onClick={setSession} >주문하기</Link>
+                {/* {uri == 'cart'
+                    ?
+                    <Link to="/home/buy" id="loginBox" onClick={setSession} >주문하기</Link>
+                    :
+                    <div to="/home/buy" id="loginBox" onClick={() => setSession()} >주문하기</div>
+                } */}
+                    <Link to="/home/buy" id="loginBox" onClick={setSession} >주문하기</Link>
                 <div id="shopBasketCancel">
                     <div>* [주문완료] 상태일 경우에만 주문 취소 가능합니다.</div>
                     <div>* [마이페이지] - [주문내역 상세페이지]에서 직접 취소 가능합니다.</div>

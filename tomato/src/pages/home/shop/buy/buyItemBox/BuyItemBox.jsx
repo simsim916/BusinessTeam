@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import './BuyItemBox.css';
 import BuyItemBoxRow from './BuyItemBoxRow';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getUserCart } from '../../../../redux/userCart/action';
 import { setUserCart } from './../../../../redux/userCart/action';
 
@@ -13,6 +13,10 @@ const BuyItemBox = ({
     handleCheck, // checkedList 아이템 선택/해제
     buyList, // 장바구니에서 클릭된 아이템만 구매페이지로
 }) => {
+
+    // const userBuy = useSelector(state => state.userBuy.data);
+    // const finalOrder = useSelector(state => state.finalOrder);
+
 
     const dispatch = useDispatch();
 

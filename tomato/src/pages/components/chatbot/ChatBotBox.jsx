@@ -13,7 +13,7 @@ const ChatBotBox = ({
     /* index 페이지 전용 props */
     setShowChatbot, // index페이지 에서 나타낼지 여부 상태값 변경 함수 
 }) => {
-
+    console.log(`admin_root=${admin_root} 의 채팅 출력완료`)
     /* 로그인 상태 sessionStorage 값 */
     const userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
 

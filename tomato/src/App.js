@@ -7,6 +7,7 @@ import Admin from "./pages/admin/Admin";
 import React from 'react';
 import { Provider } from 'react-redux';
 import store from "./pages/redux/store";
+import EventPage2 from './pages/event/EventPage2';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
                 <Routes>
                     <Route path='/member/*' element={<Member />} />
                     <Route path='/event' element={<EventPage />} />
+                    <Route path='/event2' element={<EventPage2 />} />
                     <Route path='/admin/*' element={<Admin />} />
                     <Route path='/home/*' element={<Home />} />
                     <Route path='/' element={<Home />} />

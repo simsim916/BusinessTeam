@@ -20,6 +20,7 @@ import com.example.demo.repository.ItemRepository;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.QBean;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
@@ -31,6 +32,9 @@ public class ItemRepositoryImpl implements ItemRepository {
 
 	private final JPAQueryFactory jPAQueryFactory;
 	private final EntityManager entityManager;
+	private final QBean<ItemDTO> dtoBean = Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price, item.storage,
+			item.weight, item.packing, item.sales, item.stock, item.views, item.likes, item.event_code, item.intro, item.admin,
+			item_event.discount, item_event.name.as("event_name"));
 
 	// queryDSL 동적 정렬을 위해 OrderSpecifier객체를 이용한 동적 정렬
 	public OrderSpecifier<?> getSortType(SearchRequest searchRequest) {
@@ -52,9 +56,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 	@Override
 	public List<ItemDTO> selectItemListStringWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
 		return jPAQueryFactory
-				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price, item.storage,
-						item.weight, item.packing, item.sales, item.stock, item.views, item.likes, item.event_code, item.intro,
-						item_event.discount, item_event.name.as("event_name")))
+				.select(dtoBean)
 				.from(item).join(item_event).on(item.event_code.eq(item_event.code))
 				.where(Expressions.stringPath(searchRequest.getColumn()).contains(searchRequest.getKeyword()))
 				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum()).orderBy(getSortType(searchRequest))
@@ -64,9 +66,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 	@Override
 	public List<ItemDTO> selectItemListIntegerWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
 		return jPAQueryFactory
-				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price, item.storage,
-						item.weight, item.packing, item.sales, item.stock, item.views, item.likes, item.event_code, item.intro,
-						item_event.discount, item_event.name.as("event_name")))
+				.select(dtoBean)
 				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
 				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
 						.eq(searchRequest.getKeyword()))
@@ -77,9 +77,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 	@Override
 	public List<ItemDTO> selectItemListStringWhereTypeNotNull(PageRequest pageRequest, SearchRequest searchRequest) {
 		return jPAQueryFactory
-				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price, item.storage,
-						item.weight, item.packing, item.sales, item.stock, item.views, item.likes, item.event_code, item.intro,
-						item_event.discount, item_event.name.as("event_name")))
+				.select(dtoBean)
 				.from(item).join(item_event).on(item.event_code.eq(item_event.code))
 				.where(Expressions.stringPath(searchRequest.getColumn()).isNotNull()).limit(pageRequest.getEndNum())
 				.offset(pageRequest.getStartNum()).orderBy(getSortType(searchRequest)).fetch();

@@ -24,3 +24,5 @@ public class ChatBotDTO {
 
 	private Integer user_level;
 }
+
+
