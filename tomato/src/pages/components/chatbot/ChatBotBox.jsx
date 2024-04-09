@@ -77,16 +77,20 @@ const ChatBotBox = ({
 
     const getMessageAll = async (root) => {
         setLoading(true);
-        const response = await api(`/chatbot/select?root=${root}`, 'get', null, userinfo.token)
-            .then((res) => { setLoading(false); return res; })
-            .catch((err) => { setLoading(false); setError(true); return err; })
-        setMessageAll(response.data);
-        setText((prev) => ({
-            ...prev,
-            root: response.data[0].root,
-            content: ''
-        }))
-    }
+        const response = await api(`/chatbot/selectroom?=${root}`, 'get', null, userinfo.token)
+        .then((res) => { setLoading(false); return res; })
+        .catch ((err) => { setLoading(false); setError(true); return err; });
+            if (response.data && response.data.length > 0) {
+                setMessageAll(response.data);
+                setText((prev) => ({
+                    ...prev,
+                    root: response.data[0].root,
+                    content: ''
+                }));
+            } else {
+                
+            }
+        }
 
     /* admin 페이지에서 데이터 조회시 값 불러오는 함수 */
     useEffect(() => {

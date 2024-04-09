@@ -1,11 +1,17 @@
 
 
+
+
 const Admin_Chatbot_Row = ({
     room, // 채팅방의 내용
     showChatbot, //
     changeShowChatbot // 나타낼 채팅방 배열을 수정하는 함수
 }) => {
     /* 전체 채팅 내용에서 현 component의 root값으로 filter함 */
+
+
+
+
 
     return (
         <ul>
