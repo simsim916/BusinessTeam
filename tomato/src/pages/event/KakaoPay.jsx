@@ -1,4 +1,4 @@
-import { SERVER_RESOURCE } from "../../../model/server-config";
+import { SERVER_RESOURCE } from "../../model/server-config";
 import "./KakaoPay.css";
 
 const KakaoPay = () => {

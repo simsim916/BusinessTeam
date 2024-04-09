@@ -1,7 +1,37 @@
 import { SERVER_RESOURCE } from "../../model/server-config";
 import "./EventPage2.css";
+import { Link, Route, Routes } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import Loading from './../components/Loading';
+import Error from './../components/Error';
+import KakaoPay from './KakaoPay';
+import KBPay from './KBPay';
+import TossPay from './TossPay';
+import NaverPay from './NaverPay';
 
 const EventPage2 = () => {
+    // const [item, setItem] = useState(null);
+    // const [loading, setLoading] = useState(true);
+    // const [error, setError] = useState(false);
+
+    // useEffect(() => {
+    //     axios.get(`http://localhost:8090/event2/`
+    //     ).then(res => {
+    //         setItem(res.data);
+    //         setLoading(false);
+    //     }).catch(err => {
+    //         console.log(err.message)
+    //         setLoading(false);
+    //         setError(true);
+    //     })
+
+    // }, [])
+
+    // if (loading) return <Loading />
+    // if (error) return <Error />
+
+
     return (
         <div>
             <img id="eventImgLogo" src={SERVER_RESOURCE + "/img/adimg/signup.jpg"} />
@@ -35,14 +65,14 @@ const EventPage2 = () => {
                         <div id="eventSaleBox">20%</div>
                         <div>최대 20%할인 혜택</div>
                         <div id="rankDay">레드등급 혜택기간<br></br>등업일 ~ 1년</div>
-                    </div> 
-                        <div id="levelPlusPoint"><i class="fa-solid fa-plus"></i></div>    
+                    </div>
+                    <div id="levelPlusPoint"><i class="fa-solid fa-plus"></i></div>
                     <div id="level_point">
                         <div id="eventBoxTitle">포인트</div>
                         <div id="eventSaleBox">3만원</div>
                         <div>20만원 이상 구매 시</div>
                         <div id="rankDay">포인트 사용기간혜택<br></br>신청일 ~ 2024.12.31</div>
-                    </div>    
+                    </div>
                 </div>
 
                 <div id="eventDayBox">
@@ -63,15 +93,18 @@ const EventPage2 = () => {
                 <h1>추가 결제 혜택 안내</h1>
                 <h2>쿠폰 혜택과 중복 적용 가능</h2>
                 <div>
-                    <img id="reveiwCupon" src={SERVER_RESOURCE + "/img/eventimg/네이버페이.jpg"} />
-                    <img id="reveiwCupon" src={SERVER_RESOURCE + "/img/eventimg/카카오페이.jpg"} />
-                    <img id="reveiwCupon" src={SERVER_RESOURCE + "/img/eventimg/KB페이.jpg"} />
-                    <img id="reveiwCupon" src={SERVER_RESOURCE + "/img/eventimg/토스페이.jpg"} />
+                    <Link to={"/envet2/naverpay"}><a href="/event2/naverpay"><img src={SERVER_RESOURCE + "/img/eventimg/네이버페이.jpg"} /></a></Link>
+                    <Link to={"/envet2/kakaopay"}><a href="/event2/kakaopay"><img src={SERVER_RESOURCE + "/img/eventimg/카카오페이.jpg"} /></a></Link>
+                    <Link to={"/envet2/kbpay"}><a href="/event2/kbpay"><img src={SERVER_RESOURCE + "/img/eventimg/KB페이.jpg"} /></a></Link>
+                    <Link to={"/envet2/tosspay"}><a href="/event2/tosspay"><img src={SERVER_RESOURCE + "/img/eventimg/토스페이.jpg"} /></a></Link>
                 </div>
             </div>
-
-
-
+            {/* <Routes>
+                <Route path='/naverpay' element={<NaverPay />} />
+                <Route path='/kakaopay' element={<KakaoPay />} />
+                <Route path='/kbpay' element={<KBPay />} />
+                <Route path='/tosspay' element={<TossPay />} />
+            </Routes> */}
         </div>
 
 
