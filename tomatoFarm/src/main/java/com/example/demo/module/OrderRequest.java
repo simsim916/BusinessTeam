@@ -23,7 +23,7 @@ public class OrderRequest {
 		String orderName = itemList.get(0).getName()+ " 외 " + (itemList.size() - 1) + "건"; // 주문명
 		Integer totalPrice = 0;
 		Integer totalDelivery = 0;
-		Integer totalPoint = 0;
+		Integer totalPoint = 0; // 상품의 5%
 		
 		for(ItemDTO item : itemList) {
 			double discount = 0; 

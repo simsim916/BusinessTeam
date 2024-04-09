@@ -23,8 +23,9 @@ const DeliverySelect = ({ setAddressList, insertNewAddress, addressList, handleO
         script.src = '//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
         script.async = true;
         document.body.appendChild(script);
-
-        dispatch(getUserAddress('/address/select', 'get', null, user.token));
+        if (user) {
+            dispatch(getUserAddress('/address/select', 'get', null, user.token));
+        }
         return () => {
             document.body.removeChild(script);
         };
@@ -39,8 +40,14 @@ const DeliverySelect = ({ setAddressList, insertNewAddress, addressList, handleO
             info: document.getElementById('info').value,
         }
         dispatch(setUserBuyAddress(address));
-        dispatch(getUserAddress('/address/merge', 'post', address, user.token));
+        if (user) {
+            dispatch(getUserAddress('/address/merge', 'post', address, user.token));
+        } else {
+            dispatch(setUserAddress(address));
+        }
         setOpenInsert(!openInsert);
+
+
     }
 
     const handleComplete = (data) => {
@@ -71,7 +78,7 @@ const DeliverySelect = ({ setAddressList, insertNewAddress, addressList, handleO
                 <div className="addDelivery" onClick={handleInsertAddress}>배송지 추가하기</div>
                 {/* {openAPI && <InsertAddress />} */}
                 {openInsert && <InsertAddress insertAddress={insertAddress} handleAPI={handleAPI} />}
-                {userAddress.length > 0 && userAddress.map((e, i) => <DeliverySelectRow handleOnClick={handleOnClick} key={i} address={e} />)}
+                {userAddress.length > 0 && userAddress.map((e, i) => <DeliverySelectRow handleAPI={handleAPI} handleOnClick={handleOnClick} key={i} address={e} />)}
             </div>
         </div>
     );

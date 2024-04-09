@@ -1,17 +1,16 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { SERVER_RESOURCE } from '../../../../../model/server-config';
-import { makeComa, makeDiscountPrice } from '../../../../components/MathFunction';
-import { useEffect, useState } from 'react';
+import { makeComa } from '../../../../components/MathFunction';
 
 const BuyItemBoxRow = ({
-    checkedList, // 구매페이지 내에서 체크된 아이템
+    buy,
     item, // 각 아이템 정보
     idx, // 각 아이템 인덱스
     changeItemList, // checkedList 내 아이템 수량 변경
     handleCheck // checkedList 아이템 선택/해제
 }) => {
 
-    const userBuy = useSelector(state => state.userBuy.data.itemList);
+    const userBuyItemList = useSelector(state => state.userBuy.data.itemList);
     const handleChange = (event) => {
         changeItemList(idx, event.target.value)
     }
@@ -20,13 +19,14 @@ const BuyItemBoxRow = ({
         changeItemList(idx, type, item);
     }
 
+    console.log(userBuyItemList[idx].amount);
+
     return (
         <ul className="shopBasketItem">
             <li>
                 <input className="check" type="checkbox" name="buy"
                     onChange={(event) => handleCheck(event, item)}
-                    // checked={userBuy && userBuy.find(e => e.code === item.code)}
-                    checked={userBuy && userBuy.some(e => e.code == item.code)}
+                    checked={userBuyItemList && userBuyItemList.some(e => e.code == item.code)}
                 />
 
             </li>
@@ -43,7 +43,7 @@ const BuyItemBoxRow = ({
             </li>
             <li className="shopBasketItem_count">
                 <button onClick={() => handleClick('-')}><i className="fa-solid fa-minus"></i></button>
-                <input id="inputCount" type="number" value={item.amount} onChange={handleChange} min="0" />
+                <input id="inputCount" type="number" value={(userBuyItemList && userBuyItemList[idx].amount) || item[idx].amount} onChange={handleChange} min="0" />
                 <button><i onClick={() => handleClick('+')} className="fa-solid fa-plus"></i></button>
             </li>
             {

@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -33,14 +34,22 @@ public class OrderController {
 	public ResponseEntity<?> test(@RequestBody OrderDTO dto,HttpServletRequest request) {
 		ResponseEntity<?> result = null;
 		String token = tokenProvider.parseBearerToken(request);
-		String id = tokenProvider.validateAndGetUserId(token);
-		
+		String id = null;
+		if(token != null) {
+			id = tokenProvider.validateAndGetUserId(token);
+		} else {
+			id = dto.getNonLogin();
+		}
 		OrderRequest orderRequest = new OrderRequest();
 		ItemOrder orderEntity = orderRequest.makeOrderEntity(dto, id);
 		List<OrderDetail> detailList = orderRequest.makeDetailEntity(dto,id);
+		System.out.println("===================");
+		System.out.println("===================");
+		System.out.println(orderEntity.getId());
+		System.out.println("===================");
+		
 		orderService.order(orderEntity, detailList);
 		result = ResponseEntity.status(HttpStatus.OK).body("주문 성공");
-		
 		return null;
 	}
 	

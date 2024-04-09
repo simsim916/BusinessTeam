@@ -52,6 +52,10 @@
     font-size: 20px;
 }
 
+#buyDeliveryBox p span {
+    font-size: 15px;
+}
+
 #buyDeliveryBox #delivery_select_unlogin {
     width: 120px;
     line-height: 50px;

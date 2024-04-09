@@ -10,7 +10,6 @@ const Cart_item = () => {
     const dispatch = useDispatch();
     const userCart = useSelector(state => state.userCart.data);
     const userBuy = useSelector(state => state.userBuy.data.itemList);
-    console.log(userBuy)
 
     const handleAllCheckBox = () => {
         if (userBuy && userCart.length == userBuy.length) {
@@ -22,6 +21,7 @@ const Cart_item = () => {
         }
 
     }
+
 
     return (
         <div id='shopBasketSelectBox'>
@@ -40,8 +40,18 @@ const Cart_item = () => {
                     <li>총 상품금액</li>
                     <li>배송비</li>
                 </ul>
-                {userCart && userCart.map((e, i) => <Cart_item_Row item={e} key={i} idx={i} />)}
+                {
+                    userCart.length == 0
+                        ?
+                        <div id='cartNone'>
+                            장바구니에 상품을 담아주세요.
+                        </div>
+                        :
+                        userCart && userCart.map((e, i) => <Cart_item_Row item={e} key={i} idx={i} />)
+                }
+
             </div>
+
 
         </div >
     );

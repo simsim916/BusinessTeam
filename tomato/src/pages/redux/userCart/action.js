@@ -93,11 +93,11 @@ export const changeUserCart = (key, type, userCart) => {
     }
 }
 
-export const deleteUserCart = (url, token) => {
+export const deleteUserCart = (url, method, data, token) => {
     return async (dispatch) => {
         dispatch(fetchDataRequest());
         try {
-            const response = await api(url, 'get', null, token)
+            const response = await api(url, method, data, token)
             dispatch(fetchDataSuccess(response.data));
         } catch (error) {
             console.log('getUserCart : ' + error.message)

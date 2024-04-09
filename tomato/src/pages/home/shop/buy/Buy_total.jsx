@@ -6,18 +6,19 @@ import { useSelector } from 'react-redux';
 
 const Buy_total = () => {
 
+    /* Redux */
     const userBuyItemList = useSelector(state => state.userBuy.data.itemList);
     const userBuy = useSelector(state => state.userBuy.data);
-    const orderForm = useSelector(state => state.userBuy.data);
     const user = useSelector(state => state.user.data);
 
-
     const postOrder = () => {
-        api('/order/order', 'post', userBuy, user.token
-        ).then(res => {
-            console.log(res.data);
+        if (user) {
+            api('/order/order', 'post', userBuy, user.token)
+            sessionStorage.removeItem('buy')
+        } else {
+            api('/order/order', 'post', userBuy, null)
+            localStorage.removeItem('cart');
         }
-        ).catch(err => err.message);
     }
 
     return (

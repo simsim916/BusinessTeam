@@ -1,8 +1,6 @@
 package com.example.demo.controller;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,11 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.domain.ItemDTO;
 import com.example.demo.domain.UserCartDTO;
-import com.example.demo.entity.Item;
 import com.example.demo.entity.UserCart;
-import com.example.demo.entity.UserCartID;
 import com.example.demo.jwtToken.TokenProvider;
 import com.example.demo.service.UserCartService;
 
@@ -64,7 +59,7 @@ public class UserCartController {
 		return result;
 	}
 
-	@GetMapping("/delete")
+	@PostMapping("/delete")
 	public ResponseEntity<?> delete(List<UserCart> list, HttpServletRequest request) {
 		ResponseEntity<?> result = null;
 		String token = tokenProvider.parseBearerToken(request);

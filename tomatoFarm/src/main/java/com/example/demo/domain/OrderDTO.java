@@ -2,6 +2,7 @@ package com.example.demo.domain;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Random;
 
 import javax.persistence.Column;
 
@@ -23,6 +24,7 @@ public class OrderDTO {
 	Integer phonenumber;
 	String nickname;
 	String order_message;
+	String nonLogin;
 	
 	
 //	========= 임시 ========
@@ -48,4 +50,6 @@ public class OrderDTO {
 //    private String brand;
 //    
 //    private String message;
+
+
 }

@@ -54,6 +54,5 @@ public class UserCartRepositoryImpl implements UserCartRepository {
 			entity = entityManager.merge(entity);
 			entityManager.remove(entity);
 		}
-			
 	}
 }

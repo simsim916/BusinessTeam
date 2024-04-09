@@ -1,4 +1,4 @@
-import { USERBUY_DATA_REQUEST, USERBUY_DATA_SUCCESS, USERBUY_DATA_FAILURE, SET_USERBUY_DATA_ITEMLIST, SET_USERBUY_DATA_ADDRESS, SET_USERBUY_DATA_MESSAGE } from './actions';
+import { USERBUY_DATA_REQUEST, USERBUY_DATA_SUCCESS, USERBUY_DATA_FAILURE, SET_USERBUY_DATA_ITEMLIST, SET_USERBUY_DATA_ADDRESS, SET_USERBUY_DATA_MESSAGE, SET_USERBUY_DATA_NONLOGIN } from './actions';
 
 const initialState = {
     userBuy: {
@@ -59,6 +59,14 @@ const userBuyReducer = (state = initialState.userBuy, action) => {
                 data: {
                     ...state.data,
                     order_message : action.order_message,
+                }
+            };
+        case SET_USERBUY_DATA_NONLOGIN:
+            return {
+                ...state.buyItem,
+                data: {
+                    ...state.data,
+                    nonLogin : action.nonLogin,
                 }
             };
         default:

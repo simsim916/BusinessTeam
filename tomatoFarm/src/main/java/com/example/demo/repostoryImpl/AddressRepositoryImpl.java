@@ -1,6 +1,7 @@
 package com.example.demo.repostoryImpl;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
@@ -32,5 +33,12 @@ public class AddressRepositoryImpl implements AddressRepository {
 	@Override
 	public UserAddress insertUserAddress(UserAddress entity) {
 		return entityManager.merge(entity);
+	}
+	
+	@Transactional
+	@Override
+	public void deleteAddress(UserAddress entity) {
+		UserAddress test = entityManager.merge(entity);
+		entityManager.remove(test);
 	}
 }

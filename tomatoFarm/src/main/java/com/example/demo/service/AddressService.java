@@ -8,4 +8,5 @@ public interface AddressService {
 	
 	List<UserAddress> selectAddressWhereId(String id);
 	UserAddress insertUserAddress(UserAddress entity);
+	void deleteAddress(UserAddress entity);
 }
