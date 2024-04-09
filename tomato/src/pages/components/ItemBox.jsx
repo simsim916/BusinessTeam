@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import './itemBox.css';
 import { makeComa } from './MathFunction';
 import { SERVER_RESOURCE, SERVER_URL } from './../../model/server-config';
-
+11
 const ItemBox = ({ item }) => {
     return (
         <Link to={"/home/detail?code=" + item.code} className="itemBox">
