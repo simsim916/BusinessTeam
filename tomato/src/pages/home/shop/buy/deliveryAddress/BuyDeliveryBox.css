@@ -62,3 +62,8 @@
     border-radius: 10px;
     cursor: pointer;
 }
+
+.deliverySelectRow span {
+    font-size: 15px;
+    margin-right: 10px;
+}

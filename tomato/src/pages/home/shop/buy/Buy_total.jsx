@@ -4,28 +4,20 @@ import './Buy_total.css';
 import { api } from '../../../../model/model';
 import { useSelector } from 'react-redux';
 
-const Buy_total = ({ checkedList }) => {
+const Buy_total = () => {
 
-    const userBuy = useSelector(state => state.userBuy.data.itemList);
-    console.log(userBuy);
+    const userBuyItemList = useSelector(state => state.userBuy.data.itemList);
+    const userBuy = useSelector(state => state.userBuy.data);
+    const orderForm = useSelector(state => state.userBuy.data);
+    const user = useSelector(state => state.user.data);
 
-
-    useEffect(() => {
-    }, [])
 
     const postOrder = () => {
-        let user = sessionStorage.getItem('userinfo');
-        let token = JSON.parse(user).token;
-        api('/order/order', 'post', userBuy, token
+        api('/order/order', 'post', userBuy, user.token
         ).then(res => {
-            sessionStorage.removeItem('finalOrder')
-            sessionStorage.removeItem('buyList')
-            sessionStorage.removeItem('buy');
+            console.log(res.data);
         }
         ).catch(err => err.message);
-        
-        console.log(checkedList);
-        // api(`/usercart/delete`, 'get', checkedList, token);
     }
 
     return (
@@ -35,8 +27,8 @@ const Buy_total = ({ checkedList }) => {
                     <div>상품금액
                         <div>
                             {
-                                checkedList ?
-                                    makeComa(checkedList.reduce((result, e) => +result + (e.price * e.amount), 0))
+                                userBuyItemList ?
+                                    makeComa(userBuyItemList.reduce((result, e) => +result + (e.price * e.amount), 0))
                                     :
                                     0
                             } 원
@@ -45,8 +37,8 @@ const Buy_total = ({ checkedList }) => {
                     <div>할인금액
                         <div>
                             {
-                                checkedList ?
-                                    makeComa(Math.ceil(checkedList.reduce((result, e) => +result + ((e.price * ((e.discount) / 100)) * e.amount), 0)))
+                                userBuyItemList ?
+                                    makeComa(Math.ceil(userBuyItemList.reduce((result, e) => +result + ((e.price * ((e.discount) / 100)) * e.amount), 0)))
                                     :
                                     0
                             } 원
@@ -55,8 +47,8 @@ const Buy_total = ({ checkedList }) => {
                     <div>배송비
                         <div>
                             {
-                                checkedList ?
-                                    makeComa(checkedList.reduce((result, e) => +result + (e.delivery), 0))
+                                userBuyItemList ?
+                                    makeComa(userBuyItemList.reduce((result, e) => +result + (e.delivery), 0))
                                     :
                                     0
                             } 원
@@ -65,8 +57,8 @@ const Buy_total = ({ checkedList }) => {
                     <div>결제금액
                         <div>
                             {
-                                checkedList ?
-                                    makeComa(Math.ceil(checkedList.reduce((result, e) => +result + ((e.price * ((100 - e.discount) / 100)) * e.amount) + e.delivery, 0)))
+                                userBuyItemList ?
+                                    makeComa(Math.ceil(userBuyItemList.reduce((result, e) => +result + ((e.price * ((100 - e.discount) / 100)) * e.amount) + e.delivery, 0)))
                                     :
                                     0
                             } 원

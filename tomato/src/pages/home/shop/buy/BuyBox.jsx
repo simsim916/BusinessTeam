@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { getBuyItemList } from '../../../redux/userBuy/actions';
 import { setfinalOrderStorage } from '../../../redux/userOrder/actions';
 import Buy_total from './Buy_total';
+import { setUserBuyItemList } from '../../../redux/userBuy/actions';
 
 
 
@@ -14,36 +15,26 @@ const BuyBox = () => {
     /* Redux */
     const dispatch = useDispatch();
     const userinfo = useSelector(state => state.user.data)
-    
+    const userBuy = useSelector(state => state.userBuy.data.itemList);
 
     /* 리액트 상태값 */
-    const [buyList, setBuyList] = useState(); // 장바구니에서 클릭해서 넘어온 리스트 = userbuy
-    const [checkedList, setCheckedList] = useState(); // 구매하기 페이지 내에서 클릭한 리스트
-
-    const setStorage = (data) => {
-        sessionStorage.setItem('finalOrder', JSON.stringify(data));
-    }
+    const [buy, setBuy] = useState(); // 장바구니 -> 구매페이지 넘어갈때 가져온 아이템리스트
+    const [checkedList, setCheckedList] = useState();
 
     useEffect(() => {
-        let session = sessionStorage.getItem('buyList');
-        sessionStorage.setItem('finalOrder', session);
-        setBuyList(JSON.parse(session));
-        setCheckedList(JSON.parse(session));
-        // userinfo.login && dispatch()
+        let session = sessionStorage.getItem('buy');
+        setBuy(JSON.parse(session));
     }, [])
 
     const handleCheck = (e, item) => {
-        if (checkedList.find(e => e.code === item.code)) {
-            console.log('있을 때')
-            setCheckedList(checkedList => checkedList.filter(e => e.code !== item.code));
-            setStorage(checkedList.filter(e => e.code !== item.code));
+        if (userBuy.find(e => e.code === item.code)) {
+            console.log("아이템이 있을 때");
+            dispatch(setUserBuyItemList(userBuy.filter(e => e.code !== item.code)));
         } else {
-            console.log('없을 때')
-            setCheckedList(checkedList => [...checkedList, item]);
-            setStorage([...checkedList, item]);
+            console.log("아이템이 없을 때")
+            dispatch(setUserBuyItemList([...userBuy, item]));
         }
     }
-
 
     return (
         <div id='shopBasket' className='container'>
@@ -53,15 +44,11 @@ const BuyBox = () => {
                 <i className="fa-solid fa-cart-shopping" aria-hidden="true"></i>
             </h3>
             <div id='shopBasket_left'>
-                <BuyItemBox checkedList={checkedList} setCheckedList={setCheckedList} handleCheck={handleCheck} buyList={buyList} setBuyList={setBuyList} />
+                <BuyItemBox handleCheck={handleCheck} buy={buy} />
                 <BuyDeliveryBox checkedList={checkedList} />
             </div>
 
-            {/* <Cart_total checkedList={checkedList} /> */}
-            <Buy_total checkedList={checkedList} />
-
-            {/* <BestItemBox /> */}
-
+            <Buy_total />
         </div>
     );
 }

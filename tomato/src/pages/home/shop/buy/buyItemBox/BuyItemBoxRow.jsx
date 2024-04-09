@@ -11,7 +11,7 @@ const BuyItemBoxRow = ({
     handleCheck // checkedList 아이템 선택/해제
 }) => {
 
-
+    const userBuy = useSelector(state => state.userBuy.data.itemList);
     const handleChange = (event) => {
         changeItemList(idx, event.target.value)
     }
@@ -25,7 +25,8 @@ const BuyItemBoxRow = ({
             <li>
                 <input className="check" type="checkbox" name="buy"
                     onChange={(event) => handleCheck(event, item)}
-                    checked={checkedList && checkedList.some(e => e.code === item.code)}
+                    // checked={userBuy && userBuy.find(e => e.code === item.code)}
+                    checked={userBuy && userBuy.some(e => e.code == item.code)}
                 />
 
             </li>

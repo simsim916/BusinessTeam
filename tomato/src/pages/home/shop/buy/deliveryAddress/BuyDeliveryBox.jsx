@@ -4,53 +4,41 @@ import DeliverySelect from './DeliverySelect';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { api } from '../../../../../model/model';
+import { setUserAddress } from '../../../../redux/userAddress/action';
+import { setUserBuyMessage } from '../../../../redux/userBuy/actions';
 
 const BuyDeliveryBox = () => {
-
+    const dispatch = useDispatch();
     const [deliverySelect, setDeliverySelect] = useState(false);
     const userAddress = useSelector(state => state.userAddress.data)
-    const userBuy = useSelector(state => state.useBuy);
+    const userBuy = useSelector(state => state.userBuy.data);
+    const user = useSelector(state => state.user.data);
 
-    console.log(userBuy);
-    const [orderForm, setOrderForm] = useState({
-        itemList: [
-            {
-                code: 1
-            },
-            {
-                code: 2
-            }
-        ],
-        address_code: 'aa',
-        address1: 'aa',
-        address2: 'aa'
-    })
-
-    const aaa = () => {
-        api('/order/order', 'post', orderForm)
-            .then(res => {
-                console.log('CC')
-            })
-    }
 
     /* 배송지선택창 띄우는 상태값 */
     const handleOnClick = () => {
         setDeliverySelect(!deliverySelect);
     }
 
+    console.log(userBuy)
+
+    const changeMessage = (e) => {
+        dispatch(setUserBuyMessage(e.target.value))
+    }
+
 
     return (
         <div id="buyDeliveryBox" >
-            <div onClick={aaa}>전송</div>
             {
+                
                 userAddress[0] ?
                     <>
-                        <h4>우리집</h4>
-                        <input type="text" placeholder='이름' name='id' />
-                        <input type="text" placeholder="전화 번호" name='phonenumber' />
-                        <input type="text" placeholder='배송지 선택하기 창을 이용하세요' />
-                        <input type='text' placeholder='상세주소를 입력해주세요.' name="address2" />
-                        <select name="message">
+                        <h4>{userAddress[0].info}</h4>
+                        <p>{userAddress[0].id} {userAddress[0].phonenumber}</p>
+                        <p>{userAddress[0].address1} {userAddress[0].address2}</p>
+                        <p>{userAddress[0].address2} [{userAddress[0].addressCode}]</p>
+                        <p></p>
+                        <select name="message" onChange={changeMessage}>
                             <option value="배송 전 연락바랍니다.">배송 전 연락바랍니다.</option>
                             <option value="부재 시 경비실에 맡겨주세요.">부재 시 경비실에 맡겨주세요.</option>
                             <option value="">직접 입력</option>
@@ -68,7 +56,7 @@ const BuyDeliveryBox = () => {
                     </>
             }
 
-            {deliverySelect && <DeliverySelect handleOnClick={handleOnClick} />}
+            {deliverySelect && <DeliverySelect  handleOnClick={handleOnClick} />}
         </div >
     );
 }

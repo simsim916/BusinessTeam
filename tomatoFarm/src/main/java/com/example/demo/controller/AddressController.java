@@ -28,6 +28,10 @@ public class AddressController {
 	public List<UserAddress> selectAddressWhereId(HttpServletRequest request) {
 		String token = tokenProvider.parseBearerToken(request);
 		String id = tokenProvider.validateAndGetUserId(token);
+		List<UserAddress> list =  addressService.selectAddressWhereId(id);
+		for(UserAddress address : list) {
+			System.out.println(address);
+		}
 		return addressService.selectAddressWhereId(id);
 	}
 	

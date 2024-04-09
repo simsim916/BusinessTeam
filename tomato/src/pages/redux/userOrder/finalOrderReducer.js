@@ -3,7 +3,12 @@ import { FINALORDER_DATA_REQUEST, FINALORDER_DATA_SUCCESS, FINALORDER_DATA_FAILU
 const initialState = {
     finalOrder: {
         loading: true,
-        data: JSON.parse(sessionStorage.getItem('buy')),
+        data: {
+            itemList: [],
+            address_code: 'aa',
+            address1: 'aa',
+            address2: 'aa'
+        },
         error: null
     }
 };
