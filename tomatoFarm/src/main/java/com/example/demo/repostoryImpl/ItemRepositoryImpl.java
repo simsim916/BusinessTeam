@@ -228,7 +228,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 	public List<ItemDTO> selectItemListWhereInCode(List<Integer> codeList) {
 		System.out.println(codeList);
 		return jPAQueryFactory
-				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price,
+				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name.as("item_name"), item.delivery, item.price,
 						item.storage, item.weight, item.packing, item.sales, item.stock, item.views, item.likes,
 						item.event_code, item.intro, item_event.discount, item_event.name.as("event_name")))
 				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code)).where(item.code.in(codeList))

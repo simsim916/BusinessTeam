@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './DeliverySelect.css'
 import DeliverySelectRow from './DeliverySelectRow/DeliverySelectRow';
-import Postcode from '../../../../components/Postcode';
+import Postcode from '../../../../components/daumPostcode/Postcode';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUserAddress } from '../../../../redux/userAddress/action';
 import { setUserBuyAddress } from '../../../../redux/userBuy/actions';

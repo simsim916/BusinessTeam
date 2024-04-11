@@ -38,7 +38,7 @@ const Cart_item_Row = ({ item, idx }) => {
             </li>
             <li className="shopBasketItemImg"><Link to={'/home/detail?code=' + item.code}><img src={SERVER_RESOURCE + `/img/itemImg/${item.code}_2.jpg`} alt="" /></Link></li>
             <li className="shopBasketItemIfo">
-                <Link to={'/home/detail?code=' + item.code} className="shopBasketItemIfo_name">{item.item_name}</Link>
+                <Link to={'/home/detail?code=' + item.code} className="shopBasketItemIfo_name">{item.name}</Link>
                 {
                     item.discount
                         ?

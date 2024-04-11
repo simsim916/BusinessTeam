@@ -1,9 +1,9 @@
 import React from 'react';
 import DaumPostcodeEmbed from 'react-daum-postcode';
 import { useDispatch } from 'react-redux';
-import { setUserAddress } from '../redux/userAddress/action';
+import { setUserAddress } from '../../redux/userAddress/action';
 
-const Postcode = ({ setShowPostcode }) => {
+const Postcode = ({ onComplete, style, autoClose }) => {
     const dispatch = useDispatch();
 
     const handleComplete = (data) => {
@@ -16,7 +16,12 @@ const Postcode = ({ setShowPostcode }) => {
 
     };
 
-    return <DaumPostcodeEmbed onComplete={handleComplete} style={{ height: '100%' }} />;
+    return (
+        <div id="daumPostcode">
+            <h4>주소검색</h4>
+            <DaumPostcodeEmbed onComplete={handleComplete} style={{ height: '100%' }} />
+        </div>
+    );
 };
 
 export default Postcode;
