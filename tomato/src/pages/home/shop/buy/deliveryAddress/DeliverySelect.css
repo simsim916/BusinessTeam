@@ -54,6 +54,16 @@
     border-radius: 15px;
 }
 
+#buyDeliveryBox #delivery_select {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: white;
+    background-color: #9B1B30;
+    border-radius: 10px;
+    padding: 10px 15px;
+}
+
 #deliverySelect .delivery_select {
     position: absolute;
     display: flex;
@@ -68,12 +78,6 @@
     border: 1px solid #9B1B30;
     margin-left: 10px;
     border-radius: 8px;
-}
-
-#deliverySelect .delivery_select>div:nth-of-type(2) {
-    border: none;
-    color: #fff;
-    background-color: #9B1B30;
 }
 
 #exitBt {

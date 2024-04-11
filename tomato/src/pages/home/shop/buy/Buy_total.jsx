@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 const Buy_total = () => {
 
     /* Redux */
-    const userBuyItemList = useSelector(state => state.userBuy.data.itemList);
+    const userBuyItemList = useSelector(state => state.userBuy.buyList);
     const userBuy = useSelector(state => state.userBuy.data);
     const user = useSelector(state => state.user.data);
 

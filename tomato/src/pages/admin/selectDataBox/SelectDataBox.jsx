@@ -96,7 +96,6 @@ const SelectDataBox = ({ myLocation }) => {
             ...formData,
             [name]: value
         }));
-        console.log(formData);
     };
     if (loading) return <Loading />
     if (error) return <Error />
@@ -114,7 +113,7 @@ const SelectDataBox = ({ myLocation }) => {
                         <select name="column" id="column" onChange={searchBoxChange}>
                             {Object.keys(itemList[0]).map((e, i) => (<option key={i} value={e}>{e}</option>))}
                         </select>
-                        <input type="text" name="keyword" onChange={searchBoxChange} />
+                        <input type="text" name="keyword" onChange={searchBoxChange} value={formData.keyword} />
                         <button type="button">검색</button>
                     </form>
                 </div>

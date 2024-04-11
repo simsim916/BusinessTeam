@@ -1,54 +1,42 @@
 import { api } from '../../../model/model';
 
-export const USERBUY_DATA_REQUEST = 'USERBUY_DATA_REQUEST';
-export const USERBUY_DATA_SUCCESS = 'USERBUY_DATA_SUCCESS';
-export const USERBUY_DATA_FAILURE = 'USERBUY_DATA_FAILURE';
-export const SET_USERBUY_DATA_ITEMLIST = 'SET_USERBUY_DATA_ITEMLIST';
-export const SET_USERBUY_DATA_ADDRESS = 'SET_USERBUY_DATA_ADDRESS';
-export const SET_USERBUY_DATA_MESSAGE = 'SET_USERBUY_DATA_MESSAGE';
-export const SET_USERBUY_DATA_NONLOGIN = 'SET_USERBUY_DATA_NONLOGIN';
+export const POST_DATA_REQUEST = 'POST_DATA_REQUEST';
+export const POST_DATA_SUCCESS = 'POST_DATA_SUCCESS';
+export const POST_DATA_FAILURE = 'POST_DATA_FAILURE';
+export const SET_USERBUY_ITEMLIST = 'SET_USERBUY_ITEMLIST';
+export const SET_USERBUY_FORM = 'SET_USERBUY_FORM';
 
-export const fetchDataRequest = () => ({
-    type: USERBUY_DATA_REQUEST
+export const postDataRequest = () => ({
+    type: POST_DATA_REQUEST
 });
 
-export const fetchDataSuccess = (data) => ({
-    type: USERBUY_DATA_SUCCESS,
+export const postDataSuccess = (data) => ({
+    type: POST_DATA_SUCCESS,
     payload: data
 });
 
-export const fetchDataFailure = (error) => ({
-    type: USERBUY_DATA_FAILURE,
+export const postDataFailure = (error) => ({
+    type: POST_DATA_FAILURE,
     payload: error
 });
 export const setUserBuyItemList = (data) => ({
-    type: SET_USERBUY_DATA_ITEMLIST,
+    type: SET_USERBUY_ITEMLIST,
     payload: data
 });
-export const setUserBuyAddress = (obj) => ({
-    type: SET_USERBUY_DATA_ADDRESS,
-    addressCode: obj.addressCode,
-    address1: obj.address1,
-    address2: obj.address2,
-});
-export const setUserBuyMessage = (str) => ({
-    type: SET_USERBUY_DATA_MESSAGE,
-    order_message: str,
-});
-export const setUserBuyNonLogin = (str) => ({
-    type: SET_USERBUY_DATA_NONLOGIN,
-    nonLogin: str,
+export const setUserBuyForm = (data) => ({
+    type: SET_USERBUY_FORM,
+    payload: data
 });
 
 export const postUserBuy = (url, method, requestData, token) => {
     return async (dispatch) => {
-        dispatch(fetchDataRequest());
+        dispatch(postDataRequest());
         try {
             const response = await api(url, method, requestData, token)
-            dispatch(fetchDataSuccess(response.data));
+            dispatch(postDataSuccess(response.data));
         } catch (error) {
-            console.log('fetchData : ' + error.message)
-            dispatch(fetchDataFailure(error.message));
+            console.log('postUserBuy : ' + error.message)
+            dispatch(postDataFailure(error.message));
         }
     };
 };

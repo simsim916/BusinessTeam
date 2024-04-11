@@ -11,7 +11,7 @@ const Cart_item_Row = ({ item, idx }) => {
     const dispatch = useDispatch();
     const user = useSelector(state => state.user.data);
     const userCart = useSelector(state => state.userCart.data);
-    const userBuy = useSelector(state => state.userBuy.data.itemList)
+    const userBuy = useSelector(state => state.userBuy.buyList)
 
     const changeCheckBox = () => {
         if (userBuy && userBuy.find(e => e.code == item.code))
