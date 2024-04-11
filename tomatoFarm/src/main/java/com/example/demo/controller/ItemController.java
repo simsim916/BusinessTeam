@@ -146,9 +146,14 @@ public class ItemController {
 	@GetMapping("/admingraph")
 	public ResponseEntity<?> adminStringColumn(SearchRequest searchRequest, PageRequest pageRequest) {
 		
-		
 		ResponseEntity<?> result = null;
-		result = ResponseEntity.status(HttpStatus.OK).body("agedwqadasgfwqd");
+		List<Item> list =  itemService.searchForAdmin(searchRequest);
+		for(Item item : list) {
+			System.out.println(item);
+			System.out.println("조회수 => " +item.getViews());
+		}
+//		System.out.println(list);
+		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}
 

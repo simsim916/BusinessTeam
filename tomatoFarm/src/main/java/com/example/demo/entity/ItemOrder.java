@@ -51,7 +51,12 @@ public class ItemOrder {
     
     @Column(name="deliverydate")
     private LocalDate deliveryDate;
+    
+    private String order_message;
 
     private boolean checked;
+    
+    
+    
 
 }

@@ -9,4 +9,6 @@ public interface AddressRepository {
 	List<UserAddress> selectAddressWhereId(String id);
 	
 	UserAddress insertUserAddress(UserAddress entity);
+	
+	void deleteAddress(UserAddress entity);
 }

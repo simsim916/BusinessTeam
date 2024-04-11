@@ -4,6 +4,7 @@ import { makeComa } from '../../../components/MathFunction';
 import { setUserBuyStorage } from '../../../redux/userBuy/actions';
 import { Link } from 'react-router-dom';
 import { deleteUserCart, setUserCartStorage, changeUserCart } from '../../../redux/userCart/action';
+import { api } from '../../../../model/model';
 
 const Cart_item_Row = ({ item, idx }) => {
     /* 🫓REDUX🫓 */
@@ -21,10 +22,13 @@ const Cart_item_Row = ({ item, idx }) => {
             dispatch(setUserBuyStorage([item]));
     }
 
+    console.log(userBuy);
+
     const handleXbtn = async () => {
         userBuy && dispatch(setUserBuyStorage(userBuy.filter(i => +i.code != +item.code)));
         dispatch(setUserCartStorage(userCart.filter(i => +i.code != +item.code)));
-        user && user.login && dispatch(deleteUserCart(`/usercart/delete?code=${item.code}`, user.token))
+
+        user && user.login && dispatch(deleteUserCart(`/usercart/delete`, 'post', [item], user.token))
     }
 
     return (

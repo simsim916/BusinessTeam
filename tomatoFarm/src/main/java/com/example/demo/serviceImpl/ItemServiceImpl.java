@@ -111,6 +111,12 @@ public class ItemServiceImpl implements ItemService {
 	public List<ItemDTO> selectItemListWhereInCode(List<Integer> codeList) {
 		return itemRepository.selectItemListWhereInCode(codeList);
 	}
+	
+	
+	@Override
+	public List<Item> searchForAdmin(SearchRequest searchRequest) {
+		return itemRepository.searchForAdmin(searchRequest);
+	}
 
 	
 }

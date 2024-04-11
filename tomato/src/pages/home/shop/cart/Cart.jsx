@@ -23,7 +23,7 @@ const Cart = () => {
         } else {
             dispatch(getItemListAmount('/item/selectin', 'post', userCart.data, null));
         }
-        api(`/visit/update?page=cart`, 'get');
+        // api(`/visit/update?page=cart`, 'get');
     }, [])
 
     if (userCart.loading) return <Loading />
@@ -36,6 +36,7 @@ const Cart = () => {
                 &nbsp;&nbsp;장바구니&nbsp;&nbsp;
                 <i className="fa-solid fa-cart-shopping" aria-hidden="true"></i>
             </h3>
+
             <Cart_item />
             <Cart_total />
 

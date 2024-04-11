@@ -36,8 +36,16 @@ export const postfinalOrder = (url, method, requestData, token) => {
     };
 };
 
-export const setfinalOrderStorage = (data) => {
+export const setfinalOrder = (data) => {
     return () => {
+        dispatchEvent(setFinalOrder(data))
         sessionStorage.setItem('finalOrder', JSON.stringify(data));
     }
 }
+
+// export const setUserBuyStorage = (data) => {
+//     return (dispatch) => {
+//         dispatch(setUserBuyItemList(data));
+//         sessionStorage.setItem('buy', JSON.stringify(data))
+//     }
+// }

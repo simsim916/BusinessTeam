@@ -60,7 +60,7 @@ public class VisitRepositoryImpl implements VisitRepository {
 				.select(Projections.bean(Visit_page.class,
 						visit_page.page,visit_page.visit_date,visit_page.visit_count))
 				.from(visit_page)
-//				.groupBy(Expressions.stringPath(searchRequest.getWhichGroup()))
+				.groupBy(Expressions.stringPath(searchRequest.getWhichGroup()))
 				.limit(searchRequest.getHowManyRecords())
 				.fetch();
 	}

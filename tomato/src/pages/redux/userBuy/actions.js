@@ -5,6 +5,8 @@ export const USERBUY_DATA_SUCCESS = 'USERBUY_DATA_SUCCESS';
 export const USERBUY_DATA_FAILURE = 'USERBUY_DATA_FAILURE';
 export const SET_USERBUY_DATA_ITEMLIST = 'SET_USERBUY_DATA_ITEMLIST';
 export const SET_USERBUY_DATA_ADDRESS = 'SET_USERBUY_DATA_ADDRESS';
+export const SET_USERBUY_DATA_MESSAGE = 'SET_USERBUY_DATA_MESSAGE';
+export const SET_USERBUY_DATA_NONLOGIN = 'SET_USERBUY_DATA_NONLOGIN';
 
 export const fetchDataRequest = () => ({
     type: USERBUY_DATA_REQUEST
@@ -25,8 +27,17 @@ export const setUserBuyItemList = (data) => ({
 });
 export const setUserBuyAddress = (obj) => ({
     type: SET_USERBUY_DATA_ADDRESS,
-    address_code: obj.address_code,
-    address1: obj.address1
+    addressCode: obj.addressCode,
+    address1: obj.address1,
+    address2: obj.address2,
+});
+export const setUserBuyMessage = (str) => ({
+    type: SET_USERBUY_DATA_MESSAGE,
+    order_message: str,
+});
+export const setUserBuyNonLogin = (str) => ({
+    type: SET_USERBUY_DATA_NONLOGIN,
+    nonLogin: str,
 });
 
 export const postUserBuy = (url, method, requestData, token) => {
