@@ -43,6 +43,18 @@ const SelectDataBox = ({ myLocation }) => {
         myLocation();
     }, [])
 
+    
+    const changeItemRow = (item) => {
+        setSelectedItem(item);
+    }
+    
+    const changeSelectedItem = (e) => {
+        setSelectedItem((prev) => ({
+            ...prev,
+            [e.target.id]: e.target.value
+        }))
+    }
+    
     const sortByColumn = (event) => {
         const columnName = event.target.closest('div').id;
         let sortedList;
@@ -75,25 +87,23 @@ const SelectDataBox = ({ myLocation }) => {
         setCurrPage(1);
     };
 
-    const changeItemRow = (item) => {
-        setSelectedItem(item);
-    }
-
-    const changeSelectedItem = (e) => {
-        setSelectedItem((prev) => ({
-            ...prev,
-            [e.target.id]: e.target.value
-        }))
-    }
+    // const changeChangedList = () => {
+    //     setItemList([...itemList, ...changedList])
+    //     setChangedList([...changedList, selectedItem]);
+    // }
 
     const changeChangedList = () => {
-        if (itemList.some(e => e.code == selectedItem.code)) {
-            console.log("있어");
-        } else {
-            console.log("없어");
-        }
-        setChangedList([...changedList, selectedItem])
-        // setItemList([...itemList, changedList]) // 변경을하면 원본 itemList를 변경시켜주려고 한다.
+
+        itemList.forEach(e => {
+            if (e === selectedItem) {
+                setSelectedItem([]);
+            } else {
+                setChangedList([...changedList, selectedItem]);
+                setItemList(itemList.map(item =>
+                    item.code === selectedItem.code ? selectedItem : item
+                ));
+            }
+        });
     }
 
 
@@ -105,12 +115,15 @@ const SelectDataBox = ({ myLocation }) => {
         }));
     };
 
+    console.log(changedList);
+
     const getSearch = (e) => {
         e.preventDefault();
         api(`/event/eventlist?column=${formData.column}&keyword=${formData.keyword}`, 'get', null, user.token
         ).then(res => setItemList(res.data)
         ).catch(err => console.log(err.message))
     }
+
 
     if (loading) return <Loading />
     if (error) return <Error />
@@ -145,10 +158,13 @@ const SelectDataBox = ({ myLocation }) => {
                         style={{
                             backgroundColor: (e.code == (selectedItem && selectedItem.code))
                                 ?
-                                changedList.some(k => k.code == e.code) ?
-                                    'blue' : 'yellow'
+                                'yellow'
                                 :
-                                ''
+                                changedList && changedList.some(k => k.code == e.code)
+                                    ?
+                                    'blue'
+                                    :
+                                    ''
                         }}
                     />))}
                 </div>
