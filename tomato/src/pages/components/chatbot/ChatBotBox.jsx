@@ -77,20 +77,19 @@ const ChatBotBox = ({
 
     const getMessageAll = async (root) => {
         setLoading(true);
-        const response = await api(`/chatbot/selectroom?=${root}`, 'get', null, userinfo.token)
-        .then((res) => { setLoading(false); return res; })
-        .catch ((err) => { setLoading(false); setError(true); return err; });
-            if (response.data && response.data.length > 0) {
-                setMessageAll(response.data);
-                setText((prev) => ({
-                    ...prev,
-                    root: response.data[0].root,
-                    content: ''
-                }));
-            } else {
-                
-            }
+        const response = await api(`/chat/selectmessage?room_seq=${root}`, 'get', null, userinfo.token)
+            .then((res) => { setLoading(false); return res; })
+            .catch((err) => { setLoading(false); setError(true); return err; });
+        if (response.data && response.data.length > 0) {
+            setMessageAll(response.data);
+            setText((prev) => ({
+                ...prev,
+                root: response.data[0].root,
+                content: ''
+            }));
+        } else {
         }
+    }
 
     /* admin 페이지에서 데이터 조회시 값 불러오는 함수 */
     useEffect(() => {
@@ -167,15 +166,15 @@ const ChatBotBox = ({
                                 <h2>문의유형</h2>
                                 <div id="openQuestionBox">
                                     <div onClick={(event) => startChat(event)}>
-                                        <i class="fa-solid fa-truck"></i>
+                                        <i className="fa-solid fa-truck"></i>
                                         <span>배송</span>
                                     </div>
                                     <div onClick={(event) => startChat(event)}>
-                                        <i class="fa-solid fa-cubes"></i>
+                                        <i className="fa-solid fa-cubes"></i>
                                         <span>상품</span>
                                     </div>
                                     <div onClick={(event) => startChat(event)}>
-                                        <i class="fa-solid fa-gift"></i>
+                                        <i className="fa-solid fa-gift"></i>
                                         <span>일반</span>
                                     </div>
                                 </div>

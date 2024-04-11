@@ -14,34 +14,26 @@ const Admin_Chatbot = () => {
 
     /* 채팅의 roomSeq 번호만 저장하는 함수 */
     const roomSeq = useRef([]);
-
     useEffect(() => {
         const getdata = async () => {
             const response = await api('/chat/selectroom?column=seq', 'get', null, userinfo.token);
             setRoomList(response.data);
             for (let e of response.data) {  // roomSeq 변수에 채팅데이터의 room_seq 중복없이 담기
-                if (!roomSeq.current.includes(e.seq)) 
+                if (!roomSeq.current.includes(e.seq))
                     roomSeq.current.push(e.seq);
-                setRoomList((prev) => ({
-                    ...prev,
-                    root: response.data[0].root,
-                    content: ''
-                }))
-                
             }
         }
         getdata();
     }, [])
 
-    
+
     /* 오른쪽에 나타낼 채팅방의 roomSeq번호를 가지고 있는 배열 */
     const [showChatbot, setShowChatbot] = useState([]);
-
+    console.log(showChatbot)
     /* showChatbot 배열에 나타낼 채팅방의 roomSeq를 저장하는 배열을 만드는 함수 */
     const changeShowChatbot = (value) => {
         if (showChatbot.includes(value)) {
             setShowChatbot(showChatbot.filter(e => e != value));
-
         } else {
             if (showChatbot.length < 3) {
                 setShowChatbot([...showChatbot, value]);
@@ -64,7 +56,7 @@ const Admin_Chatbot = () => {
                 </ul>
                 <div>
                     {
-                        roomList && roomList.map((e, i) => <Admin_Chatbot_Row key={i} room={e} showChatbot={showChatbot} changeShowChatbot={changeShowChatbot} />)
+                        roomList.length > 0 && roomList.map((e, i) => <Admin_Chatbot_Row key={i} room={e} showChatbot={showChatbot} changeShowChatbot={changeShowChatbot} />)
                     }
                 </div>
             </div>
