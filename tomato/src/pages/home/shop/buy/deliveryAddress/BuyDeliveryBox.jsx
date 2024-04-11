@@ -10,7 +10,7 @@ const BuyDeliveryBox = ( ) => {
     const userBuy = useSelector(state => state.userBuy.form);
 
 
-    console.log(userBuy)
+
     const changeMessage = (e) => {
         dispatch(setUserBuyForm({ deliverymessage: e.target.value }))
     }

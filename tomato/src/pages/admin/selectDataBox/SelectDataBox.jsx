@@ -5,6 +5,9 @@ import Error from '../../components/Error';
 import Loading from '../../components/Loading';
 import PagingBox from "../../components/PagingBox";
 import SelectDataBoxRow from './SelectDataBoxRow';
+import { api } from '../../../model/model';
+import { useSelector } from "react-redux";
+import ChangeList_Row from './changeList/ChangeList_Row';
 
 const SelectDataBox = ({ myLocation }) => {
 
@@ -22,41 +25,23 @@ const SelectDataBox = ({ myLocation }) => {
     const [lastSort, setLastSort] = useState(null);
     const [currPage, setCurrPage] = useState(1);
     const [limit, setLimit] = useState(25);
-    const itemForm = useRef([]);
+    const user = useSelector(state => state.user.data);
+    const [selectedItem, setSelectedItem] = useState(null);
+    const [changedList, setChangedList] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:8090/item/allitem`
-        ).then(res => {
-            setItemList(res.data);
-            column.current = (Object.keys(res.data[0]));
-            setLoading(false);
-        }).catch(err => {
-            console.log(err.message)
-            setLoading(false);
-            setError(true);
-        })
+        api('/event/eventlist', 'get', null, user.token)
+            .then(res => {
+                setItemList(res.data);
+                column.current = (Object.keys(res.data[0]));
+                setLoading(false);
+            }).catch(err => {
+                console.log(err.message)
+                setLoading(false);
+                setError(true);
+            })
         myLocation();
     }, [])
-
-    const changeItemList = (data) => {
-        let item = itemList.filter((e) => e[column.current[0]] == data[column.current[0]]);
-        setItemList((itemList) => [
-            ...itemList,
-            data
-        ])
-        let item2 = itemList.filter((e) => e[column.current[0]] == data[column.current[0]]);
-        console.log(item)
-        console.log(item2)
-        console.log(itemList)
-    }
-
-    const paging = () => (list, pageNum, size) => {
-        if (list != null) {
-            const start = size * (pageNum - 1);
-            const end = pageNum * size;
-            return list.slice(start, end);
-        }
-    }
 
     const sortByColumn = (event) => {
         const columnName = event.target.closest('div').id;
@@ -90,6 +75,21 @@ const SelectDataBox = ({ myLocation }) => {
         setCurrPage(1);
     };
 
+    const changeItemRow = (item) => {
+        setSelectedItem(item);
+    }
+
+    const changeSelectedItem = (e) => {
+        setSelectedItem((prev) => ({
+            ...prev,
+            [e.target.id]: e.target.value
+        }))
+    }
+
+    const changeChangedList = () => {
+        setChangedList([...changedList, selectedItem])
+    }
+
     const searchBoxChange = (event) => {
         const { name, value } = event.target;
         setFormData((formData) => ({
@@ -97,8 +97,13 @@ const SelectDataBox = ({ myLocation }) => {
             [name]: value
         }));
     };
+    console.log(changedList);
+
+
+
     if (loading) return <Loading />
     if (error) return <Error />
+
     return (
         <>
             <div id="excelBox" className="containerA">
@@ -110,24 +115,73 @@ const SelectDataBox = ({ myLocation }) => {
                         &nbsp;&nbsp;
                     </div>
                     <form id="topButtonBox">
-                        <select name="column" id="column" onChange={searchBoxChange}>
+                        <select name="column" id="column" value={formData.column} onChange={searchBoxChange}>
                             {Object.keys(itemList[0]).map((e, i) => (<option key={i} value={e}>{e}</option>))}
                         </select>
-                        <input type="text" name="keyword" onChange={searchBoxChange} value={formData.keyword} />
+                        <input type="text" name="keyword" value={formData.keyword} onChange={searchBoxChange} />
                         <button type="button">검색</button>
                     </form>
                 </div>
                 <div id="dataListBox">
-                    <div id="excelHead" style={{ width: `${column.current.length * 150}px` }}>
+                    <div id="excelHead">
                         {column.current ? column.current.map((col, i) => <div id={col} key={i} onClick={sortByColumn}>{col}<i className="fa-solid fa-caret-up"></i></div>) : ""}
                     </div>
                     <div>
-                        {
-                            paging()(itemList, currPage, limit).map((e, i) => (<SelectDataBoxRow changeItemList={changeItemList} column={column} item={e} key={i} />))
-                        }
+                        {itemList.map((e, i) =>
+                        (<SelectDataBoxRow
+                            changeItemRow={changeItemRow}
+                            column={column}
+                            item={e} key={i}
+                            style={{ backgroundColor: (e.code == (selectedItem && selectedItem.code)) ? 'yellow' : '' }}
+                        />))}
                     </div>
                 </div>
-            </div >
+            </div>
+
+            {changedList[0]
+                ?
+                <div id="changedListBox">
+                    <div className="ObjectHead">
+                        {
+                            column.current ?
+                                column.current.map((col, i) => <div id={col} key={i}>{col}</div>)
+                                :
+                                null
+                        }
+                        <div></div>
+                    </div>
+                    <div className="changedListBody">
+                        {
+                            changedList && changedList.map((e, key) =>
+                                <>
+                                    <div key={key} className="changedList_Row">
+                                        {Object.values(e).map((i, ke) => <div key={ke}>{i}</div>)}
+                                    </div>
+                                </>
+                            )
+                        }
+                    </div>
+                    <button>데이터 입력</button>
+                </div>
+                :
+                ''
+            }
+
+            <div id="insertObjectBox">
+                <div className="ObjectHead">
+                    {
+                        column.current ?
+                            column.current.map((col, i) => <div id={col} key={i}>{col}</div>)
+                            :
+                            null
+                    }
+                    <div></div>
+                </div>
+                <div className="ObjectBody">
+                    {column.current.map((e, i) => <input onChange={changeSelectedItem} type="text" value={selectedItem ? selectedItem[e] : ''} key={i} id={e} />)}
+                    <div><button onClick={changeChangedList}>입력</button></div>
+                </div>
+            </div>
             <PagingBox
                 limit={limit}
                 list={itemList}

@@ -43,6 +43,8 @@ const BuyItemBox = ({ }) => {
         dispatch(setUserBuyForm({ itemList: ar }))
     }
 
+    console.log(userBuy);
+
     return (
         <div id='BuyItemBox'>
             <div id='BuyItemBoxCheck'>
