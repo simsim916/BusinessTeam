@@ -25,9 +25,9 @@ public class EventController {
 	@GetMapping("/eventlist")
 	public ResponseEntity<?> selectEventWhere(SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
-//		List<item_event> list = item_eventService.selectEventWhere(searchRequest);
+		List<item_event> list = item_eventService.selectEventWhere(searchRequest);
 		
-//		result = ResponseEntity.status(HttpStatus.OK).body(list);
+		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}
 	
