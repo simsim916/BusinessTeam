@@ -9,9 +9,9 @@ const ChatBotBox = ({
     /* admin 페이지 전용 props */
     amount, // admin페이지에서 나타낼 채팅창 갯수
     admin_root, // 현재 컴포넌트의 순번
-    changeShowChatbot, // admin페이지 에서 나타낼지 여부 상태값 변경 함수
+    changeShowChatbot, // admin페이지에서 나타낼지 여부 상태값 변경 함수
     /* index 페이지 전용 props */
-    setShowChatbot, // index페이지 에서 나타낼지 여부 상태값 변경 함수 
+    setShowChatbot, // index페이지에서 나타낼지 여부 상태값 변경 함수 
 }) => {
     /* 로그인 상태 sessionStorage 값 */
     const userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
@@ -73,22 +73,26 @@ const ChatBotBox = ({
     }
 
     /* 전체 메세지를 받아오는 상태값 변수 */
-    const [messageAll, setMessageAll] = useState(null)
+    const [messageAll, setMessageAll] = useState(null);
 
     const getMessageAll = async (root) => {
         setLoading(true);
-        const response = await api(`/chatbot/select?root=${root}`, 'get', null, userinfo.token)
-            .then((res) => { setLoading(false); return res; })
-            .catch((err) => { setLoading(false); setError(true); return err; })
-        setMessageAll(response.data);
-        setText((prev) => ({
-            ...prev,
-            root: response.data[0].root,
-            content: ''
-        }))
-    }
+        const response = await api(`/chatbot/selectroom?=${root}`, 'get', null, userinfo.token)
+        .then((res) => { setLoading(false); return res; })
+        .catch ((err) => { setLoading(false); setError(true); return err; });
+            if (response.data && response.data.length > 0) {
+                setMessageAll(response.data);
+                setText((prev) => ({
+                    ...prev,
+                    root: response.data[0].root,
+                    content: ''
+                }));
+            } else {
+                
+            }
+        }
 
-    /* admin 페이지 에서 데이터 조회시 값 불러오는 함수 */
+    /* admin 페이지에서 데이터 조회시 값 불러오는 함수 */
     useEffect(() => {
         admin_root && getMessageAll(admin_root);
     }, [])
@@ -182,13 +186,14 @@ const ChatBotBox = ({
 
                 <div id='messageBox'>
                     {/* {messageAll && messageAll.map((e, i) => <span>{new Date().toLocaleTimeString([], { hour: 'numeric', minute: 'numeric' })}</span>)} */}
-                    {messageAll && messageAll.map((e, i) => <p className={e.writer == userinfo.id ? 'myChat' : 'otherChat'}>{e.content}<br></br><span>{new Date(e.regdate).getHours()}시 {new Date(e.regdate).getMinutes()}분</span></p>)}
+                    {messageAll && messageAll.map((e, i) => <p className={e.writer === userinfo.id ? 'myChat' : 'otherChat'} key={i}>{e.content}<br></br><span>{new Date(e.regdate).getHours()}시 {new Date(e.regdate).getMinutes()}분</span></p>)}
+
                 </div>
 
             </div>
             <div id="chatBotTextBox">
                 <input type="text" readOnly={!text.type} placeholder={text.type ? "텍스트를 입력해주세요." : "문의유형을 선택해주세요."} value={text.content} onChange={(event) => changeContent(event)} ref={inputBox}
-                    onKeyUp={handleKeyUp}></input>
+                    onKeyUp={handleKeyUp} />
                 <button onClick={insertMessage}>전송</button>
             </div>
         </div>

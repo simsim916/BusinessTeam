@@ -7,10 +7,10 @@ import ChatBotBox from './../../components/chatbot/ChatBotBox';
 const Admin_Chatbot = () => {
 
     /* 로그인 상태 sessionStorage 값 => api에 토큰을 보내서 server에서 id로 유저 등급을 확인함 */
-    const userinfo = JSON.parse(sessionStorage.getItem('userinfo'))
+    const userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
 
     /* 전체 채팅(내용) 목록을 담는 변수 */
-    const [roomList, setRoomList] = useState(null);
+    const [roomList, setRoomList] = useState([]);
 
     /* 채팅의 roomSeq 번호만 저장하는 함수 */
     const roomSeq = useRef([]);
@@ -20,13 +20,20 @@ const Admin_Chatbot = () => {
             const response = await api('/chat/selectroom?column=seq', 'get', null, userinfo.token);
             setRoomList(response.data);
             for (let e of response.data) {  // roomSeq 변수에 채팅데이터의 room_seq 중복없이 담기
-                if (!roomSeq.current.includes(e.seq))
+                if (!roomSeq.current.includes(e.seq)) 
                     roomSeq.current.push(e.seq);
+                setRoomList((prev) => ({
+                    ...prev,
+                    root: response.data[0].root,
+                    content: ''
+                }))
+                
             }
         }
         getdata();
     }, [])
 
+    
     /* 오른쪽에 나타낼 채팅방의 roomSeq번호를 가지고 있는 배열 */
     const [showChatbot, setShowChatbot] = useState([]);
 
