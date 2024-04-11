@@ -125,6 +125,7 @@
 #filterPrice input {
     width: 90px;
     height: 30px;
+    text-indent: 5px;
 }
 
 .itemList_count {

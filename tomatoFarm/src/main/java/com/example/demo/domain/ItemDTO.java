@@ -35,5 +35,8 @@ public class ItemDTO{
 	/*  Join용 필드  */
 	private Integer discount; // 이벤트 할인
 	private String event_name; // 이벤트명
+	private String item_name; // 아이템 이름
+	
+	
 	
 }

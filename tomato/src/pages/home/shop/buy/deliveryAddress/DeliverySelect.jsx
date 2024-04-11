@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
 import './DeliverySelect.css'
 import DeliverySelectRow from './DeliverySelectRow/DeliverySelectRow';
-import Postcode from '../../../../components/Postcode';
+import Postcode from '../../../../components/daumPostcode/Postcode';
 import { useSelector, useDispatch } from 'react-redux';
-import { setUserAddress } from '../../../../redux/userAddress/action';
-import DaumPostcodeEmbed, { loadPostcode } from 'react-daum-postcode';
 import { setUserBuyAddress } from '../../../../redux/userBuy/actions';
 
-const DeliverySelect = ({ setAddressList, insertNewAddress, handleWhichAddress, addressList, handleOnClick }) => {
+const DeliverySelect = ({ handleWhichAddress, handleOnClick }) => {
     const dispatch = useDispatch();
     const userAddress = useSelector(state => state.userAddress.data);
     const [showPostcode, setShowPostcode] = useState(!userAddress[0]);
@@ -34,16 +32,14 @@ const DeliverySelect = ({ setAddressList, insertNewAddress, handleWhichAddress, 
     };
 
     const handleOnClick2 = () => {
-        console.log('aa')
         setShowPostcode(true)
     }
 
     return (
         <div id="deliverySelect">
             <div id="deliverySelectContainer">
-                {/* {showPostcode && <Postcode setShowPostcode={setShowPostcode} />} */}
 
-                {showPostcode && <DaumPostcodeEmbed onComplete={handleComplete} style={{ height: '100%' }} autoClose={false} />}
+                {showPostcode && <Postcode onComplete={handleComplete} style={{ height: '100%' }} autoClose={false} />}
                 <h4>배송지 변경</h4>
                 <div onClick={handleOnClick} id="exitBt"><i className="fa-solid fa-xmark"></i></div>
                 <div className="addDelivery" onClick={handleOnClick2}>배송지 추가하기</div>
