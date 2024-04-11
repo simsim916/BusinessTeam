@@ -51,7 +51,7 @@ function Nav({ appearinputBoxResetButton, resetInputBox }) {
                     <li><Link to="/home/list?keyword=밀키트">밀키트 주문</Link></li>
                     <li><a href="">식단 주문</a></li>
                     <li><a href="">재료 주문</a></li>
-                    <li><a href="">이벤트</a></li>
+                    <li><Link to="/event2"><a href="">이벤트</a></Link></li>
                 </ul>
             </div>
         </nav>

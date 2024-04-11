@@ -1,7 +1,3 @@
-
-
-
-
 const Admin_Chatbot_Row = ({
     room, // 채팅방의 상태
     showChatbot, // 나타낼 채팅방 목록 배열

@@ -64,7 +64,6 @@ public class UserCartController {
 		ResponseEntity<?> result = null;
 		String token = tokenProvider.parseBearerToken(request);
 		String id = tokenProvider.validateAndGetUserId(token);
-		System.out.println("aa");
 		for(UserCart entity : list) {
 			System.out.println(entity);
 			entity.setId(id);
