@@ -8,6 +8,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import store from "./pages/redux/store";
 import EventPage2 from './pages/event/EventPage2';
+import CustomerQA from './pages/customerQA/CustomerQA';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
                     <Route path='/admin/*' element={<Admin />} />
                     <Route path='/home/*' element={<Home />} />
                     <Route path='/' element={<Home />} />
+                    <Route path='/customerQA' element={<CustomerQA />} />
                 </Routes>
             </div>
         </Provider>

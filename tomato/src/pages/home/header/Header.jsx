@@ -48,7 +48,7 @@ const Header = () => {
         <header>
             <div id="loginBar">
                 <div className="container">
-                    <Link to="/admin">고객센터</Link>
+                    <Link to="/home/ask">고객센터</Link>
                     {
                         userinfo != null && userinfo.login ?
                             <>
