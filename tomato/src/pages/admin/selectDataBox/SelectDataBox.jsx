@@ -30,7 +30,7 @@ const SelectDataBox = ({ myLocation }) => {
     const [changedList, setChangedList] = useState([]);
 
     useEffect(() => {
-        api('/event/eventlist', 'get', null, user.token)
+        api(`/event/eventlist?column=${formData.column}&keyword=${formData.keyword}`, 'get', null, user.token)
             .then(res => {
                 setItemList(res.data);
                 column.current = (Object.keys(res.data[0]));
@@ -87,8 +87,16 @@ const SelectDataBox = ({ myLocation }) => {
     }
 
     const changeChangedList = () => {
+        if (itemList.some(e => e.code == selectedItem.code)) {
+            console.log("있어");
+        } else {
+            console.log("없어");
+        }
         setChangedList([...changedList, selectedItem])
+        // setItemList([...itemList, changedList]) // 변경을하면 원본 itemList를 변경시켜주려고 한다.
     }
+
+    console.log(itemList);
 
     const searchBoxChange = (event) => {
         const { name, value } = event.target;
@@ -97,9 +105,13 @@ const SelectDataBox = ({ myLocation }) => {
             [name]: value
         }));
     };
-    console.log(changedList);
 
-
+    const getSearch = (e) => {
+        e.preventDefault();
+        api(`/event/eventlist?column=${formData.column}&keyword=${formData.keyword}`, 'get', null, user.token
+        ).then(res => setItemList(res.data)
+        ).catch(err => console.log(err.message))
+    }
 
     if (loading) return <Loading />
     if (error) return <Error />
@@ -119,7 +131,7 @@ const SelectDataBox = ({ myLocation }) => {
                             {Object.keys(itemList[0]).map((e, i) => (<option key={i} value={e}>{e}</option>))}
                         </select>
                         <input type="text" name="keyword" value={formData.keyword} onChange={searchBoxChange} />
-                        <button type="button">검색</button>
+                        <button type="button" onClick={getSearch}>검색</button>
                     </form>
                 </div>
                 <div id="dataListBox">
@@ -132,40 +144,20 @@ const SelectDataBox = ({ myLocation }) => {
                             changeItemRow={changeItemRow}
                             column={column}
                             item={e} key={i}
-                            style={{ backgroundColor: (e.code == (selectedItem && selectedItem.code)) ? 'yellow' : '' }}
+                            style={{
+                                backgroundColor: (e.code == (selectedItem && selectedItem.code))
+                                    ?
+                                    changedList.some(i => i.code == e.code)
+                                        ?
+                                        'blue'
+                                        : 'yellow'
+                                    :
+                                    ''
+                            }}
                         />))}
                     </div>
                 </div>
             </div>
-
-            {changedList[0]
-                ?
-                <div id="changedListBox">
-                    <div className="ObjectHead">
-                        {
-                            column.current ?
-                                column.current.map((col, i) => <div id={col} key={i}>{col}</div>)
-                                :
-                                null
-                        }
-                        <div></div>
-                    </div>
-                    <div className="changedListBody">
-                        {
-                            changedList && changedList.map((e, key) =>
-                                <>
-                                    <div key={key} className="changedList_Row">
-                                        {Object.values(e).map((i, ke) => <div key={ke}>{i}</div>)}
-                                    </div>
-                                </>
-                            )
-                        }
-                    </div>
-                    <button>데이터 입력</button>
-                </div>
-                :
-                ''
-            }
 
             <div id="insertObjectBox">
                 <div className="ObjectHead">

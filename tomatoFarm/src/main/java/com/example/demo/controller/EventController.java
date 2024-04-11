@@ -25,19 +25,27 @@ public class EventController {
 	@GetMapping("/eventlist")
 	public ResponseEntity<?> selectEventWhere(SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
-		List<item_event> list = item_eventService.selectEventWhere(searchRequest);
+		List<item_event> list = null;
+		
+		if(searchRequest.getKeyword().matches("^[0-9]*$")) {
+			list = item_eventService.selectEventWhereNumber(searchRequest);
+		} else {
+			list = item_eventService.selectEventWhereString(searchRequest);
+		}
 		
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}
 	
 	@PostMapping("/merge")
-	public ResponseEntity<?> merge(List<item_event> event) {
+	public ResponseEntity<?> merge(List<item_event> list) {
 		ResponseEntity<?> result = null;
+		List<item_event> mergedlist = null;
 		
+		mergedlist = item_eventService.merge(list);
 		
+		result = ResponseEntity.status(HttpStatus.OK).body(mergedlist);
 		
-		return null;
-		
+		return result;
 	}
 }

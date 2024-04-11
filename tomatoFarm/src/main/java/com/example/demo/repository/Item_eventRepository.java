@@ -7,6 +7,7 @@ import com.example.demo.module.SearchRequest;
 
 public interface Item_eventRepository {
 
-	List<item_event> selectEventWhere(SearchRequest searchRequest);
+	List<item_event> selectEventWhereNumber(SearchRequest searchRequest);
+	List<item_event> selectEventWhereString(SearchRequest searchRequest);
 	List<item_event> merge(List<item_event> list);
 }

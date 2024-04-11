@@ -23,7 +23,11 @@ public class Item_eventServiceImpl implements Item_eventService{
 	}
 
 	@Override
-	public List<item_event> selectEventWhere(SearchRequest searchRequest) {
-		return item_eventRepository.selectEventWhere(searchRequest);
+	public List<item_event> selectEventWhereNumber(SearchRequest searchRequest) {
+		return item_eventRepository.selectEventWhereNumber(searchRequest);
+	}
+	@Override
+	public List<item_event> selectEventWhereString(SearchRequest searchRequest) {
+		return item_eventRepository.selectEventWhereString(searchRequest);
 	}
 }
