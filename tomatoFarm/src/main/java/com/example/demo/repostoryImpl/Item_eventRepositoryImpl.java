@@ -25,10 +25,14 @@ public class Item_eventRepositoryImpl implements Item_eventRepository{
 	EntityManager entityManager;
 	
 	public List<item_event> selectEventWhere(SearchRequest searchRequest) {
+//			return japQueryFactory
+//					.selectFrom(item_event)
+//					.from(item_event)
+//					.where(Expressions.stringPath(searchRequest.getColumn()).contains(searchRequest.getKeyword()))
+//					.fetch();
 			return japQueryFactory
 					.selectFrom(item_event)
 					.from(item_event)
-					.where(Expressions.stringPath(searchRequest.getColumn()).contains(searchRequest.getKeyword()))
 					.fetch();
 	}
 	
