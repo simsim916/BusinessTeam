@@ -1,5 +1,6 @@
 package com.example.demo.repostoryImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -43,7 +44,7 @@ public class Item_eventRepositoryImpl implements Item_eventRepository {
 
 	@Override
 	public List<item_event> merge(List<item_event> list) {
-		List<item_event> changedList = null;
+		List<item_event> changedList = new ArrayList<item_event>();
 		for (item_event event : list) {
 			changedList.add(entityManager.merge(event));
 		}

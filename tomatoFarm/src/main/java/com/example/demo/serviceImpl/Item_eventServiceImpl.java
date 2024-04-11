@@ -2,6 +2,8 @@ package com.example.demo.serviceImpl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.item_event;
@@ -17,7 +19,8 @@ public class Item_eventServiceImpl implements Item_eventService{
 
 	Item_eventRepository item_eventRepository;
 	
-	
+	@Override
+	@Transactional
 	public List<item_event> merge(List<item_event> list) {
 		return item_eventRepository.merge(list);
 	}

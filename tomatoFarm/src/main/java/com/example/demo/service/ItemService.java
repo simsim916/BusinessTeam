@@ -76,10 +76,8 @@ public interface ItemService {
 	int batchInsert(List<Item> entity);
 	List<ItemDTO> selectAll();
 	void insertItem(Item entity);
-	List<ItemDTO> adminStringColumn(SearchRequest searchRequest,PageRequest pageRequest);
-	List<ItemDTO> adminIntegerColumn(SearchRequest searchRequest,PageRequest pageRequest);
 	int itemListCount();
 	Item updateItem(Item entity);
 	List<ItemDTO> selectItemListWhereInCode(List<Integer> codeList);
-	List<Item> searchForAdmin(SearchRequest searchRequest);
+	List<ItemDTO> searchForAdmin(SearchRequest searchRequest,PageRequest pageRequest);
 }
