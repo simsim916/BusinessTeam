@@ -24,5 +24,9 @@ public class UserAddress {
 
     @Column(name = "address2", length = 50)
     private String address2;
+    
+    private Integer phonenumber;
+    
+    private String info;
 
 }

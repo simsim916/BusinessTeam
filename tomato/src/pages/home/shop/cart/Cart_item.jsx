@@ -2,25 +2,26 @@
 import './Cart_item.css';
 import Cart_item_Row from './Cart_item_Row';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUserBuy } from '../../../redux/userBuy/actions';
+import { setUserBuyItemList } from '../../../redux/userBuy/actions';
 import { setUserBuyStorage } from '../../../redux/userBuy/actions';
 
 const Cart_item = () => {
     /* 🫓REDUX🫓 */
     const dispatch = useDispatch();
     const userCart = useSelector(state => state.userCart.data);
-    const userBuy = useSelector(state => state.userBuy.data);
+    const userBuy = useSelector(state => state.userBuy.data.itemList);
 
     const handleAllCheckBox = () => {
         if (userBuy && userCart.length == userBuy.length) {
-            dispatch(setUserBuy([]));
+            dispatch(setUserBuyItemList([]));
             dispatch(setUserBuyStorage([]));
         } else {
-            dispatch(setUserBuy(userCart));
+            dispatch(setUserBuyItemList(userCart));
             dispatch(setUserBuyStorage(userCart));
         }
 
     }
+
 
     return (
         <div id='shopBasketSelectBox'>
@@ -39,8 +40,18 @@ const Cart_item = () => {
                     <li>총 상품금액</li>
                     <li>배송비</li>
                 </ul>
-                {userCart && userCart.map((e, i) => <Cart_item_Row item={e} key={i} idx={i} />)}
+                {
+                    userCart.length == 0
+                        ?
+                        <div id='cartNone'>
+                            장바구니에 상품을 담아주세요.
+                        </div>
+                        :
+                        userCart && userCart.map((e, i) => <Cart_item_Row item={e} key={i} idx={i} />)
+                }
+
             </div>
+
 
         </div >
     );

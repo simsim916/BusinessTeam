@@ -28,4 +28,10 @@ public class AddressServiceImpl implements AddressService {
 	public UserAddress insertUserAddress(UserAddress entity) {
 		return addressRepository.insertUserAddress(entity);
 	}
+	
+	@Transactional
+	@Override
+	public void deleteAddress(UserAddress entity) {
+		addressRepository.deleteAddress(entity);
+	}
 }

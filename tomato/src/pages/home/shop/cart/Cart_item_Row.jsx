@@ -4,13 +4,14 @@ import { makeComa } from '../../../components/MathFunction';
 import { setUserBuyStorage } from '../../../redux/userBuy/actions';
 import { Link } from 'react-router-dom';
 import { deleteUserCart, setUserCartStorage, changeUserCart } from '../../../redux/userCart/action';
+import { api } from '../../../../model/model';
 
 const Cart_item_Row = ({ item, idx }) => {
     /* 🫓REDUX🫓 */
     const dispatch = useDispatch();
     const user = useSelector(state => state.user.data);
     const userCart = useSelector(state => state.userCart.data);
-    const userBuy = useSelector(state => state.userBuy.data)
+    const userBuy = useSelector(state => state.userBuy.data.itemList)
 
     const changeCheckBox = () => {
         if (userBuy && userBuy.find(e => e.code == item.code))
@@ -21,10 +22,13 @@ const Cart_item_Row = ({ item, idx }) => {
             dispatch(setUserBuyStorage([item]));
     }
 
+    console.log(userBuy);
+
     const handleXbtn = async () => {
         userBuy && dispatch(setUserBuyStorage(userBuy.filter(i => +i.code != +item.code)));
         dispatch(setUserCartStorage(userCart.filter(i => +i.code != +item.code)));
-        user && user.login && dispatch(deleteUserCart(`/usercart/delete?code=${item.code}`, user.token))
+
+        user && user.login && dispatch(deleteUserCart(`/usercart/delete`, 'post', [item], user.token))
     }
 
     return (

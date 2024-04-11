@@ -19,46 +19,6 @@ const ItemListFilter = ({ itemListSort, changeDeletedSort, deletedSort }) => {
             ingre.current += e.count
     }
 
-    const checkAll = (event) => {
-        //     let target = event.target.closest('li');
-
-        //     if (target.classList.contains('selected')) {
-        //         target.classList.remove('selected');
-        //         for (let e of target.getElementsByTagName('li')) {
-        //             e.classList.remove('selected');
-        //             setFilterCheckedList((prev) => {
-        //                 return prev.filter((ele) => ele.sort2 != e.children[1].innerText);
-        //             });
-        //         }
-        //     } else {
-        //         target.classList.add('opened');
-        //         target.classList.add('selected');
-        //         target.closest('.sortB').classList.add('selected');
-        //         for (let e of target.getElementsByTagName('li')) {
-        //             if (e.children[2].innerText > 0) {
-        //                 console.log(e.children[2].innerText)
-        //                 e.classList.add('selected');
-        //                 setFilterCheckedList([...filterCheckedList, {
-        //                     sort1: 'aa',
-        //                     sort2: e.children[1].innerText,
-        //                     count: e.children[2].innerText
-        //                 }])
-        //             }
-        //         }
-        //     }
-        //     console.log(filterCheckedList)
-        //     event.stopPropagation();
-        //     checkList();
-    }
-
-    // const checkList = () => {
-    //     console.log("--- checkC ---")
-    //     for (let e of filterCheckedList) {
-    //         console.log(e);
-    //     }
-    //     // console.log(filterCheckedList);
-    // }
-
     const showList = (event) => {
         let target = event.target.closest('li');
         if (target.classList.contains('opened')) {
@@ -88,7 +48,7 @@ const ItemListFilter = ({ itemListSort, changeDeletedSort, deletedSort }) => {
         <div id="listfilter" ref={listfilter}>
             <ul>
                 <li onClick={showList} className={mealkit.current > 0 ? 'sortB opened selected' : 'sortB'}>
-                    <i onClick={checkAll} className="fa-regular fa-circle-check" ></i>
+                    <i className="fa-regular fa-circle-check" ></i>
                     밀키트
                     <span className="itemList_count">
                         {mealkit.current}
@@ -104,7 +64,7 @@ const ItemListFilter = ({ itemListSort, changeDeletedSort, deletedSort }) => {
                 </li>
                 <hr />
                 <li onClick={showList} className={ingre.current > 0 ? 'sortB opened selected' : 'sortB'}>
-                    <i onClick={checkAll} className="fa-regular fa-circle-check"></i>식재료
+                    <i className="fa-regular fa-circle-check"></i>식재료
                     <span className="itemList_count">
                         {ingre.current}
                     </span>
@@ -117,6 +77,7 @@ const ItemListFilter = ({ itemListSort, changeDeletedSort, deletedSort }) => {
                         ))}
                     </ul>
                 </li>
+                <hr />
                 <li>
                     <i className="fa-regular fa-circle-check"></i>행사
                     <ul>
@@ -124,12 +85,13 @@ const ItemListFilter = ({ itemListSort, changeDeletedSort, deletedSort }) => {
                         <li><i className="fa-regular fa-circle-check"></i>도리깨침</li>
                     </ul>
                 </li>
+                <hr />
                 <li id="filterPrice">
                     <i className="fa-regular fa-circle-check"></i>가격
                     <form>
-                        <input type="text" placeholder="0" />
+                        <input type="text" placeholder="최소금액" />
                         &nbsp;&nbsp;~&nbsp;&nbsp;
-                        <input type="text" placeholder="1000000" />
+                        <input type="text" placeholder="최고금액" />
                     </form>
                 </li>
             </ul>

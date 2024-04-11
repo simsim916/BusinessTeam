@@ -2,28 +2,9 @@ import './Cart_total.css';
 import { makeComa } from '../../../components/MathFunction';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { setUserBuy } from '../../../redux/userBuy/actions';
 
 const Cart_total = () => {
-    let userBuy = useSelector(state => state.userBuy.data)
-
-    useEffect(() => {
-        let final = sessionStorage.getItem('finalOrder');
-        let check = (window.location.href).lastIndexOf('/');
-        let uri = window.location.href.slice(check + 1);
-        console.log(uri);
-        if(uri === 'buy') {
-        }
-    },[])
-
-    const setSession = () => {
-        sessionStorage.setItem('buyList', JSON.stringify(userBuy));
-    }
-
-    const postOrder = () => {
-        
-    }
+    let userBuy = useSelector(state => state.userBuy.data.itemList)
 
     return (
         <div id="shopBasketPayContainer">
@@ -70,13 +51,7 @@ const Cart_total = () => {
                         </div>
                     </div>
                 </div>
-                {/* {uri == 'cart'
-                    ?
-                    <Link to="/home/buy" id="loginBox" onClick={setSession} >주문하기</Link>
-                    :
-                    <div to="/home/buy" id="loginBox" onClick={() => setSession()} >주문하기</div>
-                } */}
-                    <Link to="/home/buy" id="loginBox" onClick={setSession} >주문하기</Link>
+                <Link to="/home/buy" id="loginBox" >주문하기</Link>
                 <div id="shopBasketCancel">
                     <div>* [주문완료] 상태일 경우에만 주문 취소 가능합니다.</div>
                     <div>* [마이페이지] - [주문내역 상세페이지]에서 직접 취소 가능합니다.</div>

@@ -36,9 +36,9 @@ public class ItemRepositoryImpl implements ItemRepository {
 	private final QBean<ItemDTO> dtoBean = Projections.bean(ItemDTO.class, item.code, item.brand, item.name,
 			item.delivery, item.price, item.storage, item.weight, item.packing, item.sales, item.stock, item.views,
 			item.likes, item.event_code, item.intro, item.admin, item_event.discount, item_event.name.as("event_name"));
-//	private final QBean<ItemDTO> adminDTO = Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price, item.storage,
-//			item.weight, item.packing, item.sales, item.stock, item.views, item.likes, item.event_code, item.intro, item.admin,
-//			item_event.discount, item_event.name.as("event_name"));
+	
+	private final QBean<Item> noJoinEntity = Projections.bean(Item.class, item.code, item.brand, item.name, item.delivery, item.price, item.storage,
+			item.weight, item.packing, item.sales, item.stock, item.views, item.likes, item.event_code, item.intro, item.admin);
 //	private final QBean<ItemDTO> managerDTO = Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price, item.storage,
 //			item.weight, item.packing, item.sales, item.stock, item.views, item.likes, item.event_code, item.intro, item.admin,
 //			item_event.discount, item_event.name.as("event_name"));
@@ -55,6 +55,8 @@ public class ItemRepositoryImpl implements ItemRepository {
 				return new OrderSpecifier<>(Order.ASC, QItem.item.sales);
 			case "codeD":
 				return new OrderSpecifier<>(Order.DESC, QItem.item.code);
+			case "views":
+				return new OrderSpecifier<>(Order.DESC, QItem.item.views);
 			}
 		}
 		return new OrderSpecifier<>(Order.DESC, QItem.item.sales);
@@ -226,7 +228,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 	public List<ItemDTO> selectItemListWhereInCode(List<Integer> codeList) {
 		System.out.println(codeList);
 		return jPAQueryFactory
-				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price,
+				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name.as("item_name"), item.delivery, item.price,
 						item.storage, item.weight, item.packing, item.sales, item.stock, item.views, item.likes,
 						item.event_code, item.intro, item_event.discount, item_event.name.as("event_name")))
 				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code)).where(item.code.in(codeList))
@@ -234,25 +236,27 @@ public class ItemRepositoryImpl implements ItemRepository {
 	}
 
 //	=====================================================================================================
-	public List<Item> SearchForAdmin(SearchRequest searchRequest, PageRequest pageRequest) {
+	@Override
+	public List<Item> searchForAdmin(SearchRequest searchRequest) {
 		if (searchRequest.getKeyword().replace("[-+]?\\d*\\.?\\d+", "").length() == 0) {
-			return jPAQueryFactory.selectFrom(item)
-					.from(item).leftJoin(item_event).on(item_event.code.eq(item_event.code))
-					.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
-							.contains(searchRequest.getKeyword()))
+			return jPAQueryFactory.select(noJoinEntity).from(item)
+//					.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
+//							.contains(searchRequest.getKeyword()))
 					.orderBy(getSortType(searchRequest))
 					.limit(searchRequest.getHowManyRecords())
+					.groupBy(item.code)
 					.fetch();
 		} else {
-			return jPAQueryFactory.selectFrom(item)
-					.from(item).leftJoin(item_event).on(item_event.code.eq(item_event.code))
-					.where(Expressions.stringPath(searchRequest.getColumn())
-							.contains(searchRequest.getKeyword()))
+			return jPAQueryFactory.select(noJoinEntity).from(item)
+//					.where(Expressions.stringPath(searchRequest.getColumn())
+//							.contains(searchRequest.getKeyword()))
 					.orderBy(getSortType(searchRequest))
 					.limit(searchRequest.getHowManyRecords())
+					.groupBy(item.code)
 					.fetch();
 		}
 	}
+
 //	=====================================================================================================
 
 }

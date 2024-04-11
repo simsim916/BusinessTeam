@@ -50,13 +50,13 @@ public class ChatController {
 		return result;
 	}
 
-	@PostMapping ("/insertmessage")
+	@PostMapping("/insertmessage")
 	public ResponseEntity<?> insertmessage(HttpServletRequest request, @RequestBody Chat_message entity) {
 		ResponseEntity<?> result = null;
 		String token = tokenProvider.parseBearerToken(request);
 		String id = tokenProvider.validateAndGetUserId(token);
 		entity.setWriter(id);
-		if (chatService.insertMessage(entity)>0) {
+		if (chatService.insertMessage(entity) > 0) {
 			System.out.println(entity);
 			List<Chat_messageDTO> list = chatService.selectAllmessageWhereRoomSeq(entity);
 			result = ResponseEntity.status(HttpStatus.OK).body(list);
@@ -65,16 +65,32 @@ public class ChatController {
 		}
 		return result;
 	}
-	
-	@GetMapping ("/selectroom")
+
+	@GetMapping("/selectmessage")
+	public ResponseEntity<?> selectmessage(HttpServletRequest request, Chat_message entity) {
+		ResponseEntity<?> result = null;
+		String token = tokenProvider.parseBearerToken(request);
+		String id = tokenProvider.validateAndGetUserId(token);
+		entity.setWriter(id);
+		List<Chat_messageDTO> list = chatService.selectAllmessageWhereRoomSeq(entity);
+		if (list != null && list.size() > 0) {
+			result = ResponseEntity.status(HttpStatus.OK).body(list);
+		} else {
+			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("selectmessage failed");
+		}
+		return result;
+	}
+
+	@GetMapping("/selectroom")
 	public ResponseEntity<?> selectroom(HttpServletRequest request, SearchRequest searchRequest) {
+		System.out.println(searchRequest);
 		ResponseEntity<?> result = null;
 		String token = tokenProvider.parseBearerToken(request);
 		String id = tokenProvider.validateAndGetUserId(token);
 		User user = User.builder().id(id).build();
 		PageRequest pageRequest = new PageRequest();
 		user = userService.selectUser(user);
-		if (user.getLevel()<100) {
+		if (user.getLevel() < 100) {
 			List<Chat_roomDTO> list = chatService.selectAllRoom(pageRequest, searchRequest);
 			System.out.println(list);
 			result = ResponseEntity.status(HttpStatus.OK).body(list);

@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,6 +30,10 @@ public class AddressController {
 	public List<UserAddress> selectAddressWhereId(HttpServletRequest request) {
 		String token = tokenProvider.parseBearerToken(request);
 		String id = tokenProvider.validateAndGetUserId(token);
+		List<UserAddress> list =  addressService.selectAddressWhereId(id);
+		for(UserAddress address : list) {
+			System.out.println(address);
+		}
 		return addressService.selectAddressWhereId(id);
 	}
 	
@@ -37,5 +43,19 @@ public class AddressController {
 		String id = tokenProvider.validateAndGetUserId(token);
 		entity.setId(id);
 		return addressService.insertUserAddress(entity);
+	}
+	
+	
+	@PostMapping("/delete")
+	public ResponseEntity<?> deleteAddress(@RequestBody UserAddress entity, HttpServletRequest request) {
+		ResponseEntity<?> result = null;
+		String token = tokenProvider.parseBearerToken(request);
+		String id = tokenProvider.validateAndGetUserId(token);
+		entity.setId(id);
+	
+		System.out.println(entity);
+		addressService.deleteAddress(entity);
+		return result;
+		
 	}
 }
