@@ -56,12 +56,15 @@ public class ChatController {
 		String token = tokenProvider.parseBearerToken(request);
 		String id = tokenProvider.validateAndGetUserId(token);
 		entity.setWriter(id);
-		if (chatService.insertMessage(entity) > 0) {
-			System.out.println(entity);
-			List<Chat_messageDTO> list = chatService.selectAllmessageWhereRoomSeq(entity);
-			result = ResponseEntity.status(HttpStatus.OK).body(list);
-		} else {
-			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("insertmessage failed");
+		if (entity.getContent() != null && !entity.getContent().trim().isEmpty()) {
+			if (chatService.insertMessage(entity) > 0) {
+				List<Chat_messageDTO> list = chatService.selectAllmessageWhereRoomSeq(entity);
+				result = ResponseEntity.status(HttpStatus.OK).body(list);
+			} else {
+				result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("insertmessage failed");
+			}
+		}else {
+			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("insertmessage is empty");
 		}
 		return result;
 	}

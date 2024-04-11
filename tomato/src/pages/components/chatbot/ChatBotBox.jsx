@@ -102,6 +102,9 @@ const ChatBotBox = ({
     /* 메세지를 남겼을 때 server DB에 내가 입력한 메세지를 merge하고
         지금 root에 해당되는 전체 메세지를 select 해오는 api 요청 함수 */
     const insertMessage = async () => {
+        if (!text.content.trim()) {
+            return;
+        }
         setLoading(true);
         await api('/chat/insertmessage', 'post', text, userinfo.token)
             .then(res => {
@@ -111,7 +114,7 @@ const ChatBotBox = ({
                     ...prev,
                     content: ''
                 }))
-                inputBox.current.focus();
+                if (inputBox.current) inputBox.current.focus();
             }).catch(err => {
                 setLoading(false);
                 setError(true);
@@ -193,7 +196,7 @@ const ChatBotBox = ({
             <div id="chatBotTextBox">
                 <input type="text" readOnly={!text.type} placeholder={text.type ? "텍스트를 입력해주세요." : "문의유형을 선택해주세요."} value={text.content} onChange={(event) => changeContent(event)} ref={inputBox}
                     onKeyUp={handleKeyUp} />
-                <button onClick={insertMessage}>전송</button>
+                <button onClick={insertMessage} >전송</button>
             </div>
         </div>
     );
