@@ -96,7 +96,6 @@ const SelectDataBox = ({ myLocation }) => {
         // setItemList([...itemList, changedList]) // 변경을하면 원본 itemList를 변경시켜주려고 한다.
     }
 
-    console.log(itemList);
 
     const searchBoxChange = (event) => {
         const { name, value } = event.target;
@@ -143,39 +142,17 @@ const SelectDataBox = ({ myLocation }) => {
                         changeItemRow={changeItemRow}
                         column={column}
                         item={e} key={i}
-                        style={{ backgroundColor: (e.code == (selectedItem && selectedItem.code)) ? 'yellow' : '' }}
+                        style={{
+                            backgroundColor: (e.code == (selectedItem && selectedItem.code))
+                                ?
+                                changedList.some(k => k.code == e.code) ?
+                                    'blue' : 'yellow'
+                                :
+                                ''
+                        }}
                     />))}
                 </div>
             </div>
-
-            {changedList[0]
-                ?
-                <div id="changedListBox">
-                    <div className="ObjectHead">
-                        {
-                            column.current ?
-                                column.current.map((col, i) => <div id={col} key={i}>{col}</div>)
-                                :
-                                null
-                        }
-                        <div></div>
-                    </div>
-                    <div className="changedListBody">
-                        {
-                            changedList && changedList.map((e, key) =>
-                                <>
-                                    <div key={key} className="changedList_Row">
-                                        {Object.values(e).map((i, ke) => <div key={ke}>{i}</div>)}
-                                    </div>
-                                </>
-                            )
-                        }
-                    </div>
-                    <button>데이터 입력</button>
-                </div>
-                :
-                ''
-            }
             <PagingBox
                 limit={size}
                 list={itemList}
