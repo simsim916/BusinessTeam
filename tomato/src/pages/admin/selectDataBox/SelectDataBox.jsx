@@ -112,7 +112,6 @@ const SelectDataBox = ({ myLocation }) => {
                         <h3>
                             <i className="fa-solid fa-list"></i>자료 조회
                         </h3>
-                        &nbsp;&nbsp;
                     </div>
                     <form id="topButtonBox">
                         <select name="column" id="column" value={formData.column} onChange={searchBoxChange}>
