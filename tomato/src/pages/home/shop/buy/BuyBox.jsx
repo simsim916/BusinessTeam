@@ -11,7 +11,6 @@ import { setUserBuyItemList } from '../../../redux/userBuy/actions';
 const BuyBox = () => {
     /* Redux */
     const dispatch = useDispatch();
-    
     const [buy, setBuy] = useState(); // 장바구니 -> 구매페이지 넘어갈때 가져온 아이템리스트
     const userBuyItemList = useSelector(state => state.userBuy.data.itemList);
 
@@ -21,8 +20,7 @@ const BuyBox = () => {
     }, [])
 
     const handleCheck = (item) => {
-        console.log(item);
-        if (userBuyItemList.find(e => e.code === item.code)) {
+        if (userBuyItemList.some(e => e.code === item.code)) {
             dispatch(setUserBuyItemList(userBuyItemList.filter(e => e.code !== item.code)));
         } else {
             dispatch(setUserBuyItemList([...userBuyItemList, item]));

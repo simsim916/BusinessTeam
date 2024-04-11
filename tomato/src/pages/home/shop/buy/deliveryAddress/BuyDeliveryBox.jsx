@@ -21,7 +21,6 @@ const BuyDeliveryBox = () => {
         setDeliverySelect(!deliverySelect);
     }
 
-    console.log(userBuy)
 
     const changeMessage = (e) => {
         dispatch(setUserBuyMessage(e.target.value))

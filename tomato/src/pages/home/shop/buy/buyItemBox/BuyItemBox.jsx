@@ -35,6 +35,8 @@ const BuyItemBox = ({
         dispatch(setUserBuyItemList(ar));
     }
 
+    console.log(userBuy);
+
     return (
         <div id='BuyItemBox'>
             <input type="checkbox"

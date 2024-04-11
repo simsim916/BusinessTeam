@@ -22,7 +22,6 @@ const Cart_item = () => {
 
     }
 
-
     return (
         <div id='shopBasketSelectBox'>
             {userCart && userCart.length > 0 &&
