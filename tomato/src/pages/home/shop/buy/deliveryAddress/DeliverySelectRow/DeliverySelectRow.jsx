@@ -1,43 +1,30 @@
 
-import { useDispatch, useSelector } from 'react-redux';
-import { setUserBuyAddress } from '../../../../../redux/userBuy/actions';
-import { setUserAddress } from '../../../../../redux/userAddress/action';
-import { api } from '../../../../../../model/model';
+import { useDispatch } from 'react-redux';
+import { setUserBuyForm } from '../../../../../redux/userBuy/actions';
+import './DeliverySelectRow.css';
 
-
-const DeliverySelectRow = ({ handleAPI, handleOnClick, address }) => {
+const DeliverySelectRow = ({ setDeliverySelect, address }) => {
     const dispatch = useDispatch();
-    const userBuy = useSelector(state => state.userBuy.data); // 고객이 선택한 배송지로 쓸 예정\
-    const userAddress = useSelector(state => state.userAddress.data);
-    const user = useSelector(state => state.user.data);
 
-
-    const selectWhichAddress = (address) => {
-        dispatch(setUserBuyAddress(address));
-        handleOnClick();
-        let index = userAddress.findIndex(e => e.id === address.id);
-        if (index !== -1) {
-            userAddress.splice(index, 1);
-        }
-        userAddress.unshift(address);
+    const selectDelivery = () => {
+        dispatch(setUserBuyForm(address));
     }
 
-    const deleteAddress = (address) => {
-        console.log(address);
-        let filter = userAddress.filter(e => e.addressCode != address.addressCode)
-        dispatch(setUserAddress(filter));
-        api(`/address/delete`, 'post', address, user.token);
+    const handleSelect = () => {
+        selectDelivery();
+        setDeliverySelect(false);
     }
 
     return (
         <div className="deliverySelectRow">
             <h4>{address.info}</h4>
             <p>{address.id} {address.phonenumber}</p>
-            <p><span>[{address.addressCode}]</span> {address.address1}</p>
+            <p><span>{address.address_code}</span> {address.address1}</p>
             <p>{address.address2}</p>
             <div className='delivery_select'>
-                <div onClick={() => deleteAddress(address)}>삭제</div>
-                <div onClick={() => selectWhichAddress(address)}>선택</div>
+                <div className='delete'>삭제</div>
+                <div className='update'>수정</div>
+                <div onClick={handleSelect} className='select'>선택</div>
             </div>
         </div>
     )

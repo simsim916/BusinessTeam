@@ -1,3 +1,8 @@
+#BuyItemBox{
+    margin-top: 40px;
+    position: relative;
+}
+
 #BuyItemBox input:checked {
     animation: jelly 1s ease;
     z-index: 1;
@@ -36,8 +41,13 @@
 }
 
 
-#BuyItemBox>input {
+#BuyItemBoxCheck>input {
     margin: 0 8px 10px 20px;
+}
+
+#BuyItemBoxCheck{
+    position: absolute;
+    bottom: 100%;
 }
 
 #shopBasketItemBox {

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const Cart_total = () => {
-    let userBuy = useSelector(state => state.userBuy.data.itemList)
+    let userBuy = useSelector(state => state.userBuy.buyList)
 
     return (
         <div id="shopBasketPayContainer">

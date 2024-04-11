@@ -6,6 +6,8 @@ import ItemDetail from './detail/ItemDetail';
 import BuyBox from './shop/buy/BuyBox';
 import Cart from './shop/cart/Cart';
 import React from "react";
+import EventPage2 from './../event/EventPage2';
+import CustomerQA from "../customerQA/CustomerQA";
 
 
 const Home = () => {
@@ -18,7 +20,9 @@ const Home = () => {
                 <Route path='/list' element={<ItemList />} />
                 <Route path='/detail' element={<ItemDetail />} />
                 <Route path='/cart' element={<Cart />} />
+                <Route path='/ask' element={<CustomerQA />} />
                 <Route path='/buy' element={<BuyBox />} />
+                <Route path='/event2' element={<EventPage2 />} />
                 <Route path='/*' element={<Index />} />
             </Routes>
         </>

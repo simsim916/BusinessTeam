@@ -9,7 +9,7 @@ const Cart_item = () => {
     /* 🫓REDUX🫓 */
     const dispatch = useDispatch();
     const userCart = useSelector(state => state.userCart.data);
-    const userBuy = useSelector(state => state.userBuy.data.itemList);
+    const userBuy = useSelector(state => state.userBuy.buyList);
 
     const handleAllCheckBox = () => {
         if (userBuy && userCart.length == userBuy.length) {

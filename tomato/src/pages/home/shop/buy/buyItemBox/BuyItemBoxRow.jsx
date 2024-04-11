@@ -3,14 +3,13 @@ import { SERVER_RESOURCE } from '../../../../../model/server-config';
 import { makeComa } from '../../../../components/MathFunction';
 
 const BuyItemBoxRow = ({
-    buy,
     item, // 각 아이템 정보
     idx, // 각 아이템 인덱스
     changeItemList, // checkedList 내 아이템 수량 변경
-    handleCheck // checkedList 아이템 선택/해제
+    changeCheckedList // checkedList 아이템 선택/해제
 }) => {
-    const userBuyItemList = useSelector(state => state.userBuy.data.itemList);
-
+    const userBuyForm = useSelector(state => state.userBuy.form)
+    const userBuyItemList = useSelector(state => state.userBuy.buyList);
     const handleChange = (event) => {
         changeItemList(idx, event.target.value)
     }
@@ -18,14 +17,12 @@ const BuyItemBoxRow = ({
     const handleClick = (type) => {
         changeItemList(idx, type, item);
     }
-
     return (
         <ul className="shopBasketItem">
             <li>
                 <input className="check" type="checkbox" name="buy"
-                    onChange={(event) => handleCheck(event, item)}
-                    // checked={userBuyItemList && userBuyItemList.some(e => e.code == item.code)}
-                    checked={userBuyItemList && userBuyItemList.some(e => e.code === item.code) || false}
+                    onChange={() => changeCheckedList(item)}
+                    checked={userBuyForm.itemList && userBuyForm.itemList.some(e => e.code == item.code) || false}
                 />
 
             </li>

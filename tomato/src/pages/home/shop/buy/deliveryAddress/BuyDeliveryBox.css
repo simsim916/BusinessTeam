@@ -6,24 +6,6 @@
     position: relative;
 }
 
-#buyDeliveryBox h4 {
-    color: #9B1B30;
-    font-size: 18px;
-}
-
-#buyDeliveryBox input {
-    text-indent: 7px;
-}
-
-#buyDeliveryBox input:nth-of-type(1) {
-    width: 15%;
-    margin-right: 10px;
-}
-
-#buyDeliveryBox input:nth-of-type(2) {
-    width: 25%;
-}
-
 #buyDeliveryBox select {
     margin-top: 15px;
     height: 55px;
@@ -35,25 +17,15 @@
     text-indent: 12px;
 }
 
-#buyDeliveryBox #delivery_select {
-    position: absolute;
-    width: 120px;
-    line-height: 50px;
-    border: 2px solid #9B1B30;
-    top: 20px;
-    right: 20px;
-    text-align: center;
-    border-radius: 10px;
-}
-
-#buyDeliveryBox p {
-    text-align: center;
-    margin-top: 0;
-    font-size: 20px;
+#buyDeliveryBox .delivery_select {
+    border: none;
 }
 
 #buyDeliveryBox p span {
     font-size: 15px;
+}
+#buyDeliveryBox p {
+    margin-top: 3px;
 }
 
 #buyDeliveryBox #delivery_select_unlogin {

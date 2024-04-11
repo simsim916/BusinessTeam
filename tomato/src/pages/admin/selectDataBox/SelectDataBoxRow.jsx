@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./SelectDataBox.css";
 
-const SelectDataBoxRow = ({ style ,changeItemRow, column, item }) => {
+const SelectDataBoxRow = ({ style, changeItemRow, column, item }) => {
     const [newItem, setNewItem] = useState(item);
 
     // const changeItem = (event) => {
@@ -15,15 +15,10 @@ const SelectDataBoxRow = ({ style ,changeItemRow, column, item }) => {
 
 
     return (
-        <div className="excelColumn" style={{ 
-            ...style,
-            width: `${column.current.length * 150}px` 
-            
-            }}>
+        <div onClick={() => changeItemRow(item)} className="excelColumn" style={{ ...style, }}>
             {Object.keys(newItem).map((e, i) => (
-                <input type="text" name={e} value={item[e]} key={i} readOnly/>
+                <input style={{ ...style, }} type="text" name={e} value={item[e]} key={i} readOnly />
             ))}
-            <div><button onClick={() => changeItemRow(item)}>수정</button></div>
         </div>
     );
 }

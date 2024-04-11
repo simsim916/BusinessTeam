@@ -26,11 +26,9 @@ const Cart = () => {
         } else {
             dispatch(getItemListAmount('/item/selectin', 'post', userCart.data, null));
         }
-        // api(`/visit/update?page=cart`, 'get');
     }, [])
 
     if (userCart.loading) return <Loading />
-    if (userCart.error) return <Error />
 
     return (
         <div id='shopBasket' className='container'>

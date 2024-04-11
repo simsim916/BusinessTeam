@@ -99,8 +99,6 @@ public class ItemController {
 				}
 			}
 		}
-		System.out.println(countList);
-		System.out.println(list);
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}
