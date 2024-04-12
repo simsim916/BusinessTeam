@@ -43,4 +43,5 @@ public interface ItemRepository {
 	
 	/* 사용중이지 않은 메서드 */
 //	Item selectItemIntegerWhereType(SearchRequest searchRequest);
+	List<Item> merge(List<Item> list);
 }

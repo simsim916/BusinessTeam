@@ -95,12 +95,15 @@ public class UserController {
 	}
 	
 	
-	@PostMapping("/insertTest")
-	public ResponseEntity<?> insertTest(@RequestBody List<User> list) {
+	@PostMapping("/merge")
+	public ResponseEntity<?> merge(@RequestBody List<User> list) {
 		ResponseEntity<?> result = null;
-		List<User> check = userService.insertTest(list);
 		
-		result = ResponseEntity.status(HttpStatus.OK).body(check);
+		if (userService.insertTest(list).size() > 0)
+			result = ResponseEntity.status(HttpStatus.OK).body(userService.selectUserWhere(new SearchRequest("username", "")));
+		else
+			result = ResponseEntity.status(HttpStatus.OK).body("데이터 입력 실패");
+		
 		return result;
 	}
 

@@ -2,7 +2,7 @@ import "./header.css";
 import { Link, useNavigate } from 'react-router-dom';
 import Nav from './Nav';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeKeyword } from "../../redux/basic/actions";
+import { changeAlert, changeKeyword } from "../../redux/basic/actions";
 
 
 
@@ -15,6 +15,14 @@ const Header = () => {
     const userinfo = JSON.parse(sessionStorage.getItem('userinfo'))
     const logOut = () => {
         sessionStorage.removeItem('userinfo');
+        dispatch(changeAlert({
+            title: '로그아웃 성공!',
+            time: 5,
+            style: {
+                top: '10px',
+                left: 'calc(50% - 150px)'
+            }
+        }));
     }
 
     const searchBox = (event) => {
@@ -60,6 +68,9 @@ const Header = () => {
                                 <Link to="/member">로그인</Link>
                                 <Link to="/member/signup">회원가입</Link>
                             </>
+                    }
+                    {
+                        <Link to="/admin"> 관리자페이지</Link>
                     }
                 </div>
             </div>

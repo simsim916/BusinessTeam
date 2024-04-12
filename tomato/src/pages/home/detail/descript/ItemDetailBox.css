@@ -208,22 +208,24 @@
     line-height: 50px;
     border-radius: 15px;
 }
-#itemDetail>#goCartContainer{
-    position: absolute;
+
+#itemDetail>#goCartContainer {
     display: block;
-    top: 550px;
     background-color: #ffffff;
     border: 4px solid #ccc;
     width: 400px;
     padding: 20px;
     text-align: center;
 }
-#goCartContainer div{
+
+#goCartContainer div {
     width: 100%;
 }
-#goCartContainer p:nth-child(2){
+
+#goCartContainer p:nth-child(2) {
     margin-top: 20px;
 }
+
 #goCartContainer a {
     padding: 10px 20px;
     background-color: #CA4046;
@@ -243,7 +245,7 @@
     border: 1px solid #CA4046;
 }
 
-#goCartContainer #triangle_bottom{
+#goCartContainer #triangle_bottom {
     border: 30px solid transparent;
     border-color: rgb(204, 202, 202);
     width: 0px;
@@ -339,5 +341,3 @@
     font-size: 52px;
     position: relative;
 }
-
-

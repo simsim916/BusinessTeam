@@ -1,13 +1,12 @@
 import "./SelectAskBox.css";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import PagingBox from "../../components/PagingBox";
-import WriteReply from "./writeReply/WriteReply";
-// import { paging } from '../../components/paging';
+import PagingBox, { paging } from "../../components/PagingBox";
 import SelectAskBox_Row from './selectAskBox_Row/SelectAskBox_Row';
+import { SERVER_RESOURCE } from "../../../model/server-config";
 
 
-const SelectAskBox = ({ myLocation }) => {
+const SelectAskBox = () => {
 
     const [askList, setAskList] = useState([]);
     const [currPage, setCurrPage] = useState(1);
@@ -22,14 +21,9 @@ const SelectAskBox = ({ myLocation }) => {
     });
 
     useEffect(() => {
-        myLocation();
-    }, [])
-
-    useEffect(() => {
         axios.get(`http://localhost:8090/itemask/select?column=${searchRequest.column}&keyword=${searchRequest.keyword}`
         ).then(res => {
             setAskList(res.data);
-            console.log(res.data)
         }).catch(err => {
             console.log(err.message);
         })
@@ -65,17 +59,6 @@ const SelectAskBox = ({ myLocation }) => {
     const changRefresh = () => {
         setRefresh(!refresh);
     }
-
-    const paging = () => (list, pageNum, size) => {
-        if (Array.isArray(list)) { // 배열 여부 확인
-            const start = size * (pageNum - 1);
-            const end = pageNum * size;
-            return list.slice(start, end);
-        } else {
-            return []; // 배열이 아닌 경우 빈 배열 반환
-        }
-    }
-
 
 
     return (
@@ -121,26 +104,29 @@ const SelectAskBox = ({ myLocation }) => {
                 </form>
                 <div>
                     <div>번호</div>
+                    <div>유형</div>
                     <div>제목</div>
                     <div>작성자</div>
                     <div>작성일시</div>
                     <div>답변</div>
                 </div>
                 <div>
+                    <div>2</div>
                     <div>공지</div>
                     <div>토마토팜 홈페이지 이용시 </div>
-                    <div><img src="/tomatoFarmA/resources/img/logo.png" alt="" /></div>
+                    <div><img src={SERVER_RESOURCE+"/img/logo.png"} alt="" /></div>
                     <div>2024-02-02</div>
                     <div></div>
                 </div>
                 <div>
+                    <div>1</div>
                     <div>공지</div>
                     <div>명절 배송지연 관련 공지사항</div>
                     <div>홍길동</div>
                     <div>2024-02-02</div>
                     <div></div>
                 </div>
-                {paging()(filterList(answered), currPage, limit).map((ask, i) => (
+                {paging(filterList(answered), currPage, limit).map((ask, i) => (
                     <SelectAskBox_Row key={i} ask={ask} />
                 ))}
             </div>

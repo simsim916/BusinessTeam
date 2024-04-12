@@ -8,28 +8,20 @@ import {
     LineElement,
 } from "chart.js";
 
-const LineChart = ({ graphData, setGraphData }) => {
+const LineChart = ({ graphData }) => {
 
     const chartRef = useRef(null);
     let chartInstance = null;
 
 
     useEffect(() => {
-        // =====================
-        const dateArr = [...new Set(graphData.select.map(i => i.visit_date))];
-        dateArr.sort((a, b) => a - b);
-        let date = dateArr.slice(0, 10); // 렉걸려
+        // =====================================================
+        let DateArr = [];
+        DateArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-        let check = graphData.select.slice(0, 10);
-        let test = [];
-        check.map(e => test.push(e.visit_count));
-        console.log(test);
-        // =====================
-
-
-
-
-
+        let showData = [];
+        graphData.map(e => showData.push(e.views));
+        // =====================================================
         const ctx = chartRef.current.getContext("2d");
 
         const createChart = () => {
@@ -105,7 +97,7 @@ const LineChart = ({ graphData, setGraphData }) => {
         };
     }, [graphData]);
 
-    return <canvas ref={chartRef} />;
+    return <canvas style={{width:'100%', height:'100%'}} ref={chartRef} />;
 };
 
 export default LineChart;

@@ -21,31 +21,28 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/event")
 public class EventController {
 
-	Item_eventService item_eventService;  
-	
+	Item_eventService item_eventService;
+
 	@GetMapping("/selectwhere")
 	public ResponseEntity<?> selectEventWhere(SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
 		List<item_event> list = null;
-		
-		list = item_eventService.selectEventWhere(searchRequest);                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-		
+
+		list = item_eventService.selectEventWhere(searchRequest);
+
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}
-	
+
 	@PostMapping("/merge")
 	public ResponseEntity<?> merge(@RequestBody List<item_event> list) {
 		ResponseEntity<?> result = null;
-		List<item_event> mergedlist = null;
-		for(item_event event : list) {
-			System.out.println(event);
-		}
-		
-		mergedlist = item_eventService.merge(list);
-		
-		result = ResponseEntity.status(HttpStatus.OK).body(mergedlist);
-		
+
+		if (item_eventService.merge(list).size() > 0)
+			result = ResponseEntity.status(HttpStatus.OK).body(item_eventService.selectEventWhere(new SearchRequest("name", "")));
+		else
+			result = ResponseEntity.status(HttpStatus.OK).body("데이터 입력 실패");
+
 		return result;
 	}
 }

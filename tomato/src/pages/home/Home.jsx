@@ -8,14 +8,17 @@ import Cart from './shop/cart/Cart';
 import React from "react";
 import EventPage2 from './../event/EventPage2';
 import CustomerQA from "../customerQA/CustomerQA";
+import Alert from "../components/alert/Alert";
+import { useSelector } from 'react-redux';
 
 
 const Home = () => {
     console.log('Home 랜더링')
+    const alert = useSelector(state => state.basic.alert)
     return (
         <>
             <Header />
-
+            {alert && <Alert />}
             <Routes>
                 <Route path='/list' element={<ItemList />} />
                 <Route path='/detail' element={<ItemDetail />} />

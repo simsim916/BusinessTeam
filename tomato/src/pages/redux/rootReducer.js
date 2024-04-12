@@ -8,6 +8,7 @@ import { userCartReducer } from './userCart/userCartReducer';
 import { userAddressReducer } from './userAddress/userAddressReducer';
 import { userNewAddressReducer } from './userNewAddress/userNewAddressReducer';
 import { finalOrderReducer } from './userOrder/finalOrderReducer';
+import { page_listReducer } from './page_list/page_listReducer';
 
 const rootReducer = combineReducers({
     itemList: itemListReducer,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
     userCart: userCartReducer,
     finalOrder: finalOrderReducer,
     userAddress: userAddressReducer,
-    userNewAddress: userNewAddressReducer
+    userNewAddress: userNewAddressReducer,
+    page_list: page_listReducer,
 });
 
 export default rootReducer;
