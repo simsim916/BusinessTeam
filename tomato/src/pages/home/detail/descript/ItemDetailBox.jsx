@@ -7,16 +7,19 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserCart, setUserCartStorage } from '../../../redux/userCart/action';
 import { SERVER_RESOURCE } from '../../../../model/server-config';
+import { changeAlert } from '../../../redux/basic/actions';
+import Alert from '../../../components/alert/Alert';
 
 const ItemDetailBox = ({ item }) => {
     const dispatch = useDispatch();
     const userinfo = useSelector(state => state.user.data)
+    const alert = useSelector(state => state.basic.alert)
     const [inputCountValue, setInputCountValue] = useState(1);
     const [introItem, setIntroItem] = useState(false)
     const [gotoCart, setGotoCart] = useState(false);
     const [loading, setLoading] = useState(false);
     const currentDate = new Date();
-    const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
+    const weekdays = ['일', '월', '화', '수', '목', '금', '토', '일'];
     const date = currentDate.getDate();
     const hour = currentDate.getHours();
     const dayOfWeek = currentDate.getDay();
@@ -33,7 +36,7 @@ const ItemDetailBox = ({ item }) => {
                 ele.parentNode.children[i].style.opacity = '0.5';
             }
         }
-        window.scrollTo(0,235);
+        window.scrollTo(0, 235);
     }
 
     const clickInputCount = (type) => {
@@ -62,6 +65,16 @@ const ItemDetailBox = ({ item }) => {
     const addCart = () => {
         setLoading(true);
         setGotoCart(!gotoCart);
+
+        dispatch(changeAlert({
+            cart: item.name,
+            time: 3,
+            style: {
+                bottom: '100%',
+                left: 'calc(50% - 150px)',
+                position: 'absolute'
+            }
+        }));
         if (userinfo && userinfo.login) {
             const formData = {
                 code: item.code,
@@ -143,7 +156,10 @@ const ItemDetailBox = ({ item }) => {
                     </div>
                     <div id="priceBox">
                         <div id="priceAmount">총 상품금액&nbsp; : &nbsp;<span ref={priceRef}>{makeComa(makeDiscountPrice(item.price, item.discount) * inputCountValue)}원</span></div>
-                        <div onClick={gotoCart ? null : addCart} id="gotocart">장바구니 담기</div>
+                        <div onClick={addCart} id="gotocart">
+                            장바구니 담기
+                            {alert && <Alert />}
+                        </div>
                         <Link to="/home/buy" id="gotobuy">구매하기</Link>
                     </div>
                 </div>
@@ -151,17 +167,7 @@ const ItemDetailBox = ({ item }) => {
                     loading ?
                         <Loading />
                         :
-                        gotoCart ?
-                            <div id='goCartContainer'>
-                                <p id="itemName">{item.name}</p>
-                                <p>장바구니에 상품을 담았습니다.</p>
-                                <p>장바구니로 이동하시겠습니까?</p>
-                                <Link to="/home/cart" id="cartOK">이동</Link>
-                                <a onClick={() => setGotoCart(!gotoCart)} id="cartNO">닫기</a>
-                                <div id='triangle_bottom'></div>
-                            </div>
-                            :
-                            null
+                        null
                 }
             </div>
 
