@@ -17,7 +17,7 @@ const ItemAskForm = ({ item, setRefresh, refresh, itemAskClick }) => {
         contents: '',
         reply: '',
         password: null,
-        type: '상품'
+        type: '아이템'
     })
 
     const changeAsk = (event) => {

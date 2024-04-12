@@ -124,7 +124,8 @@ const ChatBotBox = ({
             });
         if (admin_root) {
             await api('/chat/makeroom', 'post', {
-                seq: admin_root,
+                seq: admin_root,    
+                admin: userinfo.id,
                 ing: 1
             }, userinfo.token)
                 .then(res => {

@@ -13,6 +13,8 @@ const SideMenu = ({ openSideBar, sideBarOpen }) => {
             return '문의 목록';
             case 'select':
             return '상품 조회'
+            case 'chatbot':
+            return '채팅 상담'
         }
     }
     
@@ -31,7 +33,7 @@ const SideMenu = ({ openSideBar, sideBarOpen }) => {
                 <div>토마토팜</div>
                 <ul>
                     <li>
-                        <Link to="/admin/chatbot"><i className="fa-solid fa-bullhorn"></i><br />고객상담</Link>
+                        <Link to="/admin/chatbot"><i className="fa-solid fa-bullhorn"></i><br />채팅 상담</Link>
                     </li>
                     <li>
                         <Link to="/admin/graph"><i className="fa-solid fa-square-poll-vertical"></i><br />통계</Link>
