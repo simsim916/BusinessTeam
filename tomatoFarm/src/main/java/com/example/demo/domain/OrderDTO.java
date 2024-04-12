@@ -17,18 +17,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OrderDTO {
 	
-	List<ItemDTO> itemList; 
-	String address1;
-	String address2;
-	Integer addressCode;
-	Integer phonenumber;
-	String nickname;
-	String order_message;
-	String nonLogin;
+	private List<ItemDTO> itemList; 
+	private String address1;
+	private String address2;
+	private Integer address_code;
+	private Integer phonenumber;
+	private String deliverymessage;
+	private Integer price;
+	private Integer discount;
+	private Integer deliveryprice;
+	private Integer point;
 	
+	private String id;
 	
 //	========= 임시 ========
-    private String id;
 //	======================
 //    private String item_name;
 //    private Integer addressCode;

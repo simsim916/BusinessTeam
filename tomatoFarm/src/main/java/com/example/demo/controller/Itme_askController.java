@@ -45,16 +45,16 @@ public class Itme_askController {
 	}
 
 	@Transactional
-	@PostMapping("/update")
-	public ResponseEntity<?> askinsert(@RequestBody Item_ask entity) {
+	@PostMapping("/merge")
+	public ResponseEntity<?> merge(@RequestBody Item_ask entity) {
 		ResponseEntity<?> result = null;
 		if (entity.getPassword() != null) {
 			String password = entity.getPassword();
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			entity.setPassword(encoder.encode(password));
-			result = ResponseEntity.status(HttpStatus.OK).body(item_askService.updateAsk(entity));
+			result = ResponseEntity.status(HttpStatus.OK).body(item_askService.merge(entity));
 		} else {
-			result = ResponseEntity.status(HttpStatus.OK).body(item_askService.updateAsk(entity));
+			result = ResponseEntity.status(HttpStatus.OK).body(item_askService.merge(entity));
 		}
 		return result;
 	}

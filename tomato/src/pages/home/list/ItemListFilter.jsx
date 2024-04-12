@@ -3,7 +3,6 @@ import './ItemListFilter.css'
 import { useEffect, useMemo, useRef } from "react";
 
 const ItemListFilter = ({ itemListSort, changeDeletedSort, deletedSort }) => {
-    const [searchParams, setSearchParams] = useSearchParams();
     const listfilter = useRef(null);
     const mealkit = useRef(0);
     const ingre = useRef(0);

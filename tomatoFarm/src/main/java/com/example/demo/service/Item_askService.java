@@ -18,7 +18,7 @@ public interface Item_askService {
 //	=================================
 	
 	//** 상품문의 등록
-	 Item_ask updateAsk(Item_ask entity);
+	 Item_ask merge(Item_ask entity);
 	 
 	 
 	 

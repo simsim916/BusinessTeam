@@ -1,22 +1,12 @@
 import { useState } from "react";
 import "./SelectDataBox.css";
 
-const SelectDataBoxRow = ({ column, item, changeItemList }) => {
-    const [newItem, setNewItem] = useState(item);
-
-    const changeItem = (event) => {
-        setNewItem((newItem) => ({
-            ...newItem,
-            [event.target.name]: event.target.value
-        }))
-
-        changeItemList(newItem);
-    }
+const SelectDataBoxRow = ({ style, changeItemRow, item }) => {
 
     return (
-        <div className="excelColumn" style={{ width: `${column.current.length * 150}px` }}>
-            {Object.keys(newItem).map((e, i) => (
-                <input type="text" onChange={changeItem} name={e} value={newItem[e]} key={i} />
+        <div onClick={() => changeItemRow(item)} className="excelColumn" style={{ ...style, }}>
+            {Object.keys(item).map((e, i) => (
+                <input style={{ ...style, }} type="text" name={e} value={item[e] || ''} key={i} readOnly />
             ))}
         </div>
     );

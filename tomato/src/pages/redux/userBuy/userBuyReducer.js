@@ -1,14 +1,20 @@
-import { USERBUY_DATA_REQUEST, USERBUY_DATA_SUCCESS, USERBUY_DATA_FAILURE, SET_USERBUY_DATA_ITEMLIST, SET_USERBUY_DATA_ADDRESS, SET_USERBUY_DATA_MESSAGE, SET_USERBUY_DATA_NONLOGIN } from './actions';
+import { POST_DATA_FAILURE, POST_DATA_REQUEST, POST_DATA_SUCCESS, SET_USERBUY_FORM, SET_USERBUY_ITEMLIST } from "./actions";
 
 const initialState = {
     userBuy: {
         loading: true,
-        data: {
+        buyList: JSON.parse(sessionStorage.getItem('buy')),
+        form: {
             itemList: JSON.parse(sessionStorage.getItem('buy')),
-            addressCode: 123,
-            address1: 'aaa',
-            address2: 'bbb',
-            order_message : '배송 전 연락바랍니다.'
+            address_code: '',
+            address1: '',
+            address2: '',
+            deliverymessage: '',
+            price: '',
+            discount: '',
+            delieveryprice: '',
+            point: '',
+            phonenumber: '',
         },
         error: null,
     }
@@ -16,57 +22,36 @@ const initialState = {
 
 const userBuyReducer = (state = initialState.userBuy, action) => {
     switch (action.type) {
-        case USERBUY_DATA_REQUEST:
+        case POST_DATA_REQUEST:
             return {
-                ...state.buyItem,
+                ...state,
                 loading: true,
                 error: null
             };
-        case USERBUY_DATA_SUCCESS:
+        case POST_DATA_SUCCESS:
             return {
-                ...state.buyItem,
+                ...state,
                 loading: false,
                 data: action.payload
             };
-        case USERBUY_DATA_FAILURE:
+        case POST_DATA_FAILURE:
             return {
-                ...state.buyItem,
+                ...state,
                 loading: false,
                 data: [],
                 error: action.payload
             };
-        case SET_USERBUY_DATA_ITEMLIST:
+        case SET_USERBUY_ITEMLIST:
             return {
-                ...state.buyItem,
-                data: {
-                    ...state.data,
-                    itemList: action.payload
-                }
+                ...state,
+                buyList: action.payload
             };
-        case SET_USERBUY_DATA_ADDRESS:
+        case SET_USERBUY_FORM:
             return {
-                ...state.buyItem,
-                data: {
-                    ...state.data,
-                    addressCode: action.addressCode,
-                    address1: action.address1,
-                    address2: action.address2
-                }
-            };
-        case SET_USERBUY_DATA_MESSAGE:
-            return {
-                ...state.buyItem,
-                data: {
-                    ...state.data,
-                    order_message : action.order_message,
-                }
-            };
-        case SET_USERBUY_DATA_NONLOGIN:
-            return {
-                ...state.buyItem,
-                data: {
-                    ...state.data,
-                    nonLogin : action.nonLogin,
+                ...state,
+                form: {
+                    ...state.form,
+                    ...action.payload
                 }
             };
         default:

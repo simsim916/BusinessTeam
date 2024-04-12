@@ -99,8 +99,6 @@ public class ItemController {
 				}
 			}
 		}
-		System.out.println(countList);
-		System.out.println(list);
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}
@@ -115,14 +113,15 @@ public class ItemController {
 
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 
-	@GetMapping("/allitem")
-	public ResponseEntity<?> selectAll() {
+	@GetMapping("/selectwhere")
+	public ResponseEntity<?> selectwhere(SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
-		List<ItemDTO> itemList = itemService.selectAll();
-
+		System.out.println(searchRequest);
+		PageRequest pageRequest = new PageRequest();
+		List<ItemDTO> itemList = itemService.selectItemListStringWhereType(pageRequest,searchRequest);
 		if (itemList != null && itemList.size() > 0) {
 			result = ResponseEntity.status(HttpStatus.OK).body(itemList);
-			log.info(itemList);
+			log.info(itemList.size());
 		} else {
 			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
 			log.info("데이터 못찾겠다");
@@ -131,28 +130,21 @@ public class ItemController {
 		return result;
 	}
 
-	@PostMapping(value = "/insert")
-	public ResponseEntity<?> insertItem(@RequestBody List<Item> entity) {
+	@PostMapping(value = "/merge")
+	public ResponseEntity<?> insertItem(@RequestBody List<Item> list) {
 		ResponseEntity<?> result = null;
-		for (Item e : entity) {
-			System.out.println(e.getCode());
-		}
-//    	System.out.println("****" + entity.getCode());
-//      itemService.insertItem(entity);
-		result = ResponseEntity.status(HttpStatus.OK).body("insert성공");
+		
+		if (itemService.merge(list).size() > 0)
+			result = ResponseEntity.status(HttpStatus.OK).body(itemService.selectItemListStringWhereType(new PageRequest(), new SearchRequest("sort1", "")));
+		else
+			result = ResponseEntity.status(HttpStatus.OK).body("데이터 입력 실패");
 		return result;
 	}
 
 	@GetMapping("/admingraph")
 	public ResponseEntity<?> adminStringColumn(SearchRequest searchRequest, PageRequest pageRequest) {
-		
 		ResponseEntity<?> result = null;
-		List<Item> list =  itemService.searchForAdmin(searchRequest);
-		for(Item item : list) {
-			System.out.println(item);
-			System.out.println("조회수 => " +item.getViews());
-		}
-//		System.out.println(list);
+		List<ItemDTO> list =  itemService.searchForAdmin(searchRequest, pageRequest);
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}

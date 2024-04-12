@@ -2,6 +2,7 @@
 import { useState } from "react";
 import "./WriteReply.css";
 import axios from 'axios';
+import { SERVER_RESOURCE } from "../../../../model/server-config";
 
 const WriteReply = ({ ask, setWriteReply }) => {
 
@@ -13,10 +14,7 @@ const WriteReply = ({ ask, setWriteReply }) => {
 
 
     const submitReply = (e) => {
-        axios.post(`http://localhost:8090/itemask/update`, {
-            ...ask,
-            reply: reply
-        }, {
+        axios.post(`http://localhost:8090/itemask/update`, ask, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -41,7 +39,7 @@ const WriteReply = ({ ask, setWriteReply }) => {
             <div>
                 <div className="WriteReplyBox">
                     <div className="replyTop">
-                        <div className="productIMG"><img src={process.env.PUBLIC_URL + '/img/itemImg/5000100_2.jpg'} alt="" /></div>
+                        <div className="productIMG"><img src={SERVER_RESOURCE + '/img/itemImg/5000100_2.jpg'} alt="" /></div>
                         <div className="itemIntro">
                             <label>상품이름&nbsp;&nbsp;<input type="text" value={`ask.item_code`} readOnly /></label>
                             <label>상품코드&nbsp;&nbsp;<input type="text" value={ask.item_code} readOnly /></label>
@@ -54,7 +52,7 @@ const WriteReply = ({ ask, setWriteReply }) => {
                             <textarea value={ask.contents} readOnly></textarea>
                         </label>
                         <label>답변내용
-                            <textarea onChange={changeReply} value={reply}></textarea>
+                            <textarea onChange={changeReply} value={ask.reply}></textarea>
                         </label>
                     </div>
                     <div id="writeButton">

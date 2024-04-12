@@ -35,11 +35,7 @@ public class OrderController {
 		ResponseEntity<?> result = null;
 		String token = tokenProvider.parseBearerToken(request);
 		String id = null;
-		if(token != null) {
 			id = tokenProvider.validateAndGetUserId(token);
-		} else {
-			id = dto.getNonLogin();
-		}
 		OrderRequest orderRequest = new OrderRequest();
 		ItemOrder orderEntity = orderRequest.makeOrderEntity(dto, id);
 		List<OrderDetail> detailList = orderRequest.makeDetailEntity(dto,id);

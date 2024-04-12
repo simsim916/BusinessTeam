@@ -37,7 +37,7 @@ public class VisitController {
 		visitService.update(entity); 
 	}
 	
-	@GetMapping("/selectall")
+	@GetMapping("/selectwhere")
 	public ResponseEntity<?> selectAll(SearchRequest searchRequest) {
 		ResponseEntity result = null;
 		

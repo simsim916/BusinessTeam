@@ -61,6 +61,9 @@ const Header = () => {
                                 <Link to="/member/signup">회원가입</Link>
                             </>
                     }
+                    {
+                        <Link to="/admin"> 관리자페이지</Link>
+                    }
                 </div>
             </div>
             <div id="searchBar">

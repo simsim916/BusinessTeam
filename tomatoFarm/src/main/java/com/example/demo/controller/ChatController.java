@@ -76,7 +76,7 @@ public class ChatController {
 		String id = tokenProvider.validateAndGetUserId(token);
 		entity.setWriter(id);
 		List<Chat_messageDTO> list = chatService.selectAllmessageWhereRoomSeq(entity);
-		if (list != null && list.size() > 0) {
+		if (list != null) {
 			result = ResponseEntity.status(HttpStatus.OK).body(list);
 		} else {
 			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("selectmessage failed");

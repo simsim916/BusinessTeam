@@ -74,7 +74,7 @@
 }
 
 #chatBot_Unidentified li:nth-of-type(2) {
-    width: 60px;
+    width: 50px;
     /* width: 10%; */
 }
 
@@ -82,22 +82,18 @@
     color: white;
     height: 20px;
     margin-top: 10px;
-    width: 120px;
-    /* width: 10%; */
+    width: 80px;
 }
 #chatBot_Unidentified li:nth-of-type(4) {
-    width: 120px;
-    /* width: 10%; */
+    width: 100px;
 }
 
 #chatBot_Unidentified li:nth-of-type(5) {
-    width: 170px;
-    /* width: 15%; */
+    width: calc((100% - 50px - 50px - 80px - 100px - 70px - 20px)/2);
 }
 
 #chatBot_Unidentified li:nth-of-type(6) {
-    width: calc(100% - 50px - 60px - 120px - 120px - 170px - 70px - 20px);
-    /* width: 25%; */
+    width: calc((100% - 50px - 50px - 80px - 100px - 70px - 20px)/2);
 }
 
 #chatBot_Unidentified li:nth-of-type(7) {

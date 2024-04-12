@@ -3,16 +3,18 @@ import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import Error from '../../components/Error';
 import Loading from '../../components/Loading';
-import PagingBox from "../../components/PagingBox";
+import PagingBox, { paging } from "../../components/PagingBox";
 import SelectDataBoxRow from './SelectDataBoxRow';
+import { api } from '../../../model/model';
+import { useSelector } from "react-redux";
+import ChangeList_Row from './changeList/ChangeList_Row';
 
 const SelectDataBox = ({ myLocation }) => {
 
     console.log(`SelectDataBox 렌더링`);
 
-
     const [formData, setFormData] = useState({
-        column: 'name',
+        column: 'sort1',
         keyword: ''
     });
     const column = useRef(null);
@@ -21,41 +23,60 @@ const SelectDataBox = ({ myLocation }) => {
     const [itemList, setItemList] = useState(null);
     const [lastSort, setLastSort] = useState(null);
     const [currPage, setCurrPage] = useState(1);
-    const [limit, setLimit] = useState(25);
-    const itemForm = useRef([]);
+    const [size, setSize] = useState(25);
+    const user = useSelector(state => state.user.data);
+    const [selectedItem, setSelectedItem] = useState(null);
+    const [changedList, setChangedList] = useState([]);
+    const [whichTable, setWhichTable] = useState('/item');
 
     useEffect(() => {
-        axios.get(`http://localhost:8090/item/allitem`
-        ).then(res => {
-            setItemList(res.data);
-            column.current = (Object.keys(res.data[0]));
-            setLoading(false);
-        }).catch(err => {
-            console.log(err.message)
-            setLoading(false);
-            setError(true);
-        })
-        myLocation();
-    }, [])
+        api(`${whichTable}/selectwhere?column=${formData.column}&keyword=${formData.keyword}`, 'get', null, user.token)
+            .then(res => {
+                setItemList(res.data);
+                column.current = (Object.keys(res.data[0]));
+                setLoading(false);
+            }).catch(err => {
+                setLoading(false);
+                setError(true);
+            })
+    }, [whichTable])
 
-    const changeItemList = (data) => {
-        let item = itemList.filter((e) => e[column.current[0]] == data[column.current[0]]);
-        setItemList((itemList) => [
-            ...itemList,
-            data
-        ])
-        let item2 = itemList.filter((e) => e[column.current[0]] == data[column.current[0]]);
-        console.log(item)
-        console.log(item2)
-        console.log(itemList)
+    const changeTable = (e) => {
+        setWhichTable(e.target.value);
+        switch (e.target.value) {
+            case '/user':
+                setFormData({
+                    column: 'id',
+                    keyword: ''
+                })
+                break;
+            case '/event':
+                setFormData({
+                    column: 'name',
+                    keyword: ''
+                })
+                break;
+            case '/item':
+                setFormData({
+                    column: 'sort1',
+                    keyword: ''
+                })
+                break;
+        }
+        setSelectedItem(null);
+        setChangedList([]);
+        setItemList([])
     }
 
-    const paging = () => (list, pageNum, size) => {
-        if (list != null) {
-            const start = size * (pageNum - 1);
-            const end = pageNum * size;
-            return list.slice(start, end);
-        }
+    const changeItemRow = (item) => {
+        setSelectedItem(item);
+    }
+
+    const changeSelectedItem = (e) => {
+        setSelectedItem((prev) => ({
+            ...prev,
+            [e.target.id]: e.target.value
+        }))
     }
 
     const sortByColumn = (event) => {
@@ -90,50 +111,112 @@ const SelectDataBox = ({ myLocation }) => {
         setCurrPage(1);
     };
 
+    const changeChangedList = () => {
+        setChangedList([...changedList, selectedItem]);
+        setItemList(itemList.map(item =>
+            item[Object.keys(item)[0]] === selectedItem[Object.keys(selectedItem)[0]] ? selectedItem : item
+        ));
+    }
+
     const searchBoxChange = (event) => {
         const { name, value } = event.target;
         setFormData((formData) => ({
             ...formData,
             [name]: value
         }));
-        console.log(formData);
     };
+
+    const getSearch = (e) => {
+        e.preventDefault();
+        api(`${whichTable}/selectwhere?column=${formData.column}&keyword=${formData.keyword}`, 'get', null, user.token
+        ).then(res => setItemList(res.data)
+        ).catch(err => console.log(err.message))
+    }
+
+    const insertData = async () => {
+        const response = await api(`${whichTable}/merge`, 'post', JSON.stringify(changedList), user.token)
+        setItemList(response.data)
+    }
+
     if (loading) return <Loading />
     if (error) return <Error />
+
     return (
         <>
-            <div id="excelBox" className="containerA">
-                <div id="topBox">
-                    <div>
-                        <h3>
-                            <i className="fa-solid fa-list"></i>자료 조회
-                        </h3>
-                        &nbsp;&nbsp;
-                    </div>
-                    <form id="topButtonBox">
-                        <select name="column" id="column" onChange={searchBoxChange}>
-                            {Object.keys(itemList[0]).map((e, i) => (<option key={i} value={e}>{e}</option>))}
+            <div id="topBox">
+                <h3>
+                    <i className="fa-solid fa-list"></i>자료 조회
+                </h3>
+                <div id="optionBar">
+                    <label htmlFor=""> DATA -&nbsp;
+                        <select name="" id="" onChange={changeTable}>
+                            <option value="/item">상품</option>
+                            <option value="/user">회원</option>
+                            <option value="/event">이벤트</option>
                         </select>
-                        <input type="text" name="keyword" onChange={searchBoxChange} />
-                        <button type="button">검색</button>
-                    </form>
-                </div>
-                <div id="dataListBox">
-                    <div id="excelHead" style={{ width: `${column.current.length * 150}px` }}>
-                        {column.current ? column.current.map((col, i) => <div id={col} key={i} onClick={sortByColumn}>{col}<i className="fa-solid fa-caret-up"></i></div>) : ""}
+                    </label>
+                    <div id="dataSearch">
+                        <select name="column" id="column" value={formData.column} onChange={searchBoxChange}>
+                            {itemList && itemList.length > 0 && Object.keys(itemList[0]).map((e, i) => (<option key={i} value={e}>{e}</option>))}
+                        </select>
+                        <input type="text" name="keyword" value={formData.keyword} onChange={searchBoxChange} />
+                        <div onClick={getSearch}>검색</div>
                     </div>
-                    <div>
-                        {
-                            paging()(itemList, currPage, limit).map((e, i) => (<SelectDataBoxRow changeItemList={changeItemList} column={column} item={e} key={i} />))
-                        }
-                    </div>
+                    <div id="dataSave" onClick={insertData}>저장</div>
                 </div>
-            </div >
+            </div>
+            <div id="excelBox" className="containerA">
+                <div className="dataListBox">
+                    <div className="excelHead" style={{ width: `${column.current.length * 150}px` }}>
+                        {column.current ? column.current.map((col, i) => <div id={col} key={i} onClick={sortByColumn}>{col}<i className="fa-solid fa-caret-up"></i></div>) : null}
+                    </div>
+                    {paging(itemList, currPage, size).map((e, i) =>
+                    (<SelectDataBoxRow
+                        changeItemRow={changeItemRow}
+                        column={column}
+                        item={e} key={i}
+                        style={{
+                            backgroundColor:
+                                (selectedItem && selectedItem[Object.keys(selectedItem)[0]] === e[Object.keys(e)[0]]) ?
+                                    'yellow'
+                                    :
+                                    null,
+                            color:
+                                (changedList && changedList.some(k => k === e)) ?
+                                    'red'
+                                    :
+                                    null
+                        }}
+                    />))}
+                </div>
+            </div>
             <PagingBox
-                limit={limit}
+                limit={size}
                 list={itemList}
                 currPage={currPage}
                 setCurrPage={setCurrPage} />
+            <div id="insertObjectBox" className="containerA">
+                <div id="updateBox">
+                    <h3>
+                        <i className="fa-solid fa-list"></i>자료 조회
+                    </h3>
+                    <div onClick={changeChangedList}>입력</div>
+                </div>
+                <div className="dataListBox">
+                    <div className="excelHead" style={{ width: `${column.current.length * 150}px` }}>
+                        {
+                            column.current ?
+                                column.current.map((col, i) => <div id={col} key={i}>{col}</div>)
+                                :
+                                null
+                        }
+                    </div>
+                    <div className="ObjectBody">
+                        {column.current.map((e, i) => <input onChange={changeSelectedItem} type="text" value={selectedItem ? selectedItem[e] : ''} key={i} id={e} />)}
+                    </div>
+                </div>
+            </div>
+
         </>
     )
 }

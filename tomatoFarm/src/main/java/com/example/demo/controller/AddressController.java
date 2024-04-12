@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,22 +28,25 @@ public class AddressController {
 	TokenProvider tokenProvider;
 	
 	@GetMapping("/select")
-	public List<UserAddress> selectAddressWhereId(HttpServletRequest request) {
+	public ResponseEntity<?> selectAddressWhereId(HttpServletRequest request) {
+		ResponseEntity<?> result = null;
 		String token = tokenProvider.parseBearerToken(request);
 		String id = tokenProvider.validateAndGetUserId(token);
 		List<UserAddress> list =  addressService.selectAddressWhereId(id);
-		for(UserAddress address : list) {
-			System.out.println(address);
-		}
-		return addressService.selectAddressWhereId(id);
+		result = ResponseEntity.status(HttpStatus.OK).body(list);
+		return result;
 	}
 	
 	@PostMapping("/merge")
-	public UserAddress insertUserAddress(@RequestBody UserAddress entity, HttpServletRequest request) {
+	public ResponseEntity<?> insertUserAddress(@RequestBody UserAddress entity, HttpServletRequest request) {
+		ResponseEntity<?> result = null;
 		String token = tokenProvider.parseBearerToken(request);
 		String id = tokenProvider.validateAndGetUserId(token);
 		entity.setId(id);
-		return addressService.insertUserAddress(entity);
+		addressService.insertUserAddress(entity);
+		List<UserAddress> list =  addressService.selectAddressWhereId(id);
+		result = ResponseEntity.status(HttpStatus.OK).body(list);
+		return result;
 	}
 	
 	

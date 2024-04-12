@@ -24,7 +24,7 @@ public class item_event {
 	Integer code;
 	String name;
 	Integer discount;
-	private LocalDate startDate;
-	private LocalDate endDate;
+	private LocalDate startdate;
+	private LocalDate enddate;
 
 }

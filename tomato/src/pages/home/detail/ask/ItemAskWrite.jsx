@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Loading from './../../../components/Loading';
 import Error from './../../../components/Error';
 import axios from 'axios';
+import { SERVER_RESOURCE } from '../../../../model/server-config';
 
 
 const ItemAskForm = ({ item, setRefresh, refresh, itemAskClick }) => {
@@ -15,7 +16,8 @@ const ItemAskForm = ({ item, setRefresh, refresh, itemAskClick }) => {
         title: '',
         contents: '',
         reply: '',
-        password: null
+        password: null,
+        type: '아이템'
     })
 
     const changeAsk = (event) => {
@@ -29,7 +31,7 @@ const ItemAskForm = ({ item, setRefresh, refresh, itemAskClick }) => {
         setChecked(!checked)
     }
     const submitAsk = async () => {
-        await axios.post(`http://localhost:8090/itemask/update`, ask, {
+        await axios.post(`http://localhost:8090/itemask/merge`, ask, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -68,7 +70,7 @@ const ItemAskForm = ({ item, setRefresh, refresh, itemAskClick }) => {
                             <h4 >상품 문의하기</h4>
                             <div id="itemAskTop">
                                 <div id='itemAskImg'>
-                                    <img src={process.env.PUBLIC_URL + '/img/itemImg/5000100_2.jpg'} alt="" />
+                                    <img src={SERVER_RESOURCE + '/img/itemImg/5000100_2.jpg'} alt="" />
                                 </div>
                                 <div id='itemTitle'>
                                     {item.name}

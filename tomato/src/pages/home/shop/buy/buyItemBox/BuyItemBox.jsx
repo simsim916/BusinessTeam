@@ -2,22 +2,30 @@
 import './BuyItemBox.css';
 import BuyItemBoxRow from './BuyItemBoxRow';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUserBuyItemList, setUserBuyStorage } from '../../../../redux/userBuy/actions';
+import { setUserBuyForm, setUserBuyItemList } from '../../../../redux/userBuy/actions';
+import { useEffect, useState } from 'react';
 
-const BuyItemBox = ({
-    handleCheck, // checkedList 아이템 선택/해제
-    buy, // 장바구니에서 클릭된 아이템만 구매페이지로
-}) => {
+const BuyItemBox = ({ }) => {
 
     /* Redux */
     const dispatch = useDispatch();
-    const userBuy = useSelector(state => state.userBuy.data.itemList);
+    const userBuy = useSelector(state => state.userBuy.buyList);
+    const userBuyForm = useSelector(state => state.userBuy.form)
 
+    console.log(userBuy)
     const handleAllCheck = () => {
-        if (userBuy.length === buy.length) {
-            dispatch(setUserBuyItemList([]))
+        if (userBuyForm.itemList && userBuy.length == userBuyForm.itemList.length) {
+            dispatch(setUserBuyForm({ itemList: [] }))
         } else {
-            dispatch(setUserBuyItemList(buy))
+            dispatch(setUserBuyForm({ itemList: userBuy }))
+        }
+    }
+
+    const changeCheckedList = (item) => {
+        if (userBuyForm.itemList && userBuyForm.itemList.find(e => e.code === item.code)) {
+            dispatch(setUserBuyForm({ itemList: userBuyForm.itemList.filter(e => e.code !== item.code) }))
+        } else {
+            dispatch(setUserBuyForm({ itemList: [...userBuyForm.itemList, item] }))
         }
     }
 
@@ -32,15 +40,19 @@ const BuyItemBox = ({
         } else {
             ar[key].amount = type
         }
-        dispatch(setUserBuyItemList(ar));
+        dispatch(setUserBuyForm({ itemList: ar }))
     }
+
+    console.log(userBuy);
 
     return (
         <div id='BuyItemBox'>
-            <input type="checkbox"
-                onChange={handleAllCheck}
-                checked={buy && userBuy && userBuy.length === buy.length || false} >
-            </input>전체선택
+            <div id='BuyItemBoxCheck'>
+                <input type="checkbox"
+                    onChange={handleAllCheck}
+                    checked={userBuyForm.itemList && userBuy && userBuy.length === userBuyForm.itemList.length || false} >
+                </input>전체선택
+            </div>
             <ul id="BuyItemBoxTitle">
                 <li>선택</li>
                 <li>상품사진</li>
@@ -49,7 +61,7 @@ const BuyItemBox = ({
                 <li>총 상품금액</li>
                 <li>배송비</li>
             </ul>
-            {buy && buy.map((e, i) => <BuyItemBoxRow buy={buy} changeItemList={changeItemList} item={e} key={i} idx={i} handleCheck={handleCheck} />)}
+            {userBuy && userBuy.map((e, i) => <BuyItemBoxRow  changeItemList={changeItemList} item={e} key={i} idx={i} changeCheckedList={changeCheckedList} />)}
         </div>
     );
 
