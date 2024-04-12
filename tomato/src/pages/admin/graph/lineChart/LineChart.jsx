@@ -35,11 +35,11 @@ const LineChart = ({ graphData }) => {
             chartInstance = new Chart(ctx, {
                 type: "line",
                 data: {
-                    labels: date,
+                    labels: [1,2,3],
                     datasets: [
                         {
                             label: "itemListArr",
-                            data: test,
+                            data: [1,2,3],
                             borderColor: "blue",
                             backgroundColor: "rgba(255, 99, 132, 0.2)",
                             pointRadius: 5, // 포인트 크기

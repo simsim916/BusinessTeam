@@ -118,7 +118,7 @@ public class ItemController {
 		ResponseEntity<?> result = null;
 		System.out.println(searchRequest);
 		PageRequest pageRequest = new PageRequest();
-		List<ItemDTO> itemList = itemService.selectItemListStringWhereType(pageRequest,searchRequest);
+		List<ItemDTO> itemList = itemService.searchForAdmin(searchRequest,pageRequest);
 		
 		
 		if (itemList != null && itemList.size() > 0) {
@@ -137,7 +137,7 @@ public class ItemController {
 		ResponseEntity<?> result = null;
 		
 		if (itemService.merge(list).size() > 0)
-			result = ResponseEntity.status(HttpStatus.OK).body(itemService.selectItemListStringWhereType(new PageRequest(), new SearchRequest("sort1", "")));
+			result = ResponseEntity.status(HttpStatus.OK).body(itemService.searchForAdmin(new SearchRequest("sort1", ""), new PageRequest()));
 		else
 			result = ResponseEntity.status(HttpStatus.OK).body("데이터 입력 실패");
 		return result;
