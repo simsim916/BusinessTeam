@@ -1,44 +1,59 @@
-#excelBox {
-    height: 75%;
-}
-
 #topBox {
-    height: 40px;
+    height: 12%;
+    width: 100%;
+    position: relative;
 }
 
-#topBox h3 {
-    font-size: 1.5em;
+#topBox #optionBar {
+    width: 100%;
+    background-color: #9B1B30;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    padding: 0 10px;
+    color: white;
 }
 
 #topBox h3 i {
     margin-right: 10px;
 }
 
-#topButtonBox input {
-    text-indent: 10px;
-    height: 30px;
-}
-
-#topButtonBox {
-    height: 30px;
-    gap: 10px;
-    font-size: 16px;
-}
-
-#topButtonBox select {
-    width: 80px;
-    text-indent: 10px;
-}
-
-#topButtonBox button {
+#dataSave{
+    position: absolute;
+    top: 5px;
+    right: 0px;
     width: 50px;
-    padding: 2px;
+    line-height: 25px;
+    text-align: center;
     background-color: #9B1B30;
-    color: white;
+    cursor: pointer;
+}
+
+#dataSearch{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 10px;
+}
+
+#dataSearch>div{
+    background-color: white;
+    color: black;
+    width: 50px;
+    line-height: 22px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+
+#excelBox {
+    height: 63%;
 }
 
 .dataListBox {
-    height: calc(100% - 50px);
+    height: calc(100% - 0px);
     overflow-x: auto;
     overflow-y: scroll;
     position: relative;

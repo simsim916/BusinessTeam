@@ -9,14 +9,14 @@ import {
 } from "chart.js";
 
 const LineChart = ({ graphData }) => {
-    
+
     const chartRef = useRef(null);
     let chartInstance = null;
 
     useEffect(() => {
         // =====================================================
         let DateArr = [];
-        DateArr = [1,2,3,4,5,6,7,8,9,10];
+        DateArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
         let showData = [];
         graphData.map(e => showData.push(e.views));
@@ -96,7 +96,7 @@ const LineChart = ({ graphData }) => {
         };
     }, [graphData]);
 
-    return <canvas ref={chartRef} />;
+    return <canvas style={{width:'100%', height:'100%'}} ref={chartRef} />;
 };
 
 export default LineChart;

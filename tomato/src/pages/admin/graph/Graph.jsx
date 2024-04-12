@@ -2,9 +2,8 @@ import { useEffect, useState } from "react";
 import "./Graph.css";
 import LineChart from "./lineChart/LineChart";
 import { api } from "../../../model/model";
-import Graph_ranking from "./graph_ranking/Graph_ranking";
 import { useSelector } from 'react-redux';
-
+import GraphDataBox from './GraphDataBox/GraphDataBox'
 
 
 const Graph = ({ myLocation }) => {
@@ -40,50 +39,51 @@ const Graph = ({ myLocation }) => {
     }
 
     const checkSubCategory = (event) => {
-        
+
     }
 
     return (
-
-        <>
-            <div id="GraphContainer">
-                <select name="mainCategory" id="mainCategory" onChange={checkMainCategory}>
-                    <option value="x">=======</option>
-                    <option value="/item/admingraph">상품 통계</option>
-                    <option value="/visit/selectwhere">페이지 방문 통계</option>
-                </select>
-                &nbsp;&nbsp;
-                {
-                    mainCategory == '/item/admingraph'
-                        ?
-                        <select name="subCategory" id="subCategory" onChange={checkSubCategory}>
-                            <option value="">========</option>
-                            <option value="프레시지">프레시지</option>
-                            <option value="김구원 선생">김구원 선생</option>
+        <div id="GraphContainer">
+            <div id="graphHead">
+                <h3>
+                    <i className="fa-solid fa-list"></i>자료 조회
+                </h3>
+                <div id='optionBar'>
+                    <label htmlFor=""> DATA -
+                        <select name="" id="">
+                            <option value="">🍅🍅🍅🍅</option>
+                            <option value="">페이지</option>
+                            <option value="">상품</option>
                         </select>
-                        :
-                        <select name="subCategory" id="subCategory" onChange={checkSubCategory}>
-                            <option value="">========</option>
-                            <option value="?">3일</option>
-                            <option value="">7일</option>
+                    </label>
+                    <label htmlFor=""> 조회대상 -
+                        <select name="" id="">
+                            <option value="">🍅🍅🍅🍅</option>
+                            <option value="">페이지</option>
+                            <option value="">상품</option>
                         </select>
-
-                }
-
-            </div>
-            <div id="graphAndRankedItemBox">
-                <div id="graphBox">
-                    {graphData && <LineChart graphData={graphData} />}
-                </div>
-                <div>
-                    <div id="rankedItemBox">
-                        <div>
-                            {graphData && graphData.map((e, i) => <Graph_ranking item={e} key={i} />)}
-                        </div>
-                    </div>
+                    </label>
+                    <label htmlFor=""> 조회기준 -
+                        <select name="" id="">
+                            <option value="">🍅🍅🍅🍅</option>
+                            <option value="">일별</option>
+                            <option value="">월별</option>
+                            <option value="">누적</option>
+                        </select>
+                    </label>
+                    <label htmlFor=""> 조회기간 -
+                        <input type="month" />
+                        ~
+                        <input type="month" />
+                    </label>
+                    <div id='optionBTN'>조회</div>
                 </div>
             </div>
-        </>
+            <div id="graphBox">
+                {graphData && <LineChart graphData={graphData} />}
+            </div>
+            <GraphDataBox />
+        </div>
     );
 }
 

@@ -146,28 +146,30 @@ const SelectDataBox = ({ myLocation }) => {
 
     return (
         <>
-            <div id="excelBox" className="containerA">
-                <div id="topBox">
-                    <div>
-                        <h3>
-                            <i className="fa-solid fa-list"></i>자료 조회
-                            <select name="" id="" onChange={changeTable}>
-                                <option value="">========</option>
-                                <option value="/user">회원 관리</option>
-                                <option value="/event">이벤트 관리</option>
-                            </select>
-                        </h3>
-                    </div>
-                    <form id="topButtonBox">
-                        <div onClick={insertData}>insert 테스트</div>
+            <div id="topBox">
+                <h3>
+                    <i className="fa-solid fa-list"></i>자료 조회
+                </h3>
+                <div id="optionBar">
+                    <label htmlFor=""> DATA -&nbsp;
+                        <select name="" id="" onChange={changeTable}>
+                            <option value="">🍅🍅🍅🍅</option>
+                            <option value="/item">상품</option>
+                            <option value="/user">회원</option>
+                            <option value="/event">이벤트</option>
+                        </select>
+                    </label>
+                    <div id="dataSave" onClick={insertData}>저장</div>
+                    <div id="dataSearch">
                         <select name="column" id="column" value={formData.column} onChange={searchBoxChange}>
                             {itemList && itemList.length > 0 && Object.keys(itemList[0]).map((e, i) => (<option key={i} value={e}>{e}</option>))}
-
                         </select>
                         <input type="text" name="keyword" value={formData.keyword} onChange={searchBoxChange} />
-                        <button type="button" onClick={getSearch}>검색</button>
-                    </form>
+                        <div onClick={getSearch}>검색</div>
+                    </div>
                 </div>
+            </div>
+            <div id="excelBox" className="containerA">
                 <div className="dataListBox">
                     <div className="excelHead" style={{ width: `${column.current.length * 150}px` }}>
                         {column.current ? column.current.map((col, i) => <div id={col} key={i} onClick={sortByColumn}>{col}<i className="fa-solid fa-caret-up"></i></div>) : null}
