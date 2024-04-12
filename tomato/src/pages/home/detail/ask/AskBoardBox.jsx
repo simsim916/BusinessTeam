@@ -70,7 +70,7 @@ const AskBoardBox = ({ item }) => {
                     }
                 </div>
 
-                {/* <div id="askBoardBtn">
+                <div id="askBoardBtn">
                 <i className="fa-solid fa-angles-left"></i>
                 <i className="fa-solid fa-angle-left"></i>
                 <span> 1 </span>
@@ -78,7 +78,7 @@ const AskBoardBox = ({ item }) => {
                 <span> 3 </span>
                 <i className="fa-solid fa-angle-right"></i>
                 <i className="fa-solid fa-angles-right"></i>
-            </div> */}
+            </div>
                 <PagingBox
                     list={pageList}
                     limit={limit}
