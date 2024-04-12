@@ -1,8 +1,9 @@
 import "./CustomerQA.css";
 import { useState } from 'react';
-
-const CustomerQA = () => {
-
+import { api } from '../../model/model'
+import { useSelector } from 'react-redux';
+const CustomerQA = (setRefresh) => {
+    const user = useSelector(state => state.user)
     const [form, setForm] = useState({
         type: '회원',
         title: '',
@@ -31,6 +32,23 @@ const CustomerQA = () => {
             [event.target.name]: event.target.value
         }))
     }
+
+    const submitQA = async () => {
+        await api(`http://localhost:8090/itemask/merge`, 'post', form, user.token
+        ).then(res => {
+            setLoading(false);
+            console.log('제출성공')
+        }).catch(err => {
+            console.log(err.message)
+            setLoading(false);
+            setError(true);
+        });
+        // setRefresh(!refresh);
+        resetForm();
+    }
+
+    const [Loading, setLoading] = useState(false);
+    const [Error, setError] = useState(false);
 
     console.log(form)
     return (
@@ -136,7 +154,7 @@ const CustomerQA = () => {
                 <h3><i className="fa-solid fa-message"></i> 1:1 문의하기 <i className="fa-solid fa-message"></i></h3>
                 <div id="customerQABottom">
                     <div className="customerQAKeword">
-                        <div id='kewordSelectQA'>문의유형 선택</div>
+                        <div id='kewordSelectQA'>문의 유형</div>
                         <div id='kewordListQA'>
                             <label><input onChange={(e) => changeForm(e)} type='radio' name='type' value='회원' checked={form.type == '회원'}></input>회원</label>
                             <label><input onChange={(e) => changeForm(e)} type='radio' name='type' value='상품' checked={form.type == '상품'}></input>상품</label>
@@ -155,7 +173,7 @@ const CustomerQA = () => {
                 </div>
                 <div id="customerQAButton">
                     <button onClick={() => resetForm()} id="customerQACancle">취소하기</button>
-                    <button id="customerQAEnter">문의하기</button>
+                    <button onClick={submitQA} id="customerQAEnter">문의하기</button>
                 </div>
             </div>
         </>

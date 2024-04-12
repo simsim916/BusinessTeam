@@ -28,7 +28,7 @@
     position: relative;
     padding: 0 20px;
     flex-direction: column;
-    margin-top: 15px;
+    margin: 15px 0 50px 0;
 }
 
 #bestQAForm .bestQARow:hover {
