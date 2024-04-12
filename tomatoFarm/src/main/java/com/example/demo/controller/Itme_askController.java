@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Item_ask;
+import com.example.demo.jwtToken.TokenProvider;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.service.Item_askService;
@@ -30,6 +32,7 @@ import lombok.extern.log4j.Log4j2;
 public class Itme_askController {
 	private final Item_askService item_askService;
 	PasswordEncoder passwordEncoder;
+	TokenProvider tokenProvider;
 
 	@GetMapping("/select")
 	public ResponseEntity<?> selectItem_askList(PageRequest pageRequest, SearchRequest searchRequest) {
@@ -46,8 +49,11 @@ public class Itme_askController {
 
 	@Transactional
 	@PostMapping("/merge")
-	public ResponseEntity<?> merge(@RequestBody Item_ask entity) {
+	public ResponseEntity<?> merge(@RequestBody Item_ask entity, HttpServletRequest request) {
 		ResponseEntity<?> result = null;
+		String token = tokenProvider.parseBearerToken(request);
+		String id = tokenProvider.validateAndGetUserId(token);
+		entity.setWriter(id);
 		if (entity.getPassword() != null) {
 			String password = entity.getPassword();
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
