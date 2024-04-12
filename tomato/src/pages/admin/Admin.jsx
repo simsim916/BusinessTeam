@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import "./Admin.css";
-import InsertDataBox from "./insertDataBox/InsertDataBox";
 import SelectDataBox from "./selectDataBox/SelectDataBox";
 import SideMenu from './sideMenu/SideMenu';
 import SelectAskBox from "./selectAskBox/SelectAskBox";
@@ -55,7 +54,6 @@ const Admin = () => {
                 <Routes>
                     {/* <Route path='/select' element={<SelectDataBox />} /> */}
                     <Route path='/select' element={<SelectDataBox myLocation={myLocation} />} />
-                    <Route path='/insert' element={<InsertDataBox myLocation={myLocation} />} />
                     <Route path='/ask' element={<SelectAskBox myLocation={myLocation} />} />
                     <Route path='/graph' element={<Graph myLocation={myLocation} />} />
                     <Route path='/chatbot' element={<Admin_Chatbot myLocation={myLocation} />} />

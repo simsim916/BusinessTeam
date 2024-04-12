@@ -52,9 +52,6 @@ const SideMenu = ({ openSideBar, sideBarOpen, currLocation }) => {
                         <Link to="/admin/select"><i className="fa-solid fa-magnifying-glass"></i><br />상품 조회</Link>
                     </li>
                     <li>
-                        <Link to="/admin/insert"><i className="fa-solid fa-file-import"></i><br />상품 입력</Link>
-                    </li>
-                    <li>
                         <Link to="/admin/ask"><i className="fa-solid fa-comment-dots"></i><br />문의 목록</Link>
                     </li>
                 </ul>
