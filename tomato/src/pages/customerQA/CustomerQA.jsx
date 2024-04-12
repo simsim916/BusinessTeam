@@ -125,11 +125,10 @@ const CustomerQA = () => {
                         <div className="customerQAKeword">
                             <div id='kewordSelectQA'>문의유형 선택</div>
                             <div id='kewordListQA'>
-                                <label><input type='radio' id='radio' name="radio"></input>회원정보 관련</label>
-                                <label><input type='radio' id='radio' name="radio"></input>배송 관련</label>
-                                <label><input type='radio' id='radio' name="radio"></input>취소/교환/반품</label>
-                                <label><input type='radio' id='radio' name="radio"></input>상품 관련</label>
-                                <label><input type='radio' id='radio' name="radio"></input>포인트/이벤트</label>
+                                <label><input type='radio' id='radio' name="radio"></input>회원</label>
+                                <label><input type='radio' id='radio' name="radio"></input>상품</label>
+                                <label><input type='radio' id='radio' name="radio"></input>이벤트</label>
+                                <label><input type='radio' id='radio' name="radio"></input>홈페이지</label>
                             </div>
                         </div>
                         <div className="customerQATag">

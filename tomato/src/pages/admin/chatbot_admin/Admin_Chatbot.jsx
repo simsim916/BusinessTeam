@@ -14,15 +14,17 @@ const Admin_Chatbot = () => {
 
     /* 채팅의 roomSeq 번호만 저장하는 함수 */
     const roomSeq = useRef([]);
-    useEffect(() => {
-        const getdata = async () => {
-            const response = await api('/chat/selectroom?column=seq', 'get', null, userinfo.token);
-            setRoomList(response.data);
-            for (let e of response.data) {  // roomSeq 변수에 채팅데이터의 room_seq 중복없이 담기
-                if (!roomSeq.current.includes(e.seq))
-                    roomSeq.current.push(e.seq);
-            }
+
+    const getdata = async () => {
+        const response = await api('/chat/selectroom?column=seq', 'get', null, userinfo.token);
+        setRoomList(response.data);
+        for (let e of response.data) {  // roomSeq 변수에 채팅데이터의 room_seq 중복없이 담기
+            if (!roomSeq.current.includes(e.seq))
+                roomSeq.current.push(e.seq);
         }
+    }
+
+    useEffect(() => {
         getdata();
     }, [])
 
@@ -64,7 +66,7 @@ const Admin_Chatbot = () => {
 
             <div id='admin_ChatBotContainer'>
                 {
-                    showChatbot && showChatbot.map((e, i) => <ChatBotBox amount={showChatbot.length} admin_root={e} key={i} changeShowChatbot={changeShowChatbot} />)
+                    showChatbot && showChatbot.map((e, i) => <ChatBotBox getdata={getdata} amount={showChatbot.length} admin_root={e} key={i} changeShowChatbot={changeShowChatbot} />)
                 }
             </div>
         </div>

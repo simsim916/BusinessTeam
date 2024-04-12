@@ -16,24 +16,6 @@ const Admin = () => {
     const [sideBarOpen, setSideBarOpen] = useState(true);
     const [currLocation, setCurrLocation] = useState(null);
 
-    const myLocation = () => {
-        let location = window.location.href.substr(window.location.href.lastIndexOf('/') + 1);
-        switch (location) {
-            case 'select': location = "상품조회"
-                break;
-            case 'ask': location = "문의목록"
-                break;
-            case 'insert': location = "상품입력"
-                break;
-            case 'graph': location = "통계"
-                break;
-            default: location = "";
-                break;
-        }
-        setCurrLocation(location);
-    }
-
-
     const openSideBar = () => {
         setSideBarOpen(!sideBarOpen);
     };
@@ -52,11 +34,10 @@ const Admin = () => {
             <SideMenu currLocation={currLocation} openSideBar={openSideBar} sideBarOpen={sideBarOpen} />
             <div id="adminContents" style={{ marginLeft: sideBarOpen ? '100px' : '65px' }}>
                 <Routes>
-                    {/* <Route path='/select' element={<SelectDataBox />} /> */}
-                    <Route path='/select' element={<SelectDataBox myLocation={myLocation} />} />
-                    <Route path='/ask' element={<SelectAskBox myLocation={myLocation} />} />
-                    <Route path='/graph' element={<Graph myLocation={myLocation} />} />
-                    <Route path='/chatbot' element={<Admin_Chatbot myLocation={myLocation} />} />
+                    <Route path='/select' element={<SelectDataBox />} />
+                    <Route path='/ask' element={<SelectAskBox />} />
+                    <Route path='/graph' element={<Graph />} />
+                    <Route path='/chatbot' element={<Admin_Chatbot />} />
                 </Routes>
             </div>
         </>

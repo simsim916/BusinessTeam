@@ -32,10 +32,10 @@ public class Item_askServiceImpl implements Item_askService{
 		return item_askRepository.selectItemAskListIntegerWhereType( pageRequest,  searchRequest);
 	}
 	
-	public Item_ask updateAsk(Item_ask entity) {
+	public Item_ask merge(Item_ask entity) {
 		LocalDateTime date = LocalDateTime.now();
 		entity.setRegdate(date);
-		return item_askRepository.updateItemAsk(entity);
+		return item_askRepository.merge(entity);
 	}
 
 

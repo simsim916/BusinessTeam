@@ -51,7 +51,7 @@ public class Item_askRepositoryImpl implements Item_askRepository{
 	}
 	
 	@Override
-	public Item_ask updateItemAsk(Item_ask entity) {
+	public Item_ask merge(Item_ask entity) {
 		return entityManager.merge(entity);
 	}
 

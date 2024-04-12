@@ -8,6 +8,7 @@ import Cart from './shop/cart/Cart';
 import React from "react";
 import EventPage2 from './../event/EventPage2';
 import CustomerQA from "../customerQA/CustomerQA";
+import Alert from "../components/alert/Alert";
 
 
 const Home = () => {
@@ -15,7 +16,8 @@ const Home = () => {
     return (
         <>
             <Header />
-
+            <Alert />
+            
             <Routes>
                 <Route path='/list' element={<ItemList />} />
                 <Route path='/detail' element={<ItemDetail />} />

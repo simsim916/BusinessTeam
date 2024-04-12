@@ -1,27 +1,29 @@
 
-import { useState } from 'react';
 import './SideMenu.css'
 import { Link } from 'react-router-dom';
 
-import Chatbot_admin from '../chatbot_admin/Admin_Chatbot';
 
-const SideMenu = ({ openSideBar, sideBarOpen, currLocation }) => {
+const SideMenu = ({ openSideBar, sideBarOpen }) => {
+    const path = window.location.pathname;
+    const location = path.substring(path.lastIndexOf('/')+1);
 
-
-
+    const getLocation = ()=>{
+        switch(location){
+            case 'ask':
+            return '문의 목록';
+            case 'select':
+            return '상품 조회'
+        }
+    }
+    
     return (
         <>
             <div id="topBarA" style={{ paddingLeft: sideBarOpen ? '95px' : '15px' }}>
                 <i className="fa-solid fa-house"></i>
                 &nbsp;&nbsp; 관리자페이지 &nbsp;&nbsp;
-                {currLocation === ""
-                    ? currLocation
-                    : (
-                        <span>
-                            <i className="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;{currLocation}
-                        </span>
-                    )
-                }
+                <span>
+                    <i className="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;{getLocation()}
+                </span>
 
 
             </div>

@@ -39,7 +39,6 @@ const SelectDataBox = ({ myLocation }) => {
                 setLoading(false);
                 setError(true);
             })
-        myLocation();
     }, [whichTable])
 
     const changeTable = (e) => {
