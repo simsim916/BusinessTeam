@@ -9,26 +9,39 @@ import { useSelector } from 'react-redux';
 
 const Graph = ({ myLocation }) => {
     const user = useSelector(state => state.user.data);
-    const [mainCategory, setMainCategory] = useState('/item/admingraph');
+    const [mainCategory, setMainCategory] = useState('/visit/selectwhere');
     const [subCategory, setSubCategory] = useState('views');
     const [howManyRecords, setHowManyRecords] = useState(10);
-    const [graphData, setGraphData] = useState();
+    const [graphData, setGraphData] = useState({
+        all: [],
+        cart: [],
+        detail: [],
+        list: [],
+        order: [],
+        day: [],
+        month: [],
+        select: [],
+    });
+
 
 
     useEffect(() => {
         myLocation();
-        let howManyRecords = 10;
         let orderType;
         if (mainCategory == '/item/admingraph') {
             orderType = 'views'
         } else {
             orderType = 'visit_count';
         }
-        api(`${mainCategory}?howManyRecords=${howManyRecords}&orderType=${orderType}`, 'get', null, user.token
+        api(`${mainCategory}`, 'get', null, user.token
         ).then(res => {
-            console.log(res.data);
-            setGraphData(res.data);
+            setGraphData(pre => ({
+                ...pre,
+                all: res.data,
+                select: res.data,
+            }))
         })
+
     }, [mainCategory])
 
     const checkMainCategory = (event) => {
@@ -40,7 +53,7 @@ const Graph = ({ myLocation }) => {
     }
 
     const checkSubCategory = (event) => {
-        
+
     }
 
     return (
@@ -64,25 +77,28 @@ const Graph = ({ myLocation }) => {
                         :
                         <select name="subCategory" id="subCategory" onChange={checkSubCategory}>
                             <option value="">========</option>
-                            <option value="?">3일</option>
-                            <option value="">7일</option>
+                            <option value="?">일별</option>
+                            <option value="">월별</option>
                         </select>
 
                 }
 
             </div>
-            <div id="graphAndRankedItemBox">
+            <div id="graphBox">
+                {graphData && <LineChart setGraphData={setGraphData} graphData={graphData} />}
+            </div>
+            {/* <div id="graphAndRankedItemBox">
                 <div id="graphBox">
-                    {graphData && <LineChart graphData={graphData} />}
+                    {graphData && <LineChart setGraphData={setGraphData} graphData={graphData} />}
                 </div>
                 <div>
                     <div id="rankedItemBox">
                         <div>
-                            {graphData && graphData.map((e, i) => <Graph_ranking item={e} key={i} />)}
+                            {graphData && graphData.all.map((e, i) => <Graph_ranking item={e} key={i} />)}
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </>
     );
 }

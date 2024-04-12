@@ -126,7 +126,6 @@ const SelectDataBox = ({ myLocation }) => {
 
     const getSearch = (e) => {
         e.preventDefault();
-        // api(`/event/eventlist?column=${formData.column}&keyword=${formData.keyword}`, 'get', null, user.token
         api(`${whichTable}/selectwhere?column=${formData.column}&keyword=${formData.keyword}`, 'get', null, user.token
         ).then(res => setItemList(res.data)
         ).catch(err => console.log(err.message))
@@ -139,6 +138,20 @@ const SelectDataBox = ({ myLocation }) => {
         } else if (whichTable == '/event') {
             api(`${whichTable}/merge`, 'post', JSON.stringify(changedList), user.token)
         }
+    }
+
+
+    const emailTest = () => {
+        api(`/email/send?id="dydgusc66@naver.com"`, 'get', null, user.token)
+        // axios.get('https://localhost:8090/email/emailtest')
+        //     .then(response => {
+        //         // 요청이 성공했을 때의 처리
+        //         console.log(response.data);
+        //     })
+        //     .catch(error => {
+        //         // 요청이 실패했을 때의 처리
+        //         console.error(error);
+        //     });
     }
 
     if (loading) return <Loading />
@@ -160,6 +173,7 @@ const SelectDataBox = ({ myLocation }) => {
                     </div>
                     <form id="topButtonBox">
                         <div onClick={insertData}>insert 테스트</div>
+                        <div onClick={emailTest}>email 테스트</div>
                         <select name="column" id="column" value={formData.column} onChange={searchBoxChange}>
                             {itemList && itemList.length > 0 && Object.keys(itemList[0]).map((e, i) => (<option key={i} value={e}>{e}</option>))}
 

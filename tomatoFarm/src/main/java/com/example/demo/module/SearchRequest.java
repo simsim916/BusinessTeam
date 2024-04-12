@@ -37,9 +37,8 @@ public class SearchRequest {
 	private OrderSpecifier<?> orderColumn;
 	private String orderType;// 정렬 타입
 	private String scending ;// 정렬 순서
-//	private String whichTable; // 어떤 테이블의 정보를 가져올 것인지
 	private String whichGroup = "";
-	private Integer howManyRecords=10; // 몇개의 데이터(상위 몇 건)를 볼 것인지
+	private Integer howManyRecords=10; // 몇개의 데이터
 	
 	
 	

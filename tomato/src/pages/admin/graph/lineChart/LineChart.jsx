@@ -8,19 +8,28 @@ import {
     LineElement,
 } from "chart.js";
 
-const LineChart = ({ graphData }) => {
-    
+const LineChart = ({ graphData, setGraphData }) => {
+
     const chartRef = useRef(null);
     let chartInstance = null;
 
-    useEffect(() => {
-        // =====================================================
-        let DateArr = [];
-        DateArr = [1,2,3,4,5,6,7,8,9,10];
 
-        let showData = [];
-        graphData.map(e => showData.push(e.views));
-        // =====================================================
+    useEffect(() => {
+        // =====================
+        const dateArr = [...new Set(graphData.select.map(i => i.visit_date))];
+        dateArr.sort((a, b) => a - b);
+        let date = dateArr.slice(0, 10); // 렉걸려
+
+        let check = graphData.select.slice(0, 10);
+        let test = [];
+        check.map(e => test.push(e.visit_count));
+        console.log(test);
+        // =====================
+
+
+
+
+
         const ctx = chartRef.current.getContext("2d");
 
         const createChart = () => {
@@ -34,11 +43,11 @@ const LineChart = ({ graphData }) => {
             chartInstance = new Chart(ctx, {
                 type: "line",
                 data: {
-                    labels: DateArr,
+                    labels: date,
                     datasets: [
                         {
                             label: "itemListArr",
-                            data: showData,
+                            data: test,
                             borderColor: "blue",
                             backgroundColor: "rgba(255, 99, 132, 0.2)",
                             pointRadius: 5, // 포인트 크기
@@ -65,7 +74,7 @@ const LineChart = ({ graphData }) => {
                         },
                         y: {
                             beginAtZero: true,
-                            max: 1100, // 최대값 설정
+                            max: 1500, // 최대값 설정
                         },
                     },
                     maintainAspectRatio: false,
