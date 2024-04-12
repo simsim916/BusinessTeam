@@ -6,11 +6,11 @@
     width: calc(100vw - 30px);
     display: flex;
     flex-direction: column;
-        flex-wrap: wrap;
-        justify-content: space-between;
-            margin: 0 auto;
-            position: relative;
-            min-width: 800px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 auto;
+    position: relative;
+    min-width: 800px;
 }
 
 #customerQABox h3 {
