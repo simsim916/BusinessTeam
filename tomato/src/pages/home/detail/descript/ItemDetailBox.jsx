@@ -7,13 +7,11 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserCart, setUserCartStorage } from '../../../redux/userCart/action';
 import { SERVER_RESOURCE } from '../../../../model/server-config';
-import { changeAlert } from '../../../redux/basic/actions';
-import Alert from '../../../components/alert/Alert';
 
 const ItemDetailBox = ({ item }) => {
     const dispatch = useDispatch();
+    const statusbar = useRef(null)
     const userinfo = useSelector(state => state.user.data)
-    const alert = useSelector(state => state.basic.alert)
     const [inputCountValue, setInputCountValue] = useState(1);
     const [introItem, setIntroItem] = useState(false)
     const [gotoCart, setGotoCart] = useState(false);
@@ -62,19 +60,17 @@ const ItemDetailBox = ({ item }) => {
         setInputCountValue(event.target.value);
     }
 
+
+    useEffect(() => {
+        statusbar.current.style.transform = 'translateX(-100%)'
+        setTimeout(() => {
+            setGotoCart(false);
+        }, 5000)
+    }, [gotoCart])
     const addCart = () => {
         setLoading(true);
         setGotoCart(!gotoCart);
 
-        dispatch(changeAlert({
-            cart: item.name,
-            time: 3,
-            style: {
-                bottom: '100%',
-                left: 'calc(50% - 150px)',
-                position: 'absolute'
-            }
-        }));
         if (userinfo && userinfo.login) {
             const formData = {
                 code: item.code,
@@ -156,10 +152,7 @@ const ItemDetailBox = ({ item }) => {
                     </div>
                     <div id="priceBox">
                         <div id="priceAmount">총 상품금액&nbsp; : &nbsp;<span ref={priceRef}>{makeComa(makeDiscountPrice(item.price, item.discount) * inputCountValue)}원</span></div>
-                        <div onClick={addCart} id="gotocart">
-                            장바구니 담기
-                            {alert && <Alert />}
-                        </div>
+                        <div onClick={gotoCart ? null : addCart} id="gotocart">장바구니 담기</div>
                         <Link to="/home/buy" id="gotobuy">구매하기</Link>
                     </div>
                 </div>
@@ -167,7 +160,18 @@ const ItemDetailBox = ({ item }) => {
                     loading ?
                         <Loading />
                         :
-                        null
+                        gotoCart ?
+                            <div id='goCartContainer'>
+                                <p id="itemName">{item.name}</p>
+                                <p>장바구니에 상품을 담았습니다.</p>
+                                <p>장바구니로 이동하시겠습니까?</p>
+                                <Link to="/home/cart" id="cartOK">이동</Link>
+                                <a onClick={() => setGotoCart(!gotoCart)} id="cartNO">닫기</a>
+                                <div id='status' ref={statusbar}></div>
+                                <div id='triangle_bottom'></div>
+                            </div>
+                            :
+                            null
                 }
             </div>
 

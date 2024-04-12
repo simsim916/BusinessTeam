@@ -194,7 +194,6 @@
     position: absolute;
     left: 0;
     bottom: 0;
-    cursor: pointer;
 }
 
 #gotobuy {
@@ -210,12 +209,25 @@
 }
 
 #itemDetail>#goCartContainer {
+    position: absolute;
     display: block;
+    top: 550px;
     background-color: #ffffff;
     border: 4px solid #ccc;
     width: 400px;
     padding: 20px;
     text-align: center;
+    overflow: hidden;
+}
+
+#itemDetail>#goCartContainer>#status {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 10px;
+    background-color: #9b1b20;
+    transition: 5s;
+    left: 0;
 }
 
 #goCartContainer div {
