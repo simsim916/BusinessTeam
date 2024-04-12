@@ -42,10 +42,10 @@ public class OrderRequest {
 								.price(totalPrice)
 								.delivery(totalDelivery)
 								.point(totalPoint)
-								.addressCode(dto.getAddressCode())
+								.addressCode(dto.getAddress_code())
 								.address1(dto.getAddress1())
 								.address2(dto.getAddress2())
-								.order_message(dto.getOrder_message())
+								.order_message(dto.getDeliverymessage())
 								.build();
 		return itemOrder;
 	}

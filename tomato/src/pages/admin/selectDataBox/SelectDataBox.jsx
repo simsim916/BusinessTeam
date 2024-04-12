@@ -13,7 +13,6 @@ const SelectDataBox = ({ myLocation }) => {
 
     console.log(`SelectDataBox 렌더링`);
 
-
     const [formData, setFormData] = useState({
         column: 'name',
         keyword: ''
@@ -28,10 +27,10 @@ const SelectDataBox = ({ myLocation }) => {
     const user = useSelector(state => state.user.data);
     const [selectedItem, setSelectedItem] = useState(null);
     const [changedList, setChangedList] = useState([]);
+    const [whichTable, setWhichTable] = useState('/event');
 
     useEffect(() => {
-        // api('/item/allitem', 'get', null, user.token)
-        api('/event/eventlist', 'get', null, user.token)
+        api(`${whichTable}/selectwhere?column=${formData.column}&keyword=${formData.keyword}`, 'get', null, user.token)
             .then(res => {
                 setItemList(res.data);
                 column.current = (Object.keys(res.data[0]));
@@ -41,7 +40,36 @@ const SelectDataBox = ({ myLocation }) => {
                 setError(true);
             })
         myLocation();
-    }, [])
+    }, [whichTable])
+
+    const changeTable = (e) => {
+        setWhichTable(e.target.value);
+        if (e.target.value == '/user') {
+            setFormData({
+                column: 'id',
+                keyword: ''
+            })
+        } else if (e.target.value == '/event') {
+            setFormData({
+                column: 'name',
+                keyword: ''
+            })
+        }
+        setSelectedItem(null);
+        setChangedList([]);
+        setItemList([])
+    }
+
+    const changeItemRow = (item) => {
+        setSelectedItem(item);
+    }
+
+    const changeSelectedItem = (e) => {
+        setSelectedItem((prev) => ({
+            ...prev,
+            [e.target.id]: e.target.value
+        }))
+    }
 
     const sortByColumn = (event) => {
         const columnName = event.target.closest('div').id;
@@ -75,19 +103,17 @@ const SelectDataBox = ({ myLocation }) => {
         setCurrPage(1);
     };
 
-    const changeItemRow = (item) => {
-        setSelectedItem(item);
-    }
-
-    const changeSelectedItem = (e) => {
-        setSelectedItem((prev) => ({
-            ...prev,
-            [e.target.id]: e.target.value
-        }))
-    }
-
     const changeChangedList = () => {
-        setChangedList([...changedList, selectedItem])
+        setChangedList([...changedList, selectedItem]);
+        if (whichTable == '/event') {
+            setItemList(itemList.map(item =>
+                item.code === selectedItem.code ? selectedItem : item
+            ));
+        } else if (whichTable == '/user') {
+            setItemList(itemList.map(item =>
+                item.id === selectedItem.id ? selectedItem : item
+            ));
+        }
     }
 
     const searchBoxChange = (event) => {
@@ -97,9 +123,23 @@ const SelectDataBox = ({ myLocation }) => {
             [name]: value
         }));
     };
-    console.log(changedList);
 
+    const getSearch = (e) => {
+        e.preventDefault();
+        // api(`/event/eventlist?column=${formData.column}&keyword=${formData.keyword}`, 'get', null, user.token
+        api(`${whichTable}/selectwhere?column=${formData.column}&keyword=${formData.keyword}`, 'get', null, user.token
+        ).then(res => setItemList(res.data)
+        ).catch(err => console.log(err.message))
+    }
 
+    const insertData = () => {
+        console.log(changedList);
+        if (whichTable == '/user') {
+            api(`${whichTable}/insertTest`, 'post', JSON.stringify(changedList), user.token)
+        } else if (whichTable == '/event') {
+            api(`${whichTable}/merge`, 'post', JSON.stringify(changedList), user.token)
+        }
+    }
 
     if (loading) return <Loading />
     if (error) return <Error />
@@ -111,14 +151,21 @@ const SelectDataBox = ({ myLocation }) => {
                     <div>
                         <h3>
                             <i className="fa-solid fa-list"></i>자료 조회
+                            <select name="" id="" onChange={changeTable}>
+                                <option value="">========</option>
+                                <option value="/user">회원 관리</option>
+                                <option value="/event">이벤트 관리</option>
+                            </select>
                         </h3>
                     </div>
                     <form id="topButtonBox">
+                        <div onClick={insertData}>insert 테스트</div>
                         <select name="column" id="column" value={formData.column} onChange={searchBoxChange}>
-                            {Object.keys(itemList[0]).map((e, i) => (<option key={i} value={e}>{e}</option>))}
+                            {itemList && itemList.length > 0 && Object.keys(itemList[0]).map((e, i) => (<option key={i} value={e}>{e}</option>))}
+
                         </select>
                         <input type="text" name="keyword" value={formData.keyword} onChange={searchBoxChange} />
-                        <button type="button">검색</button>
+                        <button type="button" onClick={getSearch}>검색</button>
                     </form>
                 </div>
                 <div className="dataListBox">
@@ -130,39 +177,16 @@ const SelectDataBox = ({ myLocation }) => {
                         changeItemRow={changeItemRow}
                         column={column}
                         item={e} key={i}
-                        style={{ backgroundColor: (e.code == (selectedItem && selectedItem.code)) ? 'yellow' : '' }}
+                        style={{
+                            backgroundColor: (selectedItem && selectedItem === e)
+                                ? 'yellow'
+                                : (changedList && changedList.some(k => k === e))
+                                    ? 'blue'
+                                    : ''
+                        }}
                     />))}
                 </div>
             </div>
-
-            {changedList[0]
-                ?
-                <div id="changedListBox">
-                    <div className="ObjectHead">
-                        {
-                            column.current ?
-                                column.current.map((col, i) => <div id={col} key={i}>{col}</div>)
-                                :
-                                null
-                        }
-                        <div></div>
-                    </div>
-                    <div className="changedListBody">
-                        {
-                            changedList && changedList.map((e, key) =>
-                                <>
-                                    <div key={key} className="changedList_Row">
-                                        {Object.values(e).map((i, ke) => <div key={ke}>{i}</div>)}
-                                    </div>
-                                </>
-                            )
-                        }
-                    </div>
-                    <button>데이터 입력</button>
-                </div>
-                :
-                ''
-            }
             <PagingBox
                 limit={size}
                 list={itemList}
@@ -186,7 +210,6 @@ const SelectDataBox = ({ myLocation }) => {
                     </div>
                     <div className="ObjectBody">
                         {column.current.map((e, i) => <input onChange={changeSelectedItem} type="text" value={selectedItem ? selectedItem[e] : ''} key={i} id={e} />)}
-
                     </div>
                 </div>
             </div>

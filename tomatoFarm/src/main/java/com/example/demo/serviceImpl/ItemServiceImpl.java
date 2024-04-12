@@ -88,16 +88,6 @@ public class ItemServiceImpl implements ItemService {
 	}
 	
 	@Override
-	public List<ItemDTO> adminStringColumn(SearchRequest searchRequest,PageRequest pageRequest) {
-		return itemRepository.adminStringColumn(searchRequest,pageRequest);
-	}
-	
-	@Override
-	public List<ItemDTO> adminIntegerColumn(SearchRequest searchRequest, PageRequest pageRequest) {
-		return itemRepository.adminIntegerColumn(searchRequest,pageRequest);
-	}
-	
-	@Override
 	public int itemListCount() {
 		return 0;
 	}
@@ -114,8 +104,12 @@ public class ItemServiceImpl implements ItemService {
 	
 	
 	@Override
-	public List<Item> searchForAdmin(SearchRequest searchRequest) {
-		return itemRepository.searchForAdmin(searchRequest);
+	public List<ItemDTO> searchForAdmin(SearchRequest searchRequest,PageRequest pageRequest) {
+		if (searchRequest.getKeyword().matches("^[0-9]*$")) {
+			return itemRepository.adminIntegerColumn(searchRequest, pageRequest);
+		} else {
+			return itemRepository.adminStringColumn(searchRequest, pageRequest);
+		}
 	}
 
 	

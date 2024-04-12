@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,22 +23,29 @@ public class EventController {
 
 	Item_eventService item_eventService;  
 	
-	@GetMapping("/eventlist")
+	@GetMapping("/selectwhere")
 	public ResponseEntity<?> selectEventWhere(SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
-		List<item_event> list = item_eventService.selectEventWhere(searchRequest);
+		List<item_event> list = null;
+		
+		list = item_eventService.selectEventWhere(searchRequest);                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
 		
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}
 	
 	@PostMapping("/merge")
-	public ResponseEntity<?> merge(List<item_event> event) {
+	public ResponseEntity<?> merge(@RequestBody List<item_event> list) {
 		ResponseEntity<?> result = null;
+		List<item_event> mergedlist = null;
+		for(item_event event : list) {
+			System.out.println(event);
+		}
 		
+		mergedlist = item_eventService.merge(list);
 		
+		result = ResponseEntity.status(HttpStatus.OK).body(mergedlist);
 		
-		return null;
-		
+		return result;
 	}
 }

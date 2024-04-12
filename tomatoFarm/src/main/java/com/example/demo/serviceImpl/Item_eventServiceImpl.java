@@ -2,6 +2,8 @@ package com.example.demo.serviceImpl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.item_event;
@@ -17,13 +19,18 @@ public class Item_eventServiceImpl implements Item_eventService{
 
 	Item_eventRepository item_eventRepository;
 	
-	
+	@Override
+	@Transactional
 	public List<item_event> merge(List<item_event> list) {
 		return item_eventRepository.merge(list);
 	}
 
 	@Override
 	public List<item_event> selectEventWhere(SearchRequest searchRequest) {
-		return item_eventRepository.selectEventWhere(searchRequest);
+		if (searchRequest.getKeyword().matches("^[0-9]*$")) {
+			return item_eventRepository.selectEventWhereNumber(searchRequest);
+		} else {
+			return item_eventRepository.selectEventWhereString(searchRequest);
+		}
 	}
 }

@@ -1,52 +1,46 @@
 import { useEffect, useState } from "react";
 import "./Graph.css";
-import axios from 'axios';
-import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend,
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
 import LineChart from "./lineChart/LineChart";
-import { SERVER_RESOURCE } from "../../../model/server-config";
 import { api } from "../../../model/model";
 import Graph_ranking from "./graph_ranking/Graph_ranking";
+import { useSelector } from 'react-redux';
 
 
 
 const Graph = ({ myLocation }) => {
-
-    const [whichURL, setWhichTable] = useState('/item/admingraph');
+    const user = useSelector(state => state.user.data);
+    const [mainCategory, setMainCategory] = useState('/item/admingraph');
+    const [subCategory, setSubCategory] = useState('views');
+    const [howManyRecords, setHowManyRecords] = useState(10);
     const [graphData, setGraphData] = useState();
 
 
     useEffect(() => {
         myLocation();
-        // let whichGroup = 'visit_date';
         let howManyRecords = 10;
-        let orderType = 'views';
-        let user = JSON.parse(sessionStorage.getItem('userinfo'));
-        api(`${whichURL}?howManyRecords=${howManyRecords}&orderType=${orderType}`, 'get', null, user.token
+        let orderType;
+        if (mainCategory == '/item/admingraph') {
+            orderType = 'views'
+        } else {
+            orderType = 'visit_count';
+        }
+        api(`${mainCategory}?howManyRecords=${howManyRecords}&orderType=${orderType}`, 'get', null, user.token
         ).then(res => {
             console.log(res.data);
             setGraphData(res.data);
         })
-    }, [whichURL])
+    }, [mainCategory])
 
     const checkMainCategory = (event) => {
-        if (event.target.value == 'x') return;
+        if (event.target.value == 'x') return
+        else if (event.target.value == '');
         let uri = event.target.value;
         event.target.closest('select').nextElementSibling.style.display = 'initial';
-        setWhichTable(uri);
+        setMainCategory(uri);
     }
 
     const checkSubCategory = (event) => {
-
+        
     }
 
     return (
@@ -56,15 +50,26 @@ const Graph = ({ myLocation }) => {
                 <select name="mainCategory" id="mainCategory" onChange={checkMainCategory}>
                     <option value="x">=======</option>
                     <option value="/item/admingraph">상품 통계</option>
-                    <option value="/visit/selectAll">페이지 방문 통계</option>
+                    <option value="/visit/selectwhere">페이지 방문 통계</option>
                 </select>
                 &nbsp;&nbsp;
-                <select name="subCategory" id="subCategory">
-                    <option value="">========</option>
-                    <option value="?">프레시지</option>
-                    <option value="">김구원선생</option>
-                    <option value=""></option>
-                </select>
+                {
+                    mainCategory == '/item/admingraph'
+                        ?
+                        <select name="subCategory" id="subCategory" onChange={checkSubCategory}>
+                            <option value="">========</option>
+                            <option value="프레시지">프레시지</option>
+                            <option value="김구원 선생">김구원 선생</option>
+                        </select>
+                        :
+                        <select name="subCategory" id="subCategory" onChange={checkSubCategory}>
+                            <option value="">========</option>
+                            <option value="?">3일</option>
+                            <option value="">7일</option>
+                        </select>
+
+                }
+
             </div>
             <div id="graphAndRankedItemBox">
                 <div id="graphBox">

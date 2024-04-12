@@ -1,7 +1,12 @@
 package com.example.demo.service;
 
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+
 import com.example.demo.domain.UserDTO;
 import com.example.demo.entity.User;
+import com.example.demo.module.SearchRequest;
 
 public interface UserService {
 
@@ -24,11 +29,15 @@ public interface UserService {
 		return dto;
 	}
 	
-	public User selectUser(User dto);
+	User selectUser(User dto);
 	
-	public int insertUser(UserDTO dto);
+	int insertUser(UserDTO dto);
 	
-	public User updateUser(User entity);
+	User updateUser(User entity);
+	
+	List<User> selectUserWhere(SearchRequest searchRequest);
+	
+	List<User> insertTest(List<User> list);
 	
 //	=================================
 	

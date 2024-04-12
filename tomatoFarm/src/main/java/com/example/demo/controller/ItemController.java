@@ -145,12 +145,7 @@ public class ItemController {
 	public ResponseEntity<?> adminStringColumn(SearchRequest searchRequest, PageRequest pageRequest) {
 		
 		ResponseEntity<?> result = null;
-		List<Item> list =  itemService.searchForAdmin(searchRequest);
-		for(Item item : list) {
-			System.out.println(item);
-			System.out.println("조회수 => " +item.getViews());
-		}
-//		System.out.println(list);
+		List<ItemDTO> list =  itemService.searchForAdmin(searchRequest, pageRequest);
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}

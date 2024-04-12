@@ -189,12 +189,10 @@ public class ItemRepositoryImpl implements ItemRepository {
 						item.stock, item.views, item.likes, item.event_code, item_event.discount,
 						item_event.name.as("event_name")))
 				.from(item).join(item_event).on(item.event_code.eq(item_event.code))
-				.where(Expressions.stringPath(searchRequest.getColumn()).contains(searchRequest.getKeyword()))
-//				.limit(pageRequest.getSize()).offset(pageRequest.getStartNum())
+//				.where(Expressions.stringPath(searchRequest.getColumn())
+//						.contains(searchRequest.getKeyword()))
+				.limit(searchRequest.getHowManyRecords())
 				.orderBy(getSortType(searchRequest))
-//				.orderBy(Expressions.numberPath(Integer.class ,searchRequest.getColumn()).desc())
-//				.orderBy(Expressions.stringPath(searchRequest.getColumn()).desc())
-//				Expressions.stringPath(searchRequest.getColumn()) <<= 이걸로 정렬 기능은 안되는거 같은데 내 코드 문제인가?
 				.fetch();
 	}
 
@@ -206,15 +204,15 @@ public class ItemRepositoryImpl implements ItemRepository {
 						item.stock, item.views, item.likes, item.event_code, item_event.discount,
 						item_event.name.as("event_name")))
 				.from(item).join(item_event).on(item.event_code.eq(item_event.code))
-				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
-						.contains(searchRequest.getKeyword()))
-				.limit(pageRequest.getSize()).offset(pageRequest.getStartNum()).orderBy(getSortType(searchRequest))
+//				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
+//						.contains(searchRequest.getKeyword()))
+				.limit(searchRequest.getHowManyRecords())
+				.orderBy(getSortType(searchRequest))
 				.fetch();
 	}
 
 	@Override
 	public int itemListCount() {
-		// TODO Auto-generated method stub
 		return (int) jPAQueryFactory.selectFrom(item).fetchCount();
 	}
 
@@ -232,28 +230,5 @@ public class ItemRepositoryImpl implements ItemRepository {
 				.fetch();
 	}
 
-//	=====================================================================================================
-	@Override
-	public List<Item> searchForAdmin(SearchRequest searchRequest) {
-		if (searchRequest.getKeyword().replace("[-+]?\\d*\\.?\\d+", "").length() == 0) {
-			return jPAQueryFactory.select(noJoinEntity).from(item)
-//					.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
-//							.contains(searchRequest.getKeyword()))
-					.orderBy(getSortType(searchRequest))
-					.limit(searchRequest.getHowManyRecords())
-					.groupBy(item.code)
-					.fetch();
-		} else {
-			return jPAQueryFactory.select(noJoinEntity).from(item)
-//					.where(Expressions.stringPath(searchRequest.getColumn())
-//							.contains(searchRequest.getKeyword()))
-					.orderBy(getSortType(searchRequest))
-					.limit(searchRequest.getHowManyRecords())
-					.groupBy(item.code)
-					.fetch();
-		}
-	}
-
-//	=====================================================================================================
 
 }

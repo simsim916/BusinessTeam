@@ -65,7 +65,7 @@ const LineChart = ({ graphData }) => {
                         },
                         y: {
                             beginAtZero: true,
-                            max: 11000, // 최대값 설정
+                            max: 1100, // 최대값 설정
                         },
                     },
                     maintainAspectRatio: false,
