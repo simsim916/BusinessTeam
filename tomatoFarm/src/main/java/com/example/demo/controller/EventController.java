@@ -28,11 +28,7 @@ public class EventController {
 		ResponseEntity<?> result = null;
 		List<item_event> list = null;
 		
-		if(searchRequest.getKeyword().matches("^[0-9]*$")) {
-			list = item_eventService.selectEventWhereNumber(searchRequest);
-		} else {
-			list = item_eventService.selectEventWhereString(searchRequest);
-		}
+		list = item_eventService.selectEventWhere(searchRequest);                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
 		
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;

@@ -26,11 +26,11 @@ public class Item_eventServiceImpl implements Item_eventService{
 	}
 
 	@Override
-	public List<item_event> selectEventWhereNumber(SearchRequest searchRequest) {
-		return item_eventRepository.selectEventWhereNumber(searchRequest);
-	}
-	@Override
-	public List<item_event> selectEventWhereString(SearchRequest searchRequest) {
-		return item_eventRepository.selectEventWhereString(searchRequest);
+	public List<item_event> selectEventWhere(SearchRequest searchRequest) {
+		if (searchRequest.getKeyword().matches("^[0-9]*$")) {
+			return item_eventRepository.selectEventWhereNumber(searchRequest);
+		} else {
+			return item_eventRepository.selectEventWhereString(searchRequest);
+		}
 	}
 }
