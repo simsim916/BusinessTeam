@@ -121,6 +121,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 		return jPAQueryFactory.select(dtoBean)
 				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
 				.where(item.sort2.contains(searchRequest.getKeyword())
+						.or(item.sort1.contains(searchRequest.getKeyword()))
 						.or(item.sort3.contains(searchRequest.getKeyword()))
 						.or(item.brand.contains(searchRequest.getKeyword()))
 						.or(item.name.contains(searchRequest.getKeyword())))

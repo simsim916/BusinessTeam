@@ -7,10 +7,11 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserCart, setUserCartStorage } from '../../../redux/userCart/action';
 import { SERVER_RESOURCE } from '../../../../model/server-config';
+import GoCartContainer from './GoCartContainer';
 
 const ItemDetailBox = ({ item }) => {
     const dispatch = useDispatch();
-    const statusbar = useRef(null)
+    
     const userinfo = useSelector(state => state.user.data)
     const [inputCountValue, setInputCountValue] = useState(1);
     const [introItem, setIntroItem] = useState(false)
@@ -61,15 +62,10 @@ const ItemDetailBox = ({ item }) => {
     }
 
 
-    useEffect(() => {
-        statusbar.current.style.transform = 'translateX(-100%)'
-        setTimeout(() => {
-            setGotoCart(false);
-        }, 5000)
-    }, [gotoCart])
     const addCart = () => {
         setLoading(true);
         setGotoCart(!gotoCart);
+        
 
         if (userinfo && userinfo.login) {
             const formData = {
@@ -161,15 +157,7 @@ const ItemDetailBox = ({ item }) => {
                         <Loading />
                         :
                         gotoCart ?
-                            <div id='goCartContainer'>
-                                <p id="itemName">{item.name}</p>
-                                <p>장바구니에 상품을 담았습니다.</p>
-                                <p>장바구니로 이동하시겠습니까?</p>
-                                <Link to="/home/cart" id="cartOK">이동</Link>
-                                <a onClick={() => setGotoCart(!gotoCart)} id="cartNO">닫기</a>
-                                <div id='status' ref={statusbar}></div>
-                                <div id='triangle_bottom'></div>
-                            </div>
+                            <GoCartContainer name={item.name} setGotoCart={setGotoCart}/>
                             :
                             null
                 }

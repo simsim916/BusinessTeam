@@ -3,7 +3,7 @@ import { SERVER_RESOURCE } from '../../../../model/server-config';
 import { makeComa } from '../../../components/MathFunction';
 import { setUserBuyItemList, setUserBuyStorage } from '../../../redux/userBuy/actions';
 import { Link } from 'react-router-dom';
-import { deleteUserCart, setUserCartStorage, changeUserCart, setUserCart } from '../../../redux/userCart/action';
+import { setUserCartStorage, changeUserCart } from '../../../redux/userCart/action';
 import { api } from '../../../../model/model';
 
 const Cart_item_Row = ({ item, idx }) => {
@@ -12,7 +12,6 @@ const Cart_item_Row = ({ item, idx }) => {
     const user = useSelector(state => state.user.data);
     const userCart = useSelector(state => state.userCart.data);
     const userBuy = useSelector(state => state.userBuy.buyList)
-
     const changeCheckBox = () => {
         if (userBuy && userBuy.find(e => e.code == item.code))
             dispatch(setUserBuyStorage(userBuy.filter(e => e.code != item.code)));
@@ -25,13 +24,9 @@ const Cart_item_Row = ({ item, idx }) => {
 
 
     const handleXbtn = async () => {
-        // userBuy && dispatch(setUserBuyStorage(userBuy.filter(i => +i.code != +item.code)));
-        // dispatch(setUserCartStorage(userCart.filter(i => +i.code != +item.code)));
-        // user && user.login && dispatch(deleteUserCart(`/usercart/delete`, 'post', [item], user.token))
-
-        let data = userBuy.filter(i => i.code != item.code);
-        userBuy && dispatch(setUserBuyItemList(data)) // 체크된 상태로 삭제를 시도할때 처리해야할 내용
-        dispatch(setUserCart(data)); // 유저 장바구니 상태값을 덮어씌워준다.
+        let data = userCart.filter(i => i.code != item.code);
+        userCart && dispatch(setUserBuyItemList(data)) // 체크된 상태로 삭제를 시도할때 처리해야할 내용
+        dispatch(setUserCartStorage(data)); // 유저 장바구니 상태값을 덮어씌워준다.
         user && api(`/usercart/delete`, 'post', [item], user.token); // DB에서 삭제하기.
     }
 
@@ -42,7 +37,7 @@ const Cart_item_Row = ({ item, idx }) => {
             </li>
             <li className="shopBasketItemImg"><Link to={'/home/detail?code=' + item.code}><img src={SERVER_RESOURCE + `/img/itemImg/${item.code}_2.jpg`} alt="" /></Link></li>
             <li className="shopBasketItemIfo">
-                <Link to={'/home/detail?code=' + item.code} className="shopBasketItemIfo_name">{item.name}</Link>
+                <Link to={'/home/detail?code=' + item.code} className="shopBasketItemIfo_name">{item.name || item.item_name}</Link>
                 {
                     item.discount
                         ?
@@ -62,7 +57,7 @@ const Cart_item_Row = ({ item, idx }) => {
             {
                 item.discount ? (
                     <li className="shopBasketItemIfo_sumprice">
-                        <p style={{ textDecoration: 'line-through' }}>{makeComa(item.price * item.amount)}원</p>
+                        <p style={{ textDecoration: 'line-through', color: '#00000080' }}>{makeComa(item.price * item.amount)}원</p>
                         <p>{makeComa(Math.round(item.price * (100 - item.discount) / 100) * item.amount)}원</p>
                     </li>
                 ) : (

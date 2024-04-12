@@ -90,7 +90,10 @@ const Header = () => {
                     </form>
                     <div id="searchRightBox">
                         <div id="myPage">
-                            <a to="/"><i className="fa-solid fa-user"></i></a>
+                            <a to="/">
+                                <i className="fa-solid fa-user"></i>
+                                
+                            </a>
                         </div>
                         <div id="myCart">
                             <Link to="/home/cart"><i className="fa-solid fa-cart-shopping"></i></Link>

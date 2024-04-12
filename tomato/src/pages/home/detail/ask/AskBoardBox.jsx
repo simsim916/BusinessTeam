@@ -62,7 +62,7 @@ const AskBoardBox = ({ item }) => {
                         <div>작성일자</div>
                     </div>
                     {itemAskList ?
-                        paging()(pageList, currPage, limit).map((e, i) => <AskBoardRow itemAsk={e} key={i} />)
+                        paging(pageList, currPage, limit).map((e, i) => <AskBoardRow itemAsk={e} key={i} />)
                         :
                         <div id='askNone'>
                             해당 상품에 문의사항이 없습니다.
@@ -70,15 +70,6 @@ const AskBoardBox = ({ item }) => {
                     }
                 </div>
 
-                <div id="askBoardBtn">
-                <i className="fa-solid fa-angles-left"></i>
-                <i className="fa-solid fa-angle-left"></i>
-                <span> 1 </span>
-                <span> 2 </span>
-                <span> 3 </span>
-                <i className="fa-solid fa-angle-right"></i>
-                <i className="fa-solid fa-angles-right"></i>
-            </div>
                 <PagingBox
                     list={pageList}
                     limit={limit}
