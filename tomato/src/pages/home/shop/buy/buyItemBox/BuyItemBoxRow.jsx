@@ -39,7 +39,7 @@ const BuyItemBoxRow = ({
             </li>
             <li className="shopBasketItem_count">
                 <button onClick={() => handleClick('-')}><i className="fa-solid fa-minus"></i></button>
-                <input id="inputCount" type="number" value={(userBuyItemList && userBuyItemList[idx].amount) || item[idx].amount} onChange={handleChange} min="0" />
+                <input id="inputCount" type="number" value={(userBuyItemList && userBuyItemList[idx].amount) || item[idx].amount} onChange={handleChange} />
                 <button><i onClick={() => handleClick('+')} className="fa-solid fa-plus"></i></button>
             </li>
             {

@@ -25,14 +25,9 @@ const Cart_item_Row = ({ item, idx }) => {
 
 
     const handleXbtn = async () => {
-        // userBuy && dispatch(setUserBuyStorage(userBuy.filter(i => +i.code != +item.code)));
-        // dispatch(setUserCartStorage(userCart.filter(i => +i.code != +item.code)));
-        // user && user.login && dispatch(deleteUserCart(`/usercart/delete`, 'post', [item], user.token))
-
-        let data = userBuy.filter(i => i.code != item.code);
-        userBuy && dispatch(setUserBuyItemList(data)) // 체크된 상태로 삭제를 시도할때 처리해야할 내용
-        dispatch(setUserCart(data)); // 유저 장바구니 상태값을 덮어씌워준다.
-        user && api(`/usercart/delete`, 'post', [item], user.token); // DB에서 삭제하기.
+        userBuy && dispatch(setUserBuyStorage(userBuy.filter(i => +i.code != +item.code)));
+        dispatch(setUserCartStorage(userCart.filter(i => +i.code != +item.code)));
+        user && user.login && dispatch(deleteUserCart(`/usercart/delete`, 'post', [item], user.token))
     }
 
     return (

@@ -56,10 +56,10 @@ public class ItemController {
 	}
 
 	@GetMapping("/detailn")
-	public ResponseEntity<?> selectItemWhereType(SearchRequest searchRequest) {
+	public ResponseEntity<?> selectItemWhereCode(SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
 		PageRequest pageRequest = new PageRequest(1, 1);
-		ItemDTO dto = itemService.selectItemListIntegerWhereType(pageRequest, searchRequest).get(0);
+		ItemDTO dto = itemService.selectItemWhereCode(pageRequest, searchRequest).get(0);
 		result = ResponseEntity.status(HttpStatus.OK).body(dto);
 		return result;
 	}
@@ -74,7 +74,7 @@ public class ItemController {
 		return result;
 	}
 
-//페이징 + 정렬 기능 되는 search
+// 페이징 + 정렬 기능 되는 search
 	@GetMapping("/search")
 	public ResponseEntity<?> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
@@ -113,11 +113,26 @@ public class ItemController {
 
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 
+//	@GetMapping("/allitem")
+//	public ResponseEntity<?> selectAll() {
+//		ResponseEntity<?> result = null;
+//		List<ItemDTO> itemList = itemService.selectAll();
+//
+//		if (itemList != null && itemList.size() > 0) {
+//			result = ResponseEntity.status(HttpStatus.OK).body(itemList);
+//			log.info(itemList);
+//		} else {
+//			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
+//			log.info("데이터 못찾겠다");
+//		}
+//
+//		return result;
+//	}
 	@GetMapping("/allitem")
 	public ResponseEntity<?> selectAll() {
 		ResponseEntity<?> result = null;
 		List<ItemDTO> itemList = itemService.selectAll();
-
+		
 		if (itemList != null && itemList.size() > 0) {
 			result = ResponseEntity.status(HttpStatus.OK).body(itemList);
 			log.info(itemList);
@@ -125,7 +140,7 @@ public class ItemController {
 			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
 			log.info("데이터 못찾겠다");
 		}
-
+		
 		return result;
 	}
 

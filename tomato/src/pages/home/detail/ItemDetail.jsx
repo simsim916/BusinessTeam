@@ -6,13 +6,19 @@ import ItemDetailBox from './descript/ItemDetailBox';
 import ReviewBoardBox from './review/ReviewBoardBox';
 import AskBoardBox from './ask/AskBoardBox';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { api } from '../../../model/model';
+import { getUserCart } from '../../redux/userCart/action';
 
 const ItemDetail = ({ propscode }) => {
+
     const [searchParams] = useSearchParams();
     const itemCode = searchParams.get("code");
     const [item, setItem] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
+
+    
 
     useEffect(() => {
         axios.get(`http://localhost:8090/item/detailn?column=item.code&keyword=${propscode || itemCode}`
@@ -26,10 +32,9 @@ const ItemDetail = ({ propscode }) => {
         })
         axios.get(`http://localhost:8090/visit/update`, {
             params: {
-                page: 'itemDetail',
+                page: 'detail',
             }
         })
-
     }, [])
 
     if (loading) return <Loading />

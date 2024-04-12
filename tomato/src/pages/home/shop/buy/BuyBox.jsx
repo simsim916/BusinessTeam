@@ -4,12 +4,20 @@ import BuyDeliveryBox from './deliveryAddress/BuyDeliveryBox';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import Buy_total from './Buy_total';
+import axios from 'axios';
 
 
 
 const BuyBox = () => {
 
 
+    useEffect(() => {
+        axios.get(`http://localhost:8090/visit/update`, {
+            params: {
+                page: 'order',
+            }
+        })
+    }, [])
 
 
 

@@ -7,6 +7,7 @@ import Error from '../../../components/Error';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserCart, getItemListAmount } from '../../../redux/userCart/action';
 import { api } from '../../../../model/model';
+import axios from 'axios';
 
 
 const Cart = () => {
@@ -17,7 +18,7 @@ const Cart = () => {
     const userinfo = useSelector(state => state.user)
 
 
-    
+
 
     useEffect(() => {
         if (userinfo.data) {
@@ -26,6 +27,11 @@ const Cart = () => {
         } else {
             dispatch(getItemListAmount('/item/selectin', 'post', userCart.data, null));
         }
+        axios.get(`http://localhost:8090/visit/update`, {
+            params: {
+                page: 'cart',
+            }
+        })
     }, [])
 
     if (userCart.loading) return <Loading />
