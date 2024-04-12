@@ -36,4 +36,5 @@ public interface ItemRepository {
 	int itemListCount();
 	Item updateItem(Item entity);
 	List<ItemDTO> selectItemListWhereInCode(List<Integer> codeList);
+	List<Item> merge(List<Item> list);
 }

@@ -3,6 +3,7 @@ package com.example.demo.repostoryImpl;
 import static com.example.demo.entity.QItem.item;
 import static com.example.demo.entity.Qitem_event.item_event;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -15,6 +16,7 @@ import com.example.demo.domain.ItemDTO;
 import com.example.demo.domain.SortDTO;
 import com.example.demo.entity.Item;
 import com.example.demo.entity.QItem;
+import com.example.demo.entity.User;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.repository.ItemRepository;
@@ -39,6 +41,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 	
 	private final QBean<Item> noJoinEntity = Projections.bean(Item.class, item.sort1, item.sort2, item.sort3, item.code, item.brand, item.name, item.delivery, item.price, item.storage,
 			item.weight, item.packing, item.sales, item.stock, item.views, item.likes, item.event_code, item.intro, item.admin);
+	
 //	private final QBean<ItemDTO> managerDTO = Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price, item.storage,
 //			item.weight, item.packing, item.sales, item.stock, item.views, item.likes, item.event_code, item.intro, item.admin,
 //			item_event.discount, item_event.name.as("event_name"));
@@ -65,9 +68,10 @@ public class ItemRepositoryImpl implements ItemRepository {
 	@Override
 	public List<ItemDTO> selectItemListStringWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
 		return jPAQueryFactory.select(dtoBean)
-				.from(item).join(item_event).on(item.event_code.eq(item_event.code))
+				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
 				.where(Expressions.stringPath(searchRequest.getColumn()).contains(searchRequest.getKeyword()))
-				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum()).orderBy(getSortType(searchRequest))
+				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum())
+				.orderBy(getSortType(searchRequest))
 				.fetch();
 	}
 
@@ -84,7 +88,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 	@Override
 	public List<ItemDTO> selectItemListStringWhereTypeNotNull(PageRequest pageRequest, SearchRequest searchRequest) {
 		return jPAQueryFactory.select(dtoBean)
-				.from(item).join(item_event).on(item.event_code.eq(item_event.code))
+				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
 				.where(Expressions.stringPath(searchRequest.getColumn()).isNotNull()).limit(pageRequest.getEndNum())
 				.offset(pageRequest.getStartNum()).orderBy(getSortType(searchRequest)).fetch();
 	}
@@ -107,7 +111,8 @@ public class ItemRepositoryImpl implements ItemRepository {
 		return jPAQueryFactory.select(dtoBean)
 				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
 				.where(item.brand.eq(searchRequest.getKeyword())).orderBy(item.sales.desc())
-				.offset(pageRequest.getStartNum()).limit(pageRequest.getEndNum()).fetch();
+				.offset(pageRequest.getStartNum()).limit(pageRequest.getEndNum())
+				.fetch();
 	}
 
 	@Override
@@ -191,7 +196,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 				.from(item).join(item_event).on(item.event_code.eq(item_event.code))
 //				.where(Expressions.stringPath(searchRequest.getColumn())
 //						.contains(searchRequest.getKeyword()))
-				.limit(searchRequest.getHowManyRecords())
+				.offset(pageRequest.getStartNum()).limit(pageRequest.getEndNum())
 				.orderBy(getSortType(searchRequest))
 				.fetch();
 	}
@@ -206,7 +211,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 				.from(item).join(item_event).on(item.event_code.eq(item_event.code))
 //				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
 //						.contains(searchRequest.getKeyword()))
-				.limit(searchRequest.getHowManyRecords())
+				.offset(pageRequest.getStartNum()).limit(pageRequest.getEndNum())
 				.orderBy(getSortType(searchRequest))
 				.fetch();
 	}
@@ -230,5 +235,13 @@ public class ItemRepositoryImpl implements ItemRepository {
 				.fetch();
 	}
 
+	@Override
+	public List<Item> merge(List<Item> list) {
+		List<Item> check = new ArrayList<Item>();
+		for(Item entity : list) {
+			check.add(entityManager.merge(entity));
+		}
+		return check;
+	}
 
 }

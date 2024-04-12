@@ -80,4 +80,5 @@ public interface ItemService {
 	Item updateItem(Item entity);
 	List<ItemDTO> selectItemListWhereInCode(List<Integer> codeList);
 	List<ItemDTO> searchForAdmin(SearchRequest searchRequest,PageRequest pageRequest);
+	List<Item> merge(List<Item> list);
 }

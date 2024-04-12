@@ -112,5 +112,8 @@ public class ItemServiceImpl implements ItemService {
 		}
 	}
 
-	
+@Override
+	public List<Item> merge(List<Item> list) {
+		return itemRepository.merge(list);
+	}
 }
