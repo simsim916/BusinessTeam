@@ -10,6 +10,7 @@ import EventPage2 from './../event/EventPage2';
 import CustomerQA from "../customerQA/CustomerQA";
 import Alert from "../components/alert/Alert";
 import { useSelector } from 'react-redux';
+import BuyComplete from "./shop/buyComplete/BuyComplete";
 
 
 const Home = () => {
@@ -25,6 +26,7 @@ const Home = () => {
                 <Route path='/cart' element={<Cart />} />
                 <Route path='/ask' element={<CustomerQA />} />
                 <Route path='/buy' element={<BuyBox />} />
+                <Route path='/buy/end' element={<BuyComplete />} />
                 <Route path='/event2' element={<EventPage2 />} />
                 <Route path='/*' element={<Index />} />
             </Routes>

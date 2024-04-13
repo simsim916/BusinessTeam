@@ -12,7 +12,6 @@ const BuyItemBox = ({ }) => {
     const userBuy = useSelector(state => state.userBuy.buyList);
     const userBuyForm = useSelector(state => state.userBuy.form)
 
-    console.log(userBuy)
     const handleAllCheck = () => {
         if (userBuyForm.itemList && userBuy.length == userBuyForm.itemList.length) {
             dispatch(setUserBuyForm({ itemList: [] }))
@@ -29,9 +28,8 @@ const BuyItemBox = ({ }) => {
         }
     }
 
-    const changeItemList = (key, type, item) => {
+    const changeItemList = (key, type) => {
         let ar = [...userBuy];
-        console.log(ar[0].amount);
         if (type == '+') {
             ar[key].amount++;
         } else if (type == '-') {
@@ -59,7 +57,7 @@ const BuyItemBox = ({ }) => {
                 <li>총 상품금액</li>
                 <li>배송비</li>
             </ul>
-            {userBuy && userBuy.map((e, i) => <BuyItemBoxRow  changeItemList={changeItemList} item={e} key={i} idx={i} changeCheckedList={changeCheckedList} />)}
+            {userBuy && userBuy.map((e, i) => <BuyItemBoxRow changeItemList={changeItemList} item={e} key={i} idx={i} changeCheckedList={changeCheckedList} />)}
         </div>
     );
 

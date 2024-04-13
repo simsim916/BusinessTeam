@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -26,7 +27,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class ItemOrder {
+public class Itemorder {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +35,7 @@ public class ItemOrder {
     @Column(name = "user_id")
     private String id;
     @Column(name = "name")
-    private String item_name;
+    private String name;
     @Column(name = "address_code")
     private Integer addressCode;
     @Column(length = 50)
@@ -47,14 +48,15 @@ public class ItemOrder {
     private Integer point;
     
     @Column(name = "orderdate")
-    private LocalDate orderDate;
+    private LocalDateTime orderDate;
     
     @Column(name="deliverydate")
-    private LocalDate deliveryDate;
+    private LocalDateTime deliveryDate;
     
     private String order_message;
 
-    private boolean checked;
+    @Builder.Default
+    private Integer checked=0;
     
     
     

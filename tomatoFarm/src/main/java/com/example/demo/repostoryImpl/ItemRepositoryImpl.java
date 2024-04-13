@@ -1,3 +1,4 @@
+
 package com.example.demo.repostoryImpl;
 
 import static com.example.demo.entity.QItem.item;
@@ -167,9 +168,9 @@ public class ItemRepositoryImpl implements ItemRepository {
 
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 
-	public int batchInsert(List<Item> entity) {
+	public int batchInsert(List<Item> list) {
 		// QueryDSL을 사용하여 batch insert 쿼리 작성 및 실행
-		return (int) jPAQueryFactory.insert(item).values(entity).execute();
+		return (int) jPAQueryFactory.insert(item).values(list).execute();
 	}
 
 	@Override
@@ -182,7 +183,6 @@ public class ItemRepositoryImpl implements ItemRepository {
 	}
 
 	@Override
-	@Transactional
 	public void insertItem(Item entity) {
 		entityManager.persist(entity);
 	}

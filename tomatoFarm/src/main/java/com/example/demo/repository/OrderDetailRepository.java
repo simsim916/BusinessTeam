@@ -5,7 +5,7 @@ import java.util.List;
 import com.example.demo.entity.Itemorder;
 import com.example.demo.entity.OrderDetail;
 
-public interface ItemorderRepository {
+public interface OrderDetailRepository {
 
-	Itemorder merge(Itemorder entity);
+	int batchInsert(List<OrderDetail> list);
 }

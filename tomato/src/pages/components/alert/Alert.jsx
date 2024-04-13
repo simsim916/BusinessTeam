@@ -13,7 +13,7 @@ const Alert = () => {
 
     useEffect(() => {
         setTimeout(() => {
-            statusbar.current.style.transform = 'translateX(-100%)'
+            statusbar.current && (statusbar.current.style.transform = 'translateX(-100%)')
         }, 100)
 
         const timer = setTimeout(() => {

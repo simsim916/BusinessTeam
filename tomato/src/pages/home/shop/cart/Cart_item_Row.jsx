@@ -21,13 +21,16 @@ const Cart_item_Row = ({ item, idx }) => {
             dispatch(setUserBuyStorage([item]));
     }
 
-
-
     const handleXbtn = async () => {
         let data = userCart.filter(i => i.code != item.code);
         userCart && dispatch(setUserBuyItemList(data)) // 체크된 상태로 삭제를 시도할때 처리해야할 내용
         dispatch(setUserCartStorage(data)); // 유저 장바구니 상태값을 덮어씌워준다.
         user && api(`/usercart/delete`, 'post', [item], user.token); // DB에서 삭제하기.
+    }
+
+    const changeAmount = (type) => {
+        dispatch(changeUserCart(idx, type, userCart));
+        dispatch(setUserBuyStorage(userCart))
     }
 
     return (
@@ -50,9 +53,9 @@ const Cart_item_Row = ({ item, idx }) => {
                 }
             </li>
             <li className="shopBasketItem_count">
-                <button onClick={() => dispatch(changeUserCart(idx, '-', userCart))}><i className="fa-solid fa-minus"></i></button>
-                <input id="inputCount" type="number" value={item.amount} onChange={(event) => dispatch(changeUserCart(idx, event.target.value, userCart))} />
-                <button><i onClick={() => dispatch(changeUserCart(idx, '+', userCart))} className="fa-solid fa-plus"></i></button>
+                <button onClick={() => changeAmount('-')}><i className="fa-solid fa-minus"></i></button>
+                <input id="inputCount" type="number" value={item.amount} onChange={(event) => changeAmount(event.target.value)} />
+                <button><i onClick={() => changeAmount('+')} className="fa-solid fa-plus"></i></button>
             </li>
             {
                 item.discount ? (

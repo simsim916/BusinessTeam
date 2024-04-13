@@ -8,29 +8,21 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.entity.ItemOrder;
+import com.example.demo.entity.Itemorder;
 import com.example.demo.entity.OrderDetail;
-import com.example.demo.repository.OrderRepository;
+import com.example.demo.repository.ItemorderRepository;
 
 import lombok.AllArgsConstructor;
 
 @Repository
 @AllArgsConstructor
-public class OrderRepositoryImpl implements OrderRepository {
+public class ItemorderRepositoryImpl implements ItemorderRepository {
 
 	private final EntityManager entityManager;
 
 	@Override
-	public ItemOrder order(ItemOrder order) {
-		return entityManager.merge(order);
+	public Itemorder merge(Itemorder entity) {
+		return entityManager.merge(entity);
 	}
 
-	@Override
-	public List<OrderDetail> detailOrder(List<OrderDetail> list) {
-		List<OrderDetail> detailList = new ArrayList<OrderDetail>();
-		for (OrderDetail detail : list) {
-			detailList.add(entityManager.merge(detail));
-		}
-		return detailList;
-	}
 }

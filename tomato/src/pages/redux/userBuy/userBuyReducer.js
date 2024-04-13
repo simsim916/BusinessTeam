@@ -44,7 +44,7 @@ const userBuyReducer = (state = initialState.userBuy, action) => {
         case SET_USERBUY_ITEMLIST:
             return {
                 ...state,
-                buyList: action.payload
+                buyList: action.payload,
             };
         case SET_USERBUY_FORM:
             return {

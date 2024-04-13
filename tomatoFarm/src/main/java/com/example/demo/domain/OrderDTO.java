@@ -25,7 +25,7 @@ public class OrderDTO {
 	private String deliverymessage;
 	private Integer price;
 	private Integer discount;
-	private Integer deliveryprice;
+	private Integer delivery;
 	private Integer point;
 	
 	private String id;

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.domain.OrderDTO;
-import com.example.demo.entity.ItemOrder;
+import com.example.demo.entity.Itemorder;
 import com.example.demo.entity.OrderDetail;
 import com.example.demo.entity.UserAddress;
 import com.example.demo.jwtToken.TokenProvider;
@@ -31,22 +31,18 @@ public class OrderController {
 	TokenProvider tokenProvider; 
 	
 	@PostMapping("/order")
-	public ResponseEntity<?> test(@RequestBody OrderDTO dto,HttpServletRequest request) {
+	public ResponseEntity<?> order(@RequestBody OrderDTO dto, HttpServletRequest request) {
 		ResponseEntity<?> result = null;
 		String token = tokenProvider.parseBearerToken(request);
-		String id = null;
-			id = tokenProvider.validateAndGetUserId(token);
-		OrderRequest orderRequest = new OrderRequest();
-		ItemOrder orderEntity = orderRequest.makeOrderEntity(dto, id);
-		List<OrderDetail> detailList = orderRequest.makeDetailEntity(dto,id);
-		System.out.println("===================");
-		System.out.println("===================");
-		System.out.println(orderEntity.getId());
-		System.out.println("===================");
-		
-		orderService.order(orderEntity, detailList);
-		result = ResponseEntity.status(HttpStatus.OK).body("주문 성공");
-		return null;
+		String id = tokenProvider.validateAndGetUserId(token);
+		dto.setId(id);
+		Itemorder itemorder = orderService.order(dto);
+		if (itemorder!=null)
+			result = ResponseEntity.status(HttpStatus.OK).body(itemorder);
+		else 
+			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("order failed");
+				
+		return result;
 	}
 	
 }
