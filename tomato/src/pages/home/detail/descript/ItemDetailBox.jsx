@@ -8,10 +8,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserCart, setUserCartStorage } from '../../../redux/userCart/action';
 import { SERVER_RESOURCE } from '../../../../model/server-config';
 import GoCartContainer from './GoCartContainer';
+import { setUserBuyStorage } from '../../../redux/userBuy/actions';
+import { api } from '../../../../model/model';
 
 const ItemDetailBox = ({ item }) => {
     const dispatch = useDispatch();
-    
+
     const userinfo = useSelector(state => state.user.data)
     const [inputCountValue, setInputCountValue] = useState(1);
     const [introItem, setIntroItem] = useState(false)
@@ -65,7 +67,6 @@ const ItemDetailBox = ({ item }) => {
     const addCart = () => {
         setLoading(true);
         setGotoCart(!gotoCart);
-        
 
         if (userinfo && userinfo.login) {
             const formData = {
@@ -90,6 +91,11 @@ const ItemDetailBox = ({ item }) => {
         setLoading(false);
     };
 
+    const addBuy = async () => {
+        const response = await api(`/item/selectwhere?column=code&keyword=${item.code}`, 'get')
+        console.log(response.data)
+        dispatch(setUserBuyStorage([{ ...response.data, amount: +inputCountValue }]))
+    }
 
     return (
         <div id="itemDetailBox" className="container">
@@ -149,7 +155,7 @@ const ItemDetailBox = ({ item }) => {
                     <div id="priceBox">
                         <div id="priceAmount">총 상품금액&nbsp; : &nbsp;<span ref={priceRef}>{makeComa(makeDiscountPrice(item.price, item.discount) * inputCountValue)}원</span></div>
                         <div onClick={gotoCart ? null : addCart} id="gotocart">장바구니 담기</div>
-                        <Link to="/home/buy" id="gotobuy">구매하기</Link>
+                        <Link to="/home/buy" id="gotobuy" onClick={() => addBuy()}>구매하기</Link>
                     </div>
                 </div>
                 {
@@ -157,7 +163,7 @@ const ItemDetailBox = ({ item }) => {
                         <Loading />
                         :
                         gotoCart ?
-                            <GoCartContainer name={item.name} setGotoCart={setGotoCart}/>
+                            <GoCartContainer name={item.name} setGotoCart={setGotoCart} />
                             :
                             null
                 }

@@ -17,7 +17,7 @@ const Header = () => {
         sessionStorage.removeItem('userinfo');
         dispatch(changeAlert({
             title: '로그아웃 성공!',
-            time: 5,
+            time: 3,
             style: {
                 top: '10px',
                 left: 'calc(50% - 150px)'

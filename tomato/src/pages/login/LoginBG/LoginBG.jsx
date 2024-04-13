@@ -183,8 +183,6 @@ const LoginBG = () => {
 
 
     const handleKeyUp = (event) => {
-        console.log(event.key)
-        console.log(event.key == 'Enter')
         if (event.key == 'Enter') {
             if (event.target.name == 'id')
                 passwordBox.current.children[1].focus()
@@ -215,11 +213,11 @@ const LoginBG = () => {
                         onBlur={(event) => handelInputBlur(event, checkPassword)}
                         onFocus={(event) => changeOpacity(event)} />
                 </div>
-                <p id="errorBox">
+                <div id="errorBox">
                     <p id="idError">{loginValue.error.id}</p>
                     <p id="pwError">{loginValue.error.password}</p>
                     {user.error ? <span id="pwError">{user.error}</span> : null}
-                </p>
+                </div>
 
                 <button onClick={handleLogin} type="button" id="loginBtn"
                     style={{ opacity: loginValue.isLoginable ? '1' : '0.3' }} disabled={!loginValue.isLoginable}>로그인</button>

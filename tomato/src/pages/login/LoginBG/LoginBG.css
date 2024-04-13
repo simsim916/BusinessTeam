@@ -37,7 +37,7 @@
     align-items: center;
 }
 
-#loginBox>div:focus-within{
+#loginBox>div:focus-within {
     z-index: 3;
 }
 
@@ -88,6 +88,7 @@
     margin-bottom: 5px;
     height: 36px;
     text-align: left;
+    border: none !important;
 }
 
 #search {

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import './Alert.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeAlert } from '../../redux/basic/actions';
@@ -12,10 +12,15 @@ const Alert = () => {
     const data = useSelector(state => state.basic.alert)
 
     useEffect(() => {
-        statusbar.current.style.transform = 'translateX(-100%)'
         setTimeout(() => {
+            statusbar.current.style.transform = 'translateX(-100%)'
+        }, 100)
+
+        const timer = setTimeout(() => {
             dispatch(changeAlert(null));
         }, 1000 * data.time)
+
+        return () => clearTimeout(timer);
     }, [])
 
     return (
@@ -24,9 +29,9 @@ const Alert = () => {
                 <h3>{data.title}</h3>
                 <p>{data.content}</p>
             </div>
-            <div ref={statusbar} style={{ transition: `${data.time}s` }}></div>
+            <div ref={statusbar} style={{ transition: `${data.time}s ease-out` }}></div>
         </div>
     );
 }
 
-export default Alert;
+export default React.memo(Alert);

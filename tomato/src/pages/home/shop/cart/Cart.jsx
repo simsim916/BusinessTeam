@@ -16,9 +16,6 @@ const Cart = () => {
     const userCart = useSelector(state => state.userCart)
     const userinfo = useSelector(state => state.user)
 
-
-    
-
     useEffect(() => {
         if (userinfo.data) {
             const token = userinfo.data.token;
