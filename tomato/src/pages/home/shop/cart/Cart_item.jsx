@@ -31,12 +31,9 @@ const Cart_item = () => {
             const token = userinfo.data.token;
             dispatch(getUserCart('/usercart/select', 'get', null, token));
         } else {
-            dispatch(getItemListAmount('/item/selectin', 'post', userCart.data, null));
+            userCart && dispatch(getItemListAmount('/item/selectin', 'post', userCart.data, null));
         }
     }, [])
-
-    console.log(userBuy)
-    console.log('cart : ' + userCart)
 
     if (userCart_loading) return <Loading />
 
@@ -58,13 +55,13 @@ const Cart_item = () => {
                     <li>배송비</li>
                 </ul>
                 {
-                    userCart.length == 0
+                    userCart && userCart.length > 0
                         ?
+                        userCart && userCart.map((e, i) => <Cart_item_Row item={e} key={i} idx={i} />)
+                        :
                         <div id='cartNone'>
                             장바구니에 상품을 담아주세요.
                         </div>
-                        :
-                        userCart && userCart.map((e, i) => <Cart_item_Row item={e} key={i} idx={i} />)
                 }
 
             </div>

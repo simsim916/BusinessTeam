@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.domain.ItemDTO;
 import com.example.demo.domain.OrderDTO;
 import com.example.demo.entity.Itemorder;
+import com.example.demo.entity.ItemorderDTO;
 import com.example.demo.entity.OrderDetail;
 import com.example.demo.repository.ItemorderRepository;
 import com.example.demo.repository.OrderDetailRepository;
@@ -31,7 +32,6 @@ public class OrderServiceImpl implements OrderService {
 	public Itemorder order(OrderDTO dto) {
 
 		Itemorder itemorder = Itemorder.builder().id(dto.getId())
-				.name(dto.getItemList().get(0).getItem_name() + " 와 총 " + dto.getItemList().size() + "건 의 주문")
 				.addressCode(dto.getAddress_code()).address1(dto.getAddress1()).address2(dto.getAddress2())
 				.price(dto.getPrice()).delivery(dto.getDelivery()).point(dto.getPoint()).orderDate(LocalDateTime.now())
 				.order_message(dto.getDeliverymessage()).build();
@@ -54,7 +54,8 @@ public class OrderServiceImpl implements OrderService {
 			System.out.println("a : " + e);
 		
 		orderdetailRepository.batchInsert(list);
-
+		
+		
 		return itemorder;
 	}
 

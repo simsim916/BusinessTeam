@@ -84,22 +84,36 @@ const Header = () => {
                     </div>
                     <form id="searchBox">
                         <input onKeyUp={searchBoxEnterKey} onInput={appearinputBoxResetButton} onChange={changeKeyworda}
-                            id="searchBoxInput" type="text" placeholder="검색어를 입력해주세요." value={keyword} />
+                            id="searchBoxInput" type="text" placeholder="검색어를 입력해주세요." value={keyword} autoComplete="off" />
                         <i onClick={resetInputBox} className="fa-solid fa-circle-xmark"></i>
                         <button onClick={searchBox}><i className="fa-solid fa-magnifying-glass"></i></button>
+                        <div id="recentBox">
+                            <p id="recentBoxTitle">최근 검색어 </p>
+                            <div><Link to="/home/list?keyword=프레시지">프레시지</Link></div>
+                            <div><Link to="/home/list?keyword=스테이크">스테이크</Link></div>
+                            <div><Link to="/home/list?keyword=스테이크">스테이크</Link></div>
+                            <div><Link to="/home/list?keyword=스테이크">스테이크</Link></div>
+                            <div><Link to="/home/list?keyword=스테이크">스테이크</Link></div>
+                            <div><Link to="/home/list?keyword=스테이크">스테이크</Link></div>
+                        </div>
                     </form>
                     <div id="searchRightBox">
                         <div id="myPage">
                             <a to="/">
                                 <i className="fa-solid fa-user"></i>
-                                
+                                마이페이지
                             </a>
                         </div>
                         <div id="myCart">
-                            <Link to="/home/cart"><i className="fa-solid fa-cart-shopping"></i></Link>
+                            <Link to="/home/cart"><i className="fa-solid fa-cart-shopping"></i>
+                                장바구니
+                            </Link>
                         </div>
                         <div id="myItem">
-                            <a href="/"><i className="fa-solid fa-box-archive"></i></a>
+                            <a href="/">
+                                <i className="fa-solid fa-box-archive"></i>
+                                최근 본 상품
+                            </a>
                         </div>
                     </div>
                 </div>
