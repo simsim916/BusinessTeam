@@ -50,7 +50,7 @@ function Nav({ appearinputBoxResetButton, resetInputBox }) {
                 <ul id="navBar">
                     <li><Link to="/home/list?keyword=밀키트">밀키트 주문</Link></li>
                     <li><a href="">식단 주문</a></li>
-                    <li><a href="">재료 주문</a></li>
+                    <li><Link to="/home/list?keyword=식재료">재료 주문</Link></li>
                     <li><Link to="/event2">이벤트</Link></li>
                 </ul>
             </div>

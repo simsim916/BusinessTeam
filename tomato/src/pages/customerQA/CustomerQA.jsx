@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { api } from '../../model/model'
 import { useSelector } from 'react-redux';
 const CustomerQA = (setRefresh) => {
-    const user = useSelector(state => state.user)
+    const user = useSelector(state => state.user.data)
     const [form, setForm] = useState({
         type: '회원',
         title: '',
@@ -34,10 +34,9 @@ const CustomerQA = (setRefresh) => {
     }
 
     const submitQA = async () => {
-        await api(`http://localhost:8090/itemask/merge`, 'post', form, user.token
+        await api(`/itemask/merge`, 'post', form, user.token
         ).then(res => {
             setLoading(false);
-            console.log('제출성공')
         }).catch(err => {
             console.log(err.message)
             setLoading(false);
@@ -173,7 +172,7 @@ const CustomerQA = (setRefresh) => {
                 </div>
                 <div id="customerQAButton">
                     <button onClick={() => resetForm()} id="customerQACancle">취소하기</button>
-                    <button onClick={submitQA} id="customerQAEnter">문의하기</button>
+                    <button onClick={() => submitQA()} id="customerQAEnter">문의하기</button>
                 </div>
             </div>
         </>

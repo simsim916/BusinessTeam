@@ -7,22 +7,57 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserCart, setUserCartStorage } from '../../../redux/userCart/action';
 import { SERVER_RESOURCE } from '../../../../model/server-config';
+import GoCartContainer from './GoCartContainer';
+import { setUserBuyStorage } from '../../../redux/userBuy/actions';
+import { api } from '../../../../model/model';
 
 const ItemDetailBox = ({ item }) => {
+
+    /* 🫓REDUX🫓 */
     const dispatch = useDispatch();
+
     const userinfo = useSelector(state => state.user.data)
+    const alert = useSelector(state => state.basic.alert)
+    const userCart = useSelector(state => state.userCart.data);
+
+    /* State */
     const [inputCountValue, setInputCountValue] = useState(1);
     const [introItem, setIntroItem] = useState(false)
     const [gotoCart, setGotoCart] = useState(false);
     const [loading, setLoading] = useState(false);
     const currentDate = new Date();
-    const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
+    const weekdays = ['일', '월', '화', '수', '목', '금', '토', '일'];
     const date = currentDate.getDate();
     const hour = currentDate.getHours();
     const dayOfWeek = currentDate.getDay();
 
     let inputCountRef = useRef(null)
     let priceRef = useRef(null)
+
+    useEffect(() => {
+        if (userinfo && userinfo.login) {
+            let formData = {
+                code: item.code,
+                amount: 0,
+                id: userinfo.id
+            };
+            let ar = [];
+            if (userCart && userCart[0])
+                ar = [...userCart, formData];
+            else
+                ar.push(formData);
+            dispatch(getUserCart('/usercart/merge', 'post', ar, userinfo.token))
+        } else {
+            let cartArray = JSON.parse(localStorage.getItem('cart')) || [];
+            let itemIndex = cartArray.findIndex(e => e.code == item.code);
+            if (itemIndex !== -1) {
+                cartArray[itemIndex].amount += 0;
+            } else {
+                cartArray.push({ code: item.code, amount: 0 });
+            }
+            dispatch(setUserCartStorage(cartArray));
+        }
+    }, [])
 
     const changeMainImg = (event) => {
         let ele = event.target.closest('div');
@@ -33,7 +68,7 @@ const ItemDetailBox = ({ item }) => {
                 ele.parentNode.children[i].style.opacity = '0.5';
             }
         }
-        window.scrollTo(0,235);
+        window.scrollTo(0,  235);
     }
 
     const clickInputCount = (type) => {
@@ -59,9 +94,11 @@ const ItemDetailBox = ({ item }) => {
         setInputCountValue(event.target.value);
     }
 
+
     const addCart = () => {
         setLoading(true);
         setGotoCart(!gotoCart);
+
         if (userinfo && userinfo.login) {
             const formData = {
                 code: item.code,
@@ -85,6 +122,11 @@ const ItemDetailBox = ({ item }) => {
         setLoading(false);
     };
 
+    const addBuy = async () => {
+        const response = await api(`/item/selectwhere?column=item.code&keyword=${item.code}`, 'get')
+        console.log(response.data)
+        dispatch(setUserBuyStorage([{ ...response.data, amount: +inputCountValue }]))
+    }
 
     return (
         <div id="itemDetailBox" className="container">
@@ -144,7 +186,7 @@ const ItemDetailBox = ({ item }) => {
                     <div id="priceBox">
                         <div id="priceAmount">총 상품금액&nbsp; : &nbsp;<span ref={priceRef}>{makeComa(makeDiscountPrice(item.price, item.discount) * inputCountValue)}원</span></div>
                         <div onClick={gotoCart ? null : addCart} id="gotocart">장바구니 담기</div>
-                        <Link to="/home/buy" id="gotobuy">구매하기</Link>
+                        <Link to="/home/buy" id="gotobuy" onClick={() => addBuy()}>구매하기</Link>
                     </div>
                 </div>
                 {
@@ -152,14 +194,7 @@ const ItemDetailBox = ({ item }) => {
                         <Loading />
                         :
                         gotoCart ?
-                            <div id='goCartContainer'>
-                                <p id="itemName">{item.name}</p>
-                                <p>장바구니에 상품을 담았습니다.</p>
-                                <p>장바구니로 이동하시겠습니까?</p>
-                                <Link to="/home/cart" id="cartOK">이동</Link>
-                                <a onClick={() => setGotoCart(!gotoCart)} id="cartNO">닫기</a>
-                                <div id='triangle_bottom'></div>
-                            </div>
+                            <GoCartContainer name={item.name} setGotoCart={setGotoCart} />
                             :
                             null
                 }

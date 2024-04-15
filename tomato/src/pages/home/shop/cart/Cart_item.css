@@ -196,3 +196,8 @@
     height: 20px;
     opacity: 0.6;
 }
+
+#cartNone{
+    border: 1px solid;
+    border-top: none;
+}

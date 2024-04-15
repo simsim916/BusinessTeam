@@ -22,8 +22,8 @@ function App() {
                     <Route path='/event2' element={<EventPage2 />} />
                     <Route path='/admin/*' element={<Admin />} />
                     <Route path='/home/*' element={<Home />} />
-                    <Route path='/' element={<Home />} />
                     <Route path='/customerQA' element={<CustomerQA />} />
+                    <Route path='/' element={<Home />} />
                 </Routes>
             </div>
         </Provider>

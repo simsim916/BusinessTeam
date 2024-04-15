@@ -9,6 +9,7 @@ import { getItemList } from "../../redux/itemList/actions";
 import { getItemSortList } from "../../redux/itemListSort/actions";
 import { api } from "../../../model/model";
 import { changeKeyword } from "../../redux/basic/actions";
+import axios from "axios";
 
 const ItemList = () => {
     console.log('ItemList랜더링')
@@ -31,6 +32,12 @@ const ItemList = () => {
     useEffect(() => {
         dispatch(getItemList(`/item/search?keyword=${keyword}`, 'get'))
         dispatch(getItemSortList(`/item/searchsort?keyword=${keyword}`, 'get'))
+
+        axios.get(`http://localhost:8090/visit/update`, {
+            params: {
+                page: 'list',
+            }
+        })
     }, [keyword])
 
     /* listFilter 관련 */

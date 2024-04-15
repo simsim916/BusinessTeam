@@ -13,6 +13,7 @@ const LineChart = ({ graphData }) => {
     const chartRef = useRef(null);
     let chartInstance = null;
 
+
     useEffect(() => {
         // =====================================================
         let DateArr = [];
@@ -34,11 +35,11 @@ const LineChart = ({ graphData }) => {
             chartInstance = new Chart(ctx, {
                 type: "line",
                 data: {
-                    labels: DateArr,
+                    labels: [1,2,3],
                     datasets: [
                         {
                             label: "itemListArr",
-                            data: showData,
+                            data: [1,2,3],
                             borderColor: "blue",
                             backgroundColor: "rgba(255, 99, 132, 0.2)",
                             pointRadius: 5, // 포인트 크기
@@ -65,7 +66,7 @@ const LineChart = ({ graphData }) => {
                         },
                         y: {
                             beginAtZero: true,
-                            max: 1100, // 최대값 설정
+                            max: 1500, // 최대값 설정
                         },
                     },
                     maintainAspectRatio: false,

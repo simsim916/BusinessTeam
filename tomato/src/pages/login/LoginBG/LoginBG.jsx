@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginFailure, loginRequest, loginSuccess } from '../../redux/user/action';
 import { api } from '../../../model/model'
 import { getUserCart } from '../../redux/userCart/action';
+import { changeAlert } from '../../redux/basic/actions';
 
 const LoginBG = () => {
     console.log('LoginBG 랜더링')
@@ -156,7 +157,16 @@ const LoginBG = () => {
                     login: true,
                     id: response.data.id
                 }));
-                dispatch(getUserCart('/usercart/merge', 'post', cart, response.data.token))
+                dispatch(getUserCart('/usercart/merge', 'post', cart, response.data.token));
+                dispatch(changeAlert({
+                    title: '로그인 성공!',
+                    content: `${response.data.username} 님 환영합니다!`,
+                    time: 3,
+                    style: {
+                        top: '10px',
+                        left: 'calc(50% - 150px)'
+                    }
+                }));
                 localStorage.removeItem('cart');
                 navigate("/home");
             } catch (error) {
@@ -173,8 +183,6 @@ const LoginBG = () => {
 
 
     const handleKeyUp = (event) => {
-        console.log(event.key)
-        console.log(event.key == 'Enter')
         if (event.key == 'Enter') {
             if (event.target.name == 'id')
                 passwordBox.current.children[1].focus()
@@ -205,11 +213,11 @@ const LoginBG = () => {
                         onBlur={(event) => handelInputBlur(event, checkPassword)}
                         onFocus={(event) => changeOpacity(event)} />
                 </div>
-                <p id="errorBox">
+                <div id="errorBox">
                     <p id="idError">{loginValue.error.id}</p>
                     <p id="pwError">{loginValue.error.password}</p>
                     {user.error ? <span id="pwError">{user.error}</span> : null}
-                </p>
+                </div>
 
                 <button onClick={handleLogin} type="button" id="loginBtn"
                     style={{ opacity: loginValue.isLoginable ? '1' : '0.3' }} disabled={!loginValue.isLoginable}>로그인</button>

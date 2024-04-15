@@ -2,7 +2,7 @@ import { USERCART_DATA_REQUEST, USERCART_DATA_SUCCESS, USERCART_DATA_FAILURE, SE
 
 const initialState = {
     userCart: {
-        loading: true,
+        loading: false,
         data: JSON.parse(localStorage.getItem('cart')),
         error: null
     }

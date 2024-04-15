@@ -1,15 +1,8 @@
 package com.example.demo.controller;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,15 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.domain.ItemDTO;
 import com.example.demo.domain.SortDTO;
 import com.example.demo.entity.Item;
-import com.example.demo.entity.Keyword;
-import com.example.demo.entity.KeywordID;
 import com.example.demo.entity.UserCart;
 import com.example.demo.jwtToken.TokenProvider;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.service.ItemService;
 import com.example.demo.service.KeywordService;
-import com.example.demo.service.UserCartService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -56,10 +46,10 @@ public class ItemController {
 	}
 
 	@GetMapping("/detailn")
-	public ResponseEntity<?> selectItemWhereType(SearchRequest searchRequest) {
+	public ResponseEntity<?> selectItemWhereCode(SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
 		PageRequest pageRequest = new PageRequest(1, 1);
-		ItemDTO dto = itemService.selectItemListIntegerWhereType(pageRequest, searchRequest).get(0);
+		ItemDTO dto = itemService.selectItemWhereCode(pageRequest, searchRequest).get(0);
 		result = ResponseEntity.status(HttpStatus.OK).body(dto);
 		return result;
 	}
@@ -68,13 +58,12 @@ public class ItemController {
 	public ResponseEntity<?> selectItemWherebrand(SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
 		PageRequest pageRequest = new PageRequest(1, 6);
-
 		List<ItemDTO> list = itemService.selectItemWherebrand(pageRequest, searchRequest);
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}
 
-//페이징 + 정렬 기능 되는 search
+	//페이징 + 정렬 기능 되는 search
 	@GetMapping("/search")
 	public ResponseEntity<?> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
@@ -116,17 +105,17 @@ public class ItemController {
 	@GetMapping("/selectwhere")
 	public ResponseEntity<?> selectwhere(SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
-		System.out.println(searchRequest);
 		PageRequest pageRequest = new PageRequest();
-		List<ItemDTO> itemList = itemService.selectItemListStringWhereType(pageRequest,searchRequest);
+		List<ItemDTO> itemList = itemService.searchForAdmin(searchRequest,pageRequest);
+		
+		
 		if (itemList != null && itemList.size() > 0) {
 			result = ResponseEntity.status(HttpStatus.OK).body(itemList);
-			log.info(itemList.size());
 		} else {
 			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
 			log.info("데이터 못찾겠다");
 		}
-
+		
 		return result;
 	}
 
@@ -135,7 +124,7 @@ public class ItemController {
 		ResponseEntity<?> result = null;
 		
 		if (itemService.merge(list).size() > 0)
-			result = ResponseEntity.status(HttpStatus.OK).body(itemService.selectItemListStringWhereType(new PageRequest(), new SearchRequest("sort1", "")));
+			result = ResponseEntity.status(HttpStatus.OK).body(itemService.searchForAdmin(new SearchRequest("sort1", ""), new PageRequest()));
 		else
 			result = ResponseEntity.status(HttpStatus.OK).body("데이터 입력 실패");
 		return result;

@@ -30,30 +30,30 @@ const DeliveryUpdate = ({ setDeliverySelect }) => {
             <div className='info' >
                 <label>
                     <p>배송지명</p>
-                    <input name='info' value={userNewAddress.info} onChange={(event) => changeAddress(event)} /><br />
+                    <input name='info' value={userNewAddress.info || ''} onChange={(event) => changeAddress(event)} /><br />
                 </label>
             </div>
             <div className='addressName'>
                 <label>
                     <p>수령인</p>
-                    <input name='address_name' value={userNewAddress.address_name} onChange={(event) => changeAddress(event)} />
+                    <input name='address_name' value={userNewAddress.address_name || ''} onChange={(event) => changeAddress(event)} />
                 </label>
             </div>
             <div className='phoneNumber'>
                 <label>
                     <p>수령인 연락처</p>
-                    <input name='phonenumber' value={userNewAddress.phonenumber} onChange={(event) => changeAddress(event)} />
+                    <input name='phonenumber' value={userNewAddress.phonenumber || ''} onChange={(event) => changeAddress(event)} />
                 </label>
             </div>
             <div className='addressCode'>
                 <label htmlFor='address2'>
                     <p>배송지</p>
-                    <input readOnly name='address_code' value={userNewAddress.address_code} onChange={(event) => changeAddress(event)} />
-                    <input readOnly name='address1' value={userNewAddress.address1} onChange={(event) => changeAddress(event)} />
+                    <input readOnly name='address_code' value={userNewAddress.address_code || ''} onChange={(event) => changeAddress(event)} />
+                    <input readOnly name='address1' value={userNewAddress.address1 || ''} onChange={(event) => changeAddress(event)} />
                 </label>
                 <label>
                     <p>상세주소</p>
-                    <input id='address2' name='address2' value={userNewAddress.address2} onChange={(event) => changeAddress(event)} placeholder='상세주소를 입력해주세요.' />
+                    <input id='address2' name='address2' value={userNewAddress.address2 || ''} onChange={(event) => changeAddress(event)} placeholder='상세주소를 입력해주세요.' />
                 </label>
             </div>
             <div className='delivery_select'>

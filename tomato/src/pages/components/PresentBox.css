@@ -264,3 +264,7 @@
     height: 30px;
     border-radius: 50%;
 }
+
+.typeBox .slideBox {
+    transition: 300ms;
+}
