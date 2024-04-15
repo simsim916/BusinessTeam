@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.util.Random;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
@@ -14,13 +16,44 @@ import lombok.AllArgsConstructor;
 public class EmailService {
 	   private JavaMailSender emailSender;
 	   
+		public String createCode() {
+			Random random = new Random();
+			StringBuffer key = new StringBuffer();
+
+			for (int i = 0; i < 8; i++) {
+				int index = random.nextInt(4);
+
+				switch (index) {
+				case 0:
+					key.append((char) ((int) random.nextInt(26) + 97));
+					break;
+				case 1:
+					key.append((char) ((int) random.nextInt(26) + 65));
+					break;
+				default:
+					key.append(random.nextInt(9));
+				}
+			}
+			return key.toString();
+		}
+	   
 	    public void sendMail(String id) throws MessagingException {
 	        MimeMessage message = emailSender.createMimeMessage();
-	        MimeMessageHelper helper = new MimeMessageHelper(message, true);
-
+	        MimeMessageHelper helper = new MimeMessageHelper(message, false);
+	        String code = createCode();
+	        
+	        System.out.println("===========================");
+	        System.out.println(code);
+	        System.out.println(id);
+	        System.out.println("===========================");
 	        //제목, 내용 설정
 	        helper.setSubject("회원 가입 축하드립니다");
 	        helper.setText("토마토팜 회원이 되신 걸 축하드립니다", false);
+//	        helper.setText("<h2>토마토팜 회원이 되신 걸 축하드립니다</h2>", true);
+//	        helper.setText("<div>"
+//	        		+ "토마토팜 회원이 되신 걸 축하드립니다"
+//	        		+ "<span>" + code + "</span>"
+//	        		+ "</div>", true);
 
 	        // 참조자 설정
 	        helper.setCc("tomatofarm01234@gmail.com");
@@ -49,7 +82,9 @@ public class EmailService {
 //	        List<MultipartFile> multipartFileList = Arrays.asList(multipartFile);
 
 	        //메일 전송(setTo 파라미터에 문자열 리스트를 넘기면 한번에 여러명에게 전송 가능)
-	        helper.setTo(id+"@naver.com");
+	        helper.setTo(id);
 	        emailSender.send(message);
 	    }
+	    
+	    
 }

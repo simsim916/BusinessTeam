@@ -38,12 +38,10 @@ public class VisitController {
 	}
 	
 	@GetMapping("/selectwhere")
-	public ResponseEntity<?> selectAll(SearchRequest searchRequest) {
+	public ResponseEntity<?> selectWhere(SearchRequest searchRequest) {
 		ResponseEntity result = null;
 		
-		System.out.println(searchRequest);
-		
-		List<Visit_page> list = visitService.selectAll(searchRequest);
+		List<Visit_page> list = visitService.selectWhere(searchRequest);
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}

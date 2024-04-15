@@ -18,6 +18,9 @@ import lombok.AllArgsConstructor;
 public interface VisitRepository{
 
 
-	public List<Visit_page> selectAll(SearchRequest searchRequest);
+	public List<Visit_page> selectWhereString(SearchRequest searchRequest);
+	public List<Visit_page> selectWhereNumber(SearchRequest searchRequest);
+	
 	public Visit_page update(Visit_page visitPage, Visit_pageID visitPageID) ;
+	
 }

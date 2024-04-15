@@ -46,10 +46,10 @@ public class ItemController {
 	}
 
 	@GetMapping("/detailn")
-	public ResponseEntity<?> selectItemWhereType(SearchRequest searchRequest) {
+	public ResponseEntity<?> selectItemWhereCode(SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
 		PageRequest pageRequest = new PageRequest(1, 1);
-		ItemDTO dto = itemService.selectItemListIntegerWhereType(pageRequest, searchRequest).get(0);
+		ItemDTO dto = itemService.selectItemWhereCode(pageRequest, searchRequest).get(0);
 		result = ResponseEntity.status(HttpStatus.OK).body(dto);
 		return result;
 	}
@@ -106,14 +106,16 @@ public class ItemController {
 	public ResponseEntity<?> selectwhere(SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
 		PageRequest pageRequest = new PageRequest();
-		List<ItemDTO> itemList = itemService.selectItemListStringWhereType(pageRequest,searchRequest);
+		List<ItemDTO> itemList = itemService.searchForAdmin(searchRequest,pageRequest);
+		
+		
 		if (itemList != null && itemList.size() > 0) {
 			result = ResponseEntity.status(HttpStatus.OK).body(itemList);
 		} else {
 			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("출력자료 없음");
 			log.info("데이터 못찾겠다");
 		}
-
+		
 		return result;
 	}
 
@@ -122,7 +124,7 @@ public class ItemController {
 		ResponseEntity<?> result = null;
 		
 		if (itemService.merge(list).size() > 0)
-			result = ResponseEntity.status(HttpStatus.OK).body(itemService.selectItemListStringWhereType(new PageRequest(), new SearchRequest("sort1", "")));
+			result = ResponseEntity.status(HttpStatus.OK).body(itemService.searchForAdmin(new SearchRequest("sort1", ""), new PageRequest()));
 		else
 			result = ResponseEntity.status(HttpStatus.OK).body("데이터 입력 실패");
 		return result;

@@ -12,9 +12,15 @@ import { setUserBuyStorage } from '../../../redux/userBuy/actions';
 import { api } from '../../../../model/model';
 
 const ItemDetailBox = ({ item }) => {
+
+    /* 🫓REDUX🫓 */
     const dispatch = useDispatch();
 
     const userinfo = useSelector(state => state.user.data)
+    const alert = useSelector(state => state.basic.alert)
+    const userCart = useSelector(state => state.userCart.data);
+
+    /* State */
     const [inputCountValue, setInputCountValue] = useState(1);
     const [introItem, setIntroItem] = useState(false)
     const [gotoCart, setGotoCart] = useState(false);
@@ -28,6 +34,31 @@ const ItemDetailBox = ({ item }) => {
     let inputCountRef = useRef(null)
     let priceRef = useRef(null)
 
+    useEffect(() => {
+        if (userinfo && userinfo.login) {
+            let formData = {
+                code: item.code,
+                amount: 0,
+                id: userinfo.id
+            };
+            let ar = [];
+            if (userCart && userCart[0])
+                ar = [...userCart, formData];
+            else
+                ar.push(formData);
+            dispatch(getUserCart('/usercart/merge', 'post', ar, userinfo.token))
+        } else {
+            let cartArray = JSON.parse(localStorage.getItem('cart')) || [];
+            let itemIndex = cartArray.findIndex(e => e.code == item.code);
+            if (itemIndex !== -1) {
+                cartArray[itemIndex].amount += 0;
+            } else {
+                cartArray.push({ code: item.code, amount: 0 });
+            }
+            dispatch(setUserCartStorage(cartArray));
+        }
+    }, [])
+
     const changeMainImg = (event) => {
         let ele = event.target.closest('div');
         ele.style.opacity = 1;
@@ -37,7 +68,7 @@ const ItemDetailBox = ({ item }) => {
                 ele.parentNode.children[i].style.opacity = '0.5';
             }
         }
-        window.scrollTo(0, 235);
+        window.scrollTo(0,  235);
     }
 
     const clickInputCount = (type) => {

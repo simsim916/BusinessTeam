@@ -6,13 +6,14 @@ import Loading from '../../components/Loading';
 import PagingBox, { paging } from "../../components/PagingBox";
 import SelectDataBoxRow from './SelectDataBoxRow';
 import { api } from '../../../model/model';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ChangeList_Row from './changeList/ChangeList_Row';
+import { changeAlert } from "../../redux/basic/actions";
 
 const SelectDataBox = ({ myLocation }) => {
 
     console.log(`SelectDataBox 렌더링`);
-
+    const dispatch = useDispatch();
     const [formData, setFormData] = useState({
         column: 'sort1',
         keyword: ''
@@ -135,7 +136,27 @@ const SelectDataBox = ({ myLocation }) => {
 
     const insertData = async () => {
         const response = await api(`${whichTable}/merge`, 'post', JSON.stringify(changedList), user.token)
+            .then((res) => {
+                dispatch(changeAlert({
+                    title: '자료 변경 성공!',
+                    time: 3
+                }))
+            })
         setItemList(response.data)
+    }
+
+
+    const emailTest = () => {
+        api(`/email/send?id="dydgusc66@naver.com"`, 'get', null, user.token)
+        // axios.get('https://localhost:8090/email/emailtest')
+        //     .then(response => {
+        //         // 요청이 성공했을 때의 처리
+        //         console.log(response.data);
+        //     })
+        //     .catch(error => {
+        //         // 요청이 실패했을 때의 처리
+        //         console.error(error);
+        //     });
     }
 
     if (loading) return <Loading />

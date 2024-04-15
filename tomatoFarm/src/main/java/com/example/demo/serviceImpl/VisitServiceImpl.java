@@ -43,9 +43,12 @@ public class VisitServiceImpl implements VisitService {
 		return visitRepository.update(entity, visitPageID);
 	}
 	
-	public List<Visit_page> selectAll(SearchRequest searchRequest) {
-		
-		return visitRepository.selectAll(searchRequest);
+	public List<Visit_page> selectWhere(SearchRequest searchRequest) {
+		if (searchRequest.getKeyword().matches("^[0-9]*$")) {
+			return visitRepository.selectWhereNumber(searchRequest);
+		} else {
+			return visitRepository.selectWhereString(searchRequest);
+		}
 	}
 	
 
