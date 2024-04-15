@@ -1,16 +1,14 @@
-import "./SelectDataBox.css";
+import "./Admin_data.css";
 import { useEffect, useRef, useState } from 'react';
-import axios from 'axios';
 import Error from '../../components/Error';
 import Loading from '../../components/Loading';
 import PagingBox, { paging } from "../../components/PagingBox";
-import SelectDataBoxRow from './SelectDataBoxRow';
+import SelectDataBoxRow from './Admin_data_row';
 import { api } from '../../../model/model';
 import { useDispatch, useSelector } from "react-redux";
-import ChangeList_Row from './changeList/ChangeList_Row';
 import { changeAlert } from "../../redux/basic/actions";
 
-const SelectDataBox = ({ myLocation }) => {
+const Admin_data = ({ myLocation }) => {
 
     console.log(`SelectDataBox 렌더링`);
     const dispatch = useDispatch();
@@ -242,5 +240,4 @@ const SelectDataBox = ({ myLocation }) => {
     )
 }
 
-
-export default SelectDataBox;
+export default Admin_data;

@@ -11,9 +11,9 @@ public interface Item_askService {
 
 	//** 상품문의 조회
 		//* 글자 조회
-	List<Item_ask> selectItemAskListStringWhereType(PageRequest pageRequest, SearchRequest searchRequest);
+	List<Item_askDTO> selectItemAskListStringWhereType(PageRequest pageRequest, SearchRequest searchRequest);
 		//* 숫자 조회
-	List<Item_ask> selectItemAskListIntegerWhereType(PageRequest pageRequest, SearchRequest searchRequest);
+	List<Item_askDTO> selectItemAskListIntegerWhereType(PageRequest pageRequest, SearchRequest searchRequest);
 	
 //	=================================
 	

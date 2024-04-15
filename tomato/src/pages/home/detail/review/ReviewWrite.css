@@ -85,7 +85,7 @@
     flex-direction: column;
 }
 
-.reviewWriteKeword{
+.reviewWriteKeword {
     position: relative;
     display: flex;
     border-bottom: 1px solid rgb(221, 221, 221);
@@ -93,7 +93,8 @@
     text-align: center;
     align-items: center;
 }
-#kewordSelect{
+
+#kewordSelect {
     font-size: 20px;
     width: 20%;
     line-height: 50px;
@@ -101,7 +102,11 @@
     margin: 15px 0;
 }
 
-#kewordList>label{
+#kewordList{
+    display: flex;
+}
+
+#kewordList>div {
     padding: 10px;
     margin-right: 10px;
     font-size: 17px;
@@ -110,16 +115,6 @@
     font-weight: 500;
     background-color: #fff;
     border: 1px gray solid;
-}
-
-#kewordList input[type='checkbox'] {
-    /* display: none; */
-}
-/* 클릭했을때 색상 바꾸기 해야함!! */
-#kewordList input[type='checkbox']:checked{
-    background-color: #CA4046;
-    color: #fff;
-    border: 1px white solid;
 }
 
 .reviewWriteTag {

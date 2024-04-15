@@ -70,11 +70,11 @@ const PresentBox = ({ brand }) => {
                     <img src={"http://localhost:8090/resources" + `/img/brand/${brand}.png`} alt={brand} />
                     {brand}
                 </div>
-                <ul className="typeBoxTagList">
+                {/* <ul className="typeBoxTagList">
                     <li><a href="">스테이크</a></li>
                     <li><a href="">파스타</a></li>
                     <li><a href="">감바스</a></li>
-                </ul>
+                </ul> */}
             </div>
             {
                 brandItem != null ?

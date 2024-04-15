@@ -45,36 +45,54 @@ const AskBaordRow = ({ itemAsk }) => {
                 {
                     itemAsk.password != null ?
                         <i className="fa-solid fa-lock"></i>
-                        : <i className="fa-solid fa-lock-open"></i>
+                        :
+                        <i className="fa-solid fa-lock-open"></i>
                 }
             </div>
-            {
-                itemAsk.reply != null ?
-                    <div className="boardAnswer_reply">답변</div>
-                    : <div className="boardAnswer_reply">미답변</div>
-            }
+            <div className="boardAnswer_reply">{itemAsk.reply ? '답변' : '미답변'}</div>
             <div className="boardAnswer_title">{itemAsk.title}</div>
             <div className="boardAnswer_writer">{itemAsk.writer}</div>
-            <div className="boardAnswer_regdate">{itemAsk.regdate}</div>
+            <div className="boardAnswer_regdate">
+                {
+                    new Date().getFullYear() == new Date(itemAsk.regdate).getFullYear() &&
+                        new Date().getMonth() == new Date(itemAsk.regdate).getMonth() &&
+                        new Date().getDate() == new Date(itemAsk.regdate).getDate() ?
+                        new Date(itemAsk.regdate).getHours() + ' : ' + new Date(itemAsk.regdate).getMinutes()
+                        :
+                        new Date(itemAsk.regdate).getMonth() + '. ' + new Date(itemAsk.regdate).getDate()
+                }
+            </div>
 
             {
                 askDetail ?
                     itemAsk.password == null ?
-                        <div className="boardAnswer_content">{itemAsk.contents}</div>
+                        <div className="boardAnswer_content">
+                            {itemAsk.contents}
+                            <div>
+                                🍅🍅🍅🍅🍅답변🍅🍅🍅🍅🍅<br />
+                                {itemAsk.reply}
+                            </div>
+                        </div>
                         :
                         passwordSubmit ?
-                            <div className="boardAnswer_content">{itemAsk.contents}</div>
+                            <div className="boardAnswer_content">
+                                {itemAsk.contents}
+                                <div>
+                                    🍅🍅🍅🍅🍅답변🍅🍅🍅🍅🍅<br />
+                                    {itemAsk.reply}
+                                </div>
+                            </div>
                             :
                             passwordFail ?
-                            <div id='passwordCheck'>
-                                <input type="password" value={askPassword} onClick={(e) => e.stopPropagation()} onChange={PasswordChange} placeholder="4자리 숫자 입력" />
-                                <button onClick={checkPassword}>확인</button>
-                            </div>   
-                            :
-                            <div id='passwordCheck'>
+                                <div id='passwordCheck'>
+                                    <input type="password" value={askPassword} onClick={(e) => e.stopPropagation()} onChange={PasswordChange} placeholder="4자리 숫자 입력" />
+                                    <button onClick={checkPassword}>확인</button>
+                                </div>
+                                :
+                                <div id='passwordCheck'>
                                     <input type="password" value={askPassword} onClick={(e) => e.stopPropagation()} onChange={PasswordChange} placeholder="비밀번호 입력" />
                                     <button onClick={checkPassword}>확인</button>비밀번호가 틀렸습니다. 다시 입력해주세요
-                            </div>
+                                </div>
                     :
                     null
             }

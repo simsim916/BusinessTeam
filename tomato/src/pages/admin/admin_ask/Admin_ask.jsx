@@ -1,12 +1,13 @@
-import "./SelectAskBox.css";
+import "./Admin_ask.css";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import PagingBox, { paging } from "../../components/PagingBox";
-import SelectAskBox_Row from './selectAskBox_Row/SelectAskBox_Row';
+import SelectAskBox_Row from './Admin_ask_row/Admin_ask_row';
 import { SERVER_RESOURCE } from "../../../model/server-config";
+import { api } from "../../../model/model";
 
 
-const SelectAskBox = () => {
+const Admin_ask = () => {
 
     const [askList, setAskList] = useState([]);
     const [currPage, setCurrPage] = useState(1);
@@ -14,20 +15,23 @@ const SelectAskBox = () => {
 
     const [answered, setAnswered] = useState(2);
 
-    const [refresh, setRefresh] = useState(true);
     const [searchRequest, setSearchRequest] = useState({
         column: 'title',
         keyword: ''
     });
 
+    const getAskList = async () => {
+        await api(`/itemask/select?column=${searchRequest.column}&keyword=${searchRequest.keyword}`)
+            .then(res => {
+                setAskList(res.data);
+            }).catch(err => {
+                console.log(err.message);
+            })
+    }
+
     useEffect(() => {
-        axios.get(`http://localhost:8090/itemask/select?column=${searchRequest.column}&keyword=${searchRequest.keyword}`
-        ).then(res => {
-            setAskList(res.data);
-        }).catch(err => {
-            console.log(err.message);
-        })
-    }, [refresh])
+        getAskList();
+    }, [])
 
     const filterList = (answered) => {
         if (answered == 0) {
@@ -56,10 +60,10 @@ const SelectAskBox = () => {
         }));
     };
 
-    const changRefresh = () => {
-        setRefresh(!refresh);
+    const changeRefresh = (event) => {
+        event.preventDefault();
+        getAskList();
     }
-
 
     return (
         <div className="containerA">
@@ -92,7 +96,7 @@ const SelectAskBox = () => {
                 </h3>
             </div>
             <div id="announceBoard" className="appearContainer">
-                <form onSubmit={(event) => test(event, askList)}>
+                <form>
                     <select name="column" onChange={searchBoxChange}>
                         <option value="title">제목</option>
                         <option value="contents">내용</option>
@@ -100,7 +104,7 @@ const SelectAskBox = () => {
                     </select>
                     &nbsp;&nbsp;
                     <input type="text" name="keyword" onChange={searchBoxChange} />
-                    <button onClick={changRefresh}><i className="fa-solid fa-magnifying-glass"></i></button>
+                    <button onClick={changeRefresh}><i className="fa-solid fa-magnifying-glass"></i></button>
                 </form>
                 <div>
                     <div>번호</div>
@@ -114,7 +118,7 @@ const SelectAskBox = () => {
                     <div>2</div>
                     <div>공지</div>
                     <div>토마토팜 홈페이지 이용시 </div>
-                    <div><img src={SERVER_RESOURCE+"/img/logo.png"} alt="" /></div>
+                    <div><img src={SERVER_RESOURCE + "/img/logo.png"} alt="" /></div>
                     <div>2024-02-02</div>
                     <div></div>
                 </div>
@@ -127,7 +131,7 @@ const SelectAskBox = () => {
                     <div></div>
                 </div>
                 {paging(filterList(answered), currPage, limit).map((ask, i) => (
-                    <SelectAskBox_Row key={i} ask={ask} />
+                    <SelectAskBox_Row setAskList={setAskList} key={i} ask={ask} />
                 ))}
             </div>
             <PagingBox
@@ -139,4 +143,4 @@ const SelectAskBox = () => {
     );
 }
 
-export default SelectAskBox;
+export default Admin_ask;

@@ -2,12 +2,17 @@ import './ItemAskWrite.css';
 import { useState } from 'react';
 import Loading from './../../../components/Loading';
 import Error from './../../../components/Error';
-import axios from 'axios';
 import { SERVER_RESOURCE } from '../../../../model/server-config';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeAlert } from '../../../redux/basic/actions';
+import { api } from '../../../../model/model';
 
 
 const ItemAskForm = ({ item, setRefresh, refresh, itemAskClick }) => {
-
+    const dispatch = useDispatch();
+    const user = useSelector(state => state.user.data);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
     const [askBoxClose, setAskBoxClose] = useState(true);
     const [checked, setChecked] = useState(false);
     const [ask, setAsk] = useState({
@@ -15,7 +20,7 @@ const ItemAskForm = ({ item, setRefresh, refresh, itemAskClick }) => {
         writer: 'manager1',
         title: '',
         contents: '',
-        reply: '',
+        reply: null,
         password: null,
         type: '아이템'
     })
@@ -31,18 +36,24 @@ const ItemAskForm = ({ item, setRefresh, refresh, itemAskClick }) => {
         setChecked(!checked)
     }
     const submitAsk = async () => {
-        await axios.post(`http://localhost:8090/itemask/merge`, ask, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => {
-            setLoading(false);
-            console.log('제출성공')
-        }).catch(err => {
-            console.log(err.message)
-            setLoading(false);
-            setError(true);
-        });
+        await api('/itemask/merge', 'post', ask, user.token)
+            .then(res => {
+                setLoading(false);
+                dispatch(changeAlert({
+                    title: '제출 성공!',
+                    content: ``,
+                    time: 3,
+                    style: {
+                        top: '50%',
+                        left: 'calc(50% - 150px)',
+                        zIndex: 5
+                    }
+                }));
+            }).catch(err => {
+                console.log(err.message)
+                setLoading(false);
+                setError(true);
+            });
         setRefresh(!refresh);
         itemAskBoxClose();
     }
@@ -58,8 +69,8 @@ const ItemAskForm = ({ item, setRefresh, refresh, itemAskClick }) => {
         }
     }
 
-    const [Loading, setLoading] = useState(false);
-    const [Error, setError] = useState(false);
+    if (loading) return <Loading />
+    if (error) return <Error />
 
     return (
         <>
@@ -104,7 +115,11 @@ const ItemAskForm = ({ item, setRefresh, refresh, itemAskClick }) => {
 
                             <div id="itemAskButton">
                                 <button onClick={itemAskBoxClose} id="itemAskBoxCancle">취소</button>
-                                <button onClick={submitAsk} id="itemAskBoxEnter">등록</button>
+                                <button onClick={submitAsk} id="itemAskBoxEnter"
+                                    style={{
+                                        backgroundColor: ask.title.length > 0 && ask.contents.length > 0 ? '#9b1b20' : '#e0e0e0',
+                                        color: ask.title.length > 0 && ask.contents.length > 0 ? '#fff' : 'black'
+                                    }}>등록</button>
                             </div>
                         </div>
                         <div onClick={itemAskBoxClose} id="itemAskBoxClose"><i className="fa-solid fa-xmark"></i></div>

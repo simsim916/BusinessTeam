@@ -153,14 +153,14 @@
     margin-bottom: 20px;
 }
 
-#itemAskPrivacyContainer{
+#itemAskPrivacyContainer {
     display: flex;
     position: absolute;
     bottom: 15px;
     width: 75%;
 }
 
-#itemAskPrivacyBox{
+#itemAskPrivacyBox {
     display: flex;
     align-items: center;
     line-height: 30px;
@@ -179,7 +179,8 @@
     height: 20px;
     margin-right: 10px;
 }
-#passwordAsk{
+
+#passwordAsk {
     width: 150px;
     height: 30px;
     border-radius: 5px;
@@ -206,8 +207,11 @@
     height: 50px;
     font-size: 20px;
     border-radius: 10px;
+    cursor: pointer;
 }
-
+#itemAskBoxCancle:hover {
+    box-shadow: 3px 3px 5px 1px #a0a0a0;
+}
 #itemAskBoxEnter {
     background-color: rgb(221, 221, 221);
     border: 0px none;
@@ -218,9 +222,13 @@
     height: 50px;
     font-size: 20px;
     border-radius: 10px;
+    cursor: pointer;
 }
-
+#itemAskBoxEnter:hover {
+    box-shadow: 3px 3px 5px 1px #a0a0a0;
+}
 #itemAskBoxClose {
+    cursor: pointer;
     position: absolute;
     top: -50px;
     right: 10px;
@@ -231,4 +239,8 @@
     line-height: 40px;
     text-align: center;
     border-radius: 10px;
+}
+
+#itemAskBoxClose:hover {
+    box-shadow: 3px 3px 5px 1px #a0a0a0;
 }

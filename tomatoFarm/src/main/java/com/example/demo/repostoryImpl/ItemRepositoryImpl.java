@@ -76,14 +76,17 @@ public class ItemRepositoryImpl implements ItemRepository {
 //				.orderBy(getSortType(searchRequest))
 //				.fetch();
 //	}
-	
 	@Override
-	public List<ItemDTO> SearchForItemListString(PageRequest pageRequest, SearchRequest searchRequest) {
+	public List<ItemDTO> SearchForItemListInteger(PageRequest pageRequest, SearchRequest searchRequest) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	public List<ItemDTO> SearchForItemListInteger(PageRequest pageRequest, SearchRequest searchRequest) {
+@Override
+	public List<ItemDTO> SearchForItemListString(PageRequest pageRequest, SearchRequest searchRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}	
+	public List<ItemDTO> searchForItemListInteger(PageRequest pageRequest, SearchRequest searchRequest) {
 		return jPAQueryFactory.select(dtoBean).from(item).join(item_event).on(item.event_code.eq(item_event.code))
 				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
 						.contains(searchRequest.getKeyword()))
@@ -141,6 +144,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 				.from(item)
 				.where(item.sort2.contains(searchRequest.getKeyword())
 						.or(item.sort3.contains(searchRequest.getKeyword()))
+						.or(item.sort1.contains(searchRequest.getKeyword()))
 						.or(item.brand.contains(searchRequest.getKeyword()))
 						.or(item.name.contains(searchRequest.getKeyword())).and(item.sort1.ne("밀키트")))
 				.groupBy(item.sort1, item.sort2).orderBy(item.sort2.count().desc()).fetch();
@@ -152,6 +156,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 				.where(item.sort1.eq("밀키트")
 						.and(item.sort2.contains(searchRequest.getKeyword())
 								.or(item.sort3.contains(searchRequest.getKeyword()))
+								.or(item.sort1.contains(searchRequest.getKeyword()))
 								.or(item.brand.contains(searchRequest.getKeyword()))
 								.or(item.name.contains(searchRequest.getKeyword()))))
 				.groupBy(item.brand).orderBy(item.brand.count().desc()).fetch());
@@ -169,8 +174,6 @@ public class ItemRepositoryImpl implements ItemRepository {
 				.where(item.sort1.ne("밀키트")).groupBy(item.sort1, item.sort2).orderBy(item.sort2.asc()).fetch());
 		return result;
 	}
-
-	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 
 	public int batchInsert(List<Item> list) {
 		// QueryDSL을 사용하여 batch insert 쿼리 작성 및 실행

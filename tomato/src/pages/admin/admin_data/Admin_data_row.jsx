@@ -1,7 +1,5 @@
-import { useState } from "react";
-import "./SelectDataBox.css";
 
-const SelectDataBoxRow = ({ style, changeItemRow, item }) => {
+const Admin_data = ({ style, changeItemRow, item }) => {
 
     return (
         <div onClick={() => changeItemRow(item)} className="excelColumn" style={{ ...style, }}>
@@ -13,4 +11,4 @@ const SelectDataBoxRow = ({ style, changeItemRow, item }) => {
 }
 
 
-export default SelectDataBoxRow;
+export default Admin_data;
