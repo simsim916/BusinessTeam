@@ -6,6 +6,7 @@ export const POST_DATA_SUCCESS = 'POST_DATA_SUCCESS';
 export const POST_DATA_FAILURE = 'POST_DATA_FAILURE';
 export const SET_USERBUY_ITEMLIST = 'SET_USERBUY_ITEMLIST';
 export const SET_USERBUY_FORM = 'SET_USERBUY_FORM';
+export const SET_USERBUY = 'SET_USERBUY';
 
 export const postDataRequest = () => ({
     type: POST_DATA_REQUEST
@@ -26,6 +27,10 @@ export const setUserBuyItemList = (data) => ({
 });
 export const setUserBuyForm = (data) => ({
     type: SET_USERBUY_FORM,
+    payload: data
+});
+export const setUserBuy = (data) => ({
+    type: SET_USERBUY,
     payload: data
 });
 
@@ -51,5 +56,11 @@ export const setUserBuyStorage = (data) => {
     return (dispatch) => {
         dispatch(setUserBuyItemList(data));
         sessionStorage.setItem('buy', JSON.stringify(data))
+    }
+}
+export const setUserBuyStorageClean = (data) => {
+    return (dispatch) => {
+        dispatch(setUserBuy(data));
+        sessionStorage.removeItem('buy');
     }
 }

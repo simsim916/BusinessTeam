@@ -38,7 +38,7 @@ public class SecurityConfig {
 				.authorizeRequests()
 				.antMatchers("/", "/home","/resources/**","/item/**", "/itemask/**" , "/itemreview/**", 
 						"/keyword/**", "/user/**", "/visit/**", "/chatbot/**","/usercart/**","/test/**",
-						"/order/**", "/chat/**").permitAll() 
+						"/order/**", "/chat/**", "/page/**").permitAll() 
 				// => "/", "/home" 등의 경로는 인증 안해도 됨.
 				.anyRequest().authenticated().and() 
 				// => 위 이외의 모든 경로는 인증해야됨.
