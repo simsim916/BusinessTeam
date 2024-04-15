@@ -43,6 +43,8 @@ const ItemList = () => {
     /* listFilter 관련 */
     const filterCheckedList = useRef()
     const [deletedSort, setDeletedSort] = useState([]);
+    const [priceRange, setPriceRange] = useState({ min: '', max: '' })
+
     /* 검색된 sort중 삭제할 sort를 저장할 배열(deletedSort) 저장 */
     const changeDeletedSort = (event) => {
         const value = event.target.closest('li').children[1].innerText;
@@ -63,6 +65,10 @@ const ItemList = () => {
         for (let ele of deletedSort) {
             result = result.filter((e) => e.sort2 != ele && e.brand != ele)
         }
+        if (priceRange.min != '')
+            result = result.filter(e => Math.round(e.price * (100 - e.discount) / 100) >= priceRange.min)
+        if (priceRange.max != '')
+            result = result.filter(e => Math.round(e.price * (100 - e.discount) / 100) <= priceRange.max)
         return result;
     }
 
@@ -86,7 +92,9 @@ const ItemList = () => {
                 " <b>{keyword}</b> " <span>에 대한 검색 결과</span>
             </div>
             <div className="container">
-                <ItemListFilter itemListSort={itemListSort.data} deletedSort={deletedSort} changeDeletedSort={changeDeletedSort} />
+                <ItemListFilter
+                    itemListSort={itemListSort.data} deletedSort={deletedSort} changeDeletedSort={changeDeletedSort}
+                    priceRange={priceRange} setPriceRange={setPriceRange} />
                 <ItemListContainer itemList={changeItemList()} />
             </div>
         </>

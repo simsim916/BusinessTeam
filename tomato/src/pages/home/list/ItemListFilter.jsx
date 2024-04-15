@@ -1,8 +1,8 @@
 import { useSearchParams } from "react-router-dom";
 import './ItemListFilter.css'
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
-const ItemListFilter = ({ itemListSort, changeDeletedSort, deletedSort }) => {
+const ItemListFilter = ({ itemListSort, changeDeletedSort, deletedSort, priceRange, setPriceRange }) => {
     const listfilter = useRef(null);
     const mealkit = useRef(0);
     const ingre = useRef(0);
@@ -16,6 +16,13 @@ const ItemListFilter = ({ itemListSort, changeDeletedSort, deletedSort }) => {
         }
         else
             ingre.current += e.count
+    }
+
+    const handlePriceRange = (event) => {
+        setPriceRange((prev) => ({
+            ...prev,
+            [event.target.name]: event.target.value
+        }))
     }
 
     const showList = (event) => {
@@ -88,9 +95,9 @@ const ItemListFilter = ({ itemListSort, changeDeletedSort, deletedSort }) => {
                 <li id="filterPrice">
                     <i className="fa-regular fa-circle-check"></i>가격
                     <form>
-                        <input type="text" placeholder="최소금액" />
+                        <input type="number" placeholder="최소금액" name='min' value={priceRange.min} onChange={handlePriceRange} />
                         &nbsp;&nbsp;~&nbsp;&nbsp;
-                        <input type="text" placeholder="최고금액" />
+                        <input type="number" placeholder="최고금액" name='max' value={priceRange.max} onChange={handlePriceRange} />
                     </form>
                 </li>
             </ul>

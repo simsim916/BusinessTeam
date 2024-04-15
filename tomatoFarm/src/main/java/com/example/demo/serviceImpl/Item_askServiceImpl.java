@@ -22,13 +22,13 @@ public class Item_askServiceImpl implements Item_askService{
 	private final Item_askRepository item_askRepository;
 	
 	@Override
-	public List<Item_ask> selectItemAskListStringWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
+	public List<Item_askDTO> selectItemAskListStringWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
 		return item_askRepository.selectItemAskListStringWhereType(pageRequest, searchRequest);
 	}
 
 	
 	@Override
-	public List<Item_ask> selectItemAskListIntegerWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
+	public List<Item_askDTO> selectItemAskListIntegerWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
 		return item_askRepository.selectItemAskListIntegerWhereType( pageRequest,  searchRequest);
 	}
 	

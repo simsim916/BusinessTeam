@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.domain.Item_askDTO;
 import com.example.demo.entity.Item_ask;
 import com.example.demo.jwtToken.TokenProvider;
 import com.example.demo.module.PageRequest;
@@ -37,7 +38,7 @@ public class Itme_askController {
 	@GetMapping("/select")
 	public ResponseEntity<?> selectItem_askList(PageRequest pageRequest, SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
-		List<Item_ask> list = null;
+		List<Item_askDTO> list = null;
 		if (searchRequest.getKeyword().matches("[0-9]+")) {
 			list = item_askService.selectItemAskListIntegerWhereType(pageRequest, searchRequest);
 		} else {
@@ -53,15 +54,17 @@ public class Itme_askController {
 		ResponseEntity<?> result = null;
 		String token = tokenProvider.parseBearerToken(request);
 		String id = tokenProvider.validateAndGetUserId(token);
-		entity.setWriter(id);
-		if (entity.getPassword() != null) {
-			String password = entity.getPassword();
-			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-			entity.setPassword(encoder.encode(password));
-			result = ResponseEntity.status(HttpStatus.OK).body(item_askService.merge(entity));
-		} else {
-			result = ResponseEntity.status(HttpStatus.OK).body(item_askService.merge(entity));
+		if (entity.getReply_writer() == null) {
+			entity.setWriter(id);
+			if (entity.getPassword() != null) {
+				String password = entity.getPassword();
+				BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+				entity.setPassword(encoder.encode(password));
+			}
 		}
+		item_askService.merge(entity);
+		result = ResponseEntity.status(HttpStatus.OK).body(item_askService.selectItemAskListStringWhereType(new PageRequest(), new SearchRequest("title","")));
+		
 		return result;
 	}
 
@@ -82,9 +85,9 @@ public class Itme_askController {
 		searchRequest.setKeyword(entity.getSeq() + "");
 		String password = entity.getPassword();
 
-		entity = item_askService.selectItemAskListIntegerWhereType(pageRequest, searchRequest).get(0);
+		Item_askDTO dto = item_askService.selectItemAskListIntegerWhereType(pageRequest, searchRequest).get(0);
 
-		if (encoder.matches(password, entity.getPassword())) {
+		if (encoder.matches(password, dto.getPassword())) {
 			// 비밀번호 일치
 			result = ResponseEntity.status(HttpStatus.OK).body(entity);
 		} else {

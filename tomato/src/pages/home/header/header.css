@@ -101,10 +101,6 @@
     outline: 2.5px solid #9b1b20;
 }
 
-#searchBox>input:focus~#recentBox {
-    display: block;
-}
-
 #searchBox>#recentBox {
     background-color: #fff4f4;
     width: 100%;
@@ -114,7 +110,6 @@
     z-index: 5;
     outline: 1px solid;
     overflow: auto;
-    display: none;
 }
 
 #searchBox>#recentBox::-webkit-scrollbar {

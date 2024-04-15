@@ -168,7 +168,7 @@ const LoginBG = () => {
                     }
                 }));
                 localStorage.removeItem('cart');
-                navigate("/home");
+                window.history.back();
             } catch (error) {
                 console.log(error.response.data);
                 dispatch(loginFailure(error.response.data));

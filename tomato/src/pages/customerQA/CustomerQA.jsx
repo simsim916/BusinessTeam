@@ -1,9 +1,15 @@
 import "./CustomerQA.css";
 import { useState } from 'react';
 import { api } from '../../model/model'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeAlert } from "../redux/basic/actions";
+import Alert from "../components/alert/Alert";
 const CustomerQA = (setRefresh) => {
-    const user = useSelector(state => state.user.data)
+    const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
+    const user = useSelector(state => state.user.data);
+    const alert = useSelector(state => state.basic.alert)
     const [form, setForm] = useState({
         type: '회원',
         title: '',
@@ -34,22 +40,43 @@ const CustomerQA = (setRefresh) => {
     }
 
     const submitQA = async () => {
-        await api(`/itemask/merge`, 'post', form, user.token
-        ).then(res => {
-            setLoading(false);
-        }).catch(err => {
-            console.log(err.message)
-            setLoading(false);
-            setError(true);
-        });
-        // setRefresh(!refresh);
-        resetForm();
+        if (user) {
+            await api(`/itemask/merge`, 'post', form, user.token
+            ).then(res => {
+                setLoading(false);
+                dispatch(changeAlert({
+                    title: '제출 성공!',
+                    content: ``,
+                    time: 3,
+                    style: {
+                        top: '50%',
+                        left: 'calc(50% - 150px)',
+                        zIndex: 5
+                    }
+                }));
+            }).catch(err => {
+                console.log(err.message)
+                setLoading(false);
+                setError(true);
+            });
+            resetForm();
+        }
+        else {
+            dispatch(changeAlert({
+                title: '로그인 필요!',
+                content: `1:1 문의시 로그인이 반드시 필요합니다.`,
+                time: 3,
+                style: {
+                    top: '50%',
+                    left: 'calc(50% - 150px)',
+                    zIndex: 5
+                }
+            }));
+        }
     }
 
-    const [Loading, setLoading] = useState(false);
-    const [Error, setError] = useState(false);
 
-    console.log(form)
+
     return (
         <>
             <div id="customerQABox" className="container">
@@ -152,6 +179,7 @@ const CustomerQA = (setRefresh) => {
                 </div>
                 <h3><i className="fa-solid fa-message"></i> 1:1 문의하기 <i className="fa-solid fa-message"></i></h3>
                 <div id="customerQABottom">
+                    {alert && <Alert />}
                     <div className="customerQAKeword">
                         <div id='kewordSelectQA'>문의 유형</div>
                         <div id='kewordListQA'>
@@ -172,7 +200,12 @@ const CustomerQA = (setRefresh) => {
                 </div>
                 <div id="customerQAButton">
                     <button onClick={() => resetForm()} id="customerQACancle">취소하기</button>
-                    <button onClick={() => submitQA()} id="customerQAEnter">문의하기</button>
+                    <button onClick={form.title.length > 0 && form.contents.length > 0 ? () => submitQA() : null}
+                        style={{
+                            backgroundColor: form.title.length > 0 && form.contents.length > 0 ? '#9b1b20' : '#e0e0e0',
+                            color: form.title.length > 0 && form.contents.length > 0 ? '#fff' : 'black'
+                        }}
+                        id="customerQAEnter">문의하기</button>
                 </div>
             </div>
         </>

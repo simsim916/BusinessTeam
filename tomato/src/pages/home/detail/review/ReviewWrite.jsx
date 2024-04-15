@@ -3,10 +3,11 @@ import './ReviewWrite.css';
 import { useMemo, useState } from 'react';
 import Loading from './../../../components/Loading';
 import Error from './../../../components/Error';
-import axios from 'axios';
 import { api } from '../../../../model/model';
+import { useSelector } from 'react-redux';
 
 const ReviewWrite = ({ item, refresh, setRefresh, reviewWriteClick }) => {
+    const user = useSelector(state => state.user.data)
     const [writeBoxClose, setWriteBoxClose] = useState(true);
     const [score, setScore] = useState(0);
     const [review, setReview] = useState({
@@ -15,9 +16,10 @@ const ReviewWrite = ({ item, refresh, setRefresh, reviewWriteClick }) => {
         title: '',
         contents: '',
         score: '0',
+        tag: null,
     });
     const [file, setfile] = useState();
-
+    const [fileURL, setFileURL] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
@@ -32,10 +34,8 @@ const ReviewWrite = ({ item, refresh, setRefresh, reviewWriteClick }) => {
         if (file) {
             formData.append('uploadfilef', file);
         }
-        const loginInfoString = sessionStorage.getItem('logininfo');
-        const loginInfoObject = JSON.parse(loginInfoString);
 
-        await api('/itemreview/insertmultipart', 'post', formData, "loginInfoObject.token")
+        await api('/itemreview/insertmultipart', 'post', formData, user.token)
             .then(res => {
                 setLoading(false);
             }).catch(err => {
@@ -49,7 +49,20 @@ const ReviewWrite = ({ item, refresh, setRefresh, reviewWriteClick }) => {
 
     const changeFile = (e) => {
         setfile(e.target.files[0]);
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            setFileURL(event.target.result)
+        }
+        reader.readAsDataURL(e.target.files[0])
     };
+
+    const changeTag = (event) => {
+        setReview((prev) => ({
+            ...prev,
+            tag: event.target.innerText
+        }))
+    }
 
     if (loading) return <Loading />
     if (error) return <Error />
@@ -60,8 +73,6 @@ const ReviewWrite = ({ item, refresh, setRefresh, reviewWriteClick }) => {
             [event.target.name]: event.target.value
         }))
     }
-
-
 
     const changeScore = (event) => {
         setScore(event.target.id);
@@ -131,11 +142,11 @@ const ReviewWrite = ({ item, refresh, setRefresh, reviewWriteClick }) => {
                                 </div>
                                 <div className="reviewWriteKeword">
                                     <div id='kewordSelect'>키워드 선택</div>
-                                    <div id='kewordList' onChange={changeReview}>
-                                        <label><input type='checkbox' id='checkbox'></input>맛있어요</label>
-                                        <label><input type='checkbox' id='checkbox'></input>신선해요</label>
-                                        <label><input type='checkbox' id='checkbox'></input>가성비 좋아요</label>
-                                        <label><input type='checkbox' id='checkbox'></input>배송이 빨라요</label>
+                                    <div id='kewordList' onClick={changeTag}>
+                                        <div onClick={changeTag} style={{ backgroundColor: review.tag == '맛있어요' ? '#9b1b20' : '#fff', color: review.tag == '맛있어요' ? '#fff' : 'black' }}>맛있어요</div>
+                                        <div onClick={changeTag} style={{ backgroundColor: review.tag == '신선해요' ? '#9b1b20' : '#fff', color: review.tag == '신선해요' ? '#fff' : 'black' }}>신선해요</div>
+                                        <div onClick={changeTag} style={{ backgroundColor: review.tag == '가성비 좋아요' ? '#9b1b20' : '#fff', color: review.tag == '가성비 좋아요' ? '#fff' : 'black' }}>가성비 좋아요</div>
+                                        <div onClick={changeTag} style={{ backgroundColor: review.tag == '배송이 빨라요' ? '#9b1b20' : '#fff', color: review.tag == '배송이 빨라요' ? '#fff' : 'black' }}>배송이 빨라요</div>
                                     </div>
                                 </div>
                                 <div className="reviewWriteTag">
@@ -151,7 +162,10 @@ const ReviewWrite = ({ item, refresh, setRefresh, reviewWriteClick }) => {
                                 </div>
                                 <div className="reviewWriteTag">
                                     <div>사진첨부</div>
-                                    <input onChange={changeFile} type='file' name='uploadfilef' />
+                                    <div>
+                                        {fileURL && <img src={fileURL} alt="후기사진" />}
+                                        <input onChange={changeFile} type='file' name='uploadfilef' />
+                                    </div>
                                 </div>
                                 <div id="reviewWriteContentBottom">
                                     <p>* 상품 품질과 관계 없는 내용은 비공개 처리 될 수 있습니다</p>

@@ -5,10 +5,14 @@ import Loading from './../../../components/Loading';
 import Error from './../../../components/Error';
 import AskBoardRow from './AskBoardRow';
 import ItemAskWrite from './ItemAskWrite';
-import PagingBox from './../../../components/PagingBox';
+import PagingBox, { paging } from './../../../components/PagingBox';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeAlert } from '../../../redux/basic/actions';
 
 
 const AskBoardBox = ({ item }) => {
+    const user = useSelector(state => state.user.data);
+    const dispatch = useDispatch();
     const [itemAskList, setItemAskList] = useState(null);
     const [refresh, setRefresh] = useState(true);
     const [loading, setLoading] = useState(true);
@@ -16,14 +20,12 @@ const AskBoardBox = ({ item }) => {
     const [askWrite, setAskWrite] = useState(false);
     const [limit, setLimit] = useState(5);
     const [currPage, setCurrPage] = useState(1);
-    const [pageList, setPageList] = useState(null);
 
     useEffect(() => {
         axios.get(`http://localhost:8090/itemask/select?column=item_code&keyword=${item.code}`
         ).then(res => {
             setItemAskList(res.data);
             setLoading(false);
-            setPageList(res.data);
             setCurrPage(1);
         }).catch(err => {
             console.log(err.message)
@@ -33,15 +35,19 @@ const AskBoardBox = ({ item }) => {
     }, [refresh])
 
     const itemAskClick = () => {
-        setAskWrite(!askWrite);
-    }
-
-    const paging = () => (list, currPage, limit) => {
-        if (list != null) {
-            const start = limit * (currPage - 1);
-            const end = currPage * limit;
-            return list.slice(start, end);
-        }
+        if (user)
+            setAskWrite(!askWrite);
+        else
+            dispatch(changeAlert({
+                title: '로그인 필요!',
+                content: `상품 문의 작성 시 로그인이 필요합니다.`,
+                time: 3,
+                style: {
+                    top: '50%',
+                    left: 'calc(50% - 150px)',
+                    zIndex: 5
+                }
+            }));
     }
 
     if (loading) return <Loading />
@@ -52,7 +58,10 @@ const AskBoardBox = ({ item }) => {
             <div id="askBoardBox" className="container appearContainer">
                 <h5>상품문의</h5>
                 <span>상품문의 - 상품에 궁금하신점을 남겨주세요.</span>
-                <div onClick={itemAskClick} id="itemAskWrite">문의하기</div>
+                <div onClick={itemAskClick} id="itemAskWrite" style={{
+                    backgroundColor: user ? '#9B1B30' : '#e0e0e0',
+                    color: user ? '#fff' : 'black'
+                }}>문의하기</div>
                 <div id="askBoard">
                     <div className="askBoardRow">
                         <div>공개</div>
@@ -62,7 +71,7 @@ const AskBoardBox = ({ item }) => {
                         <div>작성일자</div>
                     </div>
                     {itemAskList ?
-                        paging(pageList, currPage, limit).map((e, i) => <AskBoardRow itemAsk={e} key={i} />)
+                        paging(itemAskList, currPage, limit).map((e, i) => <AskBoardRow itemAsk={e} key={i} />)
                         :
                         <div id='askNone'>
                             해당 상품에 문의사항이 없습니다.
@@ -71,7 +80,7 @@ const AskBoardBox = ({ item }) => {
                 </div>
 
                 <PagingBox
-                    list={pageList}
+                    list={itemAskList}
                     limit={limit}
                     currPage={currPage}
                     setCurrPage={setCurrPage} />
