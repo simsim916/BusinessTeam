@@ -17,6 +17,7 @@ const Buy_total = () => {
 
     const postOrder = () => {
         dispatch(postUserBuy(userBuy, user && user.token));
+        navigate('/home/buy/end')
         // sessionStorage.removeItem('buy')
     }
 

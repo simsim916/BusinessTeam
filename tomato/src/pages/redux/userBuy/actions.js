@@ -38,6 +38,7 @@ export const postUserBuy = (userBuyForm, token) => {
                 price: Math.ceil(userBuyForm.itemList.reduce((result, e) => +result + (Math.round((e.price * ((100 - e.discount) / 100)), 0) * e.amount) + e.delivery, 0)),
                 delivery: userBuyForm.itemList.reduce((result, e) => +result + (e.delivery), 0),
             }, token)
+            console.log(response.data)
             dispatch(postDataSuccess(response.data));
         } catch (error) {
             console.log('postUserBuy : ' + error.message)

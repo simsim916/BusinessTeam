@@ -16,6 +16,7 @@ const initialState = {
             point: '',
             phonenumber: '',
         },
+        data:null,
         error: null,
     }
 };

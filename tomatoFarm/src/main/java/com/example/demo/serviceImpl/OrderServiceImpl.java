@@ -46,9 +46,9 @@ public class OrderServiceImpl implements OrderService {
 				.item_name(dto.getItemList().get(0).getName())
 				.build();
 
-		System.out.println("b : " + itemorder);
 
 		itemorder = itemorderRepository.merge(itemorder);
+		System.out.println("b : " + itemorder);
 
 		List<OrderDetail> list = new ArrayList<OrderDetail>();
 
