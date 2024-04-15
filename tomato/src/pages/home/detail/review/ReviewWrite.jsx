@@ -4,10 +4,12 @@ import { useMemo, useState } from 'react';
 import Loading from './../../../components/Loading';
 import Error from './../../../components/Error';
 import { api } from '../../../../model/model';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { changeAlert } from '../../../redux/basic/actions';
 
 const ReviewWrite = ({ item, refresh, setRefresh, reviewWriteClick }) => {
     const user = useSelector(state => state.user.data)
+    const dispatch = useDispatch();
     const [writeBoxClose, setWriteBoxClose] = useState(true);
     const [score, setScore] = useState(0);
     const [review, setReview] = useState({
@@ -38,6 +40,16 @@ const ReviewWrite = ({ item, refresh, setRefresh, reviewWriteClick }) => {
         await api('/itemreview/insertmultipart', 'post', formData, user.token)
             .then(res => {
                 setLoading(false);
+                dispatch(changeAlert({
+                    title: '제출 성공!',
+                    content: ``,
+                    time: 3,
+                    style: {
+                        top: '50%',
+                        left: 'calc(50% - 150px)',
+                        zIndex: 5
+                    }
+                }));
             }).catch(err => {
                 console.log(err.message)
                 setLoading(false);
