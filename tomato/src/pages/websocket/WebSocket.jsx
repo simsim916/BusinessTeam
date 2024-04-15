@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import WebSocket from './WebSocket';
 
 
 const WebSocket2 = () => {

@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react"
 import { Link } from "react-router-dom";
 
 
-const Cart_alert = ({ name, setGotoCart }) => {
+const GoCartContainer = ({ name, setGotoCart }) => {
     const statusbar = useRef(null)
 
     useEffect(() => {
@@ -30,4 +30,4 @@ const Cart_alert = ({ name, setGotoCart }) => {
     );
 }
 
-export default Cart_alert;
+export default GoCartContainer;

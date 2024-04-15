@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import './Detail_ask_row.css';
+import './AskBoardRow.css';
 import axios from 'axios';
 
 
-const Detail_ask_row = ({ itemAsk }) => {
+const AskBaordRow = ({ itemAsk }) => {
     const [askDetail, setAskDetail] = useState(false);
     const [askPassword, setAskPassword] = useState("");
     const [passwordSubmit, setPasswordSubmit] = useState(false);
@@ -100,4 +100,4 @@ const Detail_ask_row = ({ itemAsk }) => {
     );
 }
 
-export default Detail_ask_row;
+export default AskBaordRow;

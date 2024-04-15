@@ -1,17 +1,17 @@
-import './Detail_descript.css';
+import './ItemDetailBox.css';
 
 import { useRef, useState, useEffect, useMemo } from 'react';
 import { makeComa, makeDiscountPrice } from '../../../components/MathFunction';
-import Loading from '../../../components/Loading';
+import Loading from './../../../components/Loading';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserCart, setUserCartStorage } from '../../../redux/userCart/action';
 import { SERVER_RESOURCE } from '../../../../model/server-config';
-import Cart_alert from './Cart_alert';
+import GoCartContainer from './GoCartContainer';
 import { setUserBuyStorage } from '../../../redux/userBuy/actions';
 import { api } from '../../../../model/model';
 
-const Detail_descript = ({ item }) => {
+const ItemDetailBox = ({ item }) => {
 
     /* 🫓REDUX🫓 */
     const dispatch = useDispatch();
@@ -68,7 +68,7 @@ const Detail_descript = ({ item }) => {
                 ele.parentNode.children[i].style.opacity = '0.5';
             }
         }
-        window.scrollTo(0, 235);
+        window.scrollTo(0,  235);
     }
 
     const clickInputCount = (type) => {
@@ -123,7 +123,6 @@ const Detail_descript = ({ item }) => {
     };
 
     const addBuy = async () => {
-        console.log(item.code)
         const response = await api(`/item/selectwhere?column=item.code&keyword=${item.code}`, 'get')
         console.log(response.data)
         dispatch(setUserBuyStorage([{ ...response.data, amount: +inputCountValue }]))
@@ -195,7 +194,7 @@ const Detail_descript = ({ item }) => {
                         <Loading />
                         :
                         gotoCart ?
-                            <Cart_alert name={item.name} setGotoCart={setGotoCart} />
+                            <GoCartContainer name={item.name} setGotoCart={setGotoCart} />
                             :
                             null
                 }
@@ -247,5 +246,5 @@ const Detail_descript = ({ item }) => {
     );
 }
 
-export default Detail_descript;
+export default ItemDetailBox;
 

@@ -1,6 +1,11 @@
-import './Detail_review_box_row_detail.css';
+import './ReviewDetail.css';
+import { useState } from 'react';
 
-const Detail_review_box_row_detail = ({ itemReview, reviewDetail, setReviewDetail }) => {
+
+const ReviewDetail = ({ itemReview, reviewDetail, setReviewDetail }) => {
+
+
+    
 
     const reivewDetailImgChange = (event) => {
         let ele = event.target.closest('div');
@@ -48,7 +53,12 @@ const Detail_review_box_row_detail = ({ itemReview, reviewDetail, setReviewDetai
                 </div>
             }
         </>
+
+
+
+
+
     );
 }
 
-export default Detail_review_box_row_detail;
+export default ReviewDetail;
