@@ -174,7 +174,11 @@ const ReviewWrite = ({ item, refresh, setRefresh, reviewWriteClick }) => {
                             </div>
                             <div id="reviewWriteButton">
                                 <button onClick={reviewWriteBoxClose} id="reviewWriteCancle">취소</button>
-                                <button onClick={submitReview} id="reviewWriteEnter">등록</button>
+                                <button onClick={submitReview} id="reviewWriteEnter"
+                                    style={{
+                                        backgroundColor: review.title.length > 0 && review.contents.length > 0 ? '#9b1b20' : '#e0e0e0',
+                                        color: review.title.length > 0 && review.contents.length > 0 ? '#fff' : 'black'
+                                    }}>등록</button>
                             </div>
                         </div>
                         <i onClick={reviewWriteBoxClose} id="reviewWriteBoxClose" className="fa-solid fa-xmark"></i>
