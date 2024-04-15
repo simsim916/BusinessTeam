@@ -19,8 +19,10 @@ const Cart_item = () => {
             dispatch(setUserBuyItemList(userCart));
             dispatch(setUserBuyStorage(userCart));
         }
-
     }
+
+    console.log(userCart);
+    console.log(userBuy);
 
     return (
         <div id='shopBasketSelectBox'>

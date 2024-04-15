@@ -7,6 +7,7 @@ import Graph from "./graph/Graph";
 import { Route, Routes } from 'react-router-dom';
 import axios from 'axios';
 import Admin_Chatbot from './chatbot_admin/Admin_Chatbot';
+import Weather from "./weather/Weather";
 
 
 
@@ -15,6 +16,7 @@ import Admin_Chatbot from './chatbot_admin/Admin_Chatbot';
 const Admin = () => {
     const [sideBarOpen, setSideBarOpen] = useState(true);
     const [currLocation, setCurrLocation] = useState(null);
+
 
     const openSideBar = () => {
         setSideBarOpen(!sideBarOpen);
@@ -26,8 +28,8 @@ const Admin = () => {
                 page: 'admin'
             }
         })
-    }, [])
 
+    }, [])
 
     return (
         <>
@@ -39,6 +41,9 @@ const Admin = () => {
                     <Route path='/graph' element={<Graph />} />
                     <Route path='/chatbot' element={<Admin_Chatbot />} />
                 </Routes>
+                <div id="weatherAndCalender">
+                    <Weather />
+                </div>
             </div>
         </>
     );
