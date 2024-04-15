@@ -33,8 +33,4 @@ public class ItemorderRepositoryImpl implements ItemorderRepository {
 		return entityManager.merge(entity);
 	}
 
-	public ItemorderDTO selectOne(Itemorder entity) {
-		
-		return null;
-	}
 }

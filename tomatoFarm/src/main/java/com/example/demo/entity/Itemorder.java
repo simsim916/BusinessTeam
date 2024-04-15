@@ -57,7 +57,9 @@ public class Itemorder {
     @Builder.Default
     private Integer checked=0;
     
-    
+    private Integer size;
+    private String item_name;
+    private Integer item_code;
     
 
 }

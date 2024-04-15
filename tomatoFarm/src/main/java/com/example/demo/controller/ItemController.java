@@ -1,15 +1,8 @@
 package com.example.demo.controller;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,15 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.domain.ItemDTO;
 import com.example.demo.domain.SortDTO;
 import com.example.demo.entity.Item;
-import com.example.demo.entity.Keyword;
-import com.example.demo.entity.KeywordID;
 import com.example.demo.entity.UserCart;
 import com.example.demo.jwtToken.TokenProvider;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.service.ItemService;
 import com.example.demo.service.KeywordService;
-import com.example.demo.service.UserCartService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;

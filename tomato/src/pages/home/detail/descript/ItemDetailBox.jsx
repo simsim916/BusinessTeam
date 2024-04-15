@@ -92,7 +92,7 @@ const ItemDetailBox = ({ item }) => {
     };
 
     const addBuy = async () => {
-        const response = await api(`/item/selectwhere?column=code&keyword=${item.code}`, 'get')
+        const response = await api(`/item/selectwhere?column=item.code&keyword=${item.code}`, 'get')
         console.log(response.data)
         dispatch(setUserBuyStorage([{ ...response.data, amount: +inputCountValue }]))
     }

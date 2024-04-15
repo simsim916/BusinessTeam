@@ -31,10 +31,20 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public Itemorder order(OrderDTO dto) {
 
-		Itemorder itemorder = Itemorder.builder().id(dto.getId())
-				.addressCode(dto.getAddress_code()).address1(dto.getAddress1()).address2(dto.getAddress2())
-				.price(dto.getPrice()).delivery(dto.getDelivery()).point(dto.getPoint()).orderDate(LocalDateTime.now())
-				.order_message(dto.getDeliverymessage()).build();
+		Itemorder itemorder = Itemorder.builder()
+				.id(dto.getId())
+				.addressCode(dto.getAddress_code())
+				.address1(dto.getAddress1())
+				.address2(dto.getAddress2())
+				.price(dto.getPrice())
+				.delivery(dto.getDelivery())
+				.point(dto.getPoint())
+				.orderDate(LocalDateTime.now())
+				.order_message(dto.getDeliverymessage())	
+				.size(dto.getItemList().size())
+				.item_code(dto.getItemList().get(0).getCode())
+				.item_name(dto.getItemList().get(0).getName())
+				.build();
 
 		System.out.println("b : " + itemorder);
 

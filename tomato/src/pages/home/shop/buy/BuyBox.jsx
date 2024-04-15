@@ -1,17 +1,11 @@
 import './BuyBox.css'
 import BuyItemBox from './buyItemBox/BuyItemBox';
 import BuyDeliveryBox from './deliveryAddress/BuyDeliveryBox';
-import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
 import Buy_total from './Buy_total';
 
 
 
 const BuyBox = () => {
-
-
-
-
 
     return (
         <div id='shopBasket' className='container'>
