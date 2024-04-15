@@ -6,7 +6,7 @@ export async function api(url, method, requestData, token) {
 
     let headers = '';
 
-    if (url.indexOf('multipart') >= 0 && token == null) {
+    if (url.indexOf('multipart') >= 0) {
         headers = { 'Content-Type': 'multipart/form-data' };
     } else if (token !== null) {
         headers = {
