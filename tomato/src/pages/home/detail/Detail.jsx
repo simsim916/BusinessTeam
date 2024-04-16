@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
@@ -14,8 +14,9 @@ const Detail = ({ propscode }) => {
     const [item, setItem] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
-
-
+    const navigate = useNavigate();
+    if (searchParams.size == 0)
+        navigate("/home/list?keyword=");
 
     useEffect(() => {
         axios.get(`http://localhost:8090/item/detailn?column=item.code&keyword=${propscode || itemCode}`

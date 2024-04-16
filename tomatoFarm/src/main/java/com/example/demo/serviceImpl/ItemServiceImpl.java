@@ -62,8 +62,8 @@ public class ItemServiceImpl implements ItemService {
 	
 	@Override
 	@Transactional
-	public List<SortDTO> selectSortWhereKeyword(SearchRequest searchRequest) {
-		return itemRepository.selectSortWhereKeyword(searchRequest);
+	public List<SortDTO> selectSortWhereKeyword(PageRequest pageRequest, SearchRequest searchRequest) {
+		return itemRepository.selectSortWhereKeyword(pageRequest, searchRequest);
 	}
 
 	@Override
@@ -90,6 +90,10 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public Item merge(Item entity) {
 		return itemRepository.merge(entity);
+	}
+	@Override
+	public int mergeAll(List<Item> list) {
+		return itemRepository.mergeAll(list);
 	}
 	
 	@Override

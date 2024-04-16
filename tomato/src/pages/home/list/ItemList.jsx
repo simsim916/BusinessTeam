@@ -89,8 +89,16 @@ const ItemList = () => {
     return (
         <>
             <div id="searchTitle" className="container">
-                " <b>{keyword}</b> " <span>에 대한 검색 결과</span>
-            </div>
+                {keyword ?
+                    <>
+                        " <b>{keyword}</b> " <span> 에 대한 검색 결과</span>
+                    </>
+                    :
+                    <>
+                        " <b>전체 검색</b> " <span> 에 대한 검색 결과</span>
+                    </>
+                }
+            </div >
             <div className="container">
                 <ItemListFilter
                     itemListSort={itemListSort.data} deletedSort={deletedSort} changeDeletedSort={changeDeletedSort}

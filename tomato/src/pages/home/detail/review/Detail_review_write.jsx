@@ -33,6 +33,7 @@ const Detail_review_write = ({ item, refresh, setRefresh, reviewWriteClick }) =>
         formData.append('title', review.title);
         formData.append('contents', review.contents);
         formData.append('score', review.score);
+        formData.append('tag', review.tag);
         if (file) {
             formData.append('uploadfilef', file);
         }

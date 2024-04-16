@@ -71,10 +71,10 @@ public class ItemController {
 
 	// List페이지에서 sort별 갯수 집계
 	@GetMapping("/searchsort")
-	public ResponseEntity<?> selectSortWhereKeyword(SearchRequest searchRequest) {
+	public ResponseEntity<?> selectSortWhereKeyword(PageRequest pageRequest, SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
 		List<SortDTO> list = itemService.selectSortList();
-		List<SortDTO> countList = itemService.selectSortWhereKeyword(searchRequest);
+		List<SortDTO> countList = itemService.selectSortWhereKeyword(pageRequest, searchRequest);
 		for (SortDTO a : countList) {
 			for (SortDTO b : list) {
 				if (a.getSort1().equals(b.getSort1())) {
@@ -116,8 +116,7 @@ public class ItemController {
 	@PostMapping(value = "/merge")
 	public ResponseEntity<?> merge(@RequestBody List<Item> list) {
 		ResponseEntity<?> result = null;
-		
-		if (itemService.persist(list) > 0)
+		if (itemService.mergeAll(list) > 0)
 			result = ResponseEntity.status(HttpStatus.OK).body(itemService.selectItemListWhereType(new PageRequest(), new SearchRequest("sort1", "")));
 		else
 			result = ResponseEntity.status(HttpStatus.OK).body("데이터 입력 실패");

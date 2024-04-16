@@ -60,6 +60,22 @@ public class UserController {
 
 		return result;
 	}
+	@GetMapping("/admincheck")
+	public ResponseEntity<?> admincheck(HttpServletRequest request) {
+		String token = tokenProvider.parseBearerToken(request);
+		String id = tokenProvider.validateAndGetUserId(token);
+		ResponseEntity<?> result = null;
+		User entity = User.builder().id(id).build();
+		entity = userService.selectUser(entity); // user가 입력한 id로 userData를 조회 하여 dto를 채운다.
+		System.out.println(entity);
+		if (entity.getLevel() < 100) { // 조회성공
+			result = ResponseEntity.status(HttpStatus.OK).body(true);
+		} else { // 조회실패
+			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(false);
+		}
+
+		return result;
+	}
 
 	@PostMapping("/signup")
 	public ResponseEntity<?> singup(@RequestBody User entity) {
@@ -83,9 +99,7 @@ public class UserController {
 		String token = tokenProvider.parseBearerToken(request);
 		String id = tokenProvider.validateAndGetUserId(token);
 		User entity = new User().builder().id(id).build();
-
 		User user = userService.selectUser(entity);
-		System.out.println(user);
 
 		return ResponseEntity.status(HttpStatus.OK).body(user);
 	}

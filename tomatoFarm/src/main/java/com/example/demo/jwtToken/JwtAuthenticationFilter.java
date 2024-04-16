@@ -84,7 +84,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 				//    JWT이므로 인가 서버에 요청 하지 않고도 검증 가능
 				//    TokenProvider 의 검증메서드를 통해 검증후 id 전달받음 (위조된 경우 예외처리 됨)
 				String userId = tokenProvider.validateAndGetUserId(token);
-				log.info("Authenticated user ID : " + userId );
 				
 				// 3) 인증 완료
 				// => 스프링시큐리티의 인증과정 ( https://ittrue.tistory.com/287 참고)

@@ -9,7 +9,7 @@ const Weather = () => {
 
     const [weather, setWeather] = useState({});
     let imgSRC = '/img/weather_clear.jpg';
-    const apiKey = '60dbd7283a42ef16940bde54b9dc9cda';
+    const apiKey = '';
     const tomorrowTimestamp = getTimestamps().tomorrow;
 
 

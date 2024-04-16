@@ -12,8 +12,10 @@ import com.example.demo.domain.ItemDTO;
 import com.example.demo.domain.OrderDTO;
 import com.example.demo.entity.Itemorder;
 import com.example.demo.entity.OrderDetail;
+import com.example.demo.entity.UserCart;
 import com.example.demo.repository.ItemorderRepository;
 import com.example.demo.repository.OrderDetailRepository;
+import com.example.demo.repository.UserCartRepository;
 import com.example.demo.service.OrderService;
 
 import lombok.AllArgsConstructor;
@@ -24,6 +26,7 @@ public class OrderServiceImpl implements OrderService {
 
 	private final ItemorderRepository itemorderRepository;
 	private final OrderDetailRepository orderdetailRepository;
+	private final UserCartRepository userCartRepository;
 
 	@Transactional
 	@Override
@@ -41,28 +44,32 @@ public class OrderServiceImpl implements OrderService {
 				.order_message(dto.getDeliverymessage())	
 				.size(dto.getItemList().size())
 				.item_code(dto.getItemList().get(0).getCode())
-				.item_name(dto.getItemList().get(0).getName())
+				.item_name(dto.getItemList().get(0).getItem_name())
 				.build();
 
-
 		itemorder = itemorderRepository.merge(itemorder);
-		System.out.println("b : " + itemorder);
 
 		List<OrderDetail> list = new ArrayList<OrderDetail>();
-
-		for (ItemDTO e : dto.getItemList())
+		List<Integer> item_list = new ArrayList<Integer>();
+		
+		for (ItemDTO e : dto.getItemList()) {
+			item_list.add(e.getCode());
 			list.add(OrderDetail.builder()
 					.order_code(itemorder.getCode())
 					.item_code(e.getCode())
 					.item_amount(e.getAmount())
 					.discount(e.getDiscount())
 					.build());
+		}
 		
-		for (OrderDetail e : list)
-			System.out.println("a : " + e);
 		
 		orderdetailRepository.batchInsert(list);
 		
+		List<UserCart> userCart_list = userCartRepository.selectCartWhereUserIDItemList(dto.getId(), item_list);
+		for(UserCart e : userCart_list) {
+			e.setAmount(0);
+		}
+		userCartRepository.merge(userCart_list);
 		
 		return itemorder;
 	}

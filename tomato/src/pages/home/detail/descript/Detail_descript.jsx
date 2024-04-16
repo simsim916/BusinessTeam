@@ -133,13 +133,13 @@ const Detail_descript = ({ item }) => {
         <div id="itemDetailBox" className="container">
             <div id="imgBox">
                 <div id="imgBoxImg">
-                    <img src={SERVER_RESOURCE + `/img/itemImg/${item.code}_1.jpg`} alt={`${item.name} 사진`} />
+                    <img src={SERVER_RESOURCE + `/img/itemImg/${item.code < 10000 ? 'default' : item.code}_1.jpg`} alt={`${item.name} 사진`} />
                 </div>
                 <div id="imgBoxImgList">
-                    <div onClick={changeMainImg}><img src={SERVER_RESOURCE + `/img/itemImg/${item.code}_1.jpg`} alt={`${item.name} 조리`} /></div>
-                    <div onClick={changeMainImg}><img src={SERVER_RESOURCE + `/img/itemImg/${item.code}_2.jpg`} alt={`${item.name} 제품`} /></div>
-                    <div onClick={changeMainImg}><img src={SERVER_RESOURCE + `/img/itemImg/${item.code}_3.jpg`} alt={`${item.name} 구성품`} /></div>
-                    <div onClick={changeMainImg}><img src={SERVER_RESOURCE + `/img/itemImg/${item.code}_4.jpg`} alt={`${item.name} 상세표기`} /></div>
+                    <div onClick={changeMainImg}><img src={SERVER_RESOURCE + `/img/itemImg/${item.code < 10000 ? 'default' : item.code}_1.jpg`} alt={`${item.name} 조리`} /></div>
+                    <div onClick={changeMainImg}><img src={SERVER_RESOURCE + `/img/itemImg/${item.code < 10000 ? 'default' : item.code}_1.jpg`} alt={`${item.name} 제품`} /></div>
+                    <div onClick={changeMainImg}><img src={SERVER_RESOURCE + `/img/itemImg/${item.code < 10000 ? 'default' : item.code}_1.jpg`} alt={`${item.name} 구성품`} /></div>
+                    <div onClick={changeMainImg}><img src={SERVER_RESOURCE + `/img/itemImg/${item.code < 10000 ? 'default' : item.code}_1.jpg`} alt={`${item.name} 상세표기`} /></div>
                 </div>
             </div>
 

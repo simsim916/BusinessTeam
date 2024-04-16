@@ -100,12 +100,12 @@ public class ItemRepositoryImpl implements ItemRepository {
 						.or(item.brand.contains(searchRequest.getKeyword()))
 						.or(item.name.contains(searchRequest.getKeyword())))
 				.orderBy(getSortType(searchRequest))
-				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum())
+//				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum())
 				.fetch();
 	}
 
 	@Override
-	public List<SortDTO> selectSortWhereKeyword(SearchRequest searchRequest) {
+	public List<SortDTO> selectSortWhereKeyword(PageRequest pageRequest,SearchRequest searchRequest) {
 		List<SortDTO> result = jPAQueryFactory
 				.select(Projections.bean(SortDTO.class, item.sort1, item.sort2, item.sort2.count().as("count")))
 				.from(item)
@@ -114,7 +114,9 @@ public class ItemRepositoryImpl implements ItemRepository {
 						.or(item.sort1.contains(searchRequest.getKeyword()))
 						.or(item.brand.contains(searchRequest.getKeyword()))
 						.or(item.name.contains(searchRequest.getKeyword())).and(item.sort1.ne("밀키트")))
-				.groupBy(item.sort1, item.sort2).orderBy(item.sort2.count().desc()).fetch();
+				.groupBy(item.sort1, item.sort2)
+				.orderBy(item.sort2.count().desc())
+				.fetch();
 
 		result.addAll(jPAQueryFactory
 				.select(Projections
@@ -157,6 +159,16 @@ public class ItemRepositoryImpl implements ItemRepository {
 	@Override
 	public Item merge(Item entity) {
 		return entityManager.merge(entity);
+	}
+	
+	@Override
+	public int mergeAll(List<Item> list) {
+		int result = 0;
+		for(Item e : list) {
+			entityManager.merge(e);
+			result++;
+		}
+		return result;
 	}
 	
 	@Override

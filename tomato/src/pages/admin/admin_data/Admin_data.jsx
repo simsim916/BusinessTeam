@@ -29,6 +29,7 @@ const Admin_data = ({ myLocation }) => {
     const [whichTable, setWhichTable] = useState('/item');
 
     useEffect(() => {
+        setLoading(true);
         api(`${whichTable}/selectwhere?column=${formData.column}&keyword=${formData.keyword}`, 'get', null, user.token)
             .then(res => {
                 setItemList(res.data);
@@ -128,33 +129,41 @@ const Admin_data = ({ myLocation }) => {
     const getSearch = (e) => {
         e.preventDefault();
         api(`${whichTable}/selectwhere?column=${formData.column}&keyword=${formData.keyword}`, 'get', null, user.token
-        ).then(res => setItemList(res.data)
-        ).catch(err => console.log(err.message))
+        ).then(res => {
+            setItemList(res.data)
+        }
+    ).catch(err => {
+        console.log(err.message);
+        dispatch(changeAlert({
+            style: {
+                top: '10px',
+                left: 'calc(50% - 150px)'
+            },
+            title: '검색 자료 없음!!',
+            time: 3
+        }))
+
+        })
+    }
+
+    const handleKeyUp = (event) => {
+        if (event.key == 'Enter')
+            getSearch(event);
     }
 
     const insertData = async () => {
-        const response = await api(`${whichTable}/merge`, 'post', JSON.stringify(changedList), user.token)
+        await api(`${whichTable}/merge`, 'post', JSON.stringify(changedList), user.token)
             .then((res) => {
                 dispatch(changeAlert({
+                    style: {
+                        top: '10px',
+                        left: 'calc(50% - 150px)'
+                    },
                     title: '자료 변경 성공!',
                     time: 3
                 }))
+                setItemList(res.data)
             })
-        setItemList(response.data)
-    }
-
-
-    const emailTest = () => {
-        api(`/email/send?id="dydgusc66@naver.com"`, 'get', null, user.token)
-        // axios.get('https://localhost:8090/email/emailtest')
-        //     .then(response => {
-        //         // 요청이 성공했을 때의 처리
-        //         console.log(response.data);
-        //     })
-        //     .catch(error => {
-        //         // 요청이 실패했을 때의 처리
-        //         console.error(error);
-        //     });
     }
 
     if (loading) return <Loading />
@@ -178,7 +187,7 @@ const Admin_data = ({ myLocation }) => {
                         <select name="column" id="column" value={formData.column} onChange={searchBoxChange}>
                             {itemList && itemList.length > 0 && Object.keys(itemList[0]).map((e, i) => (<option key={i} value={e}>{e}</option>))}
                         </select>
-                        <input type="text" name="keyword" value={formData.keyword} onChange={searchBoxChange} />
+                        <input type="text" name="keyword" value={formData.keyword} onKeyUp={handleKeyUp} onChange={searchBoxChange} />
                         <div onClick={getSearch}>검색</div>
                     </div>
                     <div id="dataSave" onClick={insertData}>저장</div>
@@ -231,7 +240,7 @@ const Admin_data = ({ myLocation }) => {
                         }
                     </div>
                     <div className="ObjectBody">
-                        {column.current.map((e, i) => <input onChange={changeSelectedItem} type="text" value={selectedItem ? selectedItem[e] : ''} key={i} id={e} />)}
+                        {column.current.map((e, i) => <input onChange={changeSelectedItem} type="text" value={selectedItem ? selectedItem[e] || '' : ''} key={i} id={e} />)}
                     </div>
                 </div>
             </div>

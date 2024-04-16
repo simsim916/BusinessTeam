@@ -42,7 +42,7 @@ const DeliveryUpdate = ({ setDeliverySelect }) => {
             <div className='phoneNumber'>
                 <label>
                     <p>수령인 연락처</p>
-                    <input name='phonenumber' value={userNewAddress.phonenumber || ''} onChange={(event) => changeAddress(event)} />
+                    <input type='number' name='phonenumber' value={userNewAddress.phonenumber || ''} onChange={(event) => changeAddress(event)} />
                 </label>
             </div>
             <div className='addressCode'>

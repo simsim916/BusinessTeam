@@ -15,6 +15,7 @@ const LoginBG = () => {
     const user = useSelector(state => state.user);
     const passwordBox = useRef(null);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [loginValue, setLoginValue] = useState({
         value: {
@@ -168,11 +169,13 @@ const LoginBG = () => {
                     }
                 }));
                 localStorage.removeItem('cart');
-                window.history.back();
+                if (document.referrer.substring(document.referrer.lastIndexOf("/") + 1) == 'signup')
+                    navigate("/home")
+                else
+                    window.history.back();
             } catch (error) {
-                console.log(error.response.data);
+                console.log(error.message);
                 dispatch(loginFailure(error.response.data));
-                console.log(user)
             }
         }
     }

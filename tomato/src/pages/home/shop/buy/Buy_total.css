@@ -44,6 +44,10 @@
     display: block;
 }
 
+#shopBasketPayContainer #loginBox:hover {
+    box-shadow: 3px 3px 5px 1px #a0a0a0;
+}
+
 #shopBasketCancel {
     width: 90%;
     margin: 10px auto;

@@ -23,10 +23,11 @@ public interface ItemRepository {
 	// ** 키워드 상품 페이징 조회
 	List<ItemDTO> selectItemWhereKeyword(PageRequest pageRequest, SearchRequest searchRequest);
 	// ** 키워드 상품 단순 조회 -> 필터
-	List<SortDTO> selectSortWhereKeyword(SearchRequest searchRequest);
+	List<SortDTO> selectSortWhereKeyword(PageRequest pageRequest, SearchRequest searchRequest);
 	// ** 분류 검색 조회
 	List<SortDTO> selectSortList();
 	
+	int mergeAll(List<Item> list);
 	Item merge(Item entity);
 	int persist(List<Item> list);
 	

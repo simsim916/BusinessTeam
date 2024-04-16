@@ -5,7 +5,7 @@ import { api } from '../../../../model/model';
 import { useDispatch, useSelector } from 'react-redux';
 import { postUserBuy, setUserBuyForm } from '../../../redux/userBuy/actions';
 import { useNavigate } from 'react-router-dom';
-import { setUserCart } from '../../../redux/userCart/action';
+import { setUserCart, setUserCartStorage } from '../../../redux/userCart/action';
 
 const Buy_total = () => {
 
@@ -18,24 +18,18 @@ const Buy_total = () => {
     const user = useSelector(state => state.user.data);
 
     const deleteUserCart = () => {
-        const result = [];
-        console.log(userCart);
-        for (let e of userBuy.itemList) {
-            for (let f of userCart) {
-                if (e.code == f.code)
-                    result.push(f.code)
-            }
-        }
-
-        console.log(result);
+        const result = []
+        userBuyItemList.map(e => {
+            result.push(e.code)
+        })
+        console.log(result)
         return result;
     }
 
     const postOrder = () => {
-        dispatch(setUserCart(userCart.filter(e => !deleteUserCart().includes(e.code))))
+        dispatch(setUserCartStorage(userCart.filter(e => !deleteUserCart().includes(e.code))))
         dispatch(postUserBuy(userBuy, user && user.token));
         navigate('/home/buy/end');
-        // sessionStorage.removeItem('buy');
     }
 
     return (
@@ -83,7 +77,11 @@ const Buy_total = () => {
                         </div>
                     </div>
                 </div>
-                <div id="loginBox" onClick={postOrder}>주문하기</div>
+                <div id="loginBox" onClick={postOrder}
+                    style={{
+                        backgroundColor: userBuy.itemList && userBuy.itemList.length > 0 && userBuy.deliverymessage.length > 0 ? '#9b1b20' : '#e0e0e0',
+                        color: userBuy.itemList && userBuy.itemList.length > 0 && userBuy.deliverymessage.length > 0 ? '#fff' : 'black'
+                    }}>주문하기</div>
                 <div id="shopBasketCancel">
                     <div>* [주문완료] 상태일 경우에만 주문 취소 가능합니다.</div>
                     <div>* [마이페이지] - [주문내역 상세페이지]에서 직접 취소 가능합니다.</div>

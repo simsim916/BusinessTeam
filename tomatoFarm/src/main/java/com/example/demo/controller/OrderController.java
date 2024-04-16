@@ -34,8 +34,12 @@ public class OrderController {
 	public ResponseEntity<?> order(@RequestBody OrderDTO dto, HttpServletRequest request) {
 		ResponseEntity<?> result = null;
 		String token = tokenProvider.parseBearerToken(request);
-		String id = tokenProvider.validateAndGetUserId(token);
-		dto.setId(id);
+		if (token==null) {
+			dto.setId("비회원주문");
+		} else {
+			String id = tokenProvider.validateAndGetUserId(token);
+			dto.setId(id);
+		}
 		Itemorder itemorder = orderService.order(dto);
 		if (itemorder!=null)
 			result = ResponseEntity.status(HttpStatus.OK).body(itemorder);

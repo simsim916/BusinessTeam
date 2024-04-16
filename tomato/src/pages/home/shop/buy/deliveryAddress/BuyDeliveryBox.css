@@ -24,6 +24,7 @@
 #buyDeliveryBox p span {
     font-size: 15px;
 }
+
 #buyDeliveryBox p {
     margin-top: 3px;
 }
@@ -37,6 +38,10 @@
     margin-top: 20px;
     border-radius: 10px;
     cursor: pointer;
+}
+
+#buyDeliveryBox #delivery_select_unlogin:hover {
+    box-shadow: 3px 3px 5px 1px #a0a0a0;
 }
 
 .deliverySelectRow span {

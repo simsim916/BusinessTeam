@@ -25,9 +25,9 @@ const BuyDeliveryBox = ( ) => {
                         <p>{userBuy.address1}</p>
                         <p>{userBuy.address2} <span>{userBuy.addressCode}</span></p>
                         <select name="message" onChange={changeMessage}>
+                            <option value="">배송 메세지를 선택해주세요.</option>
                             <option value="배송 전 연락바랍니다.">배송 전 연락바랍니다.</option>
                             <option value="부재 시 경비실에 맡겨주세요.">부재 시 경비실에 맡겨주세요.</option>
-                            <option value="">직접 입력</option>
                         </select>
                         <div onClick={() => setDeliverySelect(true)} id='delivery_select'>
                             배송지 선택

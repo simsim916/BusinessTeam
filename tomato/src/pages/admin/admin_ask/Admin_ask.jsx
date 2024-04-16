@@ -37,7 +37,7 @@ const Admin_ask = () => {
         if (answered == 0) {
             return askList.filter(list => list.reply === "");
         } else if (answered == 1) {
-            return askList.filter(list => list.reply !== "");
+            return askList.filter(list => list.reply != "" && list.reply != null);
         } else {
             return askList;
         }
@@ -74,7 +74,7 @@ const Admin_ask = () => {
                         <input
                             type="radio"
                             checked={answered == 2}
-                            onChange={(num) => CheckAnswered(2)}
+                            onChange={() => CheckAnswered(2)}
                         />
                     </label>
                     &nbsp;&nbsp;
@@ -82,7 +82,7 @@ const Admin_ask = () => {
                         <input
                             type="radio"
                             checked={answered == 1}
-                            onChange={(num) => CheckAnswered(1)}
+                            onChange={() => CheckAnswered(1)}
                         />
                     </label>
                     &nbsp;&nbsp;
@@ -90,7 +90,7 @@ const Admin_ask = () => {
                         <input
                             type="radio"
                             checked={answered == 0}
-                            onChange={(num) => CheckAnswered(0)}
+                            onChange={() => CheckAnswered(0)}
                         />
                     </label>
                 </h3>
@@ -101,6 +101,7 @@ const Admin_ask = () => {
                         <option value="title">제목</option>
                         <option value="contents">내용</option>
                         <option value="writer">작성자</option>
+                        <option value="type">유형</option>
                     </select>
                     &nbsp;&nbsp;
                     <input type="text" name="keyword" onChange={searchBoxChange} />

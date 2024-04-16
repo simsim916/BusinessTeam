@@ -30,12 +30,17 @@ const DeliverySelect = ({ setDeliverySelect }) => {
     return (
         <div id="deliverySelect">
             <div id="deliverySelectContainer">
-                {openPostcode && <DaumPostcodeEmbed onComplete={handleComplete} style={{ height: '100%' }} autoClose={false} />}
                 <h4>배송지 변경</h4>
                 <div onClick={() => setDeliverySelect(false)} id="exitBt"><i className="fa-solid fa-xmark"></i></div>
-                <div className="addDelivery" onClick={() => setOpenPostcode(true)}>배송지 추가하기</div>
-                {userNewAddress && <DeliveryUpdate setDeliverySelect={setDeliverySelect} />}
-                {userAddress.length > 0 && userAddress.map((e, i) => <DeliverySelectRow setDeliverySelect={setDeliverySelect} key={i} address={e} />)}
+                {openPostcode ?
+                    <DaumPostcodeEmbed onComplete={handleComplete} style={{ height: 'calc(100% - 51px)' }} autoClose={false} />
+                    :
+                    <>
+                        <div className="addDelivery" onClick={() => setOpenPostcode(true)}>배송지 추가하기</div>
+                        {userNewAddress && <DeliveryUpdate setDeliverySelect={setDeliverySelect} />}
+                        {userAddress.length > 0 && userAddress.map((e, i) => <DeliverySelectRow setDeliverySelect={setDeliverySelect} key={i} address={e} />)}
+                    </>
+                }
             </div>
         </div>
     );

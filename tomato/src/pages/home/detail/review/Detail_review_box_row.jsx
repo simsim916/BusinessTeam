@@ -9,7 +9,6 @@ const Detail_review_box_row = ({ itemReview }) => {
     const reviewDetailClick = () => {
         setReviewDetail(!reviewDetail);
     }
-
     return (
         <>
             <div onClick={reviewDetailClick} className="reviewContent">
@@ -53,7 +52,7 @@ const Detail_review_box_row = ({ itemReview }) => {
                         <p className='ReviewBoardRow_date'>{itemReview.regdate}</p>
                     </div>
                     <div className='ReviewBoardRow_toptag'>
-                        <p>가성비 좋아요</p>
+                        <p>{itemReview.tag}</p>
                     </div>
                     <span className='ReviewBoardRow_title'>{itemReview.title}</span>
                     <span className='ReviewBoardRow_wirter'>{itemReview.writer}</span>

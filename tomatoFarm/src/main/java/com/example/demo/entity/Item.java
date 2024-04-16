@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -39,5 +40,5 @@ public class Item {
 	private Integer event_code; // 이벤트명
 	private String admin; // 등록자
 	private String intro; // 상품설명
-
+	
 }

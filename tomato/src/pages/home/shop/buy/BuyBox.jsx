@@ -11,13 +11,23 @@ import { setUserBuyStorageClean } from '../../../redux/userBuy/actions';
 
 const BuyBox = () => {
     const dispatch = useDispatch();
-    const userBuy = useSelector(state => state.userBuy);
 
     useEffect(() => {
         api('/visit/update?page=order', 'get')
         return () => {
             dispatch(setUserBuyStorageClean({
-                form: null,
+                form: {
+                    itemList: JSON.parse(sessionStorage.getItem('buy')),
+                    address_code: '',
+                    address1: '',
+                    address2: '',
+                    deliverymessage: '',
+                    price: '',
+                    discount: '',
+                    delieveryprice: '',
+                    point: '',
+                    phonenumber: '',
+                },
                 buyList: []
             }))
         }

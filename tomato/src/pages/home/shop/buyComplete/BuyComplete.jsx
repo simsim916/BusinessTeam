@@ -12,7 +12,7 @@ const BuyComplete = () => {
 
     return (
         <div id="buyComplete" className="container">
-            <h3><i class="fa-solid fa-check"></i> 주문이 완료 되었습니다! <i class="fa-solid fa-check"></i></h3>
+            <h3><i className="fa-solid fa-check"></i> 주문이 완료 되었습니다! <i className="fa-solid fa-check"></i></h3>
             <div></div>
             <OrderTitle />
         </div>

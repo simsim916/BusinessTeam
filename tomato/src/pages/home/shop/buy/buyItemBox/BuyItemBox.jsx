@@ -20,7 +20,11 @@ const BuyItemBox = ({ }) => {
     }
 
     const changeCheckedList = (item) => {
-        if (userBuyForm.itemList && userBuyForm.itemList.find(e => e.code === item.code)) {
+        if (!userBuyForm.itemList) {
+            dispatch(setUserBuyForm({ itemList: [item] }))
+            return;
+        } 
+        if (userBuyForm.itemList.find(e => e.code === item.code)) {
             dispatch(setUserBuyForm({ itemList: userBuyForm.itemList.filter(e => e.code !== item.code) }))
         } else {
             dispatch(setUserBuyForm({ itemList: [...userBuyForm.itemList, item] }))
@@ -43,10 +47,12 @@ const BuyItemBox = ({ }) => {
     return (
         <div id='BuyItemBox'>
             <div id='BuyItemBoxCheck'>
-                <input type="checkbox"
-                    onChange={handleAllCheck}
-                    checked={userBuyForm.itemList && userBuy && userBuy.length === userBuyForm.itemList.length || false} >
-                </input>전체선택
+                <label>
+                    <input type="checkbox"
+                        onChange={handleAllCheck}
+                        checked={userBuyForm.itemList && userBuy && userBuy.length === userBuyForm.itemList.length || false} >
+                    </input>전체선택
+                </label>
             </div>
             <ul id="BuyItemBoxTitle">
                 <li>선택</li>
