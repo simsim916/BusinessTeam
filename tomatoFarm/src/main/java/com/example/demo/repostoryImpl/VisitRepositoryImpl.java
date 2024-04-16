@@ -59,24 +59,15 @@ public class VisitRepositoryImpl implements VisitRepository {
 		}
 	}
 
-	public List<Visit_page> selectWhereString(SearchRequest searchRequest) {
+	public List<Visit_page> selectAll(SearchRequest searchRequest) {
 		return jPAQueryFactory
 				.select(Projections.bean(Visit_page.class,
 						visit_page.page,visit_page.visit_date,visit_page.visit_count))
 				.from(visit_page)
-				.where(Expressions.stringPath(searchRequest.getColumn()).stringValue()
-						.eq(searchRequest.getKeyword()))
-				.orderBy(visit_page.visit_date.asc())
-				.fetch();
-	}
-	public List<Visit_page> selectWhereNumber(SearchRequest searchRequest) {
-		return jPAQueryFactory
-				.select(Projections.bean(Visit_page.class,
-						visit_page.page,visit_page.visit_date,visit_page.visit_count))
-				.from(visit_page)
-				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
-						.eq(searchRequest.getKeyword()))
-				.orderBy(visit_page.visit_date.asc())
+//				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
+//						.eq(searchRequest.getKeyword()))
+				.limit(searchRequest.getHowManyRecords())
+				.orderBy(getSortType(searchRequest))
 				.fetch();
 	}
 	

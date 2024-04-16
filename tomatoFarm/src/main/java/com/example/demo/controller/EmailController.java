@@ -18,7 +18,7 @@ import com.example.demo.service.EmailServiceNew;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/email")
+@RequestMapping("/sendmail")
 @RequiredArgsConstructor
 public class EmailController {
     private final EmailService emailService;
@@ -37,7 +37,7 @@ public class EmailController {
 //	}
 
 	// 회원가입 이메일 인증 - 요청 시 body로 인증번호 반환하도록 작성하였음
-//	@PostMapping("/email")
+	@PostMapping("/email")
 //    public ResponseEntity sendJoinMail(@RequestBody EmailPostDTO emailPostDto) {
 //        EmailMessage emailMessage = EmailMessage.builder()
 ////                .to(emailPostDto.getEmail())
@@ -67,9 +67,9 @@ public class EmailController {
 //		emailResponseDto.setCode(code);
 //	}
 
-	@GetMapping("/send")
-	public void emailTest(String id) throws MessagingException {
+	@GetMapping("/emailtest")
+	public void emailTest() throws MessagingException {
 		System.out.print("\n**********************]\n");
-		emailService.sendMail(id);
+		emailService.sendMail("simsim916");
 	}
 }

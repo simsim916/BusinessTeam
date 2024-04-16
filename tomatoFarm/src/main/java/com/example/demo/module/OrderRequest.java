@@ -8,14 +8,15 @@ import java.util.*;
 import com.example.demo.domain.ItemDTO;
 import com.example.demo.domain.OrderDTO;
 import com.example.demo.entity.Item;
-import com.example.demo.entity.Itemorder;
+import com.example.demo.entity.ItemOrder;
 import com.example.demo.entity.OrderDetail;
 
 import lombok.Data;
 
+@Data
 public class OrderRequest {
 	
-	public Itemorder makeOrderEntity(OrderDTO dto, String id) {
+	public ItemOrder makeOrderEntity(OrderDTO dto, String id) {
 		List<ItemDTO> itemList = dto.getItemList();
 		LocalDate now = LocalDateTime.now().plusHours(9).toLocalDate(); // 주문시간
 		String orderId = id; // 주문자 ID
@@ -34,7 +35,7 @@ public class OrderRequest {
 			totalDelivery += item.getDelivery();
 			totalPoint += (int)Math.ceil((item.getPrice() * 0.05) * item.getAmount());
 		}
-		Itemorder itemOrder = Itemorder.builder()
+		ItemOrder itemOrder = ItemOrder.builder()
 								.orderDate(now)
 								.id(orderId)
 								.item_name(orderName)

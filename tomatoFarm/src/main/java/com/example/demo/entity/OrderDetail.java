@@ -17,7 +17,6 @@ import lombok.NoArgsConstructor;
 @Table(name = "order_detail") // order_detail 테이블과 매핑
 @IdClass(OrderDetailID.class) // 복합 기본 키 클래스를 지정
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderDetail {
@@ -29,7 +28,7 @@ public class OrderDetail {
 
     @Id
     @Column(name = "item_code")
-    private Integer item_code;
+    private int item_code;
 
     @Column(name = "item_amount")
     private Integer item_amount;

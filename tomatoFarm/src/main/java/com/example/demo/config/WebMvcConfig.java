@@ -13,6 +13,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
 		registry.addViewController("/").setViewName("redirect:/home");
 	}
 
+	public void addViewControllers2(ViewControllerRegistry registry) {
+		registry.addViewController("/orderpage").setViewName("redirect:/orderpage");
+	}
+
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**").allowedOrigins("http://localhost:3000") // 클라이언트의 도메인 주소
 				.allowedMethods("GET", "POST", "PUT", "DELETE") // 허용할 HTTP 메서드

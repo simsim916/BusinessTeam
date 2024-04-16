@@ -7,9 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
@@ -27,12 +25,6 @@ public class DemoConfig {
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	@Bean
-    public MultipartResolver multipartResolver() {
-        StandardServletMultipartResolver multipartResolver = new StandardServletMultipartResolver();
-        return multipartResolver;
-    }
-	
 	@Bean
 	public JPAQueryFactory jpaQueryFactory() {
 		System.out.println("jpaQueryFactory");

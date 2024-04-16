@@ -25,27 +25,23 @@ public class ItemServiceImpl implements ItemService {
 	private final ItemRepository itemRepository;
 	private final EntityManager entityManager;
 	
-	
-//	=========================================================================
+
 	@Override
-	public List<ItemDTO> SearchForItemList(PageRequest pageRequest, SearchRequest searchRequest) {
-		if (searchRequest.getKeyword().matches("^[0-9]*$")) {
-			return itemRepository.SearchForItemListInteger(pageRequest, searchRequest);
-		} else {
-			return itemRepository.SearchForItemListString(pageRequest, searchRequest);
-		}
-	}
-//	=========================================================================
-	
-	@Override
-	public List<ItemDTO> selectItemWhereCode(PageRequest pageRequest, SearchRequest searchRequest) {
-		List<ItemDTO> result = itemRepository.selectItemWhereCode(pageRequest,searchRequest);
-		ItemDTO dto = result.get(0);
-		dto.setViews(dto.getViews()+1);
-		Item entity = dtotoEntity(dto);
-		entityManager.merge(entity);
+	public List<ItemDTO> selectItemListStringWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
+		List<ItemDTO> result = itemRepository.selectItemListStringWhereType(pageRequest,searchRequest);
 		return result;
 	}
+
+	@Override
+	public List<ItemDTO> selectItemListIntegerWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
+		List<ItemDTO> result = itemRepository.selectItemListIntegerWhereType(pageRequest,searchRequest);
+//		ItemDTO dto = result.get(0);
+//		dto.setViews(dto.getViews()+1);
+//		Item entity = dtotoEntity(dto);
+//		entityManager.merge(entity);
+		return result;
+	}
+	
 	
 	@Override
 	public List<ItemDTO> selectItemListStringWhereTypeNotNull(PageRequest pageRequest,SearchRequest searchRequest) {
@@ -78,6 +74,10 @@ public class ItemServiceImpl implements ItemService {
 
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 
+	public int batchInsert(List<Item> entity) {
+		return (int) itemRepository.batchInsert(entity);
+	}
+
 	public List<ItemDTO> selectAll() {
 		return itemRepository.selectAll();
 	}
@@ -85,6 +85,16 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public void insertItem(Item entity) {
 		itemRepository.insertItem(entity);
+	}
+	
+	@Override
+	public int itemListCount() {
+		return 0;
+	}
+	
+	@Override
+	public Item updateItem(Item entity) {
+		return entityManager.merge(entity);
 	}
 	
 	@Override
@@ -101,19 +111,6 @@ public class ItemServiceImpl implements ItemService {
 			return itemRepository.adminStringColumn(searchRequest, pageRequest);
 		}
 	}
-	
-	/* 사용 X*/
-//	======================================================================================
-//	@Override
-//	public List<ItemDTO> selectItemListWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
-//		if (searchRequest.getKeyword().matches("^[0-9]*$")) {
-//			return itemRepository.selectItemListIntegerWhereType(searchRequest, pageRequest);
-//		} else {
-//			return itemRepository.selectItemListStringWhereType(searchRequest, pageRequest);
-//		}
-//	}
-//	======================================================================================
-
 
 @Override
 	public List<Item> merge(List<Item> list) {

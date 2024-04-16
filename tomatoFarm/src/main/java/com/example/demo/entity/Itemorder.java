@@ -1,7 +1,6 @@
 package com.example.demo.entity;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -27,18 +26,19 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Itemorder {
+public class ItemOrder {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer code;
     @Column(name = "user_id")
     private String id;
+    @Column(name = "name")
+    private String item_name;
     @Column(name = "address_code")
     private Integer addressCode;
     @Column(length = 50)
     private String address1;
-    
     @Column(length = 50)
     private String address2;
     private Integer price;
@@ -47,19 +47,16 @@ public class Itemorder {
     private Integer point;
     
     @Column(name = "orderdate")
-    private LocalDateTime orderDate;
+    private LocalDate orderDate;
     
     @Column(name="deliverydate")
-    private LocalDateTime deliveryDate;
+    private LocalDate deliveryDate;
     
     private String order_message;
 
-    @Builder.Default
-    private Integer checked=0;
+    private boolean checked;
     
-    private Integer size;
-    private String item_name;
-    private Integer item_code;
+    
     
 
 }

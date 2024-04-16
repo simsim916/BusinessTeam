@@ -10,5 +10,5 @@ public interface VisitService {
 
 	
 	public Visit_page update(Visit_page entity);
-	public List<Visit_page> selectWhere(SearchRequest searchRequest);
+	public List<Visit_page> selectAll(SearchRequest searchRequest);
 }
