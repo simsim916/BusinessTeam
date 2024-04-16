@@ -68,19 +68,23 @@ const Detail_ask_row = ({ itemAsk }) => {
                     itemAsk.password == null ?
                         <div className="boardAnswer_content">
                             {itemAsk.contents}
-                            <div>
-                                🍅🍅🍅🍅🍅답변🍅🍅🍅🍅🍅<br />
-                                {itemAsk.reply}
-                            </div>
+                            {itemAsk.reply &&
+                                <div>
+                                    🍅🍅🍅🍅🍅답변🍅🍅🍅🍅🍅<br />
+                                    {itemAsk.reply}
+                                </div>
+                            }
                         </div>
                         :
                         passwordSubmit ?
                             <div className="boardAnswer_content">
                                 {itemAsk.contents}
-                                <div>
-                                    🍅🍅🍅🍅🍅답변🍅🍅🍅🍅🍅<br />
-                                    {itemAsk.reply}
-                                </div>
+                                {itemAsk.reply &&
+                                    <div>
+                                        🍅🍅🍅🍅🍅답변🍅🍅🍅🍅🍅<br />
+                                        {itemAsk.reply}
+                                    </div>
+                                }
                             </div>
                             :
                             passwordFail ?

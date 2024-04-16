@@ -45,6 +45,8 @@ public class ItemServiceImpl implements ItemService {
 	@Transactional
 	public List<ItemDTO> selectItemDetail(PageRequest pageRequest, SearchRequest searchRequest) {
 		List<ItemDTO> result = itemRepository.selectItemListIntegerWhereType(pageRequest,searchRequest);
+		System.out.println(searchRequest);
+		System.out.println(result);
 		ItemDTO dto = result.get(0);
 		dto.setViews(dto.getViews()+1);
 		Item entity = dtotoEntity(dto);
@@ -61,6 +63,11 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	@Transactional
 	public List<SortDTO> selectSortWhereKeyword(SearchRequest searchRequest) {
+		return itemRepository.selectSortWhereKeyword(searchRequest);
+	}
+
+	@Override
+	public List<ItemDTO> selectItemWhereKeyword(PageRequest pageRequest,SearchRequest searchRequest) {
 		LocalDateTime KoreaTime = LocalDateTime.now() // 현재 시간
                 .plus(9, ChronoUnit.HOURS); // +9 시간
 		
@@ -73,10 +80,8 @@ public class ItemServiceImpl implements ItemService {
 				.search_date(KoreaTime.toLocalDate())
 				.build();
 		keywordRepository.merge(entity,keywordID);
-		List<SortDTO> result = itemRepository.selectSortWhereKeyword(searchRequest);
-		return result;
+		return itemRepository.selectItemWhereKeyword(pageRequest, searchRequest);
 	}
-
 	@Override
 	public List<SortDTO> selectSortList() {
 		return itemRepository.selectSortList();

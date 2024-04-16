@@ -105,7 +105,7 @@ const CustomerQA = (setRefresh) => {
                                     <div>{e.title}</div>
                                 </div>
                                 <p id="bestQAAnswer">
-                                    {e.contents}
+                                    {e.content}
                                 </p>
                             </div>
                         )

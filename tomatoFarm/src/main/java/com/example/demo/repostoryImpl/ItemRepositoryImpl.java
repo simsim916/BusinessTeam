@@ -65,7 +65,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 		return jPAQueryFactory.select(dtoBean)
 				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
 				.where(Expressions.stringPath(searchRequest.getColumn()).contains(searchRequest.getKeyword()))
-				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum())
+//				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum())
 				.orderBy(getSortType(searchRequest))
 				.fetch();
 	}
@@ -74,9 +74,9 @@ public class ItemRepositoryImpl implements ItemRepository {
 	// ** 동적 한 컬럼 검색
 	public List<ItemDTO> selectItemListIntegerWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
 		return jPAQueryFactory.select(dtoBean)
-				.from(item).join(item_event).on(item.event_code.eq(item_event.code))
+				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
 				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue().contains(searchRequest.getKeyword()))
-				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum()).orderBy(getSortType(searchRequest))
+//				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum()).orderBy(getSortType(searchRequest))
 				.fetch();
 	}
 
@@ -91,7 +91,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 
 	@Override
 	// ** 키워드 상품 페이징 조회
-	public List<ItemDTO> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest) {
+	public List<ItemDTO> selectItemWhereKeyword(PageRequest pageRequest, SearchRequest searchRequest) {
 		return jPAQueryFactory.select(dtoBean)
 				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
 				.where(item.sort2.contains(searchRequest.getKeyword())
@@ -99,7 +99,8 @@ public class ItemRepositoryImpl implements ItemRepository {
 						.or(item.sort3.contains(searchRequest.getKeyword()))
 						.or(item.brand.contains(searchRequest.getKeyword()))
 						.or(item.name.contains(searchRequest.getKeyword())))
-				.orderBy(getSortType(searchRequest)).limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum())
+				.orderBy(getSortType(searchRequest))
+				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum())
 				.fetch();
 	}
 

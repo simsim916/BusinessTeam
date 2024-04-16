@@ -21,7 +21,6 @@ import com.example.demo.jwtToken.TokenProvider;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.service.ItemService;
-import com.example.demo.service.KeywordService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -33,7 +32,6 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping(value = "/item")
 public class ItemController {
 	private final ItemService itemService;
-	private final KeywordService keywordService;
 	private final TokenProvider tokenProvider;
 
 	@GetMapping("/selectnotnull")
@@ -66,7 +64,7 @@ public class ItemController {
 	@GetMapping("/search")
 	public ResponseEntity<?> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
-		List<ItemDTO> list = itemService.selectItemListWhereType(pageRequest, searchRequest);
+		List<ItemDTO> list = itemService.selectItemWhereKeyword(pageRequest, searchRequest);
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}
@@ -105,7 +103,7 @@ public class ItemController {
 		ResponseEntity<?> result = null;
 		PageRequest pageRequest = new PageRequest();
 		List<ItemDTO> itemList = itemService.selectItemListWhereType(pageRequest, searchRequest);
-		
+		System.out.println(itemList.size());
 		if (itemList != null && itemList.size() > 0) {
 			result = ResponseEntity.status(HttpStatus.OK).body(itemList);
 		} else {
@@ -120,7 +118,6 @@ public class ItemController {
 		ResponseEntity<?> result = null;
 		
 		if (itemService.persist(list) > 0)
-			
 			result = ResponseEntity.status(HttpStatus.OK).body(itemService.selectItemListWhereType(new PageRequest(), new SearchRequest("sort1", "")));
 		else
 			result = ResponseEntity.status(HttpStatus.OK).body("데이터 입력 실패");
