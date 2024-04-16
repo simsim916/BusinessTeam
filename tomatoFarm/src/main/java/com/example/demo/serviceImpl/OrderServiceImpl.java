@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.ItemDTO;
@@ -30,10 +31,10 @@ public class OrderServiceImpl implements OrderService {
 
 	@Transactional
 	@Override
-	public Itemorder order(OrderDTO dto) {
+	public Itemorder order(OrderDTO dto, String userId) {
 
 		Itemorder itemorder = Itemorder.builder()
-				.id(dto.getId())
+				.id(userId)
 				.addressCode(dto.getAddress_code())
 				.address1(dto.getAddress1())
 				.address2(dto.getAddress2())
@@ -62,14 +63,13 @@ public class OrderServiceImpl implements OrderService {
 					.build());
 		}
 		
-		
 		orderdetailRepository.batchInsert(list);
 		
 		List<UserCart> userCart_list = userCartRepository.selectCartWhereUserIDItemList(dto.getId(), item_list);
 		for(UserCart e : userCart_list) {
 			e.setAmount(0);
 		}
-		userCartRepository.merge(userCart_list);
+		userCartRepository.mergeAll(userCart_list);
 		
 		return itemorder;
 	}

@@ -4,6 +4,8 @@ package com.example.demo.serviceImpl;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.Item_reviewDTO;
@@ -34,7 +36,7 @@ public class Item_reviewServiceImpl implements Item_reviewService{
 		return item_reviewRepository.selectItemRevieListIntegerWhereType(pageRequest, searchRequest);
 	}
 
-	
+	@Transactional
 	@Override
 	public Item_review updateReview(Item_review entity) {
 		LocalDateTime currentDateTime = LocalDateTime.now();

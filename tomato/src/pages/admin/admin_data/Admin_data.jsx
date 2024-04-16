@@ -132,16 +132,16 @@ const Admin_data = ({ myLocation }) => {
         ).then(res => {
             setItemList(res.data)
         }
-    ).catch(err => {
-        console.log(err.message);
-        dispatch(changeAlert({
-            style: {
-                top: '10px',
-                left: 'calc(50% - 150px)'
-            },
-            title: '검색 자료 없음!!',
-            time: 3
-        }))
+        ).catch(err => {
+            console.log(err.message);
+            dispatch(changeAlert({
+                style: {
+                    top: '10px',
+                    left: 'calc(50% - 150px)'
+                },
+                title: '검색 자료 없음!!',
+                time: 3
+            }))
 
         })
     }
@@ -234,17 +234,16 @@ const Admin_data = ({ myLocation }) => {
                     <div className="excelHead" style={{ width: `${column.current.length * 150}px` }}>
                         {
                             column.current ?
-                                column.current.map((col, i) => <div id={col} key={i}>{col}</div>)
+                                column.current.map((col, i) => <div id={col} key={i} >{col}</div>)
                                 :
                                 null
                         }
                     </div>
                     <div className="ObjectBody">
-                        {column.current.map((e, i) => <input onChange={changeSelectedItem} type="text" value={selectedItem ? selectedItem[e] || '' : ''} key={i} id={e} />)}
+                        {column.current.map((e, i) => <input onChange={changeSelectedItem} type="text" value={selectedItem ? selectedItem[e] || '' : ''} key={i} id={e} readOnly={i == 0} />)}
                     </div>
                 </div>
-            </div>
-
+            </div >
         </>
     )
 }

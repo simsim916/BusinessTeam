@@ -8,6 +8,7 @@ import Detail_review_box_row from './Detail_review_box_row';
 import Detail_review_write from './Detail_review_write';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeAlert } from '../../../redux/basic/actions';
+import { api } from '../../../../model/model';
 
 
 const Detail_review_box = ({ item }) => {
@@ -22,21 +23,19 @@ const Detail_review_box = ({ item }) => {
     const [reviewWrite, setDetail_review_box_row] = useState(false);
     const [limit, setLimit] = useState(5);
     const [currPage, setCurrPage] = useState(1);
-    const [pageList, setPageList] = useState(null);
 
     useEffect(() => {
-        axios.get(`http://localhost:8090/itemreview/select?column=item_code&keyword=${item.code}`
-        ).then(res => {
-            setLoading(false);
-            setItemReviewList(res.data);
-            setPageList(res.data);
-            setCurrPage(1);
-            setLoading(false);
-        }).catch(err => {
-            console.log(err.message)
-            setLoading(false);
-            setError(true);
-        })
+        api(`/itemreview/select?column=item_code&keyword=${item.code}`, 'get')
+            .then(res => {
+                setLoading(false);
+                setItemReviewList(res.data);
+                setCurrPage(1);
+                setLoading(false);
+            }).catch(err => {
+                console.log(err.message)
+                setLoading(false);
+                setError(true);
+            })
     }, [refresh])
 
     if (loading) return <Loading />
@@ -72,8 +71,8 @@ const Detail_review_box = ({ item }) => {
                         <div>사진</div>
                         <div>내용</div>
                     </div>
-                    {pageList.length > 0 ?
-                        paging(pageList, currPage, limit).map((e, i) => <Detail_review_box_row itemReview={e} key={i} />)
+                    {itemReviewList.length > 0 ?
+                        paging(itemReviewList, currPage, limit).map((e, i) => <Detail_review_box_row itemReview={e} key={i} />)
                         :
                         <div id='reviewNone'>
                             해당 상품에 후기가 없습니다.
@@ -82,7 +81,7 @@ const Detail_review_box = ({ item }) => {
                 </div>
 
                 <PagingBox
-                    list={pageList}
+                    list={itemReviewList}
                     limit={limit}
                     currPage={currPage}
                     setCurrPage={setCurrPage} />

@@ -54,7 +54,6 @@ public class Itme_reviewController {
 	@PostMapping("/insertmultipart")
 	public ResponseEntity<?> iteminsert(HttpServletRequest request,  Item_review entity) throws IOException {
 		ResponseEntity<?> result = null;
-		System.out.println("\n\n"+ entity +"\n\n");
 		
 		if (entity != null) {
 			String realPath = request.getRealPath("/");

@@ -64,7 +64,7 @@ public interface ItemService {
 	}
 
 	List<ItemDTO> selectItemListWhereType(PageRequest pageRequest,SearchRequest searchRequest);
-	List<ItemDTO> selectItemDetail(PageRequest pageRequest,SearchRequest searchRequest);
+	List<ItemDTO> getDetailPage(PageRequest pageRequest,SearchRequest searchRequest);
 	List<ItemDTO> selectItemListStringWhereTypeNotNull(PageRequest pageRequest,SearchRequest searchRequest);
 	List<ItemDTO> selectItemListWhereInCode(List<Integer> codeList);
 	

@@ -77,7 +77,7 @@ const Buy_total = () => {
                         </div>
                     </div>
                 </div>
-                <div id="loginBox" onClick={postOrder}
+                <div id="loginBox" onClick={userBuy.itemList && userBuy.itemList.length > 0 && postOrder}
                     style={{
                         backgroundColor: userBuy.itemList && userBuy.itemList.length > 0 && userBuy.deliverymessage.length > 0 ? '#9b1b20' : '#e0e0e0',
                         color: userBuy.itemList && userBuy.itemList.length > 0 && userBuy.deliverymessage.length > 0 ? '#fff' : 'black'

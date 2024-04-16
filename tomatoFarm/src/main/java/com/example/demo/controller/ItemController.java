@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,7 +36,6 @@ import lombok.extern.log4j.Log4j2;
 public class ItemController {
 	private final ItemService itemService;
 	private final UserCartService userCartService;
-	private final TokenProvider tokenProvider;
 
 	@GetMapping("/selectnotnull")
 	public ResponseEntity<?> selectItemWhereEvent(SearchRequest searchRequest) {
@@ -47,16 +47,10 @@ public class ItemController {
 	}
 
 	@GetMapping("/detailn")
-	public ResponseEntity<?> selectItemWhereCode(HttpServletRequest request, SearchRequest searchRequest) {
-		String token = tokenProvider.parseBearerToken(request);
-		if(token!=null) {
-			String id = tokenProvider.validateAndGetUserId(token);
-			UserCart usercart = UserCart.builder()
-					.id(id).code(Integer.parseInt(searchRequest.getKeyword())).build();
-		}
+	public ResponseEntity<?> getDetailPage(HttpServletRequest request, SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
 		PageRequest pageRequest = new PageRequest(1, 1);
-		ItemDTO dto = itemService.selectItemDetail(pageRequest, searchRequest).get(0);
+		ItemDTO dto = itemService.getDetailPage(pageRequest, searchRequest).get(0);
 		result = ResponseEntity.status(HttpStatus.OK).body(dto);
 		return result;
 	}
@@ -71,17 +65,9 @@ public class ItemController {
 
 	//페이징 + 정렬 기능 되는 search
 	@GetMapping("/search")
-	public ResponseEntity<?> selectItemWhereSearchType(HttpServletRequest request, PageRequest pageRequest, SearchRequest searchRequest) {
-		String token = tokenProvider.parseBearerToken(request);
-        String id;
-        if(token != null) {
-            id = tokenProvider.validateAndGetUserId(token);
-        } else {
-            id = null;
-        }
-        
+	public ResponseEntity<?> selectItemWhereSearchType(HttpServletRequest request, PageRequest pageRequest, SearchRequest searchRequest, @AuthenticationPrincipal String userId) {
 		ResponseEntity<?> result = null;
-		List<ItemDTO> list = itemService.selectItemWhereKeyword(pageRequest, searchRequest, id);
+		List<ItemDTO> list = itemService.selectItemWhereKeyword(pageRequest, searchRequest, userId);
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}

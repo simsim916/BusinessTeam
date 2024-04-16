@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -31,48 +32,22 @@ import lombok.AllArgsConstructor;
 public class UserController {
 
 	UserService userService;
-	PasswordEncoder passwordEncoder;
-	private TokenProvider tokenProvider;
+
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody User entity) {
 		ResponseEntity<?> result = null;
-		String password = entity.getPassword(); // user가 입력한 password를 변수에 저장
-		User user = userService.selectUser(entity); // user가 입력한 id로 userData를 조회 하여 dto를 채운다.
 
-		if (user != null) { // 조회성공
-			if (passwordEncoder.matches(password, user.getPassword())) {
-				final String token = tokenProvider.create(user);
-				final UserToken userToken = UserToken.builder()
-						.token(token)
-						.id(user.getId())
-						.username(user.getUsername())
-						.admin(user.getLevel() < 100 ? true : false)
-						
-						.build();
-				result = ResponseEntity.status(HttpStatus.OK).body(userToken);
-			} else {
-				result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("비밀번호가 일치하지 않습니다.");
-			}
-		} else { // 조회실패
-			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("일치하는 ID가 없습니다.");
-		}
-
+		result = ResponseEntity.status(HttpStatus.OK).body(userService.selectUser(entity));
 		return result;
 	}
+
 	@GetMapping("/admincheck")
-	public ResponseEntity<?> admincheck(HttpServletRequest request) {
-		String token = tokenProvider.parseBearerToken(request);
-		String id = token == null ? null : tokenProvider.validateAndGetUserId(token);
+	public ResponseEntity<?> admincheck(HttpServletRequest request, @AuthenticationPrincipal String userId) {
 		ResponseEntity<?> result = null;
-		User entity = User.builder().id(id).build();
-		entity = userService.selectUser(entity); // user가 입력한 id로 userData를 조회 하여 dto를 채운다.
-		if (entity.getLevel() < 100) { // 조회성공
-			result = ResponseEntity.status(HttpStatus.OK).body(true);
-		} else { // 조회실패
-			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(false);
-		}
+
+		result = ResponseEntity.status(HttpStatus.OK).body(userService.adminCheck(userId));
 
 		return result;
 	}
@@ -80,7 +55,6 @@ public class UserController {
 	@PostMapping("/signup")
 	public ResponseEntity<?> singup(@RequestBody User entity) {
 		ResponseEntity<?> result = null;
-		System.out.println(entity);
 		String password = entity.getPassword();
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -94,16 +68,6 @@ public class UserController {
 		return result;
 	}
 
-	@GetMapping("/select")
-	public ResponseEntity<?> selectUserWhereID(HttpServletRequest request) {
-		String token = tokenProvider.parseBearerToken(request);
-		String id = tokenProvider.validateAndGetUserId(token);
-		User entity = new User().builder().id(id).build();
-		User user = userService.selectUser(entity);
-
-		return ResponseEntity.status(HttpStatus.OK).body(user);
-	}
-
 	@GetMapping("/selectwhere")
 	public ResponseEntity<?> selectUserWhere(SearchRequest searchRequest) {
 		List<User> list = null;
@@ -111,17 +75,17 @@ public class UserController {
 		result = ResponseEntity.status(HttpStatus.OK).body(userService.selectUserWhere(searchRequest));
 		return result;
 	}
-	
-	
+
 	@PostMapping("/merge")
 	public ResponseEntity<?> merge(@RequestBody List<User> list) {
 		ResponseEntity<?> result = null;
-		
+
 		if (userService.insertTest(list).size() > 0)
-			result = ResponseEntity.status(HttpStatus.OK).body(userService.selectUserWhere(new SearchRequest("username", "")));
+			result = ResponseEntity.status(HttpStatus.OK)
+					.body(userService.selectUserWhere(new SearchRequest("username", "")));
 		else
 			result = ResponseEntity.status(HttpStatus.OK).body("데이터 입력 실패");
-		
+
 		return result;
 	}
 

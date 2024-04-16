@@ -25,7 +25,7 @@ const Admin = () => {
         setSideBarOpen(!sideBarOpen);
     };
     useEffect(() => {
-        api('/user/select', 'get', null, user.token)
+        api('/user/admincheck', 'get', null, user.token)
             .then(res => {
                 setForbiden(!res.data)
             })

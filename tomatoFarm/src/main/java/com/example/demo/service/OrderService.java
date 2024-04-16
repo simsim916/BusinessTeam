@@ -8,5 +8,5 @@ import com.example.demo.entity.OrderDetail;
 
 public interface OrderService {
 
-	public Itemorder order(OrderDTO dto);
+	public Itemorder order(OrderDTO dto, String userId);
 }

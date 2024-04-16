@@ -17,7 +17,7 @@ const BuyItemBoxRow = ({
     const handleClick = (type) => {
         changeItemList(idx, type, item);
     }
-    
+
     return (
         <ul className="shopBasketItem">
             <li>

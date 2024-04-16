@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,19 +29,11 @@ import lombok.AllArgsConstructor;
 public class OrderController {
 
 	OrderService orderService;
-	TokenProvider tokenProvider; 
 	
 	@PostMapping("/order")
-	public ResponseEntity<?> order(@RequestBody OrderDTO dto, HttpServletRequest request) {
+	public ResponseEntity<?> order(@RequestBody OrderDTO dto, HttpServletRequest request, @AuthenticationPrincipal String userId) {
 		ResponseEntity<?> result = null;
-		String token = tokenProvider.parseBearerToken(request);
-		if (token==null) {
-			dto.setId("비회원주문");
-		} else {
-			String id = tokenProvider.validateAndGetUserId(token);
-			dto.setId(id);
-		}
-		Itemorder itemorder = orderService.order(dto);
+		Itemorder itemorder = orderService.order(dto, userId);
 		if (itemorder!=null)
 			result = ResponseEntity.status(HttpStatus.OK).body(itemorder);
 		else 

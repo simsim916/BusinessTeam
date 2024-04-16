@@ -16,4 +16,6 @@ public class UserToken {
 	private String token;
 	private boolean admin;
 	private String[] keyword;
+	
+	private String error;
 }

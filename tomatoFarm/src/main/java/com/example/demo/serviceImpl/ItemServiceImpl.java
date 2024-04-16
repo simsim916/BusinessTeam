@@ -9,6 +9,7 @@ import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.ItemDTO;
@@ -45,7 +46,7 @@ public class ItemServiceImpl implements ItemService {
 	
 	@Override
 	@Transactional
-	public List<ItemDTO> selectItemDetail(PageRequest pageRequest, SearchRequest searchRequest) {
+	public List<ItemDTO> getDetailPage(PageRequest pageRequest, SearchRequest searchRequest) {
 		List<ItemDTO> result = itemRepository.selectItemListIntegerWhereType(pageRequest,searchRequest);
 		System.out.println(searchRequest);
 		System.out.println(result);
@@ -69,9 +70,9 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public List<ItemDTO> selectItemWhereKeyword(PageRequest pageRequest,SearchRequest searchRequest, String id) {
+	public List<ItemDTO> selectItemWhereKeyword(PageRequest pageRequest,SearchRequest searchRequest, @AuthenticationPrincipal String userId) {
 		LocalDate koreaTime = LocalDateTime.now().toLocalDate(); // 현재 시간
-		
+		System.out.println(userId);
 		
 		KeywordID keywordID = KeywordID.builder()
 				.keyword(searchRequest.getKeyword())
@@ -81,7 +82,7 @@ public class ItemServiceImpl implements ItemService {
 		Keyword entity = Keyword.builder()
 				.keyword(keywordID.getKeyword())
 				.search_date(keywordID.getSearch_date())
-				.id(id)
+				.id(userId)
 				.build();
 		
 		Optional<Keyword> data = keywordRepository.findById(keywordID);

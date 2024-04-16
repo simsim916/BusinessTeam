@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 import com.example.demo.domain.UserDTO;
+import com.example.demo.domain.UserToken;
 import com.example.demo.entity.User;
 import com.example.demo.module.SearchRequest;
 
@@ -29,7 +30,8 @@ public interface UserService {
 		return dto;
 	}
 	
-	User selectUser(User dto);
+	UserToken selectUser(User dto);
+	boolean adminCheck(String userId);
 	
 	int insertUser(UserDTO dto);
 	

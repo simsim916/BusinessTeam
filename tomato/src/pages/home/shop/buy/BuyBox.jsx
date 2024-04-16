@@ -17,7 +17,7 @@ const BuyBox = () => {
         return () => {
             dispatch(setUserBuyStorageClean({
                 form: {
-                    itemList: JSON.parse(sessionStorage.getItem('buy')),
+                    itemList: '',
                     address_code: '',
                     address1: '',
                     address2: '',
