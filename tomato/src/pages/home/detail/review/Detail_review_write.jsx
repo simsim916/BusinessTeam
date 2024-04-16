@@ -4,12 +4,10 @@ import { useMemo, useState } from 'react';
 import Loading from '../../../components/Loading';
 import Error from '../../../components/Error';
 import { api } from '../../../../model/model';
-import { useSelector, useDispatch } from 'react-redux';
-import { changeAlert } from '../../../redux/basic/actions';
+import { useSelector } from 'react-redux';
 
 const Detail_review_write = ({ item, refresh, setRefresh, reviewWriteClick }) => {
     const user = useSelector(state => state.user.data)
-    const dispatch = useDispatch();
     const [writeBoxClose, setWriteBoxClose] = useState(true);
     const [score, setScore] = useState(0);
     const [review, setReview] = useState({
@@ -40,16 +38,6 @@ const Detail_review_write = ({ item, refresh, setRefresh, reviewWriteClick }) =>
         await api('/itemreview/insertmultipart', 'post', formData, user.token)
             .then(res => {
                 setLoading(false);
-                dispatch(changeAlert({
-                    title: '제출 성공!',
-                    content: ``,
-                    time: 3,
-                    style: {
-                        top: '50%',
-                        left: 'calc(50% - 150px)',
-                        zIndex: 5
-                    }
-                }));
             }).catch(err => {
                 console.log(err.message)
                 setLoading(false);
@@ -186,11 +174,7 @@ const Detail_review_write = ({ item, refresh, setRefresh, reviewWriteClick }) =>
                             </div>
                             <div id="reviewWriteButton">
                                 <button onClick={reviewWriteBoxClose} id="reviewWriteCancle">취소</button>
-                                <button onClick={submitReview} id="reviewWriteEnter"
-                                    style={{
-                                        backgroundColor: review.title.length > 0 && review.contents.length > 0 ? '#9b1b20' : '#e0e0e0',
-                                        color: review.title.length > 0 && review.contents.length > 0 ? '#fff' : 'black'
-                                    }}>등록</button>
+                                <button onClick={submitReview} id="reviewWriteEnter">등록</button>
                             </div>
                         </div>
                         <i onClick={reviewWriteBoxClose} id="reviewWriteBoxClose" className="fa-solid fa-xmark"></i>
