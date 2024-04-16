@@ -1,9 +1,9 @@
 
 import { useState } from 'react';
-import './Detail_review_box_row.css';
-import Detail_review_box_row_detail from './Detail_review_box_row_detail';
+import './ReviewBoardRow.css';
+import ReviewDetail from './ReviewDetail';
 
-const Detail_review_box_row = ({ itemReview }) => {
+const ReviewBoardRow = ({ itemReview }) => {
     const [reviewDetail, setReviewDetail] = useState(false);
 
     const reviewDetailClick = () => {
@@ -62,7 +62,7 @@ const Detail_review_box_row = ({ itemReview }) => {
                     </div>
                 </div>
             </div>
-            {reviewDetail ? <Detail_review_box_row_detail setReviewDetail={setReviewDetail} reviewDetail={reviewDetail} itemReview={itemReview} /> : <></>}
+            {reviewDetail ? <ReviewDetail setReviewDetail={setReviewDetail} reviewDetail={reviewDetail} itemReview={itemReview} /> : <></>}
 
         </>
 
@@ -71,4 +71,4 @@ const Detail_review_box_row = ({ itemReview }) => {
 
 }
 
-export default Detail_review_box_row;
+export default ReviewBoardRow;

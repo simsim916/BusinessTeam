@@ -2,7 +2,8 @@
 import './BuyItemBox.css';
 import BuyItemBoxRow from './BuyItemBoxRow';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUserBuyForm } from '../../../../redux/userBuy/actions';
+import { setUserBuyForm, setUserBuyItemList } from '../../../../redux/userBuy/actions';
+import { useEffect, useState } from 'react';
 
 const BuyItemBox = ({ }) => {
 

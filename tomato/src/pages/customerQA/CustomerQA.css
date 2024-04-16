@@ -34,7 +34,6 @@
 #bestQAForm .bestQARow:hover {
     background-color: #fdffb5;
 }
-
 #bestQAForm .bestQARow {
     display: flex;
     border-top: gray 1px solid;
@@ -43,8 +42,9 @@
     cursor: pointer;
 }
 
-#bestQAForm>div:nth-last-of-type(1) .bestQARow {
+#bestQAForm .bestQARow:nth-last-of-type(1) {
     border-bottom: gray 1px solid;
+    margin-bottom: 30px;
 }
 
 #bestQAForm .bestQARow div {
@@ -94,8 +94,7 @@
     align-items: center;
     line-height: 70px;
 }
-
-.customerQAKeword input {
+.customerQAKeword input{
     margin-right: 8px;
 }
 
@@ -180,10 +179,6 @@
     cursor: pointer;
 }
 
-#customerQACancle:hover {
-    box-shadow: 3px 3px 5px 1px #a0a0a0;
-}
-
 #customerQAEnter {
     background-color: rgb(221, 221, 221);
     border: 0px none;
@@ -195,8 +190,4 @@
     font-size: 20px;
     border-radius: 10px;
     cursor: pointer;
-}
-
-#customerQAEnter:hover {
-    box-shadow: 3px 3px 5px 1px #a0a0a0;
 }

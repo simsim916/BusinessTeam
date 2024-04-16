@@ -1,12 +1,12 @@
 
-import './Detail_review_write.css';
+import './ReviewWrite.css';
 import { useMemo, useState } from 'react';
-import Loading from '../../../components/Loading';
-import Error from '../../../components/Error';
+import Loading from './../../../components/Loading';
+import Error from './../../../components/Error';
 import { api } from '../../../../model/model';
 import { useSelector } from 'react-redux';
 
-const Detail_review_write = ({ item, refresh, setRefresh, reviewWriteClick }) => {
+const ReviewWrite = ({ item, refresh, setRefresh, reviewWriteClick }) => {
     const user = useSelector(state => state.user.data)
     const [writeBoxClose, setWriteBoxClose] = useState(true);
     const [score, setScore] = useState(0);
@@ -185,4 +185,4 @@ const Detail_review_write = ({ item, refresh, setRefresh, reviewWriteClick }) =>
     );
 }
 
-export default Detail_review_write;
+export default ReviewWrite;

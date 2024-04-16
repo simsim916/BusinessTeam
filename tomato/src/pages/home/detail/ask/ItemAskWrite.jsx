@@ -1,14 +1,14 @@
-import './Detail_ask_write.css';
+import './ItemAskWrite.css';
 import { useState } from 'react';
-import Loading from '../../../components/Loading';
-import Error from '../../../components/Error';
+import Loading from './../../../components/Loading';
+import Error from './../../../components/Error';
 import { SERVER_RESOURCE } from '../../../../model/server-config';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeAlert } from '../../../redux/basic/actions';
 import { api } from '../../../../model/model';
 
 
-const Detail_ask_write = ({ item, setRefresh, refresh, itemAskClick }) => {
+const ItemAskForm = ({ item, setRefresh, refresh, itemAskClick }) => {
     const dispatch = useDispatch();
     const user = useSelector(state => state.user.data);
     const [loading, setLoading] = useState(false);
@@ -131,4 +131,4 @@ const Detail_ask_write = ({ item, setRefresh, refresh, itemAskClick }) => {
     );
 }
 
-export default Detail_ask_write;
+export default ItemAskForm;

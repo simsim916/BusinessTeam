@@ -40,6 +40,13 @@ public class ItemRepositoryImpl implements ItemRepository {
 			item.delivery, item.price, item.storage, item.weight, item.packing, item.sales, item.stock, item.views,
 			item.likes, item.event_code, item.intro, item.admin, item_event.discount, item_event.name.as("event_name"));
 	
+//	private final QBean<Item> noJoinEntity = Projections.bean(Item.class, item.sort1, item.sort2, item.sort3, item.code, item.brand, item.name, item.delivery, item.price, item.storage,
+//			item.weight, item.packing, item.sales, item.stock, item.views, item.likes, item.event_code, item.intro, item.admin);
+	
+//	private final QBean<ItemDTO> managerDTO = Projections.bean(ItemDTO.class, item.code, item.brand, item.name, item.delivery, item.price, item.storage,
+//			item.weight, item.packing, item.sales, item.stock, item.views, item.likes, item.event_code, item.intro, item.admin,
+//			item_event.discount, item_event.name.as("event_name"));
+
 	// queryDSL 동적 정렬을 위해 OrderSpecifier객체를 이용한 동적 정렬
 	public OrderSpecifier<?> getSortType(SearchRequest searchRequest) {
 		if (searchRequest.getOrderType() != null) {
@@ -59,34 +66,61 @@ public class ItemRepositoryImpl implements ItemRepository {
 		return new OrderSpecifier<>(Order.DESC, QItem.item.sales);
 	}
 	
-	@Override		
-	// ** 동적 한 컬럼 검색
-	public List<ItemDTO> selectItemListStringWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
-		return jPAQueryFactory.select(dtoBean)
-				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
-				.where(Expressions.stringPath(searchRequest.getColumn()).contains(searchRequest.getKeyword()))
-				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum())
-				.orderBy(getSortType(searchRequest))
+//	=======================================================================================================
+//				
+//	public List<ItemDTO> selectItemListStringWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
+//		return jPAQueryFactory.select(dtoBean)
+//				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
+//				.where(Expressions.stringPath(searchRequest.getColumn()).contains(searchRequest.getKeyword()))
+//				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum())
+//				.orderBy(getSortType(searchRequest))
+//				.fetch();
+//	}
+	@Override
+	public List<ItemDTO> SearchForItemListInteger(PageRequest pageRequest, SearchRequest searchRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+@Override
+	public List<ItemDTO> SearchForItemListString(PageRequest pageRequest, SearchRequest searchRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}	
+	public List<ItemDTO> searchForItemListInteger(PageRequest pageRequest, SearchRequest searchRequest) {
+		return jPAQueryFactory.select(dtoBean).from(item).join(item_event).on(item.event_code.eq(item_event.code))
+				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
+						.contains(searchRequest.getKeyword()))
+				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum()).orderBy(getSortType(searchRequest))
 				.fetch();
 	}
+//	=========================================================================================================
+
 	
 	@Override
-	// ** 동적 한 컬럼 검색
-	public List<ItemDTO> selectItemListIntegerWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
-		return jPAQueryFactory.select(dtoBean)
-				.from(item).join(item_event).on(item.event_code.eq(item_event.code))
-				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue().contains(searchRequest.getKeyword()))
+	public List<ItemDTO> selectItemWhereCode(PageRequest pageRequest, SearchRequest searchRequest) {
+		return jPAQueryFactory.select(dtoBean).from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
+				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
+						.eq(searchRequest.getKeyword()))
 				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum()).orderBy(getSortType(searchRequest))
 				.fetch();
 	}
 
 	@Override
-	// 이벤트 중인 상품 조회 시 사용
 	public List<ItemDTO> selectItemListStringWhereTypeNotNull(PageRequest pageRequest, SearchRequest searchRequest) {
 		return jPAQueryFactory.select(dtoBean)
 				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
 				.where(Expressions.stringPath(searchRequest.getColumn()).isNotNull()).limit(pageRequest.getEndNum())
 				.offset(pageRequest.getStartNum()).orderBy(getSortType(searchRequest)).fetch();
+	}
+
+	@Override
+	// ** 브랜드 상품 조회
+	public List<ItemDTO> selectItemWherebrand(PageRequest pageRequest, SearchRequest searchRequest) {
+		return jPAQueryFactory.select(dtoBean)
+				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
+				.where(item.brand.eq(searchRequest.getKeyword())).orderBy(item.sales.desc())
+				.offset(pageRequest.getStartNum()).limit(pageRequest.getEndNum())
+				.fetch();
 	}
 
 	@Override
@@ -141,8 +175,54 @@ public class ItemRepositoryImpl implements ItemRepository {
 		return result;
 	}
 
+	public int batchInsert(List<Item> list) {
+		// QueryDSL을 사용하여 batch insert 쿼리 작성 및 실행
+		return (int) jPAQueryFactory.insert(item).values(list).execute();
+	}
+
 	@Override
-	// ** list에 있는 상품들 조회
+	public List<ItemDTO> selectAll() {
+		return jPAQueryFactory
+				.select(Projections.bean(ItemDTO.class, item.code, item.sort1, item.sort2, item.sort3, item.brand,
+						item.name, item.weight, item.storage, item.packing, item.delivery, item.price, item.vat,
+						item.origin, item.stock, item.admin))
+				.from(item).offset(0).limit(200).orderBy(item.sales.desc()).fetch();
+	}
+
+	@Override
+	public void insertItem(Item entity) {
+		entityManager.persist(entity);
+	}
+
+	@Override
+	public List<ItemDTO> adminStringColumn(SearchRequest searchRequest, PageRequest pageRequest) {
+				return jPAQueryFactory.select(dtoBean)
+						.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
+						.where(Expressions.stringPath(searchRequest.getColumn()).contains(searchRequest.getKeyword()))
+						.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum())
+						.orderBy(getSortType(searchRequest))
+						.fetch();
+	}
+
+	@Override
+	public List<ItemDTO> adminIntegerColumn(SearchRequest searchRequest, PageRequest pageRequest) {
+		return jPAQueryFactory
+				.select(Projections.bean(ItemDTO.class, item.code, item.sort1, item.sort2, item.sort3, item.brand,
+						item.name, item.delivery, item.price, item.storage, item.weight, item.packing, item.sales,
+						item.stock, item.views, item.likes, item.event_code, item_event.discount,
+						item_event.name.as("event_name")))
+				.from(item).join(item_event).on(item.event_code.eq(item_event.code))
+//				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
+//						.contains(searchRequest.getKeyword()))
+				.offset(pageRequest.getStartNum()).limit(pageRequest.getEndNum())
+				.orderBy(getSortType(searchRequest))
+				.fetch();
+	}
+
+	public Item updateItem(Item entity) {
+		return entityManager.merge(entity);
+	}
+
 	public List<ItemDTO> selectItemListWhereInCode(List<Integer> codeList) {
 		System.out.println(codeList);
 		return jPAQueryFactory
@@ -154,17 +234,13 @@ public class ItemRepositoryImpl implements ItemRepository {
 	}
 
 	@Override
-	public Item merge(Item entity) {
-		return entityManager.merge(entity);
+	public List<Item> merge(List<Item> list) {
+		List<Item> check = new ArrayList<Item>();
+		for(Item entity : list) {
+			check.add(entityManager.merge(entity));
+		}
+		return check;
 	}
 	
-	@Override
-	public int persist(List<Item> list) {
-		int result = 0;
-		for(Item e : list) {
-			entityManager.persist(e);
-			result++;
-		}
-		return result;
-	}
+
 }

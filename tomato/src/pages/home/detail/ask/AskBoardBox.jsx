@@ -1,16 +1,16 @@
-import './Detail_ask.css';
+import './AskBoardBox.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import Loading from '../../../components/Loading';
-import Error from '../../../components/Error';
-import Detail_ask_row from './Detail_ask_row';
-import Detail_ask_write from './Detail_ask_write';
-import PagingBox, { paging } from '../../../components/PagingBox';
+import Loading from './../../../components/Loading';
+import Error from './../../../components/Error';
+import AskBoardRow from './AskBoardRow';
+import ItemAskWrite from './ItemAskWrite';
+import PagingBox, { paging } from './../../../components/PagingBox';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeAlert } from '../../../redux/basic/actions';
 
 
-const Detail_ask = ({ item }) => {
+const AskBoardBox = ({ item }) => {
     const user = useSelector(state => state.user.data);
     const dispatch = useDispatch();
     const [itemAskList, setItemAskList] = useState(null);
@@ -43,7 +43,7 @@ const Detail_ask = ({ item }) => {
                 content: `상품 문의 작성 시 로그인이 필요합니다.`,
                 time: 3,
                 style: {
-                    top: '10px',
+                    top: '50%',
                     left: 'calc(50% - 150px)',
                     zIndex: 5
                 }
@@ -71,7 +71,7 @@ const Detail_ask = ({ item }) => {
                         <div>작성일자</div>
                     </div>
                     {itemAskList ?
-                        paging(itemAskList, currPage, limit).map((e, i) => <Detail_ask_row itemAsk={e} key={i} />)
+                        paging(itemAskList, currPage, limit).map((e, i) => <AskBoardRow itemAsk={e} key={i} />)
                         :
                         <div id='askNone'>
                             해당 상품에 문의사항이 없습니다.
@@ -84,10 +84,10 @@ const Detail_ask = ({ item }) => {
                     limit={limit}
                     currPage={currPage}
                     setCurrPage={setCurrPage} />
-                {askWrite ? <Detail_ask_write refresh={refresh} setRefresh={setRefresh} item={item} itemAskClick={itemAskClick} /> : null}
+                {askWrite ? <ItemAskWrite refresh={refresh} setRefresh={setRefresh} item={item} itemAskClick={itemAskClick} /> : null}
             </div>
         </>
     );
 }
 
-export default Detail_ask;
+export default AskBoardBox;
