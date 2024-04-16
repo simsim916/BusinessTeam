@@ -1,4 +1,4 @@
-import { POST_DATA_FAILURE, POST_DATA_REQUEST, POST_DATA_SUCCESS, SET_USERBUY_FORM, SET_USERBUY_ITEMLIST } from "./actions";
+import { POST_DATA_FAILURE, POST_DATA_REQUEST, POST_DATA_SUCCESS, SET_USERBUY, SET_USERBUY_FORM, SET_USERBUY_ITEMLIST } from "./actions";
 
 const initialState = {
     userBuy: {
@@ -16,6 +16,7 @@ const initialState = {
             point: '',
             phonenumber: '',
         },
+        data:null,
         error: null,
     }
 };
@@ -44,7 +45,12 @@ const userBuyReducer = (state = initialState.userBuy, action) => {
         case SET_USERBUY_ITEMLIST:
             return {
                 ...state,
-                buyList: action.payload
+                buyList: action.payload,
+            };
+        case SET_USERBUY:
+            return {
+                ...state,
+                ...action.payload
             };
         case SET_USERBUY_FORM:
             return {

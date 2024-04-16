@@ -5,6 +5,7 @@ import Error from './Error';
 import axios from 'axios';
 import ItemBox from './ItemBox';
 import { Link } from 'react-router-dom';
+import { SERVER_URL } from '../../model/server-config';
 
 const PresentBox = ({ brand }) => {
     const [brandItem, setBrandItem] = useState(null);
@@ -15,7 +16,7 @@ const PresentBox = ({ brand }) => {
     const slideBoxRightBtn = useRef(null);
 
     useEffect(() => {
-        axios.get('http://localhost:8090/item/searchtype?column=item.brand&keyword=' + brand
+        axios.get(SERVER_URL + '/item/searchtype?page=1&size=6&column=item.brand&keyword=' + brand
         ).then(res => {
             setBrandItem(res.data);
             setLoading(false);
@@ -70,11 +71,11 @@ const PresentBox = ({ brand }) => {
                     <img src={"http://localhost:8090/resources" + `/img/brand/${brand}.png`} alt={brand} />
                     {brand}
                 </div>
-                <ul className="typeBoxTagList">
+                {/* <ul className="typeBoxTagList">
                     <li><a href="">스테이크</a></li>
                     <li><a href="">파스타</a></li>
                     <li><a href="">감바스</a></li>
-                </ul>
+                </ul> */}
             </div>
             {
                 brandItem != null ?

@@ -1,10 +1,12 @@
 import { api } from '../../../model/model';
+import { makeComa } from '../../components/MathFunction';
 
 export const POST_DATA_REQUEST = 'POST_DATA_REQUEST';
 export const POST_DATA_SUCCESS = 'POST_DATA_SUCCESS';
 export const POST_DATA_FAILURE = 'POST_DATA_FAILURE';
 export const SET_USERBUY_ITEMLIST = 'SET_USERBUY_ITEMLIST';
 export const SET_USERBUY_FORM = 'SET_USERBUY_FORM';
+export const SET_USERBUY = 'SET_USERBUY';
 
 export const postDataRequest = () => ({
     type: POST_DATA_REQUEST
@@ -21,18 +23,27 @@ export const postDataFailure = (error) => ({
 });
 export const setUserBuyItemList = (data) => ({
     type: SET_USERBUY_ITEMLIST,
-    payload: data
+    payload: data,
 });
 export const setUserBuyForm = (data) => ({
     type: SET_USERBUY_FORM,
     payload: data
 });
+export const setUserBuy = (data) => ({
+    type: SET_USERBUY,
+    payload: data
+});
 
-export const postUserBuy = (url, method, requestData, token) => {
+export const postUserBuy = (userBuyForm, token) => {
     return async (dispatch) => {
         dispatch(postDataRequest());
         try {
-            const response = await api(url, method, requestData, token)
+            const response = await api('/order/order', 'post', {
+                ...userBuyForm,
+                price: Math.ceil(userBuyForm.itemList.reduce((result, e) => +result + (Math.round((e.price * ((100 - e.discount) / 100)), 0) * e.amount) + e.delivery, 0)),
+                delivery: userBuyForm.itemList.reduce((result, e) => +result + (e.delivery), 0),
+            }, token)
+            console.log(response.data)
             dispatch(postDataSuccess(response.data));
         } catch (error) {
             console.log('postUserBuy : ' + error.message)
@@ -45,5 +56,11 @@ export const setUserBuyStorage = (data) => {
     return (dispatch) => {
         dispatch(setUserBuyItemList(data));
         sessionStorage.setItem('buy', JSON.stringify(data))
+    }
+}
+export const setUserBuyStorageClean = (data) => {
+    return (dispatch) => {
+        dispatch(setUserBuy(data));
+        sessionStorage.removeItem('buy');
     }
 }

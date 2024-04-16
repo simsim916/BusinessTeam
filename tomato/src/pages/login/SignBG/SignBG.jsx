@@ -5,11 +5,14 @@ import Loading from '../../components/Loading';
 import Error from '../../components/Error';
 import { SERVER_RESOURCE } from "../../../model/server-config";
 import { api } from "../../../model/model";
+import { changeAlert } from "../../redux/basic/actions";
+import { useDispatch } from "react-redux";
 
 
 const SignBG = ({ }) => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [signValue, setSignValue] = useState({
         value: {
@@ -77,17 +80,14 @@ const SignBG = ({ }) => {
 
         if (value.length < 4 || value.length > 15) {
             idBox.style.border = "2px solid #FF3F3F";
-            // idBox.style.borderBottom = "1px solid #FF3F3F";
             idBox.children[0].style.color = "#FF3F3F";
             message = `아이디 : 4 ~ 15 글자 이하만 가능합니다.`;
         } else if (value.replace(key, '').length > 0) {
             idBox.style.border = "2px solid #FF3F3F";
-            // idBox.style.borderBottom = "1px solid #FF3F3F";
             idBox.children[0].style.color = "#FF3F3F";
             message = `아이디 : 영문, 숫자, 특수문자(-, _)만 가능합니다.`;
         } else {
             idBox.style.border = "2px solid #03C75A";
-            // idBox.style.borderBottom = "1px solid #03C75A";
             idBox.children[0].style.color = "#03C75A";
             check = true;
         }
@@ -106,26 +106,18 @@ const SignBG = ({ }) => {
 
         if (value.length < 4 || value.length > 14) {
             passwordBox.style.border = "2px solid #FF3F3F";
-            // passwordBox.style.borderTop = "1px solid #FF3F3F";
-            // passwordBox.style.borderBottom = "1px solid #FF3F3F";
             passwordBox.children[0].style.color = "#FF3F3F";
             message = `비밀번호 : 4 ~ 15 글자 이하만 입력해주세요.`;
         } else if (value.replace(key, '').length > 0) {
             passwordBox.style.border = "2px solid #FF3F3F";
-            // passwordBox.style.borderTop = "1px solid #FF3F3F";
-            // passwordBox.style.borderBottom = "1px solid #FF3F3F";
             passwordBox.children[0].style.color = "#FF3F3F";
             message = `비밀번호 : 영문, 숫자, 특수문자(!,@,#,$,%,^,&,*)만 가능합니다.`;
         } else if (value.replace(/[!-*.@]/gi, '').length >= value.length) {
             passwordBox.style.border = "2px solid #FF3F3F";
-            // passwordBox.style.borderTop = "1px solid #FF3F3F";
-            // passwordBox.style.borderBottom = "1px solid #FF3F3F";
             passwordBox.children[0].style.color = "#FF3F3F";
             message = `비밀번호 : 특수문자(!,@,#,$,%,^,&,*)를 반드시 포함해주세요.`;
         } else {
             passwordBox.style.border = "2px solid #03C75A";
-            // passwordBox.style.borderTop = "1px solid #03C75A";
-            // passwordBox.style.borderBottom = "1px solid #03C75A";
             passwordBox.children[0].style.color = "#03C75A";
             check = true;
         }
@@ -143,20 +135,14 @@ const SignBG = ({ }) => {
         let check = false;
         if (value.length < 2 || value.length > 10) {
             nameBox.style.border = "2px solid #FF3F3F";
-            // nameBox.style.borderTop = "1px solid #FF3F3F";
-            // nameBox.style.borderBottom = "1px solid #FF3F3F";
             nameBox.children[0].style.color = "#FF3F3F";
             message = `이름 : 2글자 이상 10글자 이하로 입력하세요.`;
         } else if (value.replace(/[a-z.가-힣]/gi, '').length > 0) {
             nameBox.style.border = "2px solid #FF3F3F";
-            // nameBox.style.borderTop = "1px solid #FF3F3F";
-            // nameBox.style.borderBottom = "1px solid #FF3F3F";
             nameBox.children[0].style.color = "#FF3F3F";
             message = `이름은 한글, 영문만 입력하세요.`;
         } else {
             nameBox.style.border = "2px solid #03C75A";
-            // nameBox.style.borderBottom = "1px solid #03C75A";
-            // nameBox.style.borderTop = "1px solid #03C75A";
             nameBox.children[0].style.color = "#03C75A";
             check = true;
         }
@@ -174,18 +160,15 @@ const SignBG = ({ }) => {
 
         if (value.length < 10 || value.length > 11) {
             phonenumberBox.style.border = "2px solid #FF3F3F";
-            // phonenumberBox.style.borderTop = "1px solid #FF3F3F";
             phonenumberBox.children[0].style.color = "#FF3F3F";
             message = `전화번호는 9자리 ~ 12자리 숫자로 입력해주세요.`;
         } else if (value.replace(/[0-9]/gi, '').length > 0) {
             phonenumberBox.style.border = "2px solid #FF3F3F";
-            // phonenumberBox.style.borderTop = "1px solid #FF3F3F";
             phonenumberBox.children[0].style.color = "#FF3F3F";
             message = `전화번호는 숫자만 입력하세요.`;
         } else {
             check = true;
             phonenumberBox.style.border = "2px solid #03C75A";
-            // phonenumberBox.style.borderTop = "1px solid #03C75A";
             phonenumberBox.children[0].style.color = "#03C75A";
         }
         return {
@@ -229,6 +212,16 @@ const SignBG = ({ }) => {
         api('/user/signup', 'post', signValue.value)
             .then(res => {
                 setLoading(false);
+                dispatch(changeAlert({
+                    title: '회원가입 성공!',
+                    content: `로그인 후 홈페이지를 이용해주세요!`,
+                    time: 3,
+                    style: {
+                        top: '10px',
+                        left: 'calc(50% - 150px)',
+                        position: 'absolute'
+                    }
+                }));
                 navigate('/member')
             }).catch(err => {
                 console.log(err.message)

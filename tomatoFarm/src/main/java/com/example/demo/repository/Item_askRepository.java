@@ -12,7 +12,7 @@ import com.example.demo.module.SearchRequest;
 @Repository
 public interface Item_askRepository {
 
-	List<Item_ask> selectItemAskListStringWhereType(PageRequest pageRequest , SearchRequest searchRequest);
-	List<Item_ask> selectItemAskListIntegerWhereType(PageRequest pageRequest , SearchRequest searchRequest);
+	List<Item_askDTO> selectItemAskListStringWhereType(PageRequest pageRequest , SearchRequest searchRequest);
+	List<Item_askDTO> selectItemAskListIntegerWhereType(PageRequest pageRequest , SearchRequest searchRequest);
 	Item_ask merge(Item_ask entity);
 }

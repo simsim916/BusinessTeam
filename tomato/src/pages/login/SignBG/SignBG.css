@@ -14,7 +14,7 @@
     border: none !important;
 }
 
-#errorBox p {
+#signBG #errorBox p {
     line-height: 1.5em;
 }
 
@@ -44,7 +44,7 @@
 
 #signBG>div:nth-child(2) {
     background-color: white;
-    width:85%;
+    width: 85%;
     height: 90%;
     max-height: 95vh;
     display: block;

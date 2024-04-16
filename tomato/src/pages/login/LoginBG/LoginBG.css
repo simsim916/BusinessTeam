@@ -37,7 +37,7 @@
     align-items: center;
 }
 
-#loginBox>div:focus-within{
+#loginBox>div:focus-within {
     z-index: 3;
 }
 
@@ -79,7 +79,7 @@
     height: 80px;
 }
 
-#errorBox {
+#loginBG #errorBox {
     width: 100%;
     font-size: 12px;
     padding-left: 5px;
@@ -88,6 +88,8 @@
     margin-bottom: 5px;
     height: 36px;
     text-align: left;
+    border: none !important;
+    display: block;
 }
 
 #search {

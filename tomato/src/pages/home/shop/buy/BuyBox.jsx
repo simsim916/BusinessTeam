@@ -1,25 +1,27 @@
 import './BuyBox.css'
 import BuyItemBox from './buyItemBox/BuyItemBox';
 import BuyDeliveryBox from './deliveryAddress/BuyDeliveryBox';
-import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
 import Buy_total from './Buy_total';
-import axios from 'axios';
+import { api } from '../../../../model/model';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUserBuyStorageClean } from '../../../redux/userBuy/actions';
 
 
 
 const BuyBox = () => {
-
+    const dispatch = useDispatch();
+    const userBuy = useSelector(state => state.userBuy);
 
     useEffect(() => {
-        axios.get(`http://localhost:8090/visit/update`, {
-            params: {
-                page: 'order',
-            }
-        })
+        api('/visit/update?page=order', 'get')
+        return () => {
+            dispatch(setUserBuyStorageClean({
+                form: null,
+                buyList: []
+            }))
+        }
     }, [])
-
-
 
     return (
         <div id='shopBasket' className='container'>

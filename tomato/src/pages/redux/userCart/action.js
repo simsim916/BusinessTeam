@@ -1,4 +1,5 @@
 import { api } from '../../../model/model';
+import { setUserBuyStorage } from '../userBuy/actions';
 
 export const USERCART_DATA_REQUEST = 'USERCART_DATA_REQUEST';
 export const USERCART_DATA_SUCCESS = 'USERCART_DATA_SUCCESS';
@@ -89,6 +90,7 @@ export const changeUserCart = (key, type, userCart) => {
                 })
             }
             localStorage.setItem('cart', JSON.stringify(result));
+            
         }
     }
 }

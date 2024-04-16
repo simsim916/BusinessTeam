@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import store from "./pages/redux/store";
 import EventPage2 from './pages/event/EventPage2';
 import CustomerQA from './pages/customerQA/CustomerQA';
+import WebSocket from "./pages/websocket/WebSocket";
 
 function App() {
 
@@ -22,8 +23,9 @@ function App() {
                     <Route path='/event2' element={<EventPage2 />} />
                     <Route path='/admin/*' element={<Admin />} />
                     <Route path='/home/*' element={<Home />} />
-                    <Route path='/' element={<Home />} />
                     <Route path='/customerQA' element={<CustomerQA />} />
+                    <Route path='/websocket' element={<WebSocket />} />
+                    <Route path='/' element={<Home />} />
                 </Routes>
             </div>
         </Provider>

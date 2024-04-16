@@ -63,22 +63,15 @@ public interface ItemService {
 		return dto;
 	}
 
-//	===============================================================================
-	List<ItemDTO> SearchForItemList(PageRequest pageRequest,SearchRequest searchRequest);
-//	===============================================================================
-	List<ItemDTO> selectItemWhereCode(PageRequest pageRequest,SearchRequest searchRequest);
+	List<ItemDTO> selectItemListWhereType(PageRequest pageRequest,SearchRequest searchRequest);
+	List<ItemDTO> selectItemDetail(PageRequest pageRequest,SearchRequest searchRequest);
 	List<ItemDTO> selectItemListStringWhereTypeNotNull(PageRequest pageRequest,SearchRequest searchRequest);
+	List<ItemDTO> selectItemListWhereInCode(List<Integer> codeList);
 	
-	
-	List<ItemDTO> selectItemWherebrand(PageRequest pageRequest, SearchRequest searchRequest);
-	List<ItemDTO> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest);
+	List<ItemDTO> selectItemWhereKeyword(PageRequest pageRequest,SearchRequest searchRequest);
 	List<SortDTO> selectSortWhereKeyword(SearchRequest searchRequest);
 	List<SortDTO> selectSortList();
-	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 	
-	List<ItemDTO> selectAll();
-	void insertItem(Item entity);
-	List<ItemDTO> selectItemListWhereInCode(List<Integer> codeList);
-	List<ItemDTO> searchForAdmin(SearchRequest searchRequest,PageRequest pageRequest);
-	List<Item> merge(List<Item> list);
+	Item merge(Item entity);
+	int persist(List<Item> list);
 }

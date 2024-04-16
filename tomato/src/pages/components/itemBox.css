@@ -33,7 +33,7 @@
 .itemImg {
     height: 65%;
     position: relative;
-    background-color: #000000;
+    background-color: #f5f5f5;
     font-size: 0;
     z-index: 5;
     display: flex;

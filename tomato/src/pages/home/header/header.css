@@ -24,10 +24,12 @@
     font-size: 0.8em;
     color: #9b1b20;
 }
-#loginBar>.container>a{
+
+#loginBar>.container>a {
     line-height: 30px;
     margin-left: 12px;
 }
+
 #searchBar {
     display: flex;
     align-items: center;
@@ -99,6 +101,43 @@
     outline: 2.5px solid #9b1b20;
 }
 
+#searchBox>#recentBox {
+    background-color: #fff4f4;
+    width: 100%;
+    position: absolute;
+    top: calc(100% + 3.5px);
+    height: 100px;
+    z-index: 5;
+    outline: 1px solid;
+    overflow: auto;
+}
+
+#searchBox>#recentBox::-webkit-scrollbar {
+    width: 7px;
+}
+
+#searchBox>#recentBox::-webkit-scrollbar-thumb {
+    background-color: #9b1b1f70;
+}
+
+#searchBox>#recentBox a {
+    font-size: 14px;
+    line-height: 22px;
+    margin-left: 10px;
+}
+
+#searchBox>#recentBox a:hover {
+    text-decoration: underline;
+    color: blue;
+}
+
+#searchBox>#recentBox>#recentBoxTitle {
+    font-size: 12px;
+    line-height: 1em;
+    background-color: #cacaca;
+    padding: 5px;
+}
+
 #searchRightBox {
     position: absolute;
     right: 0px;
@@ -109,7 +148,7 @@
 }
 
 #searchRightBox>div {
-    width: 55px;
+    width: 65px;
     color: #9b1b20;
     text-align: center;
     font-size: 12px;
@@ -117,6 +156,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+#searchRightBox>div>a {
+    display: flex;
+    flex-direction: column;
 }
 
 #searchRightBox i {

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -51,10 +52,9 @@ public class Itme_reviewController {
 	}
 
 	@PostMapping("/insertmultipart")
-	public ResponseEntity<?> iteminsert(HttpServletRequest request, Item_review entity, UserToken userToken) throws IOException {
+	public ResponseEntity<?> iteminsert(HttpServletRequest request,  Item_review entity, UserToken userToken) throws IOException {
 		ResponseEntity<?> result = null;
 		System.out.println("\n\n"+ entity +"\n\n");
-		System.out.println("\n\n"+ userToken +"\n\n");
 		
 		if (entity != null) {
 			String realPath = request.getRealPath("/");
