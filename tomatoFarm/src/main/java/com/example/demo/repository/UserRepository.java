@@ -11,7 +11,7 @@ import com.example.demo.entity.User;
 import com.example.demo.module.SearchRequest;
 
 @Repository
-public interface UserRepository{
+public interface UserRepository {
 	
 	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
 
