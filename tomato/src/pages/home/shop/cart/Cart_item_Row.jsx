@@ -46,7 +46,7 @@ const Cart_item_Row = ({ item, idx }) => {
                         ?
                         <>
                             <p style={{ textDecoration: 'line-through', marginBottom: '5px' }} className="shopBasketItemIfo_price">{makeComa(item.price)}원</p>
-                            <p className="shopBasketItemIfo_sale">{makeComa(item.price)}원</p>
+                            <p className="shopBasketItemIfo_sale">{makeComa(Math.round(item.price * (100 - item.discount) / 100))}원</p>
                         </>
                         :
                         <p style={{ color: 'black' }} className="shopBasketItemIfo_price">{makeComa(item.price)}원</p>
