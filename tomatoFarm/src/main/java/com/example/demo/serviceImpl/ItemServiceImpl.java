@@ -1,8 +1,10 @@
 package com.example.demo.serviceImpl;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -67,21 +69,32 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public List<ItemDTO> selectItemWhereKeyword(PageRequest pageRequest,SearchRequest searchRequest) {
-		LocalDateTime KoreaTime = LocalDateTime.now() // 현재 시간
-                .plus(9, ChronoUnit.HOURS); // +9 시간
+	public List<ItemDTO> selectItemWhereKeyword(PageRequest pageRequest,SearchRequest searchRequest, String id) {
+		LocalDate koreaTime = LocalDateTime.now().toLocalDate(); // 현재 시간
+		
 		
 		KeywordID keywordID = KeywordID.builder()
 				.keyword(searchRequest.getKeyword())
-				.search_date(KoreaTime.toLocalDate())
+				.search_date(koreaTime)
 				.build();
+		
 		Keyword entity = Keyword.builder()
-				.keyword(searchRequest.getKeyword())
-				.search_date(KoreaTime.toLocalDate())
+				.keyword(keywordID.getKeyword())
+				.search_date(keywordID.getSearch_date())
+				.id(id)
 				.build();
-		keywordRepository.merge(entity,keywordID);
+		
+		Optional<Keyword> data = keywordRepository.findById(keywordID);
+		
+		if(data.isPresent()) {
+			entity=data.get();
+			entity.setSearch_count(entity.getSearch_count()+1);
+		}
+		keywordRepository.save(entity);
+		
 		return itemRepository.selectItemWhereKeyword(pageRequest, searchRequest);
 	}
+	
 	@Override
 	public List<SortDTO> selectSortList() {
 		return itemRepository.selectSortList();

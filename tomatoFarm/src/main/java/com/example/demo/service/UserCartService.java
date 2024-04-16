@@ -9,7 +9,8 @@ import com.example.demo.entity.UserCartID;
 
 public interface UserCartService {
 
-	List<UserCart> merge(List<UserCart> list);
+	UserCart merge(UserCart entity);
+	List<UserCart> mergeAll(List<UserCart> list);
 	
 	List<UserCartDTO> selectItemListWhereUserID(UserCart entity);
 	

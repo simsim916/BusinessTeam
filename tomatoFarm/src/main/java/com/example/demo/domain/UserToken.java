@@ -15,4 +15,5 @@ public class UserToken {
 	private String username;
 	private String token;
 	private boolean admin;
+	private String[] keyword;
 }

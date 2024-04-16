@@ -20,8 +20,8 @@ import lombok.AllArgsConstructor;
 
 public interface UserCartRepository{
 
-
-	List<UserCart> merge(List<UserCart> list);
+	UserCart merge(UserCart entity);
+	List<UserCart> mergeAll(List<UserCart> list);
 	List<UserCartDTO> selectItemListWhereUserID(UserCart userCart);
 	List<UserCart> selectCartWhereUserIDItemList(String user_id, List<Integer> item_codeList);
 	void delete(List<UserCart> list);

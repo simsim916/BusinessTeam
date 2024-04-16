@@ -1,11 +1,12 @@
 package com.example.demo.repository;
 
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import com.example.demo.entity.Keyword;
 import com.example.demo.entity.KeywordID;
 
-public interface KeywordRepository {
+public interface KeywordRepository extends JpaRepository<Keyword, KeywordID>{
 	
-	public Keyword merge(Keyword keyword, KeywordID keywordID);
 	
 }

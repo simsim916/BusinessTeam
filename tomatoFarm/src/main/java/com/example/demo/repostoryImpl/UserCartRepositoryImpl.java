@@ -29,12 +29,16 @@ public class UserCartRepositoryImpl implements UserCartRepository {
 	private final JPAQueryFactory jpaQueryfactory;
 	private final EntityManager entityManager;
 
-	public List<UserCart> merge(List<UserCart> list) {
+	public List<UserCart> mergeAll(List<UserCart> list) {
 		List<UserCart> result = new ArrayList<UserCart>();
 		for (UserCart e : list) {
 			result.add(entityManager.merge(e));
 		}
 		return result;
+	}
+	
+	public UserCart merge(UserCart entity) {
+		return entityManager.merge(entity);
 	}
 
 	@Override

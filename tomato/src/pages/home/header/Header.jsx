@@ -42,6 +42,12 @@ const Header = () => {
         }
     }
 
+    const handleBlur = () => {
+        setTimeout(() => {
+            setRecentBox(false)
+        }, 500);
+    }
+
     const changeKeyworda = event => {
         dispatch(changeKeyword(event.target.value))
     }
@@ -89,7 +95,8 @@ const Header = () => {
                         </a>
                     </div>
                     <form id="searchBox">
-                        <input onKeyUp={searchBoxEnterKey} onInput={appearinputBoxResetButton} onChange={changeKeyworda} onFocus={() => setRecentBox(true)}
+                        <input onKeyUp={searchBoxEnterKey} onInput={appearinputBoxResetButton} onChange={changeKeyworda}
+                            onFocus={() => setRecentBox(true)} onBlur={handleBlur}
                             id="searchBoxInput" type="text" placeholder="검색어를 입력해주세요." value={keyword} autoComplete="off" />
                         <i onClick={resetInputBox} className="fa-solid fa-circle-xmark"></i>
                         <button onClick={searchBox}><i className="fa-solid fa-magnifying-glass"></i></button>

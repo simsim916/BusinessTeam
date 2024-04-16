@@ -28,5 +28,7 @@ public class Keyword {
 	private String keyword;
 	@Id
 	private LocalDate search_date;
-	@Builder.Default private Integer search_count=1;
+	private String id;
+	@Builder.Default 
+	private Integer search_count=1;
 }

@@ -8,7 +8,7 @@ export async function api(url, method, requestData, token) {
 
     if (url.indexOf('multipart') >= 0) {
         headers = { 'Content-Type': 'multipart/form-data' };
-    } else if (token !== null) {
+    } else if (token) {
         headers = {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token

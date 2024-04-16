@@ -68,7 +68,7 @@ public interface ItemService {
 	List<ItemDTO> selectItemListStringWhereTypeNotNull(PageRequest pageRequest,SearchRequest searchRequest);
 	List<ItemDTO> selectItemListWhereInCode(List<Integer> codeList);
 	
-	List<ItemDTO> selectItemWhereKeyword(PageRequest pageRequest, SearchRequest searchRequest);
+	List<ItemDTO> selectItemWhereKeyword(PageRequest pageRequest, SearchRequest searchRequest, String id);
 	List<SortDTO> selectSortWhereKeyword(PageRequest pageRequest, SearchRequest searchRequest);
 	List<SortDTO> selectSortList();
 	

@@ -49,6 +49,7 @@ public class UserController {
 						.id(user.getId())
 						.username(user.getUsername())
 						.admin(user.getLevel() < 100 ? true : false)
+						
 						.build();
 				result = ResponseEntity.status(HttpStatus.OK).body(userToken);
 			} else {
@@ -63,11 +64,10 @@ public class UserController {
 	@GetMapping("/admincheck")
 	public ResponseEntity<?> admincheck(HttpServletRequest request) {
 		String token = tokenProvider.parseBearerToken(request);
-		String id = tokenProvider.validateAndGetUserId(token);
+		String id = token == null ? null : tokenProvider.validateAndGetUserId(token);
 		ResponseEntity<?> result = null;
 		User entity = User.builder().id(id).build();
 		entity = userService.selectUser(entity); // user가 입력한 id로 userData를 조회 하여 dto를 채운다.
-		System.out.println(entity);
 		if (entity.getLevel() < 100) { // 조회성공
 			result = ResponseEntity.status(HttpStatus.OK).body(true);
 		} else { // 조회실패
