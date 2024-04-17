@@ -10,8 +10,4 @@ export const changeAlert = (alert) => ({
     type: CHANGE_ALERT,
     alert
 });
-export const changeAdmin = (data) => ({
-    type: CHANGE_ADMIN,
-    data
-});
 

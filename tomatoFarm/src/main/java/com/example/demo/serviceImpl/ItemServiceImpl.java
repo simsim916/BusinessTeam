@@ -48,8 +48,6 @@ public class ItemServiceImpl implements ItemService {
 	@Transactional
 	public List<ItemDTO> getDetailPage(PageRequest pageRequest, SearchRequest searchRequest) {
 		List<ItemDTO> result = itemRepository.selectItemListIntegerWhereType(pageRequest,searchRequest);
-		System.out.println(searchRequest);
-		System.out.println(result);
 		ItemDTO dto = result.get(0);
 		dto.setViews(dto.getViews()+1);
 		Item entity = dtotoEntity(dto);

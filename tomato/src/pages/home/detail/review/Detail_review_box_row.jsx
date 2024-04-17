@@ -7,7 +7,7 @@ const Detail_review_box_row = ({ itemReview }) => {
     const [reviewDetail, setReviewDetail] = useState(false);
 
     const reviewDetailClick = () => {
-        setReviewDetail(!reviewDetail);
+        // setReviewDetail(!reviewDetail);
     }
     return (
         <>

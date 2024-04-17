@@ -1,6 +1,6 @@
 import { api } from '../../../model/model';
 import './Admin_Chatbot.css';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Admin_Chatbot_Row from './Admin_Chatbot_Row';
 import ChatBotBox from '../../components/chatbot/ChatBotBox';
 
@@ -28,9 +28,9 @@ const Admin_Chatbot = () => {
         getdata();
     }, [])
 
+
     /* 오른쪽에 나타낼 채팅방의 roomSeq번호를 가지고 있는 배열 */
     const [showChatbot, setShowChatbot] = useState([]);
-    console.log(showChatbot)
     /* showChatbot 배열에 나타낼 채팅방의 roomSeq를 저장하는 배열을 만드는 함수 */
     const changeShowChatbot = (value) => {
         if (showChatbot.includes(value)) {
@@ -65,7 +65,7 @@ const Admin_Chatbot = () => {
 
             <div id='admin_ChatBotContainer'>
                 {
-                    showChatbot && showChatbot.map((seq) => <ChatBotBox getdata={getdata} amount={showChatbot.length} admin_root={seq} key={seq} changeShowChatbot={changeShowChatbot} />)
+                    roomList.length > 0 && showChatbot && showChatbot.map((seq) => <ChatBotBox getdata={getdata} amount={showChatbot.length} user={roomList[seq - 1].user} admin_root={seq} key={seq} changeShowChatbot={changeShowChatbot} />)
                 }
             </div>
         </div>

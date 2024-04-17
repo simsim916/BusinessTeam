@@ -4,11 +4,11 @@ import { useMemo, useState } from 'react';
 import Loading from '../../../components/Loading';
 import Error from '../../../components/Error';
 import { api } from '../../../../model/model';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { changeAlert } from '../../../redux/basic/actions';
 
 const Detail_review_write = ({ item, refresh, setRefresh, reviewWriteClick }) => {
-    const user = useSelector(state => state.user.data)
+    const user = JSON.parse(sessionStorage.getItem('userinfo'));
     const dispatch = useDispatch();
     const [writeBoxClose, setWriteBoxClose] = useState(true);
     const [score, setScore] = useState(0);

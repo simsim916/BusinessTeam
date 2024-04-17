@@ -12,9 +12,7 @@ const Admin_ask = () => {
     const [askList, setAskList] = useState([]);
     const [currPage, setCurrPage] = useState(1);
     const [limit, setLimit] = useState(8);
-
     const [answered, setAnswered] = useState(2);
-
     const [searchRequest, setSearchRequest] = useState({
         column: 'title',
         keyword: ''
@@ -35,7 +33,7 @@ const Admin_ask = () => {
 
     const filterList = (answered) => {
         if (answered == 0) {
-            return askList.filter(list => list.reply === "");
+            return askList.filter(list => list.reply == "" || list.reply == null);
         } else if (answered == 1) {
             return askList.filter(list => list.reply != "" && list.reply != null);
         } else {

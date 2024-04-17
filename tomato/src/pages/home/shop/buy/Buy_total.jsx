@@ -15,8 +15,8 @@ const Buy_total = () => {
     const userBuyItemList = useSelector(state => state.userBuy.form.itemList);
     const userBuy = useSelector(state => state.userBuy.form);
     const userCart = useSelector(state => state.userCart.data);
-    const user = useSelector(state => state.user.data);
-
+    const user = JSON.parse(sessionStorage.getItem('userinfo'));
+    
     const deleteUserCart = () => {
         const result = []
         userBuyItemList.map(e => {

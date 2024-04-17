@@ -38,6 +38,7 @@ public class ChatController {
 
 	@PostMapping("/makeroom")
 	public ResponseEntity<?> makeroom(HttpServletRequest request, @RequestBody Chat_room entity) {
+		System.out.println(entity);
 		ResponseEntity<?> result = null;
 		String token = tokenProvider.parseBearerToken(request);
 		String id = tokenProvider.validateAndGetUserId(token);

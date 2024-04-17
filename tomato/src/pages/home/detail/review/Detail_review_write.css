@@ -134,6 +134,9 @@
     font-weight: 500;
     margin: 15px 0;
 }
+.reviewWriteTag div img {
+    width: 100%;
+}
 
 .reviewWriteTag textarea {
     padding: 10px 20px;
