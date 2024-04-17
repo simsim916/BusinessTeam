@@ -1,4 +1,4 @@
-package com.example.demo.repostoryImpl;
+package com.example.demo.order.repository;
 
 import java.util.List;
 
@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.order.entity.OrderDetail;
-import com.example.demo.repository.OrderDetailRepository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import lombok.AllArgsConstructor;

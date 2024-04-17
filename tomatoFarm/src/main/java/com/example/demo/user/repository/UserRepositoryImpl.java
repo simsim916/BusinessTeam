@@ -1,17 +1,15 @@
-package com.example.demo.repostoryImpl;
+package com.example.demo.user.repository;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
-import com.example.demo.domain.UserDTO;
-import com.example.demo.entity.User;
+import com.example.demo.user.domain.UserDTO;
+import com.example.demo.user.entity.User;
 import com.example.demo.module.SearchRequest;
-import com.example.demo.repository.UserRepository;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
-import io.github.classgraph.AnnotationInfoList;
 import lombok.AllArgsConstructor;
 
 import static com.example.demo.entity.QUser.user;

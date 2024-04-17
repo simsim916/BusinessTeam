@@ -1,8 +1,6 @@
-package com.example.demo.jwtToken;
+package com.example.demo.module.jwtToken;
 
 import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
@@ -11,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import com.example.demo.entity.User;
+import com.example.demo.user.entity.User;
 
 // => dependency 추가 필요함
 import io.jsonwebtoken.Claims; 

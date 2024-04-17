@@ -1,10 +1,10 @@
-package com.example.demo.item_review.repository;
+package com.example.demo.item.item_review.repository;
 
 import java.util.List;
 
+import com.example.demo.item.item_review.entity.Item_review;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.item_review.entity.Item_review;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 

@@ -1,9 +1,9 @@
-package com.example.demo.item_ask.service;
+package com.example.demo.item.item_ask.service;
 
 import java.util.List;
 
-import com.example.demo.item_ask.domain.Item_askDTO;
-import com.example.demo.item_ask.entity.Item_ask;
+import com.example.demo.item.item_ask.domain.Item_askDTO;
+import com.example.demo.item.item_ask.entity.Item_ask;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 

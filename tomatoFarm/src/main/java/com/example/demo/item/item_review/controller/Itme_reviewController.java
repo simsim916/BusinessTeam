@@ -1,4 +1,4 @@
-package com.example.demo.item_review.controller;
+package com.example.demo.item.item_review.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.demo.item_review.entity.Item_review;
+import com.example.demo.item.item_review.entity.Item_review;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
-import com.example.demo.item_review.service.Item_reviewService;
+import com.example.demo.item.item_review.service.Item_reviewService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;

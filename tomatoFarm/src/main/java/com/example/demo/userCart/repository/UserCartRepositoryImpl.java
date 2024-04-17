@@ -1,4 +1,4 @@
-package com.example.demo.repostoryImpl;
+package com.example.demo.userCart.repository;
 
 import static com.example.demo.entity.QUserCart.userCart;
 
@@ -9,9 +9,8 @@ import javax.persistence.EntityManager;
 
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.domain.UserCartDTO;
-import com.example.demo.entity.UserCart;
-import com.example.demo.repository.UserCartRepository;
+import com.example.demo.userCart.domain.UserCartDTO;
+import com.example.demo.userCart.entity.UserCart;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 

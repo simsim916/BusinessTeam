@@ -1,10 +1,11 @@
-package com.example.demo.item_ask.controller;
+package com.example.demo.item.item_ask.controller;
 
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
+import com.example.demo.item.item_ask.entity.Item_ask;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,12 +17,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.item_ask.domain.Item_askDTO;
-import com.example.demo.item_ask.entity.Item_ask;
+import com.example.demo.item.item_ask.domain.Item_askDTO;
 import com.example.demo.module.jwtToken.TokenProvider;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
-import com.example.demo.item_ask.service.Item_askService;
+import com.example.demo.item.item_ask.service.Item_askService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 

@@ -1,4 +1,4 @@
-package com.example.demo.serviceImpl;
+package com.example.demo.userCart.service;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -7,10 +7,9 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.example.demo.domain.UserCartDTO;
-import com.example.demo.entity.UserCart;
-import com.example.demo.repository.UserCartRepository;
-import com.example.demo.service.UserCartService;
+import com.example.demo.userCart.domain.UserCartDTO;
+import com.example.demo.userCart.entity.UserCart;
+import com.example.demo.userCart.repository.UserCartRepository;
 
 import lombok.AllArgsConstructor;
 

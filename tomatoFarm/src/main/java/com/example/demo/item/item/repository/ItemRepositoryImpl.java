@@ -1,5 +1,5 @@
 
-package com.example.demo.item.repository;
+package com.example.demo.item.item.repository;
 
 import static com.example.demo.entity.QItem.item;
 import static com.example.demo.entity.Qitem_event.item_event;
@@ -8,11 +8,11 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import com.example.demo.item.item.domain.ItemDTO;
+import com.example.demo.item.item.entity.Item;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.item.domain.ItemDTO;
 import com.example.demo.domain.SortDTO;
-import com.example.demo.item.entity.Item;
 import com.example.demo.entity.QItem;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;

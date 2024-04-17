@@ -1,10 +1,10 @@
-package com.example.demo.repository;
+package com.example.demo.userCart.repository;
 
 
 import java.util.List;
 
-import com.example.demo.domain.UserCartDTO;
-import com.example.demo.entity.UserCart;
+import com.example.demo.userCart.domain.UserCartDTO;
+import com.example.demo.userCart.entity.UserCart;
 
 
 public interface UserCartRepository{

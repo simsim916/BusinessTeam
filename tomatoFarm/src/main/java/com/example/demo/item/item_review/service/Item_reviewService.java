@@ -1,8 +1,8 @@
-package com.example.demo.item_review.service;
+package com.example.demo.item.item_review.service;
 
 import java.util.List;
 
-import com.example.demo.item_review.entity.Item_review;
+import com.example.demo.item.item_review.entity.Item_review;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 

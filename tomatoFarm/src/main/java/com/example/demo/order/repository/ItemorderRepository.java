@@ -1,6 +1,6 @@
-package com.example.demo.repository;
+package com.example.demo.order.repository;
 
-import com.example.demo.entity.Itemorder;
+import com.example.demo.order.entity.Itemorder;
 
 public interface ItemorderRepository {
 

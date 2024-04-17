@@ -1,4 +1,4 @@
-package com.example.demo.item.controller;
+package com.example.demo.item.item.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.item.domain.ItemDTO;
+import com.example.demo.item.item.domain.ItemDTO;
 import com.example.demo.domain.SortDTO;
-import com.example.demo.item.entity.Item;
+import com.example.demo.item.item.entity.Item;
 import com.example.demo.userCart.entity.UserCart;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
-import com.example.demo.item.service.ItemService;
+import com.example.demo.item.item.service.ItemService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;

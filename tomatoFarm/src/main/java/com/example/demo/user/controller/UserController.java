@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.user.controller;
 
 import java.util.List;
 
@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,12 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.domain.UserDTO;
-import com.example.demo.domain.UserToken;
-import com.example.demo.entity.User;
-import com.example.demo.jwtToken.TokenProvider;
+import com.example.demo.user.entity.User;
 import com.example.demo.module.SearchRequest;
-import com.example.demo.service.UserService;
+import com.example.demo.user.service.UserService;
 
 import lombok.AllArgsConstructor;
 

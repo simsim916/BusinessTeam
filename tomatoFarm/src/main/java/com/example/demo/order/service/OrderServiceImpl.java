@@ -1,4 +1,4 @@
-package com.example.demo.serviceImpl;
+package com.example.demo.order.service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -8,15 +8,14 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.example.demo.domain.ItemDTO;
-import com.example.demo.domain.OrderDTO;
-import com.example.demo.entity.Itemorder;
+import com.example.demo.item.item.domain.ItemDTO;
+import com.example.demo.order.domain.OrderDTO;
+import com.example.demo.order.entity.Itemorder;
 import com.example.demo.order.entity.OrderDetail;
-import com.example.demo.entity.UserCart;
-import com.example.demo.repository.ItemorderRepository;
-import com.example.demo.repository.OrderDetailRepository;
-import com.example.demo.repository.UserCartRepository;
-import com.example.demo.service.OrderService;
+import com.example.demo.userCart.entity.UserCart;
+import com.example.demo.order.repository.ItemorderRepository;
+import com.example.demo.order.repository.OrderDetailRepository;
+import com.example.demo.userCart.repository.UserCartRepository;
 
 import lombok.AllArgsConstructor;
 

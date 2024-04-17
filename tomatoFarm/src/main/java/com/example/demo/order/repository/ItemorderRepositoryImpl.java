@@ -1,11 +1,10 @@
-package com.example.demo.repostoryImpl;
+package com.example.demo.order.repository;
 
 import javax.persistence.EntityManager;
 
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.entity.Itemorder;
-import com.example.demo.repository.ItemorderRepository;
+import com.example.demo.order.entity.Itemorder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package com.example.demo.WebSocket;
+package com.example.demo.module.WebSocket;
 
 import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;

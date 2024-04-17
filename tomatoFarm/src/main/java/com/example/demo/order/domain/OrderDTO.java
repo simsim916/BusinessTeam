@@ -1,12 +1,8 @@
-package com.example.demo.domain;
+package com.example.demo.order.domain;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Random;
 
-import javax.persistence.Column;
-
-import com.example.demo.entity.Item;
+import com.example.demo.item.item.domain.ItemDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OrderDTO {
 	
-	private List<ItemDTO> itemList; 
+	private List<ItemDTO> itemList;
 	private String address1;
 	private String address2;
 	private Integer address_code;

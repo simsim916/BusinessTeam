@@ -1,12 +1,6 @@
-package com.example.demo.domain;
+package com.example.demo.userCart.domain;
 
 import java.time.LocalDate;
-
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

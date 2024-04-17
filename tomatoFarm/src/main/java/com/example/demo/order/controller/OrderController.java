@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.order.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.domain.OrderDTO;
-import com.example.demo.entity.Itemorder;
-import com.example.demo.service.OrderService;
+import com.example.demo.order.domain.OrderDTO;
+import com.example.demo.order.entity.Itemorder;
+import com.example.demo.order.service.OrderService;
 
 import lombok.AllArgsConstructor;
 

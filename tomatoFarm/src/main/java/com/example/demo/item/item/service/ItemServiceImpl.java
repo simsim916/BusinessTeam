@@ -1,4 +1,4 @@
-package com.example.demo.item.service;
+package com.example.demo.item.item.service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -11,14 +11,14 @@ import javax.transaction.Transactional;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.item.domain.ItemDTO;
+import com.example.demo.item.item.domain.ItemDTO;
 import com.example.demo.domain.SortDTO;
-import com.example.demo.item.entity.Item;
+import com.example.demo.item.item.entity.Item;
 import com.example.demo.entity.Keyword;
 import com.example.demo.entity.KeywordID;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
-import com.example.demo.item.repository.ItemRepository;
+import com.example.demo.item.item.repository.ItemRepository;
 import com.example.demo.repository.KeywordRepository;
 
 import lombok.AllArgsConstructor;

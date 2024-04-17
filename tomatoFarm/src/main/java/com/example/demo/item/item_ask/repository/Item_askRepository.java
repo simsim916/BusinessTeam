@@ -1,11 +1,11 @@
-package com.example.demo.item_ask.repository;
+package com.example.demo.item.item_ask.repository;
 
 import java.util.List;
 
+import com.example.demo.item.item_ask.entity.Item_ask;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.item_ask.domain.Item_askDTO;
-import com.example.demo.item_ask.entity.Item_ask;
+import com.example.demo.item.item_ask.domain.Item_askDTO;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 

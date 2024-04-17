@@ -1,4 +1,4 @@
-package com.example.demo.item_ask.repository;
+package com.example.demo.item.item_ask.repository;
 
 import static com.example.demo.entity.QItem_ask.item_ask;
 import static com.example.demo.entity.QItem.item;
@@ -10,8 +10,8 @@ import javax.persistence.EntityManager;
 
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.item_ask.domain.Item_askDTO;
-import com.example.demo.item_ask.entity.Item_ask;
+import com.example.demo.item.item_ask.domain.Item_askDTO;
+import com.example.demo.item.item_ask.entity.Item_ask;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.querydsl.core.types.Projections;

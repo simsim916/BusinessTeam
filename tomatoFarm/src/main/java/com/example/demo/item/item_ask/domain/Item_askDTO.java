@@ -1,4 +1,4 @@
-package com.example.demo.item_ask.domain;
+package com.example.demo.item.item_ask.domain;
 
 import java.time.LocalDateTime;
 

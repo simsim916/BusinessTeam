@@ -1,9 +1,8 @@
-package com.example.demo.entity;
+package com.example.demo.userCart.entity;
 
 import java.time.LocalDate;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;

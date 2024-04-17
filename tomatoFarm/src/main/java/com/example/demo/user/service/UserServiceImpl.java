@@ -1,7 +1,6 @@
-package com.example.demo.serviceImpl;
+package com.example.demo.user.service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -12,15 +11,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.domain.UserDTO;
+import com.example.demo.user.domain.UserDTO;
 import com.example.demo.domain.UserToken;
-import com.example.demo.entity.User;
-import com.example.demo.jwtToken.TokenProvider;
+import com.example.demo.user.entity.User;
+import com.example.demo.module.jwtToken.TokenProvider;
 import com.example.demo.module.SearchRequest;
-import com.example.demo.repository.UserRepository;
-import com.example.demo.service.UserService;
-
-import lombok.AllArgsConstructor;
+import com.example.demo.user.repository.UserRepository;
 
 @RequiredArgsConstructor
 @Service

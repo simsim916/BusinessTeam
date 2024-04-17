@@ -1,4 +1,4 @@
-package com.example.demo.item_review.repository;
+package com.example.demo.item.item_review.repository;
 
 import static com.example.demo.entity.QItem_review.item_review;
 
@@ -7,9 +7,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
+import com.example.demo.item.item_review.entity.Item_review;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.item_review.entity.Item_review;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.querydsl.core.types.dsl.Expressions;

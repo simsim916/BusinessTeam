@@ -1,16 +1,16 @@
-package com.example.demo.item_ask.service;
+package com.example.demo.item.item_ask.service;
 
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.example.demo.item.item_ask.entity.Item_ask;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.item_ask.domain.Item_askDTO;
-import com.example.demo.item_ask.entity.Item_ask;
+import com.example.demo.item.item_ask.domain.Item_askDTO;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
-import com.example.demo.item_ask.repository.Item_askRepository;
+import com.example.demo.item.item_ask.repository.Item_askRepository;
 
 import lombok.AllArgsConstructor;
 

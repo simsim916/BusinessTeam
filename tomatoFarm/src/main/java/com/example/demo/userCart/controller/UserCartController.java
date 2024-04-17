@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.userCart.controller;
 
 
 import java.util.List;
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.domain.UserCartDTO;
-import com.example.demo.entity.UserCart;
-import com.example.demo.jwtToken.TokenProvider;
-import com.example.demo.service.UserCartService;
+import com.example.demo.userCart.domain.UserCartDTO;
+import com.example.demo.userCart.entity.UserCart;
+import com.example.demo.module.jwtToken.TokenProvider;
+import com.example.demo.userCart.service.UserCartService;
 
 import lombok.AllArgsConstructor;
 

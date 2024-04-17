@@ -1,9 +1,9 @@
-package com.example.demo.service;
+package com.example.demo.userCart.service;
 
 import java.util.List;
 
-import com.example.demo.domain.UserCartDTO;
-import com.example.demo.entity.UserCart;
+import com.example.demo.userCart.domain.UserCartDTO;
+import com.example.demo.userCart.entity.UserCart;
 
 public interface UserCartService {
 
