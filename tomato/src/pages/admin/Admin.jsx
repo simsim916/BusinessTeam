@@ -26,10 +26,11 @@ const Admin = () => {
         setSideBarOpen(!sideBarOpen);
     };
     useEffect(() => {
-        api('/user/admincheck', 'get', null, user.token)
-            .then(res => {
-                setForbiden(!res.data)
-            })
+        if (user)
+            api('/user/admincheck', 'get', null, user.token)
+                .then(res => {
+                    setForbiden(!res.data)
+                })
     }, [])
 
     if (forbiden) return <Error />

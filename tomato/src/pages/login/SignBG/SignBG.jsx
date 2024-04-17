@@ -250,7 +250,7 @@ const SignBG = ({ }) => {
                     </div>
                     <div id="passwordBox">
                         <i className="fa-solid fa-key"></i>
-                        <input type="password" name="password" placeholder="비밀번호" value={signValue.value.password}
+                        <input type="password" name="password" placeholder="비밀번호" value={signValue.value.password} autoComplete="false"
                             onChange={(event) => handleInputChange(event, checkPassword)}
                             onBlur={(event) => handleInputChange(event, checkPassword)}
                             onFocus={changeOpacity} />

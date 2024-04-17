@@ -64,12 +64,13 @@ public class OrderServiceImpl implements OrderService {
 		}
 		
 		orderdetailRepository.batchInsert(list);
-		
-		List<UserCart> userCart_list = userCartRepository.selectCartWhereUserIDItemList(dto.getId(), item_list);
-		for(UserCart e : userCart_list) {
-			e.setAmount(0);
+		if(!("anonymousUser".equals(userId))) {
+			List<UserCart> userCart_list = userCartRepository.selectCartWhereUserIDItemList(dto.getId(), item_list);
+			for(UserCart e : userCart_list) {
+				e.setAmount(0);
+			}
+			userCartRepository.mergeAll(userCart_list);
 		}
-		userCartRepository.mergeAll(userCart_list);
 		
 		return itemorder;
 	}

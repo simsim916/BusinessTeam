@@ -35,7 +35,6 @@ public class DemoConfig {
 	
 	@Bean
 	public JPAQueryFactory jpaQueryFactory() {
-		System.out.println("jpaQueryFactory");
 		return new JPAQueryFactory(entityManager);
 	}
 	

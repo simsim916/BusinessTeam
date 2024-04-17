@@ -9,7 +9,6 @@ import javax.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.entity.Itemorder;
-import com.example.demo.entity.ItemorderDTO;
 import com.example.demo.entity.OrderDetail;
 import com.example.demo.repository.ItemorderRepository;
 import com.querydsl.core.QueryFactory;
