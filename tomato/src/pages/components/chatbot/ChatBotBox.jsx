@@ -89,7 +89,7 @@ const ChatBotBox = ({
 
     /* 전체 메세지를 받아오는 상태값 변수 */
     const [messageAll, setMessageAll] = useState(null);
-
+    console.log(messageAll)
     const getMessageAll = async (root) => {
         setLoading(true);
         const response = await api(`/chat/selectmessage?room_seq=${root}`, 'get', null, userinfo.token)

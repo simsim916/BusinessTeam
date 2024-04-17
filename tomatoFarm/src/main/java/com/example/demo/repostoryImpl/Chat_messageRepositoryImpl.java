@@ -48,6 +48,7 @@ public class Chat_messageRepositoryImpl implements Chat_messageRepository {
 						chat_message.writer, chat_message.regdate, user.level.as("user_level")))
 				.from(chat_message).leftJoin(user).on(chat_message.writer.eq(user.id))
 				.where(chat_message.room_seq.eq(entity.getRoom_seq()))
+				.orderBy(chat_message.regdate.asc())
 				.fetch();
 	}
 
