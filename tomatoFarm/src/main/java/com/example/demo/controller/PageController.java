@@ -9,12 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.domain.ItemDTO;
 import com.example.demo.entity.Page_question;
-import com.example.demo.jwtToken.TokenProvider;
-import com.example.demo.module.PageRequest;
-import com.example.demo.module.SearchRequest;
-import com.example.demo.service.ItemService;
 import com.example.demo.service.Page_questionService;
 
 import lombok.AllArgsConstructor;

@@ -6,8 +6,9 @@ import axios from 'axios';
 import ItemBox from './ItemBox';
 import { Link } from 'react-router-dom';
 import { SERVER_URL } from '../../model/server-config';
+import { makeComa } from './MathFunction';
 
-const PresentBox = ({ brand }) => {
+const PresentBox = ({ brand, idx }) => {
     const [brandItem, setBrandItem] = useState(null);
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false);
@@ -26,9 +27,6 @@ const PresentBox = ({ brand }) => {
             setError(true);
         })
     }, [])
-
-    if (loading) return <Loading />
-    if (error) return <Error />
 
     function thirdContainerSlideRightBth() {
         let margin = slideBox.current.style.marginLeft.replace('px', '');
@@ -60,12 +58,11 @@ const PresentBox = ({ brand }) => {
         }
     }
 
-    const makeComa = (number) => {
-        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    }
+    if (loading) return <Loading />
+    if (error) return <Error />
 
     return (
-        <div className="typeBox hide2">
+        <div className={`typeBox`}>
             <div className="typeBoxTag">
                 <div className="typeBoxTagTitle">
                     <img src={"http://localhost:8090/resources" + `/img/brand/${brand}.png`} alt={brand} />
@@ -113,7 +110,6 @@ const PresentBox = ({ brand }) => {
                     : ''
             }
         </div>
-
     );
 
 

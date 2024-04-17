@@ -15,11 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.domain.Chat_messageDTO;
 import com.example.demo.domain.Chat_roomDTO;
-import com.example.demo.domain.UserDTO;
 import com.example.demo.entity.Chat_message;
 import com.example.demo.entity.Chat_room;
-import com.example.demo.entity.User;
-import com.example.demo.jwtToken.TokenProvider;
+import com.example.demo.module.jwtToken.TokenProvider;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.service.ChatService;
