@@ -73,8 +73,8 @@ const ItemListContainer = ({ itemList }) => {
                         :
                         (paging(itemList, currPage, size).map((e, i) => <ItemBox key={i} item={e} />))
                 }
+                <PagingBox limit={limit} setLimit={setLimit} list={itemList} currPage={currPage} setCurrPage={setCurrPage} />
             </div>
-            <PagingBox limit={limit} setLimit={setLimit} list={itemList} currPage={currPage} setCurrPage={setCurrPage} />
         </>
     );
 }

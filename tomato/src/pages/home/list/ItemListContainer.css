@@ -62,7 +62,7 @@
     background-position: -39.5px 0;
 }
 
-#detailBG {
+#detailBG{
     position: fixed;
     top: 0;
     left: 0;
@@ -72,7 +72,7 @@
     z-index: 11;
 }
 
-#detailBG>div {
+#detailBG>div{
     width: 60%;
     height: 80%;
     margin: 10vh auto;
@@ -80,21 +80,19 @@
     overflow-y: auto;
 }
 
-#detailBG .container {
+#detailBG .container{
     width: 100%;
     min-width: 0px;
 }
 
-#detailBG #imgBox {
+#detailBG #imgBox{
     width: 50%;
 }
-
-#detailBG #itemDetail {
+#detailBG #itemDetail{
     width: 45%;
     margin: auto;
 }
-
-#detailBG #itemDetailBox #introItem {
+#detailBG #itemDetailBox #introItem{
     width: 95%;
     min-width: 0px;
     margin: auto;

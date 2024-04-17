@@ -5,10 +5,13 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.*;
 
-import com.example.demo.item.item.domain.ItemDTO;
-import com.example.demo.order.domain.OrderDTO;
-import com.example.demo.order.entity.Itemorder;
-import com.example.demo.order.entity.OrderDetail;
+import com.example.demo.domain.ItemDTO;
+import com.example.demo.domain.OrderDTO;
+import com.example.demo.entity.Item;
+import com.example.demo.entity.Itemorder;
+import com.example.demo.entity.OrderDetail;
+
+import lombok.Data;
 
 public class OrderRequest {
 	

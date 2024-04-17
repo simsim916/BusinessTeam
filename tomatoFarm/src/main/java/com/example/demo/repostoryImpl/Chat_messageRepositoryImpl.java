@@ -5,9 +5,14 @@ import javax.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.domain.Chat_messageDTO;
+import com.example.demo.domain.ItemDTO;
 import com.example.demo.entity.Chat_message;
+import com.example.demo.entity.Chat_room;
+import com.example.demo.module.PageRequest;
+import com.example.demo.module.SearchRequest;
 import com.example.demo.repository.Chat_messageRepository;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import static com.example.demo.entity.QChat_message.chat_message;
 import static com.example.demo.entity.QUser.user;
