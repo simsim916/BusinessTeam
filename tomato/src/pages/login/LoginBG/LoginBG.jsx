@@ -154,34 +154,37 @@ const LoginBG = () => {
                     token: response.data.token,
                     username: response.data.username,
                     login: true,
-                    id: response.data.id
+                    id: response.data.id,
+                    keyword: response.data.keyword
                 }));
                 if (cart) {
                     dispatch(getUserCart('/usercart/merge', 'post', cart, response.data.token));
                     localStorage.removeItem('cart');
                 }
-                dispatch(changeAlert({
-                    title: '로그인 성공!',
-                    content: `${response.data.username} 님 환영합니다!`,
-                    time: 3,
-                    style: {
-                        top: '10px',
-                        left: 'calc(50% - 150px)'
-                    }
-                }));
-                navigate("/home")
+                if (response.data.error) {
+                    dispatch(changeAlert({
+                        title: '로그인 실패!',
+                        content: `${response.data.error}`,
+                        time: 3,
+                        style: {
+                            top: '10px',
+                            left: 'calc(50% - 150px)'
+                        }
+                    }));
+                } else {
+                    dispatch(changeAlert({
+                        title: '로그인 성공!',
+                        content: `${response.data.username} 님 환영합니다!`,
+                        time: 3,
+                        style: {
+                            top: '10px',
+                            left: 'calc(50% - 150px)'
+                        }
+                    }));
+                    navigate("/home")
+                }
             } catch (error) {
                 console.log(error.message);
-                dispatch(changeAlert({
-                    title: '로그인 실패!',
-                    content: `${error.message}`,
-                    time: 3,
-                    style: {
-                        top: '10px',
-                        left: 'calc(50% - 150px)',
-                        border: '2px solid white'
-                    }
-                }));
             }
         }
     }

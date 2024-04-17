@@ -70,21 +70,20 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public List<ItemDTO> selectItemWhereKeyword(PageRequest pageRequest,SearchRequest searchRequest, @AuthenticationPrincipal String userId) {
 		LocalDate koreaTime = LocalDateTime.now().toLocalDate(); // 현재 시간
-		System.out.println(userId);
-		
+
 		KeywordID keywordID = KeywordID.builder()
 				.keyword(searchRequest.getKeyword())
-				.search_date(koreaTime)
+				.id(userId)
+				.searchDate(koreaTime)
 				.build();
 		
 		Keyword entity = Keyword.builder()
 				.keyword(keywordID.getKeyword())
-				.search_date(keywordID.getSearch_date())
-				.id(userId)
+				.searchDate(keywordID.getSearchDate())
+				.id(keywordID.getId())
 				.build();
 		
 		Optional<Keyword> data = keywordRepository.findById(keywordID);
-		
 		if(data.isPresent()) {
 			entity=data.get();
 			entity.setSearch_count(entity.getSearch_count()+1);

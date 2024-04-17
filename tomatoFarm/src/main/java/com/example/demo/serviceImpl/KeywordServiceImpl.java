@@ -1,55 +1,40 @@
 package com.example.demo.serviceImpl;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.util.List;
-
-import javax.transaction.Transactional;
-
-import org.springframework.stereotype.Service;
-
+import com.example.demo.domain.UserToken;
+import com.example.demo.entity.Keyword;
+import com.example.demo.entity.KeywordID;
 import com.example.demo.entity.Visit_page;
 import com.example.demo.entity.Visit_pageID;
 import com.example.demo.module.SearchRequest;
+import com.example.demo.repository.KeywordRepository;
 import com.example.demo.repostoryImpl.VisitRepositoryImpl;
+import com.example.demo.service.KeywordService;
 import com.example.demo.service.VisitService;
-
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Service
-public class VisitServiceImpl implements VisitService {
+public class KeywordServiceImpl implements KeywordService {
 
-	VisitRepositoryImpl visitRepository;
+	KeywordRepository keywordRepository;
 
 	@Override
 	@Transactional
-	public Visit_page update(Visit_page entity) {
-//		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//        LocalDate date = LocalDate.parse(entity.getVisit_date(), formatter);
-		LocalDate now = LocalDateTime.now().plusHours(9).toLocalDate();
-		
-		Visit_pageID visitPageID
-		= new Visit_pageID().builder()
-//			.visit_date(entity.getVisit_date())
-			.visit_date(now)
-			.page(entity.getPage())
-			.build();
-		
-		entity.setVisit_date(now);
-		
-		return visitRepository.update(entity, visitPageID);
-	}
-	
-	public List<Visit_page> selectWhere(SearchRequest searchRequest) {
-		if (searchRequest.getKeyword().matches("^[0-9]*$")) {
-			return visitRepository.selectWhereNumber(searchRequest);
-		} else {
-			return visitRepository.selectWhereString(searchRequest);
-		}
-	}
-	
+	public List<String> selectall(Keyword entity, String userId) {
 
+		List<Keyword> keyword_list =keywordRepository.findByIdOrderBySearchDateDesc(userId);
+		List<String> keyword = new ArrayList<>();
+		for (Keyword e : keyword_list){
+			keyword.add(e.getKeyword());
+		}
+		return keyword;
+	}
 }

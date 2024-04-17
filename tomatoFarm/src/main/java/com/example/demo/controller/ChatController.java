@@ -23,7 +23,6 @@ import com.example.demo.jwtToken.TokenProvider;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.service.ChatService;
-import com.example.demo.service.UserService;
 
 import lombok.AllArgsConstructor;
 
@@ -34,7 +33,6 @@ public class ChatController {
 
 	ChatService chatService;
 	TokenProvider tokenProvider;
-	UserService userService;
 
 	@PostMapping("/makeroom")
 	public ResponseEntity<?> makeroom(HttpServletRequest request, @RequestBody Chat_room entity) {

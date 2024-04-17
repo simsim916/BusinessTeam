@@ -90,8 +90,8 @@ const ItemListFilter = ({ itemListSort, changeDeletedSort, deletedSort, priceRan
                         <li><i className="fa-regular fa-circle-check"></i>채선당</li>
                         <li><i className="fa-regular fa-circle-check"></i>도리깨침</li>
                     </ul>
-                </li> */}
-                <hr />
+                </li> 
+                <hr />*/}
                 <li id="filterPrice" className={(priceRange.min || priceRange.max) ? 'selected' : null}>
                     <i className="fa-regular fa-circle-check"></i>가격
                     <form>
