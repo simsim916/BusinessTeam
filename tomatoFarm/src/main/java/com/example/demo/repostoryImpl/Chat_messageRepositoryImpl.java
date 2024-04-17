@@ -49,6 +49,7 @@ public class Chat_messageRepositoryImpl implements Chat_messageRepository {
 				.from(chat_message).leftJoin(user).on(chat_message.writer.eq(user.id))
 				.where(chat_message.room_seq.eq(entity.getRoom_seq()))
 				.orderBy(chat_message.regdate.asc())
+				.orderBy(chat_message.regdate.asc())
 				.fetch();
 	}
 

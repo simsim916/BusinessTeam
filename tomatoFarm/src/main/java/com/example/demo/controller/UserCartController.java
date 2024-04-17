@@ -47,6 +47,24 @@ public class UserCartController {
 		return result;
 	}
 
+//	@Transactional
+//	@GetMapping("/viewup")
+//	public ResponseEntity<?> viewup(UserCart entity, HttpServletRequest request) {
+//		ResponseEntity<?> result = null;
+//		String token = tokenProvider.parseBearerToken(request);
+//		String id = tokenProvider.validateAndGetUserId(token);
+//		for (UserCart e : list)
+//			e.setId(id);
+//		// 자료를 서비스를 통해서 저장
+//		if (list != null && list.size() > 0) {
+//			userCartService.mergeAll(list); // 장바구니 DB에 들어갔어
+//			result = ResponseEntity.status(HttpStatus.OK).body(userCartService.selectItemListWhereUserID(list.get(0)));
+//		} else {
+//			result = ResponseEntity.status(HttpStatus.OK).body(userCartService.selectItemListWhereUserID(list.get(0)));
+//		}
+//		return result;
+//	}
+
 	@GetMapping("/select")
 	public ResponseEntity<?> select(UserCart entity, HttpServletRequest request) {
 		ResponseEntity<?> result = null;

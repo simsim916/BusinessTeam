@@ -12,7 +12,7 @@ import { changeAdmin, changeAlert } from '../../redux/basic/actions';
 
 const LoginBG = () => {
     console.log('LoginBG 랜더링')
-    const user = useSelector(state => state.user);
+    const user = JSON.parse(sessionStorage.getItem('userinfo'));
     const passwordBox = useRef(null);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -150,15 +150,16 @@ const LoginBG = () => {
             dispatch(loginRequest(loginValue.value.id));
             try {
                 const response = await api('/user/login', 'post', loginValue.value);
-                dispatch(loginSuccess(response.data));
                 sessionStorage.setItem('userinfo', JSON.stringify({
                     token: response.data.token,
                     username: response.data.username,
                     login: true,
                     id: response.data.id
                 }));
-                dispatch(changeAdmin(response.data.admin))
-                dispatch(getUserCart('/usercart/merge', 'post', cart, response.data.token));
+                if (cart) {
+                    dispatch(getUserCart('/usercart/merge', 'post', cart, response.data.token));
+                    localStorage.removeItem('cart');
+                }
                 dispatch(changeAlert({
                     title: '로그인 성공!',
                     content: `${response.data.username} 님 환영합니다!`,
@@ -168,16 +169,19 @@ const LoginBG = () => {
                         left: 'calc(50% - 150px)'
                     }
                 }));
-                localStorage.removeItem('cart');
-                console.log(document.referrer)
-                console.log(document.referrer.substring(document.referrer.lastIndexOf("/") + 1))
-                // if (document.referrer.substring(document.referrer.lastIndexOf("/") + 1) == 'signup')
-                //     navigate("/home")
-                // else
-                //     window.history.back();
+                navigate("/home")
             } catch (error) {
                 console.log(error.message);
-                dispatch(loginFailure(error.response.data));
+                dispatch(changeAlert({
+                    title: '로그인 실패!',
+                    content: `${error.message}`,
+                    time: 3,
+                    style: {
+                        top: '10px',
+                        left: 'calc(50% - 150px)',
+                        border: '2px solid white'
+                    }
+                }));
             }
         }
     }
@@ -194,7 +198,6 @@ const LoginBG = () => {
             requestLogin(loginValue)(dispatch);
         }
     };
-    if (user.loading) return <Loading />
 
     return (
         <div id="loginBG">
@@ -222,7 +225,6 @@ const LoginBG = () => {
                 <div id="errorBox">
                     <p id="idError">{loginValue.error.id}</p>
                     <p id="pwError">{loginValue.error.password}</p>
-                    {user.error ? <span id="pwError">{user.error}</span> : null}
                 </div>
 
                 <button onClick={handleLogin} type="button" id="loginBtn"

@@ -10,7 +10,7 @@ import { api } from '../../../../model/model';
 
 const Detail_ask_write = ({ item, setRefresh, refresh, itemAskClick }) => {
     const dispatch = useDispatch();
-    const user = useSelector(state => state.user.data);
+    const user = JSON.parse(sessionStorage.getItem('userinfo'));
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [askBoxClose, setAskBoxClose] = useState(true);

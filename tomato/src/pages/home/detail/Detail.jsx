@@ -17,7 +17,6 @@ const Detail = ({ propscode }) => {
     const [error, setError] = useState(false);
     const navigate = useNavigate();
 
-    console.log(user)
     if (searchParams.size == 0)
         navigate("/home/list?keyword=");
 

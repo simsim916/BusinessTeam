@@ -16,8 +16,7 @@ const Detail_descript = ({ item }) => {
     /* 🫓REDUX🫓 */
     const dispatch = useDispatch();
 
-    const userinfo = useSelector(state => state.user.data)
-    const alert = useSelector(state => state.basic.alert)
+    const userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
     const userCart = useSelector(state => state.userCart.data);
 
     /* State */
@@ -35,28 +34,18 @@ const Detail_descript = ({ item }) => {
     let priceRef = useRef(null)
 
     useEffect(() => {
-        if (userinfo && userinfo.login) {
-            let formData = {
-                code: item.code,
-                amount: 0,
-                id: userinfo.id
-            };
-            let ar = [];
-            if (userCart && userCart[0])
-                ar = [...userCart, formData];
-            else
-                ar.push(formData);
-            dispatch(getUserCart('/usercart/merge', 'post', ar, userinfo.token))
-        } else {
-            let cartArray = JSON.parse(localStorage.getItem('cart')) || [];
-            let itemIndex = cartArray.findIndex(e => e.code == item.code);
-            if (itemIndex !== -1) {
-                cartArray[itemIndex].amount += 0;
-            } else {
-                cartArray.push({ code: item.code, amount: 0 });
-            }
-            dispatch(setUserCartStorage(cartArray));
-        }
+        // if (userinfo && userinfo.login) {
+        //     dispatch(getUserCart(`/usercart/merge?code=${item.code}`, 'get', null, userinfo.token))
+        // } else {
+        //     let cartArray = JSON.parse(localStorage.getItem('cart')) || [];
+        //     let itemIndex = cartArray.findIndex(e => e.code == item.code);
+        //     if (itemIndex !== -1) {
+        //         cartArray[itemIndex].amount += 0;
+        //     } else {
+        //         cartArray.push({ code: item.code, amount: 0 });
+        //     }
+        //     dispatch(setUserCartStorage(cartArray));
+        // }
     }, [])
 
     const changeMainImg = (event) => {
@@ -108,7 +97,6 @@ const Detail_descript = ({ item }) => {
             const ar = [];
             ar.push(formData);
             dispatch(getUserCart('/usercart/merge', 'post', ar, userinfo.token))
-
         } else {
             let cartArray = JSON.parse(localStorage.getItem('cart')) || [];
             const itemIndex = cartArray.findIndex(cartItem => cartItem.code == item.code);
@@ -123,10 +111,8 @@ const Detail_descript = ({ item }) => {
     };
 
     const addBuy = async () => {
-        console.log(item.code)
         const response = await api(`/item/selectwhere?column=item.code&keyword=${item.code}`, 'get')
-        console.log(response.data)
-        dispatch(setUserBuyStorage([{ ...response.data, amount: +inputCountValue }]))
+        dispatch(setUserBuyStorage([{ ...response.data[0], amount: +inputCountValue }]))
     }
 
     return (

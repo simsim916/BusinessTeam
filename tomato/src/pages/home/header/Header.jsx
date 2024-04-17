@@ -3,20 +3,32 @@ import { Link, useNavigate } from 'react-router-dom';
 import Nav from './Nav';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeAlert, changeKeyword } from "../../redux/basic/actions";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { setUser } from "../../redux/user/action";
+import { api } from "../../../model/model";
 
 
 
 const Header = () => {
     console.log(`Header 랜더링`);
-
-    const admin = useSelector(state => state.basic.admin);
+    const user = JSON.parse(sessionStorage.getItem('userinfo'));
     const keyword = useSelector(state => state.basic.keyword);
     const [recentBox, setRecentBox] = useState(false)
+    const [admin, setAdmin] = useState(false)
     const navigate = useNavigate();
     const dispatch = useDispatch()
     const userinfo = JSON.parse(sessionStorage.getItem('userinfo'))
+
+    useEffect(() => {
+        if (user)
+            api('/user/admincheck', 'get', null, user.token)
+                .then(res => {
+                    setAdmin(res.data);
+                })
+                .catch(err => {
+                    console.log(err.message);
+                })
+    }, [])
     const logOut = () => {
         sessionStorage.removeItem('userinfo');
         dispatch(setUser(null));

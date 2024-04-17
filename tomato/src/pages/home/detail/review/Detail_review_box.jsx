@@ -12,7 +12,7 @@ import { api } from '../../../../model/model';
 
 
 const Detail_review_box = ({ item }) => {
-    const user = useSelector(state => state.user.data);
+    const user = JSON.parse(sessionStorage.getItem('userinfo'));
     const dispatch = useDispatch();
 
 

@@ -103,6 +103,7 @@ public class ItemController {
 		ResponseEntity<?> result = null;
 		PageRequest pageRequest = new PageRequest();
 		List<ItemDTO> itemList = itemService.selectItemListWhereType(pageRequest, searchRequest);
+		System.out.println(itemList);
 		if (itemList != null && itemList.size() > 0) {
 			result = ResponseEntity.status(HttpStatus.OK).body(itemList);
 		} else {

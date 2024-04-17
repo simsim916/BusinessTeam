@@ -20,7 +20,7 @@ import Index from './index/Index';
 const Admin = () => {
     const [sideBarOpen, setSideBarOpen] = useState(true);
     const alert = useSelector(state => state.basic.alert);
-    const user = useSelector(state => state.user.data);
+    const user = JSON.parse(sessionStorage.getItem('userinfo'));
     const [forbiden, setForbiden] = useState(true);
     const openSideBar = () => {
         setSideBarOpen(!sideBarOpen);

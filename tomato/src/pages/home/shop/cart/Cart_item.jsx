@@ -18,10 +18,8 @@ const Cart_item = () => {
 
     const handleAllCheckBox = () => {
         if (userBuy && userCart.length == userBuy.length) {
-            dispatch(setUserBuyItemList([]));
             dispatch(setUserBuyStorage([]));
         } else {
-            dispatch(setUserBuyItemList(userCart));
             dispatch(setUserBuyStorage(userCart));
         }
     }

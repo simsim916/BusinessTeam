@@ -8,7 +8,7 @@ import { api } from '../../../model/model';
 import { useDispatch, useSelector } from "react-redux";
 import { changeAlert } from "../../redux/basic/actions";
 
-const Admin_data = ({ myLocation }) => {
+const Admin_data = ({  }) => {
 
     console.log(`SelectDataBox 렌더링`);
     const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const Admin_data = ({ myLocation }) => {
     const [lastSort, setLastSort] = useState(null);
     const [currPage, setCurrPage] = useState(1);
     const [size, setSize] = useState(25);
-    const user = useSelector(state => state.user.data);
+    const user = JSON.parse(sessionStorage.getItem('userinfo'));
     const [selectedItem, setSelectedItem] = useState(null);
     const [changedList, setChangedList] = useState([]);
     const [whichTable, setWhichTable] = useState('/item');

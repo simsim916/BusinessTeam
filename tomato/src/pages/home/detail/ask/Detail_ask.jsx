@@ -11,7 +11,7 @@ import { changeAlert } from '../../../redux/basic/actions';
 
 
 const Detail_ask = ({ item }) => {
-    const user = useSelector(state => state.user.data);
+    const user = JSON.parse(sessionStorage.getItem('userinfo'));
     const dispatch = useDispatch();
     const [itemAskList, setItemAskList] = useState(null);
     const [refresh, setRefresh] = useState(true);

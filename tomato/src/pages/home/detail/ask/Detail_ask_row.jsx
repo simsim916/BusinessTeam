@@ -88,14 +88,14 @@ const Detail_ask_row = ({ itemAsk }) => {
                             </div>
                             :
                             passwordFail ?
-                                <div id='passwordCheck'>
-                                    <input type="password" value={askPassword} onClick={(e) => e.stopPropagation()} onChange={PasswordChange} placeholder="4자리 숫자 입력" />
+                                <div onClick={(e) => e.stopPropagation()} id='passwordCheck'>
+                                    <input type="password" value={askPassword}  onChange={PasswordChange} placeholder="4자리 숫자 입력" />
                                     <button onClick={checkPassword}>확인</button>
                                 </div>
                                 :
                                 <div id='passwordCheck'>
                                     <input type="password" value={askPassword} onClick={(e) => e.stopPropagation()} onChange={PasswordChange} placeholder="비밀번호 입력" />
-                                    <button onClick={checkPassword}>확인</button>비밀번호가 틀렸습니다. 다시 입력해주세요
+                                    <button onClick={checkPassword}>확인</button> <br></br>비밀번호가 틀렸습니다. 다시 입력해주세요
                                 </div>
                     :
                     null

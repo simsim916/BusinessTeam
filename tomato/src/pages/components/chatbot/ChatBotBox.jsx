@@ -9,6 +9,7 @@ const ChatBotBox = ({
     /* admin 페이지 전용 props */
     amount, // admin페이지에서 나타낼 채팅창 갯수
     admin_root, // 현재 컴포넌트의 순번
+    user,
     getdata,
     changeShowChatbot, // admin페이지에서 나타낼지 여부 상태값 변경 함수
     /* index 페이지 전용 props */
@@ -65,7 +66,7 @@ const ChatBotBox = ({
                 console.log(err.message)
             })
     }, [])
-
+    console.log(user)
     /* 채팅 종료 */
     const endChat = () => {
         const data = {
@@ -89,7 +90,6 @@ const ChatBotBox = ({
 
     /* 전체 메세지를 받아오는 상태값 변수 */
     const [messageAll, setMessageAll] = useState(null);
-    console.log(messageAll)
     const getMessageAll = async (root) => {
         setLoading(true);
         const response = await api(`/chat/selectmessage?room_seq=${root}`, 'get', null, userinfo.token)
@@ -139,6 +139,7 @@ const ChatBotBox = ({
         if (admin_root) {
             await api('/chat/makeroom', 'post', {
                 seq: admin_root,
+                user: user,
                 admin: userinfo.id,
                 ing: 1
             }, userinfo.token)
@@ -213,7 +214,7 @@ const ChatBotBox = ({
                         }
                         {!text.room_seq && userChatRoom &&
                             <div id="beforechat">
-                                <h4>이전체팅 불러오기</h4>
+                                <h4>이전채팅 불러오기</h4>
                                 {userChatRoom.map((e, i) =>
                                     <div className='beforechatRoom' key={i}>
                                         <span>{`${new Date(e.regdate).getFullYear()}.${new Date(e.regdate).getMonth()}.${new Date(e.regdate).getDate()} ${new Date(e.regdate).getHours()}시`}</span>
