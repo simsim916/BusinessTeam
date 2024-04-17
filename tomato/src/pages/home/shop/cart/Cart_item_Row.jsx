@@ -9,7 +9,8 @@ import { api } from '../../../../model/model';
 const Cart_item_Row = ({ item, idx }) => {
     /* 🫓REDUX🫓 */
     const dispatch = useDispatch();
-    const user = useSelector(state => state.user.data);
+    // const user = useSelector(state => state.user.data);
+    const user = JSON.parse(sessionStorage.getItem('userinfo'));
     const userCart = useSelector(state => state.userCart.data);
     const userBuy = useSelector(state => state.userBuy.buyList)
     const changeCheckBox = () => {

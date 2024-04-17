@@ -14,7 +14,9 @@ const Cart_item = () => {
     const userCart = useSelector(state => state.userCart.data);
     const userCart_loading = useSelector(state => state.userCart.loading);
     const userBuy = useSelector(state => state.userBuy.buyList);
-    const userinfo = useSelector(state => state.user)
+    // const userinfo = useSelector(state => state.user)
+    const userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
+    
 
     const handleAllCheckBox = () => {
         if (userBuy && userCart.length == userBuy.length) {
