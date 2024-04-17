@@ -32,7 +32,6 @@ public class PageController {
 	public ResponseEntity<?> question( ) {
 		ResponseEntity<?> result = null;
 		List<Page_question> list = page_questionService.findall();
-		System.out.println(list);
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}

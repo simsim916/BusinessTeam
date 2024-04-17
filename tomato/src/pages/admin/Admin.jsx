@@ -3,6 +3,7 @@ import "./Admin.css";
 import SideMenu from './sideMenu/SideMenu';
 import Graph from "./graph/Graph";
 import { Route, Routes } from 'react-router-dom';
+import axios from 'axios';
 
 
 
@@ -25,10 +26,11 @@ const Admin = () => {
         setSideBarOpen(!sideBarOpen);
     };
     useEffect(() => {
-        api('/user/admincheck', 'get', null, user.token)
-            .then(res => {
-                setForbiden(!res.data)
-            })
+        if (user)
+            api('/user/admincheck', 'get', null, user.token)
+                .then(res => {
+                    setForbiden(!res.data)
+                })
     }, [])
 
     if (forbiden) return <Error />

@@ -131,15 +131,16 @@ const Admin_ask = () => {
                     <div>2024-02-02</div>
                     <div></div>
                 </div>
-                {paging(filterList(answered), currPage, limit).map((ask, i) => (
+                {filterList(answered) && paging(filterList(answered), currPage, limit).map((ask, i) => (
                     <SelectAskBox_Row setAskList={setAskList} key={i} ask={ask} />
                 ))}
             </div>
-            <PagingBox
-                limit={limit}
-                list={filterList(answered)}
-                currPage={currPage}
-                setCurrPage={setCurrPage} />
+            {filterList(answered) &&
+                <PagingBox
+                    limit={limit}
+                    list={filterList(answered)}
+                    currPage={currPage}
+                    setCurrPage={setCurrPage} />}
         </div >
     );
 }

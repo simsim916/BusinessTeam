@@ -169,10 +169,12 @@ const LoginBG = () => {
                     }
                 }));
                 localStorage.removeItem('cart');
-                if (document.referrer.substring(document.referrer.lastIndexOf("/") + 1) == 'signup')
-                    navigate("/home")
-                else
-                    window.history.back();
+                console.log(document.referrer)
+                console.log(document.referrer.substring(document.referrer.lastIndexOf("/") + 1))
+                // if (document.referrer.substring(document.referrer.lastIndexOf("/") + 1) == 'signup')
+                //     navigate("/home")
+                // else
+                //     window.history.back();
             } catch (error) {
                 console.log(error.message);
                 dispatch(loginFailure(error.response.data));
@@ -211,7 +213,7 @@ const LoginBG = () => {
                 <div id="passwordBox" ref={passwordBox}>
                     <i className="fa-solid fa-key"></i>
                     <input id="password" type="password" name="password" placeholder="비밀번호"
-                        value={loginValue.value.password}
+                        value={loginValue.value.password} autoComplete="false"
                         onKeyUp={handleKeyUp}
                         onChange={(event) => handleInputChange(event, checkPassword)}
                         onBlur={(event) => handelInputBlur(event, checkPassword)}

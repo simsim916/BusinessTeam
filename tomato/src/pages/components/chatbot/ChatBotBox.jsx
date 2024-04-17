@@ -211,7 +211,7 @@ const ChatBotBox = ({
                                 </div>
                             </div>
                         }
-                        {userChatRoom &&
+                        {!text.room_seq && userChatRoom &&
                             <div id="beforechat">
                                 <h4>이전체팅 불러오기</h4>
                                 {userChatRoom.map((e, i) =>
