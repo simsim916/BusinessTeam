@@ -84,15 +84,15 @@ const ItemListFilter = ({ itemListSort, changeDeletedSort, deletedSort, priceRan
                     </ul>
                 </li>
                 <hr />
-                <li>
+                {/* <li>
                     <i className="fa-regular fa-circle-check"></i>행사
                     <ul>
                         <li><i className="fa-regular fa-circle-check"></i>채선당</li>
                         <li><i className="fa-regular fa-circle-check"></i>도리깨침</li>
                     </ul>
-                </li>
+                </li> */}
                 <hr />
-                <li id="filterPrice">
+                <li id="filterPrice" className={(priceRange.min || priceRange.max) ? 'selected' : null}>
                     <i className="fa-regular fa-circle-check"></i>가격
                     <form>
                         <input type="number" placeholder="최소금액" name='min' value={priceRange.min} onChange={handlePriceRange} />

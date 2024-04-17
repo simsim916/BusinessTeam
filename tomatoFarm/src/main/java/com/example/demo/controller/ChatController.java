@@ -38,7 +38,6 @@ public class ChatController {
 
 	@PostMapping("/makeroom")
 	public ResponseEntity<?> makeroom(HttpServletRequest request, @RequestBody Chat_room entity) {
-		System.out.println(entity);
 		ResponseEntity<?> result = null;
 		String token = tokenProvider.parseBearerToken(request);
 		String id = tokenProvider.validateAndGetUserId(token);
@@ -59,7 +58,7 @@ public class ChatController {
 		String id = tokenProvider.validateAndGetUserId(token);
 		entity.setWriter(id);
 		if (entity.getContent() != null && !entity.getContent().trim().isEmpty()) {
-			if (chatService.insertMessage(entity) > 0) {
+			if (chatService.insertMessage(entity).getSeq() != null) {
 				List<Chat_messageDTO> list = chatService.selectAllmessageWhereRoomSeq(entity);
 				result = ResponseEntity.status(HttpStatus.OK).body(list);
 			} else {

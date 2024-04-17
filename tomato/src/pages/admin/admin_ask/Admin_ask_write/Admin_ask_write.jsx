@@ -8,7 +8,7 @@ import { changeAlert } from "../../../redux/basic/actions";
 
 const Admin_ask_write = ({ setAskList, ask, setWriteReply }) => {
     const dispatch = useDispatch();
-    const user = useSelector(state => state.user.data);
+    const user = JSON.parse(sessionStorage.getItem('userinfo'));
     const [reply, setReply] = useState({ ...ask, reply_writer: user.id });
 
     const handleReply = (event) => {
