@@ -8,7 +8,7 @@ import { api } from '../../../model/model';
 import { useDispatch, useSelector } from "react-redux";
 import { changeAlert } from "../../redux/basic/actions";
 
-const Admin_data = ({  }) => {
+const Admin_data = ({ }) => {
 
     console.log(`SelectDataBox 렌더링`);
     const dispatch = useDispatch();
@@ -42,6 +42,7 @@ const Admin_data = ({  }) => {
     }, [whichTable])
 
     const changeTable = (e) => {
+        setCurrPage(1);
         setWhichTable(e.target.value);
         switch (e.target.value) {
             case '/user':

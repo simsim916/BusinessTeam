@@ -28,6 +28,6 @@ public class Keyword {
 	private LocalDate searchDate;
 	@Id
 	private String id;
-	@Builder.Default 
+	@Builder.Default
 	private Integer search_count=1;
 }

@@ -40,7 +40,7 @@ public class Item_askRepositoryImpl implements Item_askRepository{
 						item.name.as("item_name")))
 				.from(item_ask).leftJoin(item).on(item_ask.item_code.eq(item.code))
 				.where(Expressions.stringPath(searchRequest.getColumn()).contains(searchRequest.getKeyword()))
-				.orderBy(item_ask.regdate.desc())
+				.orderBy(item_ask.seq.desc())
 				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum())
 				.fetch();
 	}
@@ -53,7 +53,7 @@ public class Item_askRepositoryImpl implements Item_askRepository{
 						item.name.as("item_name")))
 				.from(item_ask).leftJoin(item).on(item_ask.item_code.eq(item.code))
 				.where(Expressions.numberPath(Integer.class,searchRequest.getColumn()).stringValue().eq(searchRequest.getKeyword()))
-				.orderBy(item_ask.regdate.desc())
+				.orderBy(item_ask.seq.desc())
 				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum())
 				.fetch();
 	}
