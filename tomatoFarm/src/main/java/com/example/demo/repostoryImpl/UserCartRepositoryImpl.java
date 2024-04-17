@@ -49,7 +49,7 @@ public class UserCartRepositoryImpl implements UserCartRepository {
 						item_event.code.as("event_code"), item_event.discount))
 				.from(userCart).leftJoin(item).on(userCart.code.eq(item.code))
 				.leftJoin(item_event).on(item.event_code.eq(item_event.code))
-				.where(userCart.id.eq(entity.getId()).and(userCart.amount.gt(1)))
+				.where(userCart.id.eq(entity.getId()).and(userCart.amount.gt(0)))
 				.fetch();
 	}
 
