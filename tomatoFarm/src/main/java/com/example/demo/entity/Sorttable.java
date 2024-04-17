@@ -20,6 +20,7 @@ public class Sorttable {
 	@Id
 	String sortccode;
 	String sorta;
+	String sorte;
 	String sortacode;
 	String sortb;
 	String sortbcode;
