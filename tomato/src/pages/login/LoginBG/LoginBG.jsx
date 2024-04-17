@@ -201,6 +201,7 @@ const LoginBG = () => {
                 <div id="idBox">
                     <i className="fa-solid fa-circle-user"></i>
                     <input id="id" type="text" name="id" placeholder="아이디"
+                        autoComplete='off'
                         value={loginValue.value.id}
                         onKeyUp={handleKeyUp}
                         onChange={(event) => handleInputChange(event, checkId)}

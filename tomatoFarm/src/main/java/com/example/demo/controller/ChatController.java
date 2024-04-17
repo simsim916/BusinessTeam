@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -85,21 +86,10 @@ public class ChatController {
 	}
 
 	@GetMapping("/selectroom")
-	public ResponseEntity<?> selectroom(HttpServletRequest request, SearchRequest searchRequest) {
-		System.out.println(searchRequest);
+	public ResponseEntity<?> selectroom(PageRequest pageRequest, SearchRequest searchRequest, @AuthenticationPrincipal String userId) {
 		ResponseEntity<?> result = null;
-		String token = tokenProvider.parseBearerToken(request);
-		String id = tokenProvider.validateAndGetUserId(token);
-		User user = User.builder().id(id).build();
-		PageRequest pageRequest = new PageRequest();
-		user = userService.selectUser(user);
-		if (user.getLevel() < 100) {
-			List<Chat_roomDTO> list = chatService.selectAllRoom(pageRequest, searchRequest);
-			System.out.println(list);
-			result = ResponseEntity.status(HttpStatus.OK).body(list);
-		} else {
-			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("selectroom failed");
-		}
+		List<Chat_roomDTO> list = chatService.selectRoom(pageRequest, searchRequest, userId);
+		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}
 }

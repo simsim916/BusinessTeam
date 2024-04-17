@@ -19,11 +19,9 @@ import com.example.demo.domain.ItemDTO;
 import com.example.demo.domain.SortDTO;
 import com.example.demo.entity.Item;
 import com.example.demo.entity.UserCart;
-import com.example.demo.jwtToken.TokenProvider;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.service.ItemService;
-import com.example.demo.service.UserCartService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -35,7 +33,6 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping(value = "/item")
 public class ItemController {
 	private final ItemService itemService;
-	private final UserCartService userCartService;
 
 	@GetMapping("/selectnotnull")
 	public ResponseEntity<?> selectItemWhereEvent(SearchRequest searchRequest) {
@@ -106,7 +103,6 @@ public class ItemController {
 		ResponseEntity<?> result = null;
 		PageRequest pageRequest = new PageRequest();
 		List<ItemDTO> itemList = itemService.selectItemListWhereType(pageRequest, searchRequest);
-		System.out.println(itemList.size());
 		if (itemList != null && itemList.size() > 0) {
 			result = ResponseEntity.status(HttpStatus.OK).body(itemList);
 		} else {

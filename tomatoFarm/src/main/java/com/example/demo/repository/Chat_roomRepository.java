@@ -10,5 +10,5 @@ import com.example.demo.module.SearchRequest;
 public interface Chat_roomRepository {
 
 	List<Chat_roomDTO> selectAllRoom(PageRequest pageRequest, SearchRequest searchRequest);
-	
+	List<Chat_roomDTO> selectUserRoom(PageRequest pageRequest, String userId);
 }

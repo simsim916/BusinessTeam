@@ -104,7 +104,6 @@
 }
 
 #openQuestion {
-    height: 150px;
     margin-top: 20px;
     display: flex;
     flex-direction: column;
@@ -112,8 +111,7 @@
     align-items: center;
 }
 
-#openQuestion h2,
-#clickQuestion h2 {
+#openQuestion h4 {
     background-color: #9B1B30;
     width: 40%;
     border-radius: 10px;
@@ -122,6 +120,7 @@
     padding: 10px;
     text-align: center;
     margin: auto;
+    margin-top: 20px;
 }
 
 #openQuestionBox {
@@ -275,4 +274,33 @@
 
 #admin_ChatBotContainer>div {
     padding: 10px;
+}
+
+#beforechat h4 {
+    background-color: #9B1B30;
+    width: 40%;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    padding: 10px;
+    text-align: center;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#beforechat .beforechatRoom {
+    line-height: 40px;
+    display: flex;
+    padding: 0 30px;
+}
+
+.beforechatRoom div {
+    line-height: 30px;
+    margin-left: auto;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: #9B1B30;
+    color: #ffffff;
+    cursor: pointer;
 }

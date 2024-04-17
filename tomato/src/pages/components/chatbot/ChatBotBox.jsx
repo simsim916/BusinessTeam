@@ -54,6 +54,18 @@ const ChatBotBox = ({
             })
     }
 
+    const [userChatRoom, setUserChatRoom] = useState(null);
+
+    useEffect(() => {
+        api('/chat/selectroom', 'get', null, userinfo.token)
+            .then(res => {
+                setUserChatRoom(res.data)
+            })
+            .catch(err => {
+                console.log(err.message)
+            })
+    }, [])
+
     /* 채팅 종료 */
     const endChat = () => {
         const data = {
@@ -67,8 +79,7 @@ const ChatBotBox = ({
                 if (admin_root) {
                     getdata(res.data)
                     changeShowChatbot(admin_root)
-                }
-                else
+                } else
                     setShowChatbot(false)
             })
             .catch(err => {
@@ -183,7 +194,7 @@ const ChatBotBox = ({
                         </div>
                         {text.type == null &&
                             <div id="openQuestion">
-                                <h2>문의유형</h2>
+                                <h4>문의유형</h4>
                                 <div id="openQuestionBox">
                                     <div onClick={(event) => startChat(event)}>
                                         <i className="fa-solid fa-truck"></i>
@@ -198,6 +209,17 @@ const ChatBotBox = ({
                                         <span>일반</span>
                                     </div>
                                 </div>
+                            </div>
+                        }
+                        {userChatRoom &&
+                            <div id="beforechat">
+                                <h4>이전체팅 불러오기</h4>
+                                {userChatRoom.map((e, i) =>
+                                    <div className='beforechatRoom' key={i}>
+                                        <span>{`${new Date(e.regdate).getFullYear()}.${new Date(e.regdate).getMonth()}.${new Date(e.regdate).getDate()} ${new Date(e.regdate).getHours()}시`}</span>
+                                        <div onClick={() => getMessageAll(e.seq)}>채팅보기</div>
+                                    </div>
+                                )}
                             </div>
                         }
                     </>

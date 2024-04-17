@@ -43,4 +43,15 @@ public class Chat_roomRepositoryImpl implements Chat_roomRepository {
 					.fetch();
 	}
 	
+	@Override
+	public List<Chat_roomDTO> selectUserRoom(PageRequest pageRequest, String userId) {
+		return jPAQueryFactory.select(Projections.bean(Chat_roomDTO.class, 
+				chat_room.seq, chat_room.ing, chat_room.type, chat_room.admin, chat_room.user, chat_message.regdate.max().as("regdate")))
+				.from(chat_room).leftJoin(chat_message).on(chat_room.seq.eq(chat_message.room_seq))
+				.where(chat_room.user.eq(userId))
+				.groupBy(chat_room.seq,chat_room.type,chat_room.ing,chat_room.user, chat_room.admin)
+				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum())
+				.fetch();
+	}
+	
 }
