@@ -1,11 +1,14 @@
 package com.example.demo.serviceImpl;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.example.demo.entity.Keyword;
+import com.example.demo.repository.KeywordRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,29 +22,37 @@ import com.example.demo.service.UserService;
 
 import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class UserServiceImpl implements UserService {
 
 	private final UserRepository userRepository;
-	PasswordEncoder passwordEncoder;
-	private TokenProvider tokenProvider;
+	private final KeywordRepository keywordRepository;
+	private final PasswordEncoder passwordEncoder;
+	private final TokenProvider tokenProvider;
 	
 	@Override
 	public UserToken selectUser(User entity) {
-		UserToken userToken = null;
+		UserToken userToken = new UserToken();
 		
 		String password = entity.getPassword(); 
 		entity = userRepository.selectUser(entity);
 		
-		if (entity.getPhonenumber() != null) { // 조회성공
+		if (entity != null) { 
+			// 로그인성공
 			if (passwordEncoder.matches(password, entity.getPassword())) {
+				 List<Keyword> keyword_list =keywordRepository.findByIdOrderBySearchDateDesc(entity.getId());
+				 List<String> keyword = new ArrayList<>();
+				 for (Keyword e : keyword_list){
+					 keyword.add(e.getKeyword());
+				 }
 				final String token = tokenProvider.create(entity);
 				userToken = UserToken.builder()
 						.token(token)
 						.id(entity.getId())
 						.username(entity.getUsername())
-						.admin(entity.getLevel() < 100 ? true : false)
+						.admin(entity.getLevel() < 100)
+						.keyword(keyword)
 						.build();
 			} else {
 				userToken.setError("비밀번호가 일치하지 않습니다.");

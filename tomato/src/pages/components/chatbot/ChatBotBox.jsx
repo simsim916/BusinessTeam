@@ -26,7 +26,6 @@ const ChatBotBox = ({
 
     /* 메세지 입력 전송 form */
     const [text, setText] = useState({
-        type: null,
         room_seq: admin_root,
         content: '',
         writer: JSON.parse(sessionStorage.getItem('userinfo')).id || '', // sessionStorage에서 가져온 id
@@ -39,14 +38,14 @@ const ChatBotBox = ({
             content: event.target.value
         }))
     }
-
     /* 채팅 시작 */
     const startChat = (event) => {
+        console.log(event.target.closest('div').children[1].innerText)
         api('/chat/makeroom', 'post', { type: event.target.closest('div').children[1].innerText }, userinfo.token)
             .then(res => {
+                console.log(res.data)
                 setText((prev) => ({
                     ...prev,
-                    type: res.data.type,
                     room_seq: res.data.seq
                 }))
             })
@@ -56,7 +55,6 @@ const ChatBotBox = ({
     }
 
     const [userChatRoom, setUserChatRoom] = useState(null);
-
     useEffect(() => {
         api('/chat/selectroom', 'get', null, userinfo.token)
             .then(res => {
@@ -66,7 +64,7 @@ const ChatBotBox = ({
                 console.log(err.message)
             })
     }, [])
-    console.log(user)
+
     /* 채팅 종료 */
     const endChat = () => {
         const data = {
@@ -92,18 +90,21 @@ const ChatBotBox = ({
     const [messageAll, setMessageAll] = useState(null);
     const getMessageAll = async (root) => {
         setLoading(true);
-        const response = await api(`/chat/selectmessage?room_seq=${root}`, 'get', null, userinfo.token)
-            .then((res) => { setLoading(false); return res; })
-            .catch((err) => { setLoading(false); setError(true); return err; });
-        if (response.data && response.data.length > 0) {
-            setMessageAll(response.data);
-            setText((prev) => ({
-                ...prev,
-                root: response.data[0].root,
-                content: ''
-            }));
-        } else {
-        }
+        await api(`/chat/selectmessage?room_seq=${root}`, 'get', null, userinfo.token)
+            .then((res) => {
+                setLoading(false);
+                setMessageAll(res.data);
+                console.log(res.data)
+                setText((prev) => ({
+                    ...prev,
+                    room_seq: res.data[0].room_seq,
+                    content: ''
+                }));
+            })
+            .catch((err) => {
+                setLoading(false);
+                setError(true);
+            });
     }
 
     /* admin 페이지에서 데이터 조회시 값 불러오는 함수 */
@@ -164,6 +165,7 @@ const ChatBotBox = ({
             chatBox.current.scrollTop = chatBox.current.scrollHeight;
     }, [messageAll])
 
+
     return (
         <div id='chatBotBox' style={{ height: amount == 2 ? 'calc(50% - 10px)' : '100%' }}>
             <div id='chatBox' ref={chatBox}>
@@ -193,7 +195,7 @@ const ChatBotBox = ({
                                 <span>궁금한 내용을 선택하거나, 직접 입력해주세요.</span>
                             </p>
                         </div>
-                        {text.type == null &&
+                        {!text.room_seq &&
                             <div id="openQuestion">
                                 <h4>문의유형</h4>
                                 <div id="openQuestionBox">
@@ -212,7 +214,7 @@ const ChatBotBox = ({
                                 </div>
                             </div>
                         }
-                        {!text.room_seq && userChatRoom &&
+                        {!text.room_seq && userChatRoom && userChatRoom.length > 0 &&
                             <div id="beforechat">
                                 <h4>이전채팅 불러오기</h4>
                                 {userChatRoom.map((e, i) =>
@@ -234,11 +236,11 @@ const ChatBotBox = ({
 
             </div>
             <div id="chatBotTextBox">
-                <input type="text" readOnly={!text.type && !admin_root} placeholder={text.type ? "텍스트를 입력해주세요." : "문의유형을 선택해주세요."} value={text.content} onChange={(event) => changeContent(event)} ref={inputBox}
+                <input type="text" readOnly={!text.room_seq} placeholder={text.type ? "텍스트를 입력해주세요." : "문의유형을 선택해주세요."} value={text.content} onChange={(event) => changeContent(event)} ref={inputBox}
                     onKeyUp={handleKeyUp} />
                 <button onClick={insertMessage} >전송</button>
             </div>
-        </div>
+        </div >
     );
 }
 

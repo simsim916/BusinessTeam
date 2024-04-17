@@ -35,15 +35,26 @@ public class ChatServiceImpl implements ChatService {
 
 	
 	@Override
-	public int insertMessage(Chat_message entity) {
+	public Chat_message insertMessage(Chat_message entity) {
 		LocalDateTime today = LocalDateTime.now();
 		entity.setRegdate(today);
 		return chat_messageRepository.insertMessage(entity);
 	}
 	
 	@Override
+	@Transactional
 	public Chat_room insertRoom(Chat_room entity) {
-		return chat_roomRepositoryJPA.save(entity);
+		entity = chat_roomRepositoryJPA.save(entity);
+		System.out.println(entity);
+		Chat_message start_message = Chat_message.builder()
+				.room_seq(entity.getSeq())
+				.writer("tomatofarm")
+				.content("문의하실 내용을 입력해주세요~")
+				.regdate(LocalDateTime.now())
+				.build();
+		start_message=chat_messageRepository.insertMessage(start_message);
+		System.out.println(start_message);
+		return entity;
 	}
 	
 	@Override

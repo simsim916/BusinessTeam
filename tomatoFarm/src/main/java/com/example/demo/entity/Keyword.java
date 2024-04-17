@@ -1,12 +1,9 @@
 package com.example.demo.entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,7 +24,9 @@ public class Keyword {
 	@Id
 	private String keyword;
 	@Id
-	private LocalDate search_date;
+	@Column(name = "search_date")
+	private LocalDate searchDate;
+	@Id
 	private String id;
 	@Builder.Default 
 	private Integer search_count=1;

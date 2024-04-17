@@ -25,9 +25,8 @@ const Cart_item = () => {
     }
 
     useEffect(() => {
-        if (userinfo.data) {
-            const token = userinfo.data.token;
-            dispatch(getUserCart('/usercart/select', 'get', null, token));
+        if (userinfo) {
+            dispatch(getUserCart('/usercart/select', 'get', null, userinfo.token));
         } else {
             userCart && dispatch(getItemListAmount('/item/selectin', 'post', userCart, null));
         }

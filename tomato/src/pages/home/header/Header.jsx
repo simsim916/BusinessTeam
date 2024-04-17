@@ -12,6 +12,7 @@ import { api } from "../../../model/model";
 const Header = () => {
     console.log(`Header 랜더링`);
     const user = JSON.parse(sessionStorage.getItem('userinfo'));
+    const recentSearch = JSON.parse(localStorage.getItem('recentSearch'));
     const keyword = useSelector(state => state.basic.keyword);
     const [recentBox, setRecentBox] = useState(false)
     const [admin, setAdmin] = useState(false)
@@ -42,10 +43,29 @@ const Header = () => {
         }));
     }
 
-    const searchBox = (event) => {
+    const makeRecentBox = (keyword) => {
+        if (recentSearch) {
+            if (recentSearch.includes(keyword))
+                localStorage.setItem('recentSearch', JSON.stringify([keyword, ...recentSearch.filter(e => e != keyword)]))
+            else
+                localStorage.setItem('recentSearch', JSON.stringify([keyword, ...recentSearch.slice(0, 4)]))
+        } else {
+            localStorage.setItem('recentSearch', JSON.stringify([keyword]))
+        }
+    }
+
+    const searchBox = async (event) => {
         event.preventDefault();
         setRecentBox(false);
+        makeRecentBox(keyword);
+        event.target.focus();
         navigate(`/home/list?keyword=${keyword}`);
+    }
+
+    const handleRecentBox = (event, keyword) => {
+        setRecentBox(false);
+        dispatch(changeKeyword(keyword))
+        makeRecentBox(keyword);
     }
 
     function searchBoxEnterKey(event) {
@@ -74,7 +94,6 @@ const Header = () => {
         inputBox.focus();
         event.target.visibility = "hidden"
     }
-
 
     return (
         <header>
@@ -115,12 +134,9 @@ const Header = () => {
                         {recentBox &&
                             <div id="recentBox">
                                 <p id="recentBoxTitle">최근 검색어 </p>
-                                <div><Link onClick={() => setRecentBox(false)} to="/home/list?keyword=프레시지">프레시지</Link></div>
-                                <div><Link onClick={() => setRecentBox(false)} to="/home/list?keyword=스테이크">스테이크</Link></div>
-                                <div><Link onClick={() => setRecentBox(false)} to="/home/list?keyword=스테이크">스테이크</Link></div>
-                                <div><Link onClick={() => setRecentBox(false)} to="/home/list?keyword=스테이크">스테이크</Link></div>
-                                <div><Link onClick={() => setRecentBox(false)} to="/home/list?keyword=스테이크">스테이크</Link></div>
-                                <div><Link onClick={() => setRecentBox(false)} to="/home/list?keyword=스테이크">스테이크</Link></div>
+                                {recentSearch && recentSearch.map((e, i) =>
+                                    <div key={i}><Link onClick={(event) => handleRecentBox(event, e)} to={`/home/list?keyword=${e}`}>{e}</Link></div>
+                                )}
                             </div>
                         }
                     </form>

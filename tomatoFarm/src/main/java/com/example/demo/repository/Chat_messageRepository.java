@@ -11,8 +11,8 @@ import com.example.demo.module.SearchRequest;
 public interface Chat_messageRepository {
 
 	List<Chat_messageDTO> selectAllmessageWhereRoomSeq(Chat_message entity);
-	
-	int insertMessage(Chat_message entity);
+
+	Chat_message insertMessage(Chat_message entity);
 	
 	
 }

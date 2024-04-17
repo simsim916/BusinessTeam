@@ -17,7 +17,6 @@ public class Chat_messageDTO {
 	private Integer seq;
 	private String writer; 
 	private String content;
-	private String type;
 	private Integer room_seq;
 	private LocalDateTime regdate;
 

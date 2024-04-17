@@ -15,6 +15,7 @@ const ItemList = () => {
     console.log('ItemList랜더링')
     /* 🫓REDUX🫓 */
     const dispatch = useDispatch();
+    const user = JSON.parse(sessionStorage.getItem('userinfo'));
     const itemList = useSelector(state => state.itemList);
     const itemListSort = useSelector(state => state.itemListSort);
 
@@ -30,7 +31,7 @@ const ItemList = () => {
 
     /* 키워드 검색시 REDUX 상태값 가져오기 */
     useEffect(() => {
-        dispatch(getItemList(`/item/search?keyword=${keyword}`, 'get'))
+        dispatch(getItemList(`/item/search?keyword=${keyword}`, 'get', null, user && user.token))
         dispatch(getItemSortList(`/item/searchsort?keyword=${keyword}`, 'get'))
 
         axios.get(`http://localhost:8090/visit/update`, {

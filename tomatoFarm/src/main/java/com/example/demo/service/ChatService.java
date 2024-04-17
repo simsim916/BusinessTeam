@@ -13,6 +13,6 @@ public interface ChatService {
 
 	List<Chat_messageDTO> selectAllmessageWhereRoomSeq(Chat_message entity);
 	List<Chat_roomDTO> selectRoom(PageRequest pageRequest, SearchRequest searchRequest, String userId);
-	int insertMessage(Chat_message entity);
+	Chat_message insertMessage(Chat_message entity);
 	Chat_room insertRoom(Chat_room entity);
 }
