@@ -8,7 +8,8 @@ import { setUserBuyForm } from '../../../../../redux/userBuy/actions';
 const DeliveryUpdate = ({ setDeliverySelect }) => {
     const dispatch = useDispatch();
     const userNewAddress = useSelector(state => state.userNewAddress.data);
-    const user = useSelector(state => state.user.data);
+    // const user = useSelector(state => state.user.data);
+    const user = JSON.parse(sessionStorage.getItem('userinfo'));
 
     const changeAddress = (event) => {
         dispatch(setNewUserAddress({

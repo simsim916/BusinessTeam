@@ -13,7 +13,6 @@ import { page_listReducer } from './page_list/page_listReducer';
 const rootReducer = combineReducers({
     itemList: itemListReducer,
     itemListSort: itemListSortReducer,
-    // user: userReducer,
     basic: basicReducer,
     userBuy: userBuyReducer,
     userCart: userCartReducer,

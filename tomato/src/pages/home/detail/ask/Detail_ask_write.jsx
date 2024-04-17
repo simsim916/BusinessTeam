@@ -81,7 +81,7 @@ const Detail_ask_write = ({ item, setRefresh, refresh, itemAskClick }) => {
                             <h4 >상품 문의하기</h4>
                             <div id="itemAskTop">
                                 <div id='itemAskImg'>
-                                    <img src={SERVER_RESOURCE + '/img/itemImg/5000100_2.jpg'} alt="" />
+                                    <img src={SERVER_RESOURCE + `/img/itemImg/${item.code}_2.jpg`} alt="" />
                                 </div>
                                 <div id='itemTitle'>
                                     {item.name}

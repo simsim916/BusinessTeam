@@ -9,7 +9,8 @@ import DeliveryUpdate from './DeliverySelectRow/DeliveryUpdate';
 
 const DeliverySelect = ({ setDeliverySelect }) => {
     const dispatch = useDispatch();
-    const user = useSelector(state => state.user.data);
+    // const user = useSelector(state => state.user.data);
+    const user = JSON.parse(sessionStorage.getItem('userinfo'));
     const userNewAddress = useSelector(state => state.userNewAddress.data);
     const userAddress = useSelector(state => state.userAddress.data); // DB내 회원 배송목록
     const [openPostcode, setOpenPostcode] = useState(!user);

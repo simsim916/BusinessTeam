@@ -8,7 +8,8 @@ const CustomerQA = (setRefresh) => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
-    const user = useSelector(state => state.user.data);
+    // const user = useSelector(state => state.user.data);
+    const user = JSON.parse(sessionStorage.getItem('userinfo'));
     const alert = useSelector(state => state.basic.alert)
     const [form, setForm] = useState({
         type: '회원',

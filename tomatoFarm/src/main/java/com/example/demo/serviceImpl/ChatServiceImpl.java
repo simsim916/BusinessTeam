@@ -11,13 +11,13 @@ import com.example.demo.domain.Chat_messageDTO;
 import com.example.demo.domain.Chat_roomDTO;
 import com.example.demo.entity.Chat_message;
 import com.example.demo.entity.Chat_room;
-import com.example.demo.entity.User;
+import com.example.demo.user.entity.User;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.repository.Chat_messageRepository;
 import com.example.demo.repository.Chat_roomRepository;
 import com.example.demo.repository.Chat_roomRepositoryJPA;
-import com.example.demo.repository.UserRepository;
+import com.example.demo.user.repository.UserRepository;
 import com.example.demo.service.ChatService;
 
 import lombok.RequiredArgsConstructor;

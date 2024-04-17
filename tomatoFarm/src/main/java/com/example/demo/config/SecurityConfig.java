@@ -8,7 +8,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.filter.CorsFilter;
 
-import com.example.demo.jwtToken.JwtAuthenticationFilter;
+import com.example.demo.module.jwtToken.JwtAuthenticationFilter;
 
 //** @EnableWebSecurity
 //=> SpringBoot Auto Configuration @들 중의 하나이며, 손쉽게 Security 설정을 할수있도록해줌.
