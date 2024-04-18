@@ -137,6 +137,7 @@ const ChatBotBox = ({
                 console.log(`insertMessage Error : ${err.message}`)
             });
         if (admin_root) {
+            console.log(user)
             await api('/chat/makeroom', 'post', {
                 seq: admin_root,
                 user: user,
@@ -229,7 +230,14 @@ const ChatBotBox = ({
 
                 <div id='messageBox'>
                     {/* {messageAll && messageAll.map((e, i) => <span>{new Date().toLocaleTimeString([], { hour: 'numeric', minute: 'numeric' })}</span>)} */}
-                    {messageAll && messageAll.map((e, i) => <p className={e.writer === userinfo.id ? 'myChat' : 'otherChat'} key={i}>{e.content}<br></br><span>{new Date(e.regdate).getHours()}시 {new Date(e.regdate).getMinutes()}분</span></p>)}
+                    {messageAll ?
+                        admin_root ?
+                            messageAll.slice(1).map((e, i) => <p className={e.writer === userinfo.id ? 'myChat' : 'otherChat'} key={i}>{e.content}<br></br><span>{new Date(e.regdate).getHours()}시 {new Date(e.regdate).getMinutes()}분</span></p>)
+                            :
+                            messageAll.map((e, i) => <p className={e.writer === userinfo.id ? 'myChat' : 'otherChat'} key={i}>{e.content}<br></br><span>{new Date(e.regdate).getHours()}시 {new Date(e.regdate).getMinutes()}분</span></p>)
+                        :
+                        null
+                    }
 
                 </div>
 

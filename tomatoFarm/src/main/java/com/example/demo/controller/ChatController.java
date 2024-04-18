@@ -33,11 +33,11 @@ public class ChatController {
     TokenProvider tokenProvider;
 
     @PostMapping("/makeroom")
-    public ResponseEntity<?> makeroom(HttpServletRequest request, @RequestBody Chat_room entity) {
+    public ResponseEntity<?> makeroom(HttpServletRequest request, @RequestBody Chat_room entity, @AuthenticationPrincipal String userId) {
         ResponseEntity<?> result = null;
-        String token = tokenProvider.parseBearerToken(request);
-        String id = tokenProvider.validateAndGetUserId(token);
-        entity.setUser(id);
+        if(entity.getAdmin()==null) {
+        	entity.setUser(userId);
+        }
         entity = chatService.insertRoom(entity);
         if (entity != null) {
             result = ResponseEntity.status(HttpStatus.OK).body(entity);
