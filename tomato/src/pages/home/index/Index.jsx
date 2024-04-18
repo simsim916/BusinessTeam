@@ -5,11 +5,12 @@ import ThirdContainer from './thirdContainer/ThridContainer';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Index.css';
+import { SERVER_URL } from '../../../model/server-config';
 
 const Index = () => {
 
     useEffect(() => {
-        axios.get(`http://localhost:8090/visit/update`, {
+        axios.get(SERVER_URL+`/visit/update`, {
             params: {
                 page: 'home',
             }

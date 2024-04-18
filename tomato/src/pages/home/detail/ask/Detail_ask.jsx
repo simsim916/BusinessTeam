@@ -8,6 +8,7 @@ import Detail_ask_write from './Detail_ask_write';
 import PagingBox, { paging } from '../../../components/PagingBox';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeAlert } from '../../../redux/basic/actions';
+import { SERVER_URL } from '../../../../model/server-config';
 
 
 const Detail_ask = ({ item }) => {
@@ -22,7 +23,7 @@ const Detail_ask = ({ item }) => {
     const [currPage, setCurrPage] = useState(1);
 
     useEffect(() => {
-        axios.get(`http://localhost:8090/itemask/select?column=item_code&keyword=${item.code}`
+        axios.get(SERVER_URL+`/itemask/select?column=item_code&keyword=${item.code}`
         ).then(res => {
             setItemAskList(res.data);
             setLoading(false);

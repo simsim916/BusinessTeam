@@ -3,13 +3,14 @@ import './nav.css'
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import CategoryList from './CategoryList';
+import { SERVER_URL } from '../../../model/server-config';
 
 function Nav({ appearinputBoxResetButton, resetInputBox }) {
 
     const [sortList, setsSortList] = useState(null);
 
     useEffect(() => {
-        axios.get("http://localhost:8090/item/sort"
+        axios.get(SERVER_URL+"/item/sort"
         ).then(res => {
             setsSortList(res.data);
         }).catch(err => {

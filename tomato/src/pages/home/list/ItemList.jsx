@@ -10,6 +10,7 @@ import { getItemSortList } from "../../redux/itemListSort/actions";
 import { api } from "../../../model/model";
 import { changeKeyword } from "../../redux/basic/actions";
 import axios from "axios";
+import { SERVER_URL } from "../../../model/server-config";
 
 const ItemList = () => {
     console.log('ItemList랜더링')
@@ -34,7 +35,7 @@ const ItemList = () => {
         dispatch(getItemList(`/item/search?keyword=${keyword}`, 'get', null, user && user.token))
         dispatch(getItemSortList(`/item/searchsort?keyword=${keyword}`, 'get'))
 
-        axios.get(`http://localhost:8090/visit/update`, {
+        axios.get(SERVER_URL+`/visit/update`, {
             params: {
                 page: 'list',
             }

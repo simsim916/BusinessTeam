@@ -15,7 +15,6 @@ const ChatBotBox = ({
     /* index 페이지 전용 props */
     setShowChatbot, // index페이지에서 나타낼지 여부 상태값 변경 함수 
 }) => {
-
     const [refresh, setRefresh] = useState(false);
     /* 로그인 상태 sessionStorage 값 */
     const userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
@@ -138,6 +137,7 @@ const ChatBotBox = ({
                 console.log(`insertMessage Error : ${err.message}`)
             });
         if (admin_root) {
+            console.log(user)
             await api('/chat/makeroom', 'post', {
                 seq: admin_root,
                 user: user,
@@ -229,9 +229,14 @@ const ChatBotBox = ({
                 }
 
                 <div id='messageBox'>
-                    {/* {messageAll && messageAll.map((e, i) => <span>{new Date().toLocaleTimeString([], { hour: 'numeric', minute: 'numeric' })}</span>)} */}
-                    {messageAll && messageAll.map((e, i) => <p className={e.writer === userinfo.id ? 'myChat' : 'otherChat'} key={i}>{e.content}<br></br><span>{new Date(e.regdate).getHours()}시 {new Date(e.regdate).getMinutes()}분</span></p>)}
-
+                    {messageAll ?
+                        admin_root ?
+                            messageAll.slice(1).map((e, i) => <p className={e.writer === userinfo.id ? 'myChat' : 'otherChat'} key={i}>{e.content}<br></br><span>{new Date(e.regdate).getHours()}시 {new Date(e.regdate).getMinutes()}분</span></p>)
+                            :
+                            messageAll.map((e, i) => <p className={e.writer === userinfo.id ? 'myChat' : 'otherChat'} key={i}>{e.content}<br></br><span>{new Date(e.regdate).getHours()}시 {new Date(e.regdate).getMinutes()}분</span></p>)
+                        :
+                        null
+                    }
                 </div>
 
             </div>

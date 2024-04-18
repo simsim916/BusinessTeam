@@ -6,6 +6,7 @@ import { changeAlert, changeKeyword } from "../../redux/basic/actions";
 import { useEffect, useState } from "react";
 import { setUser } from "../../redux/user/action";
 import { api } from "../../../model/model";
+import { SERVER_RESOURCE } from "../../../model/server-config";
 
 
 
@@ -121,7 +122,7 @@ const Header = () => {
                 <div className="container">
                     <div id="logoBox">
                         <a href="/home">
-                            <img src={"http://localhost:8090/resources" + "/img/logo.png"} alt="로고" />
+                            <img src={SERVER_RESOURCE + "/img/logo.png"} alt="로고" />
                             <h1>토마토팜 tomatoFarm</h1>
                         </a>
                     </div>
