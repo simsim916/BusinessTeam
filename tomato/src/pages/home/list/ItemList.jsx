@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-import { useEffect, useState, useRef, useMemo } from "react";
+import { useEffect, useState, useRef } from "react";
 import ItemListFilter from './ItemListFilter';
 import ItemListContainer from './ItemListContainer';
 import Loading from './../../components/Loading';

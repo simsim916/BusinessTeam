@@ -3,9 +3,8 @@ import { POST_DATA_FAILURE, POST_DATA_REQUEST, POST_DATA_SUCCESS, SET_USERBUY, S
 const initialState = {
     userBuy: {
         loading: true,
-        buyList: JSON.parse(sessionStorage.getItem('buy')),
         form: {
-            itemList: JSON.parse(sessionStorage.getItem('buy')),
+            itemList: [],
             address_code: '',
             address1: '',
             address2: '',
@@ -16,7 +15,7 @@ const initialState = {
             point: '',
             phonenumber: '',
         },
-        data:null,
+        data: null,
         error: null,
     }
 };

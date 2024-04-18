@@ -13,7 +13,7 @@ const Detail_review_write = ({ item, refresh, setRefresh, reviewWriteClick }) =>
     const [writeBoxClose, setWriteBoxClose] = useState(true);
     const [score, setScore] = useState(0);
     const [review, setReview] = useState({
-        writer: 'manager1',
+        writer: user.id,
         item_code: item.code,
         title: '',
         contents: '',

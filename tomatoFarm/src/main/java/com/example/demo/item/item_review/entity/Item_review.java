@@ -35,9 +35,7 @@ public class Item_review {
 	private LocalDateTime regdate;	//날짜
 	private Integer likes=0;	//공감수
 	private String image1; 
-	private String image2; 
-	private String image3; 
-	private String tag; 
+	private String tag;
 	
 
 	@Transient

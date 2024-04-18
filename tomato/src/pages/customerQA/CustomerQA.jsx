@@ -18,7 +18,6 @@ const CustomerQA = (setRefresh) => {
     })
     const [questionList, setQuestionList] = useState(null);
 
-    console.log(questionList)
     useEffect(() => {
         api('/page/question', 'get')
             .then(res => {

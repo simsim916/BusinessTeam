@@ -33,7 +33,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 	private final QBean<ItemDTO> dtoBean = Projections.bean(ItemDTO.class, item.sort1, item.sort2, item.sort3, item.code, item.brand, item.name,
 			item.delivery, item.price, item.storage, item.weight, item.packing, item.sales, item.stock, item.views,
 			item.likes, item.event_code, item.intro, item.admin, item_event.discount, item_event.name.as("event_name"));
-	
+
 	// queryDSL 동적 정렬을 위해 OrderSpecifier객체를 이용한 동적 정렬
 	public OrderSpecifier<?> getSortType(SearchRequest searchRequest) {
 		if (searchRequest.getOrderType() != null) {
@@ -52,7 +52,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 		}
 		return new OrderSpecifier<>(Order.DESC, item.sales);
 	}
-	
+
 	@Override		
 	// ** 동적 한 컬럼 검색
 	public List<ItemDTO> selectItemListStringWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
