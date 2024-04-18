@@ -5,6 +5,7 @@ import Loading from './../../../components/Loading';
 import Error from './../../../components/Error';
 import ItemBox from './../../../components/ItemBox';
 import axios from 'axios';
+import { SERVER_URL } from '../../../../model/server-config';
 
 
 const SecondContainer = () => {
@@ -17,7 +18,7 @@ const SecondContainer = () => {
     let selectedBox = useRef(null);
 
     useEffect(() => {
-        axios.get('http://localhost:8090/item/selectnotnull?column=item.event_code'
+        axios.get(SERVER_URL+'/item/selectnotnull?column=item.event_code'
         ).then(res => {
             setEventItemList(res.data);
             setLoading(false);

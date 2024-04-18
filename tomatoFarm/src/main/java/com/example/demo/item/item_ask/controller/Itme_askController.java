@@ -84,7 +84,7 @@ public class Itme_askController {
 		searchRequest.setColumn("seq");
 		searchRequest.setKeyword(entity.getSeq() + "");
 		String password = entity.getPassword();
-
+		System.out.println(password);
 		Item_askDTO dto = item_askService.selectItemAskListIntegerWhereType(pageRequest, searchRequest).get(0);
 
 		if (encoder.matches(password, dto.getPassword())) {

@@ -32,12 +32,14 @@ const Admin_ask = () => {
     }, [])
 
     const filterList = (answered) => {
-        if (answered == 0) {
-            return askList.filter(list => list.reply == "" || list.reply == null);
-        } else if (answered == 1) {
-            return askList.filter(list => list.reply != "" && list.reply != null);
-        } else {
-            return askList;
+        if (askList) {
+            if (answered == 0) {
+                return askList.filter(list => list.reply == "" || list.reply == null);
+            } else if (answered == 1) {
+                return askList.filter(list => list.reply != "" && list.reply != null);
+            } else {
+                return askList;
+            }
         }
     }
 

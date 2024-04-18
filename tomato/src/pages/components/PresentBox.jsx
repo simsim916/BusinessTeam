@@ -5,7 +5,7 @@ import Error from './Error';
 import axios from 'axios';
 import ItemBox from './ItemBox';
 import { Link } from 'react-router-dom';
-import { SERVER_URL } from '../../model/server-config';
+import { SERVER_RESOURCE, SERVER_URL } from '../../model/server-config';
 import { makeComa } from './MathFunction';
 
 const PresentBox = ({ brand, idx }) => {
@@ -65,7 +65,7 @@ const PresentBox = ({ brand, idx }) => {
         <div className={`typeBox`}>
             <div className="typeBoxTag">
                 <div className="typeBoxTagTitle">
-                    <img src={"http://localhost:8090/resources" + `/img/brand/${brand}.png`} alt={brand} />
+                    <img src={SERVER_RESOURCE + `/img/brand/${brand}.png`} alt={brand} />
                     {brand}
                 </div>
                 {/* <ul className="typeBoxTagList">
@@ -80,7 +80,7 @@ const PresentBox = ({ brand, idx }) => {
                         <div className="itemImgPresent">
                             <i className="fa-solid fa-cart-shopping"></i>
                             <i className="fa-solid fa-magnifying-glass"></i>
-                            <img src={"http://localhost:8090/resources" + `/img/itemImg/${brandItem[0].code}_1.jpg`} alt={brandItem[0].name} />
+                            <img src={SERVER_RESOURCE + `/img/itemImg/${brandItem[0].code}_1.jpg`} alt={brandItem[0].name} />
                         </div>
                         <div className="typeBoxImgTitle">
                             <div className="typeBoxImgTitleName"> {brandItem[0].name} </div>
