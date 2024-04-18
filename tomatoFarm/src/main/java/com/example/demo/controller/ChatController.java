@@ -29,63 +29,63 @@ import lombok.AllArgsConstructor;
 @RequestMapping(value = "/chat")
 public class ChatController {
 
-	ChatService chatService;
-	TokenProvider tokenProvider;
+    ChatService chatService;
+    TokenProvider tokenProvider;
 
-	@PostMapping("/makeroom")
-	public ResponseEntity<?> makeroom(HttpServletRequest request, @RequestBody Chat_room entity) {
-		ResponseEntity<?> result = null;
-		String token = tokenProvider.parseBearerToken(request);
-		String id = tokenProvider.validateAndGetUserId(token);
-		entity.setUser(id);
-		entity = chatService.insertRoom(entity);
-		if (entity != null) {
-			result = ResponseEntity.status(HttpStatus.OK).body(entity);
-		} else {
-			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("makeroom failed");
-		}
-		return result;
-	}
+    @PostMapping("/makeroom")
+    public ResponseEntity<?> makeroom(HttpServletRequest request, @RequestBody Chat_room entity) {
+        ResponseEntity<?> result = null;
+        String token = tokenProvider.parseBearerToken(request);
+        String id = tokenProvider.validateAndGetUserId(token);
+        entity.setUser(id);
+        entity = chatService.insertRoom(entity);
+        if (entity != null) {
+            result = ResponseEntity.status(HttpStatus.OK).body(entity);
+        } else {
+            result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("makeroom failed");
+        }
+        return result;
+    }
 
-	@PostMapping("/insertmessage")
-	public ResponseEntity<?> insertmessage(HttpServletRequest request, @RequestBody Chat_message entity) {
-		ResponseEntity<?> result = null;
-		String token = tokenProvider.parseBearerToken(request);
-		String id = tokenProvider.validateAndGetUserId(token);
-		entity.setWriter(id);
-		if (entity.getContent() != null && !entity.getContent().trim().isEmpty()) {
-			if (chatService.insertMessage(entity).getSeq() != null) {
-				List<Chat_messageDTO> list = chatService.selectAllmessageWhereRoomSeq(entity);
-				result = ResponseEntity.status(HttpStatus.OK).body(list);
-			} else {
-				result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("insertmessage failed");
-			}
-		}else {
-			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("insertmessage is empty");
-		}
-		return result;
-	}
+    @PostMapping("/insertmessage")
+    public ResponseEntity<?> insertmessage(HttpServletRequest request, @RequestBody Chat_message entity) {
+        ResponseEntity<?> result = null;
+        String token = tokenProvider.parseBearerToken(request);
+        String id = tokenProvider.validateAndGetUserId(token);
+        entity.setWriter(id);
+        if (entity.getContent() != null && !entity.getContent().trim().isEmpty()) {
+            if (chatService.insertMessage(entity).getSeq() != null) {
+                List<Chat_messageDTO> list = chatService.selectAllmessageWhereRoomSeq(entity);
+                result = ResponseEntity.status(HttpStatus.OK).body(list);
+            } else {
+                result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("insertmessage failed");
+            }
+        } else {
+            result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("insertmessage is empty");
+        }
+        return result;
+    }
 
-	@GetMapping("/selectmessage")
-	public ResponseEntity<?> selectmessage(HttpServletRequest request, Chat_message entity) {
-		ResponseEntity<?> result = null;
-		String token = tokenProvider.parseBearerToken(request);
-		String id = tokenProvider.validateAndGetUserId(token);
-		entity.setWriter(id);
-		List<Chat_messageDTO> list = chatService.selectAllmessageWhereRoomSeq(entity);
-		if (list != null) {
-			result = ResponseEntity.status(HttpStatus.OK).body(list);
-		} else {
-			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("selectmessage failed");
-		}
-		return result;
-	}
+    @GetMapping("/selectmessage")
+    public ResponseEntity<?> selectmessage(HttpServletRequest request, Chat_message entity) {
+        ResponseEntity<?> result = null;
+        String token = tokenProvider.parseBearerToken(request);
+        String id = tokenProvider.validateAndGetUserId(token);
+        entity.setWriter(id);
+        List<Chat_messageDTO> list = chatService.selectAllmessageWhereRoomSeq(entity);
+        if (list != null) {
+            result = ResponseEntity.status(HttpStatus.OK).body(list);
+        } else {
+            result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("selectmessage failed");
+        }
+        return result;
+    }
 
-	@GetMapping("/selectroom")
-	public ResponseEntity<?> selectroom(PageRequest pageRequest, SearchRequest searchRequest, @AuthenticationPrincipal String userId) {
-		ResponseEntity<?> result = null;
-		List<Chat_roomDTO> list = chatService.selectRoom(pageRequest, searchRequest, userId);
-		result = ResponseEntity.status(HttpStatus.OK).body(list);
-		return result;
-	}
+    @GetMapping("/selectroom")
+    public ResponseEntity<?> selectroom(PageRequest pageRequest, SearchRequest searchRequest, @AuthenticationPrincipal String userId) {
+        ResponseEntity<?> result = null;
+        List<Chat_roomDTO> list = chatService.selectRoom(pageRequest, searchRequest, userId);
+        result = ResponseEntity.status(HttpStatus.OK).body(list);
+        return result;
+    }
 }
