@@ -11,13 +11,13 @@ import com.example.demo.domain.Chat_messageDTO;
 import com.example.demo.domain.Chat_roomDTO;
 import com.example.demo.entity.Chat_message;
 import com.example.demo.entity.Chat_room;
-import com.example.demo.entity.User;
+import com.example.demo.user.entity.User;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.repository.Chat_messageRepository;
 import com.example.demo.repository.Chat_roomRepository;
 import com.example.demo.repository.Chat_roomRepositoryJPA;
-import com.example.demo.repository.UserRepository;
+import com.example.demo.user.repository.UserRepository;
 import com.example.demo.service.ChatService;
 
 import lombok.RequiredArgsConstructor;
@@ -44,16 +44,17 @@ public class ChatServiceImpl implements ChatService {
 	@Override
 	@Transactional
 	public Chat_room insertRoom(Chat_room entity) {
+		boolean firstWrite = entity.getSeq()==null;
 		entity = chat_roomRepositoryJPA.save(entity);
-		System.out.println(entity);
-		Chat_message start_message = Chat_message.builder()
+		if (firstWrite){
+			Chat_message start_message = Chat_message.builder()
 				.room_seq(entity.getSeq())
 				.writer("tomatofarm")
 				.content("문의하실 내용을 입력해주세요~")
 				.regdate(LocalDateTime.now())
 				.build();
-		start_message=chat_messageRepository.insertMessage(start_message);
-		System.out.println(start_message);
+			chat_messageRepository.insertMessage(start_message);
+		}
 		return entity;
 	}
 	

@@ -93,7 +93,6 @@ const ChatBotBox = ({
             .then((res) => {
                 setLoading(false);
                 setMessageAll(res.data);
-                console.log(res.data)
                 setText((prev) => ({
                     ...prev,
                     room_seq: res.data[0].room_seq,
