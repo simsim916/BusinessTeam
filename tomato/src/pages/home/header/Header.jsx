@@ -30,6 +30,7 @@ const Header = () => {
                     console.log(err.message);
                 })
     }, [])
+
     const logOut = () => {
         sessionStorage.removeItem('userinfo');
         dispatch(setUser(null));
@@ -44,14 +45,15 @@ const Header = () => {
     }
 
     const makeRecentBox = (keyword) => {
-        if (recentSearch) {
-            if (recentSearch.includes(keyword))
-                localStorage.setItem('recentSearch', JSON.stringify([keyword, ...recentSearch.filter(e => e != keyword)]))
-            else
-                localStorage.setItem('recentSearch', JSON.stringify([keyword, ...recentSearch.slice(0, 4)]))
-        } else {
-            localStorage.setItem('recentSearch', JSON.stringify([keyword]))
-        }
+        if (keyword.length > 0)
+            if (recentSearch) {
+                if (recentSearch.includes(keyword))
+                    localStorage.setItem('recentSearch', JSON.stringify([keyword, ...recentSearch.filter(e => e != keyword)]))
+                else
+                    localStorage.setItem('recentSearch', JSON.stringify([keyword, ...recentSearch.slice(0, 4)]))
+            } else {
+                localStorage.setItem('recentSearch', JSON.stringify([keyword]))
+            }
     }
 
     const searchBox = async (event) => {
