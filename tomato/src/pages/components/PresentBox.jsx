@@ -5,7 +5,7 @@ import Error from './Error';
 import axios from 'axios';
 import ItemBox from './ItemBox';
 import { Link } from 'react-router-dom';
-import { SERVER_URL } from '../../model/server-config';
+import { SERVER_RESOURCE, SERVER_URL } from '../../model/server-config';
 import { makeComa } from './MathFunction';
 
 const PresentBox = ({ brand, idx }) => {

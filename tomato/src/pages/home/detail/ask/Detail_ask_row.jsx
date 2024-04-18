@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './Detail_ask_row.css';
 import axios from 'axios';
+import { SERVER_URL } from '../../../../model/server-config';
 
 
 const Detail_ask_row = ({ itemAsk }) => {
@@ -16,7 +17,7 @@ const Detail_ask_row = ({ itemAsk }) => {
 
     const checkPassword = (event) => {
         event.stopPropagation();
-        axios.post(`http://localhost:8090/itemask/askpassword`, {
+        axios.post(SERVER_URL + `/itemask/askpassword`, {
             seq: itemAsk.seq,
             password: askPassword,
         }, {
@@ -42,27 +43,28 @@ const Detail_ask_row = ({ itemAsk }) => {
     return (
         <div onClick={itemAsk.password == null ? showContent : showContentP} className="boardAnswer">
             <div>
-                {
-                    itemAsk.password != null ?
-                        <i className="fa-solid fa-lock"></i>
-                        :
-                        <i className="fa-solid fa-lock-open"></i>
-                }
+                <div>
+                    {
+                        itemAsk.password != null ?
+                            <i className="fa-solid fa-lock"></i>
+                            :
+                            <i className="fa-solid fa-lock-open"></i>
+                    }
+                </div>
+                <div className="boardAnswer_reply">{itemAsk.reply ? '답변' : '미답변'}</div>
+                <div className="boardAnswer_title">{itemAsk.title}</div>
+                <div className="boardAnswer_writer">{itemAsk.writer}</div>
+                <div className="boardAnswer_regdate">
+                    {
+                        new Date().getFullYear() == new Date(itemAsk.regdate).getFullYear() &&
+                            new Date().getMonth() == new Date(itemAsk.regdate).getMonth() &&
+                            new Date().getDate() == new Date(itemAsk.regdate).getDate() ?
+                            new Date(itemAsk.regdate).getHours() + ' : ' + new Date(itemAsk.regdate).getMinutes()
+                            :
+                            new Date(itemAsk.regdate).getMonth() + '. ' + new Date(itemAsk.regdate).getDate()
+                    }
+                </div>
             </div>
-            <div className="boardAnswer_reply">{itemAsk.reply ? '답변' : '미답변'}</div>
-            <div className="boardAnswer_title">{itemAsk.title}</div>
-            <div className="boardAnswer_writer">{itemAsk.writer}</div>
-            <div className="boardAnswer_regdate">
-                {
-                    new Date().getFullYear() == new Date(itemAsk.regdate).getFullYear() &&
-                        new Date().getMonth() == new Date(itemAsk.regdate).getMonth() &&
-                        new Date().getDate() == new Date(itemAsk.regdate).getDate() ?
-                        new Date(itemAsk.regdate).getHours() + ' : ' + new Date(itemAsk.regdate).getMinutes()
-                        :
-                        new Date(itemAsk.regdate).getMonth() + '. ' + new Date(itemAsk.regdate).getDate()
-                }
-            </div>
-
             {
                 askDetail ?
                     itemAsk.password == null ?
@@ -89,13 +91,13 @@ const Detail_ask_row = ({ itemAsk }) => {
                             :
                             passwordFail ?
                                 <div onClick={(e) => e.stopPropagation()} id='passwordCheck'>
-                                    <input type="password" value={askPassword}  onChange={PasswordChange} placeholder="4자리 숫자 입력" />
+                                    <input type="password" value={askPassword} onChange={PasswordChange} placeholder="4자리 숫자 입력" maxLength="4" />
                                     <button onClick={checkPassword}>확인</button>
                                 </div>
                                 :
                                 <div id='passwordCheck'>
                                     <input type="password" value={askPassword} onClick={(e) => e.stopPropagation()} onChange={PasswordChange} placeholder="비밀번호 입력" />
-                                    <button onClick={checkPassword}>확인</button> <br></br>비밀번호가 틀렸습니다. 다시 입력해주세요
+                                    <button onClick={checkPassword}>확인</button> <br></br><p>비밀번호가 틀렸습니다. 다시 입력해주세요</p>
                                 </div>
                     :
                     null

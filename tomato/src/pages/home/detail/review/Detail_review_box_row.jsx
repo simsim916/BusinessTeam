@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import './Detail_review_box_row.css';
 import Detail_review_box_row_detail from './Detail_review_box_row_detail';
+import { SERVER_RESOURCE } from '../../../../model/server-config';
 
 const Detail_review_box_row = ({ itemReview }) => {
     const [reviewDetail, setReviewDetail] = useState(false);
@@ -13,7 +14,7 @@ const Detail_review_box_row = ({ itemReview }) => {
         <>
             <div onClick={reviewDetailClick} className="reviewContent">
                 <div className='ReviewBoardRow_img'>
-                    <img src={"http://localhost:8090/resources" + `/img/itemReviewImg/${itemReview.image1 ? itemReview.item_code + '/' + itemReview.image1 : 'reviewdefault.png'}`} alt="" />
+                    <img src={SERVER_RESOURCE + `/img/itemReviewImg/${itemReview.image1 ? itemReview.item_code + '/' + itemReview.image1 : 'reviewdefault.png'}`} alt="" />
                 </div>
                 <div className='ReviewBoardRow_text'>
                     <div className='ReviewBoardRow_rightTop'>
