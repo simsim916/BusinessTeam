@@ -6,13 +6,12 @@ import javax.persistence.EntityManager;
 
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.entity.QItem;
+import com.example.demo.item.item.entity.QItem;
 import com.example.demo.entity.QVisit_page;
 import com.example.demo.entity.Visit_page;
 import com.example.demo.entity.Visit_pageID;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.repository.VisitRepository;
-import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.Projections;

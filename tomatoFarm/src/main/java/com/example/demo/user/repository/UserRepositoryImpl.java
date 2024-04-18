@@ -12,7 +12,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import lombok.AllArgsConstructor;
 
-import static com.example.demo.entity.QUser.user;
+import static com.example.demo.user.entity.QUser.user;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
 
 package com.example.demo.item.item.repository;
 
-import static com.example.demo.entity.QItem.item;
+import static com.example.demo.item.item.entity.QItem.item;
 import static com.example.demo.entity.Qitem_event.item_event;
 
 import java.util.List;
@@ -13,7 +13,6 @@ import com.example.demo.item.item.entity.Item;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.domain.SortDTO;
-import com.example.demo.entity.QItem;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.querydsl.core.types.Order;
@@ -40,18 +39,18 @@ public class ItemRepositoryImpl implements ItemRepository {
 		if (searchRequest.getOrderType() != null) {
 			switch (searchRequest.getOrderType()) {
 			case "priceD":
-				return new OrderSpecifier<>(Order.DESC, QItem.item.price);
+				return new OrderSpecifier<>(Order.DESC, item.price);
 			case "priceA":
-				return new OrderSpecifier<>(Order.ASC, QItem.item.price);
+				return new OrderSpecifier<>(Order.ASC, item.price);
 			case "salesA":
-				return new OrderSpecifier<>(Order.ASC, QItem.item.sales);
+				return new OrderSpecifier<>(Order.ASC, item.sales);
 			case "codeD":
-				return new OrderSpecifier<>(Order.DESC, QItem.item.code);
+				return new OrderSpecifier<>(Order.DESC, item.code);
 			case "views":
-				return new OrderSpecifier<>(Order.DESC, QItem.item.views);
+				return new OrderSpecifier<>(Order.DESC, item.views);
 			}
 		}
-		return new OrderSpecifier<>(Order.DESC, QItem.item.sales);
+		return new OrderSpecifier<>(Order.DESC, item.sales);
 	}
 	
 	@Override		

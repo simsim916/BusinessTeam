@@ -22,7 +22,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import static com.example.demo.entity.QChat_message.chat_message;
 import static com.example.demo.entity.QChat_room.chat_room;
-import static com.example.demo.entity.QUser.user;
+import static com.example.demo.user.entity.QUser.user;
 
 import lombok.AllArgsConstructor;
 

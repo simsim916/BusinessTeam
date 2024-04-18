@@ -1,6 +1,6 @@
 package com.example.demo.item.item_review.repository;
 
-import static com.example.demo.entity.QItem_review.item_review;
+import static com.example.demo.item.item_review.entity.QItem_review.item_review;
 
 import java.util.List;
 

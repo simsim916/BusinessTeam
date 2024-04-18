@@ -1,7 +1,7 @@
 package com.example.demo.item.item_ask.repository;
 
-import static com.example.demo.entity.QItem_ask.item_ask;
-import static com.example.demo.entity.QItem.item;
+import static com.example.demo.item.item_ask.entity.QItem_ask.item_ask;
+import static com.example.demo.item.item.entity.QItem.item;
 
 
 import java.util.List;

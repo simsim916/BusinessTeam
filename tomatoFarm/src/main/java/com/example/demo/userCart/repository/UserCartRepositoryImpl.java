@@ -1,6 +1,6 @@
 package com.example.demo.userCart.repository;
 
-import static com.example.demo.entity.QUserCart.userCart;
+import static com.example.demo.userCart.entity.QUserCart.userCart;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import lombok.AllArgsConstructor;
 
-import static com.example.demo.entity.QItem.item;
+import static com.example.demo.item.item.entity.QItem.item;
 import static com.example.demo.entity.Qitem_event.item_event;
 
 @Repository
