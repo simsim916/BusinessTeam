@@ -15,7 +15,6 @@ const ChatBotBox = ({
     /* index 페이지 전용 props */
     setShowChatbot, // index페이지에서 나타낼지 여부 상태값 변경 함수 
 }) => {
-
     const [refresh, setRefresh] = useState(false);
     /* 로그인 상태 sessionStorage 값 */
     const userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
@@ -137,7 +136,6 @@ const ChatBotBox = ({
                 console.log(`insertMessage Error : ${err.message}`)
             });
         if (admin_root) {
-            console.log(user)
             await api('/chat/makeroom', 'post', {
                 seq: admin_root,
                 user: user,

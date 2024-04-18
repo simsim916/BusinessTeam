@@ -5,6 +5,7 @@ import ItemBox_vertical from './../../components/itemBox_vertical/ItemBox_vertic
 import PagingBox, { paging } from "../../components/PagingBox";
 import { useDispatch } from 'react-redux';
 import { setItemList } from '../../redux/itemList/actions';
+import { SERVER_RESOURCE } from '../../../model/server-config';
 
 
 const ItemListContainer = ({ itemList }) => {
@@ -56,9 +57,9 @@ const ItemListContainer = ({ itemList }) => {
             <div id="listContainer">
                 <div id="containerOption">
                     <ul id="listButton">
-                        <li style={{ opacity: !vertical.vertical && '1' }} onClick={() => setVertical(() => ({ ...vertical, vertical: false }))}><div></div></li>
-                        <li style={{ opacity: vertical.vertical && '1' }} onClick={() => setVertical(() => ({ ...vertical, vertical: true }))}><div></div></li>
-                        <li style={{ opacity: !vertical.infinite && '1' }} onClick={() => setVertical(() => ({ ...vertical, vertical: !vertical.infinite }))}><div></div></li>
+                        <li style={{ opacity: !vertical.vertical && '1' }} onClick={() => setVertical(() => ({ ...vertical, vertical: false }))}><div style={{ backgroundImage: `url(${SERVER_RESOURCE}/img/listbutton.png)` }}></div></li>
+                        <li style={{ opacity: vertical.vertical && '1' }} onClick={() => setVertical(() => ({ ...vertical, vertical: true }))}><div style={{ backgroundImage: `url(${SERVER_RESOURCE}/img/listbutton.png)` }}></div></li>
+                        <li style={{ opacity: !vertical.infinite && '1' }} onClick={() => setVertical(() => ({ ...vertical, vertical: !vertical.infinite }))}><div style={{ backgroundImage: `url(${SERVER_RESOURCE}/img/listbutton.png)` }}></div></li>
                     </ul>
                     <div id="total">총 <span>{itemList ? itemList.length : '0'}</span> 개</div>
                     <div id="listOption">
