@@ -5,9 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a7abcf1-5cb9-4ee8-8f85-041931c3dd65" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/user/user/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/user/user/service/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/TomatoFarmApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/TomatoFarmApplication.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/config/DemoConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/config/DemoConfig.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/config/SecurityConfig.class" afterDir="false" />
@@ -43,6 +40,7 @@
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/order/repository/OrderDetailRepositoryImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/order/repository/OrderDetailRepositoryImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/order/service/OrderService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/order/service/OrderService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/order/service/OrderServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/order/service/OrderServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/example/demo/TomatoFarmApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/example/demo/TomatoFarmApplicationTests.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,18 +57,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "simsim916"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;simsim916&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/simsim916/BusinessTeam.git",
-    "accountId": "7cba7338-83b8-4a0e-8596-5b98b794e891"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/simsim916/BusinessTeam.git&quot;,
+    &quot;accountId&quot;: &quot;7cba7338-83b8-4a0e-8596-5b98b794e891&quot;
   }
-}]]></component>
+}</component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
