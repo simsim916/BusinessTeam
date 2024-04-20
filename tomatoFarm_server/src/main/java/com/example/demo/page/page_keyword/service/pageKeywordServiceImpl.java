@@ -18,7 +18,7 @@ public class pageKeywordServiceImpl implements pageKeywordService {
 	@Transactional
 	public List<String> selectall(PageKeyword entity, String userId) {
 
-		List<PageKeyword> pageKeyword_list = pageKeywordRepository.findByIdOrderBySearchDateDesc(userId);
+		List<PageKeyword> pageKeyword_list = pageKeywordRepository.findByUserIdOrderBySearchDateDesc(userId);
 		List<String> keyword = new ArrayList<>();
 		for (PageKeyword e : pageKeyword_list){
 			keyword.add(e.getKeyword());

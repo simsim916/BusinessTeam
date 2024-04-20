@@ -20,7 +20,7 @@ import lombok.ToString;
 public class PageKeywordID implements Serializable{
 
 	private String keyword;
-	private String id;
+	private String userId;
 	private LocalDate searchDate;
 	
 }

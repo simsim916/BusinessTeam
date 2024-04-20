@@ -26,7 +26,8 @@ public class PageKeyword {
 	@Column(name = "search_date")
 	private LocalDate searchDate;
 	@Id
-	private String id;
+	@Column(name = "user_id")
+	private String userId;
 	@Builder.Default
 	private Integer search_count=1;
 }

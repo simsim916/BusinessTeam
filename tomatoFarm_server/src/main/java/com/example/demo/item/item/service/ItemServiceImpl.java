@@ -71,14 +71,14 @@ public class ItemServiceImpl implements ItemService {
 
 		PageKeywordID pageKeywordID = PageKeywordID.builder()
 				.keyword(searchRequest.getKeyword())
-				.id(userId)
+				.userId(userId)
 				.searchDate(koreaTime)
 				.build();
 		
 		PageKeyword entity = PageKeyword.builder()
 				.keyword(pageKeywordID.getKeyword())
 				.searchDate(pageKeywordID.getSearchDate())
-				.id(pageKeywordID.getId())
+				.userId(pageKeywordID.getUserId())
 				.build();
 		
 		Optional<PageKeyword> data = pageKeywordRepository.findById(pageKeywordID);

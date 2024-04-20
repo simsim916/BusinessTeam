@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface pageKeywordRepository extends JpaRepository<PageKeyword, PageKeywordID>{
 
-    List<PageKeyword> findByIdOrderBySearchDateDesc(String id);
+    List<PageKeyword> findByUserIdOrderBySearchDateDesc(String id);
 
 
 }
