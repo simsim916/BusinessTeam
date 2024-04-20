@@ -12,10 +12,10 @@ import com.example.demo.item.item.domain.ItemDTO;
 import com.example.demo.order.domain.OrderDTO;
 import com.example.demo.order.entity.Itemorder;
 import com.example.demo.order.entity.OrderDetail;
-import com.example.demo.userCart.entity.UserCart;
+import com.example.demo.user.user_cart.entity.UserCart;
 import com.example.demo.order.repository.ItemorderRepository;
 import com.example.demo.order.repository.OrderDetailRepository;
-import com.example.demo.userCart.repository.UserCartRepository;
+import com.example.demo.user.user_cart.repository.UserCartRepository;
 
 import lombok.AllArgsConstructor;
 
@@ -32,18 +32,15 @@ public class OrderServiceImpl implements OrderService {
 	public Itemorder order(OrderDTO dto, String userId) {
 
 		Itemorder itemorder = Itemorder.builder()
-				.id(userId)
+				.userId(userId)
 				.addressCode(dto.getAddress_code())
 				.address1(dto.getAddress1())
 				.address2(dto.getAddress2())
-				.price(dto.getPrice())
-				.delivery(dto.getDelivery())
-				.point(dto.getPoint())
-				.orderDate(LocalDateTime.now())
+				.orderprice(dto.getPrice())
+				.deliveryprice(dto.getDelivery())
+				.usepoint(dto.getPoint())
+				.orderdate(LocalDateTime.now())
 				.order_message(dto.getDeliverymessage())	
-				.size(dto.getItemList().size())
-				.item_code(dto.getItemList().get(0).getCode())
-				.item_name(dto.getItemList().get(0).getItem_name())
 				.build();
 
 		itemorder = itemorderRepository.merge(itemorder);
@@ -54,9 +51,9 @@ public class OrderServiceImpl implements OrderService {
 		for (ItemDTO e : dto.getItemList()) {
 			item_list.add(e.getCode());
 			list.add(OrderDetail.builder()
-					.order_code(itemorder.getCode())
-					.item_code(e.getCode())
-					.item_amount(e.getAmount())
+					.orderSeq(itemorder.getCode())
+					.itemCode(e.getCode())
+					.amount(e.getAmount())
 					.discount(e.getDiscount())
 					.build());
 		}

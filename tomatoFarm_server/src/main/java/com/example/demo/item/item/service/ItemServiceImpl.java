@@ -8,18 +8,18 @@ import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
+import com.example.demo.page.page_keyword.entity.PageKeyword;
+import com.example.demo.page.page_keyword.entity.PageKeywordID;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.item.item.domain.ItemDTO;
-import com.example.demo.domain.SortDTO;
+import com.example.demo.item.item.domain.SortDTO;
 import com.example.demo.item.item.entity.Item;
-import com.example.demo.entity.Keyword;
-import com.example.demo.entity.KeywordID;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.item.item.repository.ItemRepository;
-import com.example.demo.repository.KeywordRepository;
+import com.example.demo.page.page_keyword.repository.pageKeywordRepository;
 
 import lombok.AllArgsConstructor;
 
@@ -29,7 +29,7 @@ import lombok.AllArgsConstructor;
 public class ItemServiceImpl implements ItemService {
 
 	private final ItemRepository itemRepository;
-	private final KeywordRepository keywordRepository;
+	private final pageKeywordRepository pageKeywordRepository;
 	private final EntityManager entityManager;
 	
 	
@@ -69,24 +69,24 @@ public class ItemServiceImpl implements ItemService {
 	public List<ItemDTO> selectItemWhereKeyword(PageRequest pageRequest,SearchRequest searchRequest, @AuthenticationPrincipal String userId) {
 		LocalDate koreaTime = LocalDateTime.now().toLocalDate(); // 현재 시간
 
-		KeywordID keywordID = KeywordID.builder()
+		PageKeywordID pageKeywordID = PageKeywordID.builder()
 				.keyword(searchRequest.getKeyword())
 				.id(userId)
 				.searchDate(koreaTime)
 				.build();
 		
-		Keyword entity = Keyword.builder()
-				.keyword(keywordID.getKeyword())
-				.searchDate(keywordID.getSearchDate())
-				.id(keywordID.getId())
+		PageKeyword entity = PageKeyword.builder()
+				.keyword(pageKeywordID.getKeyword())
+				.searchDate(pageKeywordID.getSearchDate())
+				.id(pageKeywordID.getId())
 				.build();
 		
-		Optional<Keyword> data = keywordRepository.findById(keywordID);
+		Optional<PageKeyword> data = pageKeywordRepository.findById(pageKeywordID);
 		if(data.isPresent()) {
 			entity=data.get();
 			entity.setSearch_count(entity.getSearch_count()+1);
 		}
-		keywordRepository.save(entity);
+		pageKeywordRepository.save(entity);
 		
 		return itemRepository.selectItemWhereKeyword(pageRequest, searchRequest);
 	}

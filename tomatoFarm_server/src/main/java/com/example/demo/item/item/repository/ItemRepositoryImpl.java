@@ -2,7 +2,7 @@
 package com.example.demo.item.item.repository;
 
 import static com.example.demo.item.item.entity.QItem.item;
-import static com.example.demo.entity.Qitem_event.item_event;
+import static com.example.demo.item.item_event.entity.QitemEvent.itemEvent;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import com.example.demo.item.item.domain.ItemDTO;
 import com.example.demo.item.item.entity.Item;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.domain.SortDTO;
+import com.example.demo.item.item.domain.SortDTO;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.querydsl.core.types.Order;
@@ -32,7 +32,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 	private final EntityManager entityManager;
 	private final QBean<ItemDTO> dtoBean = Projections.bean(ItemDTO.class, item.sort1, item.sort2, item.sort3, item.code, item.brand, item.name,
 			item.delivery, item.price, item.storage, item.weight, item.packing, item.sales, item.stock, item.views,
-			item.likes, item.event_code, item.intro, item.admin, item_event.discount, item_event.name.as("event_name"));
+			item.likes, item.eventCode, item.intro, item.userIdAdmin, itemEvent.discount, itemEvent.name.as("event_name"));
 
 	// queryDSL 동적 정렬을 위해 OrderSpecifier객체를 이용한 동적 정렬
 	public OrderSpecifier<?> getSortType(SearchRequest searchRequest) {
@@ -57,7 +57,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 	// ** 동적 한 컬럼 검색
 	public List<ItemDTO> selectItemListStringWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
 		return jPAQueryFactory.select(dtoBean)
-				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
+				.from(item).leftJoin(itemEvent).on(item.eventCode.eq(itemEvent.code))
 				.where(Expressions.stringPath(searchRequest.getColumn()).contains(searchRequest.getKeyword()))
 //				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum())
 				.orderBy(getSortType(searchRequest))
@@ -68,7 +68,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 	// ** 동적 한 컬럼 검색
 	public List<ItemDTO> selectItemListIntegerWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
 		return jPAQueryFactory.select(dtoBean)
-				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
+				.from(item).leftJoin(itemEvent).on(item.eventCode.eq(itemEvent.code))
 				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue().contains(searchRequest.getKeyword()))
 //				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum()).orderBy(getSortType(searchRequest))
 				.fetch();
@@ -78,7 +78,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 	// 이벤트 중인 상품 조회 시 사용
 	public List<ItemDTO> selectItemListStringWhereTypeNotNull(PageRequest pageRequest, SearchRequest searchRequest) {
 		return jPAQueryFactory.select(dtoBean)
-				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
+				.from(item).leftJoin(itemEvent).on(item.eventCode.eq(itemEvent.code))
 				.where(Expressions.stringPath(searchRequest.getColumn()).isNotNull()).limit(pageRequest.getEndNum())
 				.offset(pageRequest.getStartNum()).orderBy(getSortType(searchRequest)).fetch();
 	}
@@ -87,7 +87,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 	// ** 키워드 상품 페이징 조회
 	public List<ItemDTO> selectItemWhereKeyword(PageRequest pageRequest, SearchRequest searchRequest) {
 		return jPAQueryFactory.select(dtoBean)
-				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code))
+				.from(item).leftJoin(itemEvent).on(item.eventCode.eq(itemEvent.code))
 				.where(item.sort2.contains(searchRequest.getKeyword())
 						.or(item.sort1.contains(searchRequest.getKeyword()))
 						.or(item.sort3.contains(searchRequest.getKeyword()))
@@ -145,8 +145,8 @@ public class ItemRepositoryImpl implements ItemRepository {
 		return jPAQueryFactory
 				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name.as("item_name"), item.delivery, item.price,
 						item.storage, item.weight, item.packing, item.sales, item.stock, item.views, item.likes,
-						item.event_code, item.intro, item_event.discount, item_event.name.as("event_name")))
-				.from(item).leftJoin(item_event).on(item.event_code.eq(item_event.code)).where(item.code.in(codeList))
+						item.eventCode, item.intro, itemEvent.discount, itemEvent.name.as("event_name")))
+				.from(item).leftJoin(itemEvent).on(item.eventCode.eq(itemEvent.code)).where(item.code.in(codeList))
 				.fetch();
 	}
 

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import com.example.demo.user.entity.User;
+import com.example.demo.user.user.entity.User;
 
 // => dependency 추가 필요함
 import io.jsonwebtoken.Claims; 

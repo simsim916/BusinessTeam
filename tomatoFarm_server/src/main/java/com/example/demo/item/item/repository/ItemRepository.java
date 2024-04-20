@@ -6,7 +6,7 @@ import com.example.demo.item.item.entity.Item;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.item.item.domain.ItemDTO;
-import com.example.demo.domain.SortDTO;
+import com.example.demo.item.item.domain.SortDTO;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 

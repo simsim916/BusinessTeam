@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.item.item.domain.ItemDTO;
-import com.example.demo.domain.SortDTO;
+import com.example.demo.item.item.domain.SortDTO;
 import com.example.demo.item.item.entity.Item;
-import com.example.demo.userCart.entity.UserCart;
+import com.example.demo.user.user_cart.entity.UserCart;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.item.item.service.ItemService;

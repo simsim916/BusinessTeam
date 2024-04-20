@@ -28,33 +28,33 @@ public class Itemorder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer code;
     @Column(name = "user_id")
-    private String id;
+    private String userId;
     @Column(name = "address_code")
     private Integer addressCode;
-    @Column(length = 50)
+    @Column(name = "address1")
     private String address1;
-    
-    @Column(length = 50)
+    @Column(name = "address2")
     private String address2;
-    private Integer price;
+    @Column(name = "orderprice")
+    private Integer orderprice;
     @Column(name = "deliveryprice")
-    private Integer delivery;
-    private Integer point;
+    private Integer deliveryprice;
+    @Column(name = "usepoint")
+    private Integer usepoint;
     
     @Column(name = "orderdate")
-    private LocalDateTime orderDate;
+    private LocalDateTime orderdate;
     
+    @Builder.Default
+    @Column(name="status")
+    private Integer status=0;
+
     @Column(name="deliverydate")
-    private LocalDateTime deliveryDate;
-    
+    private LocalDateTime deliverydate;
+
+    @Column(name="order_message")
     private String order_message;
 
-    @Builder.Default
-    private Integer checked=0;
-    
-    private Integer size;
-    private String item_name;
-    private Integer item_code;
-    
+
 
 }

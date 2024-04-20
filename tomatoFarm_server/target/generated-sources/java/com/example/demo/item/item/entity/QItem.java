@@ -19,15 +19,13 @@ public class QItem extends EntityPathBase<Item> {
 
     public static final QItem item = new QItem("item");
 
-    public final StringPath admin = createString("admin");
-
     public final StringPath brand = createString("brand");
 
     public final NumberPath<Integer> code = createNumber("code", Integer.class);
 
     public final NumberPath<Integer> delivery = createNumber("delivery", Integer.class);
 
-    public final NumberPath<Integer> event_code = createNumber("event_code", Integer.class);
+    public final NumberPath<Integer> eventCode = createNumber("eventCode", Integer.class);
 
     public final StringPath intro = createString("intro");
 
@@ -52,6 +50,8 @@ public class QItem extends EntityPathBase<Item> {
     public final NumberPath<Integer> stock = createNumber("stock", Integer.class);
 
     public final StringPath storage = createString("storage");
+
+    public final StringPath userIdAdmin = createString("userIdAdmin");
 
     public final NumberPath<Integer> vat = createNumber("vat", Integer.class);
 

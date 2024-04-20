@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.example.demo.item.item.entity.Item;
 import com.example.demo.item.item.domain.ItemDTO;
-import com.example.demo.domain.SortDTO;
+import com.example.demo.item.item.domain.SortDTO;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 
@@ -30,8 +30,8 @@ public interface ItemService {
 				.stock(dto.getStock())
 				.views(dto.getViews())
 				.likes(dto.getLikes())
-				.event_code(dto.getEvent_code())
-				.admin(dto.getAdmin())
+				.eventCode(dto.getEvent_code())
+				.userIdAdmin(dto.getAdmin())
 				.intro(dto.getIntro())
 				.build();
 		return entity;
@@ -56,8 +56,8 @@ public interface ItemService {
 				.stock(entity.getStock())
 				.views(entity.getViews())
 				.likes(entity.getLikes())
-				.event_code(entity.getEvent_code())
-				.admin(entity.getAdmin())
+				.event_code(entity.getEventCode())
+				.admin(entity.getUserIdAdmin())
 				.intro(entity.getIntro())
 				.build();
 		return dto;

@@ -19,13 +19,13 @@ public class QOrderDetail extends EntityPathBase<OrderDetail> {
 
     public static final QOrderDetail orderDetail = new QOrderDetail("orderDetail");
 
+    public final NumberPath<Integer> amount = createNumber("amount", Integer.class);
+
     public final NumberPath<Integer> discount = createNumber("discount", Integer.class);
 
-    public final NumberPath<Integer> item_amount = createNumber("item_amount", Integer.class);
+    public final NumberPath<Integer> itemCode = createNumber("itemCode", Integer.class);
 
-    public final NumberPath<Integer> item_code = createNumber("item_code", Integer.class);
-
-    public final NumberPath<Integer> order_code = createNumber("order_code", Integer.class);
+    public final NumberPath<Integer> orderSeq = createNumber("orderSeq", Integer.class);
 
     public QOrderDetail(String variable) {
         super(OrderDetail.class, forVariable(variable));

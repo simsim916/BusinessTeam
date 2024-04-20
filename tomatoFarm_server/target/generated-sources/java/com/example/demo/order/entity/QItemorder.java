@@ -25,29 +25,23 @@ public class QItemorder extends EntityPathBase<Itemorder> {
 
     public final NumberPath<Integer> addressCode = createNumber("addressCode", Integer.class);
 
-    public final NumberPath<Integer> checked = createNumber("checked", Integer.class);
-
     public final NumberPath<Integer> code = createNumber("code", Integer.class);
 
-    public final NumberPath<Integer> delivery = createNumber("delivery", Integer.class);
+    public final DateTimePath<java.time.LocalDateTime> deliverydate = createDateTime("deliverydate", java.time.LocalDateTime.class);
 
-    public final DateTimePath<java.time.LocalDateTime> deliveryDate = createDateTime("deliveryDate", java.time.LocalDateTime.class);
-
-    public final StringPath id = createString("id");
-
-    public final NumberPath<Integer> item_code = createNumber("item_code", Integer.class);
-
-    public final StringPath item_name = createString("item_name");
+    public final NumberPath<Integer> deliveryprice = createNumber("deliveryprice", Integer.class);
 
     public final StringPath order_message = createString("order_message");
 
-    public final DateTimePath<java.time.LocalDateTime> orderDate = createDateTime("orderDate", java.time.LocalDateTime.class);
+    public final DateTimePath<java.time.LocalDateTime> orderdate = createDateTime("orderdate", java.time.LocalDateTime.class);
 
-    public final NumberPath<Integer> point = createNumber("point", Integer.class);
+    public final NumberPath<Integer> orderprice = createNumber("orderprice", Integer.class);
 
-    public final NumberPath<Integer> price = createNumber("price", Integer.class);
+    public final NumberPath<Integer> status = createNumber("status", Integer.class);
 
-    public final NumberPath<Integer> size = createNumber("size", Integer.class);
+    public final NumberPath<Integer> usepoint = createNumber("usepoint", Integer.class);
+
+    public final StringPath userId = createString("userId");
 
     public QItemorder(String variable) {
         super(Itemorder.class, forVariable(variable));

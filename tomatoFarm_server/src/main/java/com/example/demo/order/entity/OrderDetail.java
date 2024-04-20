@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
 
-import com.example.demo.entity.OrderDetailID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,17 +23,18 @@ import lombok.NoArgsConstructor;
 public class OrderDetail {
 
     @Id
-    @Column(name = "order_code")
+    @Column(name = "order_seq")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer order_code;
+    private Integer orderSeq;
 
     @Id
     @Column(name = "item_code")
-    private Integer item_code;
+    private Integer itemCode;
 
-    @Column(name = "item_amount")
-    private Integer item_amount;
+    @Column(name = "amount")
+    private Integer amount;
 
+    @Column(name = "discount")
     private Integer discount;
 
     // Getter and Setter methods

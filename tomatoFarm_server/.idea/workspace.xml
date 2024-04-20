@@ -10,18 +10,59 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="com.intellij.jpb.JpaEntity" />
+      </list>
+    </option>
+  </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
         <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
       </MavenGeneralSettings>
     </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="jdkForImporter" value="11" />
+      </MavenImportingSettings>
+    </option>
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "settings.editor.selected.configurable": "reference.settings.project.maven.importing"
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "Spring Boot.TomatoFarmApplication.executor": "Run",
+    "last_opened_file_path": "E:/BusinessTeam/tomatoFarm_server/src/main/java/com/example/demo/user",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "preferences.keymap"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\BusinessTeam\tomatoFarm_server\src\main\java\com\example\demo\user" />
+      <recent name="E:\BusinessTeam\tomatoFarm_server\src\main\java\com\example\demo\page" />
+      <recent name="E:\BusinessTeam\tomatoFarm_server\src\main\java\com\example\demo\user\user_cart\repository\userCart\service\userCart\repository" />
+      <recent name="E:\BusinessTeam\tomatoFarm_server\src\main\java\com\example\demo\user\userCart\repository" />
+      <recent name="E:\BusinessTeam\tomatoFarm_server\src\main\java\com\example\demo\user\userCart\service" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.example.demo.chat.entity" />
+      <recent name="com.example.demo.item.item" />
+      <recent name="com.example.demo.order.entity" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.demo.user.user_detail.entity" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <method v="2">
