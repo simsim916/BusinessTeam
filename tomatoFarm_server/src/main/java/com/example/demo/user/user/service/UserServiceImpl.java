@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
 		if (entity != null) { 
 			// 로그인성공
 			if (passwordEncoder.matches(password, entity.getPassword())) {
-				 List<PageKeyword> pageKeyword_list = pageKeywordRepository.findByIdOrderBySearchDateDesc(entity.getId());
+				 List<PageKeyword> pageKeyword_list = pageKeywordRepository.findByUserIdOrderBySearchDateDesc(entity.getId());
 				 List<String> keyword = new ArrayList<>();
 				 for (PageKeyword e : pageKeyword_list){
 					 keyword.add(e.getKeyword());
