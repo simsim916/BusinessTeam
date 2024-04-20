@@ -6,8 +6,9 @@ untitled/untitled.iml
 untitled/.idea/misc.xml
 untitled/.idea/modules.xml
 untitled/.idea/vcs.xml
-tomatoFarm_server/.idea/vcs.xml
 tomatoFarm_server/target/classes/
 tomatoFarm_server/target/generated-sources/
 tomatoFarm_server/.idea/
+.idea/
+.vscode/
 tomatoFarm_server/target/
