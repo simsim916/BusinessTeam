@@ -18,7 +18,7 @@ const SignBG = ({ }) => {
         value: {
             id: '',
             password: '',
-            username: '',
+            name: '',
             phonenumber: '',
             address: '',
             email: '',

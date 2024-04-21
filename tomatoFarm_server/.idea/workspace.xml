@@ -5,42 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a7abcf1-5cb9-4ee8-8f85-041931c3dd65" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/TomatoFarmApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/TomatoFarmApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/config/DemoConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/config/DemoConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/config/SecurityConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/config/ThymeleafConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/config/ThymeleafConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/chat/domain/ChatRoomDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/chat/domain/ChatRoomDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/config/WebMvcConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/config/WebMvcConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/HomeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/config/WebMvcConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/config/WebMvcConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/config/WebSocketConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/config/WebSocketConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/controller/HomeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/controller/HomeController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/item/item/controller/ItemController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/item/item/controller/ItemController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/item/item/domain/ItemDTO$ItemDTOBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/item/item/domain/ItemDTO$ItemDTOBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/item/item/domain/ItemDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/item/item/domain/ItemDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/item/item/entity/Item$ItemBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/item/item/entity/Item$ItemBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/item/item/entity/Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/item/item/entity/Item.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/item/item/repository/ItemRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/item/item/repository/ItemRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/item/item/repository/ItemRepositoryImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/item/item/repository/ItemRepositoryImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/item/item/service/ItemService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/item/item/service/ItemService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/item/item/service/ItemServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/item/item/service/ItemServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/module/PageRequest$PageRequestBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/module/PageRequest$PageRequestBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/module/PageRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/module/PageRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/module/SearchRequest$SearchRequestBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/module/SearchRequest$SearchRequestBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/module/SearchRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/module/SearchRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/module/WebSocket/WebSocketHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/module/WebSocket/WebSocketHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/module/jwtToken/JwtAuthenticationFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/module/jwtToken/JwtAuthenticationFilter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/module/jwtToken/TokenProvider.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/module/jwtToken/TokenProvider.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/order/controller/OrderController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/order/controller/OrderController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/order/domain/OrderDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/order/domain/OrderDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/order/entity/Itemorder$ItemorderBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/order/entity/Itemorder$ItemorderBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/order/entity/Itemorder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/order/entity/Itemorder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/order/entity/OrderDetail$OrderDetailBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/order/entity/OrderDetail$OrderDetailBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/order/entity/OrderDetail.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/order/entity/OrderDetail.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/order/repository/ItemorderRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/order/repository/ItemorderRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/order/repository/ItemorderRepositoryImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/order/repository/ItemorderRepositoryImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/order/repository/OrderDetailRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/order/repository/OrderDetailRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/order/repository/OrderDetailRepositoryImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/order/repository/OrderDetailRepositoryImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/order/service/OrderService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/order/service/OrderService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/order/service/OrderServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/order/service/OrderServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/com/example/demo/TomatoFarmApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/example/demo/TomatoFarmApplicationTests.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tomato_front/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../tomato_front/build/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tomato_front/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../tomato_front/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tomato_front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../tomato_front/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tomato_front/src/model/server-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/../tomato_front/src/model/server-config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tomato_front/src/pages/login/SignBG/SignBG.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../tomato_front/src/pages/login/SignBG/SignBG.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,6 +62,9 @@
   &quot;associatedIndex&quot;: 3
 }</component>
   <component name="ProjectId" id="2fMYjZbiRvNMdSeRTgndCuEvDyf" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -170,10 +149,15 @@
       <option name="presentableId" value="Default" />
       <updated>1713613479498</updated>
       <workItem from="1713613480518" duration="240000" />
+      <workItem from="1713616450375" duration="1865000" />
+      <workItem from="1713657721119" duration="7319000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

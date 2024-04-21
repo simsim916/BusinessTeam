@@ -14,9 +14,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
     }
 
     public void addCorsMappings(CorsRegistry registry) {
-//		registry.addMapping("/**").allowedOrigins("http://tomatofarm.shop") // 클라이언트의 도메인 주소
-        registry.addMapping("/**").allowedOrigins("http://localhost:3000") // 클라이언트의 도메인 주소
-
+		registry.addMapping("/**").allowedOrigins("*","https://tomatofarm.shop") // 클라이언트의 도메인 주소
+//        registry.addMapping("/**").allowedOrigins("http://localhost:3000") // 클라이언트의 도메인 주소
                 .allowedMethods("GET", "POST", "PUT", "DELETE") // 허용할 HTTP 메서드
                 .allowedHeaders("*") // 허용할 HTTP 헤더
                 .allowCredentials(true); // 인증 정보 허용 여부
