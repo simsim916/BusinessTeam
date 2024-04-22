@@ -23,7 +23,7 @@ const Detail_ask = ({ item }) => {
     const [currPage, setCurrPage] = useState(1);
 
     useEffect(() => {
-        axios.get(SERVER_URL+`/itemask/select?column=item_code&keyword=${item.code}`
+        axios.get(SERVER_URL+`/itemask/select?column=itemCode&keyword=${item.code}`
         ).then(res => {
             setItemAskList(res.data);
             setLoading(false);
@@ -35,6 +35,8 @@ const Detail_ask = ({ item }) => {
         })
     }, [refresh])
 
+
+    console.log(itemAskList)
     const itemAskClick = () => {
         if (user)
             setAskWrite(!askWrite);

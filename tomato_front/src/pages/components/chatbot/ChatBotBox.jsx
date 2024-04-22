@@ -10,7 +10,7 @@ const ChatBotBox = ({
     amount, // admin페이지에서 나타낼 채팅창 갯수
     admin_root, // 현재 컴포넌트의 순번
     user,
-    getdata,
+    setRoomList,
     changeShowChatbot, // admin페이지에서 나타낼지 여부 상태값 변경 함수
     /* index 페이지 전용 props */
     setShowChatbot, // index페이지에서 나타낼지 여부 상태값 변경 함수 
@@ -25,7 +25,7 @@ const ChatBotBox = ({
 
     /* 메세지 입력 전송 form */
     const [text, setText] = useState({
-        room_seq: admin_root,
+        chatRoomSeq: admin_root,
         content: '',
         writer: JSON.parse(sessionStorage.getItem('userinfo')).id || '', // sessionStorage에서 가져온 id
     });
@@ -45,7 +45,7 @@ const ChatBotBox = ({
                 console.log(res.data)
                 setText((prev) => ({
                     ...prev,
-                    room_seq: res.data.seq
+                    chatRoomSeq: res.data.seq
                 }))
             })
             .catch(err => {
@@ -67,7 +67,7 @@ const ChatBotBox = ({
     /* 채팅 종료 */
     const endChat = () => {
         const data = {
-            seq: text.room_seq,
+            seq: text.chatRoomSeq,
             type: text.type,
             ing: 2
         }
@@ -75,7 +75,7 @@ const ChatBotBox = ({
         api('/chat/makeroom', 'post', data, userinfo.token)
             .then(res => {
                 if (admin_root) {
-                    getdata(res.data)
+                    setRoomList(res.data)
                     changeShowChatbot(admin_root)
                 } else
                     setShowChatbot(false)
@@ -89,13 +89,13 @@ const ChatBotBox = ({
     const [messageAll, setMessageAll] = useState(null);
     const getMessageAll = async (root) => {
         setLoading(true);
-        await api(`/chat/selectmessage?room_seq=${root}`, 'get', null, userinfo.token)
+        await api(`/chat/selectmessage?chatRoomSeq=${root}`, 'get', null, userinfo.token)
             .then((res) => {
                 setLoading(false);
                 setMessageAll(res.data);
                 setText((prev) => ({
                     ...prev,
-                    room_seq: res.data[0].room_seq,
+                    chatRoomSeq: res.data[0].chatRoomSeq,
                     content: ''
                 }));
             })
@@ -108,7 +108,7 @@ const ChatBotBox = ({
     /* admin 페이지에서 데이터 조회시 값 불러오는 함수 */
     useEffect(() => {
         admin_root && getMessageAll(admin_root);
-        text.room_seq && getMessageAll(text.room_seq);
+        text.chatRoomSeq && getMessageAll(text.chatRoomSeq);
     }, [refresh])
 
     /* 메세지 입력 input 태그 참조값 */
@@ -117,34 +117,33 @@ const ChatBotBox = ({
     /* 메세지를 남겼을 때 server DB에 내가 입력한 메세지를 merge하고
         지금 root에 해당되는 전체 메세지를 select 해오는 api 요청 함수 */
     const insertMessage = async () => {
-        if (!text.content.trim()) {
-            return;
-        }
-        setLoading(true);
-        await api('/chat/insertmessage', 'post', text, userinfo.token)
-            .then(res => {
-                setLoading(false);
-                setMessageAll(res.data);
-                setText((prev) => ({
-                    ...prev,
-                    content: ''
-                }))
-                if (inputBox.current) inputBox.current.focus();
-            }).catch(err => {
-                setLoading(false);
-                setError(true);
-                console.log(`insertMessage Error : ${err.message}`)
-            });
         if (admin_root) {
-            await api('/chat/makeroom', 'post', {
-                seq: admin_root,
-                user: user,
-                admin: userinfo.id,
-                ing: 1
-            }, userinfo.token)
+            await api('/chat/insertadminmessage', 'post', text, userinfo.token)
                 .then(res => {
-                    getdata(res.data)
-                })
+                    setMessageAll(res.data.messageList);
+                    setRoomList(res.data.roomList)
+                    setText((prev) => ({
+                        ...prev,
+                        content: ''
+                    }))
+                    if (inputBox.current) inputBox.current.focus();
+                }).catch(err => {
+                    setError(true);
+                    console.log(`insertadminmessage Error : ${err.message}`)
+                });
+        } else {
+            await api('/chat/insertusermessage', 'post', text, userinfo.token)
+                .then(res => {
+                    setMessageAll(res.data);
+                    setText((prev) => ({
+                        ...prev,
+                        content: ''
+                    }))
+                    if (inputBox.current) inputBox.current.focus();
+                }).catch(err => {
+                    setError(true);
+                    console.log(`insertMessage Error : ${err.message}`)
+                });
         }
     }
 
@@ -193,7 +192,7 @@ const ChatBotBox = ({
                                 <span>궁금한 내용을 선택하거나, 직접 입력해주세요.</span>
                             </p>
                         </div>
-                        {!text.room_seq &&
+                        {!text.chatRoomSeq &&
                             <div id="openQuestion">
                                 <h4>문의유형</h4>
                                 <div id="openQuestionBox">
@@ -212,12 +211,12 @@ const ChatBotBox = ({
                                 </div>
                             </div>
                         }
-                        {!text.room_seq && userChatRoom && userChatRoom.length > 0 &&
+                        {!text.chatRoomSeq && userChatRoom && userChatRoom.length > 0 &&
                             <div id="beforechat">
                                 <h4>이전채팅 불러오기</h4>
                                 {userChatRoom.map((e, i) =>
                                     <div className='beforechatRoom' key={i}>
-                                        <span>{`${new Date(e.regdate).getFullYear()}.${new Date(e.regdate).getMonth()}.${new Date(e.regdate).getDate()} ${new Date(e.regdate).getHours()}시`}</span>
+                                        <span>{`${new Date(e.regdate).getFullYear()}.${new Date(e.regdate).getMonth()}.${new Date(e.regdate).getDate()} ${new Date(e.regdate).getHours()}시 ${new Date(e.regdate).getMinutes()}분`}</span>
                                         <div onClick={() => getMessageAll(e.seq)}>채팅보기</div>
                                     </div>
                                 )}
@@ -241,9 +240,9 @@ const ChatBotBox = ({
 
             </div>
             <div id="chatBotTextBox">
-                <input type="text" readOnly={!text.room_seq} placeholder={text.type ? "텍스트를 입력해주세요." : "문의유형을 선택해주세요."} value={text.content} onChange={(event) => changeContent(event)} ref={inputBox}
+                <input type="text" readOnly={!text.chatRoomSeq} placeholder={text.type ? "텍스트를 입력해주세요." : "문의유형을 선택해주세요."} value={text.content} onChange={(event) => changeContent(event)} ref={inputBox}
                     onKeyUp={handleKeyUp} />
-                <button onClick={insertMessage} >전송</button>
+                <button onClick={text.content.length > 0 ? insertMessage : null} >전송</button>
             </div>
         </div >
     );

@@ -22,7 +22,7 @@ const SideMenu = ({ openSideBar, sideBarOpen }) => {
         <>
             <div id="topBarA" style={{ paddingLeft: sideBarOpen ? '95px' : '15px' }}>
                 <i className="fa-solid fa-house"></i>
-                &nbsp;&nbsp; 관리자페이지 &nbsp;&nbsp;
+                &nbsp;&nbsp; <Link to="/admin">관리자페이지</Link> &nbsp;&nbsp;
                 <span>
                     <i className="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;{getLocation()}
                 </span>
@@ -30,7 +30,7 @@ const SideMenu = ({ openSideBar, sideBarOpen }) => {
 
             </div>
             <div id="sideBar" style={{ transform: sideBarOpen ? 'translateX(0%)' : 'translateX(-100%)' }}>
-                <div>토마토팜</div>
+                <Link to="/home">토마토팜</Link>
                 <ul>
                     <li>
                         <Link to="/admin"><i className="fa-solid fa-house"></i><br />메인 메뉴</Link>

@@ -82,18 +82,18 @@
     color: white;
     height: 20px;
     margin-top: 10px;
-    width: 80px;
+    width: 60px;
 }
 #chatBot_Unidentified li:nth-of-type(4) {
     width: 100px;
 }
 
 #chatBot_Unidentified li:nth-of-type(5) {
-    width: calc((100% - 50px - 50px - 80px - 100px - 70px - 20px)/2);
+    width: calc((100% - 50px - 50px - 60px - 100px - 70px - 20px)/2);
 }
 
 #chatBot_Unidentified li:nth-of-type(6) {
-    width: calc((100% - 50px - 50px - 80px - 100px - 70px - 20px)/2);
+    width: calc((100% - 50px - 50px - 60px - 100px - 70px - 20px)/2);
 }
 
 #chatBot_Unidentified li:nth-of-type(7) {

@@ -8,11 +8,13 @@ import com.example.demo.chat.entity.ChatMessage;
 import com.example.demo.chat.entity.ChatRoom;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
+import com.example.demo.user.user.domain.AdminChat;
 
 public interface ChatService {
 
 	List<ChatMessageDTO> selectAllmessageWhereRoomSeq(ChatMessage entity);
-	List<ChatRoomDTO> selectRoom(PageRequest pageRequest, SearchRequest searchRequest, String userId);
-	ChatMessage insertMessage(ChatMessage entity);
-	ChatRoom insertRoom(ChatRoom entity);
+	List<ChatRoomDTO> selectRoom(String userId);
+	List<ChatMessageDTO> insertUserMessage(ChatMessage entity);
+	AdminChat insertAdminMessage(ChatMessage entity);
+	List<ChatRoomDTO> insertRoom(ChatRoom entity);
 }

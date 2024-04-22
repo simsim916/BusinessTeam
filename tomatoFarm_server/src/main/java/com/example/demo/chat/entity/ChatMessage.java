@@ -1,9 +1,11 @@
 package com.example.demo.chat.entity;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.*;
 
+import com.example.demo.user.user_level.entity.UserLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

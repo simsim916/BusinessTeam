@@ -1,8 +1,18 @@
 package com.example.demo.chat.repository;
 
-import com.example.demo.chat.entity.ChatRoom;
+import com.example.demo.chat.entity.ChatMessage;
+import com.example.demo.chat.domain.ChatMessageDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
-public interface ChatRoomRepositoryJPA extends JpaRepository<ChatRoom, Long>{
-	
+import java.util.List;
+
+public interface ChatMessageRepositoryJPA extends JpaRepository<ChatMessage, Long>{
+
+    @Query(value = "select " +
+            "new com.example.demo.chat.domain.ChatMessageDTO(cm.seq, cm.writer, cm.content, cm.chatRoomSeq, cm.regdate , u.userLevelCode) " +
+            "from ChatMessage cm " +
+            "left join User u on cm.writer = u.id " +
+            "where cm.chatRoomSeq = :chatRoomSeq")
+    List<ChatMessageDTO> findAllByChatRoomSeq(Long chatRoomSeq);
 }

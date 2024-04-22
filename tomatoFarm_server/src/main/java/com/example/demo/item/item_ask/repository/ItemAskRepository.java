@@ -12,7 +12,5 @@ import com.example.demo.module.SearchRequest;
 @Repository
 public interface ItemAskRepository {
 
-	List<ItemAskDTO> selectItemAskListStringWhereType(PageRequest pageRequest , SearchRequest searchRequest);
-	List<ItemAskDTO> selectItemAskListIntegerWhereType(PageRequest pageRequest , SearchRequest searchRequest);
-	ItemAsk merge(ItemAsk entity);
+	List<ItemAskDTO> selectItemAskListStringWhereType(SearchRequest searchRequest);
 }

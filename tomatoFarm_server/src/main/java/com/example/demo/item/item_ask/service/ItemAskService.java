@@ -11,15 +11,14 @@ public interface ItemAskService {
 
 	//** 상품문의 조회
 		//* 글자 조회
-	List<ItemAskDTO> selectItemAskListStringWhereType(PageRequest pageRequest, SearchRequest searchRequest);
+	List<ItemAskDTO> selectItemAskListStringWhereType(SearchRequest searchRequest);
 		//* 숫자 조회
-	List<ItemAskDTO> selectItemAskListIntegerWhereType(PageRequest pageRequest, SearchRequest searchRequest);
-	
-//	=================================
+	List<ItemAsk> findAllByItemCodeOrderBySeqDesc(SearchRequest searchRequest);
 	
 	//** 상품문의 등록
 	 ItemAsk merge(ItemAsk entity);
-	 
+
+	 Boolean checkPassword(ItemAsk entity);
 	 
 	 
 }

@@ -1,6 +1,7 @@
 package com.example.demo.chat.domain;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,13 +15,13 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ChatMessageDTO {
-	private Integer seq;
+	private Long seq;
 	private String writer; 
 	private String content;
-	private Integer room_seq;
+	private Long chatRoomSeq;
 	private LocalDateTime regdate;
+	private Integer userLevelCode;
 
-	private Integer user_level;
 }
 
 

@@ -7,7 +7,7 @@ import com.example.demo.chat.entity.ChatMessage;
 
 public interface ChatMessageRepository {
 
-	List<ChatMessageDTO> selectAllmessageWhereRoomSeq(ChatMessage entity);
+	List selectAllmessageWhereRoomSeq(ChatMessage entity);
 
 	ChatMessage insertMessage(ChatMessage entity);
 	

@@ -32,17 +32,18 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping(value = "/itemask")
 public class ItmeAskController {
 	private final ItemAskService item_askService;
-	PasswordEncoder passwordEncoder;
+
 	TokenProvider tokenProvider;
 
 	@GetMapping("/select")
-	public ResponseEntity<?> selectItem_askList(PageRequest pageRequest, SearchRequest searchRequest) {
+	public ResponseEntity<?> select(SearchRequest searchRequest) {
+		System.out.println(searchRequest);
 		ResponseEntity<?> result = null;
-		List<ItemAskDTO> list = null;
-		if (searchRequest.getKeyword().matches("[0-9]+")) {
-			list = item_askService.selectItemAskListIntegerWhereType(pageRequest, searchRequest);
+		List<?> list = null;
+		if (searchRequest.getColumn().equals("itemCode")) {
+			list = item_askService.findAllByItemCodeOrderBySeqDesc(searchRequest);
 		} else {
-			list = item_askService.selectItemAskListStringWhereType(pageRequest, searchRequest);
+			list = item_askService.selectItemAskListStringWhereType(searchRequest);
 		}
 		result = ResponseEntity.status(HttpStatus.OK).body(list.size() > 0 ? list : null);
 		return result;
@@ -63,7 +64,7 @@ public class ItmeAskController {
 			}
 		}
 		item_askService.merge(entity);
-		result = ResponseEntity.status(HttpStatus.OK).body(item_askService.selectItemAskListStringWhereType(new PageRequest(), new SearchRequest("title","")));
+		result = ResponseEntity.status(HttpStatus.OK).body(item_askService.selectItemAskListStringWhereType(new SearchRequest("title","")));
 		
 		return result;
 	}
@@ -78,16 +79,8 @@ public class ItmeAskController {
 	@PostMapping("/askpassword")
 	public ResponseEntity<?> askpassword(@RequestBody ItemAsk entity) {
 		ResponseEntity<?> result = null;
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		PageRequest pageRequest = new PageRequest();
-		SearchRequest searchRequest = new SearchRequest();
-		searchRequest.setColumn("seq");
-		searchRequest.setKeyword(entity.getSeq() + "");
-		String password = entity.getPassword();
-		System.out.println(password);
-		ItemAskDTO dto = item_askService.selectItemAskListIntegerWhereType(pageRequest, searchRequest).get(0);
-
-		if (encoder.matches(password, dto.getPassword())) {
+		System.out.println(entity);
+		if (item_askService.checkPassword(entity)) {
 			// 비밀번호 일치
 			result = ResponseEntity.status(HttpStatus.OK).body(entity);
 		} else {

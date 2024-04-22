@@ -29,7 +29,7 @@ public class ItemAskRepositoryImpl implements ItemAskRepository {
 
 	@Override
 	// ** 상품 리뷰 조회
-	public List<ItemAskDTO> selectItemAskListStringWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
+	public List<ItemAskDTO> selectItemAskListStringWhereType(SearchRequest searchRequest) {
 		return jPAQueryFactory
 				.select(Projections.bean(ItemAskDTO.class, itemAsk.seq, itemAsk.itemCode, itemAsk.userIdWriter, itemAsk.title,
 						itemAsk.type, itemAsk.contents, itemAsk.password, itemAsk.reply, itemAsk.userIdReplyer, itemAsk.regdate,
@@ -37,27 +37,7 @@ public class ItemAskRepositoryImpl implements ItemAskRepository {
 				.from(itemAsk).leftJoin(item).on(itemAsk.itemCode.eq(item.code))
 				.where(Expressions.stringPath(searchRequest.getColumn()).contains(searchRequest.getKeyword()))
 				.orderBy(itemAsk.seq.desc())
-				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum())
 				.fetch();
 	}
 
-	@Override
-	public List<ItemAskDTO> selectItemAskListIntegerWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
-		return jPAQueryFactory
-				.select(Projections.bean(ItemAskDTO.class, itemAsk.seq, itemAsk.itemCode, itemAsk.userIdWriter, itemAsk.title,
-						itemAsk.type, itemAsk.contents, itemAsk.password, itemAsk.reply, itemAsk.userIdReplyer, itemAsk.regdate,
-						item.name.as("item_name")))
-				.from(itemAsk).leftJoin(item).on(itemAsk.itemCode.eq(item.code))
-				.where(Expressions.numberPath(Integer.class,searchRequest.getColumn()).stringValue().eq(searchRequest.getKeyword()))
-				.orderBy(itemAsk.seq.desc())
-				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum())
-				.fetch();
-	}
-	
-	@Override
-	public ItemAsk merge(ItemAsk entity) {
-		return entityManager.merge(entity);
-	}
-
-	
 }

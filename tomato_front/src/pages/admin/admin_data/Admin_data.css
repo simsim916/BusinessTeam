@@ -1,5 +1,5 @@
 #topBox {
-    height: 12%;
+    height: 85px;
     width: 100%;
     position: relative;
 }
@@ -49,11 +49,11 @@
 }
 
 #excelBox {
-    height: 63%;
+    height: calc(100% - 30px - 85px - 40px - 40px - 61px);
 }
 
 .dataListBox {
-    height: calc(100% - 0px);
+    height: 100%;
     overflow-x: auto;
     overflow-y: scroll;
     position: relative;

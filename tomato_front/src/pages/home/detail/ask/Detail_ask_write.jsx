@@ -16,7 +16,7 @@ const Detail_ask_write = ({ item, setRefresh, refresh, itemAskClick }) => {
     const [askBoxClose, setAskBoxClose] = useState(true);
     const [checked, setChecked] = useState(false);
     const [ask, setAsk] = useState({
-        item_code: item.code,
+        itemCode: item.code,
         writer: 'manager1',
         title: '',
         contents: '',
@@ -91,7 +91,7 @@ const Detail_ask_write = ({ item, setRefresh, refresh, itemAskClick }) => {
                                                 <input type="checkbox" name="privacyBox" onChange={changeChecked} checked={checked} />
                                                 비밀글로 문의하기
                                             </label>
-                                            {checked && <input type='number' id='passwordAsk' name='password' value={ask.password} onChange={changeAsk} onInput={maxLengthCheck} maxlength="4" placeholder='4자리 숫자' />}
+                                            {checked && <input type='number' id='passwordAsk' name='password' value={ask.password || false} onChange={changeAsk} onInput={maxLengthCheck} maxLength="4" placeholder='4자리 숫자' />}
                                         </div>
                                     </div>
                                 </div>

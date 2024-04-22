@@ -16,12 +16,11 @@ import lombok.Setter;
 public class ChatRoomDTO {
 	private Long seq;
 	private String type;
-	private String user;
-	private String admin;
+	private String userIdUser;
+	private String userIdAdmin;
 	@Builder.Default 
 	private Integer ing = 0;
-	
-	
+
 	private LocalDateTime regdate;
 }
 

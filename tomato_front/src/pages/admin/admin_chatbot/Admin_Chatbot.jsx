@@ -65,7 +65,7 @@ const Admin_Chatbot = () => {
 
             <div id='admin_ChatBotContainer'>
                 {
-                    roomList.length > 0 && showChatbot && showChatbot.map((seq) => <ChatBotBox getdata={getdata} amount={showChatbot.length} user={roomList.filter(e => e.seq == seq)[0].user} admin_root={seq} key={seq} changeShowChatbot={changeShowChatbot} />)
+                    roomList.length > 0 && showChatbot && showChatbot.map((seq) => <ChatBotBox setRoomList={setRoomList} amount={showChatbot.length} user={roomList.filter(e => e.seq == seq)[0].user} admin_root={seq} key={seq} changeShowChatbot={changeShowChatbot} />)
                 }
             </div>
         </div>

@@ -41,9 +41,11 @@
     left: 1.5px;
     top: 67px;
     transition: 1s;
+    color: white;
 }
 
-#sideBar>div {
+#sideBar>a {
+    display: block;
     line-height: 40px;
     color: white;
     text-align: center;
@@ -61,7 +63,7 @@
 
 
 #sideBar>ul>li {
-    height: 10vh;
+    height: 12vh;
     text-align: center;
     display: flex;
     justify-content: center;

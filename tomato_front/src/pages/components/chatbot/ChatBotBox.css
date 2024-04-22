@@ -293,6 +293,7 @@
     line-height: 40px;
     display: flex;
     padding: 0 30px;
+    margin-top: 5px;
 }
 
 .beforechatRoom div {

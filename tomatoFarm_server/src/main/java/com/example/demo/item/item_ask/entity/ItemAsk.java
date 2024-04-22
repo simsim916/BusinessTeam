@@ -20,7 +20,7 @@ public class ItemAsk {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "seq")
-    private Integer seq; //순번
+    private Long seq; //순번
     @Column(name = "item_code")
     private Integer itemCode; //제품코드
     @Column(name = "user_id_writer")

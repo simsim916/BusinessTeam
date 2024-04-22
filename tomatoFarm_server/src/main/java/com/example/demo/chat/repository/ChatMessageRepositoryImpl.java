@@ -1,6 +1,6 @@
 package com.example.demo.chat.repository;
 
-import javax.persistence.EntityManager;
+import javax.persistence.*;
 
 import com.example.demo.chat.entity.ChatMessage;
 import org.springframework.stereotype.Repository;
@@ -12,6 +12,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import static com.example.demo.chat.entity.QChatMessage.chatMessage;
 import static com.example.demo.user.user.entity.QUser.user;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -28,11 +29,13 @@ public class ChatMessageRepositoryImpl implements ChatMessageRepository {
 		return entityManager.merge(entity);
 	}
 
+
 	@Override
-	public List<ChatMessageDTO> selectAllmessageWhereRoomSeq(ChatMessage entity) {
+	public List selectAllmessageWhereRoomSeq(ChatMessage entity) {
+
 		return jPAQueryFactory
 				.select(Projections.bean(ChatMessageDTO.class, chatMessage.content, chatMessage.chatRoomSeq, chatMessage.seq,
-						chatMessage.writer, chatMessage.regdate, user.userLevelCode.as("user_level")))
+						chatMessage.writer, chatMessage.regdate, user.userLevelCode.as("userLevel")))
 				.from(chatMessage).leftJoin(user).on(chatMessage.writer.eq(user.id))
 				.where(chatMessage.chatRoomSeq.eq(entity.getChatRoomSeq()))
 				.orderBy(chatMessage.regdate.asc())

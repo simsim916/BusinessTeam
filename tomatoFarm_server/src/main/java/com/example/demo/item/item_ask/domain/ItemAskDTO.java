@@ -17,18 +17,16 @@ import lombok.ToString;
 @NoArgsConstructor
 public class ItemAskDTO {
 
-	private Integer seq; //순번
-	private Integer item_code; //제품코드
-	private String writer;	//글쓴이
+	private Long seq; //순번
+	private Integer itemCode; //제품코드
+	private String userIdWriter;	//글쓴이
 	private String title;	//제목
 	private String type;	//유형
 	private String contents;	//내용
 	private String password; 	// 비밀글 비밀번호
 	private String reply;	//답변
-	private String reply_writer;	//답변
+	private String userIdRelyer;	//답변
 	private LocalDateTime regdate;	//날짜
-	
-	private Integer secret; //비밀글 유무
 	
 	private String item_name;
 	

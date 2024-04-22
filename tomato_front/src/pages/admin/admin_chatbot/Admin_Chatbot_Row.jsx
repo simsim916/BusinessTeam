@@ -23,8 +23,8 @@ const Admin_Chatbot_Row = ({
                 {room.ing == 2 && '상담완료'}
             </li>
             <li><span>{new Date(room.regdate).getHours()}시 {new Date(room.regdate).getMinutes()}분</span></li>
-            <li>{room.user}</li>
-            <li>{room.admin}</li>
+            <li>{room.userIdUser}</li>
+            <li>{room.userIdAdmin}</li>
             {showChatbot.includes(room.seq) ?
                 <li style={{ backgroundColor: 'black' }} id="chtaBotING" onClick={() => changeShowChatbot(room.seq)} >채팅닫기</li>
                 :

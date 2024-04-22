@@ -10,4 +10,5 @@ public interface ChatRoomRepository {
 
 	List<ChatRoomDTO> selectAllRoom(PageRequest pageRequest, SearchRequest searchRequest);
 	List<ChatRoomDTO> selectUserRoom(PageRequest pageRequest, String userId);
+
 }
