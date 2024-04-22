@@ -25,6 +25,7 @@ function App() {
                     <Route path='/home/*' element={<Home />} />
                     <Route path='/customerQA' element={<CustomerQA />} />
                     <Route path='/websocket' element={<WebSocket />} />
+                    <Route path='/*' element={<Home />} />
                     <Route path='/' element={<Home />} />
                 </Routes>
             </div>

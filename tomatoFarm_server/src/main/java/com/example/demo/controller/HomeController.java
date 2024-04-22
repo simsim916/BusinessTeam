@@ -25,7 +25,7 @@ public class HomeController {
 	public ResponseEntity<?> health() {
 
 		ResponseEntity<?> result = null;
-		result = ResponseEntity.status(HttpStatus.OK).body("Succes Health Check");
+		result = ResponseEntity.status(HttpStatus.OK).body("Success Health Check");
 		return result;
 	}
 

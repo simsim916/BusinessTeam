@@ -34,6 +34,7 @@ public class ChatController {
 
     @PostMapping("/makeroom")
     public ResponseEntity<?> makeroom(HttpServletRequest request, @RequestBody ChatRoom entity, @AuthenticationPrincipal String userId) {
+        long beforeTime = System.currentTimeMillis();
         ResponseEntity<?> result = null;
         if(entity.getUserIdAdmin()==null) {
         	entity.setUserIdUser(userId);
@@ -44,6 +45,8 @@ public class ChatController {
         } else {
             result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("makeroom failed");
         }
+        long afterTime  = System.currentTimeMillis();
+        System.out.println("makeroom time: " + (afterTime - beforeTime));
         return result;
     }
 
