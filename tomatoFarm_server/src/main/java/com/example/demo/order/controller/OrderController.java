@@ -1,10 +1,13 @@
 package com.example.demo.order.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,4 +38,12 @@ public class OrderController {
 		return result;
 	}
 	
+	@GetMapping("/selectwhere")
+	public ResponseEntity<?> selectWhere(@AuthenticationPrincipal String userId) {
+		ResponseEntity<?> result = null;
+		List<Itemorder> list = orderService.selectWhere(userId);
+		System.out.println(list);
+		result = ResponseEntity.status(HttpStatus.OK).body(list);
+		return result;
+	}
 }

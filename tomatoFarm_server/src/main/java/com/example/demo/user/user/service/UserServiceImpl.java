@@ -95,4 +95,9 @@ public class UserServiceImpl implements UserService {
 	public List<User> saveAll(List<User> list) {
 		return userRepositoryJPA.saveAll(list);
 	}
+	
+	@Override
+	public void delete(String userId) {
+		userRepositoryJPA.deleteById(userId);
+	}
 }

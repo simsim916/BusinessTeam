@@ -73,10 +73,22 @@ public class UserController {
 
 		if (userService.saveAll(list).size() > 0)
 			result = ResponseEntity.status(HttpStatus.OK)
-					.body(userService.selectUserWhere(new SearchRequest("username", "")));
+					.body(userService.selectUserWhere(new SearchRequest("id", "")));
 		else
 			result = ResponseEntity.status(HttpStatus.OK).body("데이터 입력 실패");
 
+		return result;
+	}
+
+	@GetMapping("/delete")
+	public ResponseEntity<?> delete(@AuthenticationPrincipal String userId) {
+		ResponseEntity<?> result = null;
+		try {
+			userService.delete(userId);
+			result = ResponseEntity.status(HttpStatus.OK).body("탈퇴 성공! 다음에 뵙겠습니다.");
+		} catch (Exception e) {
+			result = ResponseEntity.status(HttpStatus.OK).body("탈퇴 실패! 다시 시도해주세요.");
+		}
 		return result;
 	}
 

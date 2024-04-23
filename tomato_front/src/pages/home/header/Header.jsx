@@ -145,10 +145,10 @@ const Header = () => {
                     </form>
                     <div id="searchRightBox">
                         <div id="myPage">
-                            <a to="/">
+                            <Link to="/home/mypage">
                                 <i className="fa-solid fa-user"></i>
                                 마이페이지
-                            </a>
+                            </Link>
                         </div>
                         <div id="myCart">
                             <Link to="/home/cart"><i className="fa-solid fa-cart-shopping"></i>

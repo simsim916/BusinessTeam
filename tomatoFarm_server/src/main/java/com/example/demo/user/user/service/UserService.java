@@ -18,6 +18,8 @@ public interface UserService {
 	
 	List<User> saveAll(List<User> list);
 	
+	void delete(String userId);
+	
 //	=================================
 	
 }
