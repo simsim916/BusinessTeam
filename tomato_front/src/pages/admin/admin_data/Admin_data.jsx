@@ -63,6 +63,12 @@ const Admin_data = ({ }) => {
                     keyword: ''
                 })
                 break;
+            case '/address':
+                setFormData({
+                    column: 'id',
+                    keyword: ''
+                })
+                break;
         }
         setSelectedItem(null);
         setChangedList([]);
@@ -166,6 +172,7 @@ const Admin_data = ({ }) => {
                 setItemList(res.data)
             })
     }
+    console.log(itemList);
 
     if (loading) return <Loading />
     if (error) return <Error />
@@ -182,6 +189,7 @@ const Admin_data = ({ }) => {
                             <option value="/item">상품</option>
                             <option value="/user">회원</option>
                             <option value="/event">이벤트</option>
+                            <option value="/address">회원주소</option>
                         </select>
                     </label>
                     <div id="dataSearch">
