@@ -1,12 +1,14 @@
 
 import Weather from './../weather/Weather';
+import ToDoList2 from './../todoList/ToDoList2';
 import Index_calender from './Index_calender';
 
 const Index = () => {
     return (
         <div id="Index">
-            {/* <Weather /> */}
+            {/* {/* <Weather /> */}
             <Index_calender />
+            <ToDoList2 />
         </div>
     )
 }
