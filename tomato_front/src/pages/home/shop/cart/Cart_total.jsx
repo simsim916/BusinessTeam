@@ -4,7 +4,11 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const Cart_total = () => {
-    let userBuy = useSelector(state => state.userBuy.buyList)
+    const userBuy = useSelector(state => state.userBuy.buyList);
+    const userCart = useSelector(state => state.userCart.data);
+    let result;
+    if (userBuy && userCart)
+        result = userCart.filter(e => userBuy.includes(e.itemCode));
 
     return (
         <div id="shopBasketPayContainer">
@@ -14,7 +18,7 @@ const Cart_total = () => {
                         <div>
                             {
                                 userBuy ?
-                                    makeComa(userBuy.reduce((result, e) => +result + (e.price * e.amount), 0))
+                                    makeComa(result.reduce((result, e) => +result + (e.price * e.amount), 0))
                                     :
                                     0
                             } 원
@@ -24,7 +28,7 @@ const Cart_total = () => {
                         <div>
                             {
                                 userBuy ?
-                                    makeComa(Math.ceil(userBuy.reduce((result, e) => +result + ((e.price * ((e.discount) / 100)) * e.amount), 0)))
+                                    makeComa(Math.ceil(result.reduce((result, e) => +result + ((e.price * ((e.itemEventDiscount) / 100)) * e.amount), 0)))
                                     :
                                     0
                             } 원
@@ -34,7 +38,7 @@ const Cart_total = () => {
                         <div>
                             {
                                 userBuy ?
-                                    makeComa(userBuy.reduce((result, e) => +result + (e.delivery), 0))
+                                    makeComa(result.reduce((result, e) => +result + (e.delivery), 0))
                                     :
                                     0
                             } 원
@@ -44,7 +48,7 @@ const Cart_total = () => {
                         <div>
                             {
                                 userBuy ?
-                                    makeComa(Math.ceil(userBuy.reduce((result, e) => +result + ((e.price * ((100 - e.discount) / 100)) * e.amount) + e.delivery, 0)))
+                                    makeComa(Math.ceil(result.reduce((result, e) => +result + ((e.price * ((100 - e.itemEventDiscount) / 100)) * e.amount) + e.delivery, 0)))
                                     :
                                     0
                             } 원

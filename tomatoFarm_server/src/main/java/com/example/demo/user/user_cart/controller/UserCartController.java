@@ -62,6 +62,7 @@ public class UserCartController {
 	public ResponseEntity<?> selectnouser(@RequestBody List<Integer> itemlist) {
 		ResponseEntity<?> result = null;
 		List<UserCartDTO> list = userCartService.findAllBy(itemlist);
+		System.out.println(list);
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}

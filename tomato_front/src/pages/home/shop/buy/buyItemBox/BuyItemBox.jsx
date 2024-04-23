@@ -13,15 +13,20 @@ const BuyItemBox = ({ }) => {
     const userCart = useSelector(state => state.userCart.data);
     const userBuyForm = useSelector(state => state.userBuy.form)
 
+    console.log('userBuy')
+    console.log(userBuy)
+    console.log('userCart')
+    console.log(userCart)
+
     useEffect(() => {
         const ar = [];
-        if(userBuy && userCart)
-        for (let itemCode of userBuy) {
-            for (let ele of userCart) {
-                if (itemCode == ele.itemCode)
-                    ar.push(ele)
+        if (userBuy && userCart)
+            for (let itemCode of userBuy) {
+                for (let ele of userCart) {
+                    if (itemCode == ele.itemCode)
+                        ar.push(ele)
+                }
             }
-        }
         dispatch(setUserBuyItemList(ar))
     }, [])
 

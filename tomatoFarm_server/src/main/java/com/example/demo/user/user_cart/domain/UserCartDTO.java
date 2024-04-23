@@ -26,10 +26,10 @@ public class UserCartDTO {
 	private Integer vat;
 	private Integer stock;
 	private Integer eventCode;
-	private Integer ItemEventDiscount;
+	private Integer itemEventDiscount;
 
 	public UserCartDTO(Integer itemCode, String userId, Integer amount, Integer likeItem,
-					   String itemName, Integer price, Integer delivery, Integer stock, Integer ItemEventDiscount) {
+					   String itemName, Integer price, Integer delivery, Integer stock, Integer itemEventDiscount) {
 		this.itemCode = itemCode;
 		this.userId = userId;
 		this.amount = amount;
@@ -38,16 +38,16 @@ public class UserCartDTO {
 		this.price = price;
 		this.delivery = delivery;
 		this.stock = stock;
-		this.ItemEventDiscount = ItemEventDiscount;
+		this.itemEventDiscount = itemEventDiscount;
 	}
 
-	public  UserCartDTO(Integer itemCode, String itemName, Integer price, Integer delivery, Integer stock, Integer ItemEventDiscount) {
+	public  UserCartDTO(Integer itemCode, String itemName, Integer price, Integer delivery, Integer stock, Integer itemEventDiscount) {
 		this.itemCode = itemCode;
 		this.itemName = itemName;
 		this.price = price;
 		this.delivery = delivery;
 		this.stock = stock;
-		this.ItemEventDiscount = ItemEventDiscount;
+		this.itemEventDiscount = itemEventDiscount;
 	}
 	
 }

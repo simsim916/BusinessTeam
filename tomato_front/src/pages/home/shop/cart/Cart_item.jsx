@@ -15,13 +15,9 @@ const Cart_item = () => {
     const userCartList = useSelector(state => state.userCart.data)
     const userCart_loading = useSelector(state => state.userCart.loading);
     const userBuy = useSelector(state => state.userBuy.buyList);
-    // const userinfo = useSelector(state => state.user)
     const userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
 
-    console.log('userBuy')
-    console.log(userBuy)
-    console.log('userCart')
-    console.log(userCartList)
+
 
     const handleAllCheckBox = () => {
         if (userBuy && userCart.length == userBuy.length) {
@@ -69,10 +65,7 @@ const Cart_item = () => {
                             장바구니에 상품을 담아주세요.
                         </div>
                 }
-
             </div>
-
-
         </div >
     );
 

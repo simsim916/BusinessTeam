@@ -14,6 +14,8 @@ const Cart_item_Row = ({ item, idx }) => {
     const userCart = useSelector(state => state.userCart.data);
     const userBuy = useSelector(state => state.userBuy.buyList)
 
+
+    console.log(item)
     const changeCheckBox = () => {
         if (userBuy && userBuy.find(e => e == item.itemCode))
             dispatch(setUserBuyStorage(userBuy.filter(e => e != item.itemCode)));
