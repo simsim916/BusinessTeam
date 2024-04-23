@@ -5,43 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72801505-4a65-46ac-939d-d520c92dfc9a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/chat/repository/ChatMessageRepositoryJPA.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/item/item_ask/repository/ItemAskRepositoryJPA.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/user/user/domain/AdminChat.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/user/user/repository/UserRepositoryJPA.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tomatoFarm.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/user/user/domain/SignForm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/chat/controller/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/chat/controller/ChatController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/chat/domain/ChatMessageDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/chat/domain/ChatMessageDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/chat/domain/ChatRoomDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/chat/domain/ChatRoomDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/chat/entity/ChatMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/chat/entity/ChatMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/chat/repository/ChatMessageRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/chat/repository/ChatMessageRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/chat/repository/ChatMessageRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/chat/repository/ChatMessageRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/chat/repository/ChatRoomRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/chat/repository/ChatRoomRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/chat/repository/ChatRoomRepositoryJPA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/chat/repository/ChatRoomRepositoryJPA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/chat/service/ChatService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/chat/service/ChatService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/chat/service/ChatServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/chat/service/ChatServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/item/item_ask/controller/ItmeAskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/item/item_ask/controller/ItmeAskController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/item/item_ask/domain/ItemAskDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/item/item_ask/domain/ItemAskDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/item/item_ask/entity/ItemAsk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/item/item_ask/entity/ItemAsk.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/item/item_ask/repository/ItemAskRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/item/item_ask/repository/ItemAskRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/item/item_ask/repository/ItemAskRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/item/item_ask/repository/ItemAskRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/item/item_ask/service/ItemAskService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/item/item_ask/service/ItemAskService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/item/item_ask/service/ItemAskServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/item/item_ask/service/ItemAskServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/user/user_level/entity/UserLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/user/user_level/entity/UserLevel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/user/user/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/user/user/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/user/user/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/user/user/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/user/user/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/user/user/service/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/config/SecurityConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tomato_front/src/model/server-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/../tomato_front/src/model/server-config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tomato_front/src/pages/admin/admin_chatbot/Admin_Chatbot.css" beforeDir="false" afterPath="$PROJECT_DIR$/../tomato_front/src/pages/admin/admin_chatbot/Admin_Chatbot.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tomato_front/src/pages/admin/admin_chatbot/Admin_Chatbot.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../tomato_front/src/pages/admin/admin_chatbot/Admin_Chatbot.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tomato_front/src/pages/admin/admin_chatbot/Admin_Chatbot_Row.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../tomato_front/src/pages/admin/admin_chatbot/Admin_Chatbot_Row.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tomato_front/src/pages/admin/admin_data/Admin_data.css" beforeDir="false" afterPath="$PROJECT_DIR$/../tomato_front/src/pages/admin/admin_data/Admin_data.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tomato_front/src/pages/admin/sideMenu/SideMenu.css" beforeDir="false" afterPath="$PROJECT_DIR$/../tomato_front/src/pages/admin/sideMenu/SideMenu.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tomato_front/src/pages/admin/sideMenu/SideMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../tomato_front/src/pages/admin/sideMenu/SideMenu.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tomato_front/src/pages/components/PagingBox.css" beforeDir="false" afterPath="$PROJECT_DIR$/../tomato_front/src/pages/components/PagingBox.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tomato_front/src/pages/components/chatbot/ChatBotBox.css" beforeDir="false" afterPath="$PROJECT_DIR$/../tomato_front/src/pages/components/chatbot/ChatBotBox.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tomato_front/src/pages/components/chatbot/ChatBotBox.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../tomato_front/src/pages/components/chatbot/ChatBotBox.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tomato_front/src/pages/home/detail/ask/Detail_ask.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../tomato_front/src/pages/home/detail/ask/Detail_ask.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/config/WebMvcConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/config/WebMvcConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/example/demo/TomatoFarmApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/example/demo/TomatoFarmApplicationTests.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tomato_front/src/pages/login/SignBG/SignBG.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../tomato_front/src/pages/login/SignBG/SignBG.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,41 +69,41 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Maven.tomatoFarm [deploy].executor": "Run",
-    "Maven.tomatoFarm [install].executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.TomatoFarmApplication.executor": "Run",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "aws",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/BusinessTeam/tomatoFarm_server",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.17480469",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "MavenSettings",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Maven.tomatoFarm [deploy].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.tomatoFarm [install].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.TomatoFarmApplication.executor&quot;: &quot;Run&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;aws&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/BusinessTeam/tomatoFarm_server&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.17480469&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\BusinessTeam\tomatoFarm_server\src\main\java\com\example\demo\user" />
@@ -152,6 +124,7 @@
       <recent name="com.example.demo.chat.controller" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.demo.user.user.domain" />
       <recent name="com.example.demo.chat.repository" />
       <recent name="com.example.demo.user.user_detail.entity" />
     </key>
@@ -216,5 +189,20 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/demo/user/user/service/UserServiceImpl.java</url>
+          <line>67</line>
+          <properties class="com.example.demo.user.user.service.UserServiceImpl" method="adminCheck">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

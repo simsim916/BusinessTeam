@@ -1,12 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./SignBG.css"
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
 import { SERVER_RESOURCE } from "../../../model/server-config";
 import { api } from "../../../model/model";
 import { changeAlert } from "../../redux/basic/actions";
 import { useDispatch } from "react-redux";
+import AddressWrite from './AddressWrite';
 
 
 const SignBG = ({ }) => {
@@ -14,6 +15,8 @@ const SignBG = ({ }) => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
+    const [addressBox, setAddressBox] = useState(false)
+
     const [signValue, setSignValue] = useState({
         value: {
             id: '',
@@ -49,6 +52,9 @@ const SignBG = ({ }) => {
         },
         isJoinable: false
     })
+    // useMemo(() => {
+    //     console.log(signValue.value)
+    // }, [signValue])
 
     const changeOpacity = (event) => {
         let box = event.target.closest('div')
@@ -60,6 +66,10 @@ const SignBG = ({ }) => {
     }
 
     const handleInputChange = (event, handle) => {
+        if (event.target.id == 'emailSelectBox' && event.target.value == "") {
+            event.target.style.display = 'none';
+            event.target.previousElementSibling.style.display = 'initial';
+        }
         let box = event.target.closest('div')
         box.style.zIndex = '1';
         let result = {
@@ -201,6 +211,7 @@ const SignBG = ({ }) => {
     }
 
     const selectGender = (event) => {
+        event.target.closest('#genderBox').style.border = "2px solid #9B1B30";
         for (let e of event.target.closest('div').children) {
             e.style.opacity = "1";
         }
@@ -209,7 +220,19 @@ const SignBG = ({ }) => {
     }
 
     const requestSign = () => {
-        api('/user/signup', 'post', signValue.value)
+        const signForm = {
+            id: signValue.value.id,
+            password: signValue.value.password,
+            name: signValue.value.name,
+            phonenumber: signValue.value.phonenumber,
+            addressCode: '',
+            address1: '',
+            address2: '',
+            email: signValue.value.email + '@' + signValue.value.emailBack,
+            gender: signValue.value.gender,
+            birthdate: new Date(`${signValue.value.year}-${signValue.value.month}-${signValue.value.day}`),
+        }
+        api('/user/signup', 'post', signForm)
             .then(res => {
                 setLoading(false);
                 dispatch(changeAlert({
@@ -236,6 +259,7 @@ const SignBG = ({ }) => {
     return (
         <div id="signBG">
             <div id="historyback"></div>
+            {addressBox && <AddressWrite setAddressBox={setAddressBox} />}
             <div>
                 <Link to="/home"><img id="logo" src={SERVER_RESOURCE + `/img/logo.png`} alt="logo" /></Link>
                 <h3>회원가입</h3>
@@ -276,7 +300,7 @@ const SignBG = ({ }) => {
                         {signValue.error.phonenumber ? <p><i className="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;{signValue.error.phonenumber}</p> : <></>}
                     </div>
                     <p id="selectOption"><i className="fa-solid fa-check"></i>&nbsp;&nbsp;선택 입력 사항</p>
-                    <div id="addressBox">
+                    <div id="addressBox" onClick={()=>setAddressBox(true)}>
                         <i className="fa-solid fa-location-dot"></i>
                         <input type="text" name="address" placeholder="주소" value={signValue.value.address}
                             onChange={handleInputChange}
@@ -288,18 +312,18 @@ const SignBG = ({ }) => {
                             onFocus={changeOpacity}
                             onChange={handleInputChange} />
                         <i className="fa-solid fa-at"></i>
-                        <input type="text" name="emailback" id="emailWriteBox" value={signValue.value.emailBack}
+                        <input type="text" name="emailBack" id="emailWriteBox" value={signValue.value.emailBack}
                             onFocus={changeOpacity}
                             onChange={handleInputChange} />
-                        <select id="emailSelectBox"
+                        <select id="emailSelectBox" name="emailBack"
                             onFocus={changeOpacity}
                             onChange={handleInputChange} >
-                            <option>이메일 선택</option>
+                            <option value="no">이메일 선택</option>
                             <option value="naver.com">naver.com</option>
                             <option value="daum.net">daum.net</option>
                             <option value="google.com">google.com</option>
                             <option value="nate.com">nate.com</option>
-                            <option value=",">직접입력</option>
+                            <option value="">직접입력</option>
                         </select>
                     </div>
                     <div id="genderBox">
@@ -325,15 +349,15 @@ const SignBG = ({ }) => {
                     </div>
                     <div id="birthdayBox">
                         <i className="fa-solid fa-cake-candles"></i>
-                        <input type="text" name="year" placeholder="yyyy" maxLength="4" value={signValue.value.year}
+                        <input type="number" name="year" placeholder="yyyy" maxLength="4" value={signValue.value.year}
                             onFocus={changeOpacity}
                             onChange={handleInputChange}
                         />
-                        <input type="text" name="month" placeholder="mm" maxLength="2" value={signValue.value.month}
+                        <input type="number" name="month" placeholder="mm" maxLength="2" value={signValue.value.month}
                             onFocus={changeOpacity}
                             onChange={handleInputChange}
                         />
-                        <input type="text" name="day" placeholder="dd" maxLength="2" value={signValue.value.day}
+                        <input type="number" name="day" placeholder="dd" maxLength="2" value={signValue.value.day}
                             onFocus={changeOpacity}
                             onChange={handleInputChange}
                         />

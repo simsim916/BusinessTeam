@@ -12,13 +12,11 @@ public interface UserService {
 	UserToken selectUser(User dto);
 	boolean adminCheck(String userId);
 	
-	int insertUser(UserDTO dto);
-	
-	User updateUser(User entity);
+	User signup(User entity);
 	
 	List<User> selectUserWhere(SearchRequest searchRequest);
 	
-	List<User> insertTest(List<User> list);
+	List<User> saveAll(List<User> list);
 	
 //	=================================
 	

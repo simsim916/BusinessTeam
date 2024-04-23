@@ -2,12 +2,14 @@ package com.example.demo.user.user.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import com.example.demo.page.page_keyword.entity.PageKeyword;
 import com.example.demo.page.page_keyword.repository.pageKeywordRepository;
 import com.example.demo.user.user.domain.UserDTO;
+import com.example.demo.user.user.repository.UserRepositoryJPA;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,7 @@ import com.example.demo.user.user.repository.UserRepository;
 public class UserServiceImpl implements UserService {
 
 	private final UserRepository userRepository;
+	private final UserRepositoryJPA userRepositoryJPA;
 	private final pageKeywordRepository pageKeywordRepository;
 	private final PasswordEncoder passwordEncoder;
 	private final TokenProvider tokenProvider;
@@ -64,21 +67,17 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean adminCheck(String userId) {
 		boolean result = false;
-		User entity = User.builder().id(userId).build();
-		entity=userRepository.selectUser(entity);
-		if(entity.getUserLevelCode() < 100)
-			result = true;
-		
+		Optional<User> optionalUser=userRepositoryJPA.findById(userId);
+		if(optionalUser.isPresent()){
+			User user = optionalUser.get();
+			if (user.getUserLevelCode() < 100)
+				result = true;
+		}
 		return result;
 	}
 
 	@Override
-	public int insertUser(UserDTO dto) {
-		return userRepository.insertUser(dto);
-	}
-
-	@Override
-	public User updateUser(User entity) {
+	public User signup(User entity) {
 		return userRepository.updateUser(entity);
 	}
 
@@ -93,7 +92,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	@Transactional
-	public List<User> insertTest(List<User> list) {
-		return userRepository.insertTest(list);
+	public List<User> saveAll(List<User> list) {
+		return userRepositoryJPA.saveAll(list);
 	}
 }

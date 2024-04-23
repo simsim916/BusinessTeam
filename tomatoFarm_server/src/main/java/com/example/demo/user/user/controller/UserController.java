@@ -34,7 +34,6 @@ public class UserController {
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody User entity) {
 		ResponseEntity<?> result = null;
-
 		result = ResponseEntity.status(HttpStatus.OK).body(userService.selectUser(entity));
 		return result;
 	}
@@ -42,9 +41,7 @@ public class UserController {
 	@GetMapping("/admincheck")
 	public ResponseEntity<?> admincheck(HttpServletRequest request, @AuthenticationPrincipal String userId) {
 		ResponseEntity<?> result = null;
-
 		result = ResponseEntity.status(HttpStatus.OK).body(userService.adminCheck(userId));
-
 		return result;
 	}
 
@@ -53,10 +50,8 @@ public class UserController {
 		ResponseEntity<?> result = null;
 		String password = entity.getPassword();
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
 		entity.setPassword(encoder.encode(password));
-
-		if (userService.updateUser(entity) != null) {
+		if (userService.signup(entity) != null) {
 			result = ResponseEntity.status(HttpStatus.OK).body("signUp_successed");
 		} else {
 			result = ResponseEntity.status(HttpStatus.OK).body("signUp_failed");
@@ -76,7 +71,7 @@ public class UserController {
 	public ResponseEntity<?> merge(@RequestBody List<User> list) {
 		ResponseEntity<?> result = null;
 
-		if (userService.insertTest(list).size() > 0)
+		if (userService.saveAll(list).size() > 0)
 			result = ResponseEntity.status(HttpStatus.OK)
 					.body(userService.selectUserWhere(new SearchRequest("username", "")));
 		else
