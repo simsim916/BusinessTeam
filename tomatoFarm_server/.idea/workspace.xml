@@ -5,14 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72801505-4a65-46ac-939d-d520c92dfc9a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/user/user/domain/SignForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/user/user_address/repository/UserAddressRepositoryJPA.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/user/user_detail/repository/UserDetailRepositoryJPA.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/user/user/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/user/user/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/user/user/domain/SignForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/user/user/domain/SignForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/user/user/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/user/user/entity/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/user/user/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/user/user/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/user/user/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/user/user/service/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/user/user_address/entity/UserAddress.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/user/user_address/entity/UserAddress.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/user/user_detail/entity/UserDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/user/user_detail/entity/UserDetail.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/config/SecurityConfig.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/config/WebMvcConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/config/WebMvcConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/example/demo/TomatoFarmApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/example/demo/TomatoFarmApplicationTests.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tomato_front/src/pages/login/SignBG/AddressWrite.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../tomato_front/src/pages/login/SignBG/AddressWrite.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tomato_front/src/pages/login/SignBG/SignBG.css" beforeDir="false" afterPath="$PROJECT_DIR$/../tomato_front/src/pages/login/SignBG/SignBG.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../tomato_front/src/pages/login/SignBG/SignBG.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../tomato_front/src/pages/login/SignBG/SignBG.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -124,6 +130,7 @@
       <recent name="com.example.demo.chat.controller" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.demo.user.user_address.repository" />
       <recent name="com.example.demo.user.user.domain" />
       <recent name="com.example.demo.chat.repository" />
       <recent name="com.example.demo.user.user_detail.entity" />
@@ -189,20 +196,5 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/demo/user/user/service/UserServiceImpl.java</url>
-          <line>67</line>
-          <properties class="com.example.demo.user.user.service.UserServiceImpl" method="adminCheck">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

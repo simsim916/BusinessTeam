@@ -42,7 +42,7 @@
     height: 100vh;
 }
 
-#signBG>div:nth-child(2) {
+#signBG>#signform {
     background-color: white;
     width: 85%;
     height: 90%;
@@ -56,11 +56,11 @@
     overflow-y: auto;
 }
 
-#signBG>div:nth-child(2)::-webkit-scrollbar {
+#signBG>#signform::-webkit-scrollbar {
     width: 10px;
 }
 
-#signBG>div:nth-child(2)::-webkit-scrollbar-thumb {
+#signBG>#signform::-webkit-scrollbar-thumb {
     background-color: #9b1b1f70;
     border-radius: 10px;
 }
