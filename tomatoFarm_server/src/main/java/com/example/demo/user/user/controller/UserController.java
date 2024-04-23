@@ -69,7 +69,6 @@ public class UserController {
 	@PostMapping("/merge")
 	public ResponseEntity<?> merge(@RequestBody List<User> list) {
 		ResponseEntity<?> result = null;
-
 		if (userService.saveAll(list).size() > 0)
 			result = ResponseEntity.status(HttpStatus.OK)
 					.body(userService.selectUserWhere(new SearchRequest("username", "")));

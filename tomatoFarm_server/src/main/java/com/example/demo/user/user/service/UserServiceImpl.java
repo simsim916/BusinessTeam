@@ -11,7 +11,6 @@ import javax.transaction.Transactional;
 import com.example.demo.page.page_keyword.entity.PageKeyword;
 import com.example.demo.page.page_keyword.repository.pageKeywordRepository;
 import com.example.demo.user.user.domain.SignForm;
-import com.example.demo.user.user.domain.UserDTO;
 import com.example.demo.user.user.repository.UserRepositoryJPA;
 import com.example.demo.user.user_address.entity.UserAddress;
 import com.example.demo.user.user_address.repository.UserAddressRepositoryJPA;
@@ -44,7 +43,6 @@ public class UserServiceImpl implements UserService {
 		UserToken userToken = new UserToken();
 		
 		String password = entity.getPassword();
-		System.out.println(passwordEncoder.encode((password)));
 		entity = userRepository.selectUser(entity);
 		
 		if (entity != null) { 

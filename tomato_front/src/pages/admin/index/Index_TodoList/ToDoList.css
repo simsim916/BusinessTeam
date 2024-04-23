@@ -1,5 +1,5 @@
 .todoListBox {
-    width: 30%;
+    width: 400px;
     height: 95%;
     position: absolute;
     border: #9B1B30 1px solid;
@@ -10,52 +10,72 @@
 .todoListTitle{
     text-align: center;
     background-color: #9B1B30;
-    border-radius: 30px;
+    border-radius: 10px;
     color: white;
-    line-height: 50px;
+    line-height: 40px;
 }
 
 .calendar{
     width: 100%;
-    height: 40%;
+    height: 45%;
+    margin-top: 8px;
+}
+
+.calendar .react-calendar{
     border: #9B1B30 1px solid;
-    margin-top: 10px;
+    width: 100%;
+    height: 100%;
 }
 
 .todoListWirteBox{
-    display: flex;
-    flex-direction: column;
+    height: calc(100% - 10px - 40px - 5px - 30px - 8px - 45%);
 }
-
+.calendar .todo {
+    display: flex;
+    justify-content: center;
+    font-size: 6px;
+}
 .todayDate{
     text-align: center;
-    line-height: 50px;
+    line-height: 40px;
     background-color: #9B1B30;
-    border-radius: 30px;
     color: white;
-    margin-bottom: 10px;
     margin-top: 10px;
-}
-
-.scheduleBox{
-    margin-top: 30px;
+    border-radius: 15px;
 }
 
 .scheduleBoxList{
     list-style: none;
-    width: 70%;
-    display: flex;
-    flex-direction: column;
+    width: 100%;
+    margin-top: 10px;
+    overflow-y: auto;
+    /* height: 200px; */
+    height: calc(100% - 50px);
 }
 .scheduleBoxList li{
-    line-height: 40px;
+    line-height: 30px;
+    position: relative;
+}
+
+.scheduleBoxList label:hover{
+    text-decoration: underline;
+    cursor: pointer;
 }
 .scheduleBoxList input{
     margin-right: 10px;
 }
-.scheduleBoxList button{
-    margin-left: 10px;
-    padding: 5px;
+.scheduleBoxList .buttonBox{
+    position: absolute;
+    top: 0;
+    right: 5px;
+}
+.scheduleBoxList .buttonBox i{
+    margin-left: 15px;
+    color: #000;
+    cursor: pointer;
+}
+.scheduleBoxList .buttonBox i:hover {
+    color: #9B1B30;
 }
 
 .newScheduleBox{
@@ -100,10 +120,10 @@
 
 
 .scheduleBoxTotal{
-    border: #9B1B30 1px solid;
     width: 100%;
-    padding: 10px;
     border-radius: 10px;
     line-height: 30px;
-    margin-top: 50px;
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-evenly;
 }

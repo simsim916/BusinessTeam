@@ -52,7 +52,7 @@ public class ChatController {
     @PostMapping("/insertusermessage")
     public ResponseEntity<?> insertusermessage(@RequestBody ChatMessage entity, @AuthenticationPrincipal String userId) {
         ResponseEntity<?> result = null;
-        entity.setWriter(userId);
+        entity.setUserIdWriter(userId);
         List<ChatMessageDTO> list = chatService.insertUserMessage(entity);
         result = ResponseEntity.status(HttpStatus.OK).body(list);
         return result;
@@ -61,7 +61,7 @@ public class ChatController {
     @PostMapping("/insertadminmessage")
     public ResponseEntity<?> insertadminmessage(@RequestBody ChatMessage entity, @AuthenticationPrincipal String userId) {
         ResponseEntity<?> result = null;
-        entity.setWriter(userId);
+        entity.setUserIdWriter(userId);
         AdminChat adminChat = chatService.insertAdminMessage(entity);
         result = ResponseEntity.status(HttpStatus.OK).body(adminChat);
         return result;
@@ -70,7 +70,7 @@ public class ChatController {
     @GetMapping("/selectmessage")
     public ResponseEntity<?> selectmessage(ChatMessage entity, @AuthenticationPrincipal String userId) {
         ResponseEntity<?> result = null;
-        entity.setWriter(userId);
+        entity.setUserIdWriter(userId);
         List<ChatMessageDTO> list = chatService.selectAllmessageWhereRoomSeq(entity);
         if (list != null) {
             result = ResponseEntity.status(HttpStatus.OK).body(list);

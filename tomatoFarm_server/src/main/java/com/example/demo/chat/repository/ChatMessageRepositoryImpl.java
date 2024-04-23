@@ -9,10 +9,9 @@ import com.example.demo.chat.domain.ChatMessageDTO;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
-import static com.example.demo.chat.entity.QChatMessage.chatMessage;
 import static com.example.demo.user.user.entity.QUser.user;
+import static com.example.demo.chat.entity.QChatMessage.chatMessage;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -35,8 +34,8 @@ public class ChatMessageRepositoryImpl implements ChatMessageRepository {
 
 		return jPAQueryFactory
 				.select(Projections.bean(ChatMessageDTO.class, chatMessage.content, chatMessage.chatRoomSeq, chatMessage.seq,
-						chatMessage.writer, chatMessage.regdate, user.userLevelCode.as("userLevel")))
-				.from(chatMessage).leftJoin(user).on(chatMessage.writer.eq(user.id))
+						chatMessage.userIdWriter, chatMessage.regdate, user.userLevelCode.as("userLevel")))
+				.from(chatMessage).leftJoin(user).on(chatMessage.userIdWriter.eq(user.id))
 				.where(chatMessage.chatRoomSeq.eq(entity.getChatRoomSeq()))
 				.orderBy(chatMessage.regdate.asc())
 				.orderBy(chatMessage.regdate.asc())

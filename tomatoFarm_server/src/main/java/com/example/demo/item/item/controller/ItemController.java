@@ -134,7 +134,7 @@ public class ItemController {
 	public ResponseEntity<?> selectin(@RequestBody List<UserCart> list) {
 		List<Integer> codeList = new ArrayList<>();
 		for (UserCart e : list) {
-			codeList.add(e.getCode());
+			codeList.add(e.getItemCode());
 		}
 		List<ItemDTO> itemList = itemService.selectItemListWhereInCode(codeList);
 			

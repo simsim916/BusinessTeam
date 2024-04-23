@@ -53,7 +53,7 @@ public class ChatServiceImpl implements ChatService {
 		if (optionalChatRoom.isPresent()) {
 			ChatRoom chatRoom = optionalChatRoom.get();
 			chatRoom.setIng(1);
-			chatRoom.setUserIdAdmin(entity.getWriter());
+			chatRoom.setUserIdAdmin(entity.getUserIdWriter());
 			chatRoomRepositoryJPA.save(chatRoom);
 		}
 		AdminChat result = AdminChat.builder()

@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class itemEvent {
+public class ItemEvent {
 
     @Id
     @Column(name = "code")

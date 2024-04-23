@@ -10,7 +10,9 @@ public interface UserCartService {
 	UserCart merge(UserCart entity);
 	List<UserCart> mergeAll(List<UserCart> list);
 	
-	List<UserCartDTO> selectItemListWhereUserID(UserCart entity);
+	List<UserCartDTO> findAllByuserId(String userId);
+
+	List<UserCartDTO> findAllBy(List<Integer> list);
 	
 	void delete(List<UserCart> entity);
 }

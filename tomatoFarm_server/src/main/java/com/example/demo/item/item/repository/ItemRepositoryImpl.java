@@ -2,7 +2,7 @@
 package com.example.demo.item.item.repository;
 
 import static com.example.demo.item.item.entity.QItem.item;
-import static com.example.demo.item.item_event.entity.QitemEvent.itemEvent;
+import static com.example.demo.item.item_event.entity.QItemEvent.itemEvent;
 
 import java.util.List;
 
