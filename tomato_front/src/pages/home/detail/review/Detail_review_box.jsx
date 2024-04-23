@@ -30,7 +30,6 @@ const Detail_review_box = ({ item }) => {
                 setLoading(false);
                 setItemReviewList(res.data);
                 setCurrPage(1);
-                setLoading(false);
             }).catch(err => {
                 console.log(err.message)
                 setLoading(false);

@@ -15,12 +15,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="todolist")
+@Table(name="page_todo")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ToDoList {
+public class PageTodo {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

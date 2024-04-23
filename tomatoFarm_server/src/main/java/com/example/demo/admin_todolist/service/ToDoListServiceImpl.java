@@ -7,7 +7,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.example.demo.admin_todolist.entity.ToDoList;
+import com.example.demo.admin_todolist.entity.PageTodo;
 import com.example.demo.admin_todolist.repository.TodoListRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -20,17 +20,17 @@ public class ToDoListServiceImpl implements ToDoListService {
 	private final TodoListRepository todolistRepository;
 
 	@Override
-	public List<ToDoList> selectAll() {
+	public List<PageTodo> selectAll() {
 		return todolistRepository.selectAll();
 	}
 
 	@Override
-	public List<ToDoList> selectAllByDate(LocalDate regdate) {
+	public List<PageTodo> selectAllByDate(LocalDate regdate) {
 		return todolistRepository.selectAllByDate(regdate);
 	}
 
 	@Override
-	public int insert(ToDoList entity) {
+	public int insert(PageTodo entity) {
 		LocalDate regdate = LocalDate.now();
 		entity.setEnddate(regdate);
 		return todolistRepository.insert(entity);

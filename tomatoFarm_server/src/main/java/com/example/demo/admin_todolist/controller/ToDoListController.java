@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.admin_todolist.entity.ToDoList;
+import com.example.demo.admin_todolist.entity.PageTodo;
 import com.example.demo.admin_todolist.service.ToDoListService;
 import lombok.AllArgsConstructor;
 
@@ -33,13 +33,13 @@ public class ToDoListController {
 	@PostMapping("/selectbydate")
 	public ResponseEntity<?>selectByDate(@RequestBody LocalDate enddate){
 		ResponseEntity<?> result = null;
-		List<ToDoList> list = toDoListService.selectAllByDate(enddate);
+		List<PageTodo> list = toDoListService.selectAllByDate(enddate);
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}
 	
 	@PostMapping("/insert")
-	public ResponseEntity<?> insert(@RequestBody ToDoList entity){
+	public ResponseEntity<?> insert(@RequestBody PageTodo entity){
 		ResponseEntity<?> result = null;
 		int list = toDoListService.insert(entity);
 		result = ResponseEntity.status(HttpStatus.OK).body(list);

@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.admin_todolist.entity.ToDoList;
+import com.example.demo.admin_todolist.entity.PageTodo;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 
@@ -20,24 +20,24 @@ public class TodoListRepositoryImpl implements TodoListRepository{
 	private final EntityManager entityManager;
 	
 	@Override
-	public List<ToDoList> selectAll() {
+	public List<PageTodo> selectAll() {
 		return entityManager.createNativeQuery("SELECT * "
-				+ "FROM todolist", ToDoList.class)
+				+ "FROM todolist", PageTodo.class)
 				.getResultList();
 	}
 	
 	
 	@Override
-	public List<ToDoList> selectAllByDate(LocalDate regdate) {
-		List<ToDoList> list = entityManager.createNativeQuery("SELECT *"
-				+"FROM todolist WHERE regdate = ?", ToDoList.class)
+	public List<PageTodo> selectAllByDate(LocalDate regdate) {
+		List<PageTodo> list = entityManager.createNativeQuery("SELECT *"
+				+"FROM todolist WHERE regdate = ?", PageTodo.class)
 				.setParameter(1, regdate)
 				.getResultList();
 		return list;
 	}
 	
 	@Override
-	public int insert(ToDoList entity) {
+	public int insert(PageTodo entity) {
 		return entityManager.createNativeQuery("INSERT INTO todolist(enddate, content, userIdAdmin, userIdEditor, state) "
 				+ "VALUE(?,?,?,?,?)")
 				.setParameter(1, entity.getEnddate())

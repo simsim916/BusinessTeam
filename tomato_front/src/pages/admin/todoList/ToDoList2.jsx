@@ -1,6 +1,28 @@
 import "./ToDoList2.css";
+import { useState, useEffect } from 'react';
+import Loading from './../../components/Loading';
+import Error from './../../components/Error';
+import { api } from "../../../model/model";
 
 const ToDoList2 = () => {
+
+    const [selectAll, setSelectAll] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
+
+    useEffect(() => {
+        api(`/todo/selectall`, 'get', null)
+            .then(res => {
+                setLoading(true);
+                setSelectAll(res.data);
+            }).catch(err => {
+                setLoading(false);
+                setError(true);
+            })
+    }, []);
+
+    if (loading) return <Loading />
+    if (error) return <Error />
 
     return (
         <div className="todoListBox">
