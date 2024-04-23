@@ -9,6 +9,8 @@ import { changeAlert } from '../../redux/basic/actions';
 import AddressWrite from '../../login/SignBG/AddressWrite';
 
 const MyPage = () => {
+    console.log('MyPage 렌더링');
+
     const [privacyModal, setPrivacyModal] = useState(false);
     const [userData, setUserData] = useState({
         userinfo: {
@@ -93,8 +95,6 @@ const MyPage = () => {
     //             .catch(err => console.log(err.message));
     //     }
     // }
-
-    //=================================================================================
 
 
     const changeOpacity = (event) => {
@@ -293,6 +293,7 @@ const MyPage = () => {
                 setError(true);
             });
     }
+
 
     return (
         <div id='mypageContainer' className='container'>
