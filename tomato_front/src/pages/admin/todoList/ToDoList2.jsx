@@ -19,8 +19,8 @@ const ToDoList2 = () => {
         { date: '2024-04-25', title: 'Appointment', ing: 1 },
     ]);
     const [todoWrite, SetTodoWrite] = useState(false);
-    const user = JSON.parse(sessionStorage.getItem('userinfo'));
     const [refresh, setRefresh] = useState(true);
+    const user = JSON.parse(sessionStorage.getItem('userinfo'));
 
     // useEffect(() => {
     //     api(`/todo/selectall`, 'get', null)
@@ -51,6 +51,7 @@ const ToDoList2 = () => {
             
         }
     }
+
 
     return (
         <div className="todoListBox">
