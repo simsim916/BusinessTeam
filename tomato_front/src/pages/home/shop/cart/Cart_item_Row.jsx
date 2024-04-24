@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { SERVER_RESOURCE } from '../../../../model/server-config';
 import { makeComa } from '../../../components/MathFunction';
-import { setUserBuyItemList, setUserBuyStorage } from '../../../redux/userBuy/actions';
+import { setUserBuy, setUserBuyItemList, setUserBuyStorage } from '../../../redux/userBuy/actions';
 import { Link } from 'react-router-dom';
 import { setUserCartStorage, changeUserCart } from '../../../redux/userCart/action';
 import { api } from '../../../../model/model';
@@ -14,8 +14,6 @@ const Cart_item_Row = ({ item, idx }) => {
     const userCart = useSelector(state => state.userCart.data);
     const userBuy = useSelector(state => state.userBuy.buyList)
 
-
-    console.log(item)
     const changeCheckBox = () => {
         if (userBuy && userBuy.find(e => e == item.itemCode))
             dispatch(setUserBuyStorage(userBuy.filter(e => e != item.itemCode)));
@@ -27,7 +25,7 @@ const Cart_item_Row = ({ item, idx }) => {
 
     const handleXbtn = async () => {
         let data = userCart.filter(i => i.code != item.code);
-        userBuy && dispatch(setUserBuyItemList(userBuy.filter(i => i.code != item.code))) // 체크된 상태로 삭제를 시도할때 처리해야할 내용
+        userBuy && dispatch(setUserBuy({buyList:userBuy.filter(i => i.code != item.code)})) // 체크된 상태로 삭제를 시도할때 처리해야할 내용
         dispatch(setUserCartStorage(data)); // 유저 장바구니 상태값을 덮어씌워준다.
         user && api(`/usercart/delete`, 'post', [item], user.token); // DB에서 삭제하기.
     }

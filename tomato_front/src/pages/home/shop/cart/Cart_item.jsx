@@ -42,10 +42,10 @@ const Cart_item = () => {
     return (
         <div id='shopBasketSelectBox'>
             {userCart && userCart.length > 0 &&
-                <div id="shopBasketSelect">
+                <label id="shopBasketSelect">
                     <input checked={userBuy && userBuy.length == userCart.length || false} type="checkbox" onChange={handleAllCheckBox} />
                     전체선택
-                </div>
+                </label>
             }
             <div id="shopBasketItemBox">
                 <ul id="shopBasketItemBoxTitle">

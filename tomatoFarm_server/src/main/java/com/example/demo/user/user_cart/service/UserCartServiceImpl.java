@@ -43,13 +43,12 @@ public class UserCartServiceImpl implements UserCartService {
 	public List<UserCartDTO> findAllByuserId(String userId) {
 		return userCartRepositoryJPA.findAllByUserId(userId);
 	}
+
 	@Override
 	public List<UserCartDTO> findAllBy(List<Integer> list) {
-		System.out.println(userCartRepositoryJPA.findAllByItemCodeIn(list));
 		return userCartRepositoryJPA.findAllByItemCodeIn(list);
 	}
-	
-	
+
 	@Override
 	@Transactional
 	public void delete(List<UserCart> list) {

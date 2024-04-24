@@ -60,6 +60,7 @@ public class UserCartController {
 	}
 	@PostMapping("/selectnouser")
 	public ResponseEntity<?> selectnouser(@RequestBody List<Integer> itemlist) {
+		System.out.println(itemlist);
 		ResponseEntity<?> result = null;
 		List<UserCartDTO> list = userCartService.findAllBy(itemlist);
 		System.out.println(list);

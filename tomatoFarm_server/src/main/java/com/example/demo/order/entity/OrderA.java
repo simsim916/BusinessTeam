@@ -2,12 +2,7 @@ package com.example.demo.order.entity;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,21 +11,21 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
-@Table(name = "itemorder") // order 테이블과 매핑
+@Table(name = "order_a") // order 테이블과 매핑
 @Data
 @Builder
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Itemorder {
+public class OrderA {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer code;
+    private Integer seq;
     @Column(name = "user_id")
     private String userId;
     @Column(name = "address_code")
-    private Integer addressCode;
+    private String addressCode;
     @Column(name = "address1")
     private String address1;
     @Column(name = "address2")
@@ -53,8 +48,12 @@ public class Itemorder {
     private LocalDateTime deliverydate;
 
     @Column(name="order_message")
-    private String order_message;
+    private String orderMessage;
 
+    @Transient
+    private String itemName;
+    @Transient
+    private Integer orderSize;
 
 
 }

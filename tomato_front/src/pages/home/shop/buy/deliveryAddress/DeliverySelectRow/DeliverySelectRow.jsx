@@ -19,7 +19,7 @@ const DeliverySelectRow = ({ setDeliverySelect, address }) => {
         <div className="deliverySelectRow">
             <h4>{address.info}</h4>
             <p>{address.id} {address.phonenumber}</p>
-            <p><span>{address.address_code}</span> {address.address1}</p>
+            <p><span>{address.addressCode}</span> {address.address1}</p>
             <p>{address.address2}</p>
             <div className='delivery_select'>
                 <div className='delete'>삭제</div>

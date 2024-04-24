@@ -21,10 +21,6 @@ export const postDataFailure = (error) => ({
     type: POST_DATA_FAILURE,
     payload: error
 });
-export const setUserBuyItemList = (data) => ({
-    type: SET_USERBUY_ITEMLIST,
-    payload: data,
-});
 export const setUserBuyForm = (data) => ({
     type: SET_USERBUY_FORM,
     payload: data
@@ -35,14 +31,11 @@ export const setUserBuy = (data) => ({
 });
 
 export const postUserBuy = (userBuyForm, token) => {
+    console.log(userBuyForm)
     return async (dispatch) => {
         dispatch(postDataRequest());
         try {
-            const response = await api('/order/order', 'post', {
-                ...userBuyForm,
-                price: Math.ceil(userBuyForm.itemList.reduce((result, e) => +result + (Math.round((e.price * ((100 - e.discount) / 100)), 0) * e.amount) + e.delivery, 0)),
-                delivery: userBuyForm.itemList.reduce((result, e) => +result + (e.delivery), 0),
-            }, token)
+            const response = await api('/order/order', 'post', userBuyForm, token)
             console.log(response.data)
             dispatch(postDataSuccess(response.data));
         } catch (error) {
@@ -54,13 +47,27 @@ export const postUserBuy = (userBuyForm, token) => {
 
 export const setUserBuyStorage = (data) => {
     return (dispatch) => {
-        dispatch(setUserBuyItemList(data));
+        dispatch(setUserBuy({ buyList: data }));
         sessionStorage.setItem('buy', JSON.stringify(data))
     }
 }
-export const setUserBuyStorageClean = (data) => {
+export const setUserBuyStorageClean = () => {
     return (dispatch) => {
-        dispatch(setUserBuy(data));
+        dispatch(setUserBuy({
+            form: {
+                itemList: [],
+                addressCode: 0,
+                address1: '',
+                address2: '',
+                deliverymessage: '',
+                orderprice: 0,
+                discount:0,
+                delieveryprice: 0,
+                usepoint: 0,
+                phonenumber: '',
+            },
+            buyList: []
+        }));
         sessionStorage.removeItem('buy');
     }
 }

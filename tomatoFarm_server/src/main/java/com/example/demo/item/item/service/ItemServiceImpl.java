@@ -8,6 +8,7 @@ import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
+import com.example.demo.item.item.repository.ItemRepositoryJPA;
 import com.example.demo.page.page_keyword.entity.PageKeyword;
 import com.example.demo.page.page_keyword.entity.PageKeywordID;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -23,15 +24,14 @@ import com.example.demo.page.page_keyword.repository.pageKeywordRepository;
 
 import lombok.AllArgsConstructor;
 
-@Transactional
 @AllArgsConstructor
 @Service
 public class ItemServiceImpl implements ItemService {
 
 	private final ItemRepository itemRepository;
+	private final ItemRepositoryJPA itemRepositoryJPA;
 	private final pageKeywordRepository pageKeywordRepository;
-	private final EntityManager entityManager;
-	
+
 	
 	@Override
 	public List<ItemDTO> selectItemListWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
@@ -44,13 +44,12 @@ public class ItemServiceImpl implements ItemService {
 	
 	@Override
 	@Transactional
-	public List<ItemDTO> getDetailPage(PageRequest pageRequest, SearchRequest searchRequest) {
-		List<ItemDTO> result = itemRepository.selectItemListIntegerWhereType(pageRequest,searchRequest);
-		ItemDTO dto = result.get(0);
-		dto.setViews(dto.getViews()+1);
-		Item entity = dtotoEntity(dto);
-		entityManager.merge(entity);
-		return result;
+	public ItemDTO getDetailPage(PageRequest pageRequest, SearchRequest searchRequest) {
+		ItemDTO itemDTO = itemRepositoryJPA.findByCode(Integer.parseInt(searchRequest.getKeyword()));
+		itemDTO.setViews(itemDTO.getViews()+1);
+		Item entity = dtotoEntity(itemDTO);
+		itemRepositoryJPA.save(entity);
+		return itemDTO;
 	}
 	
 	@Override

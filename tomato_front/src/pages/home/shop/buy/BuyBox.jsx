@@ -5,31 +5,23 @@ import Buy_total from './Buy_total';
 import { api } from '../../../../model/model';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUserBuyStorageClean } from '../../../redux/userBuy/actions';
+import { setUserBuy, setUserBuyForm, setUserBuyStorageClean } from '../../../redux/userBuy/actions';
 
 
 
 const BuyBox = () => {
     const dispatch = useDispatch();
+    const userCart = useSelector(state => state.userCart.data)
+    const userBuyS = JSON.parse(sessionStorage.getItem('buy'))
 
     useEffect(() => {
         api('/visit/update?page=order', 'get')
+
+        dispatch(setUserBuy({ buyList: userCart.filter(e =>userBuyS.includes(e.itemCode))}))
+        dispatch(setUserBuyForm({ itemList: userCart.filter(e =>userBuyS.includes(e.itemCode))}))
+
         return () => {
-            dispatch(setUserBuyStorageClean({
-                form: {
-                    itemList: '',
-                    address_code: '',
-                    address1: '',
-                    address2: '',
-                    deliverymessage: '',
-                    price: '',
-                    discount: '',
-                    delieveryprice: '',
-                    point: '',
-                    phonenumber: '',
-                },
-                buyList: []
-            }))
+            dispatch(setUserBuyStorageClean())
         }
     }, [])
 

@@ -21,7 +21,7 @@ const DeliverySelect = ({ setDeliverySelect }) => {
 
     const handleComplete = (data) => {
         const address = {
-            address_code: data.zonecode,
+            addressCode: data.zonecode,
             address1: data.address,
         }
         dispatch(setNewUserAddress(address));

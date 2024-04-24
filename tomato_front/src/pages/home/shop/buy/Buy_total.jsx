@@ -1,5 +1,5 @@
 import { makeComa } from '../../../components/MathFunction';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import './Buy_total.css';
 import { api } from '../../../../model/model';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,7 +16,9 @@ const Buy_total = () => {
     const userBuy = useSelector(state => state.userBuy.form);
     const userCart = useSelector(state => state.userCart.data);
     const user = JSON.parse(sessionStorage.getItem('userinfo'));
-    
+    const orderprice = useRef(null);
+    const deliveryprice = useRef(null);
+    console.log(userBuy)
     const deleteUserCart = () => {
         const result = []
         userBuyItemList.map(e => {
@@ -28,7 +30,12 @@ const Buy_total = () => {
 
     const postOrder = () => {
         dispatch(setUserCartStorage(userCart.filter(e => !deleteUserCart().includes(e.code))))
-        dispatch(postUserBuy(userBuy, user && user.token));
+        dispatch(postUserBuy({
+            ...userBuy,
+            orderprice: Math.ceil(userBuyItemList.reduce((result, e) => +result + (Math.round((e.price * ((100 - e.itemEventDiscount) / 100)), 0) * e.amount) + e.delivery, 0)),
+            deliveryprice: userBuyItemList.reduce((result, e) => +result + (e.delivery), 0),
+            discount: Math.ceil(userBuyItemList.reduce((result, e) => +result + ((e.price * ((e.itemEventDiscount) / 100)) * e.amount), 0))
+        }, user && user.token));
         navigate('/home/buy/end');
     }
 
@@ -50,14 +57,14 @@ const Buy_total = () => {
                         <div>
                             {
                                 userBuyItemList ?
-                                    makeComa(Math.ceil(userBuyItemList.reduce((result, e) => +result + ((e.price * ((e.discount) / 100)) * e.amount), 0)))
+                                    makeComa(Math.ceil(userBuyItemList.reduce((result, e) => +result + ((e.price * ((e.itemEventDiscount) / 100)) * e.amount), 0)))
                                     :
                                     0
                             } 원
                         </div>
                     </div>
                     <div>배송비
-                        <div>
+                        <div ref={deliveryprice}>
                             {
                                 userBuyItemList ?
                                     makeComa(userBuyItemList.reduce((result, e) => +result + (e.delivery), 0))
@@ -67,17 +74,17 @@ const Buy_total = () => {
                         </div>
                     </div>
                     <div>결제금액
-                        <div>
+                        <div ref={orderprice}>
                             {
                                 userBuyItemList ?
-                                    makeComa(Math.ceil(userBuyItemList.reduce((result, e) => +result + (Math.round((e.price * ((100 - e.discount) / 100)), 0) * e.amount) + e.delivery, 0)))
+                                    makeComa(Math.ceil(userBuyItemList.reduce((result, e) => +result + (Math.round((e.price * ((100 - e.itemEventDiscount) / 100)), 0) * e.amount) + e.delivery, 0)))
                                     :
                                     0
                             } 원
                         </div>
                     </div>
                 </div>
-                <div id="loginBox" onClick={userBuy.itemList && userBuy.itemList.length > 0 && postOrder}
+                <div id="loginBox" onClick={postOrder}
                     style={{
                         backgroundColor: userBuy.itemList && userBuy.itemList.length > 0 && userBuy.deliverymessage.length > 0 ? '#9b1b20' : '#e0e0e0',
                         color: userBuy.itemList && userBuy.itemList.length > 0 && userBuy.deliverymessage.length > 0 ? '#fff' : 'black'

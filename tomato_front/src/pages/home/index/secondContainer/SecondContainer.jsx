@@ -18,7 +18,7 @@ const SecondContainer = () => {
     let selectedBox = useRef(null);
 
     useEffect(() => {
-        axios.get(SERVER_URL + '/item/selectnotnull?column=item.eventCode'
+        axios.get(SERVER_URL + '/item/selectnotnull?column=item.itemEventCode'
         ).then(res => {
             setEventItemList(res.data);
             setLoading(false);

@@ -2,7 +2,7 @@
 import './BuyItemBox.css';
 import BuyItemBoxRow from './BuyItemBoxRow';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUserBuyForm, setUserBuyItemList } from '../../../../redux/userBuy/actions';
+import { setUserBuy, setUserBuyForm, setUserBuyItemList } from '../../../../redux/userBuy/actions';
 import { useEffect } from 'react';
 
 const BuyItemBox = ({ }) => {
@@ -13,10 +13,6 @@ const BuyItemBox = ({ }) => {
     const userCart = useSelector(state => state.userCart.data);
     const userBuyForm = useSelector(state => state.userBuy.form)
 
-    console.log('userBuy')
-    console.log(userBuy)
-    console.log('userCart')
-    console.log(userCart)
 
     useEffect(() => {
         const ar = [];
@@ -27,7 +23,7 @@ const BuyItemBox = ({ }) => {
                         ar.push(ele)
                 }
             }
-        dispatch(setUserBuyItemList(ar))
+        dispatch(setUserBuy(ar))
     }, [])
 
     const handleAllCheck = () => {
@@ -39,12 +35,12 @@ const BuyItemBox = ({ }) => {
     }
 
     const changeCheckedList = (item) => {
-        if (!userBuyForm.itemList) {
+        if (userBuyForm.itemList.length < 1) {
             dispatch(setUserBuyForm({ itemList: [item] }))
             return;
         }
-        if (userBuyForm.itemList.find(e => e.code === item.code)) {
-            dispatch(setUserBuyForm({ itemList: userBuyForm.itemList.filter(e => e.code !== item.code) }))
+        if (userBuyForm.itemList.find(e => e.itemCode == item.itemCode)) {
+            dispatch(setUserBuyForm({ itemList: userBuyForm.itemList.filter(e => e.itemCode != item.itemCode) }))
         } else {
             dispatch(setUserBuyForm({ itemList: [...userBuyForm.itemList, item] }))
         }
