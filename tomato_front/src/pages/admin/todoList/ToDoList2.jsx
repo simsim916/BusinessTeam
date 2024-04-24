@@ -10,16 +10,16 @@ const ToDoList2 = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
-    useEffect(() => {
-        api(`/todo/selectall`, 'get', null)
-            .then(res => {
-                setLoading(true);
-                setSelectAll(res.data);
-            }).catch(err => {
-                setLoading(false);
-                setError(true);
-            })
-    }, []);
+    // useEffect(() => {
+    //     api(`/todo/selectall`, 'get', null)
+    //         .then(res => {
+    //             setLoading(true);
+    //             setSelectAll(res.data);
+    //         }).catch(err => {
+    //             setLoading(false);
+    //             setError(true);
+    //         })
+    // }, []);
 
     if (loading) return <Loading />
     if (error) return <Error />
