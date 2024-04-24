@@ -22,7 +22,7 @@ public class TodoListRepositoryImpl implements TodoListRepository{
 	@Override
 	public List<PageTodo> selectAll() {
 		return entityManager.createNativeQuery("SELECT * "
-				+ "FROM todolist", PageTodo.class)
+				+ "FROM page_todo", PageTodo.class)
 				.getResultList();
 	}
 	
@@ -30,7 +30,7 @@ public class TodoListRepositoryImpl implements TodoListRepository{
 	@Override
 	public List<PageTodo> selectAllByDate(LocalDate regdate) {
 		List<PageTodo> list = entityManager.createNativeQuery("SELECT *"
-				+"FROM todolist WHERE regdate = ?", PageTodo.class)
+				+"FROM page_todo WHERE regdate = ?", PageTodo.class)
 				.setParameter(1, regdate)
 				.getResultList();
 		return list;
@@ -38,13 +38,12 @@ public class TodoListRepositoryImpl implements TodoListRepository{
 	
 	@Override
 	public int insert(PageTodo entity) {
-		return entityManager.createNativeQuery("INSERT INTO todolist(enddate, content, userIdAdmin, userIdEditor, state) "
+		return entityManager.createNativeQuery("INSERT INTO page_todo(enddate, content, user_id_admin, user_id_editor, state) "
 				+ "VALUE(?,?,?,?,?)")
 				.setParameter(1, entity.getEnddate())
 				.setParameter(2, entity.getContent())
 				.setParameter(3, entity.getUserIdAdmin())
 				.setParameter(4, entity.getUserIdEditor())
-				.setParameter(5, entity.getState())
 				.executeUpdate();
 	}
 }

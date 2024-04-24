@@ -31,6 +31,7 @@ public class PageTodo {
 	
 	@Column(name = "content")
 	private String content;
+	
 	@Column(name = "user_id_admin")
 	private String userIdAdmin;
 	
