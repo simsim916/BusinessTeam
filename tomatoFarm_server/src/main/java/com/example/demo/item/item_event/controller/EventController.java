@@ -5,6 +5,7 @@ import java.util.List;
 import com.example.demo.item.item_event.entity.ItemEvent;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,7 +25,7 @@ public class EventController {
 	ItemEventService item_eventService;
 
 	@GetMapping("/selectwhere")
-	public ResponseEntity<?> selectEventWhere(SearchRequest searchRequest) {
+	public ResponseEntity<?> selectEventWhere(SearchRequest searchRequest, @AuthenticationPrincipal String userid) {
 		ResponseEntity<?> result = null;
 		List<ItemEvent> list = null;
 

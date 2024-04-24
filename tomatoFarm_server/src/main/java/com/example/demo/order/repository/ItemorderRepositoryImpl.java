@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
+import io.micrometer.core.instrument.search.Search;
 import lombok.AllArgsConstructor;
 
 import java.time.LocalDateTime;

@@ -59,8 +59,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 		return jPAQueryFactory.select(dtoBean)
 				.from(item).leftJoin(itemEvent).on(item.itemEventCode.eq(itemEvent.code))
 				.where(Expressions.stringPath(searchRequest.getColumn()).contains(searchRequest.getKeyword()))
-//				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum())
-				.orderBy(getSortType(searchRequest))
+//				.orderBy(getSortType(searchRequest))
 				.fetch();
 	}
 	
@@ -70,7 +69,6 @@ public class ItemRepositoryImpl implements ItemRepository {
 		return jPAQueryFactory.select(dtoBean)
 				.from(item).leftJoin(itemEvent).on(item.itemEventCode.eq(itemEvent.code))
 				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue().contains(searchRequest.getKeyword()))
-//				.limit(pageRequest.getEndNum()).offset(pageRequest.getStartNum()).orderBy(getSortType(searchRequest))
 				.fetch();
 	}
 

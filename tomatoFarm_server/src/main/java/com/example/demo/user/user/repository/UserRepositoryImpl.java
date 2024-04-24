@@ -1,15 +1,23 @@
 package com.example.demo.user.user.repository;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
+import com.example.demo.user.user.domain.UserDTO;
 import com.example.demo.user.user.entity.User;
 import org.springframework.stereotype.Repository;
 import com.example.demo.module.SearchRequest;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.Expressions;
 
 import lombok.AllArgsConstructor;
 
+import static com.example.demo.item.item.entity.QItem.item;
+import static com.example.demo.user.user_detail.entity.QUserDetail.userDetail;
+import static com.example.demo.user.user_address.entity.QUserAddress.userAddress;
+import static com.example.demo.item.item_event.entity.QItemEvent.itemEvent;
 import static com.example.demo.user.user.entity.QUser.user;
 
 import java.util.List;
@@ -29,23 +37,29 @@ public class UserRepositoryImpl implements UserRepository {
 	}
 	
 	@Override
-	public List<User> selectUserWhereString(SearchRequest searchRequest) {
+	public List<UserDTO> selectUserWhereString(SearchRequest searchRequest) {
+	    return jpaQueryfactory
+	            .select(Projections.bean(UserDTO.class, user.id, user.password, user.name, user.phonenumber, user.point, user.userLevelCode, userDetail.birthdate, userDetail.email))
+	            .from(user).join(userDetail).on(user.id.eq(userDetail.userId))
+	            .where(Expressions.stringPath(searchRequest.getColumn()).contains(searchRequest.getKeyword()))
+	            .fetch();
+	}
+
+	
+
+	@Override
+	public List<UserDTO> selectUserWhereNumber(SearchRequest searchRequest) {
 		return jpaQueryfactory
-				.selectFrom(user)
-				.from(user)
-				.where(Expressions.stringPath(searchRequest.getColumn())
+				.select(Projections.bean(UserDTO.class, user.id, user.password, user.name, user.phonenumber, user.point, user.userLevelCode, userDetail.birthdate, userDetail.email))
+				.from(user).join(userDetail).on(user.id.eq(userDetail.userId))
+				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
 						.contains(searchRequest.getKeyword()))
 				.fetch();
 	}
 	
 	@Override
-	public List<User> selectUserWhereNumber(SearchRequest searchRequest) {
-		return jpaQueryfactory
-				.selectFrom(user)
-				.from(user)
-				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
-						.contains(searchRequest.getKeyword()))
-				.fetch();
+	public User merge(User entity) {
+		return entityManager.merge(entity);
 	}
 
 }

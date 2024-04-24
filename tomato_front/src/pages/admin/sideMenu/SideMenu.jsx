@@ -42,6 +42,9 @@ const SideMenu = ({ openSideBar, sideBarOpen }) => {
                         <Link to="/admin/select"><i className="fa-solid fa-magnifying-glass"></i><br />자료 조회</Link>
                     </li>
                     <li>
+                        <Link to="/admin/insert"><i className="fa-solid fa-file-import"></i><br />자료 입력</Link>
+                    </li>
+                    <li>
                         <Link to="/admin/chatbot"><i className="fa-solid fa-bullhorn"></i><br />채팅 상담</Link>
                     </li>
                     <li>

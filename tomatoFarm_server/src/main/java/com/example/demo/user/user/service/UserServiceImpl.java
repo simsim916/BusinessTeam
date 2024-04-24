@@ -3,6 +3,7 @@ package com.example.demo.user.user.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import javax.transaction.Transactional;
 import com.example.demo.page.page_keyword.entity.PageKeyword;
 import com.example.demo.page.page_keyword.repository.pageKeywordRepository;
 import com.example.demo.user.user.domain.SignForm;
+import com.example.demo.user.user.domain.UserDTO;
 import com.example.demo.user.user.repository.UserRepositoryJPA;
 import com.example.demo.user.user_address.entity.UserAddress;
 import com.example.demo.user.user_address.repository.UserAddressRepositoryJPA;
@@ -23,6 +25,8 @@ import org.springframework.stereotype.Service;
 import com.example.demo.user.user.domain.UserToken;
 import com.example.demo.user.user.entity.User;
 import com.example.demo.module.jwtToken.TokenProvider;
+import com.example.demo.item.item.domain.ItemDTO;
+import com.example.demo.item.item.entity.Item;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.user.user.repository.UserRepository;
 
@@ -37,6 +41,8 @@ public class UserServiceImpl implements UserService {
 	private final pageKeywordRepository pageKeywordRepository;
 	private final PasswordEncoder passwordEncoder;
 	private final TokenProvider tokenProvider;
+	
+	
 	
 	@Override
 	public UserToken selectUser(User entity) {
@@ -124,7 +130,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> selectUserWhere(SearchRequest searchRequest) {
+	public List<UserDTO> selectUserWhere(SearchRequest searchRequest) {
 		if (searchRequest.getKeyword().matches("^[0-9]*$")) {
 			return userRepository.selectUserWhereNumber(searchRequest);
 		} else {
@@ -135,6 +141,30 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public List<User> saveAll(List<User> list) {
+		List<User> checkList = null;
+//		for(User user : list) {
+//			checkList.add()
+//		}
 		return userRepositoryJPA.saveAll(list);
+	}
+	
+	@Transactional
+	@Override
+	public void delete(UserDTO dto) {
+		User entity = dtotoEntity(dto);
+		userRepositoryJPA.delete(entity);
+	}
+	
+	@Transactional
+	@Override
+	public User merge(SignForm signForm) {
+		UserDTO dto = userRepository.selectUserWhereString(new SearchRequest("id",signForm.getId())).get(0);
+		String password = passwordEncoder.encode(signForm.getPassword());
+		User entity = dtotoEntity(dto);
+		entity.setPassword(password);
+		entity.setName(signForm.getName());
+		entity.setPhonenumber(signForm.getPhonenumber());
+		
+		return userRepository.merge(entity);
 	}
 }

@@ -19,7 +19,7 @@ const DeliveryUpdate = ({ setDeliverySelect }) => {
 
     const postAddress = () => {
         if (user)
-            dispatch(postNewUserAddress('/address/merge', 'post', userNewAddress, user.token))
+            dispatch(postNewUserAddress('/address/mergeone', 'post', userNewAddress, user.token))
         else {
             setDeliverySelect(false)
             dispatch(setUserBuyForm(userNewAddress));
