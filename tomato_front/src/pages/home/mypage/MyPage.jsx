@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { api } from '../../../model/model';
 import { changeAlert } from '../../redux/basic/actions';
 import AddressWrite from '../../login/SignBG/AddressWrite';
+import { makeComa } from '../../components/MathFunction';
 
 const MyPage = () => {
     console.log('MyPage 렌더링');
@@ -21,7 +22,6 @@ const MyPage = () => {
         },
         userOrder: []
     });
-    console.log(userData);
 
     const user = JSON.parse(sessionStorage.getItem('userinfo'));
 
@@ -32,16 +32,15 @@ const MyPage = () => {
     const [addressBox, setAddressBox] = useState(false)
     const [signValue, setSignValue] = useState({
         value: {
+            id: '',
             password: '',
             name: '',
             phonenumber: '',
-            address: '',
             email: '',
             emailBack: '',
-            gender: '',
-            year: '',
-            month: '',
-            day: ''
+            addressCode: '',
+            address1: '',
+            address2: '',
         },
         error: {
             password: null,
@@ -57,11 +56,12 @@ const MyPage = () => {
         },
         check: {
             password: false,
-            username: false,
-            phonenumber: false,
+            username: true,
+            phonenumber: true,
         },
         isJoinable: false
     })
+
 
     useEffect(() => {
         api(`/user/selectwhere?column=id&keyword=${user && user.id}`, 'get', null, user.token)
@@ -72,21 +72,11 @@ const MyPage = () => {
                 })))
             })
             .catch(err => console.log(err.message));
-
         api(`/order/selectwhere`, 'get', null, user.token)
             .then(res => {
                 setUserData((pre => ({
                     ...pre,
                     userOrder: res.data
-                })))
-                console.log(res.data);
-            })
-            .catch(err => console.log(err.message));
-        api(`/address/selectwhere?column=userId&keyword=${user && user.id}`, 'get', null, user.token)
-            .then(res => {
-                setUserData((pre => ({
-                    ...pre,
-                    userAddress: res.data
                 })))
                 console.log(res.data);
             })
@@ -101,13 +91,39 @@ const MyPage = () => {
         }
     }
 
-    // const deleteUser = () => {
-    //     if (confirm("정말 삭제하시겠습니까?")) {
-    //         api(`user/delete`, 'get', null, user.token)
-    //             .then(res => console.log(res.data))
-    //             .catch(err => console.log(err.message));
-    //     }
-    // }
+    const deleteUser = () => {
+        // if (confirm("정말 삭제하시겠습니까?")) {
+        //     api(`user/delete`, 'get', null, user.token)
+        //         .then(res => console.log(res.data))
+        //         .catch(err => console.log(err.message));
+        // }
+        api(`/user/delete`, 'get', null, user.token)
+            .then(res => {
+                dispatch(changeAlert({
+                    title: '탈퇴 성공',
+                    content: res.data,
+                    time: 3,
+                    style: {
+                        top: '10px',
+                        left: 'calc(50% - 150px)',
+                        position: 'absolute'
+                    }
+                }));
+            })
+            .catch(err => {
+                dispatch(changeAlert({
+                    title: '탈퇴 실패',
+                    content: err.message,
+                    time: 3,
+                    style: {
+                        top: '10px',
+                        left: 'calc(50% - 150px)',
+                        position: 'absolute'
+                    }
+                }));
+                console.log(err.message)
+            });
+    }
 
 
     const changeOpacity = (event) => {
@@ -259,39 +275,25 @@ const MyPage = () => {
         }))
     }
 
+
     const toggleJoinButton = () => {
         signValue.check.id && signValue.check.password && signValue.check.username && signValue.check.phonenumber ?
             setSignValue(signValue => ({ ...signValue, isJoinable: true })) : setSignValue(signValue => ({ ...signValue, isJoinable: false }));
     }
 
-    const selectGender = (event) => {
-        event.target.closest('#genderBox').style.border = "2px solid #9B1B30";
-        for (let e of event.target.closest('div').children) {
-            e.style.opacity = "1";
-        }
-        if (document.getElementById('checked')) document.getElementById('checked').removeAttribute('id');
-        event.target.closest('li').setAttribute('id', 'checked');
-    }
-
-    const requestSign = () => {
+    const requestModify = () => {
         const signForm = {
-            id: signValue.value.id,
+            id: userData.userinfo.id,
             password: signValue.value.password,
             name: signValue.value.name,
             phonenumber: signValue.value.phonenumber,
-            addressCode: '',
-            address1: '',
-            address2: '',
-            email: signValue.value.email + '@' + signValue.value.emailBack,
-            gender: signValue.value.gender,
-            birthdate: new Date(`${signValue.value.year}-${signValue.value.month}-${signValue.value.day}`),
         }
-        api('/user/signup', 'post', signForm)
+        api('/user/modify', 'post', signForm)
             .then(res => {
                 setLoading(false);
                 dispatch(changeAlert({
-                    title: '회원가입 성공!',
-                    content: `로그인 후 홈페이지를 이용해주세요!`,
+                    title: '정보수정 성공!',
+                    content: res.data,
                     time: 3,
                     style: {
                         top: '10px',
@@ -299,162 +301,116 @@ const MyPage = () => {
                         position: 'absolute'
                     }
                 }));
-                navigate('/member')
+                setPrivacyModal(!privacyModal);
             }).catch(err => {
+                dispatch(changeAlert({
+                    title: '정보수정 성공!',
+                    content: err.message,
+                    time: 3,
+                    style: {
+                        top: '10px',
+                        left: 'calc(50% - 150px)',
+                        position: 'absolute'
+                    }
+                }));
                 console.log(err.message)
                 setLoading(false);
                 setError(true);
+                setPrivacyModal(!privacyModal);
             });
     }
 
 
     return (
-        <div id='mypageContainer' className='container'>
-            <div id='privacyBox'>
-                <div id='privacy_img'>
-                    <img src="" alt="" />
-                </div>
-                <div id='privacy_detail'>
-                    <div>
-                        <div><span><i className="fa-solid fa-address-card"></i></span>{userData && userData.userinfo.id}</div>
-                        <div><span></span>[ {userData && userData.userinfo.name} ]</div>
+        <>
+            <div id='mypageContainer' className='container'>
+                <div id='privacyBox'>
+                    <div id='privacy_img'>
+                        <img src="" alt="" />
                     </div>
-                    <div>
-                        <div><span><i className="fa-solid fa-envelope"></i></span>asd123@naver.com</div>
-                    </div>
-                    <div>
-                        <div><span><i className="fa-solid fa-phone"></i></span>{userData && userData.userinfo.phonenumber}</div>
-                    </div>
-                    <div>
-                        <div><span><i className="fa-solid fa-coins"></i></span>{userData && userData.userinfo.point} 포인트</div>
-                    </div>
-                    <div id='privacy_detail_Btn'>
-                        <button onClick={() => setPrivacyModal(!privacyModal)}>개인정보 수정</button>
-                        <button>회원탈퇴</button>
-                    </div>
-                </div>
-            </div>
-            <div id='orderList' className='order_short'>
-                <OrderList />
-                <div id='moreInfo' onClick={showMoreOrder}>
-                    더 보 기
-                </div>
-            </div>
-            {privacyModal &&
-                <div id='modalBG'>
-                    <div id="signBG">
-                        <div id="historyback"></div>
-                        {addressBox && <AddressWrite setAddressBox={setAddressBox} />}
+                    <div id='privacy_detail'>
                         <div>
-                            <form id="signUpBox" action="signup" method="post">
-                                <div id="idBox">
-                                    <i className="fa-solid fa-user"></i>
-                                    <input type="text" name="id" placeholder="아이디" value={userData && userData.userinfo.id} readOnly
-                                        onChange={(event) => handleInputChange(event, checkId)}
-                                        onBlur={(event) => handleInputChange(event, checkId)}
-                                        onFocus={changeOpacity} />
-                                </div>
-                                <div id="passwordBox">
-                                    <i className="fa-solid fa-key"></i>
-                                    <input type="password" name="password" placeholder="비밀번호" value={signValue.value.password} autoComplete="false"
-                                        onChange={(event) => handleInputChange(event, checkPassword)}
-                                        onBlur={(event) => handleInputChange(event, checkPassword)}
-                                        onFocus={changeOpacity} />
-                                </div>
-                                <div id="nameBox">
-                                    <i className="fa-solid fa-circle-user"></i>
-                                    <input type="text" name="username" placeholder="이름" value={userData && userData.userinfo.name}
-                                        onChange={(event) => handleInputChange(event, checkName)}
-                                        onBlur={(event) => handleInputChange(event, checkName)}
-                                        onFocus={changeOpacity} />
-                                </div>
-                                <div id="phonenumberBox">
-                                    <i className="fa-solid fa-phone"></i>
-                                    <input type="text" name="phonenumber" placeholder="전화번호" value={userData && userData.userinfo.phonenumber}
-                                        onChange={(event) => handleInputChange(event, checkPhonenumber)}
-                                        onBlur={(event) => handleInputChange(event, checkPhonenumber)}
-                                        onFocus={changeOpacity} />
-                                </div>
-                                <div id="errorBox">
-                                    {signValue.error.id ? <p><i className="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;{signValue.error.id}</p> : <></>}
-                                    {signValue.error.password ? <p><i className="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;{signValue.error.password}</p> : <></>}
-                                    {signValue.error.username ? <p><i className="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;{signValue.error.username}</p> : <></>}
-                                    {signValue.error.phonenumber ? <p><i className="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;{signValue.error.phonenumber}</p> : <></>}
-                                </div>
-                                <div id="addressBox" onClick={() => setAddressBox(true)}>
-                                    <i className="fa-solid fa-location-dot"></i>
-                                    <input type="text" name="address" placeholder="주소" value={signValue.value.address}
-                                        onChange={handleInputChange}
-                                        onFocus={changeOpacity} />
-                                </div>
-                                <div id="emailBox">
-                                    <i className="fa-solid fa-envelope"></i>
-                                    <input type="text" name="email" placeholder="이메일" value={signValue.value.email}
-                                        onFocus={changeOpacity}
-                                        onChange={handleInputChange} />
-                                    <i className="fa-solid fa-at"></i>
-                                    <input type="text" name="emailBack" id="emailWriteBox" value={signValue.value.emailBack}
-                                        onFocus={changeOpacity}
-                                        onChange={handleInputChange} />
-                                    <select id="emailSelectBox" name="emailBack"
-                                        onFocus={changeOpacity}
-                                        onChange={handleInputChange} >
-                                        <option value="no">이메일 선택</option>
-                                        <option value="naver.com">naver.com</option>
-                                        <option value="daum.net">daum.net</option>
-                                        <option value="google.com">google.com</option>
-                                        <option value="nate.com">nate.com</option>
-                                        <option value="">직접입력</option>
-                                    </select>
-                                </div>
-                                <div id="genderBox">
-                                    <i className="fa-solid fa-person-half-dress"></i>
-                                    <span>성별</span>
-                                    <ul id="genderUl">
-                                        <label>
-                                            <li onClick={selectGender}>
-                                                <input type="radio" name="gender" value="0" checked={signValue.value.gender === "0"}
-                                                    onChange={handleInputChange} />
-                                                남자
-                                            </li>
-                                        </label>
-                                        <label>
-                                            <li onClick={selectGender}>
-                                                <input type="radio" name="gender" value="1" checked={signValue.value.gender === "1"}
-                                                    onChange={handleInputChange}
-                                                />
-                                                여자
-                                            </li>
-                                        </label>
-                                    </ul>
-                                </div>
-                                <div id="birthdayBox">
-                                    <i className="fa-solid fa-cake-candles"></i>
-                                    <input type="number" name="year" placeholder="yyyy" maxLength="4" value={signValue.value.year}
-                                        onFocus={changeOpacity}
-                                        onChange={handleInputChange}
-                                    />
-                                    <input type="number" name="month" placeholder="mm" maxLength="2" value={signValue.value.month}
-                                        onFocus={changeOpacity}
-                                        onChange={handleInputChange}
-                                    />
-                                    <input type="number" name="day" placeholder="dd" maxLength="2" value={signValue.value.day}
-                                        onFocus={changeOpacity}
-                                        onChange={handleInputChange}
-                                    />
-                                </div>
-                                <div id='changeBtnBox'>
-                                    <button type="button" onClick={requestSign} class="changeBtn" style={{ opacity: signValue.isJoinable ? '1' : '0.3' }} disabled={!signValue.isJoinable}>수정하기</button>
-                                    <button type="button" onClick={() => setPrivacyModal(!privacyModal)} class="changeBtn" >취소하기</button>
-                                </div>
-                            </form>
-                            <br />
-                            <p id="successOrNot"></p>
+                            <div><span><i className="fa-solid fa-address-card"></i></span>{userData && userData.userinfo.id}</div>
+                            <div><span></span>[ {userData && userData.userinfo.name} ]</div>
+                        </div>
+                        <div>
+                            <div><span><i className="fa-solid fa-envelope"></i></span>asd123@naver.com</div>
+                        </div>
+                        <div>
+                            <div><span><i className="fa-solid fa-phone"></i></span>{userData && userData.userinfo.phonenumber}</div>
+                        </div>
+                        <div>
+                            <div><span><i className="fa-solid fa-coins"></i></span>{userData && userData.userinfo.point} 포인트</div>
+                        </div>
+                        <div id='privacy_detail_Btn'>
+                            <button onClick={() => setPrivacyModal(!privacyModal)}>개인정보 수정</button>
+                            <button onClick={deleteUser}>회원탈퇴</button>
                         </div>
                     </div>
                 </div>
-            }
-        </div>
+                <div id='orderList' className='order_short'>
+                    <OrderList />
+                    <div id='moreInfo' onClick={showMoreOrder}>
+                        더 보 기
+                    </div>
+                </div>
+                {privacyModal &&
+                    <div id='modalBG'>
+                        <div id="signBG">
+                            <div id="historyback"></div>
+                            {addressBox && <AddressWrite setAddressBox={setAddressBox} />}
+                            <div>
+                                <form id="signUpBox" action="signup" method="post">
+                                    <h3>정보 수정</h3>
+                                    <div id="idBox">
+                                        <i className="fa-solid fa-user"></i>
+                                        <input type="text" name="id" placeholder="아이디" value={userData && userData.userinfo.id} readOnly
+                                            onChange={(event) => handleInputChange(event, checkId)}
+                                            onBlur={(event) => handleInputChange(event, checkId)}
+                                            onFocus={changeOpacity} />
+                                    </div>
+                                    <div id="passwordBox">
+                                        <i className="fa-solid fa-key"></i>
+                                        <input type="password" name="password" placeholder="비밀번호" value={signValue.value.password} autoComplete="false"
+                                            onChange={(event) => handleInputChange(event, checkPassword)}
+                                            onBlur={(event) => handleInputChange(event, checkPassword)}
+                                            onFocus={changeOpacity} />
+                                    </div>
+                                    <div id="nameBox">
+                                        <i className="fa-solid fa-circle-user"></i>
+                                        <input type="text" name="name" placeholder="이름"
+                                            onChange={(event) => handleInputChange(event, checkName)}
+                                            onBlur={(event) => handleInputChange(event, checkName)}
+                                            onFocus={changeOpacity} />
+                                        {/* value={userData && userData.userinfo.name} */}
+                                        {/* value={userData && userData.userinfo.phonenumber} */}
+                                    </div>
+                                    <div id="phonenumberBox">
+                                        <i className="fa-solid fa-phone"></i>
+                                        <input type="text" name="phonenumber" placeholder="전화번호"
+                                            onChange={(event) => handleInputChange(event, checkPhonenumber)}
+                                            onBlur={(event) => handleInputChange(event, checkPhonenumber)}
+                                            onFocus={changeOpacity} />
+                                    </div>
+                                    <div id="errorBox">
+                                        {signValue.error.id ? <p><i className="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;{signValue.error.id}</p> : <></>}
+                                        {signValue.error.password ? <p><i className="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;{signValue.error.password}</p> : <></>}
+                                        {signValue.error.username ? <p><i className="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;{signValue.error.username}</p> : <></>}
+                                        {signValue.error.phonenumber ? <p><i className="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;{signValue.error.phonenumber}</p> : <></>}
+                                    </div>
+                                    <div id='changeBtnBox'>
+                                        <button type="button" onClick={requestModify} className="changeBtn" style={{ opacity: signValue.isJoinable ? '1' : '0.3' }} disabled={!signValue.isJoinable}>수정하기</button>
+                                        <button type="button" onClick={() => setPrivacyModal(!privacyModal)} className="changeBtn" >취소하기</button>
+                                    </div>
+                                </form>
+                                <br />
+                                <p id="successOrNot"></p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </>
     )
 }
 

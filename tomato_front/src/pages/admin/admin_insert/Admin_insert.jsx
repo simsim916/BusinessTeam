@@ -18,7 +18,7 @@ const Admin_insert = () => {
 
     useEffect(() => {
         setColumn(null);
-        api(`${whichTable}/selectwhere?column=${forSearch.column}&keyword=${forSearch.keyword}&howmany=${forSearch.howmany}`, 'get', null, user.token)
+        api(`${whichTable}/selectwhere?column=${forSearch.column}&keyword=${forSearch.keyword}`, 'get', null, user.token)
             .then(res => {
                 setColumn(Object.keys(res.data[0]));
             })
@@ -29,12 +29,6 @@ const Admin_insert = () => {
         setWaitData([]);
         setWhichTable(e.target.value);
         switch (e.target.value) {
-            case '/user':
-                setForSearch({
-                    column: 'id',
-                    keyword: ''
-                })
-                break;
             case '/event':
                 setForSearch({
                     column: 'name',
@@ -75,7 +69,6 @@ const Admin_insert = () => {
                 <div id="optionBar">
                     <label htmlFor=""> Table -&nbsp;
                         <select name="" id="" onChange={changeTable}>
-                            <option value="/user">회원</option>
                             <option value="/item">상품</option>
                             <option value="/event">이벤트</option>
                         </select>

@@ -22,6 +22,9 @@ public class SignForm {
 	private String email;
 	private Integer gender;
 	private LocalDate birthdate;
+	
+//	===========================
+	private Integer point; 
 
 	
 	

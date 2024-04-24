@@ -96,6 +96,7 @@ const Detail_descript = ({ item }) => {
             };
             const ar = [];
             ar.push(formData);
+            console.log(formData);
             dispatch(getUserCart('/usercart/merge', 'post', ar, userinfo.token))
         } else {
             let cartArray = JSON.parse(localStorage.getItem('cart')) || [];

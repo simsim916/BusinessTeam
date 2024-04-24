@@ -16,7 +16,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.AllArgsConstructor;
 
 import static com.example.demo.item.item.entity.QItem.item;
-import static com.example.demo.item.item_event.entity.QitemEvent.itemEvent;
+//import static com.example.demo.item.item_event.entity.Qitem_event.itemEvent;
 import static com.example.demo.user.user_address.entity.QUserAddress.userAddress;
 
 import java.util.List;
@@ -28,7 +28,7 @@ public class UserAddressRepositoryImpl implements UserAddressRepository {
 	JPAQueryFactory factory;
 	EntityManager entityManager;
 	private final QBean<UserAddressDTO> dtoBean = Projections.bean(UserAddressDTO.class, 
-			userAddress.seq, userAddress.userId, userAddress.info, userAddress.main_address, userAddress.address_code, userAddress.address_code,
+			userAddress.seq, userAddress.userId, userAddress.info, userAddress.mainAddress, userAddress.addressCode, userAddress.addressCode,
 			userAddress.address1, userAddress.address2, userAddress.phonenumber);
 
 	

@@ -16,7 +16,7 @@ public class UserAddress {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long seq;
+    private Integer seq;
     @Column(name = "user_id")
     private String userId;
     private String info;
