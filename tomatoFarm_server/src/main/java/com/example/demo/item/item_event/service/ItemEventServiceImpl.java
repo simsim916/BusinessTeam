@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import com.example.demo.item.item_event.entity.itemEvent;
+import com.example.demo.item.item_event.entity.ItemEvent;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.module.SearchRequest;
@@ -20,12 +20,12 @@ public class ItemEventServiceImpl implements ItemEventService {
 	
 	@Override
 	@Transactional
-	public List<itemEvent> merge(List<itemEvent> list) {
+	public List<ItemEvent> merge(List<ItemEvent> list) {
 		return item_eventRepository.merge(list);
 	}
 
 	@Override
-	public List<itemEvent> selectEventWhere(SearchRequest searchRequest) {
+	public List<ItemEvent> selectEventWhere(SearchRequest searchRequest) {
 		if (searchRequest.getKeyword().matches("^[0-9]*$")) {
 			return item_eventRepository.selectEventWhereNumber(searchRequest);
 		} else {

@@ -4,16 +4,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.example.demo.user.user.domain.SignForm;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.user.user.entity.User;
 import com.example.demo.module.SearchRequest;
@@ -46,16 +42,19 @@ public class UserController {
 	}
 
 	@PostMapping("/signup")
-	public ResponseEntity<?> singup(@RequestBody User entity) {
+	public ResponseEntity<?> singup(@RequestBody SignForm signForm) {
 		ResponseEntity<?> result = null;
-		String password = entity.getPassword();
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		entity.setPassword(encoder.encode(password));
-		if (userService.signup(entity) != null) {
-			result = ResponseEntity.status(HttpStatus.OK).body("signUp_successed");
-		} else {
-			result = ResponseEntity.status(HttpStatus.OK).body("signUp_failed");
-		}
+		userService.signup(signForm);
+		result = ResponseEntity.status(HttpStatus.OK).body("signUp_successed");
+		return result;
+
+	}@GetMapping("/checkid")
+	public ResponseEntity<?> checkid(@RequestParam String id) {
+		ResponseEntity<?> result = null;
+		if (userService.checkID(id))
+			result = ResponseEntity.status(HttpStatus.OK).body("존재하는 아이디 입니다.");
+		else
+			result = ResponseEntity.status(HttpStatus.OK).body("OK");
 		return result;
 	}
 
@@ -71,7 +70,6 @@ public class UserController {
 	@PostMapping("/merge")
 	public ResponseEntity<?> merge(@RequestBody List<User> list) {
 		ResponseEntity<?> result = null;
-
 		if (userService.saveAll(list).size() > 0)
 			result = ResponseEntity.status(HttpStatus.OK)
 					.body(userService.selectUserWhere(new SearchRequest("id", "")));

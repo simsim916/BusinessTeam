@@ -63,12 +63,8 @@ const Detail_review_box_row = ({ itemReview }) => {
                 </div>
             </div>
             {reviewDetail ? <Detail_review_box_row_detail setReviewDetail={setReviewDetail} reviewDetail={reviewDetail} itemReview={itemReview} /> : <></>}
-
         </>
-
     );
-
-
 }
 
 export default Detail_review_box_row;

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.example.demo.chat.entity.ChatMessage;
 import com.example.demo.chat.entity.ChatRoom;
 import com.example.demo.user.user.domain.AdminChat;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -26,39 +27,41 @@ import com.example.demo.chat.service.ChatService;
 import lombok.AllArgsConstructor;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping(value = "/chat")
 public class ChatController {
 
-    ChatService chatService;
+    private final ChatService chatService;
 
-    @PostMapping("/makeroom")
-    public ResponseEntity<?> makeroom(HttpServletRequest request, @RequestBody ChatRoom entity, @AuthenticationPrincipal String userId) {
+    @PostMapping("/insertroom")
+    public ResponseEntity<?> insertroom(@RequestBody ChatRoom entity) {
         ResponseEntity<?> result = null;
-        if(entity.getUserIdAdmin()==null) {
-        	entity.setUserIdUser(userId);
-        }
-        List<ChatRoomDTO> list = chatService.insertRoom(entity);
-        if (list.isEmpty()) {
-            result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("makeroom failed");
-        } else {
-            result = ResponseEntity.status(HttpStatus.OK).body(list);
-        }
+        ChatRoom chatRoom = chatService.insertRoom(entity);
+        result = ResponseEntity.status(HttpStatus.OK).body(chatRoom);
+        return result;
+    }
+
+    @GetMapping("/endroom")
+    public ResponseEntity<?> endroom(ChatRoom entity) {
+        ResponseEntity<?> result = null;
+        List<ChatRoomDTO> list = chatService.endRoom(entity);
+        result = ResponseEntity.status(HttpStatus.OK).body(list);
         return result;
     }
 
     @PostMapping("/insertusermessage")
     public ResponseEntity<?> insertusermessage(@RequestBody ChatMessage entity, @AuthenticationPrincipal String userId) {
         ResponseEntity<?> result = null;
-        entity.setWriter(userId);
+        entity.setUserIdWriter(userId);
         List<ChatMessageDTO> list = chatService.insertUserMessage(entity);
         result = ResponseEntity.status(HttpStatus.OK).body(list);
         return result;
     }
+
     @PostMapping("/insertadminmessage")
     public ResponseEntity<?> insertadminmessage(@RequestBody ChatMessage entity, @AuthenticationPrincipal String userId) {
         ResponseEntity<?> result = null;
-        entity.setWriter(userId);
+        entity.setUserIdWriter(userId);
         AdminChat adminChat = chatService.insertAdminMessage(entity);
         result = ResponseEntity.status(HttpStatus.OK).body(adminChat);
         return result;
@@ -67,7 +70,7 @@ public class ChatController {
     @GetMapping("/selectmessage")
     public ResponseEntity<?> selectmessage(ChatMessage entity, @AuthenticationPrincipal String userId) {
         ResponseEntity<?> result = null;
-        entity.setWriter(userId);
+        entity.setUserIdWriter(userId);
         List<ChatMessageDTO> list = chatService.selectAllmessageWhereRoomSeq(entity);
         if (list != null) {
             result = ResponseEntity.status(HttpStatus.OK).body(list);

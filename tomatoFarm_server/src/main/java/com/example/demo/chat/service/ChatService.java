@@ -16,5 +16,6 @@ public interface ChatService {
 	List<ChatRoomDTO> selectRoom(String userId);
 	List<ChatMessageDTO> insertUserMessage(ChatMessage entity);
 	AdminChat insertAdminMessage(ChatMessage entity);
-	List<ChatRoomDTO> insertRoom(ChatRoom entity);
+	ChatRoom insertRoom(ChatRoom entity);
+	List<ChatRoomDTO> endRoom(ChatRoom entity);
 }

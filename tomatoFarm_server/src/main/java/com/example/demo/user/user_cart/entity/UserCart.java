@@ -24,18 +24,20 @@ public class UserCart {
 
 	@Id
 	@Column(name = "item_code")
-	private Integer code;
-	
+	private Integer itemCode;
+
 	@Id
-	private String id; // 사용자 아이디
+	@Column(name = "user_id")
+	private String userId; // 사용자 아이디
 	
 	@Builder.Default 
 	@Column(name = "amount")
 	private Integer amount = 0; // 장바구니 수량
-	@Builder.Default 
+	@Builder.Default
 	private Integer views = 1; // 조회수
-	@Builder.Default 
-	private Integer like_item = 0; // 관심상품 등록 여부
+	@Builder.Default
+	@Column(name = "like_item")
+	private Integer likeItem = 0; // 관심상품 등록 여부
 	private LocalDate regdate; // 최근 조회 날짜
 
 }

@@ -90,20 +90,20 @@ const Detail_descript = ({ item }) => {
 
         if (userinfo && userinfo.login) {
             const formData = {
-                code: item.code,
+                itemCode: item.code,
                 amount: inputCountValue,
-                id: userinfo.id
+                userId: userinfo.id
             };
             const ar = [];
             ar.push(formData);
             dispatch(getUserCart('/usercart/merge', 'post', ar, userinfo.token))
         } else {
             let cartArray = JSON.parse(localStorage.getItem('cart')) || [];
-            const itemIndex = cartArray.findIndex(cartItem => cartItem.code == item.code);
+            const itemIndex = cartArray.findIndex(cartItem => cartItem.itemCode == item.code);
             if (itemIndex !== -1) {
                 cartArray[itemIndex].amount += +inputCountValue;
             } else {
-                cartArray.push({ code: item.code, amount: +inputCountValue });
+                cartArray.push({ itemCode: item.code, amount: +inputCountValue });
             }
             dispatch(setUserCartStorage(cartArray));
         }

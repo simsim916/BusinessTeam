@@ -13,7 +13,6 @@ const BuyItemBoxRow = ({
     const handleChange = (event) => {
         changeItemList(idx, event.target.value)
     }
-
     const handleClick = (type) => {
         changeItemList(idx, type, item);
     }
@@ -23,37 +22,31 @@ const BuyItemBoxRow = ({
             <li>
                 <input className="check" type="checkbox" name="buy"
                     onChange={() => changeCheckedList(item)}
-                    checked={userBuyForm.itemList && userBuyForm.itemList.some(e => e.code == item.code) || false}
+                    checked={userBuyForm.itemList && userBuyForm.itemList.some(e => e.ItemCode == item.ItemCode) || false}
                 />
 
             </li>
-            <li className="shopBasketItemImg"><img src={SERVER_RESOURCE + `/img/itemImg/${item.code}_2.jpg`} alt="" /></li>
+            <li className="shopBasketItemImg"><img src={SERVER_RESOURCE + `/img/itemImg/${item.ItemCode}_2.jpg`} alt="" /></li>
             <li className="shopBasketItemIfo">
-                <p className="shopBasketItemIfo_name">
-                    {
-                        item.item_name ?
-                            item.item_name
-                            :
-                            item.name
-                    }</p>
+                <p className="shopBasketItemIfo_name">{item.itemName}</p>
                 <p className="shopBasketItemIfo_price">{makeComa(item.price)}원</p>
                 {
                     item.discount ?
-                        <p className="shopBasketItemIfo_sale">{makeComa(Math.round(item.price * (100 - item.discount) / 100))}원</p>
+                        <p className="shopBasketItemIfo_sale">{makeComa(Math.round(item.price * (100 - item.itemEventDiscount) / 100))}원</p>
                         :
                         null
                 }
             </li>
             <li className="shopBasketItem_count">
                 <button onClick={() => handleClick('-')}><i className="fa-solid fa-minus"></i></button>
-                <input id="inputCount" type="number" value={(userBuyItemList && userBuyItemList[idx].amount) || item[idx].amount} onChange={handleChange} />
+                <input id="inputCount" type="number" value={(userBuyItemList && typeof userBuyItemList[0] != 'String') || item[idx].amount} onChange={handleChange} />
                 <button><i onClick={() => handleClick('+')} className="fa-solid fa-plus"></i></button>
             </li>
             {
-                item.discount ? (
+                item.itemEventDiscount ? (
                     <li className="shopBasketItemIfo_sumprice">
                         <p className="shopBasketItemIfo_sale buyPage">{makeComa(item.price * item.amount)}원</p>
-                        <p>{makeComa(Math.round(item.price * (100 - item.discount) / 100) * item.amount)}원</p>
+                        <p>{makeComa(Math.round(item.price * (100 - item.itemEventDiscount) / 100) * item.amount)}원</p>
                     </li>
                 ) : (
                     <li className="shopBasketItemIfo_sumprice">

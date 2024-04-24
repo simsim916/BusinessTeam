@@ -23,7 +23,6 @@ import com.example.demo.user.user.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
-@Transactional
 @RequiredArgsConstructor
 @Service
 public class ChatServiceImpl implements ChatService {
@@ -54,7 +53,7 @@ public class ChatServiceImpl implements ChatService {
 		if (optionalChatRoom.isPresent()) {
 			ChatRoom chatRoom = optionalChatRoom.get();
 			chatRoom.setIng(1);
-			chatRoom.setUserIdAdmin(entity.getWriter());
+			chatRoom.setUserIdAdmin(entity.getUserIdWriter());
 			chatRoomRepositoryJPA.save(chatRoom);
 		}
 		AdminChat result = AdminChat.builder()
@@ -66,23 +65,18 @@ public class ChatServiceImpl implements ChatService {
 	
 	@Override
 	@Transactional
-	public List<ChatRoomDTO> insertRoom(ChatRoom entity) {
-		boolean firstWrite = entity.getSeq()==null;
+	public ChatRoom insertRoom(ChatRoom entity) {
 		entity = chatRoomRepositoryJPA.save(entity);
-		if (firstWrite){
-			ChatMessage start_message = ChatMessage.builder()
-				.chatRoomSeq(entity.getSeq())
-				.writer("tomatofarm")
-				.content("문의하실 내용을 입력해주세요~")
-				.regdate(LocalDateTime.now())
-				.build();
-			chatMessageRepositoryJPA.save(start_message);
-		return null;
-		} else {
-		return chatRoomRepositoryJPA.findAllWithRegdate();
-		}
+		return entity;
 	}
-	
+
+	@Override
+	public List<ChatRoomDTO> endRoom(ChatRoom entity) {
+		entity.setIng(2);
+		chatRoomRepositoryJPA.save(entity);
+		return chatRoomRepositoryJPA.findAllWithRegdate();
+	}
+
 	@Override
 	public List<ChatMessageDTO> selectAllmessageWhereRoomSeq(ChatMessage entity) {
 		return chatMessageRepositoryJPA.findAllByChatRoomSeq(entity.getChatRoomSeq());

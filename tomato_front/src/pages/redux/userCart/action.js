@@ -41,7 +41,9 @@ export const getItemListAmount = (url, method, requestData, token) => {
     return async (dispatch) => {
         dispatch(fetchDataRequest());
         try {
-            const response = await api(url, method, requestData, token)
+            const ar = [];
+            requestData.map(e => ar.push(e.itemCode));
+            const response = await api(url, method, ar, token)
             for (let e of response.data) {
                 for (let i of requestData) {
                     if (i.code == e.code) {
@@ -73,7 +75,7 @@ export const changeUserCart = (key, type, userCart) => {
         if (type == '+') {
             ar[key].amount++;
         } else if (type == '-') {
-            if (ar[key].amount > 0)
+            if (ar[key].amount > 1)
                 ar[key].amount--;
         } else {
             ar[key].amount = type
@@ -85,12 +87,12 @@ export const changeUserCart = (key, type, userCart) => {
             let result = [];
             for (let e of ar) {
                 result.push({
-                    code: e.code,
+                    itemCode: e.itemCode,
                     amount: e.amount
                 })
             }
             localStorage.setItem('cart', JSON.stringify(result));
-            
+
         }
     }
 }

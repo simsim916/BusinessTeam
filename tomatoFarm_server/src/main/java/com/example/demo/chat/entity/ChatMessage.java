@@ -1,11 +1,9 @@
 package com.example.demo.chat.entity;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import javax.persistence.*;
 
-import com.example.demo.user.user_level.entity.UserLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,7 +21,7 @@ public class ChatMessage {
 	private Long seq;
 
 	@Column(name = "user_id_writer")
-	private String writer;
+	private String userIdWriter;
 
 	@Column(name = "content")
 	private String content;
