@@ -72,8 +72,12 @@ public class ChatServiceImpl implements ChatService {
 
 	@Override
 	public List<ChatRoomDTO> endRoom(ChatRoom entity) {
-		entity.setIng(2);
-		chatRoomRepositoryJPA.save(entity);
+		Optional<ChatRoom> optionalChatRoom= chatRoomRepositoryJPA.findById(entity.getSeq());
+		if (optionalChatRoom.isPresent()) {
+			entity = optionalChatRoom.get();
+			entity.setIng(2);
+			chatRoomRepositoryJPA.save(entity);
+		}
 		return chatRoomRepositoryJPA.findAllWithRegdate();
 	}
 

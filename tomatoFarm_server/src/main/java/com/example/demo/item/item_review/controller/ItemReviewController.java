@@ -44,21 +44,23 @@ public class ItemReviewController {
 	public ResponseEntity<?> iteminsert(HttpServletRequest request,  ItemReview entity) throws IOException {
 		ResponseEntity<?> result = null;
 		
-		if (entity != null) {
 			String realPath = request.getRealPath("/");
 			log.info("\n\n\n** realPath => " + realPath);
-			realPath += "\\resources\\img\\itemReviewImg\\" + entity.getItemCode() + "\\";
-			File file = new File(realPath); // uploadImages 폴더에 화일존재 확인을 위함
-			if (!file.exists()) {
-				file.mkdir();
-			}
-
-			MultipartFile uploadfilef = entity.getUploadfilef();
-			if (uploadfilef != null && !uploadfilef.isEmpty()) {
-				String file1 = realPath + entity.getUserIdWriter() + "_" + uploadfilef.getOriginalFilename(); // 저장경로(relaPath+화일명)
-				uploadfilef.transferTo(new File(file1)); // 해당경로에 저장(붙여넣기)
-				entity.setImage1(entity.getUserIdWriter() + "_" + uploadfilef.getOriginalFilename());
-			}
+		if (entity != null) {
+//			String realPath = request.getRealPath("/");
+//			log.info("\n\n\n** realPath => " + realPath);
+//			realPath += "\\resources\\img\\itemReviewImg\\" + entity.getItemCode() + "\\";
+//			File file = new File(realPath); // uploadImages 폴더에 화일존재 확인을 위함
+//			if (!file.exists()) {
+//				file.mkdir();
+//			}
+//
+//			MultipartFile uploadfilef = entity.getUploadfilef();
+//			if (uploadfilef != null && !uploadfilef.isEmpty()) {
+//				String file1 = realPath + entity.getUserIdWriter() + "_" + uploadfilef.getOriginalFilename(); // 저장경로(relaPath+화일명)
+//				uploadfilef.transferTo(new File(file1)); // 해당경로에 저장(붙여넣기)
+//				entity.setImage1(entity.getUserIdWriter() + "_" + uploadfilef.getOriginalFilename());
+//			}
 			result = ResponseEntity.status(HttpStatus.OK).body(itemReviewService.updateReview(entity));
 		} 
 

@@ -16,9 +16,10 @@ const BuyBox = () => {
 
     useEffect(() => {
         api('/visit/update?page=order', 'get')
-
-        dispatch(setUserBuy({ buyList: userCart.filter(e =>userBuyS.includes(e.itemCode))}))
-        dispatch(setUserBuyForm({ itemList: userCart.filter(e =>userBuyS.includes(e.itemCode))}))
+        if (userBuyS) {
+            dispatch(setUserBuy({ buyList: userCart.filter(e => userBuyS.includes(e.itemCode)) }))
+            dispatch(setUserBuyForm({ itemList: userCart.filter(e => userBuyS.includes(e.itemCode)) }))
+        }
 
         return () => {
             dispatch(setUserBuyStorageClean())

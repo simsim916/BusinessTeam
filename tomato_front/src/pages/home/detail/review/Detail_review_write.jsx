@@ -13,8 +13,8 @@ const Detail_review_write = ({ item, refresh, setRefresh, reviewWriteClick }) =>
     const [writeBoxClose, setWriteBoxClose] = useState(true);
     const [score, setScore] = useState(0);
     const [review, setReview] = useState({
-        writer: user.id,
-        item_code: item.code,
+        userIdWriter: user.id,
+        itemCode: item.code,
         title: '',
         contents: '',
         score: '0',
@@ -28,8 +28,8 @@ const Detail_review_write = ({ item, refresh, setRefresh, reviewWriteClick }) =>
     const submitReview = async () => {
         setLoading(true);
         const formData = new FormData();
-        formData.append('writer', review.writer);
-        formData.append('item_code', review.item_code);
+        formData.append('userIdWriter', review.userIdWriter);
+        formData.append('itemCode', review.itemCode);
         formData.append('title', review.title);
         formData.append('contents', review.contents);
         formData.append('score', review.score);

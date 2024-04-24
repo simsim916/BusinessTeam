@@ -69,7 +69,6 @@ const ChatBotBox = ({
 
     /* 채팅 종료 */
     const endChat = () => {
-
         api('/chat/endroom?seq=' + text.chatRoomSeq, 'get', null, userinfo.token)
             .then(res => {
                 if (admin_root) {
@@ -226,7 +225,7 @@ const ChatBotBox = ({
                 <div id='messageBox'>
                     {/* {messageAll && messageAll.map((e, i) => <span>{new Date().toLocaleTimeString([], { hour: 'numeric', minute: 'numeric' })}</span>)} */}
                     {messageAll ?
-                        messageAll.map((e, i) => <p className={e.writer === userinfo.id ? 'myChat' : 'otherChat'} key={i}>{e.content}<br></br><span>{new Date(e.regdate).getHours()}시 {new Date(e.regdate).getMinutes()}분</span></p>)
+                        messageAll.map((e, i) => <p className={e.userIdWriter === userinfo.id ? 'myChat' : 'otherChat'} key={i}>{e.content}<br></br><span>{new Date(e.regdate).getHours()}시 {new Date(e.regdate).getMinutes()}분</span></p>)
                         :
                         null
                     }
