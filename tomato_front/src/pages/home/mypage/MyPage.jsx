@@ -21,7 +21,10 @@ const MyPage = () => {
         },
         userOrder: []
     });
+    console.log(userData);
+
     const user = JSON.parse(sessionStorage.getItem('userinfo'));
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
@@ -61,7 +64,7 @@ const MyPage = () => {
     })
 
     useEffect(() => {
-        api(`/user/selectwhere?column=id&keyword=${user.id}`, 'get', null, user.token)
+        api(`/user/selectwhere?column=id&keyword=${user && user.id}`, 'get', null, user.token)
             .then(res => {
                 setUserData((pre => ({
                     ...pre,
@@ -76,6 +79,16 @@ const MyPage = () => {
                     ...pre,
                     userOrder: res.data
                 })))
+                console.log(res.data);
+            })
+            .catch(err => console.log(err.message));
+        api(`/address/selectwhere?column=userId&keyword=${user && user.id}`, 'get', null, user.token)
+            .then(res => {
+                setUserData((pre => ({
+                    ...pre,
+                    userAddress: res.data
+                })))
+                console.log(res.data);
             })
             .catch(err => console.log(err.message));
     }, [])
