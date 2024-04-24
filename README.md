@@ -1,1 +1,1 @@
-deploy URL : tomatofarm.shop
+deploy URL : http://tomatofarm.shop
