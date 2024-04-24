@@ -35,19 +35,13 @@ public class UserCartController {
 
 	@Transactional
 	@PostMapping("/merge")
-	public ResponseEntity<?> merge(@RequestBody List<UserCart> list, HttpServletRequest request) {
+	public ResponseEntity<?> merge(@RequestBody List<UserCart> list, @AuthenticationPrincipal String userId) {
 		ResponseEntity<?> result = null;
-		String token = tokenProvider.parseBearerToken(request);
-		String id = tokenProvider.validateAndGetUserId(token);
 		for (UserCart e : list)
-			e.setUserId(id);
+			e.setUserId(userId);
 		// 자료를 서비스를 통해서 저장
-		if (list != null && list.size() > 0) {
-//			userCartService.mergeAll(list); // 장바구니 DB에 들어갔어
-//			result = ResponseEntity.status(HttpStatus.OK).body(userCartService.selectItemListWhereUserID(list.get(0)));
-		} else {
-//			result = ResponseEntity.status(HttpStatus.OK).body(userCartService.selectItemListWhereUserID(list.get(0)));
-		}
+			userCartService.mergeAll(list); // 장바구니 DB에 들어갔어
+			result = ResponseEntity.status(HttpStatus.OK).body(userCartService.findAllByuserId(userId));
 		return result;
 	}
 

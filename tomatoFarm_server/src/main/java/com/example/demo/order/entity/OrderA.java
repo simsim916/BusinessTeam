@@ -4,11 +4,33 @@ import java.time.LocalDateTime;
 
 import javax.persistence.*;
 
+import com.example.demo.order.domain.OrderDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
+
+@SqlResultSetMapping(
+        name = "OrderDTOMapping",
+        classes = @ConstructorResult(
+                targetClass = OrderDTO.class,
+                columns = {
+                        @ColumnResult(name = "address1", type = String.class),
+                        @ColumnResult(name = "address2", type = String.class),
+                        @ColumnResult(name = "address_code", type = String.class),
+                        @ColumnResult(name = "deliveryprice", type = Integer.class),
+                        @ColumnResult(name = "delivery_message", type = String.class),
+                        @ColumnResult(name = "orderprice", type = Integer.class),
+                        @ColumnResult(name = "usepoint", type = Integer.class),
+                        @ColumnResult(name = "orderdate", type = LocalDateTime.class),
+                        @ColumnResult(name = "itemCode", type = Integer.class),
+                        @ColumnResult(name = "itemName", type = String.class),
+                        @ColumnResult(name = "orderSize", type = Integer.class)
+                }
+        )
+)
 
 @Entity
 @Table(name = "order_a") // order 테이블과 매핑
@@ -47,13 +69,13 @@ public class OrderA {
     @Column(name="deliverydate")
     private LocalDateTime deliverydate;
 
-    @Column(name="order_message")
-    private String orderMessage;
+    @Column(name="delivery_message")
+    private String deliverymessage;
 
     @Transient
-    private String itemName;
-    @Transient
     private Integer orderSize;
+    @Transient
+    private String itemName;
 
 
 }

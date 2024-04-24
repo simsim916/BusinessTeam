@@ -41,7 +41,7 @@ public class OrderServiceImpl implements OrderService {
 				.deliveryprice(dto.getDeliveryprice())
 				.usepoint(dto.getUsepoint())
 				.orderdate(LocalDateTime.now())
-				.orderMessage(dto.getDeliverymessage())
+				.deliverymessage(dto.getDeliverymessage())
 				.build();
 		orderA = orderRepositoryJPA.save(orderA);
 
@@ -67,7 +67,7 @@ public class OrderServiceImpl implements OrderService {
 			}
 			userCartRepository.mergeAll(userCart_list);
 		}
-		OrderDTO result = orderRepositoryJPA.findByOrderCode(orderA.getSeq());
+		OrderDTO result = (OrderDTO) itemorderRepository.selectOrderByCode(orderA.getSeq()).get(0);
 		return result;
 	}
 

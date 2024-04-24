@@ -22,7 +22,7 @@ const BuyItemBoxRow = ({
             <li>
                 <input className="check" type="checkbox" name="buy"
                     onChange={() => changeCheckedList(item)}
-                    checked={userBuyForm.itemList.find(e => e.itemCode == item.itemCode) || false}
+                    checked={userBuyForm.itemList.find(e => e.itemCode == item.itemCode)}
                 />
             </li>
             <li className="shopBasketItemImg"><img src={SERVER_RESOURCE + `/img/itemImg/${item.itemCode}_2.jpg`} alt="" /></li>

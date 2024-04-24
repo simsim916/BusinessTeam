@@ -35,7 +35,7 @@ public class UserCartServiceImpl implements UserCartService {
 		for (UserCart e : list) {
 			e.setRegdate(today);
 		}
-		userCartRepository.mergeAll(list);
+		userCartRepositoryJPA.saveAll(list);
 		return null;
 	}
 

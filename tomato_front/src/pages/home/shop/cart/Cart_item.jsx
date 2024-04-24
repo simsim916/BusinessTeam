@@ -20,10 +20,18 @@ const Cart_item = () => {
 
 
     const handleAllCheckBox = () => {
-        if (userBuy && userCart.length == userBuy.length) {
-            dispatch(setUserBuyStorage([]));
-        } else {
-            dispatch(setUserBuyStorage(userCart.map(e => e.itemCode)));
+        if(userinfo){
+            if (userBuy && userCartList.length == userBuy.length) {
+                dispatch(setUserBuyStorage([]));
+            } else {
+                dispatch(setUserBuyStorage(userCartList.map(e => e.itemCode)));
+            }
+        } else{
+            if (userBuy && userCart.length == userBuy.length) {
+                dispatch(setUserBuyStorage([]));
+            } else {
+                dispatch(setUserBuyStorage(userCart.map(e => e.itemCode)));
+            }
         }
     }
 
@@ -44,6 +52,12 @@ const Cart_item = () => {
             {userCart && userCart.length > 0 &&
                 <label id="shopBasketSelect">
                     <input checked={userBuy && userBuy.length == userCart.length || false} type="checkbox" onChange={handleAllCheckBox} />
+                    전체선택
+                </label>
+            }
+            {userCartList && userCartList.length > 0 &&
+                <label id="shopBasketSelect">
+                    <input checked={userBuy && userBuy.length == userCartList.length || false} type="checkbox" onChange={handleAllCheckBox} />
                     전체선택
                 </label>
             }

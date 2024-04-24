@@ -1,5 +1,6 @@
 package com.example.demo.order.domain;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.example.demo.item.item.domain.ItemDTO;
@@ -28,11 +29,23 @@ public class OrderDTO {
 	private String phonenumber;
 	private Integer usepoint;
 
+	private Integer itemCode;
 	private String itemName;
 	private Integer orderSize;
 
-	public OrderDTO(String address1, Integer orderSize) {
+	private LocalDateTime orderdate;
+
+	public OrderDTO(String address1, String address2, String addressCode, Integer deliveryprice, String deliverymessage,Integer orderprice, Integer usepoint, LocalDateTime orderdate, Integer itemCode, String itemName, Integer orderSize) {
 		this.address1 = address1;
+		this.address2 = address2;
+		this.addressCode = addressCode;
+		this.deliveryprice = deliveryprice;
+		this.deliverymessage = deliverymessage;
+		this.orderprice = orderprice;
+		this.usepoint = usepoint;
+		this.orderdate = orderdate;
+		this.itemCode = itemCode;
+		this.itemName = itemName;
 		this.orderSize = orderSize;
 	}
 }

@@ -16,7 +16,7 @@ public interface UserCartRepositoryJPA extends JpaRepository<UserCart, UserCartI
             "from UserCart uc " +
             "left join Item i on uc.itemCode = i.code " +
             "left join  ItemEvent ie on i.itemEventCode = ie.code " +
-            "where uc.userId = :userId")
+            "where uc.userId = :userId and uc.amount > 0")
     List<UserCartDTO> findAllByUserId(String userId);
 
     @Query(value = "select " +
