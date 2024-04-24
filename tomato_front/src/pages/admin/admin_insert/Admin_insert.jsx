@@ -5,9 +5,9 @@ import Admin_data_row from '../admin_data/Admin_data_row'
 
 
 const Admin_insert = () => {
-    const [whichTable, setWhichTable] = useState('/user');
+    const [whichTable, setWhichTable] = useState('/item');
     const [forSearch, setForSearch] = useState({
-        column: 'id',
+        column: 'sort1',
         keyword: '',
         howmany: 2
     });
@@ -86,8 +86,10 @@ const Admin_insert = () => {
                                 </div>
                             </div>
                             : ""
-                    )
-                    }
+                    )}
+                    <div id='whichBrand'>
+                        적용 브랜드 : <input type="text" placeholder='적용시키고자 하는 브랜드' />
+                    </div>
                     <div className='forbuttonBox'><button onClick={changeWaitData}>입력</button><button>초기화</button></div>
                 </div>
                 <div id='waitInsertBox'>
@@ -95,7 +97,6 @@ const Admin_insert = () => {
                     <div className="dataListBox">
                         <div className="excelHead" style={{ width: `${column && column.length * 150}px` }}>
                             {column ? (column.map((col, i) => (i !== 0 ? <div id={col} key={i}>{col}</div> : null))) : null}
-
                         </div>
                         {waitData && waitData.map((e, i) =>
                         (<Admin_data_row

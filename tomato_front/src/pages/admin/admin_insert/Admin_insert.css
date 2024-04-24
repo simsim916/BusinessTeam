@@ -77,3 +77,9 @@
     right: 38px;
     z-index: 10;
 }
+
+#whichBrand {
+    text-indent: 7px;
+    width: 30%;
+    margin-left: 50px;
+}

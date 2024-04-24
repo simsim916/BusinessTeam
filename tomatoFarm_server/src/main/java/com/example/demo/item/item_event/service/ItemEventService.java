@@ -9,4 +9,5 @@ public interface ItemEventService {
 
 	List<ItemEvent> selectEventWhere(SearchRequest searchRequest);
 	List<ItemEvent> merge(List<ItemEvent> list);
+	Integer checkMaxCode() ;
 }

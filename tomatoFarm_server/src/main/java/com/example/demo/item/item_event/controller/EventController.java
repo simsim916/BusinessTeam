@@ -38,7 +38,7 @@ public class EventController {
 	@PostMapping("/merge")
 	public ResponseEntity<?> merge(@RequestBody List<ItemEvent> list) {
 		ResponseEntity<?> result = null;
-
+		
 		if (item_eventService.merge(list).size() > 0)
 			result = ResponseEntity.status(HttpStatus.OK).body(item_eventService.selectEventWhere(new SearchRequest("name", "")));
 		else

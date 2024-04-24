@@ -21,6 +21,11 @@ public class ItemEventServiceImpl implements ItemEventService {
 	@Override
 	@Transactional
 	public List<ItemEvent> merge(List<ItemEvent> list) {
+		Integer maxNum = item_eventRepository.checkMaxCode();
+		for(ItemEvent entity : list) {
+			++maxNum;
+			entity.setCode(maxNum);
+		}
 		return item_eventRepository.merge(list);
 	}
 
@@ -31,5 +36,11 @@ public class ItemEventServiceImpl implements ItemEventService {
 		} else {
 			return item_eventRepository.selectEventWhereString(searchRequest);
 		}
+	}
+	
+	@Override
+	public Integer checkMaxCode() {
+		
+		return item_eventRepository.checkMaxCode();
 	}
 }

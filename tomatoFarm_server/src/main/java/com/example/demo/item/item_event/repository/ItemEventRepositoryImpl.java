@@ -49,5 +49,15 @@ public class ItemEventRepositoryImpl implements ItemEventRepository {
 		}
 		return changedList;
 	}
+	
+	@Override
+	public Integer checkMaxCode() {
+		return japQueryFactory
+			    .select(itemEvent.code.max())
+			    .from(itemEvent)
+			    .fetchOne();
+	}
+	
+	
 
 }
