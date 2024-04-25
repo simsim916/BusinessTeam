@@ -80,7 +80,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 	public List<Item> selectItemTableStringWhereType(Integer eventCode, List<Integer> codeList) {
 		JPAQuery query = jPAQueryFactory.selectFrom(item)
 				.where(item.code.in(codeList));
-		
+				
 		return query.fetch();
 	}
 	
