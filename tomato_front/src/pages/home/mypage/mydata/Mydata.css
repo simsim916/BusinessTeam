@@ -1,0 +1,111 @@
+#privacyBox {
+    box-shadow: 8px 8px 10px 2px grey;
+    border-radius: 20px;
+    display: flex;
+    gap: 10px;
+    padding: 20px;
+    color: grey;
+    position: relative;
+}
+
+#privacy_img {
+    border: 1px solid rgba(128, 128, 128, 0.378);
+    border-radius: 20px;
+    width: 150px;
+    height: 150px;
+    margin-top: 30px;
+}
+
+#privacy_detail {
+    width: calc(100% - 150px);
+    padding: 30px 20px 0px 20px;
+    font-size: 1.2em;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    list-style: none;
+}
+
+#privacy_detail li {
+    line-height: 35px;
+}
+#privacy_detail li>span {
+    color: #000;
+    margin-left: 10px;
+}
+
+#privacy_detail i {
+    color: #000;
+    margin-right: 20px;
+}
+
+#privacy_detail>div {
+    display: flex;
+    gap: 30px;
+}
+
+#privacy_detail_Btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+#privacy_detail_Btn>button {
+    margin-left: 10px;
+    padding: 7px;
+    background-color: #9B1B30;
+    color: white;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+#passwordBox{
+    width: calc(100% - 150px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+}
+#passwordBox input{
+    margin-left: 15px;
+    line-height: 30px;
+    text-indent: 10px;
+}
+#passwordBox div{
+    line-height: 34px;
+    padding: 0px 8px;
+    background-color: #9B1B30;
+    color: white;
+    margin-left: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#passwordChange {
+    margin-top: 40px;
+    width: calc(100% - 150px);
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    color: #000;
+    flex-wrap: wrap;
+}
+
+#passwordChange label{
+    width: 100%;
+}
+
+#passwordChange input {
+    margin-left: 15px;
+    line-height: 30px;
+    text-indent: 10px;
+}
+#passwordChange div {
+    line-height: 34px;
+    padding: 0px 15px;
+    background-color: #9B1B30;
+    color: white;
+    margin-left: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}

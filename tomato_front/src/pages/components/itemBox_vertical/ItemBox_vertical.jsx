@@ -4,11 +4,10 @@ import { makeComa } from '../MathFunction';
 import { SERVER_RESOURCE } from '../../../model/server-config';
 
 const ItemBox_vertical = ({ item }) => {
-    
 
     return (
         <Link to={"/home/detail?code=" + item.code} className="itemBox_vertical">
-                
+
 
             <div className="itemImg">
                 <i className="fa-solid fa-cart-shopping"></i>

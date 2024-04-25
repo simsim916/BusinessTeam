@@ -13,30 +13,38 @@ import BuyComplete from "./shop/buyComplete/BuyComplete";
 import Detail from "./detail/Detail";
 import ChatBotBox from './../components/chatbot/ChatBotBox';
 import { SERVER_RESOURCE } from "../../model/server-config";
-import MyPage from "./mypage/MyPage";
+import Mypage from "./mypage/Mypage";
+import Home_notice from "./Home_notice";
+import View from "./view/View";
 
 
 const Home = () => {
     console.log('Home 랜더링')
+    const [notice, setNotice] = useState(false);
+    const [view, setView] = useState(true)
     const alert = useSelector(state => state.basic.alert)
     const userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
     const [showChatbot, setShowChatbot] = useState(false);
+
     return (
         <>
             <Header />
+            {notice && <Home_notice setNotice={setNotice} />}
             {alert && <Alert />}
+            {view && <View />}
             {
                 userinfo && showChatbot ?
                     <ChatBotBox setShowChatbot={setShowChatbot} />
                     :
                     userinfo &&
-                    <div onClick={() => setShowChatbot(!showChatbot)} id="chatbotIcon">
+                    <div onClick={() => setShowChatbot(!showChatbot)} id="chatbotIcon" style={{cursor:'pointer'}}>
                         <img src={SERVER_RESOURCE + '/img/talk.png'} alt="" />
                     </div>
             }
+
             <Routes>
                 <Route path='/list' element={<ItemList />} />
-                <Route path='/mypage' element={<MyPage />} />
+                <Route path='/mypage' element={<Mypage />} />
                 <Route path='/detail' element={<Detail />} />
                 <Route path='/cart' element={<Cart />} />
                 <Route path='/ask' element={<CustomerQA />} />
