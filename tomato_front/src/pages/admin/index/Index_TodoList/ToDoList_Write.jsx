@@ -1,8 +1,8 @@
 import "./ToDoList_Write.css";
-import { api, async } from './../../../model/model';
 import { useState } from "react";
-import Loading from './../../components/Loading';
-import Error from './../../components/Error';
+import { api } from "../../../../model/model";
+import Loading from './../../../components/Loading';
+import Error from './../../../components/Error';
 
 const ToDoList_Write = () => {
     const [loading, setLoading] = useState(false);

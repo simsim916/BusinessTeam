@@ -37,7 +37,7 @@ public class SecurityConfig {
                 .csrf().disable() // csrf는 현재 사용하지 않으므로 disable
                 .cors().configurationSource(request -> {
 					CorsConfiguration config = new CorsConfiguration();
-					config.setAllowedOrigins(List.of("http://localhost:3000","http://dydgusc66-bucket.s3-website.ap-northeast-2.amazonaws.com"));
+					config.setAllowedOrigins(List.of("http://localhost:3000","http://www.tomatofarm.shop"));
 					config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
 					config.setAllowedHeaders(List.of("*"));
 					config.setAllowCredentials(true);
