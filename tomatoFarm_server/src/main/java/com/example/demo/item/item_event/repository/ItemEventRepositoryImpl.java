@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import com.example.demo.item.item_event.entity.itemEvent;
+import com.example.demo.item.item_event.entity.ItemEvent;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.module.SearchRequest;
@@ -14,7 +14,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import lombok.AllArgsConstructor;
 
-import static com.example.demo.item.item_event.entity.QitemEvent.itemEvent;
+import static com.example.demo.item.item_event.entity.QItemEvent.itemEvent;
 
 @Repository
 @AllArgsConstructor
@@ -23,7 +23,7 @@ public class ItemEventRepositoryImpl implements ItemEventRepository {
 	JPAQueryFactory japQueryFactory;
 	EntityManager entityManager;
 
-	public List<itemEvent> selectEventWhereString(SearchRequest searchRequest) {
+	public List<ItemEvent> selectEventWhereString(SearchRequest searchRequest) {
 		return japQueryFactory.selectFrom(itemEvent)
 				.from(itemEvent)
 				.where(Expressions.stringPath(searchRequest.getColumn())
@@ -32,7 +32,7 @@ public class ItemEventRepositoryImpl implements ItemEventRepository {
 	}
 
 	@Override
-	public List<itemEvent> selectEventWhereNumber(SearchRequest searchRequest) {
+	public List<ItemEvent> selectEventWhereNumber(SearchRequest searchRequest) {
 		return japQueryFactory.
 				selectFrom(itemEvent)
 				.from(itemEvent)
@@ -42,9 +42,9 @@ public class ItemEventRepositoryImpl implements ItemEventRepository {
 	}
 
 	@Override
-	public List<itemEvent> merge(List<itemEvent> list) {
-		List<itemEvent> changedList = new ArrayList<itemEvent>();
-		for (itemEvent event : list) {
+	public List<ItemEvent> merge(List<ItemEvent> list) {
+		List<ItemEvent> changedList = new ArrayList<ItemEvent>();
+		for (ItemEvent event : list) {
 			changedList.add(entityManager.merge(event));
 		}
 		return changedList;

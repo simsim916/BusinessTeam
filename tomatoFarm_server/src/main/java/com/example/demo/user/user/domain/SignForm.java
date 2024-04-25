@@ -2,8 +2,12 @@ package com.example.demo.user.user.domain;
 
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Builder
+@ToString
 @Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class SignForm {
@@ -17,7 +21,10 @@ public class SignForm {
 	private String address2;
 	private String email;
 	private Integer gender;
-	private String birthdate;
+	private LocalDate birthdate;
+	
+//	===========================
+	private Integer point; 
 
 	
 	

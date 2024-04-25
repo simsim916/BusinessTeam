@@ -16,7 +16,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ChatMessageDTO {
 	private Long seq;
-	private String writer; 
+	private String userIdWriter;
 	private String content;
 	private Long chatRoomSeq;
 	private LocalDateTime regdate;

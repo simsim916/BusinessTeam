@@ -28,6 +28,8 @@ const Admin_data = ({ }) => {
     const [changedList, setChangedList] = useState([]);
     const [whichTable, setWhichTable] = useState('/item');
 
+    console.log(changedList);
+
     useEffect(() => {
         setLoading(true);
         api(`${whichTable}/selectwhere?column=${formData.column}&keyword=${formData.keyword}`, 'get', null, user.token)
@@ -60,6 +62,12 @@ const Admin_data = ({ }) => {
             case '/item':
                 setFormData({
                     column: 'sort1',
+                    keyword: ''
+                })
+                break;
+            case '/address':
+                setFormData({
+                    column: 'id',
                     keyword: ''
                 })
                 break;
@@ -167,6 +175,7 @@ const Admin_data = ({ }) => {
             })
     }
 
+
     if (loading) return <Loading />
     if (error) return <Error />
 
@@ -182,6 +191,7 @@ const Admin_data = ({ }) => {
                             <option value="/item">상품</option>
                             <option value="/user">회원</option>
                             <option value="/event">이벤트</option>
+                            <option value="/address">회원주소</option>
                         </select>
                     </label>
                     <div id="dataSearch">

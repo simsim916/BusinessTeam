@@ -11,20 +11,8 @@ import com.example.demo.module.SearchRequest;
 
 @Repository
 public interface UserRepository {
-	
-	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
-
-	
-	
-	/* 🎃🎃🎃🎃🎃🎃 수미 🎃🎃🎃🎃🎃🎃 */
-	
 	public User selectUser(User entity);
-	
-	public int insertUser(UserDTO dto);
-	
-	public User updateUser(User entity);
-	
-	public List<User> selectUserWhereString(SearchRequest searchRequest);
-	public List<User> selectUserWhereNumber(SearchRequest searchRequest);
-	List<User> insertTest(List<User> list);
+	public List<UserDTO> selectUserWhereString(SearchRequest searchRequest);
+	public List<UserDTO> selectUserWhereNumber(SearchRequest searchRequest);
+	public User merge(User entity);
 }

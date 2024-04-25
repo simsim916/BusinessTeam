@@ -40,7 +40,10 @@ const ChatBotBox = ({
     /* 채팅 시작 */
     const startChat = (event) => {
         console.log(event.target.closest('div').children[1].innerText)
-        api('/chat/makeroom', 'post', { type: event.target.closest('div').children[1].innerText }, userinfo.token)
+        api('/chat/insertroom', 'post', {
+            type: event.target.closest('div').children[1].innerText,
+            userIdUser: userinfo.id
+        }, userinfo.token)
             .then(res => {
                 console.log(res.data)
                 setText((prev) => ({
@@ -66,13 +69,7 @@ const ChatBotBox = ({
 
     /* 채팅 종료 */
     const endChat = () => {
-        const data = {
-            seq: text.chatRoomSeq,
-            type: text.type,
-            ing: 2
-        }
-
-        api('/chat/makeroom', 'post', data, userinfo.token)
+        api('/chat/endroom?seq=' + text.chatRoomSeq, 'get', null, userinfo.token)
             .then(res => {
                 if (admin_root) {
                     setRoomList(res.data)
@@ -95,7 +92,7 @@ const ChatBotBox = ({
                 setMessageAll(res.data);
                 setText((prev) => ({
                     ...prev,
-                    chatRoomSeq: res.data[0].chatRoomSeq,
+                    chatRoomSeq: root,
                     content: ''
                 }));
             })
@@ -228,10 +225,7 @@ const ChatBotBox = ({
                 <div id='messageBox'>
                     {/* {messageAll && messageAll.map((e, i) => <span>{new Date().toLocaleTimeString([], { hour: 'numeric', minute: 'numeric' })}</span>)} */}
                     {messageAll ?
-                        admin_root ?
-                            messageAll.slice(1).map((e, i) => <p className={e.writer === userinfo.id ? 'myChat' : 'otherChat'} key={i}>{e.content}<br></br><span>{new Date(e.regdate).getHours()}시 {new Date(e.regdate).getMinutes()}분</span></p>)
-                            :
-                            messageAll.map((e, i) => <p className={e.writer === userinfo.id ? 'myChat' : 'otherChat'} key={i}>{e.content}<br></br><span>{new Date(e.regdate).getHours()}시 {new Date(e.regdate).getMinutes()}분</span></p>)
+                        messageAll.map((e, i) => <p className={e.userIdWriter === userinfo.id ? 'myChat' : 'otherChat'} key={i}>{e.content}<br></br><span>{new Date(e.regdate).getHours()}시 {new Date(e.regdate).getMinutes()}분</span></p>)
                         :
                         null
                     }

@@ -17,8 +17,7 @@ import lombok.AllArgsConstructor;
 
 import static com.example.demo.item.item.entity.QItem.item;
 import static com.example.demo.user.user_cart.entity.QUserCart.userCart;
-import static com.example.demo.item.item_event.entity.QitemEvent.itemEvent;
-
+import static com.example.demo.item.item_event.entity.QItemEvent.itemEvent;
 @Repository
 @AllArgsConstructor
 public class UserCartRepositoryImpl implements UserCartRepository {
@@ -41,12 +40,12 @@ public class UserCartRepositoryImpl implements UserCartRepository {
 	@Override
 	public List<UserCartDTO> selectItemListWhereUserID(UserCart entity) {
 		return jpaQueryfactory
-				.select(Projections.bean(UserCartDTO.class, userCart.code, userCart.id, userCart.amount,
-						item.name.as("item_name"), item.price, item.delivery, item.vat, item.stock,
-						itemEvent.code.as("event_code"), itemEvent.discount))
-				.from(userCart).leftJoin(item).on(userCart.code.eq(item.code))
-				.leftJoin(itemEvent).on(item.eventCode.eq(itemEvent.code))
-				.where(userCart.id.eq(entity.getId()).and(userCart.amount.gt(0)))
+				.select(Projections.bean(UserCartDTO.class, userCart.itemCode, userCart.userId, userCart.amount,
+						item.name.as("itemName"), item.price, item.delivery, item.vat, item.stock,
+						itemEvent.code.as("eventCode"), itemEvent.discount))
+				.from(userCart).leftJoin(item).on(userCart.itemCode.eq(item.code))
+				.leftJoin(itemEvent).on(item.itemEventCode.eq(itemEvent.code))
+				.where(userCart.userId.eq(entity.getUserId()).and(userCart.amount.gt(0)))
 				.fetch();
 	}
 
@@ -54,7 +53,7 @@ public class UserCartRepositoryImpl implements UserCartRepository {
 	public List<UserCart> selectCartWhereUserIDItemList(String user_id, List<Integer> item_codeList) {
 		return jpaQueryfactory
 				.selectFrom(userCart)
-				.where(userCart.id.eq(user_id).and(userCart.code.in(item_codeList)))
+				.where(userCart.userId.eq(user_id).and(userCart.itemCode.in(item_codeList)))
 				.fetch();
 	}
 	

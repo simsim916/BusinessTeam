@@ -19,6 +19,7 @@ import com.example.demo.item.item.domain.ItemDTO;
 import com.example.demo.item.item.domain.SortDTO;
 import com.example.demo.item.item.entity.Item;
 import com.example.demo.user.user_cart.entity.UserCart;
+import com.sun.mail.iap.Response;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.item.item.service.ItemService;
@@ -47,7 +48,7 @@ public class ItemController {
 	public ResponseEntity<?> getDetailPage(HttpServletRequest request, SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
 		PageRequest pageRequest = new PageRequest(1, 1);
-		ItemDTO dto = itemService.getDetailPage(pageRequest, searchRequest).get(0);
+		ItemDTO dto = itemService.getDetailPage(pageRequest, searchRequest);
 		result = ResponseEntity.status(HttpStatus.OK).body(dto);
 		return result;
 	}
@@ -134,12 +135,20 @@ public class ItemController {
 	public ResponseEntity<?> selectin(@RequestBody List<UserCart> list) {
 		List<Integer> codeList = new ArrayList<>();
 		for (UserCart e : list) {
-			codeList.add(e.getCode());
+			codeList.add(e.getItemCode());
 		}
 		List<ItemDTO> itemList = itemService.selectItemListWhereInCode(codeList);
 			
 		ResponseEntity<?> result = null;
 		result = ResponseEntity.status(HttpStatus.OK).body(itemList);
+		return result;
+	}
+	
+	
+	@GetMapping("/max")
+	public ResponseEntity<?> searchMaxSeq() {
+		ResponseEntity<?> result = null;
+		
 		return result;
 	}
 	

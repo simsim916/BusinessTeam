@@ -24,7 +24,7 @@ public class UserDetail {
 	private String userId;
 	private String email;
 	private Integer gender;
-	private String birthdate;
+	private LocalDate birthdate;
 	private LocalDate regdate;
 	
 }

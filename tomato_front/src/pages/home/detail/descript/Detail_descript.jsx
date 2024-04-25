@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserCart, setUserCartStorage } from '../../../redux/userCart/action';
 import { SERVER_RESOURCE } from '../../../../model/server-config';
 import Cart_alert from './Cart_alert';
-import { setUserBuyStorage } from '../../../redux/userBuy/actions';
+import { setUserBuy, setUserBuyForm, setUserBuyStorage } from '../../../redux/userBuy/actions';
 import { api } from '../../../../model/model';
 
 const Detail_descript = ({ item }) => {
@@ -90,20 +90,21 @@ const Detail_descript = ({ item }) => {
 
         if (userinfo && userinfo.login) {
             const formData = {
-                code: item.code,
+                itemCode: item.code,
                 amount: inputCountValue,
-                id: userinfo.id
+                userId: userinfo.id
             };
             const ar = [];
             ar.push(formData);
+            console.log(formData);
             dispatch(getUserCart('/usercart/merge', 'post', ar, userinfo.token))
         } else {
             let cartArray = JSON.parse(localStorage.getItem('cart')) || [];
-            const itemIndex = cartArray.findIndex(cartItem => cartItem.code == item.code);
+            const itemIndex = cartArray.findIndex(cartItem => cartItem.itemCode == item.code);
             if (itemIndex !== -1) {
                 cartArray[itemIndex].amount += +inputCountValue;
             } else {
-                cartArray.push({ code: item.code, amount: +inputCountValue });
+                cartArray.push({ itemCode: item.code, amount: +inputCountValue });
             }
             dispatch(setUserCartStorage(cartArray));
         }
@@ -111,8 +112,9 @@ const Detail_descript = ({ item }) => {
     };
 
     const addBuy = async () => {
-        const response = await api(`/item/selectwhere?column=item.code&keyword=${item.code}`, 'get')
-        dispatch(setUserBuyStorage([{ ...response.data[0], amount: +inputCountValue }]))
+        const response = await api(`/usercart/selectnouser`, 'post', [item.code])
+        dispatch(setUserBuyForm({ itemList: [{ ...response.data[0], amount: inputCountValue }] }))
+        dispatch(setUserBuy({ buyList: [{ ...response.data[0], amount: inputCountValue }] }))
     }
 
     return (
@@ -135,11 +137,11 @@ const Detail_descript = ({ item }) => {
                     <div id="itemName">{item.name}</div>
                     <div id="itemAccount">소고기 찹스테이크 신선하고 맛있어요</div>
                     {
-                        item.discount ?
+                        item.itemEventDiscount ?
                             <>
-                                <span id="itemSale">{item.discount}<span>%</span></span>
+                                <span id="itemSale">{item.itemEventDiscount}<span>%</span></span>
                                 <div id="itemPrice">{makeComa(item.price)}원</div>
-                                <div id="itemSalePrice">{makeComa(makeDiscountPrice(item.price, item.discount))}원</div>
+                                <div id="itemSalePrice">{makeComa(makeDiscountPrice(item.price, item.itemEventDiscount))}원</div>
                             </>
                             :
                             <div id="itemSalePrice">{makeComa(item.price)}원</div>
@@ -171,7 +173,7 @@ const Detail_descript = ({ item }) => {
                         <button onClick={() => clickInputCount("+")}><i className="fa-solid fa-plus"></i></button>
                     </div>
                     <div id="priceBox">
-                        <div id="priceAmount">총 상품금액&nbsp; : &nbsp;<span ref={priceRef}>{makeComa(makeDiscountPrice(item.price, item.discount) * inputCountValue)}원</span></div>
+                        <div id="priceAmount">총 상품금액&nbsp; : &nbsp;<span ref={priceRef}>{makeComa(makeDiscountPrice(item.price, item.itemEventDiscount) * inputCountValue)}원</span></div>
                         <div onClick={gotoCart ? null : addCart} id="gotocart">장바구니 담기</div>
                         <Link to="/home/buy" id="gotobuy" onClick={() => addBuy()}>구매하기</Link>
                     </div>
@@ -222,7 +224,7 @@ const Detail_descript = ({ item }) => {
             {
                 introItem ?
                     <div onClick={showItemDetail} id="introItemBtn">
-                        상품정보 접기<i class="fa-solid fa-chevron-up"></i>
+                        상품정보 접기<i className="fa-solid fa-chevron-up"></i>
                     </div>
                     :
                     <div onClick={showItemDetail} id="introItemBtn">

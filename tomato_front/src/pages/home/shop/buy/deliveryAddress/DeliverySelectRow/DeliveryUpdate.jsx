@@ -19,7 +19,7 @@ const DeliveryUpdate = ({ setDeliverySelect }) => {
 
     const postAddress = () => {
         if (user)
-            dispatch(postNewUserAddress('/address/merge', 'post', userNewAddress, user.token))
+            dispatch(postNewUserAddress('/address/mergeone', 'post', userNewAddress, user.token))
         else {
             setDeliverySelect(false)
             dispatch(setUserBuyForm(userNewAddress));
@@ -37,7 +37,7 @@ const DeliveryUpdate = ({ setDeliverySelect }) => {
             <div className='addressName'>
                 <label>
                     <p>수령인</p>
-                    <input name='address_name' value={userNewAddress.address_name || ''} onChange={(event) => changeAddress(event)} />
+                    <input name='addressName' value={userNewAddress.addressName || ''} onChange={(event) => changeAddress(event)} />
                 </label>
             </div>
             <div className='phoneNumber'>
@@ -49,7 +49,7 @@ const DeliveryUpdate = ({ setDeliverySelect }) => {
             <div className='addressCode'>
                 <label htmlFor='address2'>
                     <p>배송지</p>
-                    <input readOnly name='address_code' value={userNewAddress.address_code || ''} onChange={(event) => changeAddress(event)} />
+                    <input readOnly name='addressCode' value={userNewAddress.addressCode || ''} onChange={(event) => changeAddress(event)} />
                     <input readOnly name='address1' value={userNewAddress.address1 || ''} onChange={(event) => changeAddress(event)} />
                 </label>
                 <label>

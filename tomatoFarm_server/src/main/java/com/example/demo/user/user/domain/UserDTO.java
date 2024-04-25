@@ -1,32 +1,30 @@
 package com.example.demo.user.user.domain;
 
+import java.time.LocalDate;
+
+import javax.persistence.Column;
+import javax.persistence.Id;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 
 @Data
-@Builder
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class UserDTO {
-
+	
 	private String id;
 	private String password;
-	private Integer level;
-	private String username;
+	private Integer userLevelCode;
+	private String name;
 	private String phonenumber;
-	private Integer address_code;
-	private String address1;
-	private String address2;
-	private String email;
-	private String email2;
-	private Integer gender;
-	private String birthdate;
 	private Integer point;
-	
-	
-	
+	private LocalDate lastdate;
+//	===========================
+	private String email;
+	private LocalDate birthdate;
 }

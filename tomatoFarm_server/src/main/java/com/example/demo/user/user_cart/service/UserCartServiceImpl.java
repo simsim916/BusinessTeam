@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import com.example.demo.user.user_cart.domain.UserCartDTO;
 import com.example.demo.user.user_cart.repository.UserCartRepository;
+import com.example.demo.user.user_cart.repository.UserCartRepositoryJPA;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.user.user_cart.entity.UserCart;
@@ -18,6 +19,7 @@ import lombok.AllArgsConstructor;
 public class UserCartServiceImpl implements UserCartService {
 
 	UserCartRepository userCartRepository;
+	UserCartRepositoryJPA userCartRepositoryJPA;
 
 	@Transactional
 	@Override
@@ -33,18 +35,20 @@ public class UserCartServiceImpl implements UserCartService {
 		for (UserCart e : list) {
 			e.setRegdate(today);
 		}
-		userCartRepository.mergeAll(list);
+		userCartRepositoryJPA.saveAll(list);
 		return null;
 	}
 
-	
-	
 	@Override
-	public List<UserCartDTO> selectItemListWhereUserID(UserCart entity) {
-		return userCartRepository.selectItemListWhereUserID(entity);
+	public List<UserCartDTO> findAllByuserId(String userId) {
+		return userCartRepositoryJPA.findAllByUserId(userId);
 	}
-	
-	
+
+	@Override
+	public List<UserCartDTO> findAllBy(List<Integer> list) {
+		return userCartRepositoryJPA.findAllByItemCodeIn(list);
+	}
+
 	@Override
 	@Transactional
 	public void delete(List<UserCart> list) {

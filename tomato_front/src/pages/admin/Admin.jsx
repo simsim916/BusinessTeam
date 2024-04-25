@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import { api } from "../../model/model";
 import Error from "../components/Error";
 import Index from './index/Index';
+import Admin_insert from "./admin_insert/Admin_insert";
 
 
 const Admin = () => {
@@ -45,6 +46,7 @@ const Admin = () => {
                     <Route path='/chatbot' element={<Admin_Chatbot />} />
                     <Route path='/graph' element={<Graph />} />
                     <Route path='/' element={<Index />} />
+                    <Route path='/insert' element={<Admin_insert />} />
                 </Routes>
             </div>
         </>

@@ -37,6 +37,7 @@ public class SearchRequest {
 	private OrderSpecifier<?> orderColumn;
 	private String orderType;// 정렬 타입
 	private String scending ;// 정렬 순서
+	private Integer howMany=1;
 	private String whichGroup = "";
 	
 	

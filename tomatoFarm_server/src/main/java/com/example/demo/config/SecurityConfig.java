@@ -37,8 +37,7 @@ public class SecurityConfig {
                 .csrf().disable() // csrf는 현재 사용하지 않으므로 disable
                 .cors().configurationSource(request -> {
 					CorsConfiguration config = new CorsConfiguration();
-					config.setAllowedOrigins(List.of("http://localhost:3000","http://www.tomatofarm.shop",
-							"http://172.31.0.0/16","http://172.31.0.0","http://172.31.0.0"));
+					config.setAllowedOrigins(List.of("http://localhost:3000","http://dydgusc66-bucket.s3-website.ap-northeast-2.amazonaws.com"));
 					config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
 					config.setAllowedHeaders(List.of("*"));
 					config.setAllowCredentials(true);
@@ -52,7 +51,7 @@ public class SecurityConfig {
 				.authorizeRequests()
 				.antMatchers("/", "/home","/resources/**","/item/**", "/itemask/**" , "/itemreview/**", 
 						"/keyword/**", "/user/**", "/visit/**", "/chatbot/**","/usercart/**","/test/**",
-						"/order/**", "/chat/**", "/page/**", "/todo/**").permitAll() 
+						"/order/**", "/chat/**", "/page/**","/event/**", "/todo/**").permitAll() 
 				// => "/", "/home" 등의 경로는 인증 안해도 됨.
 				.anyRequest().authenticated().and() 
 				// => 위 이외의 모든 경로는 인증해야됨.

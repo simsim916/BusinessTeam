@@ -14,10 +14,10 @@ const ItemBox = ({ item }) => {
             <div className="itemName">{item.name}</div>
             <div className="itemInfo">{item.brand}<br /></div>
             {
-                item.discount ? (
+                item.itemEventDiscount ? (
                     <>
                         <p className="itemPriceB">{makeComa(item.price)}원</p>
-                        <p className="itemPrice">{makeComa(Math.round(item.price * (100 - item.discount) / 100))}원</p>
+                        <p className="itemPrice">{makeComa(Math.round(item.price * (100 - item.itemEventDiscount) / 100))}원</p>
                     </>
                 ) : (
                     <p className="itemPrice">{makeComa(item.price)}원</p>
@@ -37,8 +37,8 @@ const ItemBox = ({ item }) => {
                     )
                 }
                 {
-                    item.event_code != null && (
-                        <div className="itemOptionEvent">{item.event_name}</div>
+                    item.eventName != null && (
+                        <div className="itemOptionEvent">{item.eventName}</div>
                     )
                 }
             </div>

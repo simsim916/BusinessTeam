@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { SERVER_RESOURCE } from '../../../../model/server-config';
 import { makeComa } from '../../../components/MathFunction';
-import { setUserBuyItemList, setUserBuyStorage } from '../../../redux/userBuy/actions';
+import { setUserBuy, setUserBuyStorage } from '../../../redux/userBuy/actions';
 import { Link } from 'react-router-dom';
 import { setUserCartStorage, changeUserCart } from '../../../redux/userCart/action';
 import { api } from '../../../../model/model';
@@ -13,41 +13,41 @@ const Cart_item_Row = ({ item, idx }) => {
     const user = JSON.parse(sessionStorage.getItem('userinfo'));
     const userCart = useSelector(state => state.userCart.data);
     const userBuy = useSelector(state => state.userBuy.buyList)
+
     const changeCheckBox = () => {
-        if (userBuy && userBuy.find(e => e.code == item.code))
-            dispatch(setUserBuyStorage(userBuy.filter(e => e.code != item.code)));
+        if (userBuy && userBuy.find(e => e == item.itemCode))
+            dispatch(setUserBuyStorage(userBuy.filter(e => e != item.itemCode)));
         else if (userBuy)
-            dispatch(setUserBuyStorage([...userBuy, item]));
+            dispatch(setUserBuyStorage([...userBuy, item.itemCode]));
         else
-            dispatch(setUserBuyStorage([item]));
+            dispatch(setUserBuyStorage([item.itemCode]));
     }
 
     const handleXbtn = async () => {
-        let data = userCart.filter(i => i.code != item.code);
-        userBuy && dispatch(setUserBuyItemList(userBuy.filter(i => i.code != item.code))) // 체크된 상태로 삭제를 시도할때 처리해야할 내용
+        let data = userCart.filter(i => i.itemCode != item.itemCode);
+        userBuy && dispatch(setUserBuy({ buyList: userBuy.filter(i => i.ItemCode != item.ItemCode) })) // 체크된 상태로 삭제를 시도할때 처리해야할 내용
         dispatch(setUserCartStorage(data)); // 유저 장바구니 상태값을 덮어씌워준다.
         user && api(`/usercart/delete`, 'post', [item], user.token); // DB에서 삭제하기.
     }
 
     const changeAmount = (type) => {
         dispatch(changeUserCart(idx, type, userCart));
-        dispatch(setUserBuyStorage(userCart))
     }
 
     return (
         <ul className="shopBasketItem">
             <li>
-                <input className="check" checked={userBuy && userBuy.find(e => e.code == item.code) || false} type="checkbox" onChange={() => changeCheckBox()} />
+                <input className="check" checked={userBuy && userBuy.find(e => e == item.itemCode) || false} type="checkbox" onChange={() => changeCheckBox()} />
             </li>
-            <li className="shopBasketItemImg"><Link to={'/home/detail?code=' + item.code}><img src={SERVER_RESOURCE + `/img/itemImg/${item.code}_2.jpg`} alt="" /></Link></li>
+            <li className="shopBasketItemImg"><Link to={'/home/detail?code=' + item.itemCode}><img src={SERVER_RESOURCE + `/img/itemImg/${item.itemCode}_2.jpg`} alt="" /></Link></li>
             <li className="shopBasketItemIfo">
-                <Link to={'/home/detail?code=' + item.code} className="shopBasketItemIfo_name">{item.name || item.item_name}</Link>
+                <Link to={'/home/detail?code=' + item.itemCode} className="shopBasketItemIfo_name">{item.itemName || item.name}</Link>
                 {
-                    item.discount
+                    item.itemEventDiscount
                         ?
                         <>
                             <p style={{ textDecoration: 'line-through', marginBottom: '5px' }} className="shopBasketItemIfo_price">{makeComa(item.price)}원</p>
-                            <p className="shopBasketItemIfo_sale">{makeComa(Math.round(item.price * (100 - item.discount) / 100))}원</p>
+                            <p className="shopBasketItemIfo_sale">{makeComa(Math.round(item.price * (100 - item.itemEventDiscount) / 100))}원</p>
                         </>
                         :
                         <p style={{ color: 'black' }} className="shopBasketItemIfo_price">{makeComa(item.price)}원</p>
@@ -59,10 +59,10 @@ const Cart_item_Row = ({ item, idx }) => {
                 <button><i onClick={() => changeAmount('+')} className="fa-solid fa-plus"></i></button>
             </li>
             {
-                item.discount ? (
+                item.itemEventDiscount ? (
                     <li className="shopBasketItemIfo_sumprice">
                         <p style={{ textDecoration: 'line-through', color: '#00000080' }}>{makeComa(item.price * item.amount)}원</p>
-                        <p>{makeComa(Math.round(item.price * (100 - item.discount) / 100) * item.amount)}원</p>
+                        <p>{makeComa(Math.round(item.price * (100 - item.itemEventDiscount) / 100) * item.amount)}원</p>
                     </li>
                 ) : (
                     <li className="shopBasketItemIfo_sumprice">

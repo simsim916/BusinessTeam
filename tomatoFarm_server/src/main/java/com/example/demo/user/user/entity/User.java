@@ -24,10 +24,12 @@ public class User {
 	private String id;
 	private String password;
 	@Column(name = "user_level_code")
+	@Builder.Default
 	private Integer userLevelCode = 100;
 	private String name;
 	private String phonenumber;
-	private Integer point;
+	@Builder.Default
+	private Integer point = 0;
 	private LocalDate lastdate;
 	
 }

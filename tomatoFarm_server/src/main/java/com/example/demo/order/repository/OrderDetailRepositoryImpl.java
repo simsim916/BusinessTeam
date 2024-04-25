@@ -16,7 +16,6 @@ import lombok.AllArgsConstructor;
 public class OrderDetailRepositoryImpl implements OrderDetailRepository {
 
 	private final EntityManager entityManager;
-	private final JPAQueryFactory jPAQueryFactory;
 
 	@Override
 	public int batchInsert(List<OrderDetail> list) {

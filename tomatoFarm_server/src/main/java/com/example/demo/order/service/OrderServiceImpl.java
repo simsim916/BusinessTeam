@@ -6,68 +6,69 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.example.demo.order.entity.OrderA;
+import com.example.demo.order.repository.OrderRepositoryJPA;
+import com.example.demo.user.user_cart.domain.UserCartDTO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.item.item.domain.ItemDTO;
 import com.example.demo.order.domain.OrderDTO;
-import com.example.demo.order.entity.Itemorder;
 import com.example.demo.order.entity.OrderDetail;
 import com.example.demo.user.user_cart.entity.UserCart;
 import com.example.demo.order.repository.ItemorderRepository;
 import com.example.demo.order.repository.OrderDetailRepository;
 import com.example.demo.user.user_cart.repository.UserCartRepository;
 
-import lombok.AllArgsConstructor;
-
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
 	private final ItemorderRepository itemorderRepository;
+	private final OrderRepositoryJPA orderRepositoryJPA;
 	private final OrderDetailRepository orderdetailRepository;
 	private final UserCartRepository userCartRepository;
 
 	@Transactional
 	@Override
-	public Itemorder order(OrderDTO dto, String userId) {
+	public OrderDTO order(OrderDTO dto, String userId) {
 
-		Itemorder itemorder = Itemorder.builder()
+		OrderA orderA = OrderA.builder()
 				.userId(userId)
-				.addressCode(dto.getAddress_code())
+				.addressCode(dto.getAddressCode())
 				.address1(dto.getAddress1())
 				.address2(dto.getAddress2())
-				.orderprice(dto.getPrice())
-				.deliveryprice(dto.getDelivery())
-				.usepoint(dto.getPoint())
+				.orderprice(dto.getOrderprice())
+				.deliveryprice(dto.getDeliveryprice())
+				.usepoint(dto.getUsepoint())
 				.orderdate(LocalDateTime.now())
-				.order_message(dto.getDeliverymessage())	
+				.deliverymessage(dto.getDeliverymessage())
 				.build();
-
-		itemorder = itemorderRepository.merge(itemorder);
+		orderA = orderRepositoryJPA.save(orderA);
 
 		List<OrderDetail> list = new ArrayList<OrderDetail>();
 		List<Integer> item_list = new ArrayList<Integer>();
 		
-		for (ItemDTO e : dto.getItemList()) {
-			item_list.add(e.getCode());
+		for (UserCartDTO e : dto.getItemList()) {
+			item_list.add(e.getItemCode());
 			list.add(OrderDetail.builder()
-					.orderSeq(itemorder.getCode())
-					.itemCode(e.getCode())
+					.orderSeq(orderA.getSeq())
+					.itemCode(e.getItemCode())
 					.amount(e.getAmount())
-					.discount(e.getDiscount())
+					.discount(e.getItemEventDiscount())
 					.build());
 		}
 		
 		orderdetailRepository.batchInsert(list);
+
 		if(!("anonymousUser".equals(userId))) {
-			List<UserCart> userCart_list = userCartRepository.selectCartWhereUserIDItemList(dto.getId(), item_list);
+			List<UserCart> userCart_list = userCartRepository.selectCartWhereUserIDItemList(userId, item_list);
 			for(UserCart e : userCart_list) {
 				e.setAmount(0);
 			}
 			userCartRepository.mergeAll(userCart_list);
 		}
-		
-		return itemorder;
+		OrderDTO result = (OrderDTO) itemorderRepository.selectOrderByCode(orderA.getSeq()).get(0);
+		return result;
 	}
 
 }

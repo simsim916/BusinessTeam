@@ -21,9 +21,11 @@ const SignBG = ({ }) => {
         value: {
             id: '',
             password: '',
-            name: '',
+            username: '',
             phonenumber: '',
-            address: '',
+            addressCode: '',
+            address1: '',
+            address2: '',
             email: '',
             emailBack: '',
             gender: '',
@@ -52,9 +54,6 @@ const SignBG = ({ }) => {
         },
         isJoinable: false
     })
-    // useMemo(() => {
-    //     console.log(signValue.value)
-    // }, [signValue])
 
     const changeOpacity = (event) => {
         let box = event.target.closest('div')
@@ -223,11 +222,11 @@ const SignBG = ({ }) => {
         const signForm = {
             id: signValue.value.id,
             password: signValue.value.password,
-            name: signValue.value.name,
+            name: signValue.value.username,
             phonenumber: signValue.value.phonenumber,
-            addressCode: '',
-            address1: '',
-            address2: '',
+            addressCode: signValue.value.addressCode,
+            address1: signValue.value.address1,
+            address2: signValue.value.address2,
             email: signValue.value.email + '@' + signValue.value.emailBack,
             gender: signValue.value.gender,
             birthdate: new Date(`${signValue.value.year}-${signValue.value.month}-${signValue.value.day}`),
@@ -253,14 +252,33 @@ const SignBG = ({ }) => {
             });
     }
 
+    const blurIdInput = (event) => {
+        const idBox = event.target.closest('div');
+        handleInputChange(event, checkId)
+        api('/user/checkid?id=' + signValue.value.id, 'get')
+            .then(res => {
+                if (res.data != 'OK'){
+                    idBox.style.border = "2px solid #FF3F3F";
+                    idBox.children[0].style.color = "#FF3F3F";
+                    setSignValue((prev) => ({
+                        ...prev,
+                        error: {
+                            ...prev.error,
+                            id: res.data
+                        }
+                    }))
+
+                }
+            })
+    }
+
     if (loading) return <Loading />
     if (error) return <Error />
 
     return (
         <div id="signBG">
-            <div id="historyback"></div>
-            {addressBox && <AddressWrite setAddressBox={setAddressBox} />}
-            <div>
+            {addressBox && <AddressWrite setAddressBox={setAddressBox} setSignValue={setSignValue} />}
+            <div id="signform">
                 <Link to="/home"><img id="logo" src={SERVER_RESOURCE + `/img/logo.png`} alt="logo" /></Link>
                 <h3>회원가입</h3>
                 <form id="signUpBox" action="signup" method="post">
@@ -269,7 +287,7 @@ const SignBG = ({ }) => {
                         <i className="fa-solid fa-user"></i>
                         <input type="text" name="id" placeholder="아이디" value={signValue.value.id}
                             onChange={(event) => handleInputChange(event, checkId)}
-                            onBlur={(event) => handleInputChange(event, checkId)}
+                            onBlur={blurIdInput}
                             onFocus={changeOpacity} />
                     </div>
                     <div id="passwordBox">
@@ -300,9 +318,10 @@ const SignBG = ({ }) => {
                         {signValue.error.phonenumber ? <p><i className="fa-solid fa-circle-exclamation"></i>&nbsp;&nbsp;{signValue.error.phonenumber}</p> : <></>}
                     </div>
                     <p id="selectOption"><i className="fa-solid fa-check"></i>&nbsp;&nbsp;선택 입력 사항</p>
-                    <div id="addressBox" onClick={()=>setAddressBox(true)}>
+                    <div id="addressBox" onClick={() => setAddressBox(true)}>
                         <i className="fa-solid fa-location-dot"></i>
-                        <input type="text" name="address" placeholder="주소" value={signValue.value.address}
+                        <input type="text" name="address" placeholder="주소"
+                            value={signValue.value.address2.length > 0 ? `[${signValue.value.addressCode}] ${signValue.value.address1}, ${signValue.value.address2}` : ''}
                             onChange={handleInputChange}
                             onFocus={changeOpacity} />
                     </div>

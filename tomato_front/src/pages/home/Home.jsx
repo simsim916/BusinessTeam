@@ -13,6 +13,7 @@ import BuyComplete from "./shop/buyComplete/BuyComplete";
 import Detail from "./detail/Detail";
 import ChatBotBox from './../components/chatbot/ChatBotBox';
 import { SERVER_RESOURCE } from "../../model/server-config";
+import MyPage from "./mypage/MyPage";
 
 
 const Home = () => {
@@ -35,6 +36,7 @@ const Home = () => {
             }
             <Routes>
                 <Route path='/list' element={<ItemList />} />
+                <Route path='/mypage' element={<MyPage />} />
                 <Route path='/detail' element={<Detail />} />
                 <Route path='/cart' element={<Cart />} />
                 <Route path='/ask' element={<CustomerQA />} />

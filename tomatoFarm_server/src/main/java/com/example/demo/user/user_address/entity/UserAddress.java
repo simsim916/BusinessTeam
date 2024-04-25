@@ -2,9 +2,14 @@ package com.example.demo.user.user_address.entity;
 
 import javax.persistence.*;
 
-import lombok.Data;
+import lombok.*;
 
 @Entity
+@Builder
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Table(name = "user_address")
 public class UserAddress {
@@ -15,9 +20,12 @@ public class UserAddress {
     @Column(name = "user_id")
     private String userId;
     private String info;
-    private Integer main_address=0;
-    private Integer address_code;
-    private String address_name;
+    @Column(name = "main_address")
+    private Integer mainAddress=0;
+    @Column(name = "address_code")
+    private Integer addressCode;
+    @Column(name = "address_name")
+    private String addressName;
     private String address1;
     private String address2;
     private String phonenumber;
