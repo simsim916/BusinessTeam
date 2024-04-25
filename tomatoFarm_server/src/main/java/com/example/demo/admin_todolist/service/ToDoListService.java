@@ -9,7 +9,11 @@ public interface ToDoListService {
 	
 	List<PageTodo> selectAll();
 	List<PageTodo> selectAllByDate(LocalDate regdate);
-	int insert(PageTodo entity);
+	List<PageTodo> insert(PageTodo entity);
+	List<PageTodo> check(PageTodo entity);
+	List<PageTodo> uncheck(PageTodo entity);
+	List<PageTodo> delete(PageTodo entity);
+	List<PageTodo> update(PageTodo entity);
 	
 	
 	

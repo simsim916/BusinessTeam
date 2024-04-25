@@ -1,6 +1,7 @@
 package com.example.demo.admin_todolist.service;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -30,10 +31,33 @@ public class ToDoListServiceImpl implements ToDoListService {
 	}
 
 	@Override
-	public int insert(PageTodo entity) {
-		LocalDate regdate = LocalDate.now();
-		entity.setEnddate(regdate);
-		return todolistRepository.insert(entity);
+	public List<PageTodo> insert(PageTodo entity) {
+		todolistRepository.insert(entity);
+		return todolistRepository.selectAll();
+	}
+	
+	@Override
+	public List<PageTodo> check(PageTodo entity) {
+		todolistRepository.check(entity);
+		return todolistRepository.selectAll();
+	}
+	
+	@Override
+	public List<PageTodo> uncheck(PageTodo entity) {
+		todolistRepository.uncheck(entity);
+		return todolistRepository.selectAll();
+	}
+	
+	@Override
+	public List<PageTodo> delete(PageTodo entity) {
+		todolistRepository.delete(entity);
+		return todolistRepository.selectAll();
+	}
+	
+	@Override
+	public List<PageTodo> update(PageTodo entity) {
+		todolistRepository.update(entity);
+		return todolistRepository.selectAll();
 	}
 
 }

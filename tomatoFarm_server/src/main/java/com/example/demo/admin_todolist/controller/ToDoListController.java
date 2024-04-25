@@ -40,10 +40,42 @@ public class ToDoListController {
 	@PostMapping("/insert")
 	public ResponseEntity<?> insert(@RequestBody PageTodo entity){
 		ResponseEntity<?> result = null;
-		int list = toDoListService.insert(entity);
+		List<PageTodo> list = toDoListService.insert(entity);
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 		}
+	
+	@PostMapping("/check")
+	public ResponseEntity<?> check(@RequestBody PageTodo entity){
+		ResponseEntity<?> result = null;
+		List<PageTodo> list = toDoListService.check(entity);
+		result = ResponseEntity.status(HttpStatus.OK).body(list);
+		return result;
+	}
+	
+	@PostMapping("/uncheck")
+	public ResponseEntity<?> uncheck(@RequestBody PageTodo entity){
+		ResponseEntity<?> result = null;
+		List<PageTodo> list = toDoListService.uncheck(entity);
+		result = ResponseEntity.status(HttpStatus.OK).body(list);
+		return result;
+	}
+	
+	@PostMapping("/delete")
+	public ResponseEntity<?> delete(@RequestBody PageTodo entity){
+		ResponseEntity<?> result = null;
+		List<PageTodo> list = toDoListService.delete(entity);
+		result = ResponseEntity.status(HttpStatus.OK).body(list);
+		return result;
+	}
+	
+	@PostMapping("/update")
+	public ResponseEntity<?> update(@RequestBody PageTodo entity){
+		ResponseEntity<?> result = null;
+		List<PageTodo> list = toDoListService.update(entity);
+		result = ResponseEntity.status(HttpStatus.OK).body(list);
+		return result;
+	}
 	
 
 }

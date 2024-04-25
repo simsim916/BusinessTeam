@@ -38,12 +38,38 @@ public class TodoListRepositoryImpl implements TodoListRepository{
 	
 	@Override
 	public int insert(PageTodo entity) {
-		return entityManager.createNativeQuery("INSERT INTO page_todo(enddate, content, user_id_admin, user_id_editor, state) "
-				+ "VALUE(?,?,?,?,?)")
+		return entityManager.createNativeQuery("INSERT INTO page_todo(enddate, content) "
+				+ "VALUE(?,?)")
 				.setParameter(1, entity.getEnddate())
 				.setParameter(2, entity.getContent())
-				.setParameter(3, entity.getUserIdAdmin())
-				.setParameter(4, entity.getUserIdEditor())
+				.executeUpdate();
+	}
+	
+	@Override
+	public int check(PageTodo entity) {
+		return entityManager.createNativeQuery("UPDATE page_todo set state = 1 WHERE seq = ?")
+				.setParameter(1, entity.getSeq())
+				.executeUpdate();
+	}
+	
+	@Override
+	public int uncheck(PageTodo entity) {
+		return entityManager.createNativeQuery("UPDATE page_todo set state = 0 WHERE seq = ?")
+				.setParameter(1, entity.getSeq())
+				.executeUpdate();
+	}
+	@Override
+	public int delete(PageTodo entity) {
+		return entityManager.createNativeQuery("DELETE from page_todo WHERE seq = ?")
+				.setParameter(1, entity.getSeq())
+				.executeUpdate();
+	}
+	
+	@Override
+	public int update(PageTodo entity) {
+		return entityManager.createNativeQuery("UPDATE page_todo set content = ? WHERE seq = ?")
+				.setParameter(1, entity.getContent())
+				.setParameter(2, entity.getSeq())
 				.executeUpdate();
 	}
 }

@@ -4,30 +4,22 @@ import { api } from "../../../../model/model";
 import Loading from './../../../components/Loading';
 import Error from './../../../components/Error';
 
-const ToDoList_Write = () => {
+const ToDoList_Write = ({ setTodoWrite, date, setEvents }) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
-    const [todoWriteClose, SetTodoWriteClose] = useState(true);
-    const [refresh, setRefresh] = useState(false);
     const [todoInput, setTodoInput] = useState("");
-    
-    const submitTodo = async () => {
-        const inputData = { todo: todoInput };
 
-        await api('todo/insert', 'post', inputData)
+    const submitTodo = async () => {
+
+        await api('/todo/insert', 'post', { content: todoInput, enddate: date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0') })
             .then(res => {
                 setLoading(false);
+                setEvents(res.data)
             }).catch(err => {
                 setLoading(false);
                 setError(true);
             });
-            todoWriteBoxClose();
-        }
-        
-    const todoWriteBoxClose = () => {
-        SetTodoWriteClose(!todoWriteClose);
-        setRefresh(!refresh);
-    // submitTodo();
+        setTodoWrite(false);
     }
 
     if (loading) return <Loading />
@@ -39,7 +31,7 @@ const ToDoList_Write = () => {
             <div className="newScheduleWrite">
                 <input
                     placeholder="새로운 일정 입력하세요..." value={todoInput}
-                    onChange={(e) => setTodoInput(e.target.value)}/>
+                    onChange={(e) => setTodoInput(e.target.value)} />
                 <button onClick={submitTodo}>등록</button>
             </div>
         </div>

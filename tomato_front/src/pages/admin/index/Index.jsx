@@ -1,16 +1,13 @@
 
-import Weather from './../weather/Weather';
-import Index_calender from './Index_calender';
 import './Index.css';
 import ToDoList from './Index_TodoList/ToDoList';
+import Weather from './weather/Weather';
 
 const Index = () => {
     return (
-        <div>
-            <div id="Index">
-                <ToDoList />
-                <Weather />
-            </div>
+        <div id="index">
+            <ToDoList />
+            <Weather />
         </div>
     )
 }

@@ -1,12 +1,11 @@
 .newScheduleBox {
     width: 100%;
-    margin-top: 100px;
     display: flex;
     flex-direction: column;
     border: #9B1B30 solid 1px;
     padding: 10px;
-    right: -400px;
-    top: -50px;
+    left: calc(100% + 20px);
+    top: 0px;
     position: absolute;
     display: block;
 }
