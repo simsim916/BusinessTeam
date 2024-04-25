@@ -3,6 +3,7 @@ package com.example.demo.item.item.service;
 import java.util.List;
 
 import com.example.demo.item.item.entity.Item;
+import com.example.demo.item.item.domain.AddEvent;
 import com.example.demo.item.item.domain.ItemDTO;
 import com.example.demo.item.item.domain.SortDTO;
 import com.example.demo.module.PageRequest;
@@ -75,4 +76,5 @@ public interface ItemService {
 	int mergeAll(List<Item> list);
 	Item merge(Item entity);
 	int persist(List<Item> list);
+	List<Item> selectItemTableWhereType(AddEvent dto);
 }

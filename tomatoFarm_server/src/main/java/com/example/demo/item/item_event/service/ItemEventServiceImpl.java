@@ -25,6 +25,7 @@ public class ItemEventServiceImpl implements ItemEventService {
 		for(ItemEvent entity : list) {
 			++maxNum;
 			entity.setCode(maxNum);
+			System.out.println(entity);
 		}
 		return item_eventRepository.merge(list);
 	}

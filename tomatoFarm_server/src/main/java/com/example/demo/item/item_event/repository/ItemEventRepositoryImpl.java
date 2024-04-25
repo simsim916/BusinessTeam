@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.module.SearchRequest;
 import com.querydsl.core.types.dsl.Expressions;
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import lombok.AllArgsConstructor;
@@ -23,9 +24,9 @@ public class ItemEventRepositoryImpl implements ItemEventRepository {
 	JPAQueryFactory japQueryFactory;
 	EntityManager entityManager;
 
+	@Override
 	public List<ItemEvent> selectEventWhereString(SearchRequest searchRequest) {
 		return japQueryFactory.selectFrom(itemEvent)
-				.from(itemEvent)
 				.where(Expressions.stringPath(searchRequest.getColumn())
 						.contains(searchRequest.getKeyword()))
 				.fetch();
@@ -33,11 +34,9 @@ public class ItemEventRepositoryImpl implements ItemEventRepository {
 
 	@Override
 	public List<ItemEvent> selectEventWhereNumber(SearchRequest searchRequest) {
-		return japQueryFactory.
-				selectFrom(itemEvent)
-				.from(itemEvent)
+		return japQueryFactory.selectFrom(itemEvent)
 				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
-						.contains(searchRequest.getKeyword()))
+				.contains(searchRequest.getKeyword()))
 				.fetch();
 	}
 

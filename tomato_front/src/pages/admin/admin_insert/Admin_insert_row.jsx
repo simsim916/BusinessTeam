@@ -1,8 +1,8 @@
 
-const Admin_data_row = ({ style, item, waitData, changeItemRow }) => {
+const Admin_insert_row = ({ style, item, waitData, changeSelectEvent }) => {
 
     return (
-        <div className="excelColumn" style={{ ...style, }} onClick={() => changeItemRow(item)}>
+        <div className="excelColumn" style={{ ...style, }} onClick={() => changeSelectEvent(item)}>
             {Object.keys(item).map((e, i) => (
                 <input style={{ ...style, color: waitData && waitData.some(e) ? 'red' : '' }} type="text" name={e} value={item[e] || ''} key={i} readOnly />
             ))}
@@ -11,4 +11,4 @@ const Admin_data_row = ({ style, item, waitData, changeItemRow }) => {
 }
 
 
-export default Admin_data_row;
+export default Admin_insert_row;

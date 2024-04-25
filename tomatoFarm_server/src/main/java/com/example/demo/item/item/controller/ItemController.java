@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.item.item.domain.AddEvent;
 import com.example.demo.item.item.domain.ItemDTO;
 import com.example.demo.item.item.domain.SortDTO;
 import com.example.demo.item.item.entity.Item;
@@ -101,6 +102,7 @@ public class ItemController {
 
 	@GetMapping("/selectwhere")
 	public ResponseEntity<?> selectwhere(SearchRequest searchRequest) {
+		System.out.println(searchRequest);
 		ResponseEntity<?> result = null;
 		PageRequest pageRequest = new PageRequest();
 		List<ItemDTO> itemList = itemService.selectItemListWhereType(pageRequest, searchRequest);
@@ -144,14 +146,11 @@ public class ItemController {
 		return result;
 	}
 	
-	
-	@GetMapping("/max")
-	public ResponseEntity<?> searchMaxSeq() {
-		ResponseEntity<?> result = null;
-		
-		return result;
+	@PostMapping("/insertupdate")
+	public ResponseEntity<?> updateEvent(@RequestBody AddEvent dto) {
+		List<Item> itemList = itemService.selectItemTableWhereType(dto);
+		System.out.println(itemList);
+		return null;
 	}
 	
-
-
 }

@@ -28,9 +28,7 @@ public class EventController {
 	public ResponseEntity<?> selectEventWhere(SearchRequest searchRequest, @AuthenticationPrincipal String userid) {
 		ResponseEntity<?> result = null;
 		List<ItemEvent> list = null;
-
 		list = item_eventService.selectEventWhere(searchRequest);
-
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}

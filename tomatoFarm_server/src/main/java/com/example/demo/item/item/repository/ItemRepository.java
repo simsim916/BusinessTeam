@@ -5,6 +5,7 @@ import java.util.List;
 import com.example.demo.item.item.entity.Item;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.item.item.domain.AddEvent;
 import com.example.demo.item.item.domain.ItemDTO;
 import com.example.demo.item.item.domain.SortDTO;
 import com.example.demo.module.PageRequest;
@@ -34,5 +35,6 @@ public interface ItemRepository {
 	// ** list에 있는 상품들 조회
 	List<ItemDTO> selectItemListWhereInCode(List<Integer> codeList);
 	
-	
+	List<Item> selectItemTableStringWhereType(Integer eventCode, List<Integer> codeList);
+	List<Item> selectItemTableIntegerWhereType(PageRequest pageRequest, SearchRequest searchRequest);
 }

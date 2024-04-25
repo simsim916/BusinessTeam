@@ -2,6 +2,7 @@ package com.example.demo.item.item.service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,7 @@ import com.example.demo.page.page_keyword.entity.PageKeywordID;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.item.item.domain.AddEvent;
 import com.example.demo.item.item.domain.ItemDTO;
 import com.example.demo.item.item.domain.SortDTO;
 import com.example.demo.item.item.entity.Item;
@@ -114,5 +116,23 @@ public class ItemServiceImpl implements ItemService {
 	public List<ItemDTO> selectItemListWhereInCode(List<Integer> codeList) {
 		return itemRepository.selectItemListWhereInCode(codeList);
 	}
+	
+	@Override
+	public List<Item> selectItemTableWhereType(AddEvent dto) {
+		List<Item> list = dto.getCodeList();
+		List<Integer> codeList = new ArrayList<Integer>();
+		for(Item item : list) {
+			codeList.add(item.getCode());
+		}
+		Integer eventCode = dto.getEventCode();
+//		if (searchRequest.getKeyword().matches("^[0-9]*$")) {
+//			return itemRepository.selectItemTableIntegerWhereType(dto);
+//		} else {
+//			return itemRepository.selectItemTableStringWhereType(dto);
+//		}
+		return itemRepository.selectItemTableStringWhereType(codeList,eventCode );
+	}
+	
+	
 	
 }

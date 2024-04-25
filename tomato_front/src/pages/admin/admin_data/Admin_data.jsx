@@ -28,8 +28,6 @@ const Admin_data = ({ }) => {
     const [changedList, setChangedList] = useState([]);
     const [whichTable, setWhichTable] = useState('/item');
 
-    console.log(changedList);
-
     useEffect(() => {
         setLoading(true);
         api(`${whichTable}/selectwhere?column=${formData.column}&keyword=${formData.keyword}`, 'get', null, user.token)
