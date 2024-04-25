@@ -15,23 +15,23 @@ const ToDoList2 = () => {
     const [date, setDate] = useState(new Date());
     const [events, setEvents] = useState([
         { date: '2024-04-24', title: 'Meeting', ing: 0 },
-        { date: '2024-04-24', title: 'Meeting', ing: 2 },
+        { date: '2024-04-24', title: 'Meeting2', ing: 2 },
         { date: '2024-04-25', title: 'Appointment', ing: 1 },
     ]);
     const [todoWrite, SetTodoWrite] = useState(false);
     const [refresh, setRefresh] = useState(true);
     const user = JSON.parse(sessionStorage.getItem('userinfo'));
 
-    // useEffect(() => {
-    //     api(`/todo/selectall`, 'get', null)
-    //         .then(res => {
-    //             setLoading(true);
-    //             setSelectAll(res.data);
-    //         }).catch(err => {
-    //             setLoading(false);
-    //             setError(true);
-    //         })
-    // }, []);
+    useEffect(() => {
+        api(`/todo/selectall`, 'get', null)
+            .then(res => {
+                setLoading(true);
+                setSelectAll(res.data);
+            }).catch(err => {
+                setLoading(false);
+                setError(true);
+            })
+    }, []);
 
     if (loading) return <Loading />
     if (error) return <Error />
