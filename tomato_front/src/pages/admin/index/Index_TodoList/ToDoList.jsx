@@ -87,10 +87,7 @@ const ToDoList = () => {
                     :
                     null}
             </div>
-
-
         </div>
-
     );
 }
 

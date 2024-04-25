@@ -77,7 +77,6 @@ const ToDoList_row = ({ events, setEvents, e }) => {
                 <i onClick={() => deleteEvent(e.seq)} className="fa-solid fa-trash"></i>
             </div>
         </li>
-
     );
 }
 
