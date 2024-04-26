@@ -1,8 +1,7 @@
 import './Weather.css'
-import { SERVER_RESOURCE } from '../../../model/server-config';
-
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { SERVER_RESOURCE } from '../../../../model/server-config';
 
 
 const Weather = () => {
@@ -35,9 +34,6 @@ const Weather = () => {
     let imgSRC = '/img/weather_clear.jpg';
     const apiKey = '60dbd7283a42ef16940bde54b9dc9cda';
 
-
-
-
     const getWeather = async (lat, lon) => {
         let cityName = 'Seoul'; // 도시명으로 하면 섭씨로 나와서 273도 빼줘야함.
         try {
@@ -45,7 +41,6 @@ const Weather = () => {
                 `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKey}`
             );
 
-            console.log(res.data.list)
             let check = (res.data.list).filter(e => {
                 const time = e.dt_txt.split(" ")[1];
                 return time === "12:00:00";
@@ -83,7 +78,6 @@ const Weather = () => {
     }, []);
 
 
-    console.log(weather);
     return (
         <div id='weatherBox' style={{
             backgroundImage: `url(${SERVER_RESOURCE}${weather.imgSrc})`,

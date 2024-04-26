@@ -6,8 +6,6 @@
     background-size: cover;
     position: relative;
     font-size: 25px;
-    position: absolute;
-    left: 500px;
 }
 
 #weatherDetail {
