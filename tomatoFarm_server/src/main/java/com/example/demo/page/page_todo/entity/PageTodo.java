@@ -1,4 +1,4 @@
-package com.example.demo.admin_todolist.entity;
+package com.example.demo.page.page_todo.entity;
 
 import java.time.LocalDate;
 

@@ -1,9 +1,9 @@
-package com.example.demo.admin_todolist.service;
+package com.example.demo.page.page_todo.service;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import com.example.demo.admin_todolist.entity.PageTodo;
+import com.example.demo.page.page_todo.entity.PageTodo;
 
 public interface ToDoListService {
 	

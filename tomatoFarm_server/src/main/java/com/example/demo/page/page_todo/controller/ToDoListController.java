@@ -1,8 +1,10 @@
-package com.example.demo.admin_todolist.controller;
+package com.example.demo.page.page_todo.controller;
 
 import java.time.LocalDate;
 import java.util.List;
 
+import com.example.demo.page.page_todo.entity.PageTodo;
+import com.example.demo.page.page_todo.service.ToDoListService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.admin_todolist.entity.PageTodo;
-import com.example.demo.admin_todolist.service.ToDoListService;
 import lombok.AllArgsConstructor;
 
 @RestController

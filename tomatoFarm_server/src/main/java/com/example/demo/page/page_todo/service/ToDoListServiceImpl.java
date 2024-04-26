@@ -1,15 +1,14 @@
-package com.example.demo.admin_todolist.service;
+package com.example.demo.page.page_todo.service;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.example.demo.page.page_todo.entity.PageTodo;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.admin_todolist.entity.PageTodo;
-import com.example.demo.admin_todolist.repository.TodoListRepository;
+import com.example.demo.page.page_todo.repository.TodoListRepository;
 
 import lombok.RequiredArgsConstructor;
 

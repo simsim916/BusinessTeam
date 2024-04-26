@@ -1,15 +1,12 @@
-package com.example.demo.admin_todolist.repository;
+package com.example.demo.page.page_todo.repository;
 
 import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import com.example.demo.page.page_todo.entity.PageTodo;
 import org.springframework.stereotype.Repository;
-
-import com.example.demo.admin_todolist.entity.PageTodo;
-import com.example.demo.module.PageRequest;
-import com.example.demo.module.SearchRequest;
 
 import lombok.RequiredArgsConstructor;
 
