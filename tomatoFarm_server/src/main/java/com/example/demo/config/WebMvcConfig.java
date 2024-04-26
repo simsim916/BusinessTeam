@@ -16,6 +16,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry
                 .addResourceHandler("/resources/**")
                 .addResourceLocations("classpath:/static/");
+//        .addResourceLocations("file:///home/ubuntu/server/");
     }
 
     @Override

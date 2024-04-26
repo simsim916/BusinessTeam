@@ -166,6 +166,11 @@
 #searchRightBox>div>a {
     display: flex;
     flex-direction: column;
+    cursor: pointer;
+}
+
+#searchRightBox>div>a:hover{
+    text-decoration: underline;
 }
 
 #searchRightBox i {

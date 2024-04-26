@@ -9,8 +9,12 @@ import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import com.example.demo.item.item.repository.ItemRepositoryJPA;
+import com.example.demo.mapper.ItemMapper;
 import com.example.demo.page.page_keyword.entity.PageKeyword;
 import com.example.demo.page.page_keyword.entity.PageKeywordID;
+import com.example.demo.user.user_cart.entity.UserCart;
+import com.example.demo.user.user_cart.entity.UserCartID;
+import com.example.demo.user.user_cart.repository.UserCartRepositoryJPA;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
@@ -29,10 +33,20 @@ import lombok.AllArgsConstructor;
 public class ItemServiceImpl implements ItemService {
 
 	private final ItemRepository itemRepository;
+	private final UserCartRepositoryJPA userCartRepositoryJPA;
+	private final ItemMapper itemMapper;
 	private final ItemRepositoryJPA itemRepositoryJPA;
 	private final pageKeywordRepository pageKeywordRepository;
 
-	
+	@Override
+	public List<ItemDTO> selectRecentItemWhereUserId(String userId) {
+		return itemMapper.selectRecentItemWhereUserId(userId);
+	}
+	@Override
+	public List<ItemDTO> selectItemListWhereBrand(SearchRequest searchRequest) {
+		return itemMapper.selectItemListWhereBrand(searchRequest);
+	}
+
 	@Override
 	public List<ItemDTO> selectItemListWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
 		if (searchRequest.getKeyword().matches("^[0-9]*$")) {
@@ -44,7 +58,28 @@ public class ItemServiceImpl implements ItemService {
 	
 	@Override
 	@Transactional
-	public ItemDTO getDetailPage(PageRequest pageRequest, SearchRequest searchRequest) {
+	public ItemDTO getDetailPage(PageRequest pageRequest, SearchRequest searchRequest, String userId) {
+		if(userId != null && !userId.isEmpty()) {
+			UserCartID userCartID = UserCartID.builder()
+					.userId(userId)
+					.itemCode(Integer.parseInt(searchRequest.getKeyword()))
+					.build();
+			Optional<UserCart> optionalUserCart= userCartRepositoryJPA.findById(userCartID);
+			if(optionalUserCart.isPresent()) {
+				UserCart userCart = optionalUserCart.get();
+				userCart.setViews(userCart.getViews() + 1);
+				userCart.setRegdate(LocalDate.now());
+				userCartRepositoryJPA.save(userCart);
+			} else {
+				UserCart userCart = UserCart.builder()
+						.userId(userId)
+						.itemCode(Integer.parseInt(searchRequest.getKeyword()))
+						.amount(0)
+						.regdate(LocalDate.now())
+						.build();
+				userCartRepositoryJPA.save(userCart);
+			}
+		}
 		ItemDTO itemDTO = itemRepositoryJPA.findByCode(Integer.parseInt(searchRequest.getKeyword()));
 		itemDTO.setViews(itemDTO.getViews()+1);
 		Item entity = dtotoEntity(itemDTO);
@@ -53,8 +88,14 @@ public class ItemServiceImpl implements ItemService {
 	}
 	
 	@Override
-	public List<ItemDTO> selectItemListStringWhereTypeNotNull(PageRequest pageRequest,SearchRequest searchRequest) {
-		List<ItemDTO> result = itemRepository.selectItemListStringWhereTypeNotNull(pageRequest,searchRequest);
+	public List<ItemDTO> selectItemListStringWhereTypeNotNull(SearchRequest searchRequest) {
+		List<ItemDTO> result = itemMapper.selectItemListStringWhereTypeNotNull(searchRequest);
+		System.out.println(searchRequest);
+		for(ItemDTO itemDTO : result) {
+			if(itemDTO.getUserCartRegdate() != null) {
+				System.out.println(itemDTO);
+			}
+		}
 		return result;
 	}
 	
@@ -87,7 +128,7 @@ public class ItemServiceImpl implements ItemService {
 		}
 		pageKeywordRepository.save(entity);
 		
-		return itemRepository.selectItemWhereKeyword(pageRequest, searchRequest);
+		return itemMapper.selectItemWhereKeyword(searchRequest);
 	}
 	
 	@Override

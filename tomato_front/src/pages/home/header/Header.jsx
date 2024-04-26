@@ -10,7 +10,7 @@ import { SERVER_RESOURCE } from "../../../model/server-config";
 
 
 
-const Header = () => {
+const Header = ({ setView }) => {
     console.log(`Header 랜더링`);
     const user = JSON.parse(sessionStorage.getItem('userinfo'));
     const recentSearch = JSON.parse(localStorage.getItem('recentSearch'));
@@ -34,6 +34,7 @@ const Header = () => {
 
     const logOut = () => {
         sessionStorage.removeItem('userinfo');
+        setAdmin(false)
         dispatch(setUser(null));
         dispatch(changeAlert({
             title: '로그아웃 성공!',
@@ -56,7 +57,6 @@ const Header = () => {
                 localStorage.setItem('recentSearch', JSON.stringify([keyword]))
             }
     }
-
     const searchBox = async (event) => {
         event.preventDefault();
         setRecentBox(false);
@@ -156,7 +156,7 @@ const Header = () => {
                             </Link>
                         </div>
                         <div id="myItem">
-                            <a href="/">
+                            <a onClick={()=>setView(true)}>
                                 <i className="fa-solid fa-box-archive"></i>
                                 최근 본 상품
                             </a>

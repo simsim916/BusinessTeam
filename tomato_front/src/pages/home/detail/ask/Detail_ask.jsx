@@ -36,7 +36,6 @@ const Detail_ask = ({ item }) => {
     }, [refresh])
 
 
-    console.log(itemAskList)
     const itemAskClick = () => {
         if (user)
             setAskWrite(!askWrite);

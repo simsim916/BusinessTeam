@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -38,6 +41,10 @@ public class ItemDTO{
 	
 	/* user_cart 용 */
 	private Integer amount;
+	private LocalDate userCartRegdate;
+
+	/* order_a 용 */
+	private Integer orderSeq;
 
 	public ItemDTO(Integer code, String sort1, String sort2, String sort3, String brand, String name, String weight, String storage,
 				   String packing, Integer delivery, Integer price, Integer vat, String origin, Integer sales, Integer stock, Integer views,

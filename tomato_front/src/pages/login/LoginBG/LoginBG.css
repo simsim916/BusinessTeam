@@ -60,6 +60,8 @@
 #loginBox>div>input {
     border: none;
     width: calc(100% - 50px);
+    margin-left: 0;
+    text-indent: 0;
 }
 
 #loginBtn {

@@ -122,7 +122,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Boolean checkID(String id) {
 		Boolean result = false;
-		System.out.println(id);
 		if(userRepositoryJPA.findById(id).isPresent())
 			result = true;
 

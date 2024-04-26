@@ -4,11 +4,10 @@ import { makeComa } from '../MathFunction';
 import { SERVER_RESOURCE } from '../../../model/server-config';
 
 const ItemBox_vertical = ({ item }) => {
-    
 
     return (
         <Link to={"/home/detail?code=" + item.code} className="itemBox_vertical">
-                
+
 
             <div className="itemImg">
                 <i className="fa-solid fa-cart-shopping"></i>
@@ -25,6 +24,16 @@ const ItemBox_vertical = ({ item }) => {
                     {
                         item.eventName != null && (
                             <div className="itemOptionEvent">{item.eventName}</div>
+                        )
+                    }
+                    {
+                        item.userCartRegdate != null && (
+                            <div className="userCartRegdate">최근 본 상품</div>
+                        )
+                    }
+                    {
+                        item.orderSeq != null && (
+                            <div className="orderSeq">최근 주문 상품</div>
                         )
                     }
                 </div>
