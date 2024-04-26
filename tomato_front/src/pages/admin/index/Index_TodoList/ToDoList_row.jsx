@@ -53,7 +53,6 @@ const ToDoList_row = ({ events, setEvents, e }) => {
     const handleOnChange = (event) => {
         setInputValue(event.target.value);
     }
-    console.log(events);
 
     if (loading) return <Loading />
     if (error) return <Error />
@@ -79,6 +78,5 @@ const ToDoList_row = ({ events, setEvents, e }) => {
         </li>
     );
 }
-
 
 export default ToDoList_row;
