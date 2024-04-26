@@ -52,5 +52,5 @@ public interface ItemService {
 	Item merge(Item entity);
 	int persist(List<Item> list);
 
-	List<ItemDTO> selectRecentItemWhereUserId(String userId);
+	List<ItemDTO> selectRecentItemWhereUserId(SearchRequest searchRequest);
 }

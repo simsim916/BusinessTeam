@@ -39,8 +39,8 @@ public class ItemServiceImpl implements ItemService {
 	private final pageKeywordRepository pageKeywordRepository;
 
 	@Override
-	public List<ItemDTO> selectRecentItemWhereUserId(String userId) {
-		return itemMapper.selectRecentItemWhereUserId(userId);
+	public List<ItemDTO> selectRecentItemWhereUserId(SearchRequest searchRequest) {
+		return itemMapper.selectRecentItemWhereUserId(searchRequest);
 	}
 	@Override
 	public List<ItemDTO> selectItemListWhereBrand(SearchRequest searchRequest) {

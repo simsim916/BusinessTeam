@@ -38,7 +38,9 @@ public class ItemController {
 	@GetMapping("/recent")
 	public ResponseEntity<?> recent(@AuthenticationPrincipal String userId) {
 		ResponseEntity<?> result = null;
-		List<ItemDTO> list = itemService.selectRecentItemWhereUserId(userId);
+		SearchRequest searchRequest = new SearchRequest();
+		searchRequest.setKeyword2(userId);
+		List<ItemDTO> list = itemService.selectRecentItemWhereUserId(searchRequest);
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}
