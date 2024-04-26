@@ -45,9 +45,8 @@ public class ItemReviewController {
 		ResponseEntity<?> result = null;
 		
 		if (entity != null) {
-			String realPath = request.getRealPath("/");
-			log.info("\n\n\n** realPath => " + realPath);
-			realPath += "\\resources\\img\\itemReviewImg\\" + entity.getItemCode() + "\\";
+			String realPath = "/home/ubuntu/server/";
+			realPath += "/img/itemReviewImg/" + entity.getItemCode() + "/";
 			File file = new File(realPath); // uploadImages 폴더에 화일존재 확인을 위함
 			if (!file.exists()) {
 				file.mkdir();

@@ -49,7 +49,7 @@ public class ItemController {
 	public ResponseEntity<?> getDetailPage(HttpServletRequest request, SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
 		PageRequest pageRequest = new PageRequest(1, 1);
-		ItemDTO dto = itemService.getDetailPage(pageRequest, searchRequest).get(0);
+		ItemDTO dto = itemService.getDetailPage(pageRequest, searchRequest);
 		result = ResponseEntity.status(HttpStatus.OK).body(dto);
 		return result;
 	}

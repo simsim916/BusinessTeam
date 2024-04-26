@@ -20,12 +20,14 @@
 .boardAnswer {
     height: auto;
 }
-.boardAnswer>div:nth-of-type(1){
+
+.boardAnswer>div:nth-of-type(1) {
     width: 100%;
     display: flex;
     align-items: center;
 }
-.boardAnswer>div>div:nth-of-type(1) {
+
+.boardAnswer>div:nth-of-type(1)>div:nth-of-type(1) {
     line-height: 60px;
     width: 10%;
     color: #CA4046;
@@ -55,7 +57,7 @@
 
 }
 
-.boardAnswer_content>div{
+.boardAnswer_content>div {
     margin-top: 20px;
 
 }
@@ -79,6 +81,6 @@
     cursor: pointer;
 }
 
-#passwordCheck p{
+#passwordCheck p {
     width: 100%;
 }

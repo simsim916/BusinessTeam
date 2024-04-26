@@ -97,7 +97,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 	// 이벤트 중인 상품 조회 시 사용
 	public List<ItemDTO> selectItemListStringWhereTypeNotNull(PageRequest pageRequest, SearchRequest searchRequest) {
 		return jPAQueryFactory.select(dtoBean)
-				.from(item).leftJoin(itemEvent).on(item.eventCode.eq(itemEvent.code))
+				.from(item).leftJoin(itemEvent).on(item.itemEventCode.eq(itemEvent.code))
 				.where(Expressions.stringPath(searchRequest.getColumn()).isNotNull()).limit(pageRequest.getEndNum())
 				.offset(pageRequest.getStartNum()).orderBy(getSortType(searchRequest)).fetch();
 	}
@@ -106,7 +106,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 	// ** 키워드 상품 페이징 조회
 	public List<ItemDTO> selectItemWhereKeyword(PageRequest pageRequest, SearchRequest searchRequest) {
 		return jPAQueryFactory.select(dtoBean)
-				.from(item).leftJoin(itemEvent).on(item.eventCode.eq(itemEvent.code))
+				.from(item).leftJoin(itemEvent).on(item.itemEventCode.eq(itemEvent.code))
 				.where(item.sort2.contains(searchRequest.getKeyword())
 						.or(item.sort1.contains(searchRequest.getKeyword()))
 						.or(item.sort3.contains(searchRequest.getKeyword()))
@@ -164,8 +164,8 @@ public class ItemRepositoryImpl implements ItemRepository {
 		return jPAQueryFactory
 				.select(Projections.bean(ItemDTO.class, item.code, item.brand, item.name.as("item_name"), item.delivery, item.price,
 						item.storage, item.weight, item.packing, item.sales, item.stock, item.views, item.likes,
-						item.eventCode, item.intro, itemEvent.discount, itemEvent.name.as("event_name")))
-				.from(item).leftJoin(itemEvent).on(item.eventCode.eq(itemEvent.code)).where(item.code.in(codeList))
+						item.itemEventCode, item.intro, itemEvent.discount, itemEvent.name.as("event_name")))
+				.from(item).leftJoin(itemEvent).on(item.itemEventCode.eq(itemEvent.code)).where(item.code.in(codeList))
 				.fetch();
 	}
 

@@ -100,7 +100,7 @@ const Admin_ask = () => {
                     <select name="column" onChange={searchBoxChange}>
                         <option value="title">제목</option>
                         <option value="contents">내용</option>
-                        <option value="writer">작성자</option>
+                        <option value="userIdWriter">작성자</option>
                         <option value="type">유형</option>
                     </select>
                     &nbsp;&nbsp;

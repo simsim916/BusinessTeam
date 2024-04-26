@@ -2,8 +2,8 @@ package com.example.demo.order.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
+import com.example.demo.order.entity.OrderA;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -14,36 +14,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.order.domain.OrderDTO;
-import com.example.demo.order.entity.Itemorder;
 import com.example.demo.order.service.OrderService;
-
-import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping("/order")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class OrderController {
 
-	OrderService orderService;
+	private final OrderService orderService;
 	
 	@PostMapping("/order")
-	public ResponseEntity<?> order(@RequestBody OrderDTO dto, HttpServletRequest request, @AuthenticationPrincipal String userId) {
+	public ResponseEntity<?> order(@RequestBody OrderDTO dto, @AuthenticationPrincipal String userId) {
 		ResponseEntity<?> result = null;
-		Itemorder itemorder = orderService.order(dto, userId);
-		if (itemorder!=null)
-			result = ResponseEntity.status(HttpStatus.OK).body(itemorder);
-		else 
+		dto = orderService.order(dto, userId);
+		System.out.println(dto);
+		if (dto !=null)
+			result = ResponseEntity.status(HttpStatus.OK).body(dto);
+		else
 			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("order failed");
-				
+
 		return result;
 	}
 	
-	@GetMapping("/selectwhere")
-	public ResponseEntity<?> selectWhere(@AuthenticationPrincipal String userId) {
-		ResponseEntity<?> result = null;
-		List<Itemorder> list = orderService.selectWhere(userId);
-		System.out.println(list);
-		result = ResponseEntity.status(HttpStatus.OK).body(list);
-		return result;
-	}
 }

@@ -1,11 +1,12 @@
 package com.example.demo.order.repository;
 
-import java.util.List;
+import com.example.demo.order.entity.OrderA;
 
-import com.example.demo.order.entity.Itemorder;
+import java.util.List;
 
 public interface ItemorderRepository {
 
-	Itemorder merge(Itemorder entity);
-	List<Itemorder> selectWhere(String userId);
+	OrderA merge(OrderA entity);
+
+	List selectOrderByCode(Integer code);
 }

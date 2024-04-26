@@ -44,7 +44,7 @@ public class UserCartRepositoryImpl implements UserCartRepository {
 						item.name.as("itemName"), item.price, item.delivery, item.vat, item.stock,
 						itemEvent.code.as("eventCode"), itemEvent.discount))
 				.from(userCart).leftJoin(item).on(userCart.itemCode.eq(item.code))
-				.leftJoin(itemEvent).on(item.eventCode.eq(itemEvent.code))
+				.leftJoin(itemEvent).on(item.itemEventCode.eq(itemEvent.code))
 				.where(userCart.userId.eq(entity.getUserId()).and(userCart.amount.gt(0)))
 				.fetch();
 	}

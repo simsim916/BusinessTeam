@@ -14,7 +14,7 @@ const Detail_review_box_row = ({ itemReview }) => {
         <>
             <div onClick={reviewDetailClick} className="reviewContent">
                 <div className='ReviewBoardRow_img'>
-                    <img src={SERVER_RESOURCE + `/img/itemReviewImg/${itemReview.image1 ? itemReview.item_code + '/' + itemReview.image1 : 'reviewdefault.png'}`} alt="" />
+                    <img src={SERVER_RESOURCE + `/img/itemReviewImg/${itemReview.image1 ? itemReview.itemCode + '/' + itemReview.image1 : 'reviewdefault.png'}`} alt="" />
                 </div>
                 <div className='ReviewBoardRow_text'>
                     <div className='ReviewBoardRow_rightTop'>

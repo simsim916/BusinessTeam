@@ -5,18 +5,18 @@ const initialState = {
         loading: true,
         form: {
             itemList: [],
-            address_code: '',
+            addressCode: 0,
             address1: '',
             address2: '',
             deliverymessage: '',
-            price: '',
-            discount: '',
-            delieveryprice: '',
-            point: '',
+            orderprice: 0,
+            discount: 0,
+            usepoint: 0,
             phonenumber: '',
         },
         data: null,
         error: null,
+        buyList: [],
     }
 };
 
@@ -40,11 +40,6 @@ const userBuyReducer = (state = initialState.userBuy, action) => {
                 loading: false,
                 data: [],
                 error: action.payload
-            };
-        case SET_USERBUY_ITEMLIST:
-            return {
-                ...state,
-                buyList: action.payload,
             };
         case SET_USERBUY:
             return {

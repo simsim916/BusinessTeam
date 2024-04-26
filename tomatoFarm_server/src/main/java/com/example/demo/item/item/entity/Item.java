@@ -58,7 +58,7 @@ public class Item {
 	private Integer likes=0; // 좋아요수
 
 	@Column(name = "item_event_code")
-	private Integer eventCode; // 이벤트명
+	private Integer itemEventCode; // 이벤트명
 	@Column(name = "user_id_admin")
 	private String userIdAdmin; // 등록자
 	@Column(name = "intro")

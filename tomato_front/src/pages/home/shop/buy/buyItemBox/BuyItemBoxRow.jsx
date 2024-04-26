@@ -22,16 +22,15 @@ const BuyItemBoxRow = ({
             <li>
                 <input className="check" type="checkbox" name="buy"
                     onChange={() => changeCheckedList(item)}
-                    checked={userBuyForm.itemList && userBuyForm.itemList.some(e => e.ItemCode == item.ItemCode) || false}
+                    checked={userBuyForm.itemList.find(e => e.itemCode == item.itemCode)}
                 />
-
             </li>
-            <li className="shopBasketItemImg"><img src={SERVER_RESOURCE + `/img/itemImg/${item.ItemCode}_2.jpg`} alt="" /></li>
+            <li className="shopBasketItemImg"><img src={SERVER_RESOURCE + `/img/itemImg/${item.itemCode}_2.jpg`} alt="" /></li>
             <li className="shopBasketItemIfo">
                 <p className="shopBasketItemIfo_name">{item.itemName}</p>
                 <p className="shopBasketItemIfo_price">{makeComa(item.price)}원</p>
                 {
-                    item.discount ?
+                    item.itemEventDiscount ?
                         <p className="shopBasketItemIfo_sale">{makeComa(Math.round(item.price * (100 - item.itemEventDiscount) / 100))}원</p>
                         :
                         null
@@ -39,7 +38,7 @@ const BuyItemBoxRow = ({
             </li>
             <li className="shopBasketItem_count">
                 <button onClick={() => handleClick('-')}><i className="fa-solid fa-minus"></i></button>
-                <input id="inputCount" type="number" value={(userBuyItemList && typeof userBuyItemList[0] != 'String') || item[idx].amount} onChange={handleChange} />
+                <input id="inputCount" type="number" value={1 && item.amount} onChange={handleChange} />
                 <button><i onClick={() => handleClick('+')} className="fa-solid fa-plus"></i></button>
             </li>
             {

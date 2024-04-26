@@ -17,7 +17,7 @@ const Cart_total = () => {
                     <div>상품금액
                         <div>
                             {
-                                userBuy ?
+                                result ?
                                     makeComa(result.reduce((result, e) => +result + (e.price * e.amount), 0))
                                     :
                                     0
@@ -27,7 +27,7 @@ const Cart_total = () => {
                     <div>할인금액
                         <div>
                             {
-                                userBuy ?
+                                result ?
                                     makeComa(Math.ceil(result.reduce((result, e) => +result + ((e.price * ((e.itemEventDiscount) / 100)) * e.amount), 0)))
                                     :
                                     0
@@ -37,7 +37,7 @@ const Cart_total = () => {
                     <div>배송비
                         <div>
                             {
-                                userBuy ?
+                                result ?
                                     makeComa(result.reduce((result, e) => +result + (e.delivery), 0))
                                     :
                                     0
@@ -47,7 +47,7 @@ const Cart_total = () => {
                     <div>결제금액
                         <div>
                             {
-                                userBuy ?
+                                result ?
                                     makeComa(Math.ceil(result.reduce((result, e) => +result + ((e.price * ((100 - e.itemEventDiscount) / 100)) * e.amount) + e.delivery, 0)))
                                     :
                                     0
