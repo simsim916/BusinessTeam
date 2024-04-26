@@ -54,10 +54,8 @@ public class UserCartController {
 	}
 	@PostMapping("/selectnouser")
 	public ResponseEntity<?> selectnouser(@RequestBody List<Integer> itemlist) {
-		System.out.println(itemlist);
 		ResponseEntity<?> result = null;
 		List<UserCartDTO> list = userCartService.findAllBy(itemlist);
-		System.out.println(list);
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}
@@ -68,7 +66,6 @@ public class UserCartController {
 		String token = tokenProvider.parseBearerToken(request);
 		String id = tokenProvider.validateAndGetUserId(token);
 		for(UserCart entity : list) {
-			System.out.println(entity);
 			entity.setUserId(id);
 		}
 		userCartService.delete(list);

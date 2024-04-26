@@ -14,8 +14,14 @@
     width: 150px;
     height: 150px;
     margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
-
+#privacy_img img{
+    width: 100%;
+}
 #privacy_detail {
     width: calc(100% - 150px);
     padding: 30px 20px 0px 20px;

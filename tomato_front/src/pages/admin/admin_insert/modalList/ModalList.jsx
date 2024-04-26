@@ -1,5 +1,4 @@
 import './ModalList.css';
-import Admin_data_row from '../../admin_data/Admin_data_row'
 import { useEffect, useRef, useState } from 'react';
 import { api } from '../../../../model/model';
 import { paging } from '../../../components/PagingBox';
@@ -118,8 +117,8 @@ const ModalList = ({ selectEvent, setModal }) => {
                         changeItemList={changeItemList}
                         changeList={changeList}
                     />))}
-                    <PagingBox limit={size} currPage={currPage} setCurrPage={setCurrPage} list={list} />
                 </div>
+                    <PagingBox limit={size} currPage={currPage} setCurrPage={setCurrPage} list={list} />
             </div>
         </>
     );

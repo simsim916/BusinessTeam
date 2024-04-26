@@ -8,6 +8,8 @@
     top: 0px;
     position: absolute;
     display: block;
+    z-index: 15;
+    background-color: #fff;
 }
 
 .newScheduleTitle {

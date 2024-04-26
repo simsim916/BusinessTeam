@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.example.demo.mapper.OrderMapper;
+import com.example.demo.module.SearchRequest;
 import com.example.demo.order.entity.OrderA;
 import com.example.demo.order.repository.OrderRepositoryJPA;
 import com.example.demo.user.user_cart.domain.UserCartDTO;
@@ -27,6 +29,7 @@ public class OrderServiceImpl implements OrderService {
 	private final OrderRepositoryJPA orderRepositoryJPA;
 	private final OrderDetailRepository orderdetailRepository;
 	private final UserCartRepository userCartRepository;
+	private final OrderMapper orderMapper;
 
 	@Transactional
 	@Override
@@ -71,4 +74,8 @@ public class OrderServiceImpl implements OrderService {
 		return result;
 	}
 
+	@Override
+	public List<OrderDTO> selectByUserId(SearchRequest searchRequest) {
+		return orderMapper.selectOrderListByUserId(searchRequest);
+	}
 }

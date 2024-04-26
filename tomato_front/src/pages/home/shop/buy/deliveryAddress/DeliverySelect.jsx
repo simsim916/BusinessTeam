@@ -39,7 +39,7 @@ const DeliverySelect = ({ setDeliverySelect }) => {
                     <>
                         <div className="addDelivery" onClick={() => setOpenPostcode(true)}>배송지 추가하기</div>
                         {userNewAddress && <DeliveryUpdate setDeliverySelect={setDeliverySelect} />}
-                        {userAddress.length > 0 && userAddress.map((e, i) => <DeliverySelectRow setDeliverySelect={setDeliverySelect} key={i} address={e} />)}
+                        {userAddress.length > 0 && userAddress.filter(e => e.addressCode != null).map((e, i) => <DeliverySelectRow setDeliverySelect={setDeliverySelect} key={i} address={e} />)}
                     </>
                 }
             </div>

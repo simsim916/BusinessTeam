@@ -98,6 +98,34 @@ const Header = ({ setView }) => {
         event.target.visibility = "hidden"
     }
 
+    const handleMyItem = () => {
+        if (user) {
+            setView(true);
+        } else {
+            dispatch(changeAlert({
+                title: '로그인 전용 기능입니다!',
+                time: 3,
+                style: {
+                    top: '10px',
+                    left: 'calc(50% - 150px)',
+                }
+            }))
+        }
+    }
+    const handleMyPage = (event) => {
+        if (!user) {
+            event.preventDefault()
+            dispatch(changeAlert({
+                title: '로그인 후 이용해주세요!!',
+                time: 3,
+                style: {
+                    top: '10px',
+                    left: 'calc(50% - 150px)',
+                }
+            }))
+        }
+    }
+
     return (
         <header>
             <div id="loginBar">
@@ -144,9 +172,9 @@ const Header = ({ setView }) => {
                         }
                     </form>
                     <div id="searchRightBox">
-                        { user &&
+                        {user &&
                             <div id="myPage">
-                                <Link to="/home/mypage">
+                                <Link onClick={handleMyPage} to="/home/mypage">
                                     <i className="fa-solid fa-user"></i>
                                     마이페이지
                                 </Link>
@@ -158,7 +186,7 @@ const Header = ({ setView }) => {
                             </Link>
                         </div>
                         <div id="myItem">
-                            <a onClick={()=>setView(true)}>
+                            <a onClick={handleMyItem}>
                                 <i className="fa-solid fa-box-archive"></i>
                                 최근 본 상품
                             </a>

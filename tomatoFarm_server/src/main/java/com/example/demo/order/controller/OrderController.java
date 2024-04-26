@@ -2,6 +2,7 @@ package com.example.demo.order.controller;
 
 import java.util.List;
 
+import com.example.demo.module.SearchRequest;
 import com.example.demo.order.entity.OrderA;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,12 +27,22 @@ public class OrderController {
 	@PostMapping("/order")
 	public ResponseEntity<?> order(@RequestBody OrderDTO dto, @AuthenticationPrincipal String userId) {
 		ResponseEntity<?> result = null;
+
 		dto = orderService.order(dto, userId);
-		System.out.println(dto);
 		if (dto !=null)
 			result = ResponseEntity.status(HttpStatus.OK).body(dto);
 		else
 			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("order failed");
+
+		return result;
+	}
+	@GetMapping("/select")
+	public ResponseEntity<?> order(@AuthenticationPrincipal String userId) {
+		ResponseEntity<?> result = null;
+		SearchRequest searchRequest = SearchRequest.builder().keyword2(userId).build();
+		List<OrderDTO> list = orderService.selectByUserId(searchRequest);
+			result = ResponseEntity.status(HttpStatus.OK).body(list);
+		System.out.println(list);
 
 		return result;
 	}

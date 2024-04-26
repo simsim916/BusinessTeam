@@ -1,6 +1,6 @@
 #totalContainer {
     display: flex;
-    gap: 50px;
+    gap: 20px;
     padding: 30px;
     height: calc(100% - 85px);
 }
@@ -51,7 +51,7 @@
 
 .forbuttonBox {
     display: flex;
-    gap: 100px;
+    gap: 20px;
     justify-content: center;
 }
 
@@ -81,7 +81,7 @@
 }
 #waitInsertBox .dataListBox{
     margin: 0;
-    /* height: calc(100% - 90px); */
+    height: calc(100% - 90px);
 }
 
 #whichBrand {

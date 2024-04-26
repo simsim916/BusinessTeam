@@ -28,8 +28,6 @@ public class UserController {
 
 	UserService userService;
 
-	/* 🎃🎃🎃🎃🎃🎃 검수 전 🎃🎃🎃🎃🎃🎃 */
-
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody User entity) {
 		ResponseEntity<?> result = null;
@@ -67,7 +65,6 @@ public class UserController {
 	public ResponseEntity<?> selectUserWhere(SearchRequest searchRequest) {
 		List<User> list = null;
 		ResponseEntity<?> result = null;
-		System.out.println(userService.selectUserWhere(searchRequest));
 		result = ResponseEntity.status(HttpStatus.OK).body(userService.selectUserWhere(searchRequest));
 		return result;
 	}

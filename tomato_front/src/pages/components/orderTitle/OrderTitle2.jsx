@@ -1,13 +1,8 @@
-import { useSelector } from "react-redux";
 import { SERVER_RESOURCE } from "../../../model/server-config";
-import Error from "../Error";
-import Loading from "../Loading";
 import { makeComa } from "../MathFunction";
 import './OrderTitle.css'
 
-const OrderTitle = () => {
-
-    const userBuyResult = useSelector(state => state.userBuy.data)
+const OrderTitle2 = ({ userBuyResult }) => {
 
     return (
         <div className="orderTitle">
@@ -30,4 +25,4 @@ const OrderTitle = () => {
     );
 }
 
-export default OrderTitle;
+export default OrderTitle2;

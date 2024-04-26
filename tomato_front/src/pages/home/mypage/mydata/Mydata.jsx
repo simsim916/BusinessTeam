@@ -5,6 +5,7 @@ import { api } from '../../../../model/model';
 import { useDispatch } from 'react-redux';
 import { changeAlert } from '../../../redux/basic/actions';
 import { useNavigate } from 'react-router-dom';
+import { SERVER_RESOURCE } from '../../../../model/server-config';
 
 const Mydata = () => {
     // const [passwordCheck, setPasswordCheck] = useState(false);
@@ -105,7 +106,7 @@ const Mydata = () => {
         <div>
             <div id='privacyBox'>
                 <div id='privacy_img'>
-                    <img src="" alt="" />
+                    <img src={SERVER_RESOURCE + "/img/logo2.png"} alt="로고" />
                 </div>
                 {!passwordChange && passwordBox &&
                     <div id='passwordBox'>
@@ -121,10 +122,6 @@ const Mydata = () => {
                         {userData &&
                             <li>
                                 <i className="fa-solid fa-address-card"></i>{userData.name}<span>[ {userData.id} ]</span>
-                            </li>}
-                        {userData &&
-                            <li>
-                                <i className="fa-solid fa-envelope"></i>asd123@naver.com
                             </li>}
                         <li>
                             <i className="fa-solid fa-phone"></i>{userData && userData.phonenumber}
@@ -153,9 +150,7 @@ const Mydata = () => {
                     </>
                 }
                 <div id='privacy_detail_Btn'>
-                    {/* <button onClick={handleChangePassword}>비밀번호 변경하기</button> */}
                     <button onClick={() => setPasswordBox(!passwordBox)}>비밀번호 변경하기</button>
-                    {/* <button onClick={() => setPasswordBox(true)}>내 정보 더보기</button> */}
                 </div>
             </div>
         </div>
