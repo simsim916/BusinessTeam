@@ -90,12 +90,6 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public List<ItemDTO> selectItemListStringWhereTypeNotNull(SearchRequest searchRequest) {
 		List<ItemDTO> result = itemMapper.selectItemListStringWhereTypeNotNull(searchRequest);
-		System.out.println(searchRequest);
-		for(ItemDTO itemDTO : result) {
-			if(itemDTO.getUserCartRegdate() != null) {
-				System.out.println(itemDTO);
-			}
-		}
 		return result;
 	}
 	
