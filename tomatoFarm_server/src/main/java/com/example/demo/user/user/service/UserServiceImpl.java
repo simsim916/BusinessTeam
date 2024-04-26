@@ -125,6 +125,18 @@ public class UserServiceImpl implements UserService {
 		if(userRepositoryJPA.findById(id).isPresent())
 			result = true;
 
+		
+		return result;
+	}
+	
+	public Boolean checkPassword(String password, String userId) {
+		boolean result = false;
+		Optional<User> entity = userRepositoryJPA.findById(userId);
+		if(entity.isPresent()){
+			User user = entity.get();
+			if (passwordEncoder.matches(password, user.getPassword()))
+				result = true;
+		}
 		return result;
 	}
 
@@ -140,9 +152,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public List<User> saveAll(List<User> list) {
-		List<User> checkList = null;
+//		String password;
 //		for(User user : list) {
-//			checkList.add()
+//			password = user.getPassword();
+//			user.setPassword(passwordEncoder.encode(password));
 //		}
 		return userRepositoryJPA.saveAll(list);
 	}
@@ -157,12 +170,12 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	@Override
 	public User merge(SignForm signForm) {
-		UserDTO dto = userRepository.selectUserWhereString(new SearchRequest("id",signForm.getId())).get(0);
-		String password = passwordEncoder.encode(signForm.getPassword());
-		User entity = dtotoEntity(dto);
-		entity.setPassword(password);
-		entity.setName(signForm.getName());
-		entity.setPhonenumber(signForm.getPhonenumber());
+			UserDTO dto = userRepository.selectUserWhereString(new SearchRequest("id",signForm.getId())).get(0);
+			String password = passwordEncoder.encode(signForm.getPassword());
+			User entity = dtotoEntity(dto);
+			entity.setPassword(password);
+			entity.setName(signForm.getName());
+			entity.setPhonenumber(signForm.getPhonenumber());
 		
 		return userRepository.merge(entity);
 	}

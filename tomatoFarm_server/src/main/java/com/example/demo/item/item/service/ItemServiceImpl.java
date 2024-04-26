@@ -2,6 +2,7 @@ package com.example.demo.item.item.service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,12 +19,14 @@ import com.example.demo.user.user_cart.repository.UserCartRepositoryJPA;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.item.item.domain.AddEvent;
 import com.example.demo.item.item.domain.ItemDTO;
 import com.example.demo.item.item.domain.SortDTO;
 import com.example.demo.item.item.entity.Item;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.item.item.repository.ItemRepository;
+import com.example.demo.item.item.repository.ItemRepositoryJPA;
 import com.example.demo.page.page_keyword.repository.pageKeywordRepository;
 
 import lombok.AllArgsConstructor;
@@ -131,10 +134,12 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
+	@Transactional
 	public Item merge(Item entity) {
 		return itemRepository.merge(entity);
 	}
 	@Override
+	@Transactional
 	public int mergeAll(List<Item> list) {
 		return itemRepository.mergeAll(list);
 	}
@@ -148,5 +153,17 @@ public class ItemServiceImpl implements ItemService {
 	public List<ItemDTO> selectItemListWhereInCode(List<Integer> codeList) {
 		return itemRepository.selectItemListWhereInCode(codeList);
 	}
+	
+	@Override
+	public List<Item> selectItemTableWhereType(AddEvent dto) {
+		List<Item> list = dto.getCodeList();
+		List<Integer> codeList = new ArrayList<Integer>();
+		for(Item item : list) {
+			codeList.add(item.getCode());
+		}
+		return itemRepositoryJPA.findAllById(codeList);
+	}
+	
+	
 	
 }

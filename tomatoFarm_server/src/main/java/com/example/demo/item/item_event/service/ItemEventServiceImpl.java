@@ -32,4 +32,24 @@ public class ItemEventServiceImpl implements ItemEventService {
 			return item_eventRepository.selectEventWhereString(searchRequest);
 		}
 	}
+	
+	@Override
+	@Transactional
+	public int insertEvent(List<ItemEvent> list) {
+		Integer maxNum = item_eventRepository.checkMaxCode();
+		for(ItemEvent entity : list) {
+			++maxNum;
+			entity.setCode(maxNum);
+		}
+		
+		List<ItemEvent> check = item_eventRepository.merge(list);
+		return check.size();
+	}
+	
+	@Override
+	public Integer checkMaxCode() {
+		
+		return item_eventRepository.checkMaxCode();
+	}
+	
 }

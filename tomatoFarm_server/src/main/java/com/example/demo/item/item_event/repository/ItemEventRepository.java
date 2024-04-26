@@ -10,4 +10,5 @@ public interface ItemEventRepository {
 	List<ItemEvent> selectEventWhereNumber(SearchRequest searchRequest);
 	List<ItemEvent> selectEventWhereString(SearchRequest searchRequest);
 	List<ItemEvent> merge(List<ItemEvent> list);
+	public Integer checkMaxCode();
 }

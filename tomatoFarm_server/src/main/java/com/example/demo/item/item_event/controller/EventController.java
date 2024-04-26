@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.module.SearchRequest;
+
+import io.micrometer.core.instrument.search.Search;
+
 import com.example.demo.item.item_event.service.ItemEventService;
 
 import lombok.AllArgsConstructor;
@@ -28,22 +31,26 @@ public class EventController {
 	public ResponseEntity<?> selectEventWhere(SearchRequest searchRequest, @AuthenticationPrincipal String userid) {
 		ResponseEntity<?> result = null;
 		List<ItemEvent> list = null;
-
 		list = item_eventService.selectEventWhere(searchRequest);
-
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}
 
 	@PostMapping("/merge")
-	public ResponseEntity<?> merge(@RequestBody List<ItemEvent> list) {
+	public ResponseEntity<?> merge(@RequestBody List<ItemEvent> list,SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
-
-		if (item_eventService.merge(list).size() > 0)
+		int check = 0;
+		if(searchRequest.getAccess() != null) {
+			check = item_eventService.insertEvent(list);
+		} else {
+			check = item_eventService.merge(list).size();
+		}
+		if (check > 0)
 			result = ResponseEntity.status(HttpStatus.OK).body(item_eventService.selectEventWhere(new SearchRequest("name", "")));
 		else
 			result = ResponseEntity.status(HttpStatus.OK).body("데이터 입력 실패");
 
 		return result;
 	}
+	
 }

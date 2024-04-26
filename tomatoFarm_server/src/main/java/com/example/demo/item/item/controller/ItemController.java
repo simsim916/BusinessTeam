@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.item.item.domain.AddEvent;
 import com.example.demo.item.item.domain.ItemDTO;
 import com.example.demo.item.item.domain.SortDTO;
 import com.example.demo.item.item.entity.Item;
@@ -120,6 +121,7 @@ public class ItemController {
 
 	@GetMapping("/selectwhere")
 	public ResponseEntity<?> selectwhere(SearchRequest searchRequest) {
+		System.out.println(searchRequest);
 		ResponseEntity<?> result = null;
 		PageRequest pageRequest = new PageRequest();
 		List<ItemDTO> itemList = itemService.selectItemListWhereType(pageRequest, searchRequest);
@@ -163,14 +165,19 @@ public class ItemController {
 		return result;
 	}
 	
-	
-	@GetMapping("/max")
-	public ResponseEntity<?> searchMaxSeq() {
+	@PostMapping("/insertupdate")
+	public ResponseEntity<?> updateEvent(@RequestBody AddEvent dto) {
 		ResponseEntity<?> result = null;
-		
+		List<Item> itemList = itemService.selectItemTableWhereType(dto);
+		for(Item item : itemList) {
+			item.setItemEventCode(dto.getEventCode());
+		}
+		if(itemService.mergeAll(itemList) > 0) {
+			result = ResponseEntity.status(HttpStatus.OK).body(itemService.selectItemListWhereType(new PageRequest(), new SearchRequest("sort1","")));
+		} else {
+			result = ResponseEntity.status(HttpStatus.OK).body("잠시 후 다시 시도해주세요.");
+		}
 		return result;
 	}
 	
-
-
 }

@@ -2,7 +2,7 @@
     display: flex;
     gap: 50px;
     padding: 30px;
-    height: 90%;
+    height: calc(100% - 85px);
 }
 
 #totalContainer>div {
@@ -28,20 +28,21 @@
 #forInsertBox {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 5px;
 }
 
 .forInsertRow {
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 30% calc(70% - 20px);
+    gap: 20px;
+    text-align: right;
 }
 
-.forInsertRow>div:nth-child(1) {
-    text-indent: 30px;
-}
 
-.forInsertRow>div:nth-child(2) {
-    margin: auto;
+.forInsertRow>input {
+    margin-left: 15px;
+    text-align: left;
+    text-indent: 7px;
 }
 
 .forInsertRow>div:nth-child(2)>input {
@@ -55,18 +56,15 @@
 }
 
 .forbuttonBox>button {
+    margin-top: 10px;
     background-color: #9B1B30;
     color: white;
-    padding: 5px;
-    border-radius: 20px;
+    padding: 5px 20px;
+    border-radius: 10px;
 }
 
 #waitInsertBox {
     position: relative;
-}
-
-#waitInsertBox>div {
-    margin-top: 40px;
 }
 
 #waitInsertBox button {
@@ -76,4 +74,18 @@
     position: absolute;
     right: 38px;
     z-index: 10;
+}
+
+#waitInsertBox #topBox{
+    margin: 0;
+}
+#waitInsertBox .dataListBox{
+    margin: 0;
+    /* height: calc(100% - 90px); */
+}
+
+#whichBrand {
+    text-indent: 7px;
+    width: 30%;
+    margin-left: 50px;
 }

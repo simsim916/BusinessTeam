@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import com.example.demo.item.item.domain.AddEvent;
 import com.example.demo.item.item.domain.ItemDTO;
 import com.example.demo.item.item.entity.Item;
 import org.springframework.stereotype.Repository;
@@ -20,6 +21,7 @@ import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.QBean;
 import com.querydsl.core.types.dsl.Expressions;
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import lombok.AllArgsConstructor;
@@ -32,7 +34,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 	private final EntityManager entityManager;
 	private final QBean<ItemDTO> dtoBean = Projections.bean(ItemDTO.class, item.sort1, item.sort2, item.sort3, item.code, item.brand, item.name,
 			item.delivery, item.price, item.storage, item.weight, item.packing, item.sales, item.stock, item.views,
-			item.likes, item.itemEventCode, item.intro, item.userIdAdmin, itemEvent.discount.as("itemEventDiscount"), itemEvent.name.as("eventName"));
+			item.likes, item.itemEventCode, item.intro, item.userIdAdmin ,itemEvent.discount,itemEvent.name.as("event_name"));
 
 	// queryDSL 동적 정렬을 위해 OrderSpecifier객체를 이용한 동적 정렬
 	public OrderSpecifier<?> getSortType(SearchRequest searchRequest) {
@@ -56,20 +58,39 @@ public class ItemRepositoryImpl implements ItemRepository {
 	@Override		
 	// ** 동적 한 컬럼 검색
 	public List<ItemDTO> selectItemListStringWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
-		return jPAQueryFactory.select(dtoBean)
+		JPAQuery query = jPAQueryFactory.select(dtoBean)
 				.from(item).leftJoin(itemEvent).on(item.itemEventCode.eq(itemEvent.code))
-				.where(Expressions.stringPath(searchRequest.getColumn()).contains(searchRequest.getKeyword()))
-//				.orderBy(getSortType(searchRequest))
-				.fetch();
+				.where(Expressions.stringPath(searchRequest.getColumn())
+						.contains(searchRequest.getKeyword()));
+		return query.fetch();
 	}
 	
 	@Override
 	// ** 동적 한 컬럼 검색
 	public List<ItemDTO> selectItemListIntegerWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
-		return jPAQueryFactory.select(dtoBean)
+		JPAQuery query = jPAQueryFactory.select(dtoBean)
 				.from(item).leftJoin(itemEvent).on(item.itemEventCode.eq(itemEvent.code))
-				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue().contains(searchRequest.getKeyword()))
-				.fetch();
+				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
+						.contains(searchRequest.getKeyword()));
+		
+		return query.fetch();
+	}
+	
+	@Override		
+	public List<Item> selectItemTableStringWhereType(Integer eventCode, List<Integer> codeList) {
+		JPAQuery query = jPAQueryFactory.selectFrom(item)
+				.where(item.code.in(codeList));
+				
+		return query.fetch();
+	}
+	
+	@Override
+	public List<Item> selectItemTableIntegerWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
+		JPAQuery query = jPAQueryFactory.selectFrom(item)
+				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
+						.contains(searchRequest.getKeyword()));
+		
+		return query.fetch();
 	}
 
 	@Override

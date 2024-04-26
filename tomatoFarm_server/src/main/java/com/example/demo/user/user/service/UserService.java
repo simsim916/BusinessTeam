@@ -44,6 +44,7 @@ public interface UserService {
 	void signup(SignForm signForm);
 
 	Boolean checkID(String id);
+	Boolean checkPassword(String password, String userId);
 
 	List<UserDTO> selectUserWhere(SearchRequest searchRequest);
 	

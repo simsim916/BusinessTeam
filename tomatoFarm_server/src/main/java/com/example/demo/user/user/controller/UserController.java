@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.user.user.entity.User;
+import com.example.demo.item.item.service.ItemService;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.user.user.service.UserService;
 
@@ -66,9 +67,7 @@ public class UserController {
 	public ResponseEntity<?> selectUserWhere(SearchRequest searchRequest) {
 		List<User> list = null;
 		ResponseEntity<?> result = null;
-		System.out.println("=======================");
 		System.out.println(userService.selectUserWhere(searchRequest));
-		System.out.println("=======================");
 		result = ResponseEntity.status(HttpStatus.OK).body(userService.selectUserWhere(searchRequest));
 		return result;
 	}
@@ -89,7 +88,7 @@ public class UserController {
 	public ResponseEntity<?> delete(@AuthenticationPrincipal String userId) {
 		ResponseEntity<?> result = null;
 		UserDTO dto = userService.selectUserWhere(new SearchRequest("id", userId)).get(0);
-		userService.delete(dto);
+//		userService.delete(dto);
 //		try {
 //			result = ResponseEntity.status(HttpStatus.OK).body("다음에 뵙겠습니다.");
 //		} catch (Exception e) {
@@ -110,5 +109,14 @@ public class UserController {
 		}
 		return result;
 	}
+	
+	@PostMapping("/checkpw")
+	public ResponseEntity<?> checkPassword(@RequestBody User user, @AuthenticationPrincipal String userId) {
+		ResponseEntity<?> result = null;
+		boolean test = userService.checkPassword(user.getPassword(), userId);
+		result = ResponseEntity.status(HttpStatus.OK).body(test);
+		return result;
+	}
+	
 
 }

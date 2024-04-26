@@ -1,4 +1,4 @@
-import './Mypage.css'
+import './MyPage.css'
 import Mydata from './mydata/Mydata';
 
 const Mypage = ()=>{
