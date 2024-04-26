@@ -13,7 +13,7 @@ import BuyComplete from "./shop/buyComplete/BuyComplete";
 import Detail from "./detail/Detail";
 import ChatBotBox from './../components/chatbot/ChatBotBox';
 import { SERVER_RESOURCE } from "../../model/server-config";
-import Mypage from "./mypage/Mypage";
+import Mypage from "./mypage/MyPage";
 import Home_notice from "./Home_notice";
 import View from "./view/View";
 

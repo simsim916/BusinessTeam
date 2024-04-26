@@ -34,7 +34,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 	private final EntityManager entityManager;
 	private final QBean<ItemDTO> dtoBean = Projections.bean(ItemDTO.class, item.sort1, item.sort2, item.sort3, item.code, item.brand, item.name,
 			item.delivery, item.price, item.storage, item.weight, item.packing, item.sales, item.stock, item.views,
-			item.likes, item.eventCode, item.intro, item.userIdAdmin ,itemEvent.discount,itemEvent.name.as("event_name"));
+			item.likes, item.itemEventCode, item.intro, item.userIdAdmin ,itemEvent.discount,itemEvent.name.as("event_name"));
 
 	// queryDSL 동적 정렬을 위해 OrderSpecifier객체를 이용한 동적 정렬
 	public OrderSpecifier<?> getSortType(SearchRequest searchRequest) {
@@ -59,7 +59,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 	// ** 동적 한 컬럼 검색
 	public List<ItemDTO> selectItemListStringWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
 		JPAQuery query = jPAQueryFactory.select(dtoBean)
-				.from(item).leftJoin(itemEvent).on(item.eventCode.eq(itemEvent.code))
+				.from(item).leftJoin(itemEvent).on(item.itemEventCode.eq(itemEvent.code))
 				.where(Expressions.stringPath(searchRequest.getColumn())
 						.contains(searchRequest.getKeyword()));
 		return query.fetch();
@@ -69,7 +69,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 	// ** 동적 한 컬럼 검색
 	public List<ItemDTO> selectItemListIntegerWhereType(PageRequest pageRequest, SearchRequest searchRequest) {
 		JPAQuery query = jPAQueryFactory.select(dtoBean)
-				.from(item).leftJoin(itemEvent).on(item.eventCode.eq(itemEvent.code))
+				.from(item).leftJoin(itemEvent).on(item.itemEventCode.eq(itemEvent.code))
 				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
 						.contains(searchRequest.getKeyword()));
 		

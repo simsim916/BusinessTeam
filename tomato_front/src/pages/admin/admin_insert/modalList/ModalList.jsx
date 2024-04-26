@@ -5,10 +5,12 @@ import { api } from '../../../../model/model';
 import { paging } from '../../../components/PagingBox';
 import PagingBox from '../../../components/PagingBox';
 import ModalList_row from './ModalList_row';
+import { useDispatch } from 'react-redux';
+import { changeAlert } from '../../../redux/basic/actions';
 
 
-const ModalList = ({ selectEvent }) => {
-
+const ModalList = ({ selectEvent, setModal }) => {
+    const dispatch = useDispatch();
     const user = JSON.parse(sessionStorage.getItem('userinfo'))
     const column = useRef(null);
     const [list, setList] = useState([])
@@ -17,7 +19,7 @@ const ModalList = ({ selectEvent }) => {
         keyword: '',
     });
     const [currPage, setCurrPage] = useState(1);
-    const [size, setSize] = useState(20);
+    const [size, setSize] = useState(15);
     const [changeList, setChangeList] = useState({
         eventCode: selectEvent.current.code,
         codeList: [],
@@ -62,15 +64,33 @@ const ModalList = ({ selectEvent }) => {
 
     const postData = () => {
         api(`/item/insertupdate`, 'post', changeList, user.token)
-            .then(res => setList(res.data))
+            .then(res => {
+                setList(res.data)
+                dispatch(changeAlert({
+                    title: '이벤트 추가 완료!',
+                    time: 3,
+                    style: {
+                        top: '10px',
+                        left: 'calc(50% - 150px)',
+                        position: 'absolute'
+                    }
+                }));
+                setChangeList({
+                    eventCode: selectEvent.current.code,
+                    codeList: [],
+                })
+                setModal(false);
+            })
             .catch(err => console.log(err.message));
     }
 
+    console.log(changeList.codeList);
 
     return (
         <>
             <div id='ModalBG'></div>
             <div id='modalListBox'>
+                <div id='modalXbtn' onClick={() => setModal(false)}><i className="fa-solid fa-xmark"></i></div>
                 <div id="topBox">
                     <h3>
                         <i className="fa-solid fa-list"></i>이벤트 상품 선택
@@ -96,6 +116,7 @@ const ModalList = ({ selectEvent }) => {
                         column={column}
                         item={e} key={i}
                         changeItemList={changeItemList}
+                        changeList={changeList}
                     />))}
                     <PagingBox limit={size} currPage={currPage} setCurrPage={setCurrPage} list={list} />
                 </div>

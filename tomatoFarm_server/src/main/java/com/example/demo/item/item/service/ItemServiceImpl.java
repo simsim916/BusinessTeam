@@ -99,10 +99,12 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
+	@Transactional
 	public Item merge(Item entity) {
 		return itemRepository.merge(entity);
 	}
 	@Override
+	@Transactional
 	public int mergeAll(List<Item> list) {
 		return itemRepository.mergeAll(list);
 	}

@@ -67,8 +67,9 @@ const Admin_insert = () => {
     }
 
     const insertData = () => {
+        if(!waitData.length > 0) return
         waitData.forEach(e => delete e.code);
-        api(`${whichTable}/merge`, 'post', waitData, user.token)
+        api(`${whichTable}/merge?access='insert'`, 'post', waitData, user.token)
             .then(res => {
                 setData(res.data)
             })
@@ -102,7 +103,7 @@ const Admin_insert = () => {
 
     return (
         <>
-            {modal && <ModalList selectEvent={selectEvent} changeForSearch={changeForSearch} />}
+            {modal && <ModalList setModal={setModal} selectEvent={selectEvent} />}
             <div id="topBox">
                 <h3>
                     <i className="fa-solid fa-file-import"></i>자료 입력
@@ -116,7 +117,7 @@ const Admin_insert = () => {
                     </label>
                 </div>
             </div>
-            
+
             <div id='totalContainer'>
                 <div id='forInsertBox'>
                     {column.current && column.current.map((e, key) =>
@@ -153,7 +154,7 @@ const Admin_insert = () => {
                         (<Admin_insert_row
                             item={e} key={i}
                         />))}
-                        {data.slice(0,50).map((e, i) =>
+                        {data.slice(0, 50).map((e, i) =>
                         (<Admin_insert_row
                             column={column}
                             item={e} key={i}

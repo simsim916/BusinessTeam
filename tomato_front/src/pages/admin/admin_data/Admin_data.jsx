@@ -173,6 +173,10 @@ const Admin_data = ({ }) => {
             })
     }
 
+    console.log(changedList);
+    console.log();
+
+
 
     if (loading) return <Loading />
     if (error) return <Error />
@@ -217,12 +221,19 @@ const Admin_data = ({ }) => {
                                 (selectedItem && selectedItem[Object.keys(selectedItem)[0]] === e[Object.keys(e)[0]]) ?
                                     'yellow'
                                     :
-                                    null,
-                            color:
-                                (changedList && changedList.some(k => k === e)) ?
+                                    null
+                            , color:
+                                changedList.length > 0 && changedList.some(k => k == e) ?
                                     'red'
                                     :
                                     null
+                            // color: changedList.length > 0 && changedList.some(item => item == e) ? 'red' : null
+                            // color: changedList.length > 0 && changedList.some(item => item[Object.keys(item)[0]] == e[Object.keys(e)[0]]) ? 'red' : null
+                            // color: changedList.length > 0 && changedList.some(item => item[Object.keys(item)[0]] == e[Object.keys(e)[0]][Object.keys(item)[0]]) ? 'red' : null
+                            // color: changedList.length > 0 && changedList.some(item => item === e) ? 'red' : ''
+                            //  color: (changedList.length > 0 && changedList.some(item => JSON.stringify(item) === JSON.stringify(e))) ? 'red' : null
+                            // color: (changedList.length > 0 && changedList.map(item => item.id).includes(e.id)) ? 'red' : null
+
                         }}
                     />))}
                 </div>

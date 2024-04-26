@@ -10,13 +10,17 @@
     background-color: white;
     padding: 20px;
     width: 60%;
-    height: 80%;
+    /* height: 80%; */
     z-index: 11;
     margin: 0 auto;
     position: fixed;
     top: 150px;
     left: 400px;
     overflow-x: auto;
+}
+
+#modalListBox #topBox {
+    margin-top: 25px;
 }
 
 
@@ -28,6 +32,10 @@
     border-radius: 7px;
 }
 
-#modalListBox .pagingBox {
-    margin-top: 20px;
+
+#modalListBox #modalXbtn {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    font-size: 25px;
 }

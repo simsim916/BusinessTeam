@@ -151,14 +151,14 @@ public class ItemController {
 		ResponseEntity<?> result = null;
 		List<Item> itemList = itemService.selectItemTableWhereType(dto);
 		for(Item item : itemList) {
-			item.setEventCode(dto.getEventCode());
+			item.setItemEventCode(dto.getEventCode());
 		}
 		if(itemService.mergeAll(itemList) > 0) {
 			result = ResponseEntity.status(HttpStatus.OK).body(itemService.selectItemListWhereType(new PageRequest(), new SearchRequest("sort1","")));
 		} else {
 			result = ResponseEntity.status(HttpStatus.OK).body("잠시 후 다시 시도해주세요.");
 		}
-		return null;
+		return result;
 	}
 	
 }

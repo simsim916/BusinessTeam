@@ -40,7 +40,7 @@ public class UserRepositoryImpl implements UserRepository {
 	public List<UserDTO> selectUserWhereString(SearchRequest searchRequest) {
 	    return jpaQueryfactory
 	            .select(Projections.bean(UserDTO.class, user.id, user.password, user.name, user.phonenumber, user.point, user.userLevelCode, userDetail.birthdate, userDetail.email))
-	            .from(user).join(userDetail).on(user.id.eq(userDetail.userId))
+	            .from(user).leftJoin(userDetail).on(user.id.eq(userDetail.userId))
 	            .where(Expressions.stringPath(searchRequest.getColumn()).contains(searchRequest.getKeyword()))
 	            .fetch();
 	}
@@ -51,7 +51,7 @@ public class UserRepositoryImpl implements UserRepository {
 	public List<UserDTO> selectUserWhereNumber(SearchRequest searchRequest) {
 		return jpaQueryfactory
 				.select(Projections.bean(UserDTO.class, user.id, user.password, user.name, user.phonenumber, user.point, user.userLevelCode, userDetail.birthdate, userDetail.email))
-				.from(user).join(userDetail).on(user.id.eq(userDetail.userId))
+				.from(user).leftJoin(userDetail).on(user.id.eq(userDetail.userId))
 				.where(Expressions.numberPath(Integer.class, searchRequest.getColumn()).stringValue()
 						.contains(searchRequest.getKeyword()))
 				.fetch();
