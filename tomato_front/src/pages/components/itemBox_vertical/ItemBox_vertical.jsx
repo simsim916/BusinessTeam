@@ -26,6 +26,16 @@ const ItemBox_vertical = ({ item }) => {
                             <div className="itemOptionEvent">{item.eventName}</div>
                         )
                     }
+                    {
+                        item.userCartRegdate != null && (
+                            <div className="userCartRegdate">최근 본 상품</div>
+                        )
+                    }
+                    {
+                        item.orderSeq != null && (
+                            <div className="orderSeq">최근 주문 상품</div>
+                        )
+                    }
                 </div>
                 <div className="itemName">{item.name}</div>
                 <div className="itemInfo">{item.brand}<br /></div>

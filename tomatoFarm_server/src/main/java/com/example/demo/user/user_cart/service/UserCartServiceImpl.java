@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.example.demo.mapper.ItemMapper;
 import com.example.demo.user.user_cart.domain.UserCartDTO;
 import com.example.demo.user.user_cart.repository.UserCartRepository;
 import com.example.demo.user.user_cart.repository.UserCartRepositoryJPA;
@@ -20,6 +21,7 @@ public class UserCartServiceImpl implements UserCartService {
 
 	UserCartRepository userCartRepository;
 	UserCartRepositoryJPA userCartRepositoryJPA;
+	ItemMapper itemMapper;
 
 	@Transactional
 	@Override

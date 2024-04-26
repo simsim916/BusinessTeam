@@ -17,7 +17,6 @@ import Mypage from "./mypage/Mypage";
 import Home_notice from "./Home_notice";
 import View from "./view/View";
 
-
 const Home = () => {
     console.log('Home 랜더링')
     const [notice, setNotice] = useState(true);
@@ -28,16 +27,16 @@ const Home = () => {
 
     return (
         <>
-            <Header />
+            <Header setView={setView} />
             {notice && <Home_notice setNotice={setNotice} />}
             {alert && <Alert />}
-            {view && <View />}
+            {view && <View setView={setView} />}
             {
                 userinfo && showChatbot ?
                     <ChatBotBox setShowChatbot={setShowChatbot} />
                     :
                     userinfo &&
-                    <div onClick={() => setShowChatbot(!showChatbot)} id="chatbotIcon" style={{cursor:'pointer'}}>
+                    <div onClick={() => setShowChatbot(!showChatbot)} id="chatbotIcon" style={{ cursor: 'pointer' }}>
                         <img src={SERVER_RESOURCE + '/img/talk.png'} alt="" />
                     </div>
             }

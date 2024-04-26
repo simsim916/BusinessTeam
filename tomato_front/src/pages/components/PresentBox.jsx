@@ -7,8 +7,10 @@ import ItemBox from './ItemBox';
 import { Link } from 'react-router-dom';
 import { SERVER_RESOURCE, SERVER_URL } from '../../model/server-config';
 import { makeComa } from './MathFunction';
+import { api } from '../../model/model';
 
 const PresentBox = ({ brand, idx }) => {
+    const user = JSON.parse(sessionStorage.getItem('userinfo'));
     const [brandItem, setBrandItem] = useState(null);
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false);
@@ -17,7 +19,7 @@ const PresentBox = ({ brand, idx }) => {
     const slideBoxRightBtn = useRef(null);
 
     useEffect(() => {
-        axios.get(SERVER_URL + '/item/searchtype?page=1&size=6&column=item.brand&keyword=' + brand
+        api('/item/brand?keyword=' + brand, 'get', null, user && user.token
         ).then(res => {
             setBrandItem(res.data);
             setLoading(false);

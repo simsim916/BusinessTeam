@@ -37,9 +37,11 @@ public interface ItemService {
 		return entity;
 	}
 
+	List<ItemDTO> selectItemListWhereBrand(SearchRequest searchRequest);
+
 	List<ItemDTO> selectItemListWhereType(PageRequest pageRequest,SearchRequest searchRequest);
-	ItemDTO getDetailPage(PageRequest pageRequest,SearchRequest searchRequest);
-	List<ItemDTO> selectItemListStringWhereTypeNotNull(PageRequest pageRequest,SearchRequest searchRequest);
+	ItemDTO getDetailPage(PageRequest pageRequest,SearchRequest searchRequest, String userId);
+	List<ItemDTO> selectItemListStringWhereTypeNotNull(SearchRequest searchRequest);
 	List<ItemDTO> selectItemListWhereInCode(List<Integer> codeList);
 	
 	List<ItemDTO> selectItemWhereKeyword(PageRequest pageRequest, SearchRequest searchRequest, String id);
@@ -49,4 +51,6 @@ public interface ItemService {
 	int mergeAll(List<Item> list);
 	Item merge(Item entity);
 	int persist(List<Item> list);
+
+	List<ItemDTO> selectRecentItemWhereUserId(String userId);
 }

@@ -41,6 +41,16 @@ const ItemBox = ({ item }) => {
                         <div className="itemOptionEvent">{item.eventName}</div>
                     )
                 }
+                {
+                    item.userCartRegdate != null && (
+                        <div className="userCartRegdate">최근 본 상품</div>
+                    )
+                }
+                {
+                    item.orderSeq != null && (
+                        <div className="orderSeq">최근 주문 상품</div>
+                    )
+                }
             </div>
         </Link>
     );

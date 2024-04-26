@@ -4,21 +4,19 @@ import './SecondContainer.css'
 import Loading from './../../../components/Loading';
 import Error from './../../../components/Error';
 import ItemBox from './../../../components/ItemBox';
-import axios from 'axios';
-import { SERVER_URL } from '../../../../model/server-config';
-
+import { api } from '../../../../model/model'
 
 const SecondContainer = () => {
+    const user = JSON.parse(sessionStorage.getItem('userinfo'))
     const [eventItemList, setEventItemList] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     let secondSlideBtnRef = useRef(null);
     let slideBox = useRef(null);
     let slideidx = useRef(null);
-    let selectedBox = useRef(null);
 
     useEffect(() => {
-        axios.get(SERVER_URL + '/item/selectnotnull?column=item.itemEventCode'
+        api('/item/selectnotnull?column=item.itemEventCode', 'get', null, user && user.token
         ).then(res => {
             setEventItemList(res.data);
             setLoading(false);

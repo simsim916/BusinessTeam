@@ -35,20 +35,28 @@ import lombok.extern.log4j.Log4j2;
 public class ItemController {
 	private final ItemService itemService;
 
-	@GetMapping("/selectnotnull")
-	public ResponseEntity<?> selectItemWhereEvent(SearchRequest searchRequest) {
+	@GetMapping("/recent")
+	public ResponseEntity<?> recent(@AuthenticationPrincipal String userId) {
 		ResponseEntity<?> result = null;
-		PageRequest pageRequest = new PageRequest(1, 11);
-		List<ItemDTO> list = itemService.selectItemListStringWhereTypeNotNull(pageRequest, searchRequest);
+		List<ItemDTO> list = itemService.selectRecentItemWhereUserId(userId);
+		result = ResponseEntity.status(HttpStatus.OK).body(list);
+		return result;
+	}
+
+	@GetMapping("/selectnotnull")
+	public ResponseEntity<?> selectItemWhereEvent(SearchRequest searchRequest, @AuthenticationPrincipal String userId) {
+		ResponseEntity<?> result = null;
+		searchRequest.setKeyword2(userId);
+		List<ItemDTO> list = itemService.selectItemListStringWhereTypeNotNull(searchRequest);
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}
 
 	@GetMapping("/detailn")
-	public ResponseEntity<?> getDetailPage(HttpServletRequest request, SearchRequest searchRequest) {
+	public ResponseEntity<?> getDetailPage(HttpServletRequest request, SearchRequest searchRequest, @AuthenticationPrincipal String userId) {
 		ResponseEntity<?> result = null;
 		PageRequest pageRequest = new PageRequest(1, 1);
-		ItemDTO dto = itemService.getDetailPage(pageRequest, searchRequest);
+		ItemDTO dto = itemService.getDetailPage(pageRequest, searchRequest, userId);
 		result = ResponseEntity.status(HttpStatus.OK).body(dto);
 		return result;
 	}
@@ -63,9 +71,18 @@ public class ItemController {
 
 	//페이징 + 정렬 기능 되는 search
 	@GetMapping("/search")
-	public ResponseEntity<?> selectItemWhereSearchType(HttpServletRequest request, PageRequest pageRequest, SearchRequest searchRequest, @AuthenticationPrincipal String userId) {
+	public ResponseEntity<?> selectItemWhereSearchType(PageRequest pageRequest, SearchRequest searchRequest, @AuthenticationPrincipal String userId) {
 		ResponseEntity<?> result = null;
+		searchRequest.setKeyword2(userId);
 		List<ItemDTO> list = itemService.selectItemWhereKeyword(pageRequest, searchRequest, userId);
+		result = ResponseEntity.status(HttpStatus.OK).body(list);
+		return result;
+	}
+	@GetMapping("/brand")
+	public ResponseEntity<?> brand(SearchRequest searchRequest, @AuthenticationPrincipal String userId) {
+		ResponseEntity<?> result = null;
+		searchRequest.setKeyword2(userId);
+		List<ItemDTO> list = itemService.selectItemListWhereBrand(searchRequest);
 		result = ResponseEntity.status(HttpStatus.OK).body(list);
 		return result;
 	}
