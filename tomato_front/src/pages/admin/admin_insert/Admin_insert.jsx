@@ -4,8 +4,11 @@ import { api } from '../../../model/model';
 import { useRef } from 'react';
 import ModalList from './modalList/ModalList';
 import Admin_insert_row from './Admin_insert_row';
+import PagingBox from '../../components/PagingBox';
+import { paging } from '../../components/PagingBox';
 
 const Admin_insert = () => {
+    const [modal, setModal] = useState(false);
     const [whichTable, setWhichTable] = useState('/event');
     const [forSearch, setForSearch] = useState({
         column: 'name',
@@ -14,7 +17,8 @@ const Admin_insert = () => {
     const [formData, setFormData] = useState({});
     const [data, setData] = useState([]);
     const [waitData, setWaitData] = useState([]);
-    const [modal, setModal] = useState(false);
+    const [currPage, setCurrPage] = useState(1);
+    const [limit, setLimit] = useState(20);
 
     const user = sessionStorage.getItem('userinfo');
     const column = useRef(null);
@@ -84,6 +88,7 @@ const Admin_insert = () => {
         api(`${whichTable}/selectwhere?column=${forSearch.column}&keyword=${forSearch.keyword}`, 'get', null, user.token)
             .then(res => {
                 setData(res.data)
+                console.log(res.data);
                 // column.current = Object.keys(res.data[0]);
             })
             .catch(err => console.log(err.message))
@@ -93,6 +98,7 @@ const Admin_insert = () => {
         selectEvent.current = item;
         setModal(!modal);
     }
+
 
     return (
         <>
@@ -147,7 +153,7 @@ const Admin_insert = () => {
                         (<Admin_insert_row
                             item={e} key={i}
                         />))}
-                        {data.slice(0, 100).map((e, i) =>
+                        {data.slice(0,50).map((e, i) =>
                         (<Admin_insert_row
                             column={column}
                             item={e} key={i}

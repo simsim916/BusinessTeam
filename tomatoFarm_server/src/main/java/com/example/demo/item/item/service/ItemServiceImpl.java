@@ -21,6 +21,7 @@ import com.example.demo.item.item.entity.Item;
 import com.example.demo.module.PageRequest;
 import com.example.demo.module.SearchRequest;
 import com.example.demo.item.item.repository.ItemRepository;
+import com.example.demo.item.item.repository.ItemRepositoryJPA;
 import com.example.demo.page.page_keyword.repository.pageKeywordRepository;
 
 import lombok.AllArgsConstructor;
@@ -31,6 +32,7 @@ import lombok.AllArgsConstructor;
 public class ItemServiceImpl implements ItemService {
 
 	private final ItemRepository itemRepository;
+	private final ItemRepositoryJPA itemRepositoryJPA;
 	private final pageKeywordRepository pageKeywordRepository;
 	private final EntityManager entityManager;
 	
@@ -124,13 +126,7 @@ public class ItemServiceImpl implements ItemService {
 		for(Item item : list) {
 			codeList.add(item.getCode());
 		}
-		Integer eventCode = dto.getEventCode();
-//		if (searchRequest.getKeyword().matches("^[0-9]*$")) {
-//			return itemRepository.selectItemTableIntegerWhereType(dto);
-//		} else {
-//			return itemRepository.selectItemTableStringWhereType(dto);
-//		}
-		return itemRepository.selectItemTableStringWhereType(codeList,eventCode );
+		return itemRepositoryJPA.findAllById(codeList);
 	}
 	
 	

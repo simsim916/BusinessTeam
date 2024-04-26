@@ -61,10 +61,11 @@ const ModalList = ({ selectEvent }) => {
     }
 
     const postData = () => {
-        api(`/item/insertupdate`, 'post', changeList, user.token);
+        api(`/item/insertupdate`, 'post', changeList, user.token)
+            .then(res => setList(res.data))
+            .catch(err => console.log(err.message));
     }
 
-    console.log(changeList);
 
     return (
         <>
@@ -90,7 +91,7 @@ const ModalList = ({ selectEvent }) => {
                     <div className="excelHead" style={{ width: `${column.current && column.current.length * 150}px` }}>
                         {column.current && (column.current.map((e, key) => <div id={e} key={key}>{e}</div>))}
                     </div>
-                    {paging(list, currPage, size).map((e, i) =>
+                    {list.length > 0 && paging(list, currPage, size).map((e, i) =>
                     (<ModalList_row
                         column={column}
                         item={e} key={i}

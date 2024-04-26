@@ -148,8 +148,16 @@ public class ItemController {
 	
 	@PostMapping("/insertupdate")
 	public ResponseEntity<?> updateEvent(@RequestBody AddEvent dto) {
+		ResponseEntity<?> result = null;
 		List<Item> itemList = itemService.selectItemTableWhereType(dto);
-		System.out.println(itemList);
+		for(Item item : itemList) {
+			item.setEventCode(dto.getEventCode());
+		}
+		if(itemService.mergeAll(itemList) > 0) {
+			result = ResponseEntity.status(HttpStatus.OK).body(itemService.selectItemListWhereType(new PageRequest(), new SearchRequest("sort1","")));
+		} else {
+			result = ResponseEntity.status(HttpStatus.OK).body("잠시 후 다시 시도해주세요.");
+		}
 		return null;
 	}
 	
