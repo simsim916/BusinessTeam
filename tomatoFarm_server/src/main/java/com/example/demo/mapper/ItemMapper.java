@@ -9,7 +9,7 @@ import java.util.List;
 
 @Mapper
 public interface ItemMapper {
-    List<ItemDTO> selectRecentItemWhereUserId(String userId);
+    List<ItemDTO> selectRecentItemWhereUserId(SearchRequest searchRequest);
     List<ItemDTO> selectItemWhereKeyword(SearchRequest searchRequest);
     List<ItemDTO> selectItemListStringWhereTypeNotNull(SearchRequest searchRequest);
     List<ItemDTO> selectItemListWhereBrand(SearchRequest searchRequest);

@@ -29,18 +29,18 @@
                    i.intro           as      intro,
                    ie.discount       as      itemEventDiscount,
                    ie.name           as      eventName
-        <if test="userId != null and userId != 'anonymousUser'">
+        <if test="keyword2 != null and keyword2 != 'anonymousUser'">
                          ,
                    (SELECT uc.regdate
                     FROM user_cart uc
                     WHERE item_code = i.code
-                      AND uc.user_id = #{userId}
+                      AND uc.user_id = #{keyword2}
                       AND uc.regdate >= DATE_SUB(NOW(), INTERVAL 7 DAY)
                     ORDER BY uc.regdate DESC LIMIT 1) as userCartRegdate,
                     (SELECT od.order_seq
                     FROM order_a oa
                     LEFT JOIN order_detail od ON oa.seq = od.order_seq
-                    WHERE od.item_code = i.code AND oa.user_id = #{userId}
+                    WHERE od.item_code = i.code AND oa.user_id = #{keyword2}
                     ORDER BY od.order_seq DESC LIMIT 1) as orderSeq
         </if>
             FROM item i

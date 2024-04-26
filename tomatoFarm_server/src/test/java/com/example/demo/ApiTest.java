@@ -3,6 +3,7 @@ package com.example.demo;
 import com.example.demo.item.item.domain.ItemDTO;
 import com.example.demo.mapper.ItemMapper;
 import com.example.demo.mapper.UserMapper;
+import com.example.demo.module.SearchRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,7 +23,9 @@ class ApiTest {
 
     @Test
     public void test2(){
-        for(ItemDTO e : itemMapper.selectRecentItemWhereUserId("simsim916"))
+        SearchRequest searchRequest = new SearchRequest();
+        searchRequest.setKeyword2("simsim916");
+        for(ItemDTO e : itemMapper.selectRecentItemWhereUserId(searchRequest))
         System.out.println(e);
     }
 }
