@@ -45,7 +45,7 @@ public class ItemReviewController {
 		ResponseEntity<?> result = null;
 		
 		if (entity != null) {
-			String realPath = "/home/ubuntu/server/tomatoFarm_server/src/main/resources/static";
+			String realPath = "/home/ubuntu/server/";
 			log.info("\n\n\n** realPath => " + realPath);
 			realPath += "/img/itemReviewImg/" + entity.getItemCode() + "/";
 			File file = new File(realPath); // uploadImages 폴더에 화일존재 확인을 위함

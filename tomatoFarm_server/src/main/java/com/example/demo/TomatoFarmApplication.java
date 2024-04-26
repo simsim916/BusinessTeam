@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @EnableJpaAuditing
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
-@MapperScan("com.example.demo.user.user.repository")
+@MapperScan("com.example.demo.mapper")
 public class TomatoFarmApplication {
 
 	public static void main(String[] args) {

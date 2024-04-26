@@ -59,19 +59,19 @@
     cursor: pointer;
 }
 
-#passwordBox{
+#privacyBox #passwordBox{
     width: calc(100% - 150px);
     display: flex;
     align-items: center;
     justify-content: center;
     color: #000;
 }
-#passwordBox input{
+#privacyBox #passwordBox input{
     margin-left: 15px;
     line-height: 30px;
     text-indent: 10px;
 }
-#passwordBox div{
+#privacyBox #passwordBox div{
     line-height: 34px;
     padding: 0px 8px;
     background-color: #9B1B30;

@@ -20,8 +20,8 @@ import View from "./view/View";
 
 const Home = () => {
     console.log('Home 랜더링')
-    const [notice, setNotice] = useState(false);
-    const [view, setView] = useState(true)
+    const [notice, setNotice] = useState(true);
+    const [view, setView] = useState(false)
     const alert = useSelector(state => state.basic.alert)
     const userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
     const [showChatbot, setShowChatbot] = useState(false);
