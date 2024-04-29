@@ -35,14 +35,14 @@ const SideMenu = ({ openSideBar, sideBarOpen }) => {
                     <li>
                         <Link to="/admin"><i className="fa-solid fa-house"></i><br />메인 메뉴</Link>
                     </li>
-                    {/* <li>
-                        <Link to="/admin/graph"><i className="fa-solid fa-square-poll-vertical"></i><br />통계</Link>
-                    </li> */}
                     <li>
                         <Link to="/admin/select"><i className="fa-solid fa-magnifying-glass"></i><br />자료 조회</Link>
                     </li>
                     <li>
                         <Link to="/admin/insert"><i className="fa-solid fa-file-import"></i><br />자료 입력</Link>
+                    </li>
+                    <li>
+                        <Link to="/admin/graph"><i className="fa-solid fa-square-poll-vertical"></i><br />방문 기록</Link>
                     </li>
                     <li>
                         <Link to="/admin/chatbot"><i className="fa-solid fa-bullhorn"></i><br />채팅 상담</Link>

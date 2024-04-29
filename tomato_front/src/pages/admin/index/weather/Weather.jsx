@@ -31,14 +31,13 @@ const Weather = () => {
             temp_min: ''
         }
     });
-    let imgSRC = '/img/weather_clear.jpg';
     const apiKey = '60dbd7283a42ef16940bde54b9dc9cda';
 
     const getWeather = async (lat, lon) => {
         let cityName = 'Seoul'; // 도시명으로 하면 섭씨로 나와서 273도 빼줘야함.
         try {
             let res = await axios.get(
-                `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKey}`
+                `http://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKey}`
             );
 
             let check = (res.data.list).filter(e => {

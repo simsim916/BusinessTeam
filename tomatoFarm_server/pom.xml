@@ -156,6 +156,12 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
+		<!--	spring boot health check	-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
     </dependencies>
 
 	<build>

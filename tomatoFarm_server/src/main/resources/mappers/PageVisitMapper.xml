@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.mapper.PageVisitMapper">
+
+    <select id="selectVisitCountGroupByDate" resultType="com.example.demo.page.page_visit.domain.PageVisitCNTDTO">
+        SELECT
+            visitdate as visitDate,
+            SUM(CASE WHEN page = 'order' THEN count ELSE 0 END) AS orderCount,
+            SUM(CASE WHEN page = 'itemList' THEN count ELSE 0 END) AS listCount,
+            SUM(CASE WHEN page = 'home' THEN count ELSE 0 END) AS homeCount,
+            SUM(CASE WHEN page = 'detail' THEN count ELSE 0 END) AS detailCount
+        FROM page_visit
+        WHERE #{startdate} <![CDATA[<=]]>  visitdate AND visitdate <![CDATA[<=]]>  #{enddate}
+        GROUP BY visitDate
+        ORDER BY visitDate DESC
+    </select>
+
+</mapper>

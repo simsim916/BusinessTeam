@@ -60,7 +60,7 @@
 }
 
 #chatBot_Unidentified #chatBot_Unidentified_Title li:nth-of-type(6) {
-    width: calc(100% - 50px - 60px - 120px - 120px -170px - 70px - 20px);
+    /* width: calc(100% - 50px - 60px - 120px - 120px -170px - 70px - 20px); */
 }
 
 #chatBot_Unidentified #chatBot_Unidentified_Title li:nth-of-type(7) {

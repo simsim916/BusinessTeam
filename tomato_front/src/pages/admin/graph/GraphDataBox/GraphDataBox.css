@@ -1,4 +1,38 @@
-#graphDataBox {
+.graphDataBox {
     width: 30%;
     height: 85%;
+    overflow-x: auto;
+}
+
+.graphDataBox::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+.graphDataBox::-webkit-scrollbar-thumb {
+    background-color: #9b1b1f70;
+    border-radius: 10px;
+}
+
+.graphDataBox ul {
+    list-style: none;
+    display: flex;
+    width: 600px;
+}
+
+.graphDataBox li {
+    width: 150px;
+    text-align: center;
+}
+
+.graphDataBox #column {
+    background-color: #c0c0c0;
+}
+
+.graphDataBox #column li {
+    border-right: 1px solid;
+}
+
+.graphDataBox #column li:nth-last-of-type(1) {
+    border-right: none;
 }

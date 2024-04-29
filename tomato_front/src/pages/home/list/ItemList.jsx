@@ -33,13 +33,15 @@ const ItemList = () => {
     useEffect(() => {
         dispatch(getItemList(`/item/search?keyword=${keyword}`, 'get', null, user && user.token))
         dispatch(getItemSortList(`/item/searchsort?keyword=${keyword}`, 'get'))
+    }, [keyword])
 
+    useEffect(() => {
         axios.get(SERVER_URL + `/visit/update`, {
             params: {
-                page: 'list',
+                page: 'itemList',
             }
         })
-    }, [keyword])
+    }, [])
 
     /* listFilter 관련 */
     const filterCheckedList = useRef()

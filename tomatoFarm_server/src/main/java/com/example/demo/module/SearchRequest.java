@@ -39,7 +39,9 @@ public class SearchRequest {
 	private String orderType;// 정렬 타입
 	private String scending ;// 정렬 순서
 	private String whichGroup = "";
-	
+	private LocalDate startdate;
+	private LocalDate enddate;
+
 	
 	
 	public SearchRequest(String keyword) {

@@ -23,7 +23,6 @@ export async function api(url, method, requestData, token) {
         headers: headers,
     };
 
-    console.log(options.url)
     if (requestData) {
         options.data = requestData;
     }
