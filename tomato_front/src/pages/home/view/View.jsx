@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import { SERVER_RESOURCE } from '../../../model/server-config';
 import ItemBox_vertical from '../../components/itemBox_vertical/ItemBox_vertical';
 import './View.css'
 import { api } from '../../../model/model';
+import { useParams } from 'react-router-dom';
 
 const View = ({ setView }) => {
     const user = JSON.parse(sessionStorage.getItem('userinfo'))
+    const seachParam = useParams();
     const [data, setData] = useState([])
     const view = useRef(null)
     useEffect(() => {
@@ -20,7 +21,7 @@ const View = ({ setView }) => {
                     console.log(err.message)
                 })
 
-    }, [])
+    }, [seachParam])
 
     return (
         <div id="view" ref={view}>

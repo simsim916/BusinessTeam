@@ -11,7 +11,6 @@ import { getUserCart } from '../../redux/userCart/action';
 import { changeAdmin, changeAlert } from '../../redux/basic/actions';
 
 const LoginBG = () => {
-    console.log('LoginBG 랜더링')
     const user = JSON.parse(sessionStorage.getItem('userinfo'));
     const passwordBox = useRef(null);
     const dispatch = useDispatch();

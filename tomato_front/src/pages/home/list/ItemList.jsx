@@ -13,7 +13,6 @@ import axios from "axios";
 import { SERVER_URL } from "../../../model/server-config";
 
 const ItemList = () => {
-    console.log('ItemList랜더링')
     /* 🫓REDUX🫓 */
     const dispatch = useDispatch();
     const user = JSON.parse(sessionStorage.getItem('userinfo'));
@@ -35,7 +34,7 @@ const ItemList = () => {
         dispatch(getItemList(`/item/search?keyword=${keyword}`, 'get', null, user && user.token))
         dispatch(getItemSortList(`/item/searchsort?keyword=${keyword}`, 'get'))
 
-        axios.get(SERVER_URL+`/visit/update`, {
+        axios.get(SERVER_URL + `/visit/update`, {
             params: {
                 page: 'list',
             }
@@ -68,17 +67,10 @@ const ItemList = () => {
             result = result.filter((e) => e.sort2 != ele && e.brand != ele)
         }
         if (priceRange.min != '')
-            result = result.filter(e => Math.round(e.price * (100 - e.discount) / 100) >= priceRange.min)
+            result = result.filter(e => Math.round(e.price * (100 - e.itemEventDiscount) / 100) >= priceRange.min)
         if (priceRange.max != '')
-            result = result.filter(e => Math.round(e.price * (100 - e.discount) / 100) <= priceRange.max)
+            result = result.filter(e => Math.round(e.price * (100 - e.itemEventDiscount) / 100) <= priceRange.max)
         return result;
-    }
-
-    /* list 페이지에서 detail 보기 */
-    const [showDetail, setShowDetail] = useState(false);
-
-    const handleOnClick = (event) => {
-        setShowDetail(!showDetail)
     }
 
     if (itemList.loading || itemListSort.loading) return <Loading />

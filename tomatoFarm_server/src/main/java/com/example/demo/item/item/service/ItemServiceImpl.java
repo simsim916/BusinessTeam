@@ -71,14 +71,14 @@ public class ItemServiceImpl implements ItemService {
 			if(optionalUserCart.isPresent()) {
 				UserCart userCart = optionalUserCart.get();
 				userCart.setViews(userCart.getViews() + 1);
-				userCart.setRegdate(LocalDate.now());
+				userCart.setRegdate(LocalDateTime.now());
 				userCartRepositoryJPA.save(userCart);
 			} else {
 				UserCart userCart = UserCart.builder()
 						.userId(userId)
 						.itemCode(Integer.parseInt(searchRequest.getKeyword()))
 						.amount(0)
-						.regdate(LocalDate.now())
+						.regdate(LocalDateTime.now())
 						.build();
 				userCartRepositoryJPA.save(userCart);
 			}

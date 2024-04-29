@@ -19,8 +19,6 @@ function App() {
             <div className="App">
                 <Routes>
                     <Route path='/member/*' element={<Member />} />
-                    <Route path='/event' element={<EventPage />} />
-                    <Route path='/event2' element={<EventPage2 />} />
                     <Route path='/admin/*' element={<Admin />} />
                     <Route path='/home/*' element={<Home />} />
                     <Route path='/customerQA' element={<CustomerQA />} />

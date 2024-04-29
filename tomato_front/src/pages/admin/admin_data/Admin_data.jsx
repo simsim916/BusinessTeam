@@ -10,7 +10,6 @@ import { changeAlert } from "../../redux/basic/actions";
 
 const Admin_data = ({ }) => {
 
-    console.log(`SelectDataBox 렌더링`);
     const dispatch = useDispatch();
     const [formData, setFormData] = useState({
         column: 'sort1',

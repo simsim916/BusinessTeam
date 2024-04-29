@@ -18,7 +18,6 @@ import Home_notice from "./Home_notice";
 import View from "./view/View";
 
 const Home = () => {
-    console.log('Home 랜더링')
     const [notice, setNotice] = useState(true);
     const [view, setView] = useState(false)
     const alert = useSelector(state => state.basic.alert)
@@ -49,7 +48,7 @@ const Home = () => {
                 <Route path='/ask' element={<CustomerQA />} />
                 <Route path='/buy' element={<BuyBox />} />
                 <Route path='/buy/end' element={<BuyComplete />} />
-                <Route path='/event2' element={<EventPage2 />} />
+                <Route path='/event' element={<EventPage2 />} />
                 <Route path='/*' element={<Index />} />
             </Routes>
         </>

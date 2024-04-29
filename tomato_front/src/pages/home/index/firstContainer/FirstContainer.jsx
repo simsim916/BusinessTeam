@@ -27,14 +27,14 @@ const FirstContainer = () => {
                     </Link>
                     신선 재료
                 </div>
-                <div>
+                {/* <div>
                     <Link>
                         <img src={SERVER_RESOURCE + "/img/index_menu.png"} alt="메뉴 주문" className="categoryImg" /><br />
                     </Link>
                     메뉴 주문
-                </div>
+                </div> */}
                 <div>
-                    <Link>
+                    <Link to="/home/event">
                         <img src={SERVER_RESOURCE + "/img/index_gift.png"} alt="이벤트" className="categoryImg" /><br />
                     </Link>
                     이벤트

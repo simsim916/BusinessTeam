@@ -7,7 +7,7 @@
     border-radius: 10px;
     overflow: hidden;
     border: 1px solid #9b1b20;
-    z-index: 10;
+    z-index: 20;
 }
 
 #alert div:nth-of-type(1) {

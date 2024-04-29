@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 import './ItemListFilter.css'
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 const ItemListFilter = ({ itemListSort, changeDeletedSort, deletedSort, priceRange, setPriceRange }) => {
     const listfilter = useRef(null);

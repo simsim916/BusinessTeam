@@ -1,6 +1,7 @@
 package com.example.demo.user.user_cart.entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,6 +39,6 @@ public class UserCart {
 	@Builder.Default
 	@Column(name = "like_item")
 	private Integer likeItem = 0; // 관심상품 등록 여부
-	private LocalDate regdate; // 최근 조회 날짜
+	private LocalDateTime regdate; // 최근 조회 날짜
 
 }

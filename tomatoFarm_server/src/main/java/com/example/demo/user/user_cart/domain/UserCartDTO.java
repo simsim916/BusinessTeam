@@ -1,6 +1,7 @@
 package com.example.demo.user.user_cart.domain;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import lombok.*;
 
@@ -18,7 +19,7 @@ public class UserCartDTO {
 	private Integer amount = 0; // 장바구니 수량
 	private Integer views = 1; // 조회수
 	private Integer likeItem = 0; // 관심상품 등록 여부
-	private LocalDate regdate; // 최근 조회 날짜
+	private LocalDateTime regdate; // 최근 조회 날짜
 
 	private String itemName;
 	private Integer price;

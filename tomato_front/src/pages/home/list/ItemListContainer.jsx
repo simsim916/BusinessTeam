@@ -9,7 +9,6 @@ import { SERVER_RESOURCE } from '../../../model/server-config';
 
 
 const ItemListContainer = ({ itemList }) => {
-    console.log('ItemListContainer 랜더링')
     let size = 16;
     const makeListSize = () => {
         if (window.matchMedia("(max-width : 1024px)").matches) {

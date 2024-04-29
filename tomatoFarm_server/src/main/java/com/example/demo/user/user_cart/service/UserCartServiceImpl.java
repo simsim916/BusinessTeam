@@ -1,6 +1,7 @@
 package com.example.demo.user.user_cart.service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -33,7 +34,7 @@ public class UserCartServiceImpl implements UserCartService {
 	@Override
 	public List<UserCart> mergeAll(List<UserCart> list) {
 		// LocalDate 클래스를 이용해서 entity에 등록일자 담기
-		LocalDate today = LocalDate.now();
+		LocalDateTime today = LocalDateTime.now();
 		for (UserCart e : list) {
 			e.setRegdate(today);
 		}

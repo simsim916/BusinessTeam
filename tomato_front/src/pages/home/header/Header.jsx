@@ -11,7 +11,6 @@ import { SERVER_RESOURCE } from "../../../model/server-config";
 
 
 const Header = ({ setView }) => {
-    console.log(`Header 랜더링`);
     const user = JSON.parse(sessionStorage.getItem('userinfo'));
     const recentSearch = JSON.parse(localStorage.getItem('recentSearch'));
     const keyword = useSelector(state => state.basic.keyword);
@@ -93,7 +92,7 @@ const Header = ({ setView }) => {
 
     function resetInputBox(event) {
         const inputBox = event.target.closest('form').children[0];
-        inputBox.value = '';
+        dispatch(changeKeyword(''))
         inputBox.focus();
         event.target.visibility = "hidden"
     }

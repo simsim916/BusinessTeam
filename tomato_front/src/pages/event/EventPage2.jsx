@@ -1,39 +1,12 @@
 import { SERVER_RESOURCE } from "../../model/server-config";
 import "./EventPage2.css";
-import { Link, Route, Routes } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import Loading from './../components/Loading';
-import Error from './../components/Error';
-import KakaoPay from './KakaoPay';
-import KBPay from './KBPay';
-import TossPay from './TossPay';
-import NaverPay from './NaverPay';
+import { Link } from 'react-router-dom';
 
 const EventPage2 = () => {
-    // const [item, setItem] = useState(null);
-    // const [loading, setLoading] = useState(true);
-    // const [error, setError] = useState(false);
-
-    // useEffect(() => {
-    //     axios.get(`http://localhost:8090/event2/`
-    //     ).then(res => {
-    //         setItem(res.data);
-    //         setLoading(false);
-    //     }).catch(err => {
-    //         console.log(err.message)
-    //         setLoading(false);
-    //         setError(true);
-    //     })
-
-    // }, [])
-
-    // if (loading) return <Loading />
-    // if (error) return <Error />
 
 
     return (
-        <div>
+        <div className="container">
             <img id="eventImgLogo" src={SERVER_RESOURCE + "/img/adimg/signup.jpg"} />
             <img id="eventImgLogo" src={SERVER_RESOURCE + "/img/adimg/review.jpg"} />
             <h1 id="eventPageTitle"><i class="fa-solid fa-star"></i> SPECIAL CUPON<i class="fa-solid fa-star"></i></h1>
