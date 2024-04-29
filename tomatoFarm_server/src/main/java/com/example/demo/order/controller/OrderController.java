@@ -42,8 +42,6 @@ public class OrderController {
 		SearchRequest searchRequest = SearchRequest.builder().keyword2(userId).build();
 		List<OrderDTO> list = orderService.selectByUserId(searchRequest);
 			result = ResponseEntity.status(HttpStatus.OK).body(list);
-		System.out.println(list);
-
 		return result;
 	}
 	
