@@ -4,6 +4,8 @@ import BuyItemBoxRow from './BuyItemBoxRow';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserBuy, setUserBuyForm, setUserBuyItemList } from '../../../../redux/userBuy/actions';
 import { useEffect } from 'react';
+import { changeAlert } from './../../../../redux/basic/actions';
+import { Link } from 'react-router-dom';
 
 const BuyItemBox = ({ }) => {
 
@@ -51,10 +53,34 @@ const BuyItemBox = ({ }) => {
         if (type == '+') {
             ar[key].amount++;
         } else if (type == '-') {
-            if (ar[key].amount > 0)
+            if (ar[key].amount > 1)
                 ar[key].amount--;
+            else
+                dispatch(changeAlert({
+                    title: '수량 변경 오류',
+                    content: `수량은 1 이상으로 선택해주세요!`,
+                    time: 3,
+                    style: {
+                        top: '10px',
+                        left: 'calc(50% - 150px)',
+                        position: 'absolute'
+                    }
+                }))
         } else {
-            ar[key].amount = type
+            if (type > 0)
+                ar[key].amount = type
+            else
+                dispatch(changeAlert({
+                    title: '수량 변경 오류',
+                    content: `수량은 1 이상으로 선택해주세요!`,
+                    time: 3,
+                    style: {
+                        top: '10px',
+                        left: 'calc(50% - 150px)',
+                        position: 'absolute'
+                    }
+                }))
+
         }
         dispatch(setUserBuyForm({ itemList: ar }))
     }
@@ -77,7 +103,16 @@ const BuyItemBox = ({ }) => {
                 <li>총 상품금액</li>
                 <li>배송비</li>
             </ul>
-            {userBuy && userBuy.map((e, i) => <BuyItemBoxRow changeItemList={changeItemList} item={e} key={i} idx={i} changeCheckedList={changeCheckedList} />)}
+            {userBuy.length>0 ?
+                userBuy.map((e, i) => <BuyItemBoxRow changeItemList={changeItemList} item={e} key={i} idx={i} changeCheckedList={changeCheckedList} />)
+                :
+                <div id='cartNone'>
+                    장바구니에서 상품을 담아주세요.
+                    <Link to='/home/cart'>
+                    장바구니 가기
+                    </Link>
+                </div>
+            }
         </div>
     );
 

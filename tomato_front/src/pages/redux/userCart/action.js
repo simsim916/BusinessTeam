@@ -1,5 +1,6 @@
 import { api } from '../../../model/model';
 import { setUserBuyStorage } from '../userBuy/actions';
+import { changeAlert } from './../basic/actions';
 
 export const USERCART_DATA_REQUEST = 'USERCART_DATA_REQUEST';
 export const USERCART_DATA_SUCCESS = 'USERCART_DATA_SUCCESS';
@@ -77,8 +78,31 @@ export const changeUserCart = (key, type, userCart) => {
         } else if (type == '-') {
             if (ar[key].amount > 1)
                 ar[key].amount--;
+            else
+                dispatch(changeAlert({
+                    title: '수량 변경 오류',
+                    content: `수량은 1 이상으로 선택해주세요!`,
+                    time: 3,
+                    style: {
+                        top: '10px',
+                        left: 'calc(50% - 150px)',
+                        position: 'absolute'
+                    }
+                }))
         } else {
+            if(type>0)
             ar[key].amount = type
+            else
+                dispatch(changeAlert({
+                    title: '수량 변경 오류',
+                    content: `수량은 1 이상으로 선택해주세요!`,
+                    time: 3,
+                    style: {
+                        top: '10px',
+                        left: 'calc(50% - 150px)',
+                        position: 'absolute'
+                    }
+                }))
         }
         if (userinfo != null)
             dispatch(getUserCart('/usercart/merge', 'post', ar, userinfo.token))

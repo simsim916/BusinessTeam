@@ -106,10 +106,6 @@
     padding-inline-start: 0;
 }
 
-
-
-
-
 .shopBasketItem li {
     line-height: 50px;
     width: 200px;
@@ -198,4 +194,14 @@
 
 .buyPage {
     text-decoration: line-through;
+}
+#cartNone{
+    flex-direction: column;
+}
+#cartNone a{
+    background-color: #9B1B30;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 20px;
 }

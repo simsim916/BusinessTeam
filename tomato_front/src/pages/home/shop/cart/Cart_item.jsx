@@ -20,13 +20,13 @@ const Cart_item = () => {
 
 
     const handleAllCheckBox = () => {
-        if(userinfo){
+        if (userinfo) {
             if (userBuy && userCartList.length == userBuy.length) {
                 dispatch(setUserBuyStorage([]));
             } else {
                 dispatch(setUserBuyStorage(userCartList.map(e => e.itemCode)));
             }
-        } else{
+        } else {
             if (userBuy && userCart.length == userBuy.length) {
                 dispatch(setUserBuyStorage([]));
             } else {
@@ -44,8 +44,6 @@ const Cart_item = () => {
             }
         }
     }, [])
-
-    if (userCart_loading) return <Loading />
 
     return (
         <div id='shopBasketSelectBox'>
@@ -70,7 +68,9 @@ const Cart_item = () => {
                     <li>총 상품금액</li>
                     <li>배송비</li>
                 </ul>
-                {
+                {userCart_loading ?
+                    <Loading />
+                    :
                     userCartList && userCartList.length > 0
                         ?
                         userCartList && userCartList.map((e, i) => <Cart_item_Row item={e} key={i} idx={i} />)
