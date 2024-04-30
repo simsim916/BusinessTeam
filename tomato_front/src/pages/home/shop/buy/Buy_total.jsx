@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { postUserBuy, setUserBuyForm } from '../../../redux/userBuy/actions';
 import { useNavigate } from 'react-router-dom';
 import { setUserCart, setUserCartStorage } from '../../../redux/userCart/action';
+import { changeAlert } from './../../../redux/basic/actions';
 
 const Buy_total = () => {
 
@@ -18,25 +19,47 @@ const Buy_total = () => {
     const user = JSON.parse(sessionStorage.getItem('userinfo'));
     const orderprice = useRef(null);
     const deliveryprice = useRef(null);
-    console.log(userBuy)
     const deleteUserCart = () => {
         const result = []
         userBuyItemList.map(e => {
             result.push(e.code)
         })
-        console.log(result)
         return result;
     }
 
     const postOrder = () => {
-        dispatch(setUserCartStorage(userCart.filter(e => !deleteUserCart().includes(e.code))))
-        dispatch(postUserBuy({
-            ...userBuy,
-            orderprice: Math.ceil(userBuyItemList.reduce((result, e) => +result + (Math.round((e.price * ((100 - e.itemEventDiscount) / 100)), 0) * e.amount) + e.delivery, 0)),
-            deliveryprice: userBuyItemList.reduce((result, e) => +result + (e.delivery), 0),
-            discount: Math.ceil(userBuyItemList.reduce((result, e) => +result + ((e.price * ((e.itemEventDiscount) / 100)) * e.amount), 0))
-        }, user && user.token));
-        navigate('/home/buy/end');
+        if (!userBuy.itemList || userBuy.itemList.length <= 0)
+            dispatch(changeAlert({
+                title: '구매할 아이템 선택',
+                content: `구매할 아이템을 선택해주세요`,
+                time: 3,
+                style: {
+                    top: '10px',
+                    left: 'calc(50% - 150px)',
+                    position: 'absolute'
+                }
+            }))
+        else if (userBuy.deliverymessage.length <= 0)
+            dispatch(changeAlert({
+                title: '배송지 오류',
+                content: `배송지 선택 후 배송메세지를 선택해주세요`,
+                time: 3,
+                style: {
+                    top: '10px',
+                    left: 'calc(50% - 150px)',
+                    position: 'absolute'
+                }
+            }))
+        else {
+            dispatch(setUserCartStorage(userCart.filter(e => !deleteUserCart().includes(e.code))))
+            dispatch(postUserBuy({
+                ...userBuy,
+                orderprice: Math.ceil(userBuyItemList.reduce((result, e) => +result + (Math.round((e.price * ((100 - e.itemEventDiscount) / 100)), 0) * e.amount) + e.delivery, 0)),
+                deliveryprice: userBuyItemList.reduce((result, e) => +result + (e.delivery), 0),
+                discount: Math.ceil(userBuyItemList.reduce((result, e) => +result + ((e.price * ((e.itemEventDiscount) / 100)) * e.amount), 0))
+            }, user && user.token));
+            navigate('/home/buy/end');
+        }
     }
 
     return (
