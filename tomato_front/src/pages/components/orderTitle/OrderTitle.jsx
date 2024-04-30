@@ -4,6 +4,7 @@ import Error from "../Error";
 import Loading from "../Loading";
 import { makeComa } from "../MathFunction";
 import './OrderTitle.css'
+import { Link } from "react-router-dom";
 
 const OrderTitle = () => {
 
@@ -23,7 +24,7 @@ const OrderTitle = () => {
                     <p className="orderTitleDelivery">[{userBuyResult.addressCode}]{userBuyResult.address1}, {userBuyResult.address2}</p>
                 </div>
                 <div className="orderTitleBTN">
-                    <div className="orderTitleBTN_detaii">상세내용 보기</div>
+                    <Link to='/home/mypage/order'><div className="orderTitleBTN_detaii">주문 목록 보기</div></Link>
                 </div>
             </div>
         </div>

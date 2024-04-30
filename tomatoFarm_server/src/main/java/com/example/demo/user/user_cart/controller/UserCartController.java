@@ -61,17 +61,13 @@ public class UserCartController {
 	}
 
 	@PostMapping("/delete")
-	public ResponseEntity<?> delete(@RequestBody List<UserCart> list, HttpServletRequest request) {
+	public ResponseEntity<?> delete(@RequestBody List<UserCart> list, @AuthenticationPrincipal String userId) {
 		ResponseEntity<?> result = null;
-		String token = tokenProvider.parseBearerToken(request);
-		String id = tokenProvider.validateAndGetUserId(token);
 		for(UserCart entity : list) {
-			entity.setUserId(id);
+			entity.setUserId(userId);
 		}
 		userCartService.delete(list);
-
 		return result;
-
 	}
 
 }

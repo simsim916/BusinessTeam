@@ -17,9 +17,9 @@ const OrderTitle2 = ({ userBuyResult }) => {
                     <p className="orderTitlePrice">{makeComa(userBuyResult.orderprice)}</p>
                     <p className="orderTitleDelivery">[{userBuyResult.addressCode}]{userBuyResult.address1}, {userBuyResult.address2}</p>
                 </div>
-                <div className="orderTitleBTN">
+                {/* <div className="orderTitleBTN">
                     <div className="orderTitleBTN_detaii">상세내용 보기</div>
-                </div>
+                </div> */}
             </div>
         </div>
     );

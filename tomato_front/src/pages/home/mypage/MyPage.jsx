@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './MyPage.css'
 import Mydata from './mydata/Mydata';
 import OrderList from './orderList/OrderList';
+import { Link, Route, Routes } from 'react-router-dom';
 
 const Mypage = () => {
     const [content, setContent] = useState('Mydata');
@@ -9,12 +10,15 @@ const Mypage = () => {
         <div id='mypage' className="container">
             <h3><i className="fa-solid fa-user"></i> 마이페이지 <i className="fa-solid fa-user"></i></h3>
             <ul id='mypage_nav'>
-                <li onClick={() => setContent('Mydata')}>my 정보 </li>
-                <li onClick={() => setContent('Myorder')} >my 주문 목록</li>
+                <li><Link to='/home/mypage'>my 정보</Link></li>
+                <li><Link to='/home/mypage/order'>my 주문 목록</Link></li>
             </ul>
             <div id='mypage_content'>
-                {content == 'Mydata' && <Mydata />}
-                {content == 'Myorder' && <OrderList />}
+
+                <Routes>
+                    <Route path='/order' element={<OrderList />} />
+                    <Route path='/*' element={<Mydata />} />
+                </Routes>
             </div>
         </div>
     );

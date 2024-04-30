@@ -42,7 +42,7 @@ const Home = () => {
 
             <Routes>
                 <Route path='/list' element={<ItemList />} />
-                <Route path='/mypage' element={<Mypage />} />
+                <Route path='/mypage/*' element={<Mypage />} />
                 <Route path='/detail' element={<Detail />} />
                 <Route path='/cart' element={<Cart />} />
                 <Route path='/ask' element={<CustomerQA />} />
