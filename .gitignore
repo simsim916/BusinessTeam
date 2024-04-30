@@ -1,6 +1,4 @@
 /.metadata/
-
-
 node_modules
 untitled/untitled.iml
 untitled/.idea/misc.xml
@@ -13,5 +11,5 @@ tomatoFarm_server/.idea/
 .idea/
 .vscode/
 tomatoFarm_server/target/
-
 tomato_front/build/
+.gitignore
