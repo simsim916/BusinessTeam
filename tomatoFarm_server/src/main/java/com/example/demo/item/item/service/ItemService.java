@@ -51,8 +51,6 @@ public interface ItemService {
 	
 	int mergeAll(List<Item> list);
 	Item merge(Item entity);
-	int persist(List<Item> list);
-
 	List<ItemDTO> selectRecentItemWhereUserId(SearchRequest searchRequest);
 	List<Item> selectItemTableWhereType(AddEvent dto);
 }

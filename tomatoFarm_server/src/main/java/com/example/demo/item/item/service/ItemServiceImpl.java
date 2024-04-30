@@ -16,6 +16,7 @@ import com.example.demo.page.page_keyword.entity.PageKeywordID;
 import com.example.demo.user.user_cart.entity.UserCart;
 import com.example.demo.user.user_cart.entity.UserCartID;
 import com.example.demo.user.user_cart.repository.UserCartRepositoryJPA;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
@@ -31,9 +32,9 @@ import com.example.demo.page.page_keyword.repository.pageKeywordRepository;
 
 import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
-public abstract class ItemServiceImpl implements ItemService, ItemMapper {
+public class ItemServiceImpl implements ItemService {
 
 	private final ItemRepository itemRepository;
 	private final UserCartRepositoryJPA userCartRepositoryJPA;
@@ -103,6 +104,7 @@ public abstract class ItemServiceImpl implements ItemService, ItemMapper {
 	}
 
 	@Override
+	@Transactional
 	public List<ItemDTO> selectItemWhereKeyword(PageRequest pageRequest,SearchRequest searchRequest, @AuthenticationPrincipal String userId) {
 		LocalDate koreaTime = LocalDateTime.now().toLocalDate(); // 현재 시간
 
@@ -142,11 +144,6 @@ public abstract class ItemServiceImpl implements ItemService, ItemMapper {
 	@Transactional
 	public int mergeAll(List<Item> list) {
 		return itemRepository.mergeAll(list);
-	}
-	
-	@Override
-	public int persist(List<Item> list) {
-		return itemRepository.persist(list);
 	}
 	
 	@Override

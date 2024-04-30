@@ -40,16 +40,21 @@ const ModalList = ({ selectEvent, setModal }) => {
             .then(res => {
                 setList(res.data);
                 setCurrPage(1);
-                console.log(res.data);
             })
             .catch(err => console.log(err.message))
     }
 
     const changeForSearch = (e) => {
-        setForSearch(pre => ({
-            ...pre,
-            [e.target.name]: e.target.value,
-        }))
+        if (e.target.value == 'name')
+            setForSearch(pre => ({
+                ...pre,
+                column: 'item.name',
+            }))
+        else
+            setForSearch(pre => ({
+                ...pre,
+                [e.target.name]: e.target.value,
+            }))
     }
 
     const changeItemList = (item) => {
@@ -83,7 +88,6 @@ const ModalList = ({ selectEvent, setModal }) => {
             .catch(err => console.log(err.message));
     }
 
-    console.log(changeList.codeList);
 
     return (
         <>
@@ -118,7 +122,7 @@ const ModalList = ({ selectEvent, setModal }) => {
                         changeList={changeList}
                     />))}
                 </div>
-                    <PagingBox limit={size} currPage={currPage} setCurrPage={setCurrPage} list={list} />
+                <PagingBox limit={size} currPage={currPage} setCurrPage={setCurrPage} list={list} />
             </div>
         </>
     );

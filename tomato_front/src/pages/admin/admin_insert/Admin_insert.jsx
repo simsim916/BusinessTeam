@@ -89,7 +89,6 @@ const Admin_insert = () => {
         api(`${whichTable}/selectwhere?column=${forSearch.column}&keyword=${forSearch.keyword}`, 'get', null, user.token)
             .then(res => {
                 setData(res.data)
-                console.log(res.data);
                 // column.current = Object.keys(res.data[0]);
             })
             .catch(err => console.log(err.message))

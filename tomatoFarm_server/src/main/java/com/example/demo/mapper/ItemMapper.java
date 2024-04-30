@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 @Mapper
-public interface ItemMapper extends ItemService {
+public interface ItemMapper {
     List<ItemDTO> selectRecentItemWhereUserId(SearchRequest searchRequest);
     List<ItemDTO> selectItemWhereKeyword(SearchRequest searchRequest);
     List<ItemDTO> selectItemListStringWhereTypeNotNull(SearchRequest searchRequest);

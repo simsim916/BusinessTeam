@@ -122,6 +122,7 @@ public class ItemController {
 	@GetMapping("/selectwhere")
 	public ResponseEntity<?> selectwhere(SearchRequest searchRequest) {
 		ResponseEntity<?> result = null;
+		System.out.println(searchRequest);
 		PageRequest pageRequest = new PageRequest();
 		List<ItemDTO> itemList = itemService.selectItemListWhereType(pageRequest, searchRequest);
 		if (itemList != null && itemList.size() > 0) {
