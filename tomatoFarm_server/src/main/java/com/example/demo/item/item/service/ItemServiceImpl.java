@@ -33,7 +33,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Service
-public class ItemServiceImpl implements ItemService {
+public abstract class ItemServiceImpl implements ItemService, ItemMapper {
 
 	private final ItemRepository itemRepository;
 	private final UserCartRepositoryJPA userCartRepositoryJPA;

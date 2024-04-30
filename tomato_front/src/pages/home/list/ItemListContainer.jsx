@@ -9,12 +9,12 @@ import { SERVER_RESOURCE } from '../../../model/server-config';
 
 
 const ItemListContainer = ({ itemList }) => {
-    let size = 16;
+    const [size,setSize] = useState(16)
     const makeListSize = () => {
         if (window.matchMedia("(max-width : 1024px)").matches) {
-            size = 15;
+            setSize(15);
         } else {
-            size = 16;
+            setSize(16);
         }
         setLimit(size)
     }
