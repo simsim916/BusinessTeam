@@ -74,7 +74,7 @@ const ToDoList = () => {
 
             <div className="todoListWriteBox">
                 <div className="newScheduleWriteButton" onClick={() => setTodoWrite(!todoWrite)}>일정 등록</div>
-                <h3 className="todayDate">{`${new Date(date).getFullYear()}년 ${new Date(date).getMonth()}월 ${new Date(date).getDate()}일`}</h3>
+                <h3 className="todayDate">{`${new Date(date).getFullYear()}년 ${new Date(date).getMonth()+1}월 ${new Date(date).getDate()}일`}</h3>
 
                 <ul className="scheduleBoxList">
                     {events.filter(e => e.enddate == date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0')).map(e =>
