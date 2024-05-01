@@ -31,7 +31,6 @@ const Weather = () => {
             temp_min: ''
         }
     });
-    const apiKey = '60dbd7283a42ef16940bde54b9dc9cda';
 
     const getWeather = async (lat, lon) => {
         let cityName = 'Seoul'; // 도시명으로 하면 섭씨로 나와서 273도 빼줘야함.
