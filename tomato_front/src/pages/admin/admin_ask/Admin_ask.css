@@ -3,8 +3,6 @@
     box-sizing: border-box;
 }
 
-/* ======================================= */
-
 #annTopBox {
     display: flex;
     justify-content: space-between;
@@ -19,8 +17,6 @@
 #annTopBox label {
     font-size: initial;
 }
-
-/* ================================================= */
 
 #announceBoard {
     margin-top: 10px;
@@ -62,7 +58,7 @@
 
 #announceBoard>div {
     display: flex;
-    line-height: 55px;
+    line-height: 53px;
     border-bottom: 1px solid rgba(128, 128, 128, 0.316);
 }
 

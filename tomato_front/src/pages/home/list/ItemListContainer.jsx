@@ -9,7 +9,7 @@ import { SERVER_RESOURCE } from '../../../model/server-config';
 
 
 const ItemListContainer = ({ itemList }) => {
-    const [size,setSize] = useState(16)
+    const [size, setSize] = useState(window.matchMedia("(max-width : 1024px)").matches ? 15 : 16)
     const makeListSize = () => {
         if (window.matchMedia("(max-width : 1024px)").matches) {
             setSize(15);
@@ -73,8 +73,10 @@ const ItemListContainer = ({ itemList }) => {
                         :
                         (paging(itemList, currPage, size).map((e, i) => <ItemBox key={i} item={e} />))
                 }
+                <div id='paging'>
+                    <PagingBox limit={limit} setLimit={setLimit} list={itemList} currPage={currPage} setCurrPage={setCurrPage} />
+                </div>
             </div>
-            <PagingBox limit={limit} setLimit={setLimit} list={itemList} currPage={currPage} setCurrPage={setCurrPage} />
         </>
     );
 }

@@ -13,7 +13,9 @@ const Home_notice = ({ setNotice }) => {
                 <p>무엇이든, 언제든 충고와 피드백을 수용하고 있으니 <br></br><span style={{ fontSize: '1.5em' }}>따뜻한 조언</span> 과 <span style={{ fontSize: '1.5em' }}>충고</span> 부탁드립니다!</p>
                 
                 <div id='idNotice'>
-                    관리자페이지 전용 계정 : ID - admin , PW - 12345!
+                    관리자페이지 전용 계정 : ID - admin , PW - 12345!<br></br>
+                    일반 계정 : ID - guest , PW - 12345!<br></br>
+                    회원가입도 가능하니 한 번 이용해주시면 감사드리겠습니다!
                 </div>
 
                 <div id='contactUs'>

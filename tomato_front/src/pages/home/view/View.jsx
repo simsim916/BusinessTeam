@@ -31,8 +31,8 @@ const View = ({ setView }) => {
                 {data.length > 0 ?
                     data.map((e, i) => (
                         <>
-                            {i == 0 && <div className='view_date'>{`${new Date(e.userCartRegdate).getFullYear()}.${new Date(e.userCartRegdate).getMonth()}.${new Date(e.userCartRegdate).getDate()}`}<hr></hr></div>}
-                            {i > 0 && data[i - 1].userCartRegdate != e.userCartRegdate && <div className='view_date'>{`${new Date(e.userCartRegdate).getFullYear()}.${new Date(e.userCartRegdate).getMonth()}.${new Date(e.userCartRegdate).getDate()}`}<hr></hr></div>}
+                            {i == 0 && <div className='view_date'>{`${new Date(e.userCartRegdate).getFullYear()}.${new Date(e.userCartRegdate).getMonth()+1}.${new Date(e.userCartRegdate).getDate()}`}<hr></hr></div>}
+                            {i > 0 && data[i - 1].userCartRegdate != e.userCartRegdate && <div className='view_date'>{`${new Date(e.userCartRegdate).getFullYear()}.${new Date(e.userCartRegdate).getMonth()+1}.${new Date(e.userCartRegdate).getDate()}`}<hr></hr></div>}
                             <ItemBox_vertical item={e} key={i} />
                         </>
                     ))

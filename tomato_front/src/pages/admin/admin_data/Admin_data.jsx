@@ -172,11 +172,6 @@ const Admin_data = ({ }) => {
             })
     }
 
-    console.log(changedList);
-    console.log();
-
-
-
     if (loading) return <Loading />
     if (error) return <Error />
 

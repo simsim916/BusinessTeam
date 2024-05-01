@@ -110,6 +110,7 @@ const LoginBG = () => {
     }
 
     const handelInputBlur = (event, handle) => {
+        passwordBox.current.focus()
         event.target.closest('div').style.zIndex = '1';
         let result = {
             message: '',

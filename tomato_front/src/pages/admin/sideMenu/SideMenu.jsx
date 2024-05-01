@@ -1,4 +1,5 @@
 
+import { useState } from 'react';
 import './SideMenu.css'
 import { Link } from 'react-router-dom';
 
@@ -7,30 +8,30 @@ const SideMenu = ({ openSideBar, sideBarOpen }) => {
     const path = window.location.pathname;
     const location = path.substring(path.lastIndexOf('/') + 1);
 
-    const getLocation = () => {
-        switch (location) {
-            case 'ask':
-                return '문의 목록';
-            case 'select':
-                return '상품 조회'
-            case 'chatbot':
-                return '채팅 상담'
-        }
-    }
+    // const getLocation = () => {
+    //     switch (location) {
+    //         case 'ask':
+    //             return '문의 목록';
+    //         case 'select':
+    //             return '상품 조회'
+    //         case 'chatbot':
+    //             return '채팅 상담'
+    //     }
+    // }
 
     return (
         <>
             <div id="topBarA" style={{ paddingLeft: sideBarOpen ? '95px' : '15px' }}>
                 <i className="fa-solid fa-house"></i>
                 &nbsp;&nbsp; <Link to="/admin">관리자페이지</Link> &nbsp;&nbsp;
-                <span>
+                {/* <span>
                     <i className="fa-solid fa-chevron-right"></i>&nbsp;&nbsp;{getLocation()}
-                </span>
+                </span> */}
 
 
             </div>
             <div id="sideBar" style={{ transform: sideBarOpen ? 'translateX(0%)' : 'translateX(-100%)' }}>
-                <Link to="/home">토마토팜</Link>
+                <Link to="/home" >토마토팜</Link>
                 <ul>
                     <li>
                         <Link to="/admin"><i className="fa-solid fa-house"></i><br />메인 메뉴</Link>

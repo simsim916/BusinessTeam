@@ -40,7 +40,6 @@ public class ChatController {
         result = ResponseEntity.status(HttpStatus.OK).body(chatRoom);
         return result;
     }
-
     @GetMapping("/endroom")
     public ResponseEntity<?> endroom(ChatRoom entity) {
         ResponseEntity<?> result = null;

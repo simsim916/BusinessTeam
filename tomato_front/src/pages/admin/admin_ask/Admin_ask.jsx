@@ -66,7 +66,7 @@ const Admin_ask = () => {
     }
 
     return (
-        <div className="containerA">
+        <div style={{height:'100%'}} className="containerA">
             <div id="annTopBox">
                 <h3>문의글
                     &nbsp;&nbsp;
