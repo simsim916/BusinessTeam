@@ -25,11 +25,11 @@ const Admin_data = ({ }) => {
     const user = JSON.parse(sessionStorage.getItem('userinfo'));
     const [selectedItem, setSelectedItem] = useState(null);
     const [changedList, setChangedList] = useState([]);
-    const [whichTable, setWhichTable] = useState('/item');
+    const [whichTable, setWhichTable] = useState('item');
 
     useEffect(() => {
         setLoading(true);
-        api(`${whichTable}/selectwhere?column=${formData.column}&keyword=${formData.keyword}`, 'get', null, user.token)
+        api(`/${whichTable}/selectwhere?column=${formData.column}&keyword=${formData.keyword}`, 'get', null, user.token)
             .then(res => {
                 setItemList(res.data);
                 column.current = (Object.keys(res.data[0]));
@@ -44,25 +44,25 @@ const Admin_data = ({ }) => {
         setCurrPage(1);
         setWhichTable(e.target.value);
         switch (e.target.value) {
-            case '/user':
+            case 'user':
                 setFormData({
                     column: 'id',
                     keyword: ''
                 })
                 break;
-            case '/event':
+            case 'event':
                 setFormData({
                     column: 'name',
                     keyword: ''
                 })
                 break;
-            case '/item':
+            case 'item':
                 setFormData({
                     column: 'sort1',
                     keyword: ''
                 })
                 break;
-            case '/address':
+            case 'address':
                 setFormData({
                     column: 'id',
                     keyword: ''
@@ -134,7 +134,7 @@ const Admin_data = ({ }) => {
 
     const getSearch = (e) => {
         e.preventDefault();
-        api(`${whichTable}/selectwhere?column=${formData.column}&keyword=${formData.keyword}`, 'get', null, user.token
+        api(`/${whichTable}/selectwhere?column=${formData.column}&keyword=${formData.keyword}`, 'get', null, user.token
         ).then(res => {
             setItemList(res.data)
         }
@@ -158,7 +158,7 @@ const Admin_data = ({ }) => {
     }
 
     const insertData = async () => {
-        await api(`${whichTable}/merge`, 'post', JSON.stringify(changedList), user.token)
+        await api(`/${whichTable}/merge`, 'post', JSON.stringify(changedList), user.token)
             .then((res) => {
                 dispatch(changeAlert({
                     style: {
@@ -184,10 +184,10 @@ const Admin_data = ({ }) => {
                 <div id="optionBar">
                     <label htmlFor=""> DATA -&nbsp;
                         <select name="" id="" onChange={changeTable}>
-                            <option value="/item">상품</option>
-                            <option value="/user">회원</option>
-                            <option value="/event">이벤트</option>
-                            <option value="/address">회원주소</option>
+                            <option value="item" selected={whichTable=='item'}>상품</option>
+                            <option value="user" selected={whichTable == 'user'}>회원</option>
+                            <option value="event" selected={whichTable == 'event'}>이벤트</option>
+                            <option value="address" selected={whichTable == 'address'}>회원주소</option>
                         </select>
                     </label>
                     <div id="dataSearch">

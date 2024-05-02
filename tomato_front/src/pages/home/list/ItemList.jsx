@@ -48,6 +48,11 @@ const ItemList = () => {
     const [deletedSort, setDeletedSort] = useState([]);
     const [priceRange, setPriceRange] = useState({ min: '', max: '' })
 
+    useEffect(()=>{
+        setDeletedSort([])
+        setPriceRange({ min: '', max: '' })
+    }, [searchParams])
+
     /* 검색된 sort중 삭제할 sort를 저장할 배열(deletedSort) 저장 */
     const changeDeletedSort = (event) => {
         const value = event.target.closest('li').children[1].innerText;

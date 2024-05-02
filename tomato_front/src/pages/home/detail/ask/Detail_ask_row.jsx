@@ -5,6 +5,7 @@ import { SERVER_URL } from '../../../../model/server-config';
 
 
 const Detail_ask_row = ({ itemAsk }) => {
+    const user = JSON.parse(sessionStorage.getItem('userinfo'));
     const [askDetail, setAskDetail] = useState(false);
     const [askPassword, setAskPassword] = useState("");
     const [passwordSubmit, setPasswordSubmit] = useState(false);
@@ -52,8 +53,14 @@ const Detail_ask_row = ({ itemAsk }) => {
                     }
                 </div>
                 <div className="boardAnswer_reply">{itemAsk.reply ? '답변' : '미답변'}</div>
-                <div className="boardAnswer_title">{itemAsk.title}</div>
-                <div className="boardAnswer_writer">{itemAsk.writer}</div>
+                {itemAsk.password ?
+                    user && user.id == itemAsk.userIdWriter ?
+                        <div className="boardAnswer_title">{itemAsk.title}</div>
+                        :
+                        <div className="boardAnswer_title">비밀 문의글 입니다.</div>
+                    :
+                    <div className="boardAnswer_title">{itemAsk.title}</div>}
+                <div className="boardAnswer_writer">{itemAsk.userIdWriter}</div>
                 <div className="boardAnswer_regdate">
                     {
                         new Date().getFullYear() == new Date(itemAsk.regdate).getFullYear() &&

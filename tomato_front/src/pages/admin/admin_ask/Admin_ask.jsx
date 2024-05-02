@@ -66,7 +66,7 @@ const Admin_ask = () => {
     }
 
     return (
-        <div style={{height:'100%'}} className="containerA">
+        <div style={{ height: '100%' }} className="containerA">
             <div id="annTopBox">
                 <h3>문의글
                     &nbsp;&nbsp;
@@ -100,7 +100,7 @@ const Admin_ask = () => {
                     <select name="column" onChange={searchBoxChange}>
                         <option value="title">제목</option>
                         <option value="contents">내용</option>
-                        <option value="userIdWriter">작성자</option>
+                        <option value="user_id_writer">작성자</option>
                         <option value="type">유형</option>
                     </select>
                     &nbsp;&nbsp;

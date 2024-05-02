@@ -37,7 +37,6 @@ public class ItmeAskController {
 
 	@GetMapping("/select")
 	public ResponseEntity<?> select(SearchRequest searchRequest) {
-		System.out.println(searchRequest);
 		ResponseEntity<?> result = null;
 		List<?> list = null;
 		if (searchRequest.getColumn().equals("itemCode")) {

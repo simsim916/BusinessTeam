@@ -37,7 +37,7 @@ const Home = () => {
                 style: {
                     top: '10px',
                     left: 'calc(50% - 150px)',
-                    position: 'absolute'
+                    position: 'fixed'
                 }
             }))
     }
@@ -45,7 +45,7 @@ const Home = () => {
     return (
         <>
             <Header setView={setView} />
-            {notice && <Home_notice setNotice={setNotice} />}
+            {/* {notice && <Home_notice setNotice={setNotice} />} */}
             {alert && <Alert />}
             {view && <View setView={setView} />}
             {

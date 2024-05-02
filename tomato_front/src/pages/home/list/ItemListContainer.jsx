@@ -21,14 +21,13 @@ const ItemListContainer = ({ itemList }) => {
     window.addEventListener('resize', makeListSize);
 
     const dispatch = useDispatch();
-    const [sort, setSort] = useState('sales');
+    const [sort, setSort] = useState('salesD');
     const [currPage, setCurrPage] = useState(1);
     const [limit, setLimit] = useState(16);
     const [vertical, setVertical] = useState({
         vertical: false,
         infinite: true
     });
-
     const sortItemList = (event, list) => {
         // 1. 정렬하고자 하는 Column 의 이름을 onClick 주는 요소의 id로 지정
         // 2. list = 정렬하고자 하는 List
@@ -62,7 +61,7 @@ const ItemListContainer = ({ itemList }) => {
                     </ul>
                     <div id="total">총 <span>{itemList ? itemList.length : '0'}</span> 개</div>
                     <div id="listOption">
-                        <div id="sales" style={{ opacity: sort == "sales" ? '1' : '0.5' }} onClick={(event) => sortItemList(event, itemList)}>인기상품순</div>
+                        <div id="salesD" style={{ opacity: sort == "salesD" ? '1' : '0.5' }} onClick={(event) => sortItemList(event, itemList)}>인기상품순</div>
                         <div id="price" style={{ opacity: sort == "price" ? '1' : '0.5' }} onClick={(event) => sortItemList(event, itemList)}>가격낮은순</div>
                         <div id="priceD" style={{ opacity: sort == "priceD" ? '1' : '0.5' }} onClick={(event) => sortItemList(event, itemList)}>가격높은순</div>
                     </div>

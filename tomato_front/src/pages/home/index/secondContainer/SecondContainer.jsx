@@ -30,12 +30,13 @@ const SecondContainer = () => {
     if (loading) return <Loading />
     if (error) return <Error />
 
-    function secondContainerSlideLeftbth(event) {
-        let margin = slideBox.current.style.marginLeft.replace('px', '');
+    function secondContainerSlideLeft(margin){
         slideBox.current.style.transition = '150ms ease'
         if (margin == -2640) {
             secondSlideBtnRef.current.children[0].removeAttribute("id");
         } else {
+            if (margin == 2640)
+                margin = -2200
             secondSlideBtnRef.current.children[`${5 - margin / 440}`].removeAttribute("id");
         }
         if (margin < 2200) {
@@ -45,18 +46,27 @@ const SecondContainer = () => {
         }
         setTimeout(() => {
             slideBox.current.style.transition = null;
-            if (margin == 2200) {
+            if (margin >= 2200) {
                 slideBox.current.style.marginLeft = `-2640px`;
             }
         }, 150);
     }
 
-    function secondContainerSlideRightbth(event) {
+    function secondContainerSlideLeftbth(event) {
         let margin = slideBox.current.style.marginLeft.replace('px', '');
+        if (margin == 2640) {
+            slideBox.current.style.marginLeft = `-2200px`;
+        }
+        setTimeout(() => secondContainerSlideLeft(margin), 10);
+    }
+
+    function secondContainerSlideRight(margin){
         slideBox.current.style.transition = '150ms ease'
         if (margin == 2640) {
             secondSlideBtnRef.current.children[10].removeAttribute("id");
         } else {
+            if (margin == -2640)
+                margin = 2200
             secondSlideBtnRef.current.children[`${5 - margin / 440}`].removeAttribute("id");
         }
         if (margin > -2200) {
@@ -70,6 +80,13 @@ const SecondContainer = () => {
                 slideBox.current.style.marginLeft = `2640px`;
             }
         }, 150);
+    }
+    function secondContainerSlideRightbth() {
+        let margin = slideBox.current.style.marginLeft.replace('px', '');
+        if(margin == -2640){
+            slideBox.current.style.marginLeft = `2200px`;
+        }
+        setTimeout(()=>secondContainerSlideRight(margin), 10);
     }
 
     function secondContainerSlideBtn(event) {
