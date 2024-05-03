@@ -72,7 +72,7 @@ const Admin_ask_write = ({ setAskList, ask, setWriteReply }) => {
                                     </div>
                             }
                             <div>작성자 :
-                                <span>{ask.writer}</span>
+                                <span>{ask.userIdWriter}</span>
                             </div>
                             <div>작성일 :
                                 <span>{new Date(ask.regdate).getFullYear() + '. ' + new Date(ask.regdate).getMonth() + '. ' + new Date(ask.regdate).getDate() + ' / ' + new Date(ask.regdate).getHours() + ' : ' + new Date(ask.regdate).getMinutes()}</span>

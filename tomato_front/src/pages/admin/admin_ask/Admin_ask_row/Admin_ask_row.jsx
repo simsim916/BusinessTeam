@@ -27,7 +27,7 @@ const Admin_ask_row = ({ setAskList, ask }) => {
                     null
                 }
             </div>
-            <div>{ask.writer}</div>
+            <div>{ask.userIdWriter}</div>
             <div>{new Date(ask.regdate).toLocaleString("ko-KR", {
                 day: '2-digit',
                 month: '2-digit',
