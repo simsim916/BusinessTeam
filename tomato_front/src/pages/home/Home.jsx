@@ -45,7 +45,7 @@ const Home = () => {
     return (
         <>
             <Header setView={setView} />
-            {/* {notice && <Home_notice setNotice={setNotice} />} */}
+            {notice && <Home_notice setNotice={setNotice} />}
             {alert && <Alert />}
             {view && <View setView={setView} />}
             {
