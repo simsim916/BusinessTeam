@@ -32,7 +32,7 @@ const Home = () => {
         else
             dispatch(changeAlert({
                 title: '로그인 필요!',
-                content: `챗봇은 로그인 전용 기능입니다!`,
+                content: `챗봇은 로그인 전용 기능입니다!!`,
                 time: 3,
                 style: {
                     top: '10px',

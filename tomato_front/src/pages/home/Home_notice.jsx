@@ -20,7 +20,7 @@ const Home_notice = ({ setNotice }) => {
 
                 <div id='contactUs'>
                     <Link to="https://github.com/simsim916/BusinessTeam"><i className="fa-brands fa-github"></i> https://github.com/simsim916/BusinessTeam</Link>
-                    <Link to="https://www.notion.so/simsim916/825da1d0f3d34b3e91a4d539a92d9720"><i class="fa-solid fa-person-chalkboard"></i> 홈페이지 제작 과정 (notion) </Link>
+                    <Link to="https://www.notion.so/simsim916/825da1d0f3d34b3e91a4d539a92d9720"><i className="fa-solid fa-person-chalkboard"></i> 홈페이지 제작 과정 (notion) </Link>
                 </div>
                 <i onClick={() => setNotice(false)} id='closeBTN' className="fa-solid fa-x"></i>
             </div>
